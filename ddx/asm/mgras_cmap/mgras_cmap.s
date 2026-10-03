@@ -1,0 +1,3919 @@
+# SGI Impact DDX Module: mgras_cmap
+# Functions: 13
+
+.text
+.set noat
+.set noreorder
+
+glabel mgrasInstallFakeMap
+    jr	$ra
+    nop
+
+glabel mgrasInstallOverlayMap
+    addiu	$sp,$sp,-96
+    move	$v0,$s8
+    addiu	$s8,$sp,96
+    sd	$v0,-88($s8)
+    lw	$t2,0($a0)
+    move	$a7,$zero
+    lw	$a2,68($a0)
+    move	$a4,$zero
+    li	$t3,1
+    lhu	$a6,8($t2)
+    move	$a5,$zero
+    lui	$v0,0x17
+    lw	$a1,0($a2)
+    addiu	$v0,$v0,-4784
+    lw	$t8,12($a0)
+    sll	$at,$a6,0x2
+    sll	$v1,$a1,0x3
+    subu	$at,$at,$a6
+    lw	$t8,116($t8)
+    subu	$v1,$v1,$a1
+    sll	$at,$at,0x1
+    sd	$gp,-80($s8)
+    li	$a1,-16
+    addiu	$at,$at,19
+    addu	$gp,$t9,$v0
+    lw	$t8,116($t8)
+    and	$at,$at,$a1
+    ldc1	$f4,-12944($gp)
+    sll	$v1,$v1,0x2
+    subu	$sp,$sp,$at
+    move	$t1,$a2
+    ldc1	$f6,-12952($gp)
+    addu	$t8,$t8,$v1
+    lw	$t8,24($t8)
+    beqz	$sp,.L5e3a2ff0
+    move	$t0,$sp
+    beqz	$a2,.L5e3a2f34
+    lw	$a3,56($a0)
+    blez	$a6,.L5e3a2c68
+    move	$t9,$a3
+    move	$a5,$t8
+    move	$a3,$t0
+    b	.L5e3a2bfc
+    move	$a2,$t9
+.L5e3a2bb0:
+    lhu	$at,0($a2)
+    sra	$at,$at,0x8
+    sb	$at,6($a3)
+    lhu	$a1,2($a2)
+    sra	$a1,$a1,0x8
+    sb	$a1,7($a3)
+    lhu	$v1,4($a2)
+    sra	$v1,$v1,0x8
+    sb	$v1,8($a3)
+    nop
+    nop
+    nop
+.L5e3a2be0:
+    lhu	$a6,8($t2)
+    addiu	$a3,$a3,6
+.L5e3a2be8:
+    addiu	$a4,$a4,1
+    slt	$v0,$a4,$a6
+    addiu	$a2,$a2,20
+    beqz	$v0,.L5e3a2c68
+    addiu	$a5,$a5,1
+.L5e3a2bfc:
+    sllv	$at,$t3,$a4
+    lh	$v1,12($a2)
+    sra	$a1,$a4,0x5
+    sll	$a1,$a1,0x2
+    beqz	$v1,.L5e3a2be8
+    addu	$a1,$a1,$t1
+    lw	$a1,4($a1)
+    and	$a1,$a1,$at
+    beqz	$a1,.L5e3a2be8
+    nop
+    sh	$a5,4($a3)
+    lw	$at,16($a2)
+    beqz	$at,.L5e3a2bb0
+    addiu	$a7,$a7,1
+    lw	$a1,0($a2)
+    lhu	$a1,0($a1)
+    sra	$a1,$a1,0x8
+    sb	$a1,6($a3)
+    lw	$v1,4($a2)
+    lhu	$v1,0($v1)
+    sra	$v1,$v1,0x8
+    sb	$v1,7($a3)
+    lw	$v0,8($a2)
+    lhu	$v0,0($v0)
+    sra	$v0,$v0,0x8
+    b	.L5e3a2be0
+    sb	$v0,8($a3)
+.L5e3a2c68:
+    move	$a3,$zero
+.L5e3a2c6c:
+    lui	$t2,0x6
+    beqz	$a7,.L5e3a2f20
+    lui	$a2,0x7
+    sh	$a7,2($t0)
+    lw	$t3,12($a0)
+    lw	$t9,-12608($gp)
+    lw	$t3,436($t3)
+    sll	$t9,$t9,0x2
+    addu	$t3,$t3,$t9
+    lw	$t3,0($t3)
+    lw	$t1,0($t3)
+    addu	$a2,$t1,$a2
+    lw	$t9,256($a2)
+    dsll32	$t8,$a7,0x10
+    andi	$t9,$t9,0x1f
+    dsra32	$t8,$t8,0x10
+    lw	$a6,116($t3)
+    beqz	$t9,.L5e3a2cd0
+    lw	$t9,4($t3)
+    nop
+    nop
+.L5e3a2cc0:
+    lw	$at,256($a2)
+    andi	$at,$at,0x1f
+    bnez	$at,.L5e3a2cc0
+    nop
+.L5e3a2cd0:
+    blez	$t8,.L5e3a301c
+    move	$a0,$t0
+    addu	$a5,$t2,$t1
+    ldc1	$f5,-12960($gp)
+    move	$a4,$zero
+    b	.L5e3a2d28
+    sd	$a6,-72($s8)
+    nop
+.L5e3a2cf0:
+    sh	$a6,3120($a5)
+    lbu	$t2,8($a0)
+    lbu	$a7,7($a0)
+    addiu	$a3,$a3,2
+    beqz	$at,.L5e3a2e40
+    lbu	$t1,6($a0)
+    sll	$v1,$a7,0x10
+    sll	$v0,$t1,0x18
+    or	$v0,$v0,$v1
+    sll	$v1,$t2,0x8
+    or	$v0,$v0,$v1
+    sw	$v0,3352($a5)
+.L5e3a2d20:
+    beq	$a4,$t8,.L5e3a2e9c
+    addiu	$a0,$a0,6
+.L5e3a2d28:
+    pref	0x0,262($a0)
+    pref	0x0,260($a0)
+    lhu	$at,4($a0)
+    andi	$v0,$a4,0x1f
+    sll	$a6,$at,0x8
+    addiu	$a4,$a4,1
+    sra	$at,$at,0x8
+    andi	$at,$at,0xff
+    andi	$a6,$a6,0xff00
+    beqz	$v0,.L5e3a2d88
+    or	$a6,$a6,$at
+.L5e3a2d54:
+    slti	$v0,$a3,6
+    bnez	$v0,.L5e3a2cf0
+    ld	$at,-72($s8)
+    lw	$v1,256($a2)
+    andi	$v1,$v1,0x1f
+    beqz	$v1,.L5e3a2cf0
+    move	$a3,$zero
+.L5e3a2d70:
+    lw	$a1,256($a2)
+    andi	$a1,$a1,0x1f
+    bnez	$a1,.L5e3a2d70
+    nop
+    b	.L5e3a2cf0
+    nop
+.L5e3a2d88:
+    lw	$at,256($a2)
+    andi	$at,$at,0x1f
+    beqz	$at,.L5e3a2db0
+    li	$a3,6
+    nop
+    nop
+.L5e3a2da0:
+    lw	$v0,256($a2)
+    andi	$v0,$v0,0x1f
+    bnez	$v0,.L5e3a2da0
+    nop
+.L5e3a2db0:
+    li	$at,4
+    sb	$at,2544($t9)
+    sb	$at,7304($a5)
+    lw	$v0,132($t3)
+    sw	$v0,7936($a5)
+    sb	$at,2544($t9)
+    sb	$at,7304($a5)
+    lw	$a1,132($t3)
+    sw	$a1,7936($a5)
+    lw	$v1,256($a2)
+    andi	$v1,$v1,0x1f
+    beqz	$v1,.L5e3a2e00
+    nop
+    nop
+    nop
+    nop
+.L5e3a2df0:
+    lw	$v1,256($a2)
+    andi	$v1,$v1,0x1f
+    bnez	$v1,.L5e3a2df0
+    nop
+.L5e3a2e00:
+    lbu	$a1,4616($a5)
+    andi	$a1,$a1,0x8
+    bnez	$a1,.L5e3a2e20
+    li	$v1,4
+.L5e3a2e10:
+    lbu	$at,4616($a5)
+    andi	$at,$at,0x8
+    beqz	$at,.L5e3a2e10
+    nop
+.L5e3a2e20:
+    sh	$a6,3120($a5)
+    sh	$a6,3120($a5)
+    sb	$v1,2544($t9)
+    sb	$v1,7304($a5)
+    lw	$v0,132($t3)
+    ori	$v0,$v0,0x4000
+    b	.L5e3a2d54
+    sw	$v0,7936($a5)
+.L5e3a2e40:
+    mtc1	$t2,$f1
+    mtc1	$a7,$f2
+    mtc1	$t1,$f0
+    cvt.d.w	$f2,$f2
+    cvt.d.w	$f0,$f0
+    cvt.d.w	$f1,$f1
+    mul.d	$f2,$f2,$f6
+    mul.d	$f0,$f0,$f5
+    mul.d	$f1,$f1,$f4
+    cvt.s.d	$f2,$f2
+    cvt.s.d	$f0,$f0
+    cvt.s.d	$f1,$f1
+    add.s	$f0,$f0,$f2
+    add.s	$f0,$f0,$f1
+    trunc.w.s	$f0,$f0
+    mfc1	$at,$f0
+    sll	$a1,$at,0x10
+    sll	$v0,$at,0x18
+    sll	$at,$at,0x8
+    or	$a1,$a1,$v0
+    or	$a1,$a1,$at
+    b	.L5e3a2d20
+    sw	$a1,3352($a5)
+.L5e3a2e9c:
+    li	$a1,4
+    sb	$a1,2544($t9)
+    sb	$a1,7304($a5)
+    lw	$at,132($t3)
+    sw	$at,7936($a5)
+    sb	$a1,2544($t9)
+    sb	$a1,7304($a5)
+    lw	$a0,132($t3)
+    sw	$a0,7936($a5)
+    lh	$v1,2($t0)
+    move	$a2,$t0
+    blez	$v1,.L5e3a2f20
+    move	$a0,$zero
+.L5e3a2ed0:
+    lbu	$a1,7($a2)
+    lbu	$v1,6($a2)
+    andi	$a1,$a1,0xff
+    lbu	$at,8($a2)
+    andi	$v1,$v1,0xff
+    sll	$a1,$a1,0x8
+    lhu	$v0,4($a2)
+    or	$v1,$v1,$a1
+    lw	$a1,100($t3)
+    andi	$at,$at,0xff
+    sll	$v0,$v0,0x2
+    sll	$at,$at,0x10
+    addu	$a1,$a1,$v0
+    or	$v1,$v1,$at
+    sw	$v1,0($a1)
+    lh	$v0,2($t0)
+    addiu	$a0,$a0,1
+    slt	$v0,$a0,$v0
+    bnez	$v0,.L5e3a2ed0
+    addiu	$a2,$a2,6
+.L5e3a2f20:
+    ld	$at,-88($s8)
+    ld	$gp,-80($s8)
+    move	$sp,$s8
+    jr	$ra
+    move	$s8,$at
+.L5e3a2f34:
+    blez	$a6,.L5e3a2c68
+    move	$t1,$a3
+    move	$a4,$t8
+    move	$a2,$t1
+    b	.L5e3a2f98
+    move	$a3,$t0
+    nop
+.L5e3a2f50:
+    lhu	$a1,0($a2)
+    sra	$a1,$a1,0x8
+    sb	$a1,6($a3)
+    lhu	$v1,2($a2)
+    sra	$v1,$v1,0x8
+    sb	$v1,7($a3)
+    lhu	$v0,4($a2)
+    sra	$v0,$v0,0x8
+    sb	$v0,8($a3)
+    nop
+    nop
+    nop
+.L5e3a2f80:
+    lhu	$a6,8($t2)
+    addiu	$a3,$a3,6
+.L5e3a2f88:
+    slt	$at,$a5,$a6
+    addiu	$a2,$a2,20
+    beqz	$at,.L5e3a2fe8
+    addiu	$a4,$a4,1
+.L5e3a2f98:
+    lh	$v0,12($a2)
+    beqz	$v0,.L5e3a2f88
+    addiu	$a5,$a5,1
+    sh	$a4,4($a3)
+    lw	$v1,16($a2)
+    beqz	$v1,.L5e3a2f50
+    addiu	$a7,$a7,1
+    lw	$v0,0($a2)
+    lhu	$v0,0($v0)
+    sra	$v0,$v0,0x8
+    sb	$v0,6($a3)
+    lw	$at,4($a2)
+    lhu	$at,0($at)
+    sra	$at,$at,0x8
+    sb	$at,7($a3)
+    lw	$a1,8($a2)
+    lhu	$a1,0($a1)
+    sra	$a1,$a1,0x8
+    b	.L5e3a2f80
+    sb	$a1,8($a3)
+.L5e3a2fe8:
+    b	.L5e3a2c6c
+    move	$a3,$zero
+.L5e3a2ff0:
+    lw	$t9,-29932($gp)
+    la	$a0,sub_5e4f0000
+    sd	$ra,-96($s8)
+    jalr	$t9
+    addiu	$a0,$a0,8872
+    ld	$ra,-96($s8)
+    ld	$a1,-88($s8)
+    ld	$gp,-80($s8)
+    move	$sp,$s8
+    jr	$ra
+    move	$s8,$a1
+.L5e3a301c:
+    addu	$a5,$t2,$t1
+    b	.L5e3a2e9c
+    nop
+
+glabel mgrasStoreColors
+    move	$a3,$s8
+    move	$t0,$a0
+    lw	$a0,0($a0)
+    move	$a7,$a1
+    addiu	$sp,$sp,-80
+    addiu	$s8,$sp,80
+    sll	$a4,$a7,0x2
+    lh	$a0,4($a0)
+    li	$a5,-16
+    subu	$a4,$a4,$a7
+    sd	$s0,-56($s8)
+    sd	$a3,-64($s8)
+    li	$s0,4
+    sll	$a4,$a4,0x1
+    lui	$a3,0x16
+    addiu	$a4,$a4,19
+    sd	$gp,-48($s8)
+    addiu	$a1,$a3,-21812
+    and	$a4,$a4,$a5
+    lw	$at,68($t0)
+    beq	$a0,$s0,.L5e3b72d4
+    addu	$gp,$t9,$a1
+    lw	$v0,0($at)
+    ldc1	$f5,-12944($gp)
+    ldc1	$f4,-12952($gp)
+    move	$at,$a2
+    sll	$a3,$v0,0x3
+    ldc1	$f6,-12960($gp)
+    bltz	$v0,.L5e3b72bc
+    subu	$a3,$a3,$v0
+    beqz	$a7,.L5e3b72bc
+    subu	$sp,$sp,$a4
+    beqz	$sp,.L5e3b72ec
+    move	$t3,$sp
+    lw	$t1,12($t0)
+    lw	$t1,116($t1)
+    dsll32	$t8,$a7,0x10
+    lw	$t1,116($t1)
+    move	$a1,$t3
+    sll	$a3,$a3,0x2
+    dsra32	$t8,$t8,0x10
+    addu	$t1,$t1,$a3
+    andi	$a3,$a7,0x1
+    blez	$a7,.L5e3b6ff0
+    lw	$t1,24($t1)
+    sll	$v1,$a7,0x2
+    subu	$v1,$v1,$a7
+    move	$t2,$a7
+    sll	$v1,$v1,0x2
+    beqz	$a3,.L5e3b6e8c
+    addu	$v1,$v1,$a2
+    pref	0x0,256($at)
+    lw	$a6,0($at)
+    addu	$a6,$a6,$t1
+    sh	$a6,4($a1)
+    lhu	$a5,4($at)
+    sra	$a5,$a5,0x8
+    sb	$a5,6($a1)
+    lhu	$a4,6($at)
+    sra	$a4,$a4,0x8
+    sb	$a4,7($a1)
+    lhu	$a3,8($at)
+    addiu	$a1,$a1,6
+    addiu	$at,$at,12
+    sra	$a3,$a3,0x8
+    sb	$a3,2($a1)
+.L5e3b6e8c:
+    move	$a0,$a1
+    sra	$a2,$t2,0x1
+    move	$a1,$t1
+    move	$v0,$at
+    beqz	$a2,.L5e3b6fec
+    slti	$a3,$a2,2
+    bnez	$a3,.L5e3b7324
+    addiu	$a2,$v1,-24
+    pref	0x0,256($v0)
+    lw	$at,0($v0)
+.L5e3b6eb4:
+    addiu	$v1,$a0,12
+    addu	$at,$at,$a1
+    sh	$at,4($a0)
+    lhu	$at,4($v0)
+    sra	$at,$at,0x8
+    sb	$at,6($a0)
+    lhu	$at,6($v0)
+    sra	$at,$at,0x8
+    sb	$at,7($a0)
+    lhu	$at,8($v0)
+    sra	$at,$at,0x8
+    sb	$at,8($a0)
+    lw	$at,12($v0)
+    addu	$at,$at,$a1
+    sh	$at,10($a0)
+    lhu	$at,16($v0)
+    sra	$at,$at,0x8
+    sb	$at,12($a0)
+    lhu	$at,18($v0)
+    sra	$at,$at,0x8
+    sb	$at,13($a0)
+    lhu	$at,20($v0)
+    sra	$at,$at,0x8
+    sb	$at,14($a0)
+    addiu	$v0,$v0,24
+    beq	$v0,$a2,.L5e3b72b4
+    lw	$at,0($v0)
+    addiu	$a0,$v1,12
+    addu	$at,$at,$a1
+    sh	$at,4($v1)
+    lhu	$at,4($v0)
+    sra	$at,$at,0x8
+    sb	$at,6($v1)
+    lhu	$at,6($v0)
+    sra	$at,$at,0x8
+    sb	$at,7($v1)
+    lhu	$at,8($v0)
+    sra	$at,$at,0x8
+    sb	$at,8($v1)
+    lw	$at,12($v0)
+    addu	$at,$at,$a1
+    sh	$at,10($v1)
+    lhu	$at,16($v0)
+    sra	$at,$at,0x8
+    sb	$at,12($v1)
+    lhu	$at,18($v0)
+    sra	$at,$at,0x8
+    sb	$at,13($v1)
+    lhu	$at,20($v0)
+    sra	$at,$at,0x8
+    sb	$at,14($v1)
+    addiu	$v0,$v0,24
+    pref	0x0,256($v0)
+    bne	$v0,$a2,.L5e3b6eb4
+    lw	$at,0($v0)
+.L5e3b6f90:
+    addu	$a3,$at,$t1
+    sh	$a3,4($a0)
+    lhu	$a6,4($v0)
+    sra	$a6,$a6,0x8
+    sb	$a6,6($a0)
+    lhu	$a5,6($v0)
+    sra	$a5,$a5,0x8
+    sb	$a5,7($a0)
+    lhu	$a4,8($v0)
+    sra	$a4,$a4,0x8
+    sb	$a4,8($a0)
+    lw	$a3,12($v0)
+    addu	$a3,$a3,$t1
+    sh	$a3,10($a0)
+    lhu	$a6,16($v0)
+    sra	$a6,$a6,0x8
+    sb	$a6,12($a0)
+    lhu	$a5,18($v0)
+    sra	$a5,$a5,0x8
+    sb	$a5,13($a0)
+    lhu	$a4,20($v0)
+    sra	$a4,$a4,0x8
+    sb	$a4,14($a0)
+.L5e3b6fec:
+    sd	$ra,-72($s8)
+.L5e3b6ff0:
+    sh	$a7,2($t3)
+    lw	$t2,12($t0)
+    lw	$t9,-12608($gp)
+    lw	$t2,436($t2)
+    sll	$t9,$t9,0x2
+    addu	$t2,$t2,$t9
+    lw	$t2,0($t2)
+    lw	$a2,0($t2)
+    lui	$at,0x7
+    addu	$at,$a2,$at
+    lw	$a4,256($at)
+    sd	$ra,-72($s8)
+    andi	$a4,$a4,0x1f
+    move	$v1,$zero
+    lw	$t9,116($t2)
+    lui	$t0,0x6
+    beqz	$a4,.L5e3b7054
+    lw	$ra,4($t2)
+    nop
+    nop
+    nop
+.L5e3b7044:
+    lw	$a3,256($at)
+    andi	$a3,$a3,0x1f
+    bnez	$a3,.L5e3b7044
+    nop
+.L5e3b7054:
+    addu	$a1,$t0,$a2
+    blez	$t8,.L5e3b731c
+    move	$a0,$zero
+    b	.L5e3b70ac
+    move	$v0,$t3
+    nop
+    nop
+    nop
+.L5e3b7074:
+    sh	$a2,3120($a1)
+    lbu	$t1,8($v0)
+    lbu	$t0,7($v0)
+    addiu	$v1,$v1,2
+    beqz	$t9,.L5e3b71b4
+    lbu	$a7,6($v0)
+    sll	$a4,$t0,0x10
+    sll	$a3,$a7,0x18
+    or	$a3,$a3,$a4
+    sll	$a4,$t1,0x8
+    or	$a3,$a3,$a4
+    sw	$a3,3352($a1)
+.L5e3b70a4:
+    beq	$a0,$t8,.L5e3b7210
+    addiu	$v0,$v0,6
+.L5e3b70ac:
+    pref	0x0,262($v0)
+    pref	0x0,260($v0)
+    lhu	$a3,4($v0)
+    andi	$a4,$a0,0x1f
+    sll	$a2,$a3,0x8
+    addiu	$a0,$a0,1
+    sra	$a3,$a3,0x8
+    andi	$a3,$a3,0xff
+    andi	$a2,$a2,0xff00
+    beqz	$a4,.L5e3b710c
+    or	$a2,$a2,$a3
+.L5e3b70d8:
+    slti	$a4,$v1,6
+    bnez	$a4,.L5e3b7074
+    nop
+    lw	$a5,256($at)
+    andi	$a5,$a5,0x1f
+    beqz	$a5,.L5e3b7074
+    move	$v1,$zero
+.L5e3b70f4:
+    lw	$a6,256($at)
+    andi	$a6,$a6,0x1f
+    bnez	$a6,.L5e3b70f4
+    nop
+    b	.L5e3b7074
+    nop
+.L5e3b710c:
+    lw	$a3,256($at)
+    andi	$a3,$a3,0x1f
+    beqz	$a3,.L5e3b7134
+    li	$v1,6
+    nop
+    nop
+.L5e3b7124:
+    lw	$a4,256($at)
+    andi	$a4,$a4,0x1f
+    bnez	$a4,.L5e3b7124
+    nop
+.L5e3b7134:
+    sb	$s0,2544($ra)
+    sb	$s0,7304($a1)
+    lw	$a3,132($t2)
+    sw	$a3,7936($a1)
+    sb	$s0,2544($ra)
+    sb	$s0,7304($a1)
+    lw	$a6,132($t2)
+    sw	$a6,7936($a1)
+    lw	$a5,256($at)
+    andi	$a5,$a5,0x1f
+    beqz	$a5,.L5e3b7174
+    nop
+.L5e3b7164:
+    lw	$a4,256($at)
+    andi	$a4,$a4,0x1f
+    bnez	$a4,.L5e3b7164
+    nop
+.L5e3b7174:
+    lbu	$a5,4616($a1)
+    andi	$a5,$a5,0x8
+    bnez	$a5,.L5e3b7194
+    nop
+.L5e3b7184:
+    lbu	$a6,4616($a1)
+    andi	$a6,$a6,0x8
+    beqz	$a6,.L5e3b7184
+    nop
+.L5e3b7194:
+    sh	$a2,3120($a1)
+    sh	$a2,3120($a1)
+    sb	$s0,2544($ra)
+    sb	$s0,7304($a1)
+    lw	$a3,132($t2)
+    ori	$a3,$a3,0x4000
+    b	.L5e3b70d8
+    sw	$a3,7936($a1)
+.L5e3b71b4:
+    mtc1	$t1,$f1
+    mtc1	$t0,$f2
+    mtc1	$a7,$f0
+    cvt.d.w	$f2,$f2
+    cvt.d.w	$f0,$f0
+    cvt.d.w	$f1,$f1
+    mul.d	$f2,$f2,$f4
+    mul.d	$f0,$f0,$f6
+    mul.d	$f1,$f1,$f5
+    cvt.s.d	$f2,$f2
+    cvt.s.d	$f0,$f0
+    cvt.s.d	$f1,$f1
+    add.s	$f0,$f0,$f2
+    add.s	$f0,$f0,$f1
+    trunc.w.s	$f0,$f0
+    mfc1	$a5,$f0
+    sll	$a4,$a5,0x10
+    sll	$a6,$a5,0x18
+    sll	$a5,$a5,0x8
+    or	$a4,$a4,$a6
+    or	$a4,$a4,$a5
+    b	.L5e3b70a4
+    sw	$a4,3352($a1)
+.L5e3b7210:
+    sb	$s0,2544($ra)
+    sb	$s0,7304($a1)
+    lw	$a5,132($t2)
+    sw	$a5,7936($a1)
+    sb	$s0,2544($ra)
+    sb	$s0,7304($a1)
+    lw	$a4,132($t2)
+    sw	$a4,7936($a1)
+    lh	$a3,2($t3)
+    ld	$gp,-48($s8)
+    move	$at,$zero
+    ld	$ra,-72($s8)
+    move	$v0,$t3
+    blez	$a3,.L5e3b72a4
+    ld	$s0,-56($s8)
+    ld	$ra,-72($s8)
+    nop
+.L5e3b7254:
+    lbu	$a4,7($v0)
+    lbu	$a3,6($v0)
+    andi	$a4,$a4,0xff
+    lbu	$a5,8($v0)
+    andi	$a3,$a3,0xff
+    sll	$a4,$a4,0x8
+    lhu	$a6,4($v0)
+    or	$a3,$a3,$a4
+    lw	$a4,100($t2)
+    andi	$a5,$a5,0xff
+    sll	$a6,$a6,0x2
+    sll	$a5,$a5,0x10
+    addu	$a4,$a4,$a6
+    or	$a3,$a3,$a5
+    sw	$a3,0($a4)
+    lh	$a6,2($t3)
+    addiu	$at,$at,1
+    slt	$a6,$at,$a6
+    bnez	$a6,.L5e3b7254
+    addiu	$v0,$v0,6
+.L5e3b72a4:
+    ld	$a5,-64($s8)
+    move	$sp,$s8
+    jr	$ra
+    move	$s8,$a5
+.L5e3b72b4:
+    b	.L5e3b6f90
+    move	$a0,$v1
+.L5e3b72bc:
+    ld	$gp,-48($s8)
+    ld	$a6,-64($s8)
+    ld	$s0,-56($s8)
+    move	$sp,$s8
+    jr	$ra
+    move	$s8,$a6
+.L5e3b72d4:
+    ld	$gp,-48($s8)
+    ld	$at,-64($s8)
+    ld	$s0,-56($s8)
+    move	$sp,$s8
+    jr	$ra
+    move	$s8,$at
+.L5e3b72ec:
+    lw	$t9,-29932($gp)
+    la	$a0,sub_5e4f0000
+    sd	$ra,-72($s8)
+    jalr	$t9
+    addiu	$a0,$a0,8824
+    ld	$gp,-48($s8)
+    ld	$ra,-72($s8)
+    ld	$a3,-64($s8)
+    ld	$s0,-56($s8)
+    move	$sp,$s8
+    jr	$ra
+    move	$s8,$a3
+.L5e3b731c:
+    b	.L5e3b7210
+    addu	$a1,$t0,$a2
+.L5e3b7324:
+    move	$v1,$a0
+    move	$at,$v0
+    lw	$a3,0($at)
+    addu	$a3,$a3,$t1
+    sh	$a3,4($v1)
+    lhu	$a6,4($at)
+    sra	$a6,$a6,0x8
+    sb	$a6,6($v1)
+    lhu	$a5,6($at)
+    sra	$a5,$a5,0x8
+    sb	$a5,7($v1)
+    lhu	$a4,8($at)
+    sra	$a4,$a4,0x8
+    sb	$a4,8($v1)
+    lw	$a3,12($at)
+    addu	$a3,$a3,$t1
+    sh	$a3,10($v1)
+    lhu	$a6,16($at)
+    sra	$a6,$a6,0x8
+    sb	$a6,12($v1)
+    lhu	$a5,18($at)
+    sra	$a5,$a5,0x8
+    sb	$a5,13($v1)
+    lhu	$a4,20($at)
+    sra	$a4,$a4,0x8
+    b	.L5e3b6fec
+    sb	$a4,14($v1)
+
+glabel mgrasInstallNormalMap
+    addiu	$sp,$sp,-144
+    move	$t1,$s8
+    addiu	$s8,$sp,144
+    sd	$t1,-112($s8)
+    lui	$a7,0x14
+    addiu	$a7,$a7,31708
+    sd	$gp,-104($s8)
+    addu	$gp,$t9,$a7
+    lw	$t9,68($a0)
+    sd	$t9,-72($s8)
+    lw	$a2,0($a0)
+    lw	$a5,12($a0)
+    lh	$a4,4($a2)
+    sd	$s6,-96($s8)
+    lw	$a6,-12608($gp)
+    move	$a3,$zero
+    move	$t1,$a2
+    lw	$a7,436($a5)
+    sd	$t9,-120($s8)
+    li	$s6,4
+    sll	$a6,$a6,0x2
+    ldc1	$f6,-12952($gp)
+    andi	$t3,$a4,0x1
+    addu	$a7,$a7,$a6
+    sltiu	$t3,$t3,1
+    beq	$a4,$s6,.L5e3ca1e8
+    lw	$a7,0($a7)
+    lhu	$at,8($t1)
+    ld	$t9,-120($s8)
+    sll	$t8,$at,0x2
+    lw	$v1,0($t9)
+    subu	$t8,$t8,$at
+    lw	$t2,116($a5)
+    li	$at,-16
+    sll	$t8,$t8,0x1
+    sll	$v0,$v1,0x3
+    addiu	$t8,$t8,19
+    lw	$t2,116($t2)
+    subu	$v0,$v0,$v1
+    and	$t8,$t8,$at
+    sll	$v0,$v0,0x2
+    subu	$sp,$sp,$t8
+    move	$t1,$zero
+    addu	$t2,$t2,$v0
+    lw	$t2,24($t2)
+    beqz	$sp,.L5e3ca200
+    move	$t8,$sp
+    ld	$a1,-72($s8)
+    beqz	$a1,.L5e3c9d44
+    move	$a4,$t8
+    beqz	$t3,.L5e3ca0f8
+    nop
+.L5e3c9d44:
+    lhu	$t0,8($a2)
+    blez	$t0,.L5e3c9e10
+    lw	$t9,56($a0)
+    move	$a5,$t2
+    b	.L5e3c9db0
+    move	$a2,$t9
+    nop
+    nop
+.L5e3c9d64:
+    lhu	$v1,0($a2)
+    sra	$v1,$v1,0x8
+    sb	$v1,6($a4)
+    lhu	$v0,2($a2)
+    sra	$v0,$v0,0x8
+    sb	$v0,7($a4)
+    lhu	$at,4($a2)
+    sra	$at,$at,0x8
+    sb	$at,8($a4)
+    nop
+    nop
+    nop
+.L5e3c9d94:
+    lw	$t0,0($a0)
+    addiu	$a4,$a4,6
+    lhu	$t0,8($t0)
+    slt	$at,$t1,$t0
+.L5e3c9da4:
+    addiu	$a2,$a2,20
+    beqz	$at,.L5e3c9e10
+    addiu	$a5,$a5,1
+.L5e3c9db0:
+    lh	$v0,12($a2)
+    beqz	$v0,.L5e3c9e00
+    addiu	$t1,$t1,1
+    sh	$a5,4($a4)
+.L5e3c9dc0:
+    lw	$v1,16($a2)
+    beqz	$v1,.L5e3c9d64
+    addiu	$a3,$a3,1
+    lw	$v0,0($a2)
+    lhu	$v0,0($v0)
+    sra	$v0,$v0,0x8
+    sb	$v0,6($a4)
+    lw	$at,4($a2)
+    lhu	$at,0($at)
+    sra	$at,$at,0x8
+    sb	$at,7($a4)
+    lw	$a1,8($a2)
+    lhu	$a1,0($a1)
+    sra	$a1,$a1,0x8
+    b	.L5e3c9d94
+    sb	$a1,8($a4)
+.L5e3c9e00:
+    beqz	$t3,.L5e3c9da4
+    slt	$at,$t1,$t0
+    b	.L5e3c9dc0
+    sh	$a5,4($a4)
+.L5e3c9e10:
+    beqz	$a3,.L5e3ca0d4
+    move	$a4,$zero
+    sh	$a3,2($t8)
+    lw	$t3,12($a0)
+    lw	$t3,436($t3)
+    addu	$t3,$t3,$a6
+    lw	$t3,0($t3)
+    lw	$t0,0($t3)
+    lui	$a2,0x7
+    addu	$a2,$t0,$a2
+    lw	$v1,256($a2)
+    sd	$s4,-136($s8)
+    dsll32	$t9,$a3,0x10
+    lw	$s4,116($t3)
+    andi	$v1,$v1,0x1f
+    dsra32	$t9,$t9,0x10
+    lw	$a1,4($t3)
+    lui	$t1,0x6
+    beqz	$v1,.L5e3c9e74
+    sd	$a1,-88($s8)
+    nop
+.L5e3c9e64:
+    lw	$at,256($a2)
+    andi	$at,$at,0x1f
+    bnez	$at,.L5e3c9e64
+    nop
+.L5e3c9e74:
+    blez	$t9,.L5e3ca230
+    move	$a3,$t8
+    addu	$a6,$t1,$t0
+    ldc1	$f4,-12960($gp)
+    ldc1	$f5,-12944($gp)
+    move	$a5,$zero
+    b	.L5e3c9ecc
+    sd	$a7,-144($s8)
+.L5e3c9e94:
+    sh	$a7,3120($a6)
+    lbu	$t1,8($a3)
+    lbu	$t2,7($a3)
+    addiu	$a4,$a4,2
+    beqz	$s4,.L5e3c9fe4
+    lbu	$t0,6($a3)
+    sll	$v0,$t2,0x10
+    sll	$at,$t0,0x18
+    or	$at,$at,$v0
+    sll	$v0,$t1,0x8
+    or	$at,$at,$v0
+    sw	$at,3352($a6)
+.L5e3c9ec4:
+    beq	$a5,$t9,.L5e3ca040
+    addiu	$a3,$a3,6
+.L5e3c9ecc:
+    pref	0x0,262($a3)
+    pref	0x0,260($a3)
+    lhu	$at,4($a3)
+    andi	$v0,$a5,0x1f
+    sll	$a7,$at,0x8
+    addiu	$a5,$a5,1
+    sra	$at,$at,0x8
+    andi	$at,$at,0xff
+    andi	$a7,$a7,0xff00
+    beqz	$v0,.L5e3c9f2c
+    or	$a7,$a7,$at
+.L5e3c9ef8:
+    slti	$v0,$a4,6
+    bnez	$v0,.L5e3c9e94
+    nop
+    lw	$v1,256($a2)
+    andi	$v1,$v1,0x1f
+    beqz	$v1,.L5e3c9e94
+    move	$a4,$zero
+.L5e3c9f14:
+    lw	$a1,256($a2)
+    andi	$a1,$a1,0x1f
+    bnez	$a1,.L5e3c9f14
+    nop
+    b	.L5e3c9e94
+    nop
+.L5e3c9f2c:
+    lw	$at,256($a2)
+    andi	$at,$at,0x1f
+    beqz	$at,.L5e3c9f54
+    li	$a4,6
+    nop
+    nop
+.L5e3c9f44:
+    lw	$v0,256($a2)
+    andi	$v0,$v0,0x1f
+    bnez	$v0,.L5e3c9f44
+    nop
+.L5e3c9f54:
+    ld	$at,-88($s8)
+    sb	$s6,2544($at)
+    sb	$s6,7304($a6)
+    lw	$v0,132($t3)
+    sw	$v0,7936($a6)
+    sb	$s6,2544($at)
+    sb	$s6,7304($a6)
+    lw	$a1,132($t3)
+    sw	$a1,7936($a6)
+    lw	$v1,256($a2)
+    andi	$v1,$v1,0x1f
+    beqz	$v1,.L5e3c9fa4
+    nop
+    nop
+    nop
+    nop
+.L5e3c9f94:
+    lw	$v1,256($a2)
+    andi	$v1,$v1,0x1f
+    bnez	$v1,.L5e3c9f94
+    nop
+.L5e3c9fa4:
+    lbu	$a1,4616($a6)
+    andi	$a1,$a1,0x8
+    bnez	$a1,.L5e3c9fc4
+    ld	$v1,-88($s8)
+.L5e3c9fb4:
+    lbu	$at,4616($a6)
+    andi	$at,$at,0x8
+    beqz	$at,.L5e3c9fb4
+    nop
+.L5e3c9fc4:
+    sh	$a7,3120($a6)
+    sh	$a7,3120($a6)
+    sb	$s6,2544($v1)
+    sb	$s6,7304($a6)
+    lw	$v0,132($t3)
+    ori	$v0,$v0,0x4000
+    b	.L5e3c9ef8
+    sw	$v0,7936($a6)
+.L5e3c9fe4:
+    mtc1	$t1,$f1
+    mtc1	$t2,$f2
+    mtc1	$t0,$f0
+    cvt.d.w	$f2,$f2
+    cvt.d.w	$f0,$f0
+    cvt.d.w	$f1,$f1
+    mul.d	$f2,$f2,$f6
+    mul.d	$f0,$f0,$f4
+    mul.d	$f1,$f1,$f5
+    cvt.s.d	$f2,$f2
+    cvt.s.d	$f0,$f0
+    cvt.s.d	$f1,$f1
+    add.s	$f0,$f0,$f2
+    add.s	$f0,$f0,$f1
+    trunc.w.s	$f0,$f0
+    mfc1	$at,$f0
+    sll	$a1,$at,0x10
+    sll	$v0,$at,0x18
+    sll	$at,$at,0x8
+    or	$a1,$a1,$v0
+    or	$a1,$a1,$at
+    b	.L5e3c9ec4
+    sw	$a1,3352($a6)
+.L5e3ca040:
+    ld	$s4,-136($s8)
+    ld	$a7,-144($s8)
+.L5e3ca048:
+    ld	$a2,-88($s8)
+    sb	$s6,2544($a2)
+    sb	$s6,7304($a6)
+    lw	$at,132($t3)
+    sw	$at,7936($a6)
+    sb	$s6,2544($a2)
+    sb	$s6,7304($a6)
+    lw	$a1,132($t3)
+    sw	$a1,7936($a6)
+    lh	$v1,2($t8)
+    move	$a3,$t8
+    blez	$v1,.L5e3ca0d4
+    move	$a2,$zero
+    nop
+    nop
+.L5e3ca084:
+    lbu	$a1,7($a3)
+    lbu	$v1,6($a3)
+    andi	$a1,$a1,0xff
+    lbu	$at,8($a3)
+    andi	$v1,$v1,0xff
+    sll	$a1,$a1,0x8
+    lhu	$v0,4($a3)
+    or	$v1,$v1,$a1
+    lw	$a1,100($t3)
+    andi	$at,$at,0xff
+    sll	$v0,$v0,0x2
+    sll	$at,$at,0x10
+    addu	$a1,$a1,$v0
+    or	$v1,$v1,$at
+    sw	$v1,0($a1)
+    lh	$v0,2($t8)
+    addiu	$a2,$a2,1
+    slt	$v0,$a2,$v0
+    bnez	$v0,.L5e3ca084
+    addiu	$a3,$a3,6
+.L5e3ca0d4:
+    lw	$at,120($a7)
+    ld	$v0,-112($s8)
+    ld	$s6,-96($s8)
+    bnez	$at,.L5e3ca0ec
+    ld	$gp,-104($s8)
+    sw	$a0,120($a7)
+.L5e3ca0ec:
+    move	$sp,$s8
+    jr	$ra
+    move	$s8,$v0
+.L5e3ca0f8:
+    lhu	$t0,8($a2)
+    move	$a5,$zero
+    move	$t1,$t2
+    lw	$v1,56($a0)
+    li	$t3,1
+    blez	$t0,.L5e3c9e10
+    sd	$v1,-80($s8)
+    move	$a4,$t8
+    b	.L5e3ca174
+    ld	$a2,-80($s8)
+    nop
+.L5e3ca124:
+    lhu	$v0,0($a2)
+    sra	$v0,$v0,0x8
+    sb	$v0,6($a4)
+    lhu	$at,2($a2)
+    sra	$at,$at,0x8
+    sb	$at,7($a4)
+    lhu	$a1,4($a2)
+    sra	$a1,$a1,0x8
+    sb	$a1,8($a4)
+    nop
+    nop
+    nop
+.L5e3ca154:
+    lw	$t0,0($a0)
+    addiu	$a4,$a4,6
+    lhu	$t0,8($t0)
+.L5e3ca160:
+    addiu	$a5,$a5,1
+    slt	$at,$a5,$t0
+    addiu	$a2,$a2,20
+    beqz	$at,.L5e3ca1e0
+    addiu	$t1,$t1,1
+.L5e3ca174:
+    sllv	$a1,$t3,$a5
+    lh	$v0,12($a2)
+    sra	$v1,$a5,0x5
+    sll	$v1,$v1,0x2
+    beqz	$v0,.L5e3ca160
+    addu	$v1,$v1,$t9
+    lw	$v1,4($v1)
+    and	$v1,$v1,$a1
+    beqz	$v1,.L5e3ca160
+    nop
+    sh	$t1,4($a4)
+    lw	$a1,16($a2)
+    beqz	$a1,.L5e3ca124
+    addiu	$a3,$a3,1
+    lw	$v1,0($a2)
+    lhu	$v1,0($v1)
+    sra	$v1,$v1,0x8
+    sb	$v1,6($a4)
+    lw	$v0,4($a2)
+    lhu	$v0,0($v0)
+    sra	$v0,$v0,0x8
+    sb	$v0,7($a4)
+    lw	$at,8($a2)
+    lhu	$at,0($at)
+    sra	$at,$at,0x8
+    b	.L5e3ca154
+    sb	$at,8($a4)
+.L5e3ca1e0:
+    b	.L5e3c9e10
+    nop
+.L5e3ca1e8:
+    ld	$gp,-104($s8)
+    ld	$a0,-112($s8)
+    ld	$s6,-96($s8)
+    move	$sp,$s8
+    jr	$ra
+    move	$s8,$a0
+.L5e3ca200:
+    lw	$t9,-29932($gp)
+    la	$a0,sub_5e4f0000
+    sd	$ra,-128($s8)
+    jalr	$t9
+    addiu	$a0,$a0,8872
+    ld	$gp,-104($s8)
+    ld	$ra,-128($s8)
+    ld	$a1,-112($s8)
+    ld	$s6,-96($s8)
+    move	$sp,$s8
+    jr	$ra
+    move	$s8,$a1
+.L5e3ca230:
+    addu	$a6,$t1,$t0
+    b	.L5e3ca048
+    ld	$s4,-136($s8)
+
+glabel mgrasInitializeColormap
+    lui	$at,0x14
+    addiu	$sp,$sp,-128
+    sd	$gp,88($sp)
+    addiu	$at,$at,26864
+    sd	$s3,80($sp)
+    addu	$gp,$t9,$at
+    lw	$t9,-32000($gp)
+    sd	$s0,104($sp)
+    sd	$ra,96($sp)
+    move	$s0,$a0
+    jalr	$t9
+    lw	$s3,12($s0)
+    beqz	$v0,.L5e3cb838
+    li	$a6,0xffff
+    lw	$a4,0($s0)
+    lh	$v0,4($a4)
+    andi	$v0,$v0,0x1
+    beqz	$v0,.L5e3cb08c
+    la	$t2,ddxActiveScreens
+    lw	$t2,116($s3)
+    lw	$v0,0($a4)
+    lw	$v1,80($t2)
+    subu	$v0,$v0,$v1
+    sll	$at,$v0,0x2
+    lw	$t2,88($t2)
+    addu	$at,$at,$v0
+    sll	$at,$at,0x2
+    addu	$t2,$t2,$at
+    lw	$t2,4($t2)
+    lw	$at,-12608($gp)
+    lw	$a0,436($s3)
+    addiu	$v0,$gp,-23520
+    sll	$t2,$t2,0x5
+    sll	$at,$at,0x2
+    addu	$t2,$t2,$v0
+    addu	$a0,$a0,$at
+    lw	$t2,4($t2)
+    lw	$a0,0($a0)
+    sll	$at,$t2,0x2
+    lw	$a0,60($a0)
+    subu	$at,$at,$t2
+    slti	$t2,$t2,32
+    sll	$at,$at,0x2
+    addu	$a0,$a0,$at
+    beqz	$t2,.L5e3cb03c
+    lw	$a0,8($a0)
+    ld	$gp,88($sp)
+    andi	$t2,$a0,0x400
+    ld	$s3,80($sp)
+    li	$v0,1
+    beqz	$t2,.L5e3cb060
+    ld	$ra,96($sp)
+    ld	$s0,104($sp)
+    jr	$ra
+    addiu	$sp,$sp,128
+.L5e3cb03c:
+    ld	$gp,88($sp)
+    andi	$at,$a0,0x100
+    ld	$s3,80($sp)
+    li	$v0,1
+    beqz	$at,.L5e3cb060
+    ld	$ra,96($sp)
+    ld	$s0,104($sp)
+    jr	$ra
+    addiu	$sp,$sp,128
+.L5e3cb060:
+    lh	$v0,16($s0)
+    ld	$gp,88($sp)
+    andi	$v0,$v0,0x2
+    ld	$s3,80($sp)
+    li	$at,-1
+    beqz	$v0,.L5e3cb854
+    ld	$ra,96($sp)
+    move	$v0,$zero
+    ld	$s0,104($sp)
+    jr	$ra
+    addiu	$sp,$sp,128
+.L5e3cb08c:
+    lw	$v1,0($s3)
+    sll	$v1,$v1,0x2
+    addu	$v1,$v1,$t2
+    lw	$v1,0($v1)
+    lw	$v1,68($v1)
+    lbu	$v1,17($v1)
+    li	$t2,32
+    li	$t8,16
+    li	$s3,1
+    beq	$v1,$t2,.L5e3cb88c
+    move	$t9,$a4
+    lhu	$t3,8($a4)
+    li	$v1,2
+    lh	$at,6($a4)
+    lh	$a2,4($a4)
+    li	$a4,0xffff
+    li	$t2,4
+    subu	$t8,$t8,$at
+    addiu	$t3,$t3,-1
+    sllv	$s3,$s3,$at
+    move	$a3,$t3
+    ld	$gp,88($sp)
+    bne	$a2,$t2,.L5e3cb39c
+    addiu	$s3,$s3,-1
+    lw	$a0,32($t9)
+    lw	$v1,20($t9)
+    lw	$a2,28($t9)
+    lw	$a1,16($t9)
+    lw	$v0,24($t9)
+    srlv	$v1,$v1,$a0
+    addiu	$t2,$t3,1
+    srlv	$a1,$a1,$a2
+    sd	$a1,64($sp)
+    lw	$at,12($t9)
+    sll	$a1,$t2,0x10
+    subu	$a1,$a1,$t2
+    slti	$t2,$t2,2
+    sd	$v1,72($sp)
+    move	$a2,$zero
+    srlv	$at,$at,$v0
+    move	$a0,$zero
+    bnez	$t2,.L5e3cc394
+    sd	$at,56($sp)
+    ld	$a6,72($sp)
+    ld	$a7,56($sp)
+    divu	$zero,$a2,$a7
+    mflo	$a3
+    srlv	$a3,$a3,$t8
+    sll	$v1,$a3,0x10
+    subu	$v1,$v1,$a3
+    divu	$zero,$v1,$s3
+    ld	$a3,64($sp)
+    mflo	$t9
+    nop
+    nop
+    divu	$zero,$a2,$a3
+    mflo	$v0
+    srlv	$v0,$v0,$t8
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$s3
+    mflo	$t0
+    nop
+    nop
+    divu	$zero,$a2,$a6
+    mflo	$ra
+    srlv	$ra,$ra,$t8
+    sll	$t3,$ra,0x10
+    subu	$t3,$t3,$ra
+    divu	$zero,$t3,$s3
+    li	$t2,0xffff
+    move	$a5,$s0
+    subu	$t2,$a1,$t2
+    move	$a1,$t8
+    move	$t8,$t0
+    addu	$ra,$a4,$a2
+    move	$a2,$s3
+    lw	$at,56($s0)
+    mflo	$t1
+    nop
+    nop
+    divu	$zero,$ra,$a7
+    sll	$zero,$zero,0x2
+    nop
+    nop
+.L5e3cb1e0:
+    addiu	$v1,$a0,20
+    addu	$at,$at,$a0
+    sh	$t9,0($at)
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    mflo	$t9
+    nop
+    nop
+    divu	$zero,$ra,$a3
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    mflo	$t3
+    nop
+    nop
+    divu	$zero,$ra,$a6
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,60($a5)
+    addu	$at,$at,$a0
+    sh	$t8,2($at)
+    teq	$a7,$zero,0x7
+    teq	$a2,$zero,0x7
+    teq	$a3,$zero,0x7
+    lw	$at,64($a5)
+    teq	$a2,$zero,0x7
+    teq	$a6,$zero,0x7
+    addu	$at,$at,$a0
+    sh	$t1,4($at)
+    teq	$a2,$zero,0x7
+    addu	$t0,$a4,$ra
+    mflo	$t1
+    nop
+    nop
+    divu	$zero,$t0,$a7
+    beq	$ra,$t2,.L5e3cbb8c
+    lw	$at,56($a5)
+    addiu	$a0,$v1,20
+    addu	$at,$at,$v1
+    sh	$t9,0($at)
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    mflo	$t9
+    nop
+    nop
+    divu	$zero,$t0,$a3
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    mflo	$t8
+    nop
+    nop
+    divu	$zero,$t0,$a6
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,60($a5)
+    addu	$at,$at,$v1
+    sh	$t3,2($at)
+    teq	$a7,$zero,0x7
+    teq	$a2,$zero,0x7
+    teq	$a3,$zero,0x7
+    lw	$at,64($a5)
+    teq	$a2,$zero,0x7
+    teq	$a6,$zero,0x7
+    addu	$at,$at,$v1
+    sh	$t1,4($at)
+    teq	$a2,$zero,0x7
+    addu	$ra,$a4,$t0
+    mflo	$t1
+    nop
+    nop
+    divu	$zero,$ra,$a7
+    bne	$t0,$t2,.L5e3cb1e0
+    lw	$at,56($a5)
+    ld	$a4,56($sp)
+    ld	$a3,64($sp)
+    move	$a5,$a0
+    move	$a6,$at
+    ld	$a2,72($sp)
+.L5e3cb35c:
+    addu	$v0,$a6,$a5
+    sh	$t9,0($v0)
+    lw	$at,60($s0)
+    addu	$at,$at,$a5
+    teq	$s3,$zero,0x7
+    sh	$t8,2($at)
+    teq	$a2,$zero,0x7
+    teq	$s3,$zero,0x7
+    lw	$t2,64($s0)
+    teq	$a3,$zero,0x7
+    teq	$s3,$zero,0x7
+    addu	$t2,$t2,$a5
+    teq	$a4,$zero,0x7
+    sh	$t1,4($t2)
+.L5e3cb394:
+    b	.L5e3cb824
+    ld	$ra,96($sp)
+.L5e3cb39c:
+    bne	$a2,$v1,.L5e3cb6b4
+    nop
+    lw	$ra,20($t9)
+    lw	$at,32($t9)
+    lw	$a6,16($t9)
+    lw	$t1,28($t9)
+    addiu	$a0,$t3,1
+    srlv	$ra,$ra,$at
+    lw	$a3,12($t9)
+    slti	$at,$a0,2
+    move	$a4,$zero
+    srlv	$a6,$a6,$t1
+    lw	$t2,24($t9)
+    move	$t1,$zero
+    bnez	$at,.L5e3cc450
+    srlv	$a3,$a3,$t2
+    sd	$a3,48($sp)
+    addiu	$t0,$a0,-1
+    move	$a0,$t9
+    sd	$a6,40($sp)
+    move	$a2,$s3
+    move	$a7,$ra
+    lw	$at,12($t9)
+    move	$a5,$s0
+    move	$a1,$t8
+.L5e3cb400:
+    lw	$v0,24($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a3
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addiu	$v1,$a4,20
+    addu	$v0,$at,$a4
+    mflo	$at
+    sh	$at,0($v0)
+    lw	$at,16($a0)
+    lw	$v0,28($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a6
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addu	$v0,$at,$a4
+    mflo	$at
+    sh	$at,2($v0)
+    lw	$at,20($a0)
+    lw	$v0,32($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a7
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    teq	$a3,$zero,0x7
+    teq	$a2,$zero,0x7
+    lw	$at,56($a5)
+    teq	$a6,$zero,0x7
+    addiu	$t1,$t1,1
+    teq	$a2,$zero,0x7
+    addu	$v0,$at,$a4
+    mflo	$at
+    sh	$at,4($v0)
+    teq	$a7,$zero,0x7
+    teq	$a2,$zero,0x7
+    beq	$t1,$t0,.L5e3cbed0
+    lw	$at,12($a0)
+    lw	$v0,24($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a3
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addiu	$a4,$v1,20
+    addu	$v0,$at,$v1
+    mflo	$at
+    sh	$at,0($v0)
+    lw	$at,16($a0)
+    lw	$v0,28($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a6
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addu	$v0,$at,$v1
+    mflo	$at
+    sh	$at,2($v0)
+    lw	$at,20($a0)
+    lw	$v0,32($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a7
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    teq	$a3,$zero,0x7
+    teq	$a2,$zero,0x7
+    lw	$at,56($a5)
+    teq	$a6,$zero,0x7
+    addiu	$t1,$t1,1
+    teq	$a2,$zero,0x7
+    addu	$at,$at,$v1
+    mflo	$v0
+    sh	$v0,4($at)
+    teq	$a7,$zero,0x7
+    teq	$a2,$zero,0x7
+    bne	$t1,$t0,.L5e3cb400
+    lw	$at,12($a0)
+    move	$a2,$at
+.L5e3cb5cc:
+    lw	$t2,24($t9)
+    and	$v1,$a2,$t1
+    srlv	$v1,$v1,$t2
+    ld	$t2,48($sp)
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$t2
+    mflo	$at
+    srlv	$at,$at,$t8
+    sll	$v1,$at,0x10
+    subu	$v1,$v1,$at
+    divu	$zero,$v1,$s3
+    lw	$v0,56($s0)
+    addu	$v0,$v0,$a4
+    mflo	$at
+    sh	$at,0($v0)
+    lw	$v1,16($t9)
+    lw	$at,28($t9)
+    and	$v1,$v1,$t1
+    srlv	$v1,$v1,$at
+    ld	$at,40($sp)
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$at
+    mflo	$v1
+    srlv	$v1,$v1,$t8
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$s3
+    lw	$v1,56($s0)
+    addu	$v1,$v1,$a4
+    mflo	$v0
+    sh	$v0,2($v1)
+    lw	$v1,20($t9)
+    lw	$v0,32($t9)
+    and	$v1,$v1,$t1
+    srlv	$v1,$v1,$v0
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$ra
+    mflo	$v1
+    srlv	$v1,$v1,$t8
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$s3
+    teq	$s3,$zero,0x7
+    teq	$ra,$zero,0x7
+    teq	$s3,$zero,0x7
+    lw	$v1,56($s0)
+    teq	$s3,$zero,0x7
+    teq	$t2,$zero,0x7
+    addu	$v1,$v1,$a4
+    teq	$at,$zero,0x7
+    mflo	$v0
+    nop
+    sh	$v0,4($v1)
+.L5e3cb6ac:
+    b	.L5e3cb824
+    ld	$ra,96($sp)
+.L5e3cb6b4:
+    bnez	$a2,.L5e3cb820
+    addiu	$t2,$t3,1
+    move	$t0,$zero
+    li	$a4,0xffff
+    slti	$at,$t2,2
+    move	$a2,$zero
+    sll	$a1,$t2,0x10
+    bnez	$at,.L5e3cc52c
+    subu	$a1,$a1,$t2
+    divu	$zero,$a2,$t3
+    mflo	$t1
+    srlv	$t1,$t1,$t8
+    sll	$a7,$t1,0x10
+    subu	$a7,$a7,$t1
+    divu	$zero,$a7,$s3
+    move	$a5,$s0
+    addu	$v1,$a4,$a2
+    move	$a2,$s3
+    subu	$a6,$a1,$a6
+    move	$a1,$t8
+    lw	$at,56($s0)
+    mflo	$v0
+    nop
+    nop
+    divu	$zero,$v1,$t3
+    sll	$zero,$zero,0x2
+    nop
+.L5e3cb720:
+    addiu	$a7,$t0,20
+    addu	$at,$at,$t0
+    sh	$v0,0($at)
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addu	$v0,$at,$t0
+    lhu	$at,0($v0)
+    sh	$at,2($v0)
+    lw	$at,56($a5)
+    addu	$v0,$at,$t0
+    teq	$a3,$zero,0x7
+    lhu	$at,0($v0)
+    sh	$at,4($v0)
+    teq	$a2,$zero,0x7
+    addu	$a0,$a4,$v1
+    mflo	$v0
+    nop
+    nop
+    divu	$zero,$a0,$a3
+    beq	$v1,$a6,.L5e3cbba8
+    lw	$at,56($a5)
+    addiu	$t0,$a7,20
+    addu	$at,$at,$a7
+    sh	$v0,0($at)
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addu	$v0,$at,$a7
+    lhu	$at,0($v0)
+    sh	$at,2($v0)
+    lw	$at,56($a5)
+    addu	$at,$at,$a7
+    teq	$a3,$zero,0x7
+    lhu	$v0,0($at)
+    sh	$v0,4($at)
+    teq	$a2,$zero,0x7
+    addu	$v1,$a4,$a0
+    mflo	$v0
+    nop
+    nop
+    divu	$zero,$v1,$a3
+    bne	$a0,$a6,.L5e3cb720
+    lw	$at,56($a5)
+    move	$a2,$at
+    move	$a3,$v0
+.L5e3cb7f0:
+    addu	$t2,$a2,$t0
+    sh	$a3,0($t2)
+    lw	$v1,56($s0)
+    addu	$v1,$v1,$t0
+    lhu	$v0,0($v1)
+    sh	$v0,2($v1)
+    lw	$at,56($s0)
+    addu	$at,$at,$t0
+    teq	$s3,$zero,0x7
+    lhu	$t2,0($at)
+    teq	$t3,$zero,0x7
+    sh	$t2,4($at)
+.L5e3cb820:
+    ld	$ra,96($sp)
+.L5e3cb824:
+    li	$v0,1
+    ld	$s0,104($sp)
+    ld	$s3,80($sp)
+    jr	$ra
+    addiu	$sp,$sp,128
+.L5e3cb838:
+    ld	$ra,96($sp)
+    ld	$gp,88($sp)
+    move	$v0,$zero
+    ld	$s0,104($sp)
+    ld	$s3,80($sp)
+    jr	$ra
+    addiu	$sp,$sp,128
+.L5e3cb854:
+    lw	$v0,56($s0)
+    sh	$at,12($v0)
+    lw	$ra,56($s0)
+    sw	$zero,16($ra)
+    ld	$gp,88($sp)
+    lw	$s3,20($s0)
+    ld	$ra,96($sp)
+    addiu	$s3,$s3,-1
+    sw	$s3,20($s0)
+    li	$v0,1
+    ld	$s0,104($sp)
+    ld	$s3,80($sp)
+    jr	$ra
+    addiu	$sp,$sp,128
+.L5e3cb88c:
+    lh	$v1,4($a4)
+    li	$a1,2
+    beq	$v1,$a1,.L5e3cc054
+    move	$a0,$a4
+.L5e3cb89c:
+    lhu	$t3,8($a4)
+    move	$t9,$a4
+    lh	$a2,4($a4)
+    li	$t8,16
+    li	$t2,4
+    lh	$at,6($a4)
+    li	$s3,1
+    addiu	$t3,$t3,-1
+    subu	$t8,$t8,$at
+    sllv	$s3,$s3,$at
+    bne	$a2,$t2,.L5e3cbbb8
+    addiu	$s3,$s3,-1
+    lw	$a0,32($t9)
+    lw	$v1,20($t9)
+    lw	$a2,28($t9)
+    lw	$a1,16($t9)
+    lw	$v0,24($t9)
+    srlv	$v1,$v1,$a0
+    addiu	$t2,$t3,1
+    srlv	$a1,$a1,$a2
+    sd	$a1,16($sp)
+    li	$a4,0xffff
+    lw	$at,12($t9)
+    sll	$a1,$t2,0x10
+    subu	$a1,$a1,$t2
+    slti	$t2,$t2,2
+    move	$a2,$zero
+    sd	$v1,24($sp)
+    srlv	$at,$at,$v0
+    move	$a0,$zero
+    bnez	$t2,.L5e3cc1a8
+    sd	$at,32($sp)
+    ld	$a7,32($sp)
+    divu	$zero,$a2,$a7
+    mflo	$a3
+    srlv	$a3,$a3,$t8
+    sll	$v1,$a3,0x10
+    subu	$v1,$v1,$a3
+    divu	$zero,$v1,$s3
+    ld	$a3,16($sp)
+    mflo	$t9
+    nop
+    nop
+    divu	$zero,$a2,$a3
+    mflo	$v0
+    srlv	$v0,$v0,$t8
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$s3
+    ld	$a6,24($sp)
+    mflo	$t0
+    nop
+    nop
+    divu	$zero,$a2,$a6
+    mflo	$ra
+    srlv	$ra,$ra,$t8
+    sll	$t3,$ra,0x10
+    subu	$t3,$t3,$ra
+    divu	$zero,$t3,$s3
+    li	$t2,0xffff
+    move	$a5,$s0
+    subu	$t2,$a1,$t2
+    move	$a1,$t8
+    move	$t8,$t0
+    addu	$ra,$a4,$a2
+    move	$a2,$s3
+    lw	$at,56($s0)
+    mflo	$t1
+    nop
+    nop
+    divu	$zero,$ra,$a7
+    sll	$zero,$zero,0x2
+.L5e3cb9bc:
+    addiu	$v1,$a0,20
+    addu	$at,$at,$a0
+    sh	$t9,0($at)
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    mflo	$t9
+    nop
+    nop
+    divu	$zero,$ra,$a3
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    mflo	$t3
+    nop
+    nop
+    divu	$zero,$ra,$a6
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,60($a5)
+    addu	$at,$at,$a0
+    sh	$t8,2($at)
+    teq	$a7,$zero,0x7
+    teq	$a2,$zero,0x7
+    teq	$a3,$zero,0x7
+    lw	$at,64($a5)
+    teq	$a2,$zero,0x7
+    teq	$a6,$zero,0x7
+    addu	$at,$at,$a0
+    sh	$t1,4($at)
+    teq	$a2,$zero,0x7
+    addu	$t0,$a4,$ra
+    mflo	$t1
+    nop
+    nop
+    divu	$zero,$t0,$a7
+    beq	$ra,$t2,.L5e3cc170
+    lw	$at,56($a5)
+    addiu	$a0,$v1,20
+    addu	$at,$at,$v1
+    sh	$t9,0($at)
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    mflo	$t9
+    nop
+    nop
+    divu	$zero,$t0,$a3
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    mflo	$t8
+    nop
+    nop
+    divu	$zero,$t0,$a6
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,60($a5)
+    addu	$at,$at,$v1
+    sh	$t3,2($at)
+    teq	$a7,$zero,0x7
+    teq	$a2,$zero,0x7
+    teq	$a3,$zero,0x7
+    lw	$at,64($a5)
+    teq	$a2,$zero,0x7
+    teq	$a6,$zero,0x7
+    addu	$at,$at,$v1
+    sh	$t1,4($at)
+    teq	$a2,$zero,0x7
+    addu	$ra,$a4,$t0
+    mflo	$t1
+    nop
+    nop
+    divu	$zero,$ra,$a7
+    bne	$t0,$t2,.L5e3cb9bc
+    lw	$at,56($a5)
+    ld	$a3,16($sp)
+    ld	$a4,24($sp)
+    move	$a6,$a0
+    move	$a5,$at
+    ld	$a2,32($sp)
+.L5e3cbb38:
+    addu	$v0,$a5,$a6
+    sh	$t9,0($v0)
+    lw	$at,60($s0)
+    addu	$at,$at,$a6
+    teq	$s3,$zero,0x7
+    sh	$t8,2($at)
+    teq	$a4,$zero,0x7
+    teq	$s3,$zero,0x7
+    lw	$t2,64($s0)
+    teq	$a3,$zero,0x7
+    teq	$s3,$zero,0x7
+    addu	$t2,$t2,$a6
+    teq	$a2,$zero,0x7
+    sh	$t1,4($t2)
+.L5e3cbb70:
+    ld	$ra,96($sp)
+.L5e3cbb74:
+    ld	$gp,88($sp)
+    li	$v0,1
+    ld	$s0,104($sp)
+    ld	$s3,80($sp)
+    jr	$ra
+    addiu	$sp,$sp,128
+.L5e3cbb8c:
+    ld	$a4,56($sp)
+    move	$a5,$v1
+    move	$t8,$t3
+    ld	$a3,64($sp)
+    move	$a6,$at
+    b	.L5e3cb35c
+    ld	$a2,72($sp)
+.L5e3cbba8:
+    move	$t0,$a7
+    move	$a2,$at
+    b	.L5e3cb7f0
+    move	$a3,$v0
+.L5e3cbbb8:
+    bne	$a2,$a1,.L5e3cbedc
+    nop
+    lw	$ra,20($t9)
+    lw	$at,32($t9)
+    lw	$a6,16($t9)
+    lw	$t1,28($t9)
+    addiu	$a0,$t3,1
+    srlv	$ra,$ra,$at
+    lw	$a3,12($t9)
+    slti	$at,$a0,2
+    move	$a4,$zero
+    srlv	$a6,$a6,$t1
+    lw	$t2,24($t9)
+    move	$t1,$zero
+    bnez	$at,.L5e3cc264
+    srlv	$a3,$a3,$t2
+    sd	$a6,8($sp)
+    addiu	$t0,$a0,-1
+    move	$a0,$t9
+    sd	$a3,0($sp)
+    move	$a2,$s3
+    move	$a7,$ra
+    lw	$at,12($t9)
+    move	$a5,$s0
+    move	$a1,$t8
+.L5e3cbc1c:
+    lw	$v0,24($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a3
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addiu	$v1,$a4,20
+    addu	$v0,$at,$a4
+    mflo	$at
+    sh	$at,0($v0)
+    lw	$at,16($a0)
+    lw	$v0,28($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a6
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addu	$v0,$at,$a4
+    mflo	$at
+    sh	$at,2($v0)
+    lw	$at,20($a0)
+    lw	$v0,32($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a7
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    teq	$a3,$zero,0x7
+    teq	$a2,$zero,0x7
+    lw	$at,56($a5)
+    teq	$a6,$zero,0x7
+    addiu	$t1,$t1,1
+    teq	$a2,$zero,0x7
+    addu	$v0,$at,$a4
+    mflo	$at
+    sh	$at,4($v0)
+    teq	$a7,$zero,0x7
+    teq	$a2,$zero,0x7
+    beq	$t1,$t0,.L5e3cc19c
+    lw	$at,12($a0)
+    lw	$v0,24($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a3
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addiu	$a4,$v1,20
+    addu	$v0,$at,$v1
+    mflo	$at
+    sh	$at,0($v0)
+    lw	$at,16($a0)
+    lw	$v0,28($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a6
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addu	$v0,$at,$v1
+    mflo	$at
+    sh	$at,2($v0)
+    lw	$at,20($a0)
+    lw	$v0,32($a0)
+    and	$at,$at,$t1
+    srlv	$v0,$at,$v0
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a7
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    teq	$a3,$zero,0x7
+    teq	$a2,$zero,0x7
+    lw	$at,56($a5)
+    teq	$a6,$zero,0x7
+    addiu	$t1,$t1,1
+    teq	$a2,$zero,0x7
+    addu	$at,$at,$v1
+    mflo	$v0
+    sh	$v0,4($at)
+    teq	$a7,$zero,0x7
+    teq	$a2,$zero,0x7
+    bne	$t1,$t0,.L5e3cbc1c
+    lw	$at,12($a0)
+    move	$a2,$at
+.L5e3cbde8:
+    lw	$t2,24($t9)
+    and	$v1,$a2,$t1
+    srlv	$v1,$v1,$t2
+    ld	$t2,0($sp)
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$t2
+    mflo	$at
+    srlv	$at,$at,$t8
+    sll	$v1,$at,0x10
+    subu	$v1,$v1,$at
+    divu	$zero,$v1,$s3
+    lw	$v0,56($s0)
+    addu	$v0,$v0,$a4
+    mflo	$at
+    sh	$at,0($v0)
+    lw	$v1,16($t9)
+    lw	$at,28($t9)
+    and	$v1,$v1,$t1
+    srlv	$v1,$v1,$at
+    ld	$at,8($sp)
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$at
+    mflo	$v1
+    srlv	$v1,$v1,$t8
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$s3
+    lw	$v1,56($s0)
+    addu	$v1,$v1,$a4
+    mflo	$v0
+    sh	$v0,2($v1)
+    lw	$v1,20($t9)
+    lw	$v0,32($t9)
+    and	$v1,$v1,$t1
+    srlv	$v1,$v1,$v0
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$ra
+    mflo	$v1
+    srlv	$v1,$v1,$t8
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$s3
+    teq	$s3,$zero,0x7
+    teq	$ra,$zero,0x7
+    teq	$s3,$zero,0x7
+    lw	$v1,56($s0)
+    teq	$s3,$zero,0x7
+    teq	$t2,$zero,0x7
+    addu	$v1,$v1,$a4
+    teq	$at,$zero,0x7
+    mflo	$v0
+    nop
+    sh	$v0,4($v1)
+.L5e3cbec8:
+    b	.L5e3cbb74
+    ld	$ra,96($sp)
+.L5e3cbed0:
+    move	$a4,$v1
+    b	.L5e3cb5cc
+    move	$a2,$at
+.L5e3cbedc:
+    bnez	$a2,.L5e3cbb70
+    li	$a4,0xffff
+    addiu	$t2,$t3,1
+    move	$t0,$zero
+    slti	$at,$t2,2
+    move	$a2,$zero
+    sll	$a1,$t2,0x10
+    bnez	$at,.L5e3cc340
+    subu	$a1,$a1,$t2
+    divu	$zero,$a2,$t3
+    mflo	$t1
+    srlv	$t1,$t1,$t8
+    sll	$a7,$t1,0x10
+    subu	$a7,$a7,$t1
+    divu	$zero,$a7,$s3
+    move	$a5,$s0
+    move	$a3,$t3
+    addu	$v1,$a4,$a2
+    move	$a2,$s3
+    li	$a6,0xffff
+    subu	$a6,$a1,$a6
+    move	$a1,$t8
+    lw	$at,56($s0)
+    mflo	$v0
+    nop
+    nop
+    divu	$zero,$v1,$t3
+    sll	$zero,$zero,0x2
+.L5e3cbf4c:
+    addiu	$a7,$t0,20
+    addu	$at,$at,$t0
+    sh	$v0,0($at)
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addu	$v0,$at,$t0
+    lhu	$at,0($v0)
+    sh	$at,2($v0)
+    lw	$at,56($a5)
+    addu	$v0,$at,$t0
+    teq	$a3,$zero,0x7
+    lhu	$at,0($v0)
+    sh	$at,4($v0)
+    teq	$a2,$zero,0x7
+    addu	$a0,$a4,$v1
+    mflo	$v0
+    nop
+    nop
+    divu	$zero,$a0,$a3
+    beq	$v1,$a6,.L5e3cc18c
+    lw	$at,56($a5)
+    addiu	$t0,$a7,20
+    addu	$at,$at,$a7
+    sh	$v0,0($at)
+    mflo	$at
+    srlv	$v0,$at,$a1
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$a2
+    lw	$at,56($a5)
+    addu	$v0,$at,$a7
+    lhu	$at,0($v0)
+    sh	$at,2($v0)
+    lw	$at,56($a5)
+    addu	$at,$at,$a7
+    teq	$a3,$zero,0x7
+    lhu	$v0,0($at)
+    sh	$v0,4($at)
+    teq	$a2,$zero,0x7
+    addu	$v1,$a4,$a0
+    mflo	$v0
+    nop
+    nop
+    divu	$zero,$v1,$a3
+    bne	$a0,$a6,.L5e3cbf4c
+    lw	$at,56($a5)
+    move	$a2,$at
+    move	$a3,$v0
+.L5e3cc01c:
+    addu	$t2,$a2,$t0
+    sh	$a3,0($t2)
+    lw	$v1,56($s0)
+    addu	$v1,$v1,$t0
+    lhu	$v0,0($v1)
+    sh	$v0,2($v1)
+    lw	$at,56($s0)
+    addu	$at,$at,$t0
+    teq	$s3,$zero,0x7
+    lhu	$t2,0($at)
+    teq	$t3,$zero,0x7
+    sh	$t2,4($at)
+.L5e3cc04c:
+    b	.L5e3cbb74
+    ld	$ra,96($sp)
+.L5e3cc054:
+    lhu	$at,8($a0)
+    li	$v0,256
+    bne	$at,$v0,.L5e3cb89c
+    nop
+    lw	$at,56($s0)
+    la	$a2,gl_blue_map__DKC
+    la	$v0,gl_green_map__CKC
+    move	$t0,$zero
+    la	$a4,gl_red_map__BKC
+    move	$a5,$s0
+    lbu	$a3,0($v0)
+    addiu	$v0,$v0,1
+    addiu	$a0,$a4,1
+    lbu	$a4,0($a4)
+    addiu	$a6,$a2,256
+.L5e3cc090:
+    addiu	$a7,$t0,20
+    addu	$v1,$at,$t0
+    lbu	$a1,0($a2)
+    sll	$at,$a4,0x8
+    sh	$at,0($v1)
+    lw	$at,56($a5)
+    addu	$v1,$at,$t0
+    lbu	$a4,0($a0)
+    sll	$at,$a3,0x8
+    sh	$at,2($v1)
+    lw	$at,56($a5)
+    addu	$v1,$at,$t0
+    lbu	$a3,0($v0)
+    sll	$at,$a1,0x8
+    sh	$at,4($v1)
+    addiu	$a2,$a2,1
+    addiu	$a1,$v0,1
+    addiu	$a0,$a0,1
+    lw	$at,56($a5)
+    addiu	$t0,$a7,20
+    addu	$v0,$at,$a7
+    lbu	$v1,0($a2)
+    sll	$at,$a4,0x8
+    sh	$at,0($v0)
+    lw	$at,56($a5)
+    addu	$v0,$at,$a7
+    lbu	$a4,0($a0)
+    sll	$at,$a3,0x8
+    sh	$at,2($v0)
+    lw	$at,56($a5)
+    addu	$at,$at,$a7
+    lbu	$a3,0($a1)
+    sll	$v0,$v1,0x8
+    sh	$v0,4($at)
+    addiu	$a2,$a2,1
+    addiu	$v0,$a1,1
+    addiu	$a0,$a0,1
+    bne	$a2,$a6,.L5e3cc090
+    lw	$at,56($a5)
+    move	$v1,$a2
+    move	$t2,$t0
+    move	$v0,$a4
+    lbu	$v1,0($v1)
+    addu	$at,$at,$t2
+    sll	$v0,$v0,0x8
+    sh	$v0,0($at)
+    lw	$at,56($s0)
+    move	$a0,$a3
+    addu	$at,$at,$t2
+    sll	$a0,$a0,0x8
+    sh	$a0,2($at)
+    lw	$a0,56($s0)
+    sll	$v1,$v1,0x8
+    addu	$a0,$a0,$t2
+    b	.L5e3cbb70
+    sh	$v1,4($a0)
+.L5e3cc170:
+    ld	$a3,16($sp)
+    move	$a6,$v1
+    move	$t8,$t3
+    ld	$a4,24($sp)
+    move	$a5,$at
+    b	.L5e3cbb38
+    ld	$a2,32($sp)
+.L5e3cc18c:
+    move	$t0,$a7
+    move	$a2,$at
+    b	.L5e3cc01c
+    move	$a3,$v0
+.L5e3cc19c:
+    move	$a4,$v1
+    b	.L5e3cbde8
+    move	$a2,$at
+.L5e3cc1a8:
+    ld	$v1,32($sp)
+    divu	$zero,$a2,$v1
+    mflo	$v0
+    srlv	$v0,$v0,$t8
+    sll	$at,$v0,0x10
+    subu	$at,$at,$v0
+    divu	$zero,$at,$s3
+    ld	$t2,16($sp)
+    mflo	$at
+    nop
+    nop
+    divu	$zero,$a2,$t2
+    mflo	$v1
+    srlv	$v1,$v1,$t8
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$s3
+    ld	$t2,24($sp)
+    mflo	$v1
+    nop
+    nop
+    divu	$zero,$a2,$t2
+    mflo	$v0
+    srlv	$v0,$v0,$t8
+    sll	$t2,$v0,0x10
+    subu	$t2,$t2,$v0
+    divu	$zero,$t2,$s3
+    lw	$v0,56($s0)
+    addu	$v0,$v0,$a0
+    sh	$at,0($v0)
+    lw	$t2,60($s0)
+    ld	$v0,32($sp)
+    teq	$s3,$zero,0x7
+    ld	$at,16($sp)
+    addu	$t2,$t2,$a0
+    teq	$s3,$zero,0x7
+    sh	$v1,2($t2)
+    teq	$s3,$zero,0x7
+    ld	$t2,24($sp)
+    teq	$at,$zero,0x7
+    lw	$v1,64($s0)
+    teq	$v0,$zero,0x7
+    teq	$t2,$zero,0x7
+    addu	$v1,$v1,$a0
+    mflo	$v0
+    b	.L5e3cbb70
+    sh	$v0,4($v1)
+.L5e3cc264:
+    lw	$at,12($t9)
+    lw	$v0,24($t9)
+    and	$at,$at,$t1
+    srlv	$at,$at,$v0
+    sll	$t2,$at,0x10
+    subu	$t2,$t2,$at
+    divu	$zero,$t2,$a3
+    mflo	$v1
+    srlv	$v1,$v1,$t8
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$s3
+    lw	$at,56($s0)
+    addu	$at,$at,$a4
+    mflo	$t2
+    sh	$t2,0($at)
+    lw	$v1,16($t9)
+    lw	$t2,28($t9)
+    and	$v1,$v1,$t1
+    srlv	$v1,$v1,$t2
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$a6
+    mflo	$at
+    srlv	$at,$at,$t8
+    sll	$t2,$at,0x10
+    subu	$t2,$t2,$at
+    divu	$zero,$t2,$s3
+    lw	$v1,56($s0)
+    addu	$v1,$v1,$a4
+    mflo	$v0
+    sh	$v0,2($v1)
+    lw	$at,20($t9)
+    lw	$v0,32($t9)
+    and	$at,$at,$t1
+    srlv	$at,$at,$v0
+    sll	$t2,$at,0x10
+    subu	$t2,$t2,$at
+    divu	$zero,$t2,$ra
+    mflo	$v1
+    srlv	$v1,$v1,$t8
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$s3
+    teq	$s3,$zero,0x7
+    teq	$ra,$zero,0x7
+    teq	$s3,$zero,0x7
+    teq	$a6,$zero,0x7
+    lw	$at,56($s0)
+    teq	$s3,$zero,0x7
+    teq	$a3,$zero,0x7
+    addu	$at,$at,$a4
+    mflo	$t2
+    b	.L5e3cbec8
+    sh	$t2,4($at)
+.L5e3cc340:
+    divu	$zero,$a2,$t3
+    mflo	$at
+    srlv	$at,$at,$t8
+    sll	$t2,$at,0x10
+    subu	$t2,$t2,$at
+    divu	$zero,$t2,$s3
+    lw	$v1,56($s0)
+    addu	$v1,$v1,$t0
+    mflo	$v0
+    sh	$v0,0($v1)
+    lw	$at,56($s0)
+    addu	$at,$at,$t0
+    lhu	$t2,0($at)
+    sh	$t2,2($at)
+    lw	$v1,56($s0)
+    teq	$s3,$zero,0x7
+    addu	$v1,$v1,$t0
+    teq	$t3,$zero,0x7
+    lhu	$v0,0($v1)
+    b	.L5e3cc04c
+    sh	$v0,4($v1)
+.L5e3cc394:
+    ld	$at,56($sp)
+    divu	$zero,$a2,$at
+    mflo	$t2
+    srlv	$t2,$t2,$t8
+    sll	$v1,$t2,0x10
+    subu	$v1,$v1,$t2
+    divu	$zero,$v1,$s3
+    ld	$v0,64($sp)
+    mflo	$v1
+    nop
+    nop
+    divu	$zero,$a2,$v0
+    mflo	$at
+    srlv	$at,$at,$t8
+    sll	$t2,$at,0x10
+    subu	$t2,$t2,$at
+    divu	$zero,$t2,$s3
+    ld	$v0,72($sp)
+    mflo	$at
+    nop
+    nop
+    divu	$zero,$a2,$v0
+    mflo	$t2
+    srlv	$t2,$t2,$t8
+    sll	$v0,$t2,0x10
+    subu	$v0,$v0,$t2
+    divu	$zero,$v0,$s3
+    lw	$t2,56($s0)
+    addu	$t2,$t2,$a0
+    sh	$v1,0($t2)
+    lw	$v0,60($s0)
+    ld	$t2,56($sp)
+    teq	$s3,$zero,0x7
+    ld	$v1,64($sp)
+    addu	$v0,$v0,$a0
+    teq	$s3,$zero,0x7
+    sh	$at,2($v0)
+    teq	$s3,$zero,0x7
+    ld	$v0,72($sp)
+    teq	$v1,$zero,0x7
+    lw	$at,64($s0)
+    teq	$t2,$zero,0x7
+    teq	$v0,$zero,0x7
+    addu	$at,$at,$a0
+    mflo	$t2
+    b	.L5e3cb394
+    sh	$t2,4($at)
+.L5e3cc450:
+    lw	$v1,12($t9)
+    lw	$t2,24($t9)
+    and	$v1,$v1,$t1
+    srlv	$v1,$v1,$t2
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$a3
+    mflo	$at
+    srlv	$at,$at,$t8
+    sll	$t2,$at,0x10
+    subu	$t2,$t2,$at
+    divu	$zero,$t2,$s3
+    lw	$v1,56($s0)
+    addu	$v1,$v1,$a4
+    mflo	$v0
+    sh	$v0,0($v1)
+    lw	$at,16($t9)
+    lw	$v0,28($t9)
+    and	$at,$at,$t1
+    srlv	$at,$at,$v0
+    sll	$t2,$at,0x10
+    subu	$t2,$t2,$at
+    divu	$zero,$t2,$a6
+    mflo	$v1
+    srlv	$v1,$v1,$t8
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$s3
+    lw	$at,56($s0)
+    addu	$at,$at,$a4
+    mflo	$t2
+    sh	$t2,2($at)
+    lw	$v1,20($t9)
+    lw	$t2,32($t9)
+    and	$v1,$v1,$t1
+    srlv	$v1,$v1,$t2
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$ra
+    mflo	$at
+    srlv	$at,$at,$t8
+    sll	$t2,$at,0x10
+    subu	$t2,$t2,$at
+    divu	$zero,$t2,$s3
+    teq	$s3,$zero,0x7
+    teq	$ra,$zero,0x7
+    teq	$s3,$zero,0x7
+    teq	$a6,$zero,0x7
+    lw	$v1,56($s0)
+    teq	$s3,$zero,0x7
+    teq	$a3,$zero,0x7
+    addu	$v1,$v1,$a4
+    mflo	$v0
+    b	.L5e3cb6ac
+    sh	$v0,4($v1)
+.L5e3cc52c:
+    divu	$zero,$a2,$t3
+    mflo	$v1
+    srlv	$v1,$v1,$t8
+    sll	$v0,$v1,0x10
+    subu	$v0,$v0,$v1
+    divu	$zero,$v0,$s3
+    lw	$at,56($s0)
+    addu	$at,$at,$t0
+    mflo	$t2
+    sh	$t2,0($at)
+    lw	$v1,56($s0)
+    addu	$v1,$v1,$t0
+    lhu	$v0,0($v1)
+    sh	$v0,2($v1)
+    lw	$at,56($s0)
+    teq	$s3,$zero,0x7
+    addu	$at,$at,$t0
+    teq	$t3,$zero,0x7
+    lhu	$t2,0($at)
+    b	.L5e3cb820
+    sh	$t2,4($at)
+
+glabel mgrasBlackCmap
+    move	$a7,$a0
+    move	$v1,$zero
+    move	$v0,$s8
+    lui	$at,0xffff
+    addiu	$sp,$sp,-64
+    ori	$at,$at,0x3ff0
+    addiu	$s8,$sp,64
+    addu	$sp,$sp,$at
+    lui	$t0,0x1
+    li	$a3,254
+    sd	$s1,-40($s8)
+    sd	$v0,-32($s8)
+    beqz	$sp,.L5e3d23d4
+    move	$s1,$sp
+    li	$a1,7424
+    li	$v0,1
+    move	$at,$s1
+    nop
+    nop
+    nop
+.L5e3d1f80:
+    sb	$zero,6($at)
+    sb	$zero,12($at)
+    sb	$zero,7($at)
+    sb	$zero,13($at)
+    sb	$zero,8($at)
+    sb	$zero,14($at)
+    addiu	$a0,$v1,2
+    sh	$v0,10($at)
+    addiu	$v0,$a0,1
+    sh	$v1,4($at)
+    addiu	$at,$at,12
+    sb	$zero,6($at)
+    sb	$zero,12($at)
+    sb	$zero,7($at)
+    sb	$zero,13($at)
+    sb	$zero,8($at)
+    sb	$zero,14($at)
+    addiu	$v1,$a0,2
+    sh	$v0,10($at)
+    addiu	$v0,$v1,1
+    sh	$a0,4($at)
+    bne	$v1,$a1,.L5e3d1f80
+    addiu	$at,$at,12
+    li	$a0,7424
+    addu	$t0,$s1,$t0
+    addiu	$v1,$a0,1
+    move	$a1,$zero
+    sh	$a0,-20988($t0)
+    addiu	$v0,$v1,1
+    b	.L5e3d2034
+    move	$a0,$t0
+    nop
+.L5e3d2000:
+    addiu	$v0,$a2,1
+    sb	$v0,-20980($a0)
+    sb	$v0,-20979($a0)
+    sb	$v0,-20978($a0)
+    sh	$v1,-20982($a0)
+    sb	$a2,-20986($a0)
+    sb	$a2,-20985($a0)
+    addiu	$a1,$a2,2
+    sb	$a2,-20984($a0)
+    addiu	$v1,$at,1
+    addiu	$a0,$a0,12
+    sh	$at,-20988($a0)
+    addiu	$v0,$v1,1
+.L5e3d2034:
+    addiu	$at,$a1,1
+    sb	$at,-20980($a0)
+    sb	$at,-20979($a0)
+    sb	$at,-20978($a0)
+    sh	$v1,-20982($a0)
+    sb	$a1,-20986($a0)
+    sb	$a1,-20985($a0)
+    addiu	$a2,$a1,2
+    sb	$a1,-20984($a0)
+    addiu	$v1,$v0,1
+    addiu	$a0,$a0,12
+    sh	$v0,-20988($a0)
+    bne	$a2,$a3,.L5e3d2000
+    addiu	$at,$v1,1
+    move	$a3,$a0
+    move	$a4,$v1
+    sh	$a4,-20982($a3)
+    move	$v0,$a2
+    sb	$v0,-20984($a3)
+    sb	$v0,-20985($a3)
+    sb	$v0,-20986($a3)
+    li	$at,7680
+    addiu	$v0,$v0,1
+    sb	$v0,-20980($a3)
+    move	$a0,$t0
+    li	$t9,8192
+    sb	$v0,-20979($a3)
+    move	$a1,$t9
+    sb	$v0,-20978($a3)
+    lui	$a4,0x7
+    sd	$ra,-56($s8)
+.L5e3d20b0:
+    sb	$zero,-19444($a0)
+    sb	$zero,-19443($a0)
+    sb	$zero,-19442($a0)
+    addiu	$v0,$at,1
+    sh	$v0,-19446($a0)
+    sb	$zero,-19450($a0)
+    sb	$zero,-19449($a0)
+    addiu	$v1,$at,2
+    sb	$zero,-19448($a0)
+    sh	$at,-19452($a0)
+    addiu	$v0,$a0,12
+    sb	$zero,-19444($v0)
+    sb	$zero,-19443($v0)
+    sb	$zero,-19442($v0)
+    addiu	$at,$v1,1
+    sh	$at,-19446($v0)
+    sb	$zero,-19450($v0)
+    sb	$zero,-19449($v0)
+    addiu	$at,$v1,2
+    sb	$zero,-19448($v0)
+    sh	$v1,-19452($v0)
+    bne	$at,$a1,.L5e3d20b0
+    addiu	$a0,$v0,12
+    lw	$a2,-12608($gp)
+    lw	$a1,436($a7)
+    sh	$t9,2($s1)
+    sll	$a2,$a2,0x2
+    addu	$a1,$a1,$a2
+    lw	$a1,0($a1)
+    lw	$at,0($a1)
+    ldc1	$f6,-12944($gp)
+    addu	$a4,$at,$a4
+    lw	$v0,256($a4)
+    ldc1	$f5,-12952($gp)
+    move	$a5,$zero
+    ldc1	$f4,-12960($gp)
+    andi	$v0,$v0,0x1f
+    move	$a6,$zero
+    move	$a0,$s1
+    lw	$t8,116($a1)
+    lui	$a7,0x6
+    beqz	$v0,.L5e3d2174
+    lw	$ra,4($a1)
+    nop
+.L5e3d2160:
+    lw	$a3,256($a4)
+    andi	$a3,$a3,0x1f
+    bnez	$a3,.L5e3d2160
+    nop
+    sd	$s0,-48($s8)
+.L5e3d2174:
+    addu	$a7,$at,$a7
+    sd	$s0,-48($s8)
+    b	.L5e3d21c8
+    li	$s0,4
+    nop
+    nop
+    nop
+.L5e3d2190:
+    sh	$t0,3120($a7)
+    lbu	$t2,8($a0)
+    lbu	$t3,7($a0)
+    addiu	$a5,$a5,2
+    beqz	$t8,.L5e3d22d0
+    lbu	$t1,6($a0)
+    sll	$v1,$t3,0x10
+    sll	$v0,$t1,0x18
+    or	$v0,$v0,$v1
+    sll	$v1,$t2,0x8
+    or	$v0,$v0,$v1
+    sw	$v0,3352($a7)
+.L5e3d21c0:
+    beq	$a6,$t9,.L5e3d232c
+    addiu	$a0,$a0,6
+.L5e3d21c8:
+    lhu	$v0,4($a0)
+    andi	$v1,$a6,0x1f
+    sll	$t0,$v0,0x8
+    addiu	$a6,$a6,1
+    sra	$v0,$v0,0x8
+    andi	$v0,$v0,0xff
+    andi	$t0,$t0,0xff00
+    beqz	$v1,.L5e3d2228
+    or	$t0,$t0,$v0
+.L5e3d21ec:
+    slti	$v1,$a5,6
+    bnez	$v1,.L5e3d2190
+    nop
+    lw	$a2,256($a4)
+    andi	$a2,$a2,0x1f
+    beqz	$a2,.L5e3d2190
+    move	$a5,$zero
+    nop
+    nop
+.L5e3d2210:
+    lw	$a3,256($a4)
+    andi	$a3,$a3,0x1f
+    bnez	$a3,.L5e3d2210
+    nop
+    b	.L5e3d2190
+    nop
+.L5e3d2228:
+    lw	$v0,256($a4)
+    andi	$v0,$v0,0x1f
+    beqz	$v0,.L5e3d2250
+    li	$a5,6
+    nop
+    nop
+.L5e3d2240:
+    lw	$v1,256($a4)
+    andi	$v1,$v1,0x1f
+    bnez	$v1,.L5e3d2240
+    nop
+.L5e3d2250:
+    sb	$s0,2544($ra)
+    sb	$s0,7304($a7)
+    lw	$v0,132($a1)
+    sw	$v0,7936($a7)
+    sb	$s0,2544($ra)
+    sb	$s0,7304($a7)
+    lw	$a3,132($a1)
+    sw	$a3,7936($a7)
+    lw	$a2,256($a4)
+    andi	$a2,$a2,0x1f
+    beqz	$a2,.L5e3d2290
+    nop
+.L5e3d2280:
+    lw	$v1,256($a4)
+    andi	$v1,$v1,0x1f
+    bnez	$v1,.L5e3d2280
+    nop
+.L5e3d2290:
+    lbu	$a2,4616($a7)
+    andi	$a2,$a2,0x8
+    bnez	$a2,.L5e3d22b0
+    nop
+.L5e3d22a0:
+    lbu	$a3,4616($a7)
+    andi	$a3,$a3,0x8
+    beqz	$a3,.L5e3d22a0
+    nop
+.L5e3d22b0:
+    sh	$t0,3120($a7)
+    sh	$t0,3120($a7)
+    sb	$s0,2544($ra)
+    sb	$s0,7304($a7)
+    lw	$v0,132($a1)
+    ori	$v0,$v0,0x4000
+    b	.L5e3d21ec
+    sw	$v0,7936($a7)
+.L5e3d22d0:
+    mtc1	$t2,$f1
+    mtc1	$t3,$f2
+    mtc1	$t1,$f0
+    cvt.d.w	$f2,$f2
+    cvt.d.w	$f0,$f0
+    cvt.d.w	$f1,$f1
+    mul.d	$f2,$f2,$f5
+    mul.d	$f0,$f0,$f4
+    mul.d	$f1,$f1,$f6
+    cvt.s.d	$f2,$f2
+    cvt.s.d	$f0,$f0
+    cvt.s.d	$f1,$f1
+    add.s	$f0,$f0,$f2
+    add.s	$f0,$f0,$f1
+    trunc.w.s	$f0,$f0
+    mfc1	$a2,$f0
+    sll	$v1,$a2,0x10
+    sll	$a3,$a2,0x18
+    sll	$a2,$a2,0x8
+    or	$v1,$v1,$a3
+    or	$v1,$v1,$a2
+    b	.L5e3d21c0
+    sw	$v1,3352($a7)
+.L5e3d232c:
+    sb	$s0,2544($ra)
+    sb	$s0,7304($a7)
+    lh	$v0,2($s1)
+    lw	$a0,132($a1)
+    sw	$a0,7936($a7)
+    sb	$s0,2544($ra)
+    ld	$ra,-56($s8)
+    sb	$s0,7304($a7)
+    ld	$s0,-48($s8)
+    move	$a4,$s1
+    lw	$v1,132($a1)
+    move	$a0,$zero
+    blez	$v0,.L5e3d23c0
+    sw	$v1,7936($a7)
+    ld	$s0,-48($s8)
+    ld	$ra,-56($s8)
+    nop
+.L5e3d2370:
+    lbu	$v0,7($a4)
+    lbu	$a3,6($a4)
+    andi	$v0,$v0,0xff
+    lbu	$v1,8($a4)
+    andi	$a3,$a3,0xff
+    sll	$v0,$v0,0x8
+    lhu	$a2,4($a4)
+    or	$a3,$a3,$v0
+    lw	$v0,100($a1)
+    andi	$v1,$v1,0xff
+    sll	$a2,$a2,0x2
+    sll	$v1,$v1,0x10
+    addu	$v0,$v0,$a2
+    or	$a3,$a3,$v1
+    sw	$a3,0($v0)
+    lh	$a2,2($s1)
+    addiu	$a0,$a0,1
+    slt	$a2,$a0,$a2
+    bnez	$a2,.L5e3d2370
+    addiu	$a4,$a4,6
+.L5e3d23c0:
+    ld	$v1,-32($s8)
+    ld	$s1,-40($s8)
+    move	$sp,$s8
+    jr	$ra
+    move	$s8,$v1
+.L5e3d23d4:
+    lw	$t9,-29932($gp)
+    la	$a0,sub_5e4f0000
+    sd	$ra,-56($s8)
+    jalr	$t9
+    addiu	$a0,$a0,8928
+    ld	$ra,-56($s8)
+    ld	$a2,-32($s8)
+    ld	$s1,-40($s8)
+    move	$sp,$s8
+    jr	$ra
+    move	$s8,$a2
+
+glabel mgrasStrGamma8
+    addiu	$sp,$sp,-176
+    sd	$s6,80($sp)
+    lui	$s6,0x14
+    sd	$gp,56($sp)
+    addiu	$s6,$s6,-32536
+    sd	$s5,64($sp)
+    addu	$gp,$t9,$s6
+    la	$s5,vcScreenPrivateIndex
+    sd	$s4,72($sp)
+    lw	$s5,0($s5)
+    lw	$s4,436($a0)
+    sll	$s5,$s5,0x2
+    addu	$s4,$s4,$s5
+    lw	$s4,0($s4)
+    move	$a5,$a4
+    addiu	$a6,$sp,-992
+    sd	$s4,40($sp)
+    move	$v1,$a6
+    move	$s6,$a3
+    lw	$s4,36($s4)
+    addu	$t1,$s6,$s6
+    sll	$t9,$a2,0x4
+    sd	$a0,48($sp)
+    move	$s5,$a2
+    addu	$s4,$s4,$t9
+    move	$a2,$s6
+    blez	$a3,.L5e3d99b8
+    lw	$s4,12($s4)
+    sd	$ra,88($sp)
+    move	$a7,$s4
+    sd	$s2,120($sp)
+    addu	$t1,$t1,$s4
+    sd	$s1,112($sp)
+    addiu	$s2,$sp,-480
+    sd	$s0,96($sp)
+    addiu	$s1,$sp,32
+    andi	$at,$s6,0x1
+    sd	$s3,104($sp)
+    andi	$s0,$a1,0x4
+    andi	$ra,$a1,0x2
+    beqz	$at,.L5e3d9858
+    andi	$s3,$a1,0x1
+    pref	0x1,256($a7)
+    sltu	$v0,$zero,$ra
+    sltu	$t3,$zero,$s0
+    lbu	$a3,0($a5)
+    move	$a1,$s1
+    movn	$v1,$a7,$t3
+    sltu	$at,$zero,$s3
+    sll	$t3,$a3,0x8
+    movn	$a1,$a7,$at
+    or	$t3,$t3,$a3
+    move	$at,$s2
+    andi	$t3,$t3,0xffff
+    sh	$t3,0($a1)
+    movn	$at,$a7,$v0
+    sh	$t3,1024($v1)
+    addiu	$a5,$a5,1
+    addiu	$a7,$a7,2
+    sh	$t3,512($at)
+.L5e3d9858:
+    move	$t2,$s2
+    addiu	$t3,$t1,-4
+    move	$a4,$s0
+    move	$t0,$a5
+    sra	$a1,$a2,0x1
+    move	$a5,$s1
+    beqz	$a1,.L5e3d99a4
+    move	$a3,$a7
+    slti	$at,$a1,2
+    bnez	$at,.L5e3d9a60
+    move	$a7,$s3
+    move	$a2,$s2
+    move	$t1,$ra
+    sltu	$v1,$zero,$ra
+    sltu	$at,$zero,$s3
+    lbu	$v0,0($t0)
+.L5e3d9898:
+    movn	$a2,$a3,$v1
+    sltu	$a1,$zero,$a4
+    sll	$a0,$v0,0x8
+    move	$v1,$a5
+    pref	0x1,256($a3)
+    or	$v0,$a0,$v0
+    movn	$v1,$a3,$at
+    andi	$v0,$v0,0xffff
+    sh	$v0,0($v1)
+    move	$at,$a6
+    sh	$v0,512($a2)
+    movn	$at,$a3,$a1
+    sh	$v0,1024($at)
+    sltu	$at,$zero,$a7
+    addiu	$a2,$a3,2
+    move	$a1,$a5
+    lbu	$v0,1($t0)
+    movn	$a1,$a2,$at
+    sltu	$a0,$zero,$a4
+    sll	$at,$v0,0x8
+    sltu	$v1,$zero,$t1
+    or	$v0,$at,$v0
+    move	$at,$t2
+    andi	$v0,$v0,0xffff
+    sh	$v0,0($a1)
+    movn	$at,$a2,$v1
+    sh	$v0,512($at)
+    movz	$a2,$a6,$a0
+    sh	$v0,1024($a2)
+    addiu	$t0,$t0,2
+    addiu	$a3,$a3,4
+    sltu	$at,$zero,$a7
+    sltu	$v1,$zero,$t1
+    move	$a2,$t2
+    bne	$a3,$t3,.L5e3d9898
+    lbu	$v0,0($t0)
+    move	$t3,$a3
+    movn	$a2,$t3,$v1
+    move	$t9,$at
+    sltu	$at,$zero,$s0
+    sll	$t8,$v0,0x8
+    or	$t8,$t8,$v0
+    move	$v0,$s1
+    addiu	$a0,$sp,-992
+    pref	0x1,256($t3)
+    movn	$v0,$t3,$t9
+    move	$t9,$a0
+    andi	$t8,$t8,0xffff
+    sh	$t8,0($v0)
+    movn	$t9,$t3,$at
+    sh	$t8,512($a2)
+    sh	$t8,1024($t9)
+    move	$a3,$t0
+    sltu	$a1,$zero,$ra
+    lbu	$a3,1($a3)
+    sltu	$v1,$zero,$s0
+    addiu	$v0,$t3,2
+    sltu	$a2,$zero,$s3
+    sll	$at,$a3,0x8
+    movn	$s1,$v0,$a2
+    or	$at,$at,$a3
+    movn	$s2,$v0,$a1
+    andi	$at,$at,0xffff
+    sh	$at,0($s1)
+    movz	$v0,$a0,$v1
+    sh	$at,512($s2)
+    sh	$at,1024($v0)
+.L5e3d99a4:
+    ld	$ra,88($sp)
+    ld	$s0,96($sp)
+    ld	$s3,104($sp)
+    ld	$s1,112($sp)
+    ld	$s2,120($sp)
+.L5e3d99b8:
+    bnez	$s5,.L5e3d9a28
+    sd	$ra,88($sp)
+    lw	$t9,-32716($gp)
+    addiu	$t9,$t9,29704
+    ld	$a0,40($sp)
+    bal mgrasQryMonitor
+    move	$a1,$s4
+    la	$at,doLoadGamma__CBD
+    lw	$at,0($at)
+    beqz	$at,.L5e3d9a48
+    ld	$ra,88($sp)
+    ld	$a0,48($sp)
+    lw	$t9,-29916($gp)
+    lw	$a0,116($a0)
+    move	$a2,$s4
+    lui	$a1,0x6d67
+    ori	$a1,$a1,0x3
+    jalr	$t9
+    lw	$a0,100($a0)
+    li	$t3,-1
+    bne	$v0,$t3,.L5e3d9a48
+    ld	$ra,88($sp)
+    lw	$t9,-29932($gp)
+    la	$a0,sub_5e4f0000
+    jalr	$t9
+    addiu	$a0,$a0,13368
+    b	.L5e3d9a48
+    ld	$ra,88($sp)
+.L5e3d9a28:
+    lw	$t9,-32712($gp)
+    addiu	$t9,$t9,-27344
+    move	$a1,$s5
+    move	$a2,$s6
+    ld	$a0,48($sp)
+    bal mgrasSetScrnGlock
+    move	$a3,$s4
+    ld	$ra,88($sp)
+.L5e3d9a48:
+    ld	$gp,56($sp)
+    ld	$s4,72($sp)
+    ld	$s5,64($sp)
+    ld	$s6,80($sp)
+    jr	$ra
+    addiu	$sp,$sp,176
+.L5e3d9a60:
+    move	$a1,$t0
+    move	$a2,$a3
+    sltu	$at,$zero,$ra
+    move	$a0,$s2
+    lbu	$t3,0($a1)
+    movn	$a0,$a2,$at
+    sltu	$v1,$zero,$s0
+    sll	$at,$t3,0x8
+    sltu	$v0,$zero,$s3
+    move	$a3,$s1
+    or	$at,$at,$t3
+    movn	$a3,$a2,$v0
+    move	$v0,$a6
+    andi	$at,$at,0xffff
+    sh	$at,0($a3)
+    sh	$at,512($a0)
+    movn	$v0,$a2,$v1
+    sh	$at,1024($v0)
+    sltu	$t3,$zero,$ra
+    addiu	$v0,$a2,2
+    lbu	$a3,1($a1)
+    sltu	$v1,$zero,$s0
+    movn	$s2,$v0,$t3
+    sll	$at,$a3,0x8
+    sltu	$a0,$zero,$s3
+    or	$at,$at,$a3
+    movn	$s1,$v0,$a0
+    movz	$v0,$a6,$v1
+    andi	$at,$at,0xffff
+    sh	$at,0($s1)
+    sh	$at,1024($v0)
+    b	.L5e3d99a4
+    sh	$at,512($s2)
+
+glabel mgrasStrGamma16
+    addiu	$sp,$sp,-192
+    sd	$s7,64($sp)
+    lui	$s7,0x13
+    sd	$gp,56($sp)
+    addiu	$s7,$s7,32108
+    sd	$s6,80($sp)
+    addu	$gp,$t9,$s7
+    la	$s6,vcScreenPrivateIndex
+    sd	$s0,72($sp)
+    lw	$s6,0($s6)
+    lw	$s0,436($a0)
+    andi	$t1,$a1,0x1
+    sll	$s6,$s6,0x2
+    addiu	$t2,$sp,0
+    sd	$a0,48($sp)
+    addu	$s0,$s0,$s6
+    addiu	$a5,$sp,0
+    move	$s7,$a3
+    lw	$s0,0($s0)
+    move	$a0,$a4
+    addu	$v1,$s7,$s7
+    sd	$s0,40($sp)
+    move	$a7,$a5
+    addu	$v1,$v1,$a4
+    lw	$s0,36($s0)
+    sll	$t9,$a2,0x4
+    addiu	$t3,$v1,-2
+    move	$s6,$a2
+    addu	$s0,$s0,$t9
+    slti	$t9,$s7,2
+    blez	$a3,.L5e3d9cec
+    lw	$s0,12($s0)
+    sd	$s3,128($sp)
+    move	$t8,$s0
+    sd	$s1,104($sp)
+    addiu	$a3,$sp,-992
+    sd	$s2,120($sp)
+    addiu	$s1,$sp,-480
+    addiu	$s2,$sp,0
+    move	$t0,$a3
+    sd	$s5,96($sp)
+    andi	$s3,$a1,0x2
+    sd	$s4,88($sp)
+    addiu	$s5,$sp,32
+    andi	$s4,$a1,0x4
+    move	$a1,$s5
+    bnez	$t9,.L5e3d9da8
+    move	$a6,$s4
+    pref	0x0,256($a0)
+    move	$a4,$s2
+    pref	0x1,256($t8)
+    move	$v0,$t2
+    sltu	$a2,$zero,$t1
+    move	$a5,$s1
+    sd	$ra,112($sp)
+    movn	$v0,$a0,$a2
+    move	$a3,$s3
+    move	$v1,$a2
+    lh	$v0,0($v0)
+    nop
+.L5e3d9bd4:
+    move	$at,$a1
+    addiu	$a2,$t8,2
+    movn	$at,$t8,$v1
+    sh	$v0,0($at)
+    sltu	$v1,$zero,$a3
+    move	$at,$a4
+    movn	$at,$a0,$v1
+    lh	$v0,0($at)
+    move	$at,$a5
+    movn	$at,$t8,$v1
+    sh	$v0,512($at)
+    sltu	$v1,$zero,$a6
+    move	$at,$a7
+    movn	$at,$a0,$v1
+    lh	$v0,0($at)
+    move	$at,$t0
+    movn	$at,$t8,$v1
+    addiu	$a0,$a0,2
+    sh	$v0,1024($at)
+    sltu	$v1,$zero,$t1
+    move	$at,$t2
+    movn	$at,$a0,$v1
+    beq	$a0,$t3,.L5e3d9d94
+    lh	$v0,0($at)
+    move	$at,$a1
+    addiu	$t8,$a2,2
+    pref	0x1,256($t8)
+    movn	$at,$a2,$v1
+    sh	$v0,0($at)
+    sltu	$v1,$zero,$a3
+    move	$at,$a4
+    movn	$at,$a0,$v1
+    lh	$v0,0($at)
+    move	$at,$a5
+    movn	$at,$a2,$v1
+    sh	$v0,512($at)
+    sltu	$v1,$zero,$a6
+    move	$at,$a7
+    movn	$at,$a0,$v1
+    lh	$v0,0($at)
+    move	$at,$t0
+    movn	$at,$a2,$v1
+    addiu	$a0,$a0,2
+    sh	$v0,1024($at)
+    sltu	$v1,$zero,$t1
+    move	$at,$t2
+    pref	0x0,256($a0)
+    movn	$at,$a0,$v1
+    bne	$a0,$t3,.L5e3d9bd4
+    lh	$v0,0($at)
+    move	$a3,$v0
+    addiu	$a2,$sp,-992
+    addiu	$a4,$sp,0
+.L5e3d9ca8:
+    movn	$s5,$t8,$v1
+    sltu	$v0,$zero,$s3
+    sh	$a3,0($s5)
+    movn	$s2,$a0,$v0
+    lh	$at,0($s2)
+    movn	$s1,$t8,$v0
+    sltu	$t9,$zero,$s4
+    sh	$at,512($s1)
+    movz	$a0,$a4,$t9
+    lh	$t3,0($a0)
+    movz	$t8,$a2,$t9
+    sh	$t3,1024($t8)
+.L5e3d9cd8:
+    ld	$s4,88($sp)
+    ld	$s5,96($sp)
+    ld	$s1,104($sp)
+    ld	$s2,120($sp)
+    ld	$s3,128($sp)
+.L5e3d9cec:
+    bnez	$s6,.L5e3d9d5c
+    sd	$ra,112($sp)
+    lw	$t9,-32716($gp)
+    addiu	$t9,$t9,29704
+    ld	$a0,40($sp)
+    bal mgrasQryMonitor
+    move	$a1,$s0
+    la	$at,doLoadGamma__CBD
+    lw	$at,0($at)
+    beqz	$at,.L5e3d9d7c
+    ld	$ra,112($sp)
+    ld	$a0,48($sp)
+    lw	$t9,-29916($gp)
+    lw	$a0,116($a0)
+    move	$a2,$s0
+    lui	$a1,0x6d67
+    ori	$a1,$a1,0x3
+    jalr	$t9
+    lw	$a0,100($a0)
+    li	$t3,-1
+    bne	$v0,$t3,.L5e3d9d7c
+    ld	$ra,112($sp)
+    lw	$t9,-29932($gp)
+    la	$a0,sub_5e4f0000
+    jalr	$t9
+    addiu	$a0,$a0,13368
+    b	.L5e3d9d7c
+    ld	$ra,112($sp)
+.L5e3d9d5c:
+    lw	$t9,-32712($gp)
+    addiu	$t9,$t9,-27344
+    move	$a1,$s6
+    move	$a2,$s7
+    ld	$a0,48($sp)
+    bal mgrasSetScrnGlock
+    move	$a3,$s0
+    ld	$ra,112($sp)
+.L5e3d9d7c:
+    ld	$gp,56($sp)
+    ld	$s0,72($sp)
+    ld	$s6,80($sp)
+    ld	$s7,64($sp)
+    jr	$ra
+    addiu	$sp,$sp,192
+.L5e3d9d94:
+    move	$a3,$v0
+    move	$t8,$a2
+    addiu	$a2,$sp,-992
+    b	.L5e3d9ca8
+    addiu	$a4,$sp,0
+.L5e3d9da8:
+    sltu	$v0,$zero,$t1
+    movn	$t2,$a0,$v0
+    lh	$at,0($t2)
+    movn	$s5,$t8,$v0
+    sltu	$t9,$zero,$s3
+    sh	$at,0($s5)
+    movn	$s2,$a0,$t9
+    lh	$t3,0($s2)
+    movn	$s1,$t8,$t9
+    sltu	$v0,$zero,$s4
+    sh	$t3,512($s1)
+    movz	$a0,$a5,$v0
+    lh	$at,0($a0)
+    movz	$t8,$a3,$v0
+    b	.L5e3d9cd8
+    sh	$at,1024($t8)
+
+glabel mgrasStore24Colors
+    lw	$at,12($a0)
+    lw	$a3,0($a0)
+    lw	$at,116($at)
+    lw	$a3,0($a3)
+    lw	$v0,80($at)
+    subu	$a3,$a3,$v0
+    sll	$v1,$a3,0x2
+    lw	$v0,88($at)
+    addu	$v1,$v1,$a3
+    sll	$v1,$v1,0x2
+    addu	$v0,$v0,$v1
+    lw	$v0,4($v0)
+    sll	$a3,$v0,0x2
+    lw	$v1,124($at)
+    subu	$a3,$a3,$v0
+    sll	$a3,$a3,0x3
+    addu	$v1,$v1,$a3
+    lw	$v1,4($v1)
+    lw	$v1,0($v1)
+    sll	$v0,$v1,0x3
+    lw	$at,116($at)
+    subu	$v0,$v0,$v1
+    sll	$v0,$v0,0x2
+    addu	$at,$at,$v0
+    lw	$at,0($at)
+    addiu	$sp,$sp,-48
+    lui	$v0,0x7
+    sd	$gp,0($sp)
+    addiu	$v0,$v0,29896
+    beq	$at,$a0,.L5e49a410
+    addu	$gp,$t9,$v0
+    ld	$gp,0($sp)
+    jr	$ra
+    addiu	$sp,$sp,48
+.L5e49a410:
+    lw	$t9,-32664($gp)
+    addiu	$t9,$t9,-25256
+    sd	$ra,8($sp)
+    bal mfbZeroPolyArcSS
+    nop
+    ld	$ra,8($sp)
+    ld	$gp,0($sp)
+    jr	$ra
+    addiu	$sp,$sp,48
+
+glabel mgrasInstall24Map
+    addiu	$sp,$sp,-64
+    sd	$s1,8($sp)
+    lw	$t0,12($a0)
+    lui	$at,0x7
+    sd	$gp,0($sp)
+    addiu	$at,$at,29724
+    lw	$s1,436($t0)
+    addu	$gp,$t9,$at
+    lw	$t9,-12608($gp)
+    lw	$a7,-21852($gp)
+    sll	$t9,$t9,0x2
+    sd	$s0,16($sp)
+    addu	$s1,$s1,$t9
+    move	$s0,$a0
+    beqz	$a7,.L5e49a5b8
+    lw	$s1,0($s1)
+    lw	$v0,104($s1)
+    beqz	$v0,.L5e49a5cc
+    lw	$t9,-30092($gp)
+    la	$s1,ErrorF
+.L5e49a484:
+    move	$t1,$v0
+    addiu	$a0,$v0,510
+    move	$a2,$zero
+    lw	$at,56($s0)
+    b	.L5e49a4e8
+    move	$v1,$s0
+    nop
+    nop
+.L5e49a4a4:
+    addiu	$a2,$a1,20
+    addu	$at,$at,$a1
+    lhu	$at,0($at)
+    sll	$at,$at,0x8
+    sh	$at,0($v0)
+    lw	$at,60($v1)
+    addu	$at,$at,$a1
+    lhu	$at,2($at)
+    sll	$at,$at,0x8
+    sh	$at,512($v0)
+    lw	$at,64($v1)
+    addu	$at,$at,$a1
+    lhu	$at,4($at)
+    sll	$at,$at,0x8
+    sh	$at,1024($v0)
+    addiu	$v0,$v0,2
+    lw	$at,56($v1)
+.L5e49a4e8:
+    addiu	$a1,$a2,20
+    addu	$at,$at,$a2
+    lhu	$at,0($at)
+    sll	$at,$at,0x8
+    sh	$at,0($v0)
+    lw	$at,60($v1)
+    addu	$at,$at,$a2
+    lhu	$at,2($at)
+    sll	$at,$at,0x8
+    sh	$at,512($v0)
+    lw	$at,64($v1)
+    addu	$at,$at,$a2
+    lhu	$at,4($at)
+    sll	$at,$at,0x8
+    sh	$at,1024($v0)
+    addiu	$v0,$v0,2
+    bne	$v0,$a0,.L5e49a4a4
+    lw	$at,56($v1)
+    move	$a5,$a1
+    move	$a3,$at
+    addu	$a3,$a3,$a5
+    lhu	$a3,0($a3)
+    move	$a4,$v0
+    sll	$a3,$a3,0x8
+    sh	$a3,0($a4)
+    lw	$a6,60($s0)
+    addu	$a6,$a6,$a5
+    lhu	$a6,2($a6)
+    sll	$a6,$a6,0x8
+    sh	$a6,512($a4)
+    lw	$a3,64($s0)
+    addu	$a3,$a3,$a5
+    lhu	$a3,4($a3)
+    sll	$a3,$a3,0x8
+    sh	$a3,1024($a4)
+    beqz	$a7,.L5e49a5a4
+    lw	$t9,-29916($gp)
+    lw	$a0,116($t0)
+    move	$a2,$t1
+    sd	$ra,32($sp)
+    lui	$a1,0x6d67
+    ori	$a1,$a1,0x3
+    jalr	$t9
+    lw	$a0,100($a0)
+    li	$a3,-1
+    beq	$v0,$a3,.L5e49a62c
+    ld	$ra,32($sp)
+.L5e49a5a4:
+    ld	$gp,0($sp)
+    ld	$s0,16($sp)
+    ld	$s1,8($sp)
+    jr	$ra
+    addiu	$sp,$sp,64
+.L5e49a5b8:
+    ld	$gp,0($sp)
+    ld	$s0,16($sp)
+    ld	$s1,8($sp)
+    jr	$ra
+    addiu	$sp,$sp,64
+.L5e49a5cc:
+    sd	$ra,32($sp)
+    sd	$t0,24($sp)
+    jalr	$t9
+    li	$a0,1536
+    sw	$v0,104($s1)
+    ld	$t0,24($sp)
+    bnez	$v0,.L5e49a644
+    ld	$ra,32($sp)
+    lw	$a4,-21848($gp)
+    beqz	$a4,.L5e49a658
+    lw	$t9,-29932($gp)
+    la	$a0,sub_5e4f0000
+    sw	$zero,-21848($gp)
+    jalr	$t9
+    addiu	$a0,$a0,8976
+    lw	$v0,104($s1)
+    ld	$t0,24($sp)
+    bnez	$v0,.L5e49a64c
+    ld	$ra,32($sp)
+.L5e49a618:
+    ld	$gp,0($sp)
+    ld	$s0,16($sp)
+    ld	$s1,8($sp)
+    jr	$ra
+    addiu	$sp,$sp,64
+.L5e49a62c:
+    la	$a0,sub_5e4f0000
+    move	$t9,$s1
+    jalr	$s1
+    addiu	$a0,$a0,9024
+    b	.L5e49a5a4
+    ld	$ra,32($sp)
+.L5e49a644:
+    la	$s1,ErrorF
+.L5e49a648:
+    beqz	$v0,.L5e49a618
+.L5e49a64c:
+    la	$s1,ErrorF
+    b	.L5e49a484
+    lw	$a7,-21852($gp)
+.L5e49a658:
+    b	.L5e49a648
+    la	$s1,ErrorF
+
+glabel mgrasUninstall24Map
+    li	$v0,5
+    lh	$at,4($a0)
+    lui	$v1,0x7
+    addiu	$sp,$sp,-32
+    sd	$gp,0($sp)
+    addiu	$v1,$v1,29168
+    lw	$a4,12($a0)
+    bne	$at,$v0,.L5e49a6d4
+    addu	$gp,$t9,$v1
+    lw	$a0,-21852($gp)
+    beqz	$a0,.L5e49a6d4
+    la	$a3,vcScreenPrivateIndex
+    lw	$a3,0($a3)
+    lw	$a2,436($a4)
+    sd	$ra,8($sp)
+    sll	$a3,$a3,0x2
+    lw	$a0,116($a4)
+    addu	$a2,$a2,$a3
+    lw	$a2,0($a2)
+    lw	$t9,-29916($gp)
+    lw	$a2,36($a2)
+    lui	$a1,0x6d67
+    lw	$a0,100($a0)
+    ori	$a1,$a1,0x3
+    jalr	$t9
+    lw	$a2,12($a2)
+    li	$at,-1
+    beq	$v0,$at,.L5e49a6e0
+    ld	$ra,8($sp)
+.L5e49a6d4:
+    ld	$gp,0($sp)
+    jr	$ra
+    addiu	$sp,$sp,32
+.L5e49a6e0:
+    lw	$t9,-29932($gp)
+    la	$a0,sub_5e4f0000
+    jalr	$t9
+    addiu	$a0,$a0,9024
+    b	.L5e49a6d4
+    ld	$ra,8($sp)
+
+glabel mgrasStoreFakeColors
+    jr	$ra
+    nop
+
+glabel mgrasChangeDIDCmap
+    addiu	$sp,$sp,-128
+    sd	$s2,72($sp)
+    sd	$s0,48($sp)
+    sd	$s1,40($sp)
+    sd	$s3,64($sp)
+    lui	$a5,0x7
+    sd	$gp,56($sp)
+    addiu	$a5,$a5,-13164
+    addu	$gp,$t9,$a5
+    lw	$a5,16($a0)
+    lw	$t9,-12608($gp)
+    la	$a4,rrmWindowPrivateIndex
+    lw	$a6,132($a0)
+    lw	$a4,0($a4)
+    la	$a7,rrmScreenPrivateIndex
+    lw	$s3,436($a5)
+    sll	$a4,$a4,0x2
+    lw	$a7,0($a7)
+    addu	$a6,$a6,$a4
+    lw	$a6,0($a6)
+    li	$t0,992
+    lw	$s2,116($a5)
+    sll	$t9,$t9,0x2
+    addu	$t9,$t9,$s3
+    sll	$a7,$a7,0x2
+    lw	$a3,20($a6)
+    move	$s1,$a0
+    lw	$t9,0($t9)
+    addu	$s3,$s3,$a7
+    sd	$t9,24($sp)
+    move	$s0,$a6
+    sll	$at,$a3,0x3
+    lw	$s3,0($s3)
+    addu	$at,$at,$a3
+    bltz	$a3,.L5e4a4eb8
+    sll	$at,$at,0x2
+    lw	$a2,68($a1)
+    lw	$a2,0($a2)
+    li	$v0,248
+    sd	$s4,88($sp)
+    sll	$v1,$a2,0x3
+    addu	$at,$at,$s3
+    lw	$s4,116($s2)
+    subu	$v1,$v1,$a2
+    li	$a2,3
+    sll	$v1,$v1,0x2
+    lhu	$at,168($at)
+    addu	$s4,$s4,$v1
+    slti	$v1,$a3,32
+    movz	$t0,$v0,$v1
+    li	$v0,5
+    lw	$s4,24($s4)
+    andi	$at,$at,0x1
+    movz	$v0,$a2,$v1
+    sd	$s5,80($sp)
+    sra	$s4,$s4,0x8
+    nor	$s5,$t0,$zero
+    beqz	$at,.L5e4a4eac
+    sllv	$s4,$s4,$v0
+    lw	$at,36($s0)
+    and	$at,$at,$t0
+    li	$a0,-1
+    move	$a1,$a6
+    beq	$at,$s4,.L5e4a4db8
+    sd	$ra,96($sp)
+    lw	$a3,436($a5)
+    lw	$v1,20($a6)
+    lhu	$v0,0($a6)
+    sll	$at,$v1,0x3
+    addu	$a3,$a3,$a7
+    lw	$a3,0($a3)
+    addu	$at,$at,$v1
+    andi	$v0,$v0,0x8
+    sll	$at,$at,0x2
+    addu	$a3,$a3,$at
+    beqz	$v0,.L5e4a4d88
+    addiu	$a3,$a3,152
+    lw	$a6,44($a1)
+    beqz	$a6,.L5e4a4ed4
+    lw	$a5,48($a1)
+    lw	$at,132($a6)
+    addu	$at,$at,$a4
+    lw	$at,0($at)
+    sw	$a5,48($at)
+.L5e4a4d0c:
+    lw	$a5,48($a1)
+    beqz	$a5,.L5e4a4edc
+    lw	$a6,44($a1)
+    lw	$v0,132($a5)
+    addu	$v0,$v0,$a4
+    lw	$v0,0($v0)
+    sw	$a6,44($v0)
+    sw	$zero,48($a1)
+.L5e4a4d2c:
+    sw	$zero,44($a1)
+    lhu	$a2,16($a3)
+    lw	$a4,20($a3)
+    lw	$a5,0($a3)
+    andi	$a2,$a2,0x31
+    addiu	$a4,$a4,-1
+    sw	$a4,20($a3)
+    andi	$a2,$a2,0xffff
+    ori	$a4,$a2,0x6
+    andi	$v1,$a2,0x1
+    beqz	$a5,.L5e4a4ee4
+    movz	$a4,$a2,$v1
+    lw	$at,4($a3)
+    ori	$v0,$a4,0x2
+    ori	$a4,$v0,0x4
+    xor	$at,$at,$a5
+    movz	$a4,$v0,$at
+.L5e4a4d70:
+    sh	$a4,16($a3)
+    lhu	$v0,0($a1)
+    sd	$ra,96($sp)
+    li	$v1,-9
+    and	$v0,$v0,$v1
+    sh	$v0,0($a1)
+.L5e4a4d88:
+    li	$a2,-1
+    sw	$a2,20($a1)
+    lw	$t9,-32080($gp)
+    lw	$a1,36($s0)
+    move	$a0,$s1
+    sd	$ra,96($sp)
+    and	$a1,$a1,$s5
+    or	$a1,$s4,$a1
+    jalr	$t9
+    sw	$a1,36($s0)
+    beqz	$v0,.L5e4a4f2c
+    lw	$t9,-32092($gp)
+.L5e4a4db8:
+    lw	$t9,32($s3)
+.L5e4a4dbc:
+    move	$a0,$s1
+    li	$a2,1
+    sd	$s6,32($sp)
+    jalr	$t9
+    li	$a1,8
+    lw	$a4,32($s0)
+    lw	$s3,36($s0)
+    lw	$s6,20($s0)
+    andi	$at,$a4,0x2
+    and	$s3,$s3,$s5
+    ld	$s5,80($sp)
+    or	$s3,$s3,$s4
+    beqz	$at,.L5e4a4e18
+    ld	$s4,88($sp)
+    andi	$s4,$a4,0x4
+    lui	$s5,0x4000
+    lui	$at,0x4000
+    nor	$s5,$s5,$zero
+    and	$s5,$s3,$s5
+    or	$s3,$s3,$at
+    movz	$s3,$s5,$s4
+    ld	$s5,80($sp)
+    ld	$s4,88($sp)
+.L5e4a4e18:
+    lw	$t9,12($s0)
+    sw	$t9,0($sp)
+    lw	$t9,-29916($gp)
+    lw	$t8,4($s1)
+    sw	$a4,16($sp)
+    sw	$s3,12($sp)
+    sw	$s6,8($sp)
+    sw	$t8,4($sp)
+    addiu	$a2,$sp,0
+    li	$a1,1017
+    jalr	$t9
+    lw	$a0,100($s2)
+    li	$at,-1
+    beq	$v0,$at,.L5e4a4ef0
+    ld	$ra,96($sp)
+.L5e4a4e54:
+    ld	$v0,24($sp)
+    sll	$v1,$s6,0x2
+    subu	$v1,$v1,$s6
+    lw	$s1,60($v0)
+    sll	$v1,$v1,0x2
+    addu	$s1,$s1,$v1
+    sw	$s6,0($s1)
+    ld	$gp,56($sp)
+    lw	$a2,60($v0)
+    ld	$s2,72($sp)
+    lw	$a0,32($s0)
+    addu	$a2,$a2,$v1
+    sw	$a0,4($a2)
+    ld	$s1,40($sp)
+    lw	$v0,60($v0)
+    ld	$s6,32($sp)
+    ld	$s0,48($sp)
+    addu	$v0,$v0,$v1
+    sw	$s3,8($v0)
+    ld	$s3,64($sp)
+    jr	$ra
+    addiu	$sp,$sp,128
+.L5e4a4eac:
+    sd	$ra,96($sp)
+    b	.L5e4a4db8
+    nor	$s5,$t0,$zero
+.L5e4a4eb8:
+    ld	$gp,56($sp)
+    ld	$s0,48($sp)
+    ld	$s1,40($sp)
+    ld	$s2,72($sp)
+    ld	$s3,64($sp)
+    jr	$ra
+    addiu	$sp,$sp,128
+.L5e4a4ed4:
+    b	.L5e4a4d0c
+    sw	$a5,0($a3)
+.L5e4a4edc:
+    b	.L5e4a4d2c
+    sw	$a6,4($a3)
+.L5e4a4ee4:
+    li	$a2,-17
+    b	.L5e4a4d70
+    and	$a4,$a4,$a2
+.L5e4a4ef0:
+    la	$a0,sub_5e4f0000
+    la	$s1,ErrorF
+    addiu	$a0,$a0,8776
+    jalr	$s1
+    move	$t9,$s1
+    lw	$a2,4($sp)
+    la	$a0,sub_5e4f0000
+    la	$a3,errno
+    lw	$a1,0($sp)
+    move	$t9,$s1
+    lw	$a3,0($a3)
+    jalr	$s1
+    addiu	$a0,$a0,8736
+    b	.L5e4a4e54
+    ld	$ra,96($sp)
+.L5e4a4f2c:
+    jalr	$t9
+    move	$a0,$s1
+    b	.L5e4a4dbc
+    lw	$t9,32($s3)
+

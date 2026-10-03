@@ -1,0 +1,18 @@
+{
+  "target": "ddx/impactpc.so",
+  "total_funcs": 698,
+  "total_objects": 141,
+  "modules": {
+    "mgras_draw": 17,
+    "mgras_glyph": 8,
+    "mgras_image": 13,
+    "mgras_window": 19,
+    "mgras_vc3": 16,
+    "mgras_cmap": 13,
+    "mgras_cursor": 4,
+    "mgras_init": 10,
+    "rrm": 115,
+    "cfb_mi": 302,
+    "other": 181
+  }
+}
