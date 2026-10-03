@@ -1,0 +1,29 @@
+.section .rodata
+
+dlabel jpt_00000000
+    .dword .L000011fc
+    .dword .L000011fc
+    .dword .L00001214
+    .dword .L00001220
+    .dword .L0000122c
+    .dword .L0000122c
+    .dword .L0000122c
+    .dword .L0000122c
+    .dword .L000011f4
+    .dword .L000011f4
+    .dword .L000011f4
+    .dword .L000011f4
+    .dword .L000011f4
+    .dword .L000011f4
+    .dword .L000011f4
+    .dword .L000011f4
+    .dword .L000011f4
+    .dword .L000011f4
+    .dword .L000011f4
+    .dword .L000011f4
+    .dword .L0000123c
+    .dword .L0000123c
+    .dword .L000011f4
+    .dword .L0000123c
+enddlabel jpt_00000000
+
