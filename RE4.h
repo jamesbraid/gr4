@@ -144,6 +144,14 @@ extern "C" {
 /* Background, Fog, and Screen Masks */
 #define RE4_REG_BKGRD_RG            0x0140      /* Background color Red & Green */
 #define RE4_REG_BKGRD_BA            0x0141      /* Background color Blue & Alpha */
+/*
+ * BKGRD_RG/BA: the colour opaque line/char stipples draw for their 0 bits.
+ * RGB modes: 12-bit components, red lowest like PACKEDCOLOR:
+ *   BKGRD_RG = G[23:12] | R[11:0], BKGRD_BA = B[11:0] (alpha above, unseen).
+ * CI modes: the index in BKGRD_RG[11:0]. Confirmed by the desktop's 50%
+ * icon dithers (syserrpanel: fg red 0xf0 on RG 0x700C00 / BA 0x700, a red
+ * sign on hardware; accessibility: fg blue on RG 0x700700 / BA 0xC00).
+ */
 #define RE4_REG_TXENV_RG            0x0142      /* Texture environment color RG */
 #define RE4_REG_TXENV_B             0x0143      /* Texture environment color B */
 #define RE4_REG_FOG_RG              0x0144      /* Fog color Red & Green */

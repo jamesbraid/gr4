@@ -134,6 +134,43 @@ typedef union {
 
 /*
  * ============================================================================
+ * GLX VISUALS AND PBUFFER CONFIGS (IRIX 6.5.22, HighImpact, 1024x768)
+ * ============================================================================
+ *
+ * As glXGetConfig / glXGetFBConfigAttribSGIX report them (glprim
+ * --listvisuals in iris, 2026-10-10; not yet compared with a real board):
+ *   CI8     z24s8 or none, single-buffered; level 1 (overlay) visuals too
+ *   CI12    z24s8 or none; single, double, double stereo
+ *   RGBA 4,4,4,4   double-buffered only, z24s8 or none, accum 16, stereo
+ *   RGBA 5,5,5,1   the same
+ *   RGBA 8,8,8,8   single and double, z24s8 or none, accum 16
+ *   RGBA 12,12,12,0  single and double, z24s8 or none, accum 16
+ * There is no 3,3,2, 10,10,10,2 or 12,12,12,12, and no depth layout but
+ * z24s8. The 12-bit RGBA visuals double-buffer in word halves (PP1.h).
+ *
+ * Pbuffers (GLX_SGIX_pbuffer): max 1024x768. Asked for RGBA|CI, only four
+ * configs come back (0x49-0x4C: 12-bit, render type RGBA and CI, red
+ * size 12, green and blue 0; sb/db, z24s8 or none). Asked for RGBA, more
+ * (e.g. 0x50 4,4,4,4 db, 0x54 5,5,5,1 db, 0x57-0x5E 8,8,8,8 and 12-bit
+ * RGB). A 400x300 glXCreateGLXPbufferSGIX succeeded only for 8,8,8,8 sb,
+ * 4,4,4,4 db, 5,5,5,1 db and the 12-bit sb config; every z24s8 config,
+ * 8,8,8,8 db and 12,12,12 failed with BadAlloc. Our reading: the X
+ * server has offscreen room for one 24-bit buffer at 1024x768 and no
+ * offscreen ZST (unconfirmed).
+ *
+ * A pbuffer's GL window (the context image's words 2-15) has origin
+ * (0, 468), i.e. the bottom 300 rows, and DRBpointers 0xA8000000: page
+ * fields 0, so it lives in the aux/ZST pages (top byte 0xA8 unknown). A
+ * double-buffered pbuffer draws GL_BACK as DRAW_BUFFER [2, 1] (12-bit) like
+ * a window, but glXSwapBuffers on it produced no board traffic at all: no
+ * VALIDATE_BANKS or SCHEDULE_SWAP, image words 16-17 stayed 1, 1, and the
+ * X server's context switched in and wrote nothing. The front buffer is
+ * never drawn, so glprim's front reads of a double-buffered pbuffer return
+ * whatever was there before. Whether a real board swaps them is untested.
+ */
+
+/*
+ * ============================================================================
  * GIO BUS IDENTIFICATION & SLOTS
  * ============================================================================
  */

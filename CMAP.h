@@ -201,6 +201,33 @@ extern "C" {
 #define XMAP_VISUAL_TRUECOLOR24     0x2         /* 24-bit TrueColor */
 #define XMAP_VISUAL_CI12            0x3         /* 12-bit Color Index */
 
+/*
+ * Main mode words as the 6.5.22 X server and kernel program them (traced,
+ * IP28 HighImpact 1024x768 and 1280x1024, 2026-10): bits 4:0 a format,
+ * bits 9:5 a colormap block (block * 256 = CMAP entry base), bits 12:10
+ * unknown (bit 10 set on nearly every DID, bit 11 on DIDs 14-16, bit 12
+ * on 12 and 19). The format values do not follow the XMAP_VISUAL_*
+ * guesses above:
+ *   1   colour index, 8-bit PseudoColor desktop windows (DIDs 0-7, blocks
+ *       16-23, one colormap block each)
+ *   3   colour index (DID 8, block 0; CI12 in our reading)
+ *   5   12-bit RGB pairs, double-buffered: BUF_SELECT's bit for the DID
+ *       picks the low (A) or high (B) 12 bits of each word (PP1.h).
+ *       glprim's 4,4,4,4 visual and electropaint (pixel format 0).
+ *   7   the 5,5,5,1 pairs (octahedra, pixel format 0x100): RGB 5:5:5 in
+ *       bits 14:0 / 29:15 of the word (libGLcore's plane masks, PP1.h).
+ *       iris still displays 7 as 4:4:4 halves.
+ *   21  (0x15) 24-bit RGB double-buffered on two pages: BUF_SELECT picks
+ *       DIB's second page.
+ *   25  (0x19) 36-bit RGB, the RGBA 12,12,12 visual (gltest, 2026-10-10:
+ *       DIDs 12 0x17B9 and 17 0x1419, BUF_SELECT bit 17 flipping on its
+ *       swaps; second page like 0x15). Presumably scanout takes the
+ *       twelve bits (PP1.h layout); iris shows the 8-bit parts.
+ *   4, 8, 19, 23  seen, unmodelled (8 = unused DIDs 20-31).
+ * The RGB DIDs name block 29 (0x7A0), which holds an identity ramp. RGB
+ * pixels are believed to bypass the CMAP and go straight to the DAC's
+ * gamma table, so the block is probably ignored for them.
+ */
 #define XMAP_BUF_FRONT              0x0         /* Display Front Buffer */
 #define XMAP_BUF_BACK               0x1         /* Display Back Buffer */
 

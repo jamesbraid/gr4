@@ -480,6 +480,22 @@ extern "C" {
  *     TRAM, ending at page 255 (the console background at 223 with 32
  *     pages, a 256x256 at 239 with 16, lightmaps at 253 with 2), and
  *     reloaded each time they are bound.
+ *   - A slot texture is saved through its slot: TXSIZE 0xD6D6, TEXMODE1
+ *     with the slot in bits 8:7 (0x140 = slot 2), XFRMODE 0x400090 (one
+ *     8-bit component), 0x400 rows; reloaded with TL_MODE's slot bits
+ *     (0x34038 = slot 3) and TL_NO_TABLE (0x09B).
+ *
+ * TyrQuake after an overnight demo loop (glq.log, 2026-10-10; cause still
+ * open, libGLcore bookkeeping or emulation). Its water/lava warp is
+ * rebuilt every frame: two GET_PIXELS_BITMAP_PIO reads of the screen, then
+ * a TL load (TL_MODE 0x34024 RGB, TL_SPEC 0x880, TL_MIPMAP 0x28) in four
+ * 64 x 256 strips (0xDA8 at s = 0, 0x40, 0x80, 0xC0), sampled as TXSIZE
+ * 0x8888 from page 0x28, which takes 16 pages (0x28-0x37). In the same
+ * frames about 20 wall textures (TXSIZE 0x4444-0x7878) were bound to pages
+ * inside 0x28-0x37, so every frame the warp overwrote them: walls showed
+ * the lava. A fresh run keeps the warp's pages to itself. The overlap is
+ * libGLcore's own placement; the manager was also restoring about six
+ * pages a frame (TRAM overcommitted). Real hardware behaviour unknown.
  *
  * CAUTION: the register bitfield layouts (the *u unions) are not in the
  * sources we have. The TEXMODE2/TXSIZE/TXLOD bit positions below are
