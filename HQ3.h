@@ -898,6 +898,16 @@ extern "C" {
  *   0x4009 (xfrcontrol read start in the low bits) to raster interface
  *   register 5. Pixel zoom: GE pixel state 0x192 (token 0x080, a GE state
  *   write: words 3 address, 6 count, then values) holds 1 / zoom.
+ *   SAVE_RSS words 2 and 3 say which planes the operation moves (traced,
+ *   glprim --read front/depth/stencil on a z24s8 visual, 2026-10-10):
+ *     colour   word 2 0xFF        word 3 0          xfrmode format 8 type 0
+ *     depth    word 2 0x1E000FF   word 3 0x1C00000  format 2 type 3 (32-bit)
+ *     stencil  word 2 0x1E000FF   word 3 0x1800000  format 1 type 0 (8-bit)
+ *   A stencil read has the same transfer format as a colour-index read,
+ *   so only SAVE_RSS tells them apart; nothing else in the stream differs
+ *   (the block, counters and GET_PIXELS are the same). Our reading: word 3
+ *   bits 24:22 select the ZST planes (bit 22 the depth part). The stencil
+ *   index is the ZST word's top byte (Z 23:0, stencil 31:24, see PP1.h).
  * glDrawPixels (libGLcore __glMgrSendPixels; traced with mandel, colour
  *   index GL_UNSIGNED_SHORT, one 100-pixel row a call): RASTER_POS4F,
  *   LOAD_RASTER_POS_INFO, SAVE_RSS / SAVE_TEXMODE, 0x0CD
@@ -915,10 +925,23 @@ extern "C" {
  *   context sends 0x009 INIT_RGB; colours are then indices (COLOR4F one
  *   value, e.g. a short converted), drawn as 12-bit colour-index pixels;
  *   0x0BD CLEAR_INDEX for glClear.
- * Double buffering: DRAW_BUFFER (0x049) first word 1 front, 4 back, 0
- *   none; SCHEDULE_SWAP (0x037) is sent by the kernel (MgrasSchedSwapBuf),
- *   which then flips XMAP BUF_SELECT (select 3, index 0: bit = window ID
- *   shows buffer B, the DIB pointer's second field) at retrace.
+ * Double buffering: DRAW_BUFFER (0x049, 3 words) carries PP1 fill mode
+ *   draw-field values (PP1.h): 1 front (A), 4 back as a second page, 2 back
+ *   as the high 12-bit half of A's words, 0 none; 3 / 5 = both (FRONT_AND_
+ *   BACK). __glMgrasDrawBuffer sends GL_BACK as [2, 1, 0] when the visual
+ *   has fewer than 8 green bits (12-bit visuals: 4444, 5551) and [4, 1, 0]
+ *   otherwise (traced: octahedra, electropaint, glprim). The kernel sends
+ *   VALIDATE_BANKS (0x098, [n, n]: the bank the next frame draws) and
+ *   SCHEDULE_SWAP (0x037, MgrasSchedSwapBuf), then flips XMAP BUF_SELECT
+ *   (select 3, index 0: bit = window ID shows buffer B) at retrace. For a
+ *   12-bit visual buffer B is the high half of the same page, whatever the
+ *   window's DRBpointers / DIB second field say (CMAP.h, PP1.h).
+ * Pixel format: INIT_FORMAT_VALUES (0x09A, 2 words, the same value twice)
+ *   gives the context's PP1 pixel format, fill mode bits 13 and 10:8
+ *   (traced on 6.5.22 per visual): 0 RGBA 4,4,4,4 (electropaint), 0x100
+ *   RGBA 5,5,5,1 (octahedra), 0x2200 RGBA 8,8,8,8, 0x2300 and 0x2400 the
+ *   12,12,12 visuals. Bit 13 clear = 12-bit pixels stored as word halves.
+ *   What 0x100 stores (5,5,5,1 cannot fit 12 bits) is open.
  *
  * Control word data conversion (bits 29:23), from libGLcore's glColor /
  * glVertex / glNormal / glIndex forms: bit 5 convert to float, bit 4

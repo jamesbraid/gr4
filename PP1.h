@@ -151,6 +151,54 @@ extern "C" {
 #define PP1_FM_PIXTYPE_CI12         (6 << 8)    /* 12-bit Color Index */
 #define PP1_FM_PIXTYPE_ZST32        (8 << 8)    /* 24-bit Depth + 8-bit Stencil */
 
+/*
+ * 12-bit pixel pairs (traced 6.5.22, octahedra / electropaint / glprim
+ * 4,4,4,4 and 5,5,5,1 visuals, and the X server's 12-bit windows): with
+ * pixel type 0 or 1 and bit 13 clear, a 24-bit word holds two 12-bit
+ * pixels, buffer A in bits 11:0 and buffer B in bits 23:12, each red in
+ * bits 3:0, green 7:4, blue 11:8 (electropaint's dump matched every drawn
+ * colour this way; swapping red and blue matched 3%). This is how 12-bit
+ * visuals double-buffer when there is no room for a second 24-bit page
+ * (1280x1024 HighImpact), and they do it at 1024x768 too, where a second
+ * page exists. Draw field 1 = A, 2 = B, 3 = both; the colour is written
+ * to both halves and ColorMaskLSBs picks them (X: 0xFFF for A, 0xFFF000
+ * for B, 0xFFFFFF for both). Read field 1 reads B. DRBpointers stays at
+ * A's page for both buffers; reading "the back buffer" from the window's
+ * second page returns unrelated memory. Drawn values are the 8-bit
+ * component >> 4 (X's fills are n << 4); our scanout widens a nibble n to
+ * n * 0x11 before the DAC gamma (replication, unconfirmed on hardware).
+ * Plane masks: ColorMaskLSBsA / B (0x163 / 0x164) are planes 31:0 of a
+ * 36-bit pixel, ColorMaskMSBs (0x162) planes 35:32 (and the overlay index
+ * mask). libGLcore's InitFormatValues keeps a 32-bit mask per buffer and
+ * writes a third, small value straight to 0x162: 0 for 8,8,8,8 (masks all
+ * ones), 0xF for 12,12,12 (masks all ones, all 36 planes), 0x70 or 7 for
+ * colour-index visuals. The layouts by component depth:
+ *   4 bits  (RGBA 4,4,4,4)  format 0      A 0x0F000FFF  B 0xF0FFF000
+ *           RGB 4:4:4 in 11:0 / 23:12, alpha nibble in 27:24 / 31:28
+ *   5 bits  (RGBA 5,5,5,1)  format 0x100  A 0x40007FFF  B 0xBFFF8000
+ *           RGB 5:5:5 in 14:0 / 29:15, alpha bit 30 / 31
+ *   8 bits  (RGBA 8,8,8,8)  format 0x2200, masks all ones (one buffer a
+ *           page)
+ *   12 bits (RGBA 12,12,12,0) format 0x2300 (pixel type 3, bit 13),
+ *           masks all ones + MSBs 0xF: 36-bit RGB. The X server fills its
+ *           24-bit windows with this pixel type too (fill mode 0xC006304,
+ *           mask 0xFFFFFF, 12-bit fill colours), so the top 8 bits of
+ *           each component sit in the 8-8-8 places (7:0, 15:8, 23:16)
+ *           and the low nibbles in planes 35:24 (red 27:24, green 31:28,
+ *           blue 35:32 in our guess). Double buffered on a second page,
+ *           DRAW_BUFFER [4, 1].
+ *   0x2400  masks 0xFFF / 0xFFF000: the 12-bit "rgba 12,0,0,0" pbuffer
+ *           configs (pixel type 4), meaning open.
+ *   colour index: CI12 format 0x400, masks 0xFFF / 0xFFF000; CI8 0x600
+ *           (or 0x500) with 0xFF / 0xFF000
+ * So 5,5,5,1 is real (15-bit halves), not 4:4:4; the component order
+ * inside the 15 bits is not known (red lowest by analogy). iris models
+ * formats 0 and 0x100 alike as 4:4:4 halves without alpha (2026-10-10).
+ * GL_DITHER (HQ3 token 0x067) is sent, but no fill mode bit for dither
+ * has been seen; our model dithers GL's 12-bit writes with REX3's 4x4
+ * Bayer matrix (a model-private bit 3).
+ */
+
 /* Buffer Configuration (bits 13:11) */
 #define PP1_FM_BUFCOUNT_MASK        (0x3 << 11) /* Number of color buffers */
 #define PP1_FM_BUFSIZE_MASK         BIT(13)     /* Single vs Double buffer size */
@@ -228,6 +276,15 @@ extern "C" {
 /*
  * ============================================================================
  * STENCIL & DEPTH TESTS (PP1_REG_STENCIL_MODE, PP1_REG_Z_MODE)
+ *
+ * The ZST buffer (z24s8 visuals; the only depth layout 6.5.22 offers):
+ * one 32-bit word a pixel, Z in bits 23:0, stencil in 31:24. glClear's
+ * depth part fills planes 23:0 (ColorMaskLSBs 0xFFFFFF, MSBs 0), its
+ * stencil part planes 31:24 through the stencil write mask (LSBs 0, MSBs
+ * = mask). These words are not colours: a 12-bit window's pair packing or
+ * a colour-index pixel type must not touch them (our bug, 2026-10-10).
+ * glReadPixels of depth returns Z << 8 | Z >> 16 (32 bits full scale); of
+ * stencil, the top byte (HQ3.h, SAVE_RSS planes).
  * ============================================================================
  */
 
