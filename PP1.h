@@ -345,10 +345,32 @@ extern "C" {
  * 2 * 448 + 128 = 1024 pages exactly (two 36-bit buffers + overlay), the
  * buffer counts the Octane report's Table 4.2 gives.
  *
- * DRBsize (0x16E), per MgrasSetRSSTiming: bits 1:0 Xtiles9, bits 5:2
- * Xtiles36, then the RSS count, the DMA line-count mask and an auto-flush
- * disable. 0x31E at 1280x1024 (7, 2); 6.5.22 writes 0x9000031A at
- * 1024x768 (6, 2; top byte unknown).
+ * DRBsize (0x16E), per MgrasSetRSSTiming (libsk mgras_init.c) and the IDE
+ * diags (mgras_info.c packs bits 10:6 as "drb_misc = 0x9: DRB_RSS=1,
+ * DMAlinecnt=2, AFE=0"; mgras_hqpio_redma.c sets DRB_RSS = numRE4s - 1):
+ *   bits 1:0   DRB_Xtiles9  = ceil(width / 768)
+ *   bits 5:2   DRB_Xtiles36 = ceil(width / 192)
+ *   bits 7:6   DRB_RSS      = raster engines - 1 (PP_1_RSS / PP_2_RSS)
+ *   bits 9:8   DMA_line_count_mask (PP_DMA_LCM_1_RSS / _2_RSS; 3 and 2
+ *              as traced)
+ *   bit  10    AutoFlushEnab_n (0 = auto flush on)
+ *   top byte   unknown (6.5.22 writes 0x90)
+ * Traced (6.5.22, IP28, 1024x768): High Impact 0x9000031A (6, 2, one
+ * RSS, LCM 3); Maximum Impact 0x9000025A (6, 2, two RSS, LCM 2).
+ *
+ * MAXIMUM IMPACT (two RE4s, each with its own two PP1s and 12MB): every
+ * RE4 lays out ITS scanlines (y % 2 == RE4 number, row y / 2) exactly as
+ * one RE4 lays out all of them, so a 36-bit buffer is half as many pages
+ * per RE4 (1024x768: 6 * 24 = 144) and the same page pointer names the
+ * same buffer on both. A tile is 192 x 32 screen rows. Pointers the
+ * 6.5.22 X server and kernel use at 1024x768 (XMAP DIB 0x090DC2E0):
+ * main 0x2E0 (736), second 0x370 (880 = 736 + 144), overlay 0x090 (144);
+ * DRBpointers for X drawing 0xB81C0 as on High Impact. Writes broadcast
+ * to both RE4s (config DestRE = CONFIG_RE4_ALL, the PROM's default), and
+ * each draws only its own scanlines; the XMAP CONFIG register carries
+ * the RSS count too (XMAP_CONFIG_DEFAULT(numRE), bits 21:20). With a
+ * one-RE4 layout assumed, buffers overlap and the screen shows bands of
+ * 16 rows (seen in iris before the fix).
  *
  * Drawing: both X servers put the target buffer's page in DRBpointers
  * bits 9:0 and switch it for overlay drawing (6.5.0: 0x90240 main /
