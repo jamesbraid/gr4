@@ -56,8 +56,10 @@ extern "C" {
  *    - Microcode RAM: 64K to 256K words x 64 bits (loaded at boot from ge11.bin / mgras_ge.hex).
  *    - CRAM (Constant RAM): 1,024 words storing standard matrix identities, lighting constants,
  *      trigonometric tables, and material parameters.
- *    - ERAM (Extended RAM): 2,048 words storing user clip planes, light source properties,
- *      and active viewport scales.
+ *    - ERAM (External RAM): NOT on chip. 64K words of RAM behind each GE11 (the
+ *      kernel addresses it up to 0xDDEB on a 6.5.22 Maximum Impact). It holds the
+ *      saved GE state of each GL context (fixed-size slots) and resources
+ *      libGLcore loads (imaging tables etc.). See "ERAM AND CONTEXT SWITCHING".
  *    - WRAM (Working RAM): 2,048 words buffering transformed vertices, intermediate lighting
  *      results, and clipping flags.
  *    - Output FIFOs (OFIFO 0, 1, 2): 64-word multi-threaded FIFOs streaming setup packets
@@ -180,10 +182,12 @@ extern "C" {
 
 /* High-Level Simulation & Diagnostic Tokens (cp_ge_sim_tokens.h) */
 #define CP_PASS_THROUGH_GE_FIFO         0xFE        /* Bypass GE11 processing, queue to RSS */
-#define CP_PASS_THROUGH_GE_WRAM         0xFD        /* Write directly to GE11 WRAM */
-#define CP_PASS_THROUGH_GE_WRAM_DELAYED 0xFC
-#define CP_PASS_THROUGH_GE_FIFO_3       0xFB
-#define CP_PASS_THROUGH_GE_WRAM_4       0xFA
+/* IRIX uses the next four for ERAM, not WRAM (MgrasEramRead / MgrasEramWrite,
+ * names from the diagnostics): */
+#define CP_PASS_THROUGH_GE_WRAM         0xFD        /* ERAM write: word count; data follows */
+#define CP_PASS_THROUGH_GE_WRAM_DELAYED 0xFC        /* ERAM read: address, count -> host DMA */
+#define CP_PASS_THROUGH_GE_FIFO_3       0xFB        /* ERAM write: address, count (place it) */
+#define CP_PASS_THROUGH_GE_WRAM_4       0xFA        /* ERAM write: end of this GE's set */
 #define CP_PASS_THROUGH_GE_WRAM_5       0xF9
 #define CP_SET_CP_FLAGS                 0xF8
 #define CP_DELAY                        0xF7
@@ -200,6 +204,67 @@ extern "C" {
 #define GE11_SUB_SET_GE_FLAGS           6
 #define GE11_SUB_RESET_WRAM_WRPTR       7
 #define GE11_SUB_WRITE_HQ_REG           8
+
+/*
+ * ============================================================================
+ * ERAM AND CONTEXT SWITCHING (one or two GE11s)
+ * ============================================================================
+ *
+ * From IRIX 6.5.22 traces: slots and switches on High and Maximum Impact,
+ * the two-GE transfers on a Maximum Impact (Indigo2, Avid Matador session).
+ * The microcode's own record layout is unknown.
+ *
+ * Working state vs saved state:
+ *   The microcode runs on state inside the GE11 (WRAM, CRAM, registers).
+ *   ERAM is where a context's state is saved. Each GL context (and the
+ *   kernel and X server) owns a slot of 0x17C7 words, slots from 0xA9B up
+ *   (0xA9B the kernel's, 0x2262 the X server's, then 0x3A29, 0x51F0, ...).
+ *   On a context switch (HQ3 context switch, image word 0 = the incoming
+ *   context's slot), the outgoing state is saved to its slot and the
+ *   incoming one's loaded from its slot. An ordinary switch moves no GE
+ *   state over the bus. Before the first switch after boot the GE has its
+ *   on-chip state, which no slot owns yet.
+ *
+ * Eviction (no free slot):
+ *   The kernel copies a resident context's slot to host memory and frees
+ *   it. When that context returns, the kernel copies the slot into a free
+ *   one (often a different slot) before switching to it. It runs in the
+ *   kernel's own context, sends CP_GE_NOSAVE_NEXT_SWITCH first, and moves
+ *   the data by HQ DMA through the kernel's page table:
+ *     save:    arm a board-to-host DMA, then 0xFC (address, count)
+ *     restore: 0xFD (count), the words by host-to-board DMA, 0xFB
+ *              (address, count) per 900-word chunk, 0xFA after the last
+ *
+ * Two GE11s (Maximum Impact):
+ *   Each GE11 has its own ERAM, and the kernel does every transfer once per
+ *   GE, GE0 first. No token selects the GE; order alone does. Traced
+ *   eviction of slot S:
+ *     save:    0xFC (S,     0x17C8) -> DMA 0x17C7 words to host buffer [0]
+ *              0xFC (S - 1, 0x17C8) -> DMA 0x17C7 words to host buffer [0x17C7]
+ *     restore: buffer [0]      -> S (7 chunks), 0xFA
+ *              buffer [0x17C7] -> S (7 chunks), 0xFA
+ *   GE1 is read from one word below the slot, yet both halves go back to
+ *   the same address. So GE1's read output evidently arrives one word late
+ *   (inferred from the kernel's offset). The extra word requested (0x17C8
+ *   against a 0x17C7-word slot and DMA) covers that delay.
+ *   Both GEs receive every state command, so their saved GL attribute state
+ *   should be identical. Per-GE scratch (vertices in flight from the
+ *   alternating primitives) is drained by the switch. Unverified on
+ *   hardware.
+ *   A one-GE board presumably does each transfer once; not traced.
+ *
+ * Emulator (iris, hq3.rs): one GE HLE with one live state. A switch copies
+ *   it into and out of GE0's ERAM slot, as the microcode does. GE1 gets its
+ *   own ERAM array: a transfer repeating GE0's last one is GE1's (a read at
+ *   one below GE0's last address with the same count, or a write set
+ *   starting where GE0's set started), and GE1's reads are offset by one
+ *   word. Nothing reads GE1's copy. Before this, GE1's half (read at S - 1)
+ *   landed on GE0's copy one word off and shifted the restored state by a
+ *   field. Avid Matador came back from being iconified with its RGB context
+ *   flagged colour-index (PP1 fill mode format 6, colour mask 0xFFF).
+ *   Possible later: serve GE1 reads from GE0's ERAM and drop GE1's writes
+ *   (rules/mgras/eram-state-ideas.md).
+ */
 
 /*
  * ============================================================================

@@ -90,6 +90,21 @@ typedef union {
  *  Maximum Impact   GR4             2           2 (dual) 4 MB       24-bit + Z + Tex
  * ----------------------------------------------------------------------------
  *
+ * How the drivers tell them apart (libsk MgrasGatherInfo, MgrasFillBoardID):
+ * BDVERS1 gives the board revision, the GE count and the product ID
+ * (MGRAS_PRODUCT for High/Max, MGRAS_PRODUCT_MG10 for Solid). For
+ * MGRAS_PRODUCT, BDVERS0's RB revision field (6:4) says whether the second
+ * raster board (RB) is fitted: anything but 7 (MGRAS_BV0_RB_NOT_INSTALLED, or
+ * its BAD_BIT2 twin) means RBPresent and NumREs = 2, with RB TRAMs in 3:2 and
+ * RA TRAMs in 1:0. Kernel options mgras_numge / mgras_numre override both
+ * counts. The PROM names 2 GEs + 2 REs + TRAMs "Maximum Impact", 2 GEs + 1
+ * RE "High-AA Impact". The RA revision gfxinfo prints is CMAP1's revision
+ * register (MGRAS_CMAP_RA_REV); RARev < 3 makes the IP22/IP28 kernel lower
+ * the HPC3 voltage margin (rev B PP1s). Board IDs iris uses (BDVERS0,
+ * BDVERS1): Solid 0x70, 0x21; High 0x72, 0x01; Max 0x0A, 0x02. 6.5.22 on
+ * IP28 then reports "2 GEs, 2 REs, 4 TRAMs" for Max; the IP28 kernel names
+ * every IMPACT "IMPACTPC" (a string in its mgras_init.o).
+ *
  * Subsystem Block Diagram:
  *
  *            CPU / GIO64 (Indigo2) or XIO Crossbar (Octane)

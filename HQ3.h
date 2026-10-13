@@ -237,6 +237,30 @@ extern "C" {
 #define HQ3_DMA_BUSY_REIF_DMA_ACTV  BIT(11)
 #define HQ3_DMA_BUSY_HAG_DMA        BIT(12)
 
+/*
+ * How the IRIX 6.5 drivers use these (decompiled mgras.o, libGLcore):
+ *   - GIO interrupt vectors (MgrasSetGioVectors): 0 = MgrasFIFOInterrupt,
+ *     1 = MgrasGeneralInterrupt, 2 = MgrasRetraceInterrupt.
+ *   - HQ3_INTR_ENAB_SET bits above the flag causes drive vector 0:
+ *     bit 26 CFIFO at/above high water, 27 CFIFO below low water, 30 DFIFO
+ *     above high water, 31 DFIFO below low water. Boot value 0x4400E200.
+ *   - STATUS bits as the drivers test them (the BIT() names above are
+ *     older guesses): bit 0 HQ3 has run every command (libGLcore waits
+ *     for it before a read DMA), bit 1 whole pipe idle (glFinish spins on
+ *     it), bit 3 CFIFO above high water, bit 4 CFIFO below low water,
+ *     bit 7 / bit 8 the same for the DFIFO.
+ *   - MgrasFIFOInterrupt on high water: polls STATUS bit 3 for up to 10 ms
+ *     (50 us for some processes); still high and FIFOSTATUS depth != 0x7F
+ *     (0x7F = wedged) -> blocks the writer, swaps enable 26 for 27, arms a
+ *     watchdog timeout. On low water (STATUS bit 4) it swaps back and
+ *     wakes the writer.
+ *   - MgrasFlushHQ3 (buffer swaps, clip/bank validation): polls the CFIFO
+ *     depth against a threshold (HWM - k, or 0) or DMABUSY & 0x17 for
+ *     ~1-10 ms, then sets CFIFO_LW = threshold + 1, enables bit 27 and
+ *     sleeps until the low-water interrupt.
+ *   - 6.5.22 programs CFIFO HW/LW = 0x20/0x14, DFIFO HW/LW = 0x28/0x14.
+ */
+
 /* Flags & Interrupt Mask Bits (HQ3_FLAG_*, HQ3_INTR_*) */
 #define HQ3_FLAG_RETRACE            BIT(0)      /* Vertical retrace event */
 #define HQ3_FLAG_CFIFO_LOWATER      BIT(1)      /* CFIFO below low watermark */
@@ -344,6 +368,12 @@ extern "C" {
  *     friends, an ERAM address and a word count), the data moving by HQ DMA
  *     through the kernel's DMA page table, once per GE11. Unlike GR2 / XZ,
  *     an ordinary switch moves no GE state over the bus.
+ *     Two GE11s (Maximum Impact, traced 6.5.22): no token selects the GE;
+ *     the transfers simply come in GE order. Save: CP_PASS_THROUGH_GE_
+ *     WRAM_DELAYED (S, 0x17C8), then (S - 1, 0x17C8), each feeding a
+ *     0x17C7-word DMA into consecutive halves of one host buffer (so GE1's
+ *     read output runs one word late). Restore: half 0 to S in 900-word
+ *     chunks (WRAM / FIFO_3), WRAM_4 (end), half 1 to S, WRAM_4.
  *   - Raster (RSS) state: not saved by the hardware as such. The GE
  *     regenerates a GL context's raster registers from its GL state. The X
  *     server drives the raster registers directly (0x1000 commands) and
@@ -918,7 +948,17 @@ extern "C" {
  *   0x156), then 0x08D SEND_PIXELS, 8 words: data words per row, two
  *   skips, pixel-state counts (%3, /3), rows (provisional), the GE routine
  *   (0x49D0, host to raster), flags (0x18); the rows follow as FIFO pixel
- *   data, bottom row first; then RESTORE_RSS / RESTORE_TEXMODE. 0x080
+ *   data, bottom row first; then RESTORE_RSS / RESTORE_TEXMODE.
+ *   Texture loads (routine 0x511A): a row is words 0 + 1, not word 0
+ *   (traced 2026-10-10, glprim on 6.5.22: 64x64 GL_LUMINANCE_ALPHA sends
+ *   [0x10, 0x10, 0, 1, 0x15, ...] with 128-byte rows; 256x256 RGBA comes
+ *   as 128-texel strips [0x40, 0x40, 0, 1, 0x55, ...] with 512-byte rows;
+ *   rows = word 3 + 3 * word 4 = 64 / 256). The texture manager's TRAM
+ *   restores send word 1 as 0 ([0x40, 0, 0, 0x80, 0, ...], 256-byte rows
+ *   of the 64-wide page view). So word 1 is not a skip there, and
+ *   glDrawPixels uses it the same way: Advanced Visualizer's DMA window
+ *   restore (156-pixel RGBA strips) sends [0x4E, 0x4E, 0, 0, 0xBD, 1,
+ *   0x49D0, 0x88], 624-byte rows; FIFO glDrawPixels sends word 1 as 0. 0x080
  *   (10 words, a 1.0 among them) comes with it, probably zoom. KERN_7C
  *   before it carries 6 words of GE data, not register pairs.
  * Colour-index contexts: 0x00A INIT_CI (1 word, 8 or 12) where an RGB
