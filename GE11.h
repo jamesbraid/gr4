@@ -328,6 +328,228 @@ extern "C" {
  *    and streaming fragment packets to PP1.
  */
 
+/*
+ * ============================================================================
+ * IMAGING ENGINE: THE GE PIXEL PIPELINE
+ * ============================================================================
+ *
+ * Mapped 2026-10 from IRIX 6.5.22 libGLcore with test/gltest/pixtest.c
+ * (one GL call a case; recorded with `mgras rec`, decoded with
+ * tools/mgras-pixdecode.py --summary --ucode mgras_ge.u). Our model is
+ * src/dev/mgras/pixpipe.rs. The HQ side (tokens, payloads, readbacks) is
+ * in HQ3.h "PIXEL OPERATIONS", the raster side (XFRMODE) in RE4.h.
+ *
+ * Who does what, per GL call:
+ *   glDrawPixels, glCopyPixels (draw half), glTexImage / glTexSubImage,
+ *   glBitmap: the host elements go through a GE microcode program (the
+ *   pixel transfer: conversion, scale/bias, maps, index shift/offset,
+ *   format expansion, y zoom), then to the raster engine in the transfer
+ *   format XFRMODE names. The raster engine does the x zoom / decimation
+ *   and writes the pixels (or texels, for loads into TRAM).
+ *   glReadPixels, glGetTexImage, glCopyPixels (read half): the raster
+ *   engine alone, no GE program. libGLcore applies no read-side pixel
+ *   transfer at all (GL_RED_SCALE and the maps are ignored by
+ *   glReadPixels) and packs the packed types itself on the CPU.
+ *
+ * The program, GE address 0x13B (PIXEL_STATE, count prog_len words):
+ *   pairs (microcode entry, state address); module k's state address is
+ *   the second word of pair k + 1, the first pair's second word is 0, the
+ *   last module (always pipecontrol) has its state in the last pair.
+ *   Entries are the routines of the microcode's line table (mgras_ge.u,
+ *   identical in the revB and HQ4 microcode):
+ *     0x156A clamp        0x1655 expand       0x1865 shiftadd
+ *     0x1A3E mask         0x1AC4 LUT          0x1E3E scalebias
+ *     0x1F44 inttofloat   0x24D7 bitmaptofloat 0x352D pipecontrol
+ *     0x3663 / 0x3715 / 0x374A zoom            0x3874 unpack
+ *     0x399A compress     0x3E65 colmatrix    0x3EF5 xzoom
+ *   States live in GE memory (0x100-0x1FF, PIXEL_STATE) or in ERAM
+ *   (0xC00 up, INIT_PIXEL_STATE_ERAM 0x0CD); a module does not care which.
+ *
+ * The modules work on one row at a time, in batches of 24 components,
+ * through working RAM. State words 0-4 are pointers and batch counts
+ * (input, ?, output, whole batches, remainder); the parameters start at
+ * word 5. Any per-component parameter cycles with the component's place
+ * in the row's stream, so an RGBA row with 12 cycling slots repeats every
+ * 3 pixels.
+ *   inttofloat  [5] scale: 1/255 (ubyte), 2/255 (byte, then a bias),
+ *               1/65535, 2/65535, 2^-31 ... Input element type comes from
+ *               ERAM 0xDBB: 0 s8, 1 u8, 2 s16, 3 u16, 4 32-bit.
+ *   shiftadd    [5] signed shift (left when positive, right when
+ *               negative), [6] integer add. GL's INDEX_SHIFT and
+ *               INDEX_OFFSET. UNSIGNED_INT colour data ahead of a signed
+ *               inttofloat comes through it with shift -1.
+ *   mask        [5] AND mask (stencil: 0x1FF seen; colour index: the
+ *               map size - 1).
+ *   scalebias   12 (bias, scale) pairs from [5], cycling. GL's
+ *               c * scale + bias (*_SCALE / *_BIAS), and libGLcore folds
+ *               the signed types' 2/255 + (-1) correction into it.
+ *   expand      [5] which components the host format has: 0 A, 1 B, 2 G,
+ *               3 R (the absent ones take fill values [7..] in order,
+ *               starting after the present one), 4 L (fill alpha [7]),
+ *               5 LA, 6 RGB (fill alpha [7]), 7 one index copied to all
+ *               four slots (before the I_TO_R/G/B/A maps). The fills
+ *               carry any scale/bias that ran before expand.
+ *   unpack      packed types (5_6_5, 4_4_4_4 ...): [5] element size
+ *               (0 16-bit, 1 32-bit, 2 8-bit), [6..9] per-field scales,
+ *               [10..13] masks, [14..17] right shifts.
+ *   LUT         glPixelMap: [5] cycle length in components (12 on RGBA
+ *               pipelines; but 14 on a 12-bit colour-index visual, which
+ *               still has six offsets), [6] table id (0xC0D), then table
+ *               offsets, one word per component pair, up to the 2^23 word
+ *               (the float-to-int trick) that ends the list. Table words
+ *               (INIT_COLOR_TABLE 0x089 payloads: [?, bytes, 0xC0D, ?,
+ *               offset, count, entries]) each hold two 16-bit results:
+ *               high half for the pair's first component, low half for
+ *               its second; I_TO_I maps repeat the entry in both halves.
+ *               An index looks up its entry directly; a colour is scaled
+ *               to the map size by a clamp first. A 4096-entry I_TO_I map
+ *               (12-bit visual) comes as 16 INIT_COLOR_TABLE blocks of
+ *               256 at offsets 0x000..0xF00. The table memory is the
+ *               board's, not the context's (4096 words would not fit the
+ *               kernel's 0x17C7-word context slot); libGLcore sends the
+ *               tables before each pixel operation that uses them.
+ *   clamp       12 cycling output scales from [5]; the value is clamped to
+ *               [0, 1], then scaled: 255 for bytes, 127 signed, 65535,
+ *               2^32 - 1, or a LUT's size - 1 when a LUT follows.
+ *   compress    texture loads: [5] picks the internal format's
+ *               components out of RGBA: 0 A, 1 R (luminance, intensity),
+ *               2 R and A, 4 RGB. The input is always four components.
+ *   bitmaptofloat  GL_BITMAP data (stencil and index draws): a bit a
+ *               pixel, most significant first, to 0.0 / 1.0.
+ *   bitmaptoint 0x25A0: the same as integers 0 / 1, on colour-index
+ *               visuals (then shiftadd for INDEX_OFFSET, mask).
+ *   colmatrix   SGI_color_matrix; libGLcore always puts one in an RGBA
+ *               pipeline. With an identity (a 5-word state) it passes
+ *               the data through.
+ *   zoom        GE 0x18E state; [4] = 1 / zoom_y. The GE repeats or
+ *               drops rows; 0x192 holds 1 / zoom too (see HQ3.h).
+ *   xzoom       x replication for |zoom_x| > 1: an index table from [7];
+ *               the replication count is the length of its first run of
+ *               zeros (ceil(zoom_x)). The raster engine then does the
+ *               exact fraction (RE4.h XFRFACTOR).
+ *   pipecontrol the hand-off to the raster engine (last module).
+ *   A pipeline whose first module is none of the converters (inttofloat,
+ *   shiftadd, unpack, mask, bitmaptofloat) takes 32-bit elements as IEEE
+ *   floats (GL_FLOAT).
+ *
+ * The element type word ERAM 0xDBB misleads for stencil and colour-index
+ * draws of byte data; the row geometry (bytes a row / width) is the
+ * reliable element size there.
+ *
+ * Typical programs (traced):
+ *   RGBA UNSIGNED_BYTE, no transfer:  inttofloat -> colmatrix -> clamp
+ *                                      -> pipecontrol
+ *   + scale/bias:   inttofloat -> scalebias -> colmatrix -> clamp -> ...
+ *   + MAP_COLOR:    ... -> clamp(map size - 1) -> LUT -> ...
+ *   LUMINANCE:      inttofloat -> expand(4) -> colmatrix -> clamp -> ...
+ *   FLOAT:          colmatrix -> clamp -> pipecontrol (no converter)
+ *   COLOR_INDEX on an RGBA visual: shiftadd -> mask -> (LUT) -> ...
+ *   COLOR_INDEX on a CI visual: mask -> pipecontrol; with a map
+ *                   mask -> inttofloat -> LUT -> mask -> pipecontrol;
+ *                   GL_BITMAP bitmaptoint -> shiftadd -> mask -> ...
+ *   STENCIL_INDEX:  shiftadd -> mask(0x1FF) -> pipecontrol
+ *   texture load into L/LA/A/I/RGB: ... -> compress -> clamp -> ...
+ *   5_6_5 etc.:     unpack -> ... (the fields as components)
+ *
+ * Output: the last module's components go to the raster engine as the
+ * XFRMODE component type (bytes, shorts, ints), clamped. Colour and
+ * stencil indices keep their low bits instead (GL masks them by the
+ * write mask / plane count); the raster engine stores the low byte.
+ */
+
+/*
+ * ============================================================================
+ * STATE READBACK: WHERE glGet* FINDS EACH PIECE OF GL STATE
+ * ============================================================================
+ *
+ * Mapped 2026-10-13 with test/gltest/glstate.c (every queryable GL state
+ * set to a non-default value and read back; markers split the recording,
+ * tools/mgras-statemap.py) and `mgras probe` runs (the GE answers chosen
+ * words, tools/mgras-probe-states.py, which show how libGLcore decodes
+ * them). IRIX 6.5.22 libGLcore. Our model: src/dev/mgras/glquery.rs.
+ *
+ * How libGLcore asks:
+ *   __MGR_RETURN_MODE (HQ token 0x0A2: address, count, flag) and
+ *   SPIN_AND_RETURN (0x0A1: address): the GE writes the word at that state
+ *   address to the readback register (HQ3.h, GE_DATA flag). GET_LIGHTFV
+ *   (0x0EF: light, pname) and GET_MATERIALFV (0x0EE: face, pname) first
+ *   copy the parameter into scratch words 0x32E..0x331, which are then
+ *   read with RETURN_MODE. glGetError reads 0x2A0 (the GE's error word):
+ *   answering anything but small values there makes libGLcore loop.
+ *   glPushAttrib reads much of this state back too (so a probe must keep
+ *   the push outside what it measures).
+ *
+ * Answered by libGLcore from its own shadow (no readback): most enables
+ * (lighting, lights, colour material, depth test, cull, logic ops,
+ * texturing, texgen, evaluators, normalize, smooth points / polygons,
+ * polygon offset fill, the SGI imaging enables), draw / read buffers,
+ * clear values of accumulation, pixel store and transfer, pixel maps,
+ * zoom, texture objects and parameters, texture environment, hints,
+ * limits, lists, matrix / attribute stack depths of client state.
+ *
+ * Read from the GE (address: contents, format):
+ *   0x004-0x007  current colour, floats (SPIN_AND_RETURN)
+ *   0x008-0x00A  current normal; 0x00B-0x00E current texture coordinates;
+ *                0x00F edge flag (format not probed)
+ *   0x029        matrix mode - 0x1700
+ *   0x03A-0x049  modelview top (OpenGL order; IRIS GL getmatrix reads the
+ *                current mode's matrix here)
+ *   0x04A-0x059  projection top; 0x06A-0x079 texture top;
+ *   0x1B9-0x1C8  SGI colour matrix top
+ *   0x083 / 0x896 / 0x897  modelview / projection / texture stack pointers
+ *                (0x899 + 16 * depth, 0xA99 + ..., 0xAB9 + ...)
+ *   0x1FA        enables: polygon stipple bit 0, line stipple bit 5, fog
+ *                bit 17
+ *   0x1FC        dither bit 0, stencil test bit 4, alpha test bit 6, logic
+ *                op 29:26 (PP1 fill mode's field)
+ *   0x23A        stencil: func 2:0, fail op 5:3, depth-fail op 8:6,
+ *                depth-pass op 11:9 (KEEP ZERO REPLACE INCR DECR INVERT),
+ *                ref 19:12
+ *   0x23C        stencil value mask 7:0, write mask 15:8
+ *   0x23E        depth func 2:0; depth write mask true when the 24-bit mask
+ *                field (27:4) is all set
+ *   0x240        alpha func 2:0, reference 14:3 (12 bits, / 4095)
+ *                (compare functions: 0x200 + index, NEVER..ALWAYS)
+ *   0x29F        colour write mask bits 0-3 R G B A (index mask in CI)
+ *   0x2A0        error word
+ *   0x2BF        raster distance (eye space); 0x2C4 raster w;
+ *   0x2C5-0x2C8  raster colour (as glRasterPos latched it);
+ *   0x2C9-0x2CC  raster texture coordinates; 0x2CD-0x2CF raster x, y
+ *                (+49151.5), z; 0x2D0 valid (bit 2)
+ *   0x32E-0x331  GET_LIGHTFV / GET_MATERIALFV results
+ *   0x4D2-0x4D5  light model ambient (libGLcore sends RGB only)
+ *   0x4DF / 0x4E0  colour material parameter / face, GL enums
+ *   0x0AFB-0xB00 clip plane 0-5 enable, bit 31; 0xB01-0xB18 the planes,
+ *                eye space, 4 floats each
+ *   0xB42        fog mode (GL enum); 0xB43 density, 0xB44 start, 0xB45 end,
+ *   0xB46-0xB49  fog colour; 0xB4A fog index (integer)
+ *   0xB7E-0xB81  colour clear value; 0xB86 depth clear (24-bit integer);
+ *                0xB87 index clear; 0xB88 stencil clear
+ *   0xB8B / 0xB8C  polygon mode front / back; 0xB8D shade model; 0xB8E
+ *                local viewer; 0xB8F two side (GL enums / non-zero)
+ *   0xB91-0xB94  viewport; 0xB95-0xB96 depth range; 0xB98-0xB9B scissor
+ *                (x, y, xmax, ymax); 0xB9C scissor test (non-zero)
+ *   0xBA4        line smooth (non-zero)
+ *   0xBB1 point size; 0xBB2 line width; 0xBB3 cull face mode; 0xBB4 front
+ *                face (GL enums)
+ *   0xBBA / 0xBBB  line stipple as LINE_STIPPLE sends it: the pattern
+ *                bit-reversed, repeat - 1
+ *   0xBBE blend (non-zero); 0xBBF / 0xBC0 blend src / dst; 0xBC1 blend
+ *                equation (GL enums)
+ *   0xC16 / 0xC18  polygon offset factor / units
+ *   0xC59 / 0xC60  selection name stack (GET_FEEDBACK_DATA 0x061; not
+ *                modelled)
+ *
+ * libGLcore's own departures (glstate XFAIL): glGetBooleanv of
+ * POLYGON_OFFSET_LINE / POINT and TEXTURE_4D_SGIS is GL_INVALID_ENUM;
+ * CLAMP_TO_EDGE_SGIS is rejected; GL_TEXTURE_RESIDENT writes nothing;
+ * TEXTURE_LUMINANCE_SIZE of an RGBA8 level reads 8 and INTENSITY_SIZE is
+ * GL_INVALID_VALUE; REPLACE is sent as MODULATE; the texture environment
+ * colour and the light model ambient go out without alpha; glBlendColorEXT
+ * is sent but its query answers zeros; glGetMap returns control points
+ * transposed.
+ */
+
 #ifdef __cplusplus
 }
 #endif
