@@ -212,6 +212,17 @@ extern "C" {
 #define PP1_FM_DRAW_BACK_B          (8 << 14)   /* Back Buffer B (Stereo) */
 #define PP1_FM_DRAW_OVERLAY         (16 << 14)  /* Overlay Planes */
 #define PP1_FM_DRAW_CID             0x142600    /* Window ID Planes */
+/*
+ * As the 6.5.22 X server and libGLcore use the draw field: 1 buffer A
+ * (DRBpointers 9:0), 2 buffer B (the high 12-bit half for pixel pairs, the
+ * second page otherwise), 3 both; 4 buffer B as DRBpointers' second page
+ * (19:10) and 5 A plus that page, for 24-bit double buffering: GL's
+ * DRAW_BUFFER [4, 1], and the X server's double-buffered 24-bit windows
+ * (System Manager's panes: fill modes 0xC012204 / 0xC016A04, swapped by
+ * XMAP BUF_SELECT; traced 2026-10-13). Taking 4 for A drew those windows'
+ * back buffers over their front and left B stale: a GL program's last
+ * frame showed through after it exited.
+ */
 
 /* Read Buffer Targets (bits 25:21) */
 /*

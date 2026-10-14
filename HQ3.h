@@ -600,10 +600,131 @@ extern "C" {
  *      host DMA.
  *   2. It is drawn back with SEND_PIXELS (routine 0x49D0) in chunks about
  *      80 pixels wide. The GE pixel pipeline widens RGB16 to the transfer
- *      mode's RGBA16.
+ *      mode's RGBA16. Host rows are padded to whole words: an RGB16 strip
+ *      of 93 pixels is 558 bytes sent as 140 words (SEND_PIXELS words 0 +
+ *      1). The 0xDA8 width gives the pixel count; the row's word count
+ *      does not divide by it.
  * For a pixel draw, ERAM block 0xDA8 is the chunk's place in the image
  * [x0, y0, x1, y1, transfer size (rows << 16 | columns), 1], offset from
- * the raster position.
+ * the raster position. (x0, y0) is the first pixel sent and (x1, y1) the
+ * last, so the order gives the direction. Upright images run y0 = 0 up to
+ * y1 = rows - 1. With glPixelZoom(1, -1) (Mirai 1.0's splash, traced) the
+ * block is [0, -1, w - 1, -rows]: the first row lies just below the raster
+ * position and the image runs down. The SEND_PIXELS token itself looks
+ * the same either way; only this block shows the flip. A negative x zoom
+ * presumably gives x1 < x0 the same way (not traced).
+ * libGLcore also sends the raster engine's zoom registers through
+ * RSS_REG_SHADOW: XFRFACTOR 0x155 / XFRINITFACTOR 0x154, seen as
+ * 0x101423AC / 0 (Mirai, zoom (1, -1)) and 0x3BFC00 / 0x1010090 (Avid
+ * Matador, zoom 1). Not decoded.
+ *
+ * Applications that keep their two buffers in step by hand (Mirai 1.0):
+ * after each swap they read the region just changed from the front buffer
+ * (READ_BUFFER GL_FRONT, GET_PIXELS) and draw it into the back
+ * (SEND_PIXELS). They check glIsEnabled(GL_SCISSOR_TEST), which libGLcore
+ * asks the GE (GE address 0xB9C, see Readbacks), and turn scissoring off
+ * for the copy only if it is on. A wrong answer leaves the copy clipped,
+ * and the back buffer goes stale wherever the copy did not reach.
+ */
+
+/*
+ * ============================================================================
+ * PIXEL OPERATIONS (mapped with test/gltest/pixtest.c, 6.5.22, 2026-10)
+ * ============================================================================
+ * The GE program and its modules: GE11.h "IMAGING ENGINE". Raster
+ * transfer formats: RE4.h XFRMODE.
+ *
+ * Pixel data commands (bit 31 set): byte count in 19:0, initial alignment
+ *   in 24:22. glDrawPixels with UNPACK_ALIGNMENT 1 or 2 sends rows that do
+ *   not start on a word: the command then carries ceil((count + align) /
+ *   4) words, rounded up to an even number (doublewords), and the first
+ *   `align` bytes are filler. Getting this wrong desynchronises the whole
+ *   FIFO (the next command word is read from pixel data).
+ *
+ * State blocks whose data comes later: 0x080 (GE state) and 0x0CD
+ *   (INIT_PIXEL_STATE_ERAM) with a header but no data words, and 0x089
+ *   INIT_COLOR_TABLE (glPixelMap tables), take their values from the next
+ *   pixel data command. The block is [?, ?, bytes, address, 0, 0, n,
+ *   values, n, values ...]: a count, then that many words, repeated.
+ *
+ * Readbacks are per context: the GE_DATA flag (bit 17 of the flags the
+ *   host polls) and the answer word belong to the context that asked. Two
+ *   GL clients interleaved by context switches must not see each other's
+ *   flag; a global flag hangs the second client.
+ *
+ * glReadPixels: SAVE_RSS, the raster register lists, then GET_PIXELS
+ *   (0x0DB) with
+ *     0x4009  DMA read: the host arms a board-to-host DMA for the block.
+ *     0x400A  PIO read (fill-mode block kind 2): the host reads the
+ *             pixels itself from the raster engine's character registers
+ *             (RE4.h), a doubleword at a time, high word first. libGLcore
+ *             reads one row per GET_PIXELS this way for small packed-type
+ *             reads (GetPixelsPackedPIO) and packs them on the CPU.
+ *   PIO reads of RGB(A) come in the reverse of the DMA order: an RGBA
+ *   read (RGBorder set) arrives alpha first, an ABGR read (RGBorder
+ *   clear) red first, unless XFRMODE bit 18 is set (RE4.h; the X
+ *   server's XGetImage sets it and wants the DMA order). libGLcore's packer (__glMgr_PackPixels) expects
+ *   this for 4_4_4_4 and 8_8_8_8. Its 5_5_5_1, 10_10_10_2 (read as 16-bit
+ *   components) and 3_3_2 packers put the last wire component in the top
+ *   bits whatever the order, so those reads come out in a reversed layout
+ *   on the real board too.
+ *   SAVE_RSS word 3 selects the planes: bits 24:22 for reads (word 4 = 2),
+ *   bits 20:18 for draws (word 4 = 3); value 6 = stencil, 7 = depth.
+ *
+ * The HQ formatter (0xC00 convert control): with byte-sized components
+ *   the swap bit exchanges the bytes of each 16-bit pair (UNPACK /
+ *   PACK_SWAP_BYTES on 16-bit data); for 32-bit components it reverses
+ *   each word.
+ *
+ * Large glDrawPixels images come by host DMA in column chunks: 156
+ *   RGBA or 144 RGB pixels wide (traced with pixtest zoombig, matching
+ *   atomchild411's traces in PR #221). Before each chunk 0xDA8 gives its
+ *   rectangle relative to the raster position, already zoomed (60 rows at
+ *   y zoom 3.2: 192 high; 156 columns at x zoom 1.2: 187 wide), and the
+ *   DMA (LINE_BYTES 0x804 = the image's row bytes) brings the chunk's
+ *   rows unzoomed. Under a fractional x zoom XFRSIZE's width is the
+ *   GE-replicated count (ceil(zx) times the pixels: 0x138 for 156 at 1.2).
+ *   Tiny textures come by DMA too, each row padded to whole words (a 2 x 2
+ *   GL_RGB texture: LINE_BYTES 6, 8 bytes a row arrive).
+ *
+ * Texture loads (SEND_PIXELS routine 0x511A) go through the GE program
+ *   like a draw and end in TRAM; glGetTexImage is READ_TEXTURE (0x0F0:
+ *   width, height, 0.5, 0.5, xfrmode, 0x400D). Transfer formats 9 (one
+ *   component) and 10 (two) are the texel formats.
+ *
+ * Where libGLcore itself departs from GL 1.1 (the board does as told;
+ * pixtest reports these as XFAIL):
+ *   - glTexEnv GL_REPLACE is sent as MODULATE (__glMgrim_TexEnviv).
+ *   - glReadPixels applies no pixel transfer (scale, bias, maps).
+ *   - glBitmap starts at UNPACK_SKIP_PIXELS / 8 bytes and drops the
+ *     remaining skip_pixels % 8 bits.
+ *   - glGetTexImage(GL_ALPHA) fails with GL_INVALID_OPERATION.
+ *   - glTexSubImage2D / glCopyTexSubImage2D (mgrTM_TexSubImage2D_setup)
+ *     fail with GL_INVALID_VALUE unless the sub-image is at least 32
+ *     texels wide or the level's full width, and ends on a multiple of
+ *     32 texels or at the level's right edge. Applications that update
+ *     narrow pieces of a texture get nothing on IMPACT.
+ *   - Packed 5_5_5_1, 10_10_10_2 and 3_3_2 reads come back in reversed
+ *     layouts (above).
+ * GENERAL_BITMAP format word: bit 17 = UNPACK_LSB_FIRST, bits 16:14 = row
+ * padding.
+ *
+ * Colour-index visuals (pixtest --ci 8 / --ci 12, 2026-10-13): both GL
+ *   CI visuals draw with PP1 fill mode 0xC006604 (pixel type 6); only the
+ *   plane masks differ, ColorMaskLSBs 0xFF for 8 bits and 0xFFF for 12
+ *   (INDEX_MASK 0x03D carries the same). Draws go out in XFRMODE format
+ *   0 with the host type's component type (0 u8, 4 s8, 1 u16, 5 s16,
+ *   3 / 7 32-bit); 16-bit rows are padded to words, so 0xDA8's transfer
+ *   width, not the padded row, is the pixel count. UNSIGNED_BYTE indices
+ *   reach the raster engine as bytes, so a shifted index past 255 wraps
+ *   even on a 12-bit visual. Every glReadPixels(GL_COLOR_INDEX) reads
+ *   32-bit indices (XFRMODE 0x...03) and libGLcore converts them on the
+ *   CPU: plain truncation for the signed types (GL wants a mask to
+ *   2^(n-1) - 1), and no read transfer. The board returns the 12-bit index
+ *   field; on an 8-bit visual planes 11:8 keep whatever was there, and
+ *   nothing masks them off (our model; unverified on hardware).
+ *   glReadPixels(GL_RGBA) from a CI visual fails with
+ *   GL_INVALID_OPERATION in libGLcore.
  */
 
 /*
@@ -847,6 +968,14 @@ extern "C" {
  *                   GL_FRONT / GL_BACK / GL_FRONT_AND_BACK, FRONT_FACE
  *                   (0x056) GL_CW (0x900) / GL_CCW (0x901)
  *   0x064 / 0x065   GL_ALPHA_TEST / GL_BLEND: 1 / 0
+ *   0x060 (1 word)  glBlendEquationEXT, the GL enum (0x8006 FUNC_ADD ...).
+ *                   With GL_LOGIC_OP (0x0BF1), GL_BLEND on enables the
+ *                   colour logic op (LOGIC_OP 0x040) instead of blending
+ *                   (EXT_blend_logic_op). IRIS GL's logicop() goes this
+ *                   way: AutoCAD R13 draws its crosshair as BLEND on,
+ *                   LOGIC_OP 6 (XOR), white line strips, then LOGIC_OP 3,
+ *                   BLEND off, without ever sending 0x06B (traced
+ *                   2026-10-13).
  *   0x06A / 0x06D   GL_LINE_STIPPLE / GL_POLYGON_STIPPLE: 1 / 0
  *   0x06F           GL_STENCIL_TEST: 1 / 0
  * Data of the state tokens (traced): compare functions (ALPHA_FUNC,
@@ -897,8 +1026,14 @@ extern "C" {
  *   (IGLOO getmatrix), 0x1FC = dither; 0x2CD-0x2CF the current raster
  *   position (window x, y, z as floats) and 0x2D0 its valid flag, with
  *   0x2C4 (w?) read alongside (IRIS GL getcpos; gr_osview measures its text
- *   with it, our reading of the order); 0x0A1 SPIN_AND_RETURN (1 word)
- *   waits and returns, same flag protocol (answer = the argument, assumed).
+ *   with it, our reading of the order); 0xB98-0xB9B the scissor box and
+ *   0xB9C glIsEnabled(GL_SCISSOR_TEST), 1 / 0. libGLcore's
+ *   __glMgrim_IsEnabled asks the GE for the scissor test, from the
+ *   SYMBOL_LOCATION entry just before the box's four. The address is
+ *   inferred from Mirai 1.0, which reads it before every front-to-back
+ *   copy. 0x0A1 SPIN_AND_RETURN (1 word) waits, then returns the word at
+ *   its argument, with the same flag protocol. Seen with 4-7: the current
+ *   colour, RGBA floats (IRIS GL getcolor, and Mirai around each widget).
  *   libGLcore takes these addresses from a table filled at run time
  *   (SYMBOL_LOCATION, in .bss), not from constants in its code.
  * Raster position and bitmaps: 0x038 RASTER_POS4F (object x, y [, z, w]);

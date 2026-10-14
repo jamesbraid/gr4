@@ -171,6 +171,10 @@ extern "C" {
 #define RE4_REG_XFRSIZE             0x0153      /* Transfer size (lines:16, width:16) */
 #define RE4_REG_XFRINITFACTOR       0x0154      /* Zoom initial factor */
 #define RE4_REG_XFRFACTOR           0x0155      /* Zoom step factor */
+/* XFRFACTOR / XFRINITFACTOR: 17 bits testable (IDE mgras_re4.c). Values
+ * libGLcore sent for glDrawPixels: 0x101423AC / 0 at zoom (1, -1) (Mirai),
+ * 0x3BFC00 / 0x1010090 at zoom 1 (Avid Matador). Encoding not known. The
+ * zoom direction also shows in the GE's pixel block (HQ3.h, ERAM 0xDA8). */
 #define RE4_REG_XFRMASKLOW          0x0156      /* Transfer mask low word */
 #define RE4_REG_XFRMASKHIGH         0x0157      /* Transfer mask high word */
 #define RE4_REG_XFRCOUNTERS         0x0158      /* Current transfer line & pixel count */
@@ -354,6 +358,35 @@ extern "C" {
  * (8,8) 2 (4-4-4-4), (8,10) 2 (5-5-5), (8,0) 4, (7,1) 6. SGI names
  * formats XFRMODE_CI1, _L1, _RGB3, _RGBA4 and types XFRMODE_1U, _2U, _4444U.
  * The format values below are earlier guesses.
+ *
+ * As libGLcore uses it (traced with test/gltest/pixtest.c, 6.5.22):
+ *   3:0   component type: 0 u8, 1 u16, 3 u32, 4 s8, 5 s16, 7 s32,
+ *         8 / 10 packed (4-4-4-4, 5-5-5; the X server's)
+ *   7:4   format: 0 colour index, 1 stencil, 2 depth, 3 R, 4 G, 5 B, 6 A,
+ *         7 RGB, 8 RGBA, 9 one-component texel, 10 two-component texel
+ *   10:8  begin skip, bytes
+ *   17:14 stride skip, bytes (the GL row padding; up to 6 seen)
+ *   18    PIO reads in the DMA component order. Only the X server sets
+ *         it (XGetImage reads with 0x40080 and takes the pixel word as
+ *         0x00BBGGRR); libGLcore never does. Our reading from both
+ *         clients' unpacking code; SGI's StrideSkipBytes (22:14) cannot
+ *         be right, since RGBorder sits at 22.
+ *   19    zoom: scale by XFRFACTOR
+ *   20    decimate (zoom below 1)
+ *   22    RGBorder: 1 = red first in host memory, 0 = ABGR
+ *   23    always set for pixel draws (BitMapOpaque in SGI's list)
+ * Host components are the framebuffer's top bits (no rounding) when
+ * reading wider than the framebuffer stores, and truncated when writing.
+ * A PIO read (character registers) delivers RGB(A) in the reverse of the
+ * DMA order unless bit 18 is set: see HQ3.h "PIXEL OPERATIONS".
+ *
+ * Zoom (XFRFACTOR 0x155, XFRINITFACTOR 0x154): the factor is 8.8 fixed
+ * point (256 = 1). The GE does the y zoom (1 / zoom_y) and the integer
+ * part of an x replication; the raster engine samples source pixel
+ * floor((2j + 1) * f / 512) for destination column j (pixel centres),
+ * zooming or decimating. The direction and extents of the destination
+ * come from ERAM 0xDA8 (HQ3.h): a negative zoom shows there as x1 < x0
+ * or y1 < y0.
  */
 #define RE4_XFRMODE_COMP_TYPE_MASK  (0xF << 0)
 #define RE4_XFRMODE_FORMAT_MASK     (0xF << 4)
