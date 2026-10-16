@@ -379,7 +379,18 @@ extern "C" {
  *               INDEX_OFFSET. UNSIGNED_INT colour data ahead of a signed
  *               inttofloat comes through it with shift -1.
  *   mask        [5] AND mask (stencil: 0x1FF seen; colour index: the
- *               map size - 1).
+ *               map size - 1; a colour-index glDrawPixels from the host
+ *               with no maps: 0xFFFFFFFF, state at 0x1D6).
+ *               glCopyPixels on a colour-index visual (libGLcore's
+ *               __glMgrFastCopyPixels) loads the program [mask 0x1D6,
+ *               pipecontrol] but never the mask state, nor the element
+ *               type at ERAM 0xDBB: __glMgrInitPixelPipe, which sends the
+ *               module states, does not run on that path. The copy relies
+ *               on whatever the GE already holds there (traced 2026-10-15,
+ *               test/gltest/cicopy.c and PowerAnimator 9's front/back
+ *               copies; nothing on a fresh boot ever writes 0x1D6). Where
+ *               a real GE gets those words from is not known; our model
+ *               passes the indices through when they were never loaded.
  *   scalebias   12 (bias, scale) pairs from [5], cycling. GL's
  *               c * scale + bias (*_SCALE / *_BIAS), and libGLcore folds
  *               the signed types' 2/255 + (-1) correction into it.
