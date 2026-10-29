@@ -479,6 +479,29 @@ extern "C" {
  * words, tools/mgras-probe-states.py, which show how libGLcore decodes
  * them). IRIX 6.5.22 libGLcore. Our model: src/dev/mgras/glquery.rs.
  *
+ * Selection (glRenderMode(GL_SELECT); libGLcore 6.5.22, disassembled and
+ * traced): the GE keeps the name stack and the hit records. Tokens: 0x0CB
+ * (1 word) enters select mode; 0x0C4 INIT_NAMES, 0x0C5 LOAD_NAME (name),
+ * 0x0C6 POP_NAME, 0x0C7 PUSH_NAME (name); 0x0C9 RENDER_MODE leaves it.
+ * libGLcore then reads the records: __MGR_RETURN_MODE of word 0xC60 (the
+ * record words held), then of each record word i with 0xFFFFFFFF as the
+ * second word. A record is [sequence, name count, z min, z max, names...],
+ * the depths floats in [0, 1] that libGLcore scales by 2^32 - 1. On a
+ * two-GE board it reads GE 0's list, sends 0x061, reads GE 1's, and merges
+ * them by sequence (equal sequences are one hit seen by both GEs: z range
+ * widened); 0x062 ends the read and empties the lists. libGLcore counts
+ * record words itself (4 + depth a name change) and reads early before
+ * about 2000. GL_NAME_STACK_DEPTH reads word 0xC59 as an integer. (Octane
+ * HQ4 addresses 0x8C higher: 0xCE5, 0xCEC.)
+ *
+ * glGetTexImage (libGLcore 6.5.22): the TE returns the texture's own
+ * components (XFRMODE format 9 one, 0xA two, 7 RGB, 8 RGBA), and
+ * __glMgr_FormatTexels expands them by component count alone: one
+ * component to red, two to red and alpha, missing components 0. So an
+ * ALPHA texture reads back (A, 0, 0, 0), LUMINANCE and INTENSITY (L, 0, 0,
+ * 0), RGB (R, G, B, 0) where GL 1.1 wants (0, 0, 0, A), (L, 0, 0, 1) and
+ * (R, G, B, 1). A libGLcore departure, not the board's.
+ *
  * How libGLcore asks:
  *   __MGR_RETURN_MODE (HQ token 0x0A2: address, count, flag) and
  *   SPIN_AND_RETURN (0x0A1: address): the GE writes the word at that state
