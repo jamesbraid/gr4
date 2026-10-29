@@ -105,6 +105,20 @@ typedef union {
  * IP28 then reports "2 GEs, 2 REs, 4 TRAMs" for Max; the IP28 kernel names
  * every IMPACT "IMPACTPC" (a string in its mgras_init.o).
  *
+ * Octane (HQ4) boards, as the 6.5.22 IP30 kernel's board probe decodes them
+ * (disassembled) and the PROM names them: BDVERS1 bits 1:0 NumGEs, 4:2 board
+ * revision, 6:5 product (0 High/Max, 1 Solid MG10 on the Indigo2; the
+ * Octane's GM10 and GM20 are 2 and, by inference, 3). For GM10/GM20,
+ * BDVERS0 bits 1:0 are the RA TRAM field and 3:2 the RB one, each 3 = none
+ * and anything else = 4 TRAMs; NumREs = NumGEs and RBPresent stays 0.
+ * Names: 1 GE no TRAM "SI", 1 GE + TRAMs "SI with texture option", 2 GEs no
+ * TRAM "SSI", 2 GEs + TRAMs "MXI", each prefixed "E" when the GE11 revision
+ * is above 2. The serial-number record's name is GM10 for one RE and GM20
+ * for two; texture comes on mezzanines (TMEZZ: one for SI, two for MXI).
+ * Board IDs iris uses (BDVERS0, BDVERS1): SI 0x0F, 0x45; SI with texture
+ * 0x0C, 0x45; MXI 0x00, 0x66. gfxinfo then reports "Product ID 0x2, 1 GE,
+ * 1 RE, 4 TRAMs" and "Product ID 0x3, 2 GEs, 2 REs, 4 TRAMs".
+ *
  * Subsystem Block Diagram:
  *
  *            CPU / GIO64 (Indigo2) or XIO Crossbar (Octane)

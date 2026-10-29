@@ -1186,6 +1186,38 @@ extern "C" {
 #define HQ_TOK_POLYGON_OFFSET             0x0E7  /*  12 bytes: __glMgrim_PolygonOffset, __glMgrim_PolygonOffsetEXT */
 #define HQ_TOK_SAVE_TEXMODE               0x0E9  /*  16 bytes: __glMgrSaveTexmode */
 #define HQ_TOK_RESTORE_TEXMODE            0x0EA  /*   0 bytes: __glMgrRestoreTexmode */
+/*
+ * Traced 2026-10-16 with test/gltest/toktest.c (one GL feature a step) on
+ * IRIX 6.5.22, Maximum Impact:
+ *   0x06C [1] / [0]  glEnable / glDisable(GL_POINT_SMOOTH) (also [0] from
+ *                    the pick code's soft-path setup).
+ *   0x0E9 [1, 0, 0, 0] ... 0x0EA  around glDrawPixels, glCopyPixels,
+ *                    glTexImage2D, glTexSubImage2D and glCopyTexImage2D:
+ *                    the texture mode is kept aside and the operation
+ *                    drawn untextured (glDrawPixels with GL_TEXTURE_2D on
+ *                    is sent this way too).
+ *   0x09B            a texture load with no lookup table, where
+ *                    mgrTM_DoTexLoad would otherwise send the TL table.
+ *   0x09C            after each SEND_PIXELS of a texture load (end of a
+ *                    sub-load).
+ *   0x0EB [0], twice, then TEX_OFF (0x00C)  before every texture load;
+ *                    meaning not known.
+ *   0x05F [0]        three per texture load (texture manager, after
+ *                    __glMgrSaveTexmode); the data is a GLenum from
+ *                    __glMgrim_Enable/Disable elsewhere. Meaning of [0] not
+ *                    known.
+ *   0x097, 0x0DA, 0x096 (0 bytes)  in glCopyPixels and glCopyTexImage2D;
+ *                    meaning not known.
+ *   __MGR_RETURN_MODE [3, 0, 0]  before every texture load and pixel
+ *                    operation; the host polls for it and reads the answer
+ *                    but does not use it: a round trip that waits for the
+ *                    pipeline. GE word 3's contents are not known.
+ *   glDrawPixels / glCopyPixels draws carry no depth on the bus: the RE4
+ *                    gets Zmode (test, function, write mask) and the
+ *                    fragments must take the raster position's z, which
+ *                    the GE holds (readback 0x2CF); LOAD_RASTER_POS_INFO
+ *                    (0x0D7) comes right before each such draw.
+ */
 #define HQ_TOK_DETAIL_TEX_FUNC_SGIS       0x0EC  /*  16 bytes: __glMgrim_DetailTexFuncSGIS, RestoreData, mgrTM_DoTexRead ... */
 #define HQ_TOK_SET_DATA                   0x0ED  /*   8 bytes: __glMgrasSetData */
 #define HQ_TOK_GET_MATERIALFV             0x0EE  /*   8 bytes: __glMgrim_GetMaterialfv, __glMgrim_GetMaterialiv */
