@@ -2,8 +2,8 @@
 
 Everything that runs inside Ghidra lives here. A component has its own
 acceptance test, run from the repository root inside the Ghidra image with
-`root/` populated. No component has landed yet; the empty directories (each
-holds a `.gitkeep`) fix the layout.
+`root/` populated. Directories with nothing in them yet hold a `.gitkeep`
+to fix the layout.
 
 ```
 ghidra/
@@ -33,4 +33,4 @@ the toolchain image without.)
 
 | Path | What it is |
 |---|---|
-| none yet | |
+| [scripts/](scripts/) | the shared IRIX scripts and the guide to them ([scripts/README.md](scripts/README.md)); here they run over `mgras_kernel/*.o`, `ddx/impactpc.so` and `libglcore/libGLcore.so` |
