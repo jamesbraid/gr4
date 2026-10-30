@@ -1,0 +1,475 @@
+<HTML>
+
+<TITLE>SGI Graphics Performance Comparison Tables...</TITLE>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+
+<CENTER><B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B><P>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+</CENTER>
+
+<CENTER>
+
+<H1>SGI Graphics Performance Comparison Tables</H1>
+
+<H3>Last Change: 26/Oct/2015</H3>
+
+</CENTER>
+
+Given below are several graphical performance comparison tables. With
+so many metrics available, the data is presented via four separate
+tables since a single table would be very large.<P>
+
+Data is given for Personal IRIS, Indy, O2, Crimson, Indigo, Indigo2,
+Octane, Octane2, VW320, i-Station, Onyx and Onyx2.<P>
+
+Note that the CDRS-03 viewset is now officially out-of-date. The
+reason is that CDRS consists largely of wireframe modeling which has
+become increasingly less relevant compared to the typical workload of
+today; one now observes incredibly skewed results such as the Sun
+Ultra30 Elite3D which scores 130.18, yet it's individual test results
+vary between 5.1 and 240! SPEC has given out a <A HREF =
+"http://www.specbench.org/gpc/opc.static/viewperf-prodre.html">press
+release</A> detailing the situation.<P>
+
+Processor types vary amongst older systems, so be wary of direct
+comparisons. Older systems using high-end graphics options of the
+time (eg. Crimson RealityEngine) may appear on paper to be close to
+newer systems with mid-range graphics options (eg. Octane
+SI+texture), when in fact the newer systems may be considerably
+quicker due to a much higher preprocessing ability (ie. R10000/195
+vs. R4000/100 or R4400/150), though note that Crimson RE does have
+features which later desktop systems may not have such as full-scene
+subsample antialiasing. Indigo figures assume the use of a 100MHz
+R4000 CPU.<P>
+
+Gaps in the tables below are evident where data could not be found
+(denoted by '?'); if you are able to supply missing information,
+please contact me.<P>
+
+You may need to expand the width of your viewing window to see the
+tables in full, or use your browser's horizontal scrollbars.<P>
+
+Key:<P>
+
+<H5><PRE>
+  N/A       = Not Applicable, ie. the system can only do the task in software
+  ?         = Could not find this value via any publicly available source
+  K         = x1000
+  M         = x1000000
+  Z         = Hardware Z Buffer
+  GZ        = Gouraud shaded with hardware Z buffer
+  GF        = Gouraud Fill, ie. Gouraud shaded pixel fill rate, always in pixels/sec
+  GFZ       = Same as GF, but using hardware Z buffer due to texturing
+  Tri       = Triangle(s)
+  Tex       = Textured, ie. texture mapped with mipmapping
+  Conv(3x3) = Convolutions 3x3 general (comps/sec)
+  Conv(5x5) = Convolutions 5x5 seperable (comps/sec)
+  CR        = IRIS Crimson
+  I2 xxxIMP = Indigo2 xxxIMPACT
+  OCT xx/yy = Octane, where xx = gfx option, yy = CPU type
+  EXT       = Extreme graphics
+  RE        = RealityEngine
+  RE2       = RealityEngine2
+  R         = Reality
+  IR        = InfiniteReality
+  IR2       = InfiniteReality2
+  IP        = InfinitePerformance
+  Tb        = Turbo (Personal IRIS)
+  St        = Standard (Personal IRIS)
+  DX        = Data Explorer
+  DRV       = Design Review
+  ADVS      = Advanced Visualiser
+  Light     = Lightscape
+</PRE></H5>
+
+<PRE>
+                                    3D       Flat    Lit GZ   Lit        Lit  
+                              X     Depth    Tri     Tri/sec  Tex        GZ   
+                            Lines   Cued GZ  Strips           GZ         Indep
+                                    Lines    No Z             Tri/sec    Quads
+
+Personal IRIS St:           ?       ?        ?       ?        ?          5K
+Personal IRIS Tb:           ?       ?        ?       ?        ?          20K
+Indigo Entry:               ?       380K     100K    26K      N/A        13K
+Indigo XS:                  ?       140K     98K     50K      N/A        24K
+Indigo XZ:                  ?       280K     196K    100K     N/A        45K
+Indigo Elan:                ?       555K     370K    180K     N/A        88K
+Indy XL R4K/100PC:          1.4M    ?        ?       33K      N/A        ?
+Indy XL R4K/133PC:          1.4M    ?        ?       38K      N/A        ?
+Indy XL R4K/133SC:          1.5M    ?        ?       53K      N/A        ?
+Indy XL R4K/150SC:          1.6M    ?        ?       64K      N/A        ?
+Indy XL R4K/200SC:          1.6M    ?        ?       88K      N/A        ?
+Indy XL R5K/150PC:          1.4M    ?        ?       71K      N/A        ?
+Indy XL R5K/150SC:          1.5M    ?        ?       81K      N/A        ?
+Indy XL R5K/180SC:          1.5M    ?        ?       96K      N/A        ?
+Indy XZ:                    ?       460K     402K    180K     M/A        91K
+I2 XL:                      1.59M   205K     288K    52K      N/A        25K
+I2 XZ:                      441K    452K     408K    181K     N/A        67K
+I2 Extreme:                 ?       1.0M     645K    405K     N/A        155K
+O2 R5K/180SC:               2.2M    716K     854K    434K     250K       ?
+O2 R5K/200SC:               2.5M    799K     958K    485K     279K       ?
+O2 R10K/195SC:              2.8M    894K     1.04M   531K     326K       ?
+O2 R10K/250SC:              ?       1.08M    1.24M   665K     394K       ?
+CR Entry:                   ?       375K     56K     13K      1.7K (*)   9.5K
+CR XS/XS24:                 ?       260K     99K     50K      1.3K (*)   17K  
+CR Elan:                    ?       1M       370K    180K     1.3K (*)   65K  
+CR Extreme:                 ?       1M       635K    415K     1.3K (*)   156K
+CR VGXT                     ?       1.2M     1.1M    780K     35K        200K
+CR RE                       ?       1.2M     1.1M    820K     210K       300K
+I2 SolidIMP:                3.26M   1.88M    1.5M    1.02M    N/A        ?    
+I2 HighIMP:                 3.26M   1.88M    1.5M    1.02M    652K       300K 
+I2 MaxIMP:                  3.26M   2.23M    ?       1.8M     1.6M       600K 
+Octane SI:                  3.78M   1.37M    1.5M    1.02M    N/A        384K 
+Octane SE:                  3.80M   ?        ?       1.16M    N/A        480K
+Octane SI+T:                3.78M   1.37M    1.5M    1.02M    655K       384K 
+Octane SE+T:                3.80M   ?        ?       1.16M    810K       480K
+Octane SSI:                 3.88M   2.11M    2.67M   1.82M    N/A        687K
+Octane SSE:                 3.88M   2.29     ?       2.19M    N/A        880K
+Octane MXI:                 3.88M   2.11M    2.67M   1.82M    1.18M      687K 
+Octane MXE:                 3.88M   2.29M    ?       2.19M    1.42M      880K
+Octane2 V10/V12 (16):       ?       ?        ?       18.1     ?          ?
+VW320 PIII/550 (13):        ?       7.94M    ?       3.5M     1.5M       ?
+Onyx Extreme:               ?       210K     600K    370K     2K         180K
+Onyx VTX:                   ?       1.0M     1.0M    813K     450K       350K
+Onyx RE2 (2):               ?       2.0M     2.0M    1.2M     930K       570K
+Onyx2 R:                    ?       ?        ?       ?        5.5M       ?
+Onyx2 IR (9):               ?       ?        ?       ?        10.9M      ?
+Onyx2 IR2 (9):              ?       ?        ?       ?        13.1M      ?
+Onyx2 16 x IR2 (9):         ?       ?        ?       ?        210M       ?
+Onyx2 IR2E:                 ?       ?        ?       ?        ?          ?
+Onyx2 IR3:                  ?       ?        ?       ?        ?          ?
+Onyx2 IR4:                  ?       ?        ?       ?        ?          ?
+Onyx3000 IP (14):           ?       ?        ?       ?        17.7M      ?
+
+
+                            GF        Tex GFZ     Conv(3x3)   Conv(5x5)   Color
+                            Pix/sec   pix/sec                             Lookups/sec
+
+O2:                         66M       33M         ?           ?           ?
+I2 XL:                      89M       N/A         N/A         N/A         N/A
+I2 XZ:                      37M       N/A         N/A         N/A         N/A
+CR XS/XS24:                 ?         ?           ?           ?           ?
+CR Elan:                    ?         ?           ?           ?           ?
+CR Extreme:                 78M       N/A         ?           ?           ?
+CR VGXT                     200M      44M         ?           ?           ?
+CR RE                       180M (1)  320M        ?           ?           ?
+I2 SolidIMP:                120M      N/A         ?           ?           ?
+I2 HighIMP:                 120M      68.5M       20M         20M         50M
+I2 MaxIMP:                  240M      119M        40M         40M         100M
+Octane SI:                  120M      N/A         13.7M       11.5M       38M
+Octane SI+T:                120M      60M         13.7M       11.52M      38M
+Octane SE:                  120M      N/A         16.88M      14.20M      49.2M
+Octane SE+T:                120M      68.4M       16.88M      14.20M      49.2M
+Octane SSI:                 240M      N/A         24.4M       20M         64M
+Octane SSE:                 240M      N/A         33.76M      27.12M      96.4M
+Octane MXI:                 240M      118M        24.4M       20M         64M
+Octane MXE:                 240M      138M        33.7M       27.12M      96.4M
+Octane2 V10/V12 (16):       ?         448M        ?           ?           ?
+VW320 PIII/500 (13):        180M      120M        ?           ?           ?
+Onyx EXT (4):               100M      N/A         ?           ?           ?
+Onyx VTX (5):               ?         80M         ?           ?           ?
+Onyx RE2 (2):               180M (1)  320M        ?           ?           ?
+Onyx2 Reality (17):         448M      188M        ?           6.4M        ?
+Onyx2 IR, 1RM (9,17):       224M      156M        ?           12.7M       ?
+Onyx2 IR, 2RM (9,17):       448M      312M        ?           12.7M       ?
+Onyx2 IR, 4RM (9,17):       896M      624M        ?           12.7M       ?
+Onyx2 IR2, 1RM (9,17):      224M      192M        ?           15.3M       ?
+Onyx2 IR2, 2RM (9,17):      448M      384M        ?           15.3M       ?
+Onyx2 IR2, 4RM (9,17):      896M      768M        ?           15.3M       ?
+Onyx2 16 x IR2, 4RM (9,17): 7200M     6100M       ?           244M        ?
+Onyx2 IR3, 1RM (9,17):      ?         185M        ?           15.3M       ?
+Onyx2 IR3, 2RM (9,17):      ?         370M        ?           15.3M       ?
+Onyx2 IR3, 4RM (9,17):      ?         740M        ?           15.3M       ?
+Onyx2 IR4, 4RM (9,17):      ?         1290M       ?           15.3M       ?
+Onyx2 16 x IR4, 4RM (9,17): ?         20600M      ?           244M        ?
+Onyx3000 IP (14):           ?         484M        ?           ?           ?
+Onyx3000 16 x IP (14):      ?         7700M       ?           ?           ?
+
+
+                            DX      CDRS     ProCDRS   DRV     ADVS    Light
+
+Indy XZ (8):                1.64    ?                  ?       ?       ?
+O2 R5000SC 180MHz:          3.15    16.26              2.45    5.49    0.49
+O2 R5000SC 200MHz:          3.47    18.51              2.67    6.20    0.53
+O2 R10000SC 195MHz:         3.48    22.50              2.70    7.78    0.55
+O2 R5200SC 300MHz:          4.60    ?          3.28    3.67    9.13    0.78
+O2 R10000SC 250MHz:         4.74    27.13              3.46    9.58    0.72
+O2 R12000SC 300MHz:         ?       ?          4.08    3.99    ?       ?
+I2 XZ (7):                  1.64    ?                  ?       ?       ?
+I2 SolidIMPACT R4K/200:     7.33    ?                  ?       ?       ?
+I2 SolidIMPACT R4K/250:     ?       ?                  ?       ?       0.87
+I2 SolidIMPACT R10K/175:    7.38    25.57              3.25    N/A     0.96
+I2 SolidIMPACT R10K/195:    7.42    25.98              3.30    N/A     0.97
+I2 HighIMPACT R4K/200:      7.32    32.09              ?       ?       ?
+I2 HighIMPACT R10K/195:     7.4     32.36              4.62    10.90   0.97
+I2 MaxIMPACT R4K/250:       8.97    47.67              ?       ?       ?
+I2 MaxIMPACT R10K/195:      9.54    48.39              6.13    17.60   1.02
+OCT SI R10K/175:            7.71    26.46              3.46    N/A     1.21
+OCT SI+Tex R10K/175:        7.71    32.00              4.87    10.78   1.31
+OCT SE R10K/225:            9.45    31.72              4.21    N/A     1.37
+OCT SE+Tex R10K/225:        9.56    38.86              5.87    12.75   1.37
+OCT SSI R10K/195:           13.66   35.85              5.43    N/A     1.47
+OCT SSE R10K/250:           18.30   55.57              7.05    N/A     1.55
+OCT MXI R10K/195:           13.74   48.63              8.22    16.57   1.58
+OCT MXE R10K/250:           18.37   55.46              10.62   20.09   1.55
+OCT MXE R12K/300:                             10.05    10.77   19.98   
+VW320 PIII/1GHz:            ?       ?                  ?       ?       2.48
+VW320 PIII/550:             36.21   ?         22.04    16.64   36.93   2.65
+VW540 PIII/550 XEON:        36.42   ?         22.13    16.76   37.36   2.66
+VW320 PIII/600:             37.27   ?         22.39    17.46   39.59   2.84
+VW320 PIII/1GHz:            ?       ?                  ?       ?       3.55
+i-Station IR R10K/195:      19.89   138.05             ?       ?       1.86
+Onyx2 Reality R10K/180:     21.72   91.54              15.83   23.70   2.41
+Onyx2 Reality R10K/195:     21.90   92.72              16.27   23.84   2.61
+Onyx2 IR R10K/195:          35.65   161.29             20.82   45.43   2.65
+Onyx2 IR R10K/250:          41.60   ?                  23.96   ?       3.30
+
+
+                     Characters    Screen     Max Framebuffer    3D Vectors    Vol-Render
+                     Per Second    Clear      Memory Size        Per Second    Voxels/sec
+
+Personal IRIS St:    ?             ?          ?                  90K           ?
+Personal IRIS Tb:    ?             ?          ?                  200K          ?
+Indy XL/100PC:       ?             3ms        ?                  333K          ?
+Indy XL/133PC:       ?             3ms        ?                  563K          ?
+Indy XL/133SC:       ?             3ms        ?                  573K          ?
+Indy XL/150SC:       ?             3ms        ?                  800K          ?
+Indy XL/200SC:       ?             3ms        ?                  912K          ?
+Indy XL/150PC:       ?             3ms        ?                  1.2M          ?
+Indy XL/150SC:       ?             3ms        ?                  1.2M          ?
+Indy XL/180SC:       ?             3ms        ?                  1.2M          ?
+Indy XZ (10):        ?             3ms        ?                  912K          ?
+Indigo Entry:        ?             19ms       ?                  ?             ?
+Indigo XS:           ?             9ms        ?                  ?             ?
+Indigo XZ:           ?             9ms        ?                  ?             ?
+Indigo Elan:         ?             9ms        8MB                ?             ?
+I2 XL (6):           471K          10ms       ?                  ?             ?
+I2 XZ:               251K          9ms        8MB                ?             ?
+I2 Extreme:          255K          4.5ms      8MB                ?             ?
+I2 SolidIMP:         ?             ?          ?                  ?             ?
+I2 HighIMP:          ?             ?          13.5MB             ?             ?
+I2 MaxIMP:           ?             ?          27MB               ?             ?
+O2:                  ?             ?          1GB (3)            ?             ?
+CR Entry:            115K          20ms       ?                  ?             ?
+CR XS/XS24:          112K          9ms        ?                  ?             ?
+CR Elan:             152K          9ms        ?                  ?             ?
+CR Extreme:          253K          4.5ms      8MB                ?             ?
+CR VGXT              96K           0.78ms     ?                  ?             ?
+CR RE                300K          0.75ms     160MB              ?             ?
+Octane SI:           ?             ?          13.5MB             ?             ?
+Octane SI+T:         ?             ?          13.5MB             ?             ?
+Octane SE:           ?             ?          13.5MB             ?             ?
+Octane SE+T:         ?             ?          13.5MB             ?             ?
+Octane SSI:          ?             ?          27MB               ?             ?
+Octane SSE:          ?             ?          27MB               ?             ?
+Octane MXI:          ?             ?          27MB               ?             ?
+Octane MXE:          ?             ?          27MB               ?             ?
+Octane V6/V10:       ?             ?          32MB (15)          ?             ?
+Octane V8/V12:       ?             ?          128MB (15)         ?             ?
+VW320 PIII/500:      ?             ?          1GB (12)           7M            ?
+Onyx EXT (4):        ?             ?          8MB                ?             ?
+Onyx VTX (5):        ?             ?          40MB               ?             ?
+Onyx RE2:            ?             ?          160MB              ?             ?
+Onyx2 Reality:       ?             ?          80MB               ?             200M
+Onyx2 IR, 1RM:       ?             ?          320MB              7.1M (AA)     200M
+Onyx2 IR, 2RM:       ?             ?          320MB              7.1M (AA)     400M
+Onyx2 IR, 4RM:       ?             ?          320MB              7.1M (AA)     800M
+Onyx2 IR2, 1RM:      ?             ?          320MB              8.6M (AA)     200M
+Onyx2 IR2, 2RM:      ?             ?          320MB              8.6M (AA)     400M
+Onyx2 IR2, 4RM:      ?             ?          320MB              8.6M (AA)     800M
+Onyx2 16 x IR2, 2RM: ?             ?          320MB per pipe     ?             6400M
+Onyx2 IR2E, 4RM:     ?             ?          320MB              ?             800M
+Onyx2 IR3, 4RM:      ?             ?          320MB              ?             800M
+Onyx2 IR4, 4RM:      ?             ?          10GB               ?             800M
+Onyx2 16 x IR4, 4RM: ?             ?          10GB per pipe      ?             12800M
+Onyx3000 IP (14):    ?             ?          128MB              ?             ?
+</A></PRE><P><BR>
+
+<B>Notes:</B><P>
+
+All performance numbers for IRx graphics systems are for one pipe
+only unless otherwise stated. Performance can scale up to 16 pipes,
+eg. textured AA fill rate for IR4 is 10.2Gpixels/sec for a max-spec
+configuration, while the voxel rate scales to 6.4Gvoxels/sec and the
+memory scales to 160GB VRAM and 16GB TRAM.<P>
+
+(*) The various data sheets list low texturing numbers for Entry,
+XS/XS24, XL, XZ, Elan and Extreme graphics because these systems have
+no texturing hardware, ie. any figures listed are for <I>software</I>
+texturing. Drawing textures in software is highly pixel-fill bound:
+the time taken to draw an object increases enormously as the area the
+object takes up on the screen increases. Today, it is preferable to
+simply state 'Not Applicable', or 'N/A', for such figures, implying
+that texturing is a computational area at which certain system
+configurations are not targeted, eg. Octane/SI. The software
+texturing figures for various systems are included for reference (not
+all older data sheets included such figures). Note: this means O2's
+texturing hardware can make it 100 times better than Extreme for
+anything involving texturing, while Octane or Indigo2 configurations
+that have hardware texturing can be 1000 times better than Extreme
+for texture work (depending on the depth complexity and size of the
+scene being drawn).<P>
+
+(1) The GF pix/sec figure is for a 2RM system only. The data sheets
+do not specify what a 4RM system could do.<P>
+
+(2) This is for a 1-pipe 4RM Onyx unless otherwise stated. Remember
+that Onyx can have up to three pipes.<P>
+
+(3) O2's frame buffer memory is taken from the main RAM pool, so the
+theoretical limit is 1GB, though in practice one will rarely see much
+more than 8MB used for the ordinary screen display. More important is
+that this architectural feature means texture memory and other
+rendering memory is only limited by main RAM size. Obviously, due to
+this design, it is critical that O2 users ensure their systems are
+adequately equipped with sufficient memory for the particular task at
+hand, otherwise disk swapping will occur. Personally, I would
+recommend at least 512MB for anyone doing serious work.<P>
+
+(4) Extreme graphics with Onyx was only ever available with the
+deskside model.<P>
+
+(5) VTX graphics was never available for the Power Onyx line, ie.
+those Onyx models employing the R8000 chip set.<P>
+
+(6) Indigo2 XL performance measured with 200MHz R4400SC. Bare in mind
+that XL performance with 250MHz R4400 or R10000 (175MHz or 195MHz)
+will be faster, perhaps much faster with 195MHz R10000.<P>
+
+(7) The Data Explorer figure comes from the original Indigo2 IMPACT
+technical specs page - I kept a copy when it was first published. :)<P>
+
+(8) I found this DX result accidentally, buried in the depths of
+SGI's web site. The Indy was using an R4600PC 133MHz CPU - not
+exactly the best possible choice. Personally, I'd like to know what a
+180MHz R5000SC Indy could do (read the <A HREF =
+"hollibench.html">HolliDance Benchmark</A> page to see why an XL
+model might outperform an XZ model).<P>
+
+(9) Remember that Onyx2 is extremely scalable like Origin, eg. one
+could have a <A HREF = "extreme.html#MONSTER">64-CPU 8-pipe 32RM
+Onyx2 RealityMonster</A> if one so desired, with a maximum of 128
+CPUs and 16 pipes.<P>
+
+(10) The data sheet doesn't say which CPU this is with, which is
+really annoying as that is important. See also note (11).<P>
+
+(11) There are no data sheets for XZ being used with R5000 which
+makes comparing different Indys rather difficult. To understand why
+such figures were never released, see the <A HREF =
+"hollibench.html">HolliDance Benchmark</A> page.<P>
+
+(12) The VW320 has a similar architecture to O2, except it's much
+faster. Thus, the frame buffer and texture memory limit is again
+limited only by main RAM size.<P>
+
+(13) These are sustained figures. Peak figures are higher, eg. 174M
+textured pixels/sec vs. 120M/sec sustained.<P>
+
+(14) This is for a single-pipe InfinitePerformance system. IP is
+scalable to 16 pipes, giving up to 283 million triangles per second
+and 7.7 billion pixels per second of sustained performance. IP is the
+same V12 graphics system as used in Octane2/Fuel/Tezro. The VRAM in
+IP is combined; 128MB total, up to 116MB of which can be used for
+texture. A V-Brick contains two V12 pipes.<P>
+
+(15) VPro graphics options use a combined onboard graphics memory
+pool for all graphics data. Thus, for example, V6 and V10 have 32MB
+total, up to 20MB of which can be used for textures. V8 and V12
+have 128MB total, up to 116MB of which can be used for textures.
+Note that SGI docs say 8MB/108MB respectively, but the real amount
+available is higher if one uses 1280x1024 with only 8 bytes per pixel.<P>
+
+(16) This is from the <A HREF =
+"http://web.archive.org/web/20010125044100/www.sgi.com/newsroom/press_releases/2001/january/dcd.html">SGI
+press release, 16th Jan 2001</A>.<P>
+
+(17) The quoted performance figure is for <B>8X subsample
+anti-aliased</B> (so much higher quality than the data given for
+other systems), Z-buffered, textured, lit pixels with 10bits per
+component colour (or tris/sec). SGI did not publish textured fill
+rates without AA.<P>
+
+Finally:<P>
+
+There are slight differences between the October 1998 Octane
+brochure's performance figures and the published Viewperf numbers for
+Octane. The differences are not significant, but where possible I've
+used the published Viewperf result first, then the brochure figures
+where SPEC-reported data is not available.<P>
+
+<HR>
+
+<CENTER>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B></CENTER><P>
+
+</HTML>
+

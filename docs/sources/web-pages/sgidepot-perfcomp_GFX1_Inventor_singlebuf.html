@@ -1,0 +1,1697 @@
+<HTML>
+
+<TITLE>GRAPHICS Test 1: Inventor Objects: rotation speed (single-buffered)</TITLE>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+
+<CENTER>
+
+<H2>SGI Performance Comparisons</H2>
+
+<H3>Inventor Objects: rotation speed (single-buffered)</H3>
+
+<H4>Last Change: 05/Aug/2026, 0122hrs</H4>
+
+<H5>(widen your browser window to see the tables clearly)</H5>
+
+</CENTER>
+
+These tests give the frames-per-second rates whilst spinning various
+3D Inventor objects. Some of the models are my own, created over the
+years; others are from various SGI demos, eg. the 'Underwater Camera'
+and 'Huge Engine Model'.<P>
+
+NOTE: The frame rate figures given here are for
+<I>single-buffered</I> tests, ie. no attempt is made to synchronise
+the drawing of the 3D image with the display refresh of the monitor.
+Thus, a system's graphics hardware renders a model as quickly as
+possible, which means observed frame rates will usually be an obscure
+fraction of the monitor refresh rate, but can also be many times the
+refresh rate if a particular graphics system is sufficiently powerful
+or if the model is simple.<P>
+
+By contrast, <A HREF =
+"perfcomp_GFX2_Inventor_doublebuf.html">double-buffered</A> tests
+involve waiting for a monitor refresh event to synchronise the
+drawing of the object with the frame-by-frame display of pixel data
+on the screen.  Thus, frame rates for double-buffered tests can never
+be more than the monitor refresh rate, are usually an integer divisor
+of the monitor rate, and usually do not represent the maximum
+capabilities of a graphics system. I present results of both types of
+test in order to offer as broad a range of information as possible,
+and also to show very clearly how different these two types of test
+can be. For full details on this issue, see my page on <A HREF =
+"dbuffer.html">The Effects of Double-Buffering on Animation Frame
+Rates</A>. I dedicate all effort to single-buffered tests now though
+since they are far more meaningful.<P><BR>
+
+MAJOR UPDATE (29/Jan/2009): in recent weeks I took a closer look at
+all these results, after learning some new things about SGI gfx
+hardware and studying the CPU usage of various configurations.
+Firstly, I finally found out how to force an SGI to run any
+application in single-buffer mode, including any Performer
+application, namely by setting the environment variable,
+"DECOUPLE_SWAPBUF" to 'y'. Even though ivview has a menu option to
+use single buffer mode, that's just the rendering method within the
+Inventor application rather than the raw hardware setting. Using the
+above environment variable turns on true single buffer mode, giving
+more accurate results. Often this does not make too much of a
+difference, but it can do in some cases. Note however the setting
+is not applicable to O2 systems as it induces screen corruption in
+3D windows such as Inventor.<P>
+
+Next, by using osview to monitor CPU usage, it is very clear that a
+great many of the SGI systems tested here are CPU-bound when running
+these tests. That is, the results are limited by the CPU speed,
+revealed by osview showing the CPU running at or near 100% usage.
+This is made worse by the fact that Inventor only uses one CPU to run
+ivview, so on any multi-CPU system the potential of all the other
+CPUs is wasted. Whether or not a system will be CPU-bound for any
+individual test depends on the window size, the precise graphics
+configuration, the nature of the 3D model, the application/libraries
+used to render the model (eg. Performer, Inventor, Maya, Alias), and
+to what extent the gfx hardware being used is applicable or not for
+the particular render mode being tested, eg. textured vs. wireframe.<P>
+
+These factors all mean that the results here should be taken with a
+major pinch of salt. For example, the Huge Engine Model 'MW' (Maximum
+Window) test gives 10.76 fps on my Fuel 900MHz V12 (with 94% CPU
+usage), but if I load the model into perfly instead then the frame
+rate rockets up to 68 fps and only 78% CPU usage! (or 88fps with
+textures turned off, giving almost 10M tris/sec, more inline with
+what one expect V12 to be able to do, at least on a single-CPU system
+anyway). In other words, using ivview to display the model means the
+bottleneck is often the main CPU, not the gfx, and note that the ivview
+numbers show Inventor is particularly slow at coping with textures.<P>
+
+The difference can be even larger on any multi-CPU system since
+perfly can utilise all available CPU resources. Testing various
+systems and models has shown that in many cases using a more
+optimised application such as perfly can give absolute performance
+results (triangles/sec I mean) that are an order of magnitude faster
+(or more) than the data shown here. This is especially true of
+high-end systems, any system with fast graphics (eg. desktop VPro) or
+tests that have their own inherant bottlenecks (eg. large landscape
+models).<P>
+
+I can only assume Inventor's internals must involve a rather
+top-heavy way of handling the 3D data, perhaps the high-level scene
+graph description is to blame. perfly accesses the graphics hardware
+more directly using a more optimised scene graph and so is much
+faster. Where things get complicated is when, for a particular test,
+a system may be CPU-bound with a large size window but gfx bound for
+a small size window, or it may be CPU bound in one rendering mode but
+gfx bound in another mode. Or a combination of these possibilities.
+Onyx2 reveals this strongly, with good results for shaded mode, but
+slow results for wireframe (CPU usage maxed out for wireframe, ie. the
+CPU is the bottleneck); on the other hand, having 2 RMs vs. 4 RMs can
+muddle this up, ie. MW tests may or may not be CPU or gfx bound
+depending on the test, CPU, gfx mode, model complexity, etc.<P>
+
+For example, consider the chromeskins results for two of the Onyx2
+systems:<P>
+
+<PRE>
+                                             MW     MW/SH   MW/W     SW      SW/SH   SW/W
+
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:      231.27  390.50  220.82  349.62   447.59  221.00    [<A HREF = "hinv080.txt">hinv</A>]
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:      321.26  323.04  216.53  322.11   322.72  217.58    [<A HREF = "hinv000.txt">hinv</A>]
+</PRE><P>
+
+When the window is large, pixel fill is more important when textures
+are turned on, so the 4RM system is faster (probably caused by
+Inventor's poor handling of texture data). With textures off, the gfx
+hardware can go much faster (because of how poorly Inventor handles
+textures), so performance is now limited more by CPU speed - this is
+why the MW/SH and SW/SH results are almost the same for the R10K/250
+system, but quite different for the R12K/400 system, ie. the /SH
+tests on the R12K/400 system are less dependent on CPU speed. But in
+wireframe mode, the bottleneck may be a combination of both factors:
+the R12K/400 eases any CPU bottleneck which might be present in the
+R10K/250 system, but its smaller number of RMs may cancel out the
+benefit of using a faster CPU, in both cases perhaps made worse by
+the way Inventor draws lines.<P>
+
+So, what to conclude? Well, these test results always were supposed
+to be 'real-world' tests, an example of what real work might involve
+for ordinary users, but to be fair to SGI's systems, it's unlikely
+users of mid-range and high-end systems would be using Inventor that
+much. As such, the data on this page is gravely understating how fast
+SGIs can be.<P>
+
+SGI's preferred library/API suite for obtaing maximum performance is
+<A HREF = "performer.html" TARGET="_top">IRIS Performer</A>; most major
+3D applications aimed at SGI high-end systems use Performer, eg.
+Vega/MultiGen. Alas, at the moment I don't know how to use perfly to
+display a model in exactly the way I want for a repeatable test, but
+I shall look into this. For now, it is safe to assume that whatever
+numbers you see here, in reality SGIs are capable of operating at
+significantly higher performance levels.<P>
+
+Now back to the original text on this page...<P><BR>
+
+The objects I've used for these tests vary in their nature, but they
+do share one aspect in common: they're not 'perfect' objects, ie.
+they're often inefficient in their definition. This is entirely
+deliberate, because in the real world that is exactly how many 3D
+object files are constructed, eg. a landscape data set may have a
+huge number of triangles wastefully used to represent a flat area,
+but someone working with the model might not be allowed to alter it,
+or may not know how even if they could. Thus, although I always use
+the command 'ivview -p' to run these tests, I do not use ivview's
+object-optimisation options. Sometimes of course, it's possible to
+use software such as Optimizer to improve performance, but I don't
+deal with such issues here.<P>
+
+For each object, a brief description, the number of polygons it
+contains and a link to a screenshot are provided. Feel free to browse
+the <A HREF = "prfcmppics.html" TARGET="_top">screenshots page</A>,
+which has most of the object models available for download.<P>
+
+Caveats:<P>
+
+<UL>
+
+<LI>Some results may seem strangely out of order; this is because the
+frame rates can be greatly affected by exactly how a model is spun. The
+data for the angus, engine, stars and spacestation models shows this,
+but examples can be found in almost every table. With hindsight, it
+would have been better to write some kind of testing program that loaded
+each model and either spun it in a predefined way, or simply calculated
+how long it took to draw the default view in each mode a certain number
+of times. Over time, I'll retest some of the configs where the numbers
+don't seem right. The landscape tests are a good example - the model is
+supposed to be rotated verticaly face-on before being spun, in order to
+maximise the fill demand, but if it's simply spun edge-on with the
+default view, then the results come out too high. This is why, in the
+tables for the ss models, an R12K/300 SE appears to be quicker than an
+R12K/400 SE.<P>
+
+<LI>Monitor settings are if possible always 1280x1024 at 60Hz with 32+32
+or the nearest-best (early results were often done with 72Hz displays,
+which may have slightly reduced the numbers for some O2 configs);
+exceptions are the Onyx2 R10K/195 results which were run at 60Hz
+1920x1200 resolution, and the Onyx2 R10K/250 tests I ran which were done
+at 1280x1024_60, though the actual display I was using was 3840x1024. In
+addition, some R12K/400 Octane V6 results were done at 1280x720, which
+unfortunately means the results can make V6 look as good or better than
+V12, when in fact V12 is definitely faster, ie. at the lower res, V6 is
+dealing with a 30% smaller fill area. I will rerun the tests at
+1280x1024_60 when I am able (it doesn't matter so much if the refresh is
+60 instead of 72 though since the tests are single buffered anyway).<P>
+
+<LI>The results given for R10K/195 Onyx2 used just one CPU and one
+RasterManager (RM7); thus, they should not be used to judge the
+maximum performance of Onyx2 which is massively higher than the
+figures given here. My thanks to Michael Tiemann for supplying the
+Onyx2 data. Compare Michael's results to my own which use IR2E and
+R10K/250.<P>
+
+<LI>Ranking rationale: Each test consists of several sub tests. A
+system X is ranked better than system Y if X achieves better results
+for a majority of the sub-tests, eg. I2 R4400SC/250 2MB XL24 is
+ranked better than Indy R4400SC/200 1MB XL24 for the underwater
+camera model because it beats the Indy for 4 out of the 6 sub-tests.
+For those cases where there is a tie, then the system with the better
+max-window (MW) score is ranked first. If two systems tie on one
+sub-test but not others, then that sub-test is ignored and the
+judging rationale is repeated on the remaining tests. This ranking
+method is most evident when looking at texturing results for systems
+with no hardware texture mapping support, eg. look how far up the
+table R10K SolidIMPACT reaches despite it's low texture result - it's
+because the shaded/wireframe figures are better than the systems
+lower down, ie. for 4 out of the 6 tests. This allows systems which
+would be good for certain tasks to remain higher above the table and
+easily visible, rather than being placed way down the table just
+because of the results of one particular test. However, it does mean
+that sometimes it is possible to place a system's results in more
+than one possible position, depending on whether one compares results
+going top-down or bottom-up through the table. In general, I compare
+results bottom-up.<P>
+
+<LI>The 2GE Indigo2 XZ outperforms the 4GE Indigo2 Elan for the
+textured tests probably because of issues concerning graphics context
+switches (the CPU must do the texturing, which interferes with the
+smooth flow of data). For shaded/wireframe tasks, the 4GE system is
+faster as expected.<P>
+
+<LI>For some of the models, the bottleneck in the rendering process
+is the rate at which the main CPU can supply data to the graphics
+pipe. This is especially important where high-end systems are
+concerned, both old and new, eg. examine the Test B results for POWER
+Series RE 1RM: note how, compared to using R3000/33, the frame rate
+first doubles, then triples, when using the faster R4000/100 and
+R4400/150 CPUs instead (respectively). Even more critical is that all
+these Inventor tests <I>only use one main CPU</I>. Thus, if one
+recompiled ivview to use more than one CPU, some systems could easily
+increase their performance by a huge margin.<P>
+
+<LI>Tests involving texture mapping only make use of a single texture
+usually operating in environment mapping mode (the exception is the Earth
+model which employs a static texture), ie. these are not representative
+of tasks where multiple different and size-variant textures may be
+used in a scene, such as urban modelling. This means such tests here
+cannot convey how SGIs vary in their texture memory capacity or texture
+data loading speed. Instead they just show how much of a difference it
+makes to have any hardware acceleration for texture mapping at all. A more
+relevant test in terms of capacity and loading speed would be, for example,
+a large DOOM WAD level in Inventor format which has a different texture
+for every surface; this might need more than 4MB TRAM and thus would not
+fit into the TRAM of IMPACT or RM4 RE2, but would be no problem for VPro,
+RM5 RE2 or any IRx system. Or a more extreme test would be a volumetric
+texel dataset such as a CT or GIS model.<P>
+
+</UL>
+
+Key:<P>
+
+<PRE>
+   MWin (MW) = Maximum Window (click top-right button)
+   SWin (SW) = Small Window (default size of ivview)
+   /xx       = xx is the rendering mode; if none is given then the mode is
+               'default', ie. texturing is ON if the model contains texture.
+               Otherwise, see SH, W, T or HL below.
+   SH        = shaded mode
+   W         = wireframe mode
+   T         = transparent
+   HL        = hidden-line mode
+</PRE><P><BR>
+
+Test A: Underwater Camera (42650 polygons). This model [<A HREF =
+"prfcmppics.html#GFX1A">screenshot</A>] is from SGI's own demonstration
+collection. High-quality transparency was turned on for this test.<P>
+
+<PRE>
+                                               MWin   MWin/SH   MWin/W   SWin   SWin/SH   SWin/W
+
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:       166.33   183.18    82.75  166.42   183.36    83.13    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:        166.10   182.74    82.48  166.17   183.01    83.38    [<A HREF = "hinv080.txt">hinv</A>]
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:        133.47   134.06    82.75  133.33   133.80    82.75    [<A HREF = "hinv000.txt">hinv</A>]
+Tezro R16000 1GHz 16MB L2 V12:               100.15   206.38    77.50  111.00   271.19    86.65    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:               100.03   205.59    77.42  110.78   270.19    86.65    [<A HREF = "hinv079.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:               100.00   204.29    77.34  110.83   270.05    86.65    [<A HREF = "hinv098.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:               100.03   205.12    77.23  110.70   269.17    86.60    [<A HREF = "hinv092.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:             99.72   202.23    77.69  110.67   266.72    86.65    [<A HREF = "hinv113.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 V12:              97.00   183.14    76.81  103.47   215.25    86.42    [<A HREF = "hinv048.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                     98.62   194.61    76.13   98.46   194.50    75.17    [<A HREF = "hinv072.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                     96.24   182.05    73.55  109.95   263.64    86.04    [<A HREF = "hinv068.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:        134.44   148.12    74.44  134.50   147.87    67.05    [<A HREF = "hinv125.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:              88.79   143.24    52.36  101.60   195.90    69.81    [<A HREF = "hinv110.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:               82.30   123.64    50.90   91.45   146.37    67.81    [<A HREF = "hinv060.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:        77.46    77.87    61.15   77.48    78.10    62.17    [<A HREF = "hinv051.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 SSE:              5.93    57.25    34.15   14.30    65.60    36.52    [<A HREF = "hinv059.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:              47.96    55.71    27.27   53.68    63.53    28.56    [<A HREF = "hinv071.txt">hinv</A>]
+Octane2 R14000SC/600 2MB L2 MXE:              47.42    55.02    30.87   52.20    61.82    32.45    [<A HREF = "hinv107.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SSE:                3.98    53.97    32.56   10.33    63.20    35.20    [<A HREF = "hinv062.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:             49.75    53.74    27.55   51.24    54.88    28.33    [<A HREF = "hinv026.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:           49.68    54.07    27.36   50.91    55.62    28.53    [<A HREF = "hinv115.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:           48.16    52.28    25.58   51.34    56.20    28.26    [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:           47.95    51.31    25.84   50.82    55.23    28.10    [<A HREF = "hinv115.txt">hinv</A>]
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:        47.66    49.15    26.14   48.66    51.36    27.91    [<A HREF = "hinv031.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:             46.16    47.01    26.95   46.91    47.98    28.09    [<A HREF = "hinv014.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:             44.90    46.48    25.49   46.65    48.21    28.10    [<A HREF = "hinv111.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:        40.66    40.63    26.14   40.24    41.21    27.45    [<A HREF = "hinv007.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 1RM4:             34.77    34.86    24.90   35.07    35.21    27.17    [<A HREF = "hinv005.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:             34.69    35.10    27.01   35.07    35.18    28.26    [<A HREF = "hinv005.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:        33.50    38.00    23.30   35.50    40.43    24.11    [<A HREF = "hinv006.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:        32.42    36.41    23.07   34.42    39.00    23.99    [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:        28.88    35.53    20.71   31.59    36.07    22.09    [<A HREF = "hinv035.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:              31.44    32.54    21.29   31.63    32.65    21.30    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 4RM:              31.46    32.37    20.80   31.30    32.37    21.27    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 1RM:              31.27    32.39    20.33   31.82    32.65    21.65    [<A HREF = "hinv004.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:        30.44    34.45    22.28   32.70    36.79    23.08
+Octane R10000SC/250 2MB L2 MXI:               29.00    42.00    19.12   30.56    45.50    19.70    [<A HREF = "hinv106.txt">hinv</A>]
+O2 R12000 400MHz 2MB:                         26.20    31.26    23.89   29.76    36.38    27.78    [<A HREF = "hinv101.txt">hinv</A>]
+O2 R7000SC 600MHz 256K/1MB L2/L3:             25.96    30.01    25.25   29.96    35.32    31.29    [<A HREF = "hinv086.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:        27.67    29.23    22.25   29.06    30.82    23.09    [<A HREF = "hinv050.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 SSI:                3.42    44.05    20.14    8.54    48.17    20.61    [<A HREF = "hinv105.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SE+Texture:       25.66    30.87    17.39   28.27    34.83    18.31    [<A HREF = "hinv117.txt">hinv</A>]
+Octane R10000SC/250 1MB L2 SE+Texture:        24.94    30.13    13.94   28.04    34.95    14.62
+Octane R12000SC/400 2MB L2 SE+Texture:        24.24    29.31    16.21   26.93    33.93    17.17
+Octane R10000SC/195 1MB L2 SE+Texture:        22.89    27.53    13.59   25.66    31.78    12.72
+Indigo2 R4400SC/200 2MB HighIMPACT-AA 1MB:    21.98    24.98    15.90   24.35    28.36    16.10    [<A HREF = "hinv032.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SI+Texture:       21.25    25.78    14.62   22.90    28.35    15.23    [<A HREF = "hinv118.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB HighIMPACT:           21.18    24.35    15.53   23.76    28.05    16.60
+Indigo2 R10K/175 1MB L2 HighIMPACT 4MB:       23.64    23.80    13.33   24.11    28.13    14.33
+Octane R10000 175MHz 1MB L2 SI+Texture:       20.28    23.66    13.47   22.37    26.60    14.27
+O2 R12000SC 300MHz 1MB:                       19.10    22.58    19.73   21.17    25.59    22.73    [<A HREF = "hinv043.txt">hinv</A>]
+O2 R7000 350MHz 256K/1MB (030-1327-002 mbd):  17.93    22.15    21.02   20.60    25.10    25.00    [<A HREF = "hinv121.txt">hinv</A>]  At best, not quite 1% faster with the final rev motherboard, hence O2+ will behave exactly the same.
+O2 R7000 350MHz 256K/1MB (030-1038-003 mbd):  17.77    22.15    20.91   20.40    25.03    24.91    [<A HREF = "hinv121.txt">hinv</A>]
+POWER Series R4000SC/100 RE 1RM:              19.53    19.62    19.75   19.52    19.64    20.51
+POWER Series R4000SC/100 RE 2RM:              19.33    19.50    19.60   19.45    19.54    20.50    Probably CPU-limited, ie. the extra RM may be increasing the CPU overhead somehow.
+O2 R12000 270MHz 1MB:                         17.56    20.81    18.85   18.85    22.73    21.36    [<A HREF = "hinv100.txt">hinv</A>]
+O2 R10000 250MHz 1MB:                         16.15    19.18    18.77   17.16    20.72    22.03    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                        14.88    17.76    20.62   15.81    19.00    24.14    [<A HREF = "hinv090.txt">hinv</A>]
+O2 R10000SC 225MHz 1MB:                       14.49    17.39    19.00   15.59    18.92    22.73    [<A HREF = "hinv123.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SE:                 3.84    31.67    18.82   10.17    39.53    20.64    [<A HREF = "hinv061.txt">hinv</A>]
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:        14.64    14.90    18.79   15.03    15.19    19.35    [<A HREF = "hinv049.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                       13.66    16.38    18.05   14.33    17.47    20.69    [<A HREF = "hinv070.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                       11.67    14.00    15.82   12.22    14.88    17.77    [<A HREF = "hinv122.txt">hinv</A>]
+O2 R5000SC 200MHz 1MB:                        11.98    13.70    15.84   11.33    14.47    17.08
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:      2.54    27.39    15.21    6.56    30.68    16.05    [<A HREF = "hinv033.txt">hinv</A>]
+O2 R10000SC 150MHz 1MB:                       10.67    12.74    14.47   11.02    13.29    15.87    [<A HREF = "hinv016.txt">hinv</A>]
+Indigo2 R10000 175MHz 1MB L2 SolidIMPACT:      2.26    26.70    15.14    5.50    29.93    15.81    [<A HREF = "hinv028.txt">hinv</A>]
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:     1.48    23.92    14.39    2.80    28.55    15.70    [<A HREF = "hinv046.txt">hinv</A>]
+O2 R5000SC 180MHz 512K:                        9.28    11.35    13.83    9.40    11.87    15.04
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):      3.07    11.39    12.71    5.87    11.79    13.88    [<A HREF = "hinv104.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):     2.11    11.25    12.43    4.06    11.63    13.67    [<A HREF = "hinv002.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):     1.68    10.74    12.04    3.55    11.15    13.30    [<A HREF = "hinv018.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):     1.45    10.75    12.02    2.84    11.04    13.11    [<A HREF = "hinv021.txt">hinv</A>]
+POWER Series R3000SC/33 RE 1RM:                5.09     5.13     7.80    5.10     5.13     8.11
+Indy R5000SC 180MHz 512K XL24:                 3.02     4.80     3.80    4.83     6.54     4.98
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):        1.80     5.78     6.03    3.25     5.94     6.43
+Indy R5000SC 180MHz 512K XZ (4GE):             1.96     5.73     6.00    3.68     5.90     6.36    [<A HREF = "hinv019.txt">hinv</A>]
+Indy R4400SC 200MHz 1MB XZ (4GE):              1.53     5.72     5.92    2.60     5.90     6.40
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):        1.29     5.75     5.84    2.13     5.98     6.38
+Indy R4600SC 133MHz 512K L2 XZ (4GE):          1.21     5.71     5.94    2.05     5.85     6.35    [<A HREF = "hinv109.txt">hinv</A>]
+Indy R5000PC 150MHz XZ (4GE):                  1.60     5.61     5.68    2.89     5.85     6.22    [<A HREF = "hinv108.txt">hinv</A>]
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):      0.79     5.54     5.82    1.54     5.66     6.17    [<A HREF = "hinv027.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):                  0.90     5.36     5.65    1.63     5.56     5.96    [<A HREF = "hinv029.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB XL24:                  2.66     3.70     3.79    3.69     5.40     4.83
+Indy R5000PC 150MHz XL24:                      2.37     3.67     3.08    3.79     5.01     4.06
+Indigo R3000 33MHz GR2-Elan (4GE):             0.35     4.91     5.60    0.62     5.00     5.89    [<A HREF = "hinv041.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):          1.39     3.85     4.14    2.47     3.95     4.43
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):          1.22     3.80     4.21    2.08     3.87     4.37    [<A HREF = "hinv015.txt">hinv</A>]
+Indigo R4400SC/150 1MB GR2-XS24Z (1GE):        0.98     1.85     2.05    1.58     1.84     2.08    [<A HREF = "hinv053.txt">hinv</A>]
+Indigo R4000SC/100 1MB GR2-XS24Z (1GE):        0.61     1.83     2.04    1.10     1.84     2.06    [<A HREF = "hinv054.txt">hinv</A>]
+Indy R4400SC/200 1MB XL24:                     2.12     3.40     3.13    3.17     4.50     3.93
+Indigo R3000 33MHz GR2-XZ (2GE):               0.33     3.11     3.50    0.60     3.15     3.57    [<A HREF = "hinv106.txt">hinv</A>]
+Indy R4600SC/133 512K L2 XL8:                  1.45     2.39     2.49    2.00     2.94     3.09
+Indy R4600PC/133 XL24:                         1.18     1.97     1.89    1.41     2.37     2.34
+Indy R4600PC/100 XL24:                         0.88     1.59     1.70    1.34     2.06     2.15
+Indigo R3000 33MHz XS24Z (1GE):                0.32     1.80     2.01    0.56     1.81     2.02    [<A HREF = "hinv039.txt">hinv</A>]
+Indigo R3000 33MHz Entry:                      0.52     0.76     0.69    0.64     0.86     0.81    [<A HREF = "hinv038.txt">hinv</A>]
+
+</PRE><P><BR>
+
+Test B: Huge Engine Model (111638 polygons). This model [<A HREF =
+"prfcmppics.html#GFX1B">screenshot</A>] is also from SGI's own
+demonstration collection. High-quality transparency has a different
+effect on this model and so is shown as a separate metric.<P>
+
+<PRE>
+                                             MW   MW/SH   MW/W   MW/T    SW   SW/SH   SW/W   SW/T
+
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:      24.60  36.66   7.45  45.63  25.20  36.66   7.83  46.72    [<A HREF = "hinv080.txt">hinv</A>]
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:     23.30  36.48   7.13  44.53  27.57  36.71   7.02  48.51    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:      22.21  34.50   7.33  41.31  22.26  34.52   7.32  41.73    [<A HREF = "hinv125.txt">hinv</A>]
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:      22.19  23.55   7.01  41.67  23.00  23.63   7.63  42.18    [<A HREF = "hinv000.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:     13.53  13.75   7.53  24.01  13.51  13.76   7.35  24.90    [<A HREF = "hinv051.txt">hinv</A>]
+Tezro R16000 1GHz 16MB L2 V12:             10.79  43.80  15.48  21.33  10.97  50.10  16.65  21.72    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:             10.77  42.46  15.25  21.28  10.97  49.98  16.65  21.65    [<A HREF = "hinv079.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:             10.78  42.87  15.35  21.20  10.97  49.85  16.64  21.60    [<A HREF = "hinv098.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:             10.77  42.27  15.16  20.97  10.96  49.81  16.64  21.38    [<A HREF = "hinv092.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                    ?    40.93  14.82    ?      ?    49.72  16.59    ?      [<A HREF = "hinv068.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:          10.77  41.08  15.38  20.87  10.96  46.15  16.64  21.06    [<A HREF = "hinv113.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                  10.75  40.00  15.42  20.71  10.96  42.80  16.63  20.89    [<A HREF = "hinv072.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 V12:           10.74  32.37  15.40  20.93  10.95  35.01  16.64  21.00    [<A HREF = "hinv048.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:           10.50  27.76   9.48  20.06  10.90  32.54  12.20  20.38    [<A HREF = "hinv110.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:            10.46  23.37   9.03  19.31  10.88  25.95  11.93  19.81
+Octane2 R12000SC/400 2MB L2 MXE:            7.62  11.68   4.03  13.90   7.94   7.94  12.48  15.30    [<A HREF = "hinv071.txt">hinv</A>]
+Octane2 R14000SC/600 2MB L2 MXE:            7.38  11.33   4.46  13.83   7.64  11.96   4.55  14.79    [<A HREF = "hinv107.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:         6.64   9.01   3.02  12.78   6.70   9.39   3.09  12.96    [<A HREF = "hinv114.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:           6.62   8.91   3.01  12.59   6.70   9.30   3.12  12.69    [<A HREF = "hinv026.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:           6.61   8.51   3.04  12.43   6.69   8.69   3.11  12.57    [<A HREF = "hinv014.txt">hinv</A>]
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:      6.57   8.85   3.04  12.53   6.65   9.15   3.11  12.57    [<A HREF = "hinv031.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:         6.50   8.36   2.93  12.58   6.70   9.34   3.10  12.95    [<A HREF = "hinv115.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:         6.49   8.48   2.93  12.62   6.70   9.35   3.09  12.94    [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:           6.46   7.98   2.93  12.26   6.67   8.59   3.10  12.48    [<A HREF = "hinv111.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:      6.55   7.31   3.04  12.18   6.59   7.22   3.11  12.18    [<A HREF = "hinv007.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:           6.19   6.34   3.05  11.18   6.20   6.34   3.11  11.21    [<A HREF = "hinv005.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 1RM4:           6.06   6.23   2.86  11.02   6.13   6.27   3.08  11.09    [<A HREF = "hinv005.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:      5.37   7.40   2.94  10.13   5.50   7.63   2.98  10.47    [<A HREF = "hinv035.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:      5.34   7.33   2.94  10.10   5.46   7.51   2.97  10.46    [<A HREF = "hinv006.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:      5.10   6.34   2.94   9.53   5.22   6.49   2.99   9.75    [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:      4.75   5.46   2.94   8.75   4.84   5.57   2.97   8.88    [<A HREF = "hinv050.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:      4.48   6.25   2.94   8.55   4.70   6.39   2.98   8.78
+POWER Series R4400SC/150 RE 4RM:            4.53   5.93   2.39   8.38   4.54   5.96   2.41   8.42    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:            4.52   5.93   2.39   8.38   4.54   5.95   2.41   8.42    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 1RM:            4.46   5.73   2.34   8.30   4.54   5.90   2.41   8.42    [<A HREF = "hinv004.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 MXI:             4.05   8.23   2.85   7.72   4.12   8.53   2.87   7.89    [<A HREF = "hinv106.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SE+Texture:     3.72   6.02   2.36   7.13   3.85   6.41   2.41   7.51    [<A HREF = "hinv117.txt">hinv</A>]
+Octane R10000SC/250 1MB L2 SE+Texture:      3.58   6.05   2.00   6.80   3.71   6.55   2.05   7.22
+Octane R12000SC/400 2MB L2 SE+Texture:      3.55   5.90   2.29   6.78   3.67   6.28   2.33   7.14
+Indigo2 R4400SC/200 2MB HighIMPACT-AA 1MB:  3.30   4.31   2.50   6.42   3.39   4.45   2.54   6.42    [<A HREF = "hinv032.txt">hinv</A>]
+Octane R10000SC/195 1MB L2 SE+Texture:      3.28   5.50   1.76   6.20   3.39   5.86   1.81   6.54
+Indigo2 R4400SC/250 2MB L2 HighIMPACT:      3.02   4.83   1.99   5.73   3.08   5.06   2.02   5.90
+POWER Series R4000SC/100 RE 2RM:            3.47   3.49   2.38   6.29   3.46   3.52   2.39   6.22
+POWER Series R4000SC/100 RE 1RM:            3.45   3.53   2.34   6.29   3.48   3.55   2.39   6.29
+O2 R7000SC 600MHz 256K/1MB L2/L3:           2.96   4.86   3.53   5.76   3.12   5.17   3.94   6.10    [<A HREF = "hinv086.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SI+Texture:     2.92   4.79   1.93   5.72   2.99   4.99   1.96   5.90    [<A HREF = "hinv118.txt">hinv</A>]
+Octane R10000/175 1MB L2 SI+Tex:            2.88   4.47   1.80   5.55   2.96   4.77   1.84   5.68
+O2 R12000 400MHz 2MB:                       2.64   4.47   3.10   5.12   2.72   4.70   3.31   5.32    [<A HREF = "hinv101.txt">hinv</A>]
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:      2.55   2.70   2.81   4.71   2.59   2.70   2.81   4.72    [<A HREF = "hinv049.txt">hinv</A>]
+O2 R12000SC 300MHz 1MB:                     2.14   3.59   2.72   4.18   2.21   3.75   2.93   4.32    [<A HREF = "hinv043.txt">hinv</A>]
+O2 R7000 350MHz 256K/1MB:                   1.96   3.43   3.02   3.80   2.00   3.57   3.30   3.91    [<A HREF = "hinv121.txt">hinv</A>]
+O2 R12000 270MHz 1MB:                       1.81   3.08   2.56   3.50   1.86   3.21   2.70   3.61    [<A HREF = "hinv100.txt">hinv</A>]
+O2 R7000SC 300MHz 256K:                     1.67                                                     [<A HREF = "hinv065.txt">hinv</A>]
+O2 R10000 250MHz 1MB:                       1.64   2.80   2.73   3.17   1.68   2.88   3.02   3.24    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R10000SC 225MHz 1MB:                     1.49   2.55   2.97   2.87   1.50   2.62   3.26   2.91    [<A HREF = "hinv123.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                      1.47   2.54   3.17   2.78   1.50   2.60   3.40   2.82    [<A HREF = "hinv090.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                     1.34   2.33   2.73   2.61   1.35   2.39   2.95   2.65    [<A HREF = "hinv070.txt">hinv</A>]
+POWER Series R3000SC/33 RE 1RM:             1.67   1.77   2.25   2.92   1.67   1.77   2.31   2.92
+O2 R5000SC 250MHz 1MB:                      1.18                                                     [<A HREF = "hinv067.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                     1.16   2.02   2.33   2.26   1.17   2.05   2.43   2.27    [<A HREF = "hinv122.txt">hinv</A>]
+O2 R10000SC 150MHz 1MB:                     1.07   1.84   2.06   2.09   1.08   1.86   2.15   2.09    [<A HREF = "hinv016.txt">hinv</A>]
+O2 R5000SC 200MHz:                          1.05   2.01   2.37   2.05   1.06   2.05   2.46   2.07
+Octane2 R12000 400MHz 2MB L2 SSE:           0.44  11.95   4.85   0.85   0.93  12.73   5.04   1.61    [<A HREF = "hinv059.txt">hinv</A>]
+O2 R5000SC 180MHz:                          0.90   1.64   2.06   1.76   0.91   1.66   2.16   1.78
+Octane R10000SC/250 2MB L2 SSI:             0.29   8.80   2.91   0.55   0.57   9.20   2.94   1.01    [<A HREF = "hinv105.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):   0.24   2.06   2.17   0.50   0.53   2.08   2.27   1.09    [<A HREF = "hinv104.txt">hinv</A>]
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:   0.26   5.35   1.80   0.41   0.47   5.66   1.83   0.85    [<A HREF = "hinv033.txt">hinv</A>]
+Indigo2 R10000 175MHz 1MB L2 SolidIMPACT:   0.20   5.27   1.79   0.35   0.43   5.56   1.81   0.80    [<A HREF = "hinv028.txt">hinv</A>]
+Indy R5000SC 180MHz 512K XZ (4GE):          0.19   0.90   0.93   0.40   0.38   0.91   0.96   0.74
+Indy R5000SC 180MHz 512K XL24:              0.26   0.65   0.44   0.35   0.67   0.88   0.55   0.69
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):  0.16   2.03   2.14   0.33   0.29   2.05   2.25   0.60    [<A HREF = "hinv002.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):  0.14   2.01   2.12   0.30   0.25   2.02   2.21   0.49    [<A HREF = "hinv018.txt">hinv</A>]
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:  0.11   4.88   1.76   0.22   0.20   5.29   1.82   0.39    [<A HREF = "hinv046.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):  0.10   1.97   2.06   0.21   0.17   1.99   2.15   0.35    [<A HREF = "hinv021.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):     0.17   0.90   0.92   0.30   0.28   0.91   0.96   0.55
+Indy R5000PC 150MHz XZ (4GE):               0.15   0.88   0.92   0.31   0.26   0.89   0.95   0.54    [<A HREF = "hinv022.txt">hinv</A>]
+Indy R5000PC 150MHz XL24:                   0.23   0.50   0.39   0.29   0.38   0.69   0.49   0.57
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):     0.14   0.90   0.94   0.28   0.25   0.91   0.96   0.49
+Indigo2 R4400SC/250 2MB XL24:               0.22   0.61   0.41   0.29   0.33   0.74   0.57   0.55
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):       0.14   0.64   0.71   0.28   0.25   0.65   0.70   0.49
+Indy R4400SC 200MHz 1MB XZ (4GE):           0.13   0.90   0.93   0.26   0.22   0.91   0.95   0.44
+Indy R4600SC 133MHz 512K L2 XZ (4GE):       0.10   0.90   0.93   0.19   0.15   0.91   0.96   0.31    [<A HREF = "hinv109.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):       0.10   0.63   0.69   0.22   0.18   0.63   0.70   0.38    [<A HREF = "hinv015.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):               0.07   0.86   0.90   0.15   0.11   0.87   0.92   0.25    [<A HREF = "hinv029.txt">hinv</A>]
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):   0.06   0.87   0.91   0.12   0.10   0.89   0.94   0.18    [<A HREF = "hinv027.txt">hinv</A>]
+Indy R4400SC/200 XL24:                      0.17   0.44   0.33   0.12   0.25   0.51   0.40   0.42
+Indy R4600SC/133 512K L2 XL8:               0.12   0.34   0.33   0.18   0.17   0.42   0.41   0.34
+Indy R4600PC/133 XL24:                      0.08   0.26   0.26   0.06   0.11   0.34   0.35   0.11
+Indy R4600PC/100 XL24:                      0.07   0.20   0.20   0.05   0.10   0.25   0.26   0.09
+Indigo R3000 33MHz GR2-Elan (4GE):          0.02   0.86   0.90   0.02   0.04   0.87   0.93   0.03    [<A HREF = "hinv107.txt">hinv</A>]
+Indigo R3000 33MHz GR2-XZ (2GE):            0.02   0.52   0.58   0.02   0.03   0.52   0.58   0.02    [<A HREF = "hinv106.txt">hinv</A>]
+</PRE><P><BR>
+
+Test C: chromeskins (7156 polygons). ChromeSkins [<A HREF =
+"prfcmppics.html#GFX1C">screenshot</A>] is a reflective model of the
+O2 chassis. O2 users will find the full demo in
+/usr/demos/General_Demos/chromeskins. This test is strongly affected
+by the available pixel fill rate, so mult-RM Onyx systems scale well.<P>
+
+<PRE>
+                                             MW     MW/SH   MW/W     SW      SW/SH   SW/W
+
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:     245.88  397.50  220.39  350.00   447.00  220.17    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:      231.27  390.50  220.82  349.62   447.59  221.00    [<A HREF = "hinv080.txt">hinv</A>]
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:      321.26  323.04  216.53  322.11   322.72  217.58    [<A HREF = "hinv000.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:      164.17  237.88  179.64  287.57   368.50  179.64    [<A HREF = "hinv125.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:     111.48  199.78  140.61  240.04   240.26  166.67    [<A HREF = "hinv051.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:           96.54  196.09  129.55  138.36   457.37  215.55    [<A HREF = "hinv113.txt">hinv</A>]
+Tezro R16000 1GHz 16MB L2 V12:              94.91  194.50  128.31  138.43   464.27  213.89    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:              94.86  194.11  127.81  138.09   463.50  213.89    [<A HREF = "hinv079.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:              95.46  194.11  128.94  138.00   462.50  212.00    [<A HREF = "hinv098.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 V12:            93.37  187.20  126.05  137.54   448.82  212.00    [<A HREF = "hinv048.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:              95.46  192.75  128.47  138.01   458.00  213.96    [<A HREF = "hinv092.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                   92.13  183.66  123.81  124.00   442.26  210.92    [<A HREF = "hinv072.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                   91.55  174.20  107.60  136.05   440.30  215.21    [<A HREF = "hinv068.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:            86.06  135.23   79.81  133.14   328.85  140.88    [<A HREF = "hinv110.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:             81.35  126.79   72.79  131.56   298.29  128.06    [<A HREF = "hinv060.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:         95.51   97.66   63.94  118.82   146.35   80.48    [<A HREF = "hinv114.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:           94.38   95.95   61.96  116.82   139.65   79.26    [<A HREF = "hinv026.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:           94.09   92.01   62.72  113.85   120.09   80.48    [<A HREF = "hinv014.txt">hinv</A>]
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:      88.92   89.14   60.34  112.89   128.12   80.03    [<A HREF = "hinv031.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:      92.02   92.51   60.29   98.59    98.65   78.31    [<A HREF = "hinv007.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:           87.21   87.59   69.56   87.89    87.61   77.55    [<A HREF = "hinv005.txt">hinv</A>]
+Octane2 R14000SC/600 2MB L2 MXE:            61.31   80.80   63.71   96.36   142.46   80.70    [<A HREF = "hinv107.txt">hinv</A>]
+POWER Series R4400SC/150 RE 4RM:            74.98   81.38   57.83   76.19    83.27   60.75    [<A HREF = "hinv004.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 SSE:            1.47   80.35   68.65    5.32   146.30   91.90    [<A HREF = "hinv059.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:            60.89   78.28   56.73   97.89   141.05   70.14    [<A HREF = "hinv071.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SSE:              1.33   79.63   64.10    4.15   140.81   86.89    [<A HREF = "hinv062.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:            70.85   76.60   52.59   76.05    83.59   59.79    [<A HREF = "hinv004.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:         60.32   60.17   48.67  117.32   139.27   75.62    [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:         61.01   60.17   48.68  115.21   136.23   75.16    [<A HREF = "hinv115.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:           60.00   60.13   48.62  109.17   118.76   73.65    [<A HREF = "hinv111.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 1RM4:           59.40   58.70   45.64   92.73    94.30   70.04    [<A HREF = "hinv005.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:      52.92   70.79   52.96   72.75   101.75   62.63    [<A HREF = "hinv006.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:      50.30   67.51   51.02   71.92   101.52   61.10    [<A HREF = "hinv035.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:      48.65   62.54   50.18   68.33    90.24   59.70    [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:      47.55   62.75   50.15   66.14    87.62   59.22
+POWER Series R4400SC/150 RE 1RM:            60.86   59.53   43.39   75.45    80.80   57.66    [<A HREF = "hinv004.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:      47.03   55.72   49.02   64.48    75.45   57.83    [<A HREF = "hinv050.txt">hinv</A>]
+POWER Series R4000SC/100 RE 2RM:            49.09   49.12   50.74   49.37    49.22   56.33
+Octane R10000SC/250 2MB L2 MXI:             38.89   68.33   42.67   48.35   105.04   48.85    [<A HREF = "hinv106.txt">hinv</A>]
+POWER Series R4000SC/100 RE 1RM:            48.10   48.31   41.33   48.31    48.12   52.82
+O2 R7000SC 600MHz 256K/1MB L2/L3:           25.46   38.68   39.91   51.41    80.43   69.86    [<A HREF = "hinv086.txt">hinv</A>]
+O2 R12000 400MHz 2MB:                       25.85   39.43   39.23   48.15    76.01   64.32    [<A HREF = "hinv101.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 SSI:              0.94   70.54   44.28    3.38   109.26   51.17    [<A HREF = "hinv105.txt">hinv</A>]
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:      30.32   32.44   42.10   35.50    37.05   48.50    [<A HREF = "hinv049.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SE:               1.30   44.20   35.91    4.21    83.13   50.95    [<A HREF = "hinv061.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SE+Texture:     30.36   42.20   35.66   48.17    76.22   45.90    [<A HREF = "hinv117.txt">hinv</A>]
+Octane R10000SC/250 1MB L2 SE+Texture:      29.64   39.45   29.12   48.71    73.29   36.02
+Octane R12000SC/400 2MB L2 SE+Texture:      28.40   39.63   32.78   44.55    72.62   42.40
+Octane R10000SC/195 1MB L2 SE+Texture:      28.41   37.62   25.76   45.08    67.52   31.31
+Indigo2 R4400SC/200 2MB HighIMPACT-AA 1MB:  27.99   36.48   34.36   43.59    58.52   45.73    [<A HREF = "hinv032.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB HighIMPACT 1MB:     27.53   36.50   32.00   43.44    62.20   41.42
+Octane2 R14000SC/550 2MB L2 SI+Texture:     27.37   38.95   31.62   40.02    63.75   39.23    [<A HREF = "hinv118.txt">hinv</A>]
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:    0.62   38.46   32.15    2.32    67.53   40.55    [<A HREF = "hinv033.txt">hinv</A>]
+Octane R10000/175 1MB L2 SI+Tex:            27.90   37.60   29.40   41.29    60.20   36.90
+O2 R7000 350MHz 256K/1MB:                   22.78   34.73   37.51   37.75    59.76   59.14    [<A HREF = "hinv121.txt">hinv</A>]
+O2 R12000SC 300MHz 1MB:                     22.60   33.81   34.85   39.51    61.02   54.51    [<A HREF = "hinv043.txt">hinv</A>]
+O2 R12000 270MHz 1MB:                       21.08   31.91   33.27   34.37    54.00   50.02    [<A HREF = "hinv100.txt">hinv</A>]
+O2 R10000 250MHz 1MB:                       20.68   31.04   33.54   31.98    49.95   51.72    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R10000SC 225MHz 1MB:                     20.22   30.18   34.33   30.06    46.64   52.41    [<A HREF = "hinv123.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                      19.43   29.01   34.74   29.44    45.76   54.78    [<A HREF = "hinv090.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                     18.56   27.91   31.86   27.33    42.87   47.99    [<A HREF = "hinv070.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                     17.71   26.79   30.39   24.77    38.57   43.04    [<A HREF = "hinv122.txt">hinv</A>]
+POWER Series R3000SC/33 RE 1RM:             23.58   23.38   33.38   23.59    23.38   36.37
+O2 R5000SC 200MHz 1MB:                      17.50   25.28   30.22   22.44    36.60   42.50
+O2 R10000SC 150MHz 1MB:                     16.12   23.67   27.49   22.27    33.12   38.08    [<A HREF = "hinv016.txt">hinv</A>]
+O2 R5000SC 180MHz 512K:                     14.46   21.78   27.16   18.50    29.17   36.40
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:   0.40   29.19   27.07    1.33    57.58   37.93    [<A HREF = "hinv046.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):    1.19   23.61   26.76    3.73    29.20   33.69    [<A HREF = "hinv104.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):   0.66   23.25   26.10    2.01    28.63   32.76    [<A HREF = "hinv002.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):   0.59   22.50   25.60    1.71    27.74   31.76    [<A HREF = "hinv018.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):   0.42   22.02   24.86    1.33    26.72   30.95    [<A HREF = "hinv021.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):      0.53   11.76   12.89    1.75    14.56   15.77
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):      0.54   11.82   13.08    1.65    14.47   15.72
+Indy R4400SC 200MHz 1MB XZ (4GE):            0.55   11.66   13.04    1.69    14.40   15.58
+Indy R4600SC 133MHz 512K L2 XZ (4GE):        0.46   11.58   12.66    1.31    14.25   15.35    [<A HREF = "hinv109.txt">hinv</A>]
+Indy R5000PC 150MHz XZ (4GE):                0.74   11.53   12.65    1.89    13.90   15.06    [<A HREF = "hinv108.txt">hinv</A>]
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):    0.24   11.36   12.55    0.83    13.82   14.91    [<A HREF = "hinv027.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):                0.28   10.94   12.04    1.14    13.20   14.29    [<A HREF = "hinv029.txt">hinv</A>]
+Indigo R3000 33MHz GR2-Elan (4GE):           0.08   10.00   11.64    0.23    11.82   13.63    [<A HREF = "hinv041.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB XL24:                1.21    7.50    7.88    3.20    13.62   11.60
+Indy R5000SC 180MHz 512K XZ (4GE):           2.14    5.71    6.03    3.62     5.93    6.33    ????
+Indy R5000SC 180MHz 512K XL24:               1.22    6.13    6.77    3.56    12.61   10.57
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):        0.55    8.75   10.09    1.69     9.90   11.40
+Indy R4400SC/200 1MB XL24:                   1.02    5.89    5.95    2.78    10.07    9.12
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):        0.42    8.54    9.77    1.34     9.66   11.11    [<A HREF = "hinv015.txt">hinv</A>]
+Indy R5000PC 150MHz XL24:                    1.02    5.21    5.62    2.91     9.51    8.46
+Indigo R3000 33MHz GR2-XZ (2GE):             0.11    7.13    8.34    0.33     7.75    8.82    [<A HREF = "hinv106.txt">hinv</A>]
+Indy R4600SC/133 512K L2 XL8:                0.72    4.15    4.72    1.91     7.11    7.22
+Indy R4600PC/133 XL24:                       0.63    3.32    3.94    1.45     5.39    5.89
+Indigo R3000 33MHz XS24Z (1GE):              0.12    4.50    5.11    0.31     4.70    5.34    [<A HREF = "hinv039.txt">hinv</A>]
+Indy R4600PC/100 XL24:                       0.52    2.96    3.22    1.18     4.55    4.75
+Indigo R3000 33MHz Entry:                    0.29    1.68    1.98    0.46     2.11    2.36    [<A HREF = "hinv038.txt">hinv</A>]
+</PRE><P><BR>
+
+Test D: angus.iv (3459 polygons). Angus [<A HREF =
+"prfcmppics.html#GFX1D">screenshot</A>] is a non-textured model of an
+unmanned underwater vehicle. For this test, I rotate the model so that
+it is in a normal upright position, then spin it horizontally.<P>
+
+<PRE>
+                                             MW     MW/W    MW/HL     SW     SW/W     SW/HL
+
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:      282.30  198.85  276.48   282.26  276.26   452.95    [<A HREF = "hinv080.txt">hinv</A>]
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:      281.95  276.35  434.85   282.75  255.10   419.11    [<A HREF = "hinv000.txt">hinv</A>]
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:     281.50  203.59  279.51   281.00  277.50   450.55    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:      228.87  152.04  223.22   229.66  226.00   374.25    [<A HREF = "hinv125.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:          157.84  122.61  181.41   258.77  276.31   397.90    [<A HREF = "hinv113.txt">hinv</A>]
+Tezro R16000 1GHz 16MB L2 V12:             154.11  121.50  176.91   259.74  275.50   393.80    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:             154.85  120.38  176.12   258.37  273.23   393.61    [<A HREF = "hinv079.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:             154.44  119.26  176.00   257.74  277.05   394.28    [<A HREF = "hinv098.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:             154.33  119.23  175.32   257.18  272.91   393.36    [<A HREF = "hinv092.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 V12:           146.33  109.41  170.11   246.25  268.87   373.20    [<A HREF = "hinv048.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                  145.00  108.30  159.99   251.59  260.04   365.66    [<A HREF = "hinv072.txt">hinv</A>]
+Onyx2 IR R10K/195 4MB L2 1RM:              155.00     ?       ?     228.00     ?        ?      [<A HREF = "hinv003.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:     150.31  109.79  136.02   208.99  201.65   281.55    [<A HREF = "hinv051.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:           111.63   68.75   95.47   217.43  132.67   187.34    [<A HREF = "hinv110.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:            101.41   67.26   93.49   200.94  128.86   174.70    [<A HREF = "hinv060.txt">hinv</A>]
+Octane2 R14000SC/600 2MB L2 MXE:            85.30   65.91   93.96   138.11  111.76   169.08    [<A HREF = "hinv107.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:            80.26   62.02   87.62   128.71  105.21   158.76    [<A HREF = "hinv071.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SSE:             71.85   62.04   83.04   125.38  103.41   157.23    [<A HREF = "hinv062.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 MXI:             69.37   59.49   84.78    96.77   91.98   134.93    [<A HREF = "hinv106.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 SSI:             69.10   59.01   84.51    96.68   90.44   137.31    [<A HREF = "hinv105.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:      65.89   53.67   77.11    97.28   81.23   125.48    [<A HREF = "hinv035.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:      62.85   56.02   77.00    94.33   80.90   120.59    [<A HREF = "hinv006.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:      67.11   52.77   76.39    92.92   78.42   120.72    [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:      65.87   51.62   74.55    91.95   77.35   115.55    [<A HREF = "hinv050.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:      58.55   52.73   71.36    88.34   76.30   112.28
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:      58.95   48.19   68.97    80.10   68.75   102.96    [<A HREF = "hinv049.txt">hinv</A>]
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:      59.18   59.88   65.89    60.76   67.07    92.02    [<A HREF = "hinv031.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:      59.19   59.47   49.91    60.70   60.78    66.35    [<A HREF = "hinv007.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:           58.97   57.65   79.10    59.72   70.35    96.52    [<A HREF = "hinv005.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:         60.70   48.93   68.05    61.94   66.30    91.13    [<A HREF = "hinv114.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:           59.58   49.07   63.57    61.07   67.20    92.41    [<A HREF = "hinv026.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:           59.97   48.51   65.54    60.92   66.62    91.52    [<A HREF = "hinv014.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:           50.97   37.16   50.68    60.91   58.60    88.27    [<A HREF = "hinv111.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:         50.36   37.39   50.38    60.62   58.51    83.29    [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:         50.15   37.35   51.06    61.57   58.74    83.00    [<A HREF = "hinv115.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 1RM4:           44.75   36.19   46.37    59.51   59.98    83.25    [<A HREF = "hinv005.txt">hinv</A>]
+POWER Series R4400SC/150 RE 4RM:            43.36   48.33   68.18    43.63   53.78    75.81    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:            43.05   44.23   61.12    43.69   52.37    73.81    [<A HREF = "hinv004.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SE+Texture:     43.65   35.81   49.42    73.74   61.46    93.27    [<A HREF = "hinv117.txt">hinv</A>]
+POWER Series R4000SC/100 RE 2RM:            41.17   42.05   59.46    42.34   50.72    71.63
+Octane R12000SC/400 2MB L2 SE+Texture:      40.79   33.70   47.91    72.60   60.71    89.18
+Octane R10000SC/250 1MB L2 SE+Texture:      40.88   33.80   47.46    68.50   58.63    85.24
+Octane2 R14000SC/550 2MB L2 SI+Texture:     40.56   34.18   48.82    63.23   55.65    83.55    [<A HREF = "hinv118.txt">hinv</A>]
+POWER Series R4000SC/100 RE 1RM:            40.53   36.56   47.48    42.15   47.01    66.50
+Octane R12000SC/300 2MB L2 SE:              36.79   33.72   45.20    69.07   60.16    86.79    [<A HREF = "hinv061.txt">hinv</A>]
+Octane R10000SC/195 1MB L2 SE+Texture:      35.86   33.83   46.60    63.56   58.12    77.86
+POWER Series R4400SC/150 RE 1RM:            38.63   33.81   40.98    43.69   49.61    68.98    [<A HREF = "hinv004.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB HighIMPACT 1MB:     37.70   31.41   46.50    58.95   52.04    78.20
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:   38.31   30.40   43.66    59.97   48.08    75.11    [<A HREF = "hinv033.txt">hinv</A>]
+Octane R10000/175 1MB L2 SI+Tex:            34.14   32.35   51.49    57.35   50.50    73.67
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:  37.51   30.04   42.90    58.02   47.15    72.40    [<A HREF = "hinv046.txt">hinv</A>]
+POWER Series R3000SC/33 RE 1RM:             34.32   33.70   45.02    35.38   39.86    55.30
+O2 R7000SC 600MHz 256K/1MB L2/L3:           32.84   30.38   41.96    74.01   61.12    89.63    [<A HREF = "hinv086.txt">hinv</A>]
+O2 R12000 400MHz 2MB:                       32.56   31.59   44.38    70.57   60.70    89.22    [<A HREF = "hinv101.txt">hinv</A>]
+O2 R7000 350MHz 256K/1MB:                   30.24   30.71   42.49    56.56   57.27    82.77    [<A HREF = "hinv121.txt">hinv</A>]
+O2 R12000SC 300MHz 1MB:                     29.74   28.44   39.45    55.24   55.10    80.84    [<A HREF = "hinv043.txt">hinv</A>]
+O2 R12000 270MHz 1MB:                       28.16   27.81   38.98    52.32   50.90    76.05    [<A HREF = "hinv100.txt">hinv</A>]
+O2 R10000SC 225MHz 1MB:                     26.78   28.90   40.39    45.67   54.78    76.73    [<A HREF = "hinv123.txt">hinv</A>]
+O2 R10000 250MHz 1MB:                       27.28   27.80   38.80    48.23   52.39    75.75    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                      26.26   28.57   39.28    44.92   55.57    77.53    [<A HREF = "hinv090.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                     24.84   28.02   38.22    41.40   51.74    72.15    [<A HREF = "hinv070.txt">hinv</A>]
+O2 R5000SC 200MHz 1MB:                      21.05   28.90   38.27    32.40   50.30    66.98
+O2 R10000SC 175MHz 1MB:                     23.56   27.17   37.01    35.44   47.64    65.08    [<A HREF = "hinv122.txt">hinv</A>]
+O2 R10000SC 150MHz 1MB:                     21.58   25.14   34.45    31.13   44.75    60.20    [<A HREF = "hinv016.txt">hinv</A>]
+O2 R5000SC 180MHz 512K:                     17.68   26.80   35.60    26.23   45.25    57.00    [<A HREF = "hinv017.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):   17.71   22.57   30.71    19.87   41.02    50.30    [<A HREF = "hinv104.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):  17.44   21.47   26.80    19.60   35.01    44.20    [<A HREF = "hinv002.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):  16.93   21.01   26.92    19.01   34.14    43.32    [<A HREF = "hinv018.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):  16.81   20.50   25.96    18.21   33.02    41.41    [<A HREF = "hinv021.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):      9.16   11.85   14.93    10.42   19.83    25.27
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):      9.12   11.89   14.70    10.22   19.62    25.13
+Indy R5000SC 180MHz 512K XZ (4GE):           9.06   11.75   14.71    10.27   19.58    25.02
+Indy R4400SC 200MHz 1MB XZ (4GE):            8.95   11.76   14.61    10.19   19.38    24.76
+Indy R5000PC 150MHz XZ (4GE):                8.72   11.54   14.42     9.74   18.81    23.78    [<A HREF = "hinv108.txt">hinv</A>]
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):    8.39   11.27   13.80     9.35   18.05    22.58    [<A HREF = "hinv027.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):                7.85   10.81   13.35     8.69   28.19    28.01    [<A HREF = "hinv029.txt">hinv</A>]
+Indy R4600SC 133MHz 512K L2 XZ (4GE):        7.62   10.80   13.70     8.42     ?      23.16  ? [<A HREF = "hinv109.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):        7.00   10.64   13.46     7.63   17.33    21.48
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):        6.81   10.70   13.18     7.45   16.70    20.83    [<A HREF = "hinv015.txt">hinv</A>]
+Indigo R3000 33MHz GR2-Elan (4GE):           7.26    9.33   11.51     8.04   14.14    17.85    [<A HREF = "hinv041.txt">hinv</A>]
+Indigo R3000 33MHz GR2-XZ (2GE):             5.40    8.96   10.68     5.72   12.57    15.03    [<A HREF = "hinv106.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB XL24:                5.86    6.79    6.95     9.58   10.79    12.80
+Indy R5000SC 180MHz 512K XL24:               5.48    5.86    6.55    10.51   10.95    12.50    [<A HREF = "hinv055.txt">hinv</A>]
+Indigo R4400SC/150 1MB GR2-XS24Z (1GE):      3.17    7.67    9.16     3.27   10.27    11.72    [<A HREF = "hinv053.txt">hinv</A>]
+Indigo R4000SC/100 1MB GR2-XS24Z (1GE):      3.09    7.44    8.70     3.19    9.68    10.82    [<A HREF = "hinv054.txt">hinv</A>]
+Indigo R3000 33MHz XS24Z (1GE):              2.93    6.77    8.03     3.00    8.62     9.93    [<A HREF = "hinv039.txt">hinv</A>]
+Indy R4400SC/200 XL24:                       4.60    4.91    5.56     7.55    8.59     9.83
+Indy R5000PC 150MHz XL24:                    4.47    4.42    5.02     7.92    8.22     9.58
+Indy R4600SC/133 512K L2 XL8:                3.57    3.56    4.41     5.59    7.26     8.25
+Indy R4600PC/133 XL24:                       2.38    3.18    3.43     3.90    5.74     6.27
+Indy R4600PC/100 XL24:                       2.24    2.64    3.00     3.57    4.76     5.59
+Indigo R3000 33MHz Entry:                    1.40    1.81    1.98     1.73    2.52     2.80    [<A HREF = "hinv038.txt">hinv</A>]
+</PRE><P><BR>
+
+Test E: e.iv (1568 polygons, complexity value 0.7). e.iv [<A HREF =
+"prfcmppics.html#GFX1E">screenshot</A>] is a simple model of Earth
+using a single small Earth texture on an Inventor sphere node. This
+test is strongly affected by the available pixel fill rate, so mult-RM
+Onyx systems scale well.<P>
+
+<PRE>
+                                             MW      MW/SH   MW/W    MW/HL     SW     SW/SH     SW/W    SW/HL
+
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:      717.55   876.27  687.30  919.70  1320.02  3153.05   621.07  1142.86    [<A HREF = "hinv000.txt">hinv</A>]
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:     409.00   537.31  473.34  572.00  1400.50  1751.00   736.50  1243.00    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:      386.22   520.02  461.58  555.67  1233.78  1667.75   718.49  1215.56    [<A HREF = "hinv080.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:          259.49   272.65  277.06  362.64   939.84  1122.05   806.55  1108.80    [<A HREF = "hinv113.txt">hinv</A>]
+Tezro R16000 1GHz 16MB L2 V12:             255.50   271.00  275.86  363.27   942.50  1084.00   800.10  1106.00    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:             255.12   267.73  273.36  360.82   932.00  1110.00   796.77  1101.45    [<A HREF = "hinv079.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:             254.64   267.66  272.85  359.74   926.98  1109.94   794.54  1095.34    [<A HREF = "hinv092.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:      231.15   276.72  267.59  382.47   933.00  1207.58   608.59  1068.86    [<A HREF = "hinv125.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:             254.04   264.87  267.37  353.12   912.00  1084.00   793.50  1084.00    [<A HREF = "hinv098.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 V12:           248.22   260.11  263.60  346.97   910.39  1075.10   778.11  1076.10    [<A HREF = "hinv048.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                  239.06   247.72  250.12           905.18  1072.99   767.58             [<A HREF = "hinv068.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                  242.80   253.60  257.78  340.89   878.78  1040.50   762.43  1045.58    [<A HREF = "hinv072.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:     174.08   256.98  245.84  291.92   597.16   888.19   504.98   700.65    [<A HREF = "hinv051.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:           181.52   187.14  138.87  194.67   574.48   630.34   382.46   513.61    [<A HREF = "hinv110.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:            180.12   185.25  137.66  192.62   558.95   599.47   369.02   494.81    [<A HREF = "hinv060.txt">hinv</A>]
+Octane2 R14000SC/600 2MB L2 MXE:           114.55   125.33  144.78  175.56   379.27   457.23   301.35   418.10    [<A HREF = "hinv107.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:          207.14   207.07  133.80  199.33   349.78   362.99   178.78   270.10    [<A HREF = "hinv005.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:           108.12   119.07  137.07  166.30   330.50   408.42   286.13   389.48    [<A HREF = "hinv071.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 MXI:            105.81   125.34  137.49  169.69   292.37   428.34   223.44   328.92    [<A HREF = "hinv106.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SSE:              2.32   119.20  132.23  164.71     7.52   403.59   254.69   385.05    [<A HREF = "hinv062.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 SSI:              1.89   125.62  137.74  170.01     6.07   428.24   222.92   328.53    [<A HREF = "hinv105.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:        138.00   137.86  117.00  160.00   408.09   416.50   170.16   258.87    [<A HREF = "hinv114.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:          136.82   136.79  115.56  158.58   357.21   381.31   169.61   253.58    [<A HREF = "hinv026.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:          137.25   136.59  115.52  158.09   356.63   377.02   169.79   258.14    [<A HREF = "hinv014.txt">hinv</A>]
+POWER Series R4400SC/150 1MB L2 RE 4RM:    197.68   201.27  119.35  178.04   262.68   278.63   133.88   206.04    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:     137.12   136.74  115.60  158.96   356.12   377.29   170.03   257.38    [<A HREF = "hinv031.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:     137.06   137.14  115.56  158.92   330.38   351.13   169.33   257.16    [<A HREF = "hinv007.txt">hinv</A>]
+POWER Series R4400SC/150 1MB L2 RE 2RM:    137.85   137.76  114.46  158.56   268.03   274.64   134.50   202.56    [<A HREF = "hinv004.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:     103.12   115.85  118.56  150.74   300.20   352.21   190.19   272.28    [<A HREF = "hinv006.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:     100.49   114.62  119.01  150.70   312.38   369.50   186.79   278.54    [<A HREF = "hinv035.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:      97.47   108.74  113.00  143.48   269.07   315.78   171.27   251.24
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:      95.78   108.17  111.59  141.90   257.84   305.81   168.75   246.67    [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:      95.02   106.55  110.31  140.79   251.34   294.38   166.29   242.76    [<A HREF = "hinv050.txt">hinv</A>]
+POWER Series R4000SC/100 1MB L2 RE 2RM:    137.62   138.01  105.51  154.01   211.80   222.36   117.99   181.17
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:      85.59    95.25   98.24  124.14   180.67   213.43   138.41   195.86    [<A HREF = "hinv049.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:         78.50    78.23   82.06  103.91   278.29   277.75   156.71   229.48    [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:         78.27    78.42   82.34  104.27   277.00   277.58   156.76   229.00    [<A HREF = "hinv115.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:           78.46    78.21   81.99  104.12   277.50   276.98   156.65   229.20    [<A HREF = "hinv111.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 1RM4:           76.04    75.82   79.82  101.95   264.22   268.01   154.56   201.48    [<A HREF = "hinv005.txt">hinv</A>]
+POWER Series R4000SC/100 1MB L2 RE 1RM:     77.83    77.68   78.42  103.69   179.33   192.48   114.48   171.79
+Octane2 R14000SC/550 2MB L2 SE+Texture:     56.97    64.40   75.25   92.15   193.94   224.58   143.93   207.37    [<A HREF = "hinv117.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SI+Texture:     56.94    64.32   72.46   90.11   196.02   239.87   127.04   188.42    [<A HREF = "hinv118.txt">hinv</A>]
+POWER Series R4400SC/150 1MB L2 RE 1RM:     54.94    54.91   71.36   75.51   213.78   228.28   127.76   189.89
+Octane R12000SC/400 2MB L2 SE+Texture:      53.85    59.78   69.72   86.01   190.46   225.90   147.98   206.40
+Octane R10000SC/250 1MB L2 SE+Texture:      52.91    59.88   70.22   85.57   179.50   227.18   149.04   204.95
+Octane R10000SC/195 1MB L2 SE+Texture:      52.18    59.75   69.68   85.55   168.07   225.02   147.62   197.90
+Octane R12000SC/300 2MB L2 SE:               2.28    60.17   70.91   86.71     7.50   211.53   135.23   199.94    [<A HREF = "hinv061.txt">hinv</A>]
+Octane R10000/175 1MB L2 SI+Tex:            52.97    60.16   68.68   83.55   171.91   222.86   124.66   178.46
+Indigo2 R4400SC/250 2MB HighIMPACT 1MB:     54.53    57.75   65.60   81.46   174.04   191.81   117.60   168.80
+POWER Series R3000SC/33 RE 1RM:             52.98    78.01   71.75   93.08   100.38   121.15    81.10   117.94
+O2 R7000SC 600MHz 256K/1MB L2/L3:           37.83    58.61   66.77   83.62   124.11   197.34   159.08   213.72    [<A HREF = "hinv086.txt">hinv</A>]
+O2 R12000 400MHz 2MB:                       38.20    59.61   66.64   83.90   121.94   196.72   153.52   205.67    [<A HREF = "hinv101.txt">hinv</A>]
+O2 R7000 350MHz 256K/1MB:                   37.52    57.56   65.16   81.48   115.78   178.64   148.20   197.75    [<A HREF = "hinv121.txt">hinv</A>]
+O2 R12000SC 300MHz 1MB:                     35.80    54.23   60.42   76.75   111.19   169.84   135.02   182.16    [<A HREF = "hinv043.txt">hinv</A>]
+O2 R10000SC 225MHz 1MB:                     36.81    56.46   62.14   77.75   103.12   150.11   127.34   178.50    [<A HREF = "hinv123.txt">hinv</A>]
+O2 R12000 270MHz 1MB:                       35.48    54.09   59.44   76.24   110.61   162.18   128.55   172.65    [<A HREF = "hinv100.txt">hinv</A>]  (6.5.30m)
+O2 R12000SC 270MHz 1MB:                     36.10    54.03   59.44   76.45   110.25   162.05   128.99   178.30    [<A HREF = "hinv044.txt">hinv</A>]  (6.5.6m)
+O2 R10000 250MHz 1MB:                       35.03    52.71   58.67   73.97   103.29   152.01   124.09   170.94    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                      35.08    52.39   58.57   74.68    99.00   147.69   133.44   180.65    [<A HREF = "hinv090.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                     35.81    53.63   59.29   74.77    90.80   129.77   122.16   160.92    [<A HREF = "hinv122.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                     34.93    52.33   58.44   72.69    96.27   142.33   122.40   169.66    [<A HREF = "hinv070.txt">hinv</A>]
+O2 R5000SC 200MHz 1MB:                      35.65    51.77   57.48   72.70    88.10   125.31   123.23   160.84
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:    1.21    59.08   64.26   81.33     4.19   205.94   106.42   159.69    [<A HREF = "hinv033.txt">hinv</A>]
+O2 R10000SC 150MHz 1MB:                     35.22    52.98   58.58   74.01    83.88   116.95   115.68   149.48    [<A HREF = "hinv016.txt">hinv</A>]
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:   0.72    57.52   62.37   79.01     2.35   178.29    99.30   148.70    [<A HREF = "hinv046.txt">hinv</A>]
+O2 R5000SC 180MHz 512K:                     33.16    48.68   54.22   69.01    75.50   105.63   110.72   142.44    [<A HREF = "hinv017.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):    0.33    61.75   61.25   65.64     1.40   152.60   123.83   156.96    [<A HREF = "hinv104.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):   0.32    58.26   57.68   61.68     1.36   140.61   114.02   140.49    [<A HREF = "hinv002.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):   0.31    56.28   55.86   60.26     1.32   130.60   108.88   132.63    [<A HREF = "hinv018.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):   0.29    55.00   55.25   58.21     1.22   124.75   103.50   127.75    [<A HREF = "hinv021.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):      0.35    31.45   32.95   33.75     1.47    70.64    66.83    77.84
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):      0.34    32.10   33.55   34.39     1.44    70.00    68.23    78.34
+Indy R5000SC 180MHz 512K XZ (4GE):           0.36    30.70   32.63   33.44     1.52    68.72    65.06    75.46
+Indy R4400SC 200MHz 1MB XZ (4GE):            0.34    30.85   32.46   33.38     1.41    69.21    65.64    75.37
+Indy R4600SC 133MHz 512K L2 XZ (4GE):        0.28    31.18   32.57   33.54     1.17    65.52    62.31    72.75    [<A HREF = "hinv109.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):        0.41    30.44   32.13   33.08     1.69    49.33    51.16    58.50
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):    0.25    30.84   31.80   32.90     0.98    63.01    60.80    69.59    [<A HREF = "hinv027.txt">hinv</A>]
+Indy R5000PC 150MHz XZ (4GE):                0.34    30.76   32.12   33.01     1.44    63.85    62.35    71.27    [<A HREF = "hinv108.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):        0.37    28.92   30.60   31.63     1.54    48.08    49.30    56.30    [<A HREF = "hinv015.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):                0.26    28.73   30.03   30.95     1.01    58.08    55.48    64.07    [<A HREF = "hinv029.txt">hinv</A>]
+Indigo R3000 33MHz GR2-Elan (4GE):           0.13    26.89   27.94   29.27     0.40    50.38    48.27    57.29    [<A HREF = "hinv041.txt">hinv</A>]
+Indigo R3000 33MHz GR2-XZ (2GE):             0.14    25.68   27.03   28.24     0.44    34.50    35.73    41.70    [<A HREF = "hinv106.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB XL24:                1.21    12.83   16.28   15.13     3.96    25.55    25.25    27.33
+Indy R5000SC 180MHz 512K XL24:               1.20    10.11   13.66   12.73     3.99    26.56    24.34    27.50
+Indigo R4000SC/100 1MB GR2-XS24Z (1GE):      0.36    19.35   20.61   22.66     1.14    22.77    24.33    27.96    [<A HREF = "hinv054.txt">hinv</A>]
+Indigo R3000 33MHz XS24Z (1GE):              0.14    18.01   19.22   21.02     0.44    20.71    22.02    25.51    [<A HREF = "hinv039.txt">hinv</A>]
+Indy R4400SC/200 1MB XL24:                   1.00    10.03   12.19   11.54     3.12    20.50    20.44    22.10
+Indy R5000PC 150MHz XL24:                    0.98     8.22   11.10    9.86     3.12    18.78    17.82    18.95
+Indy R4600SC/133 512K L2 XL8:                0.62     7.82    9.75    9.26     1.81    16.45    16.32    18.04
+Indy R4600PC/133 XL24:                       0.52     5.79    7.89    7.34     1.57    11.88    12.94    13.75
+Indy R4600PC/100 XL24:                       0.40     5.15    6.47    6.37     1.30    10.59    10.78    11.95
+Indigo R3000 33MHz Entry:                    0.30     3.56    4.50    4.32     0.63     5.06     5.54     5.85    [<A HREF = "hinv038.txt">hinv</A>]
+</PRE><P><BR>
+
+Test F: stars3.iv (0 polygons, 16666 points). This model [<A HREF =
+"prfcmppics.html#GFX1F">screenshot</A>] is a point data set made to
+resemble a simple galaxy. The model file actually contains several
+sub-models and as such is deliberately inefficient.<P>
+
+<PRE>
+                                            MW      SW
+
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:     191.09  191.22    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:      179.15  154.15    [<A HREF = "hinv080.txt">hinv</A>]
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:      156.43  175.89    [<A HREF = "hinv000.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:      153.85  146.21    [<A HREF = "hinv125.txt">hinv</A>]
+Onyx2 IR R10K/195 1-CPU 1RM:               150.00  130.00    [<A HREF = "hinv003.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:      81.18   81.66    [<A HREF = "hinv051.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:           79.50   94.31    [<A HREF = "hinv113.txt">hinv</A>]
+Tezro R16000 1GHz 16MB L2 V12:              78.61   94.41    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:              78.23   92.95    [<A HREF = "hinv079.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:              77.92   94.41    [<A HREF = "hinv098.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:              77.98   92.72    [<A HREF = "hinv092.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                   75.39   96.51    [<A HREF = "hinv068.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                   71.54   84.27    [<A HREF = "hinv072.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 V12:            74.76   84.85    [<A HREF = "hinv048.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:            47.66   54.92    [<A HREF = "hinv071.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:             46.79   53.79    [<A HREF = "hinv060.txt">hinv</A>]
+Octane2 R14000SC/600 2MB L2 MXE:            46.44   52.99    [<A HREF = "hinv107.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:            46.05   52.78    [<A HREF = "hinv110.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SSE:             45.84   52.42    [<A HREF = "hinv062.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 MXI:             44.12   50.36    [<A HREF = "hinv106.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 SSI:             44.01   49.90    [<A HREF = "hinv105.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:      42.26   48.48    [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:      39.95   45.30
+Octane2 R14000SC/550 2MB L2 SE+Texture:     39.66   51.31    [<A HREF = "hinv117.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SE:              38.69   50.80    [<A HREF = "hinv061.txt">hinv</A>]
+Octane R10000SC/250 1MB L2 SE+Texture:      38.55   50.80
+Octane R12000SC/400 2MB L2 SE+Texture:      38.25   50.37
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:      37.67   40.84    [<A HREF = "hinv031.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:      37.67   40.61    [<A HREF = "hinv007.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:           37.60   40.02    [<A HREF = "hinv014.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:           37.18   40.80    [<A HREF = "hinv026.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:         36.93   40.26    [<A HREF = "hinv114.txt">hinv</A>]
+Octane R10000SC/195 1MB L2 SE+Texture:      35.58   45.69
+Octane2 R14000SC/550 2MB L2 SI+Texture:     35.19   44.02    [<A HREF = "hinv118.txt">hinv</A>]
+O2 R12000 400MHz 2MB:                       35.12   42.78    [<A HREF = "hinv101.txt">hinv</A>]
+O2 R7000SC 600MHz 256K/1MB L2/L3:           35.07   43.64    [<A HREF = "hinv086.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:      34.96   39.13    [<A HREF = "hinv050.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:      34.53   38.28    [<A HREF = "hinv035.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:      34.08   37.97    [<A HREF = "hinv006.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:         33.58   39.40    [<A HREF = "hinv112.txt">hinv</A>]
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:  33.52   42.10    [<A HREF = "hinv046.txt">hinv</A>]
+Indigo2 R4400SC/200 2MB HighIMPACT-AA 1MB:  33.28   43.54    [<A HREF = "hinv032.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB HighIMPACT 1MB:     33.07   41.60
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:         32.85   38,38    [<A HREF = "hinv115.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:           32.72   33.85    [<A HREF = "hinv005.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:           32.57   38.10    [<A HREF = "hinv111.txt">hinv</A>]
+Octane R10000/175 1MB L2 SI+Tex:            32.24   39.70
+Onyx R4400SC/150 1MB L2 RE2 1RM4:           31.13   36.48    [<A HREF = "hinv005.txt">hinv</A>]
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:   31.12   39.51    [<A HREF = "hinv033.txt">hinv</A>]
+POWER Series R4400SC/150 RE 4RM:            29.48   30.62    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:            28.60   30.50    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4000SC/100 RE 2RM:            28.00   29.21
+POWER Series R4400SC/150 RE 1RM:            27.39   30.49    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4000SC/100 RE 1RM:            26.51   29.13
+O2 R7000 350MHz 256K/1MB:                   25.75   29.52    [<A HREF = "hinv121.txt">hinv</A>]
+O2 R12000SC 300MHz 1MB:                     25.19   29.09    [<A HREF = "hinv043.txt">hinv</A>]
+POWER Series R3000SC/33 RE 1RM:             23.40   24.79
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:      23.34   25.14    [<A HREF = "hinv049.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                      22.67   26.10    [<A HREF = "hinv090.txt">hinv</A>]
+O2 R12000 270MHz 1MB:                       22.48   25.27    [<A HREF = "hinv100.txt">hinv</A>]
+O2 R10000 250MHz 1MB:                       20.08   22.54    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R10000SC 225MHz 1MB:                     19.95   22.18    [<A HREF = "hinv123.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                     19.62   22.01    [<A HREF = "hinv070.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):   17.91   19.08    [<A HREF = "hinv104.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                     17.65   19.47    [<A HREF = "hinv122.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):  17.40   18.58    [<A HREF = "hinv002.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):  17.01   18.04    [<A HREF = "hinv018.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):  16.70   17.57    [<A HREF = "hinv021.txt">hinv</A>]
+O2 R10000SC 150MHz 1MB:                     15.14   16.44    [<A HREF = "hinv016.txt">hinv</A>]
+O2 R5000SC 200MHz 1MB:                      15.05   16.48
+O2 R5000SC 180MHz 512K:                     13.20   14.25    [<A HREF = "hinv017.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):     11.08   12.05
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):     10.96   11.91
+Indy R5000SC 180MHz 512K XZ (4GE):          10.91   11.87
+Indy R4400SC 200MHz 1MB XZ (4GE):           10.86   11.82
+Indy R4600SC 133MHz 512K L2 XZ (4GE):       10.82   11.80    [<A HREF = "hinv109.txt">hinv</A>]
+Indy R5000PC 150MHz XZ (4GE):               10.78   11.65    [<A HREF = "hinv108.txt">hinv</A>]
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):   10.43   11.27    [<A HREF = "hinv027.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):               10.23   11.02    [<A HREF = "hinv029.txt">hinv</A>]
+Indigo R3000 33MHz GR2-Elan (4GE):           7.29    7.63    [<A HREF = "hinv041.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):        6.97    7.35
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):        6.82    7.20    [<A HREF = "hinv015.txt">hinv</A>]
+Indigo R3000 33MHz GR2-XZ (2GE):             5.68    5.86    [<A HREF = "hinv106.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB XL24:                5.32    6.03
+Indy R5000SC 180MHz 512K XL24:               5.03    5.87
+Indy R4400SC/200 1MB XL24:                   4.49    4.91
+Indy R5000PC 150MHz XL24:                    3.68    4.16
+Indigo R4000SC/100 1MB GR2-XS24Z (1GE):      3.00    3.08    [<A HREF = "hinv054.txt">hinv</A>]
+Indigo R3000 33MHz XS24Z (1GE):              2.96    3.01    [<A HREF = "hinv039.txt">hinv</A>]
+Indy R4600SC/133 512K L2 XL8:                2.84    3.15
+Indy R4600PC/133 XL24:                       2.02    2.24
+Indy R4600PC/100 XL24:                       1.84    2.01
+Indigo R3000 33MHz Entry:                    0.91    0.96    [<A HREF = "hinv038.txt">hinv</A>]
+</PRE><P><BR>
+
+Test G: ss78ne_d30.iv (1682 polygons). This is an inefficient
+landscape model [<A HREF = "prfcmppics.html#GFX1G">screenshot</A>]
+with a different colour value for each vertex (30x30 grid). The full
+version of this model is a 500x500 grid - I wrote my own program to
+'extract' simpler versions from the complete model. The colouring
+algorithm is also my own. The dataset is actually part of England,
+but I don't know which part. Data supplied by Ordnance Survey. For all
+of these ss78ne_d*.iv tests, the model is rotated to give a downwards
+view, ie. 90 degree vertical forward tilt; the spin is then imposed
+clockwise or anticlockwise, resulting in maximum fill strain. At lower
+polygon counts this test can be fill rate limited, such as on Onyx
+systems with fewer RMs, but as the mesh size increases the test becomes
+more dependent on the main CPU to feed the graphics pipe fast enough.<P>
+
+<PRE>
+                                             MW      MW/W      SW     SW/W
+
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:      716.60   634.16  1219.54   603.26    [<A HREF = "hinv000.txt">hinv</A>]
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:     592.70   487.00  1305.50   656.17    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:      577.31   473.41  1306.64   654.09    [<A HREF = "hinv080.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:          331.85   335.04  1114.00   805.60    [<A HREF = "hinv113.txt">hinv</A>]
+Tezro R16000 1GHz 16MB L2 V12:             308.50   326.50  1105.05   792.55    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:             306.19   326.34  1110.00   798.10    [<A HREF = "hinv079.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:             305.00   326.67  1093.00   791.50    [<A HREF = "hinv098.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:             304.69   324.86  1098.61   794.64    [<A HREF = "hinv092.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 V12:           297.19   317.42  1076.87   781.36    [<A HREF = "hinv048.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                  322.38   304.90  1057.00   778.46    [<A HREF = "hinv068.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                  290.52   308.31  1066.00   771.20    [<A HREF = "hinv072.txt">hinv</A>]
+Onyx2 IR R10K/195 1-CPU 1RM:               321.00      ?     875.00      ?      [<A HREF = "hinv003.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:      296.70   273.23  1133.00   588.00    [<A HREF = "hinv125.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:     295.18   267.11   805.81   482.39    [<A HREF = "hinv051.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:            212.85   163.44   780.04   464.69    [<A HREF = "hinv060.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:           186.50   143.57   687.50   422.83    [<A HREF = "hinv110.txt">hinv</A>]
+Octane2 R14000SC/600 2MB L2 MXE:           135.93   144.26   408.17   248.05    [<A HREF = "hinv107.txt">hinv</A>]
+Octane R12000SC/300 2MB l2 SSE:            141.37   139.66   382.04   238.14    [<A HREF = "hinv062.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:           128.17   131.25   377.65   209.67    [<A HREF = "hinv071.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 MXI:            133.51   123.41   298.95   188.82    [<A HREF = "hinv106.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 SSI:            133.24   123.32   282.10   182.62    [<A HREF = "hinv105.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:          190.88   122.75   211.33   157.51    [<A HREF = "hinv005.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:     126.75   117.58   294.46   180.65    [<A HREF = "hinv006.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:     124.12   117.78   282.40   176.24    [<A HREF = "hinv035.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:        149.93   109.17   264.24   151.27    [<A HREF = "hinv114.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:          155.21   108.24   251.70   151.17    [<A HREF = "hinv026.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:          154.31   108.02   245.04   148.63    [<A HREF = "hinv014.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:     153.63   108.23   237.41   151.01    [<A HREF = "hinv007.txt">hinv</A>]
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:     153.42   108.19   246.22   150.77    [<A HREF = "hinv031.txt">hinv</A>]
+POWER Series R4400SC/150 RE 4RM:           146.87   113.89   152.99   132.38    [<A HREF = "hinv004.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:     119.20   112.75   256.01   169.08
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:     116.70   111.78   256.74   167.12    [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:     115.97   109.80   239.04   159.25    [<A HREF = "hinv050.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:           138.51   103.83   154.17   132.36    [<A HREF = "hinv004.txt">hinv</A>]
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:     101.74    96.88   188.51   134.62    [<A HREF = "hinv049.txt">hinv</A>]
+POWER Series R4000SC/100 RE 2RM:           121.86    95.41   131.89   115.09
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:         86.50    84.04   254.50   140.86    [<A HREF = "hinv115.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:         86.40    83.91   253.40   140.66    [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:           86.23    83.67   233.28   140.54    [<A HREF = "hinv111.txt">hinv</A>]
+POWER Series R4400SC/150 RE 1RM:            86.11    82.60   152.73   127.42    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4000SC/100 RE 1RM:            92.00    81.70   133.54   116.12
+Onyx R4400SC/150 1MB L2 RE2 1RM4:           84.84    81.53   204.86   135.74    [<A HREF = "hinv005.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SE+Texture:     69.41    75.90   214.05   140.12    [<A HREF = "hinv117.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SE:              70.12    72.31   204.68   136.74    [<A HREF = "hinv061.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SI+Texture:     69.11    71.38   151.83   116.38    [<A HREF = "hinv118.txt">hinv</A>]
+Octane R12000SC/400 2MB L2 SE+Texture:      64.58    70.71   202.80   137.03
+Octane R10000SC/250 1MB L2 SE+Texture:      63.88    67.81   185.52   116.81
+Octane R10000SC/195 1MB L2 SE+Texture:      62.84    64.17   181.72   105.92
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:   64.20    63.76   165.53   100.96    [<A HREF = "hinv033.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB HighIMPACT:         62.72    66.77   162.70   115.57
+O2 R7000SC 600MHz 256K/1MB L2/L3:           62.67    66.33   187.72   150.72    [<A HREF = "hinv086.txt">hinv</A>]
+O2 R12000 400MHz 2MB:                       61.43    68.05   181.07   150.46    [<A HREF = "hinv101.txt">hinv</A>]
+Octane R10000/175 1MB L2 SI+Tex:            63.84    65.78   158.64   107.56
+POWER Series R3000SC/33 RE 1RM:             75.32    65.30    75.68    79.56
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:  61.95    61.88   163.07    99.95    [<A HREF = "hinv046.txt">hinv</A>]
+O2 R7000 350MHz 256K/1MB:                   59.15    66.84   160.85   143.26    [<A HREF = "hinv121.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):   61.80    63.87    80.00   128.02    [<A HREF = "hinv104.txt">hinv</A>]
+O2 R10000SC 225MHz 1MB:                     58.07    63.67   112.70   129.15    [<A HREF = "hinv123.txt">hinv</A>]
+O2 R12000SC 300MHz 1MB:                     55.32    61.18   145.75   128.31    [<A HREF = "hinv043.txt">hinv</A>]
+O2 R12000 270MHz 1MB:                       55.32    61.19   128.87   128.31    [<A HREF = "hinv100.txt">hinv</A>]
+O2 R10000 250MHz 1MB:                       54.25    59.67   120.92   126.03    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                      53.32    59.46   111.34   131.72    [<A HREF = "hinv090.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                     55.28    58.35   106.12   119.43    [<A HREF = "hinv070.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):  59.07    60.20    76.61   115.42    [<A HREF = "hinv002.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                     55.91    59.54    90.95   116.06    [<A HREF = "hinv122.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):  57.34    59.07    72.16   109.65    [<A HREF = "hinv018.txt">hinv</A>]
+O2 R5000SC 200MHz 1MB:                      54.41    58.72    91.69   114.50
+O2 R10000SC 150MHz 1MB:                     54.16    59.52    81.07   105.29    [<A HREF = "hinv016.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):  56.09    57.31    70.23   103.67    [<A HREF = "hinv021.txt">hinv</A>]
+O2 R5000SC 180MHz 512K:                     51.16    56.20    75.50    95.20    [<A HREF = "hinv017.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):     28.35    37.06    35.38    72.10
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):     28.14    36.56    34.95    70.96
+Indy R4400SC 200MHz 1MB XZ (4GE):           28.04    34.31    35.00    71.56
+Indy R5000SC 180MHz 512K XZ (4GE):          27.92    34.48    34.78    68.68
+Indy R4600SC 133MHz 512K L2 XZ (4GE):       27.45    34.20    33.97    67.65    [<A HREF = "hinv109.txt">hinv</A>]
+Indy R5000PC 150MHz XZ (4GE):               27.21    33.31    33.03    64.34    [<A HREF = "hinv108.txt">hinv</A>]
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):   26.82    33.19    32.72    62.55    [<A HREF = "hinv027.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):               25.64    31.27    30.70    56.47    [<A HREF = "hinv029.txt">hinv</A>]
+Indigo R3000 33MHz GR2-Elan (4GE):          24.30    29.02    28.14    48.33    [<A HREF = "hinv041.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):       19.66    34.28    22.72    51.30
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):       19.12    32.00    22.22    49.28    [<A HREF = "hinv015.txt">hinv</A>]
+Indigo R3000 33MHz GR2-XZ (2GE):            15.63    27.90    17.01    34.39    [<A HREF = "hinv106.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB XL24:               11.54    15.74    22.49    25.81
+Indy R5000SC 180MHz 512K XL24:               9.04    13.90    21.87    23.81
+Indy R4400SC/200 1MB XL24:                   9.48    11.76    18.08    17.13
+Indigo R4000SC/100 1MB GR2-XS24Z (1GE):      9.01    19.73     9.63    22.86    [<A HREF = "hinv054.txt">hinv</A>]
+Indigo R3000 33MHz XS24Z (1GE):              8.71    18.38     9.21    20.61    [<A HREF = "hinv039.txt">hinv</A>]
+Indy R5000PC 150MHz XL24:                    7.94    11.02    18.75    18.43
+Indy R4600SC/133 512K L2 XL8:                6.81     9.44    14.40    16.04
+Indy R4600PC/133 XL24:                       5.11     7.20     9.51    11.08
+Indy R4600PC/100 XL24:                       4.70     6.43     8.47    10.02
+Indigo R3000 33MHz Entry:                    2.92     4.38     3.91     5.42    [<A HREF = "hinv038.txt">hinv</A>]
+</PRE><P><BR>
+
+Test H: ss78ne_d100.iv (19602 polygons). This is a more complex
+100x100 grid version of the landscape model [<A HREF =
+"prfcmppics.html#GFX1H">screenshot</A>].<P>
+
+<PRE>
+                                             MW      MW/W      SW      SW/W
+
+Octane2 R14000 600MHz 2MB L2 V12:          132.93    86.34   160.92    97.77    [<A HREF = "hinv113.txt">hinv</A>]
+Tezro R16000 1GHz 16MB L2 V12:             132.10    85.96   160.84    97.71    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:             132.10    85.91   160.63    97.71    [<A HREF = "hinv079.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:             132.01    85.85   160.57    97.71    [<A HREF = "hinv092.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:             132.00    85.91   160.42    97.66    [<A HREF = "hinv098.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 V12:           130.75    85.12   160.26    97.16    [<A HREF = "hinv048.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                  130.03    84.77   159.80    97.50    [<A HREF = "hinv072.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                  128.24    84.21   157.23    93.00    [<A HREF = "hinv068.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:           128.52    55.60   159.98    73.30    [<A HREF = "hinv110.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:            125.64    56.31   159.52    73.93    [<A HREF = "hinv060.txt">hinv</A>]
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:     150.42    41.71   150.55    40.71    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:      150.12    41.60   149.66    41.36    [<A HREF = "hinv080.txt">hinv</A>]
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:      148.44    41.90   148.61    41.15    [<A HREF = "hinv000.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:      121.26    45.61   121.64    44.39    [<A HREF = "hinv125.txt">hinv</A>]
+Onyx2 IR R10K/195 1-CPU 1RM:               116.00      ?     116.00      ?      [<A HREF = "hinv003.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:     113.39    42.78   113.98    43.56    [<A HREF = "hinv051.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:            45.65    21.22    52.86    22.67    [<A HREF = "hinv071.txt">hinv</A>]
+Octane2 R14000SC/600 2MB L2 MXE:            44.95    24.34    51.23    26.13    [<A HREF = "hinv107.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SSE:             44.33    24.05    50.85    26.00    [<A HREF = "hinv062.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:      33.09    18.00    36.54    19.01    [<A HREF = "hinv006.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:      32.93    18.08    36.42    19.16    [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:      32.73    18.10    36.10    19.09    [<A HREF = "hinv035.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:      32.41    17.95    35.59    18.94    [<A HREF = "hinv050.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 MXI:             32.23    18.18    35.14    19.10    [<A HREF = "hinv106.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:      32.22    18.09    35.35    19.01
+Octane R10000SC/250 2MB L2 SSI:             32.08    18.17    35.20    19.08    [<A HREF = "hinv105.txt">hinv</A>]
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:      29.39    17.09    32.29    17.96    [<A HREF = "hinv049.txt">hinv</A>]
+O2 R7000SC 600MHz 256K/1MB L2/L3:           24.77    19.28    28.66    23.23    [<A HREF = "hinv086.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:         26.25    13.59    26.56    14.08    [<A HREF = "hinv114.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:           25.94    13.59    26.63    14.05    [<A HREF = "hinv026.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SE+Texture:     23.01    13.85    26.50    15.09    [<A HREF = "hinv117.txt">hinv</A>]
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:      25.89    13.58    26.22    14.05    [<A HREF = "hinv031.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:      25.78    13.56    26.46    14.02    [<A HREF = "hinv007.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SE:              22.74    13.76    26.31    15.01    [<A HREF = "hinv061.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:           25.76    13.56    26.28    14.05    [<A HREF = "hinv014.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:           25.62    13.76    25.62    14.12    [<A HREF = "hinv005.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:         25.59    13.15    26.30    13.97    [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:         25.39    13.15    26.26    13.95    [<A HREF = "hinv115.txt">hinv</A>]
+Octane R12000SC/400 2MB L2 SE+Texture:      22.34    13.89    26.01    15.23
+Onyx R4400SC/200 4MB L2 RE2 1RM5:           25.24    13.11    25.77    13.96    [<A HREF = "hinv111.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 1RM4:           24.85    13.06    25.73    13.94    [<A HREF = "hinv005.txt">hinv</A>]
+Octane R10000SC/250 1MB L2 SE+Texture:      22.40    11.25    26.15    12.18
+Octane R10000SC/195 1MB L2 SE+Texture:      20.98    10.38    24.19    11.16
+O2 R12000 400MHz 2MB:                       20.95    17.47    23.40    19.37    [<A HREF = "hinv101.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB HighIMPACT 1MB:     18.66    12.09    21.06    13.10
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:   18.71    10.24    20.99    10.89    [<A HREF = "hinv033.txt">hinv</A>]
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:  18.46    10.14    20.95    10.81    [<A HREF = "hinv046.txt">hinv</A>]
+Octane R10000/175 1MB L2 SI+Tex:            18.11    11.32    20.25    12.12
+O2 R7000 350MHz 256K/1MB:                   17.73    16.67    19.46    18.31    [<A HREF = "hinv121.txt">hinv</A>]
+O2 R12000SC 300MHz 1MB:                     16.90    15.53    18.61    17.44    [<A HREF = "hinv043.txt">hinv</A>]
+POWER Series R4400SC/150 RE 4RM:            17.56    13.51      ?        ?      [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:            17.33    12.77    17.61    13.44    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 1RM:            17.25    12.95    17.55    13.59    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/100 RE 2RM:            17.12    13.16    17.15    13.16
+POWER Series R4400SC/100 RE 1RM:            16.88    12.79    17.15    13.18
+Octane2 R14000SC/550 2MB L2 SI+Texture:     15.43    11.77    16.79    12.58    [<A HREF = "hinv118.txt">hinv</A>]
+O2 R12000 270MHz 1MB:                       14.25    16.47    15.42    19.71    [<A HREF = "hinv100.txt">hinv</A>]
+O2 R10000 250MHz 1MB:                       13.20    16.50    14.22    20.90    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R10000SC 225MHz 1MB:                     12.22    16.61    13.01    19.21    [<A HREF = "hinv123.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                      11.81    18.51    12.61    21.11    [<A HREF = "hinv090.txt">hinv</A>]
+POWER Series R3000SC/33 RE 1RM:             12.10    12.28    12.07    12.36
+O2 R10000SC 195MHz 1MB:                     11.07    14.80    11.80    16.87    [<A HREF = "hinv070.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                     10.14    13.90    10.71    14.92    [<A HREF = "hinv122.txt">hinv</A>]
+O2 R5000SC 200MHz 1MB:                      10.13    13.51    10.65    14.61
+O2 R5000SC 180MHz 512K:                      9.66    11.37    10.24    12.18    [<A HREF = "hinv017.txt">hinv</A>]
+O2 R10000SC 150MHz 1MB:                      8.62    12.19     9.00    12.97    [<A HREF = "hinv016.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):    7.61    15.54     7.89    18.75    [<A HREF = "hinv104.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):   7.63    15.07     7.82    18.28    [<A HREF = "hinv002.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):   7.57    14.75     7.71    17.95    [<A HREF = "hinv018.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):   7.43    14.26     7.59    17.56    [<A HREF = "hinv021.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):      3.34     8.09     3.43     8.56
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):      3.32     8.05     3.41     8.52
+Indy R5000SC 180MHz 512K XZ (4GE):           3.33     7.99     3.42     8.49
+Indy R4400SC 200MHz 1MB XZ (4GE):            3.33     8.01     3.41     8.48
+Indy R4600SC 133MHz 512K L2 XZ (4GE):        3.32     7.98     3.42     8.47    [<A HREF = "hinv109.txt">hinv</A>]
+Indy R5000PC 150MHz XZ (4GE):                3.31     7.94     3.39     8.33    [<A HREF = "hinv108.txt">hinv</A>]
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):    3.27     7.81     3.32     8.24    [<A HREF = "hinv027.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):                3.25     7.62     3.31     8.06    [<A HREF = "hinv029.txt">hinv</A>]
+Indigo R3000 33MHz GR2-Elan (4GE):           3.21     7.53     3.25     7.86    [<A HREF = "hinv041.txt">hinv</A>]
+Indy R5000SC 180MHz 512K XL24:               2.81     2.64     3.76     3.42
+Indigo2 R4400SC/250 2MB XL24:                2.45     2.41     2.97     2.73
+Indy R5000PC 150MHz XL24:                    2.16     2.19     2.98     2.77
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):        2.09     5.05     2.13     5.26
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):        2.06     5.01     2.08     5.20    [<A HREF = "hinv015.txt">hinv</A>]
+Indy R4400SC/200 1MB XL24:                   2.03     2.15     2.77     2.54
+Indigo R3000 33MHz GR2-XZ (2GE):             1.73     4.14     1.75     4.22    [<A HREF = "hinv106.txt">hinv</A>]
+Indy R4600PC/133 XL24:                       1.11     1.21     1.37     1.43
+Indy R4600PC/100 XL24:                       0.95     1.14     1.21     1.37
+Indigo R4000SC/100 1MB GR2-XS24Z (1GE):      0.88     2.17     0.88     2.20    [<A HREF = "hinv054.txt">hinv</A>]
+Indigo R3000 33MHz XS24Z (1GE):              0.87     2.12     0.88     2.16    [<A HREF = "hinv039.txt">hinv</A>]
+Indigo R3000 33MHz Entry:                    0.49     0.66     0.53     0.70    [<A HREF = "hinv038.txt">hinv</A>]
+</PRE><P><BR>
+
+Test I: ss78ne_d300.iv (178802 polygons). More complex again [<A HREF =
+"prfcmppics.html#GFX1I">screenshot</A>], now a 300x300 grid. Notice how
+the more powerful systems become very much CPU-bound since this test
+only uses one CPU.<P>
+
+<PRE>
+                                              MW     MW/W     SW      SW/W
+
+Tezro R16000 1GHz 16MB L2 V12:              18.32   10.93    18.77   11.10    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:              18.30   10.94    18.77   11.10    [<A HREF = "hinv079.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:           18.31   10.93    18.75   11.10    [<A HREF = "hinv113.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:              18.30   10.94    18.75   11.10    [<A HREF = "hinv098.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:              18.27   10.93    18.74   11.10    [<A HREF = "hinv092.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                   18.26   10.92    18.26   10.94    [<A HREF = "hinv068.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                   18.24   10.91    18.74   11.09    [<A HREF = "hinv072.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:            18.22    8.65    18.72    9.20    [<A HREF = "hinv110.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:             18.12    8.70    18.57    9.25    [<A HREF = "hinv060.txt">hinv</A>]
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:      17.06    4.28    17.06    4.30    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:       17.05    4.28    17.06    4.27    [<A HREF = "hinv080.txt">hinv</A>]
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:       16.93    4.79    16.93    4.79    [<A HREF = "hinv000.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:       13.70    4.43    13.71    4.28    [<A HREF = "hinv125.txt">hinv</A>]
+Onyx2 IR R10K/195 1-CPU 1RM:                13.60     ?      13.50     ?      [<A HREF = "hinv003.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:      13.02    4.40    13.01    4.43    [<A HREF = "hinv051.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:             5.99    2.47     6.11    2.47    [<A HREF = "hinv071.txt">hinv</A>]
+Octane2 R14000SC/600 2MB L2 MXE:             5.81    2.92     5.88    2.94    [<A HREF = "hinv107.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SSE:              5.81    2.91     5.90    2.93    [<A HREF = "hinv062.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:       4.22    2.15     4.27    2.16    [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:       4.22    2.13     4.28    2.14    [<A HREF = "hinv035.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:       4.21    2.14     4.26    2.16    [<A HREF = "hinv050.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:       4.15    2.11     4.22    2.13    [<A HREF = "hinv006.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:       4.06    2.13     4.13    2.16
+Octane R10000SC/250 2MB L2 SSI:              3.93    2.13     3.97    2.14    [<A HREF = "hinv105.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 MXI:              3.93    2.11     3.88    2.12    [<A HREF = "hinv106.txt">hinv</A>]
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:       3.51    2.08     3.54    2.08    [<A HREF = "hinv049.txt">hinv</A>]
+O2 R7000SC 600MHz 256K/1MB L2/L3:            3.11    2.63     3.18    2.62    [<A HREF = "hinv086.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SE+Texture:      2.99    1.68     3.05    1.70    [<A HREF = "hinv117.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SE:               3.03    1.68     3.04    1.69    [<A HREF = "hinv061.txt">hinv</A>]
+Octane R10000SC/250 1MB L2 SE+Texture:       3.02    1.48     3.08    1.49
+Octane R12000SC/400 2MB L2 SE+Texture:       2.94    1.65     3.00    1.68
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:       3.01    1.53     3.05    1.54    [<A HREF = "hinv031.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:          2.99    1.54     2.98    1.54    [<A HREF = "hinv115.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:          2.98    1.54     2.94    1.54    [<A HREF = "hinv114.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:            2.97    1.57     2.88    1.54    [<A HREF = "hinv005.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:            2.94    1.53     2.98    1.54    [<A HREF = "hinv014.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:          2.94    1.53     2.95    1.54    [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:            2.94    1.53     2.92    1.54    [<A HREF = "hinv111.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:       2.92    1.53     2.95    1.54    [<A HREF = "hinv007.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 1RM4:            2.91    1.53     2.95    1.54    [<A HREF = "hinv005.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:            2.76    1.52     2.95    1.54    [<A HREF = "hinv026.txt">hinv</A>]
+Octane R10000SC/195 1MB L2 SE+Texture:       2.77    1.26     2.81    1.27
+O2 R12000 400MHz 2MB:                        2.47    2.17     2.50    2.20    [<A HREF = "hinv101.txt">hinv</A>]
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:    2.42    1.21     2.46    1.22    [<A HREF = "hinv033.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB HighIMPACT 1MB:      2.39    1.47     2.44    1.48
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:   2.41    1.21     2.44    1.22    [<A HREF = "hinv046.txt">hinv</A>]
+Octane R10000/175 1MB L2 SI+Tex:             2.31    1.35     2.36    1.38
+O2 R7000 350MHz 256K/1MB:                    2.13    2.10     2.15    2.12    [<A HREF = "hinv121.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:             2.04    1.51     2.01    1.51    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 4RM:             2.02    1.52     2.01    1.51    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 1RM:             2.00    1.50     2.01    1.51    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4000SC/100 RE 1RM:             2.01    1.48     2.01    1.48
+POWER Series R4000SC/100 RE 1RM:             2.01    1.48     1.98    1.50
+O2 R12000SC 300MHz 1MB:                      1.92    2.26     1.95    2.35    [<A HREF = "hinv043.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SI+Texture:      1.90    1.41     1.92    1.41    [<A HREF = "hinv118.txt">hinv</A>]
+O2 R12000 270MHz 1MB:                        1.72    2.37     1.74    2.45    [<A HREF = "hinv100.txt">hinv</A>]
+O2 R10000 250MHz 1MB:                        1.57    2.45     1.58    2.54    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                       1.51    2.32     1.54    2.35    [<A HREF = "hinv090.txt">hinv</A>]
+POWER Series R3000SC/33 RE 1RM:              1.45    1.48     1.45    1.48
+O2 R10000SC 225MHz 1MB:                      1.41    2.18     1.42    2.25    [<A HREF = "hinv123.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                      1.29    2.01     1.30    2.05    [<A HREF = "hinv070.txt">hinv</A>]
+O2 R5000SC 200MHz 1MB:                       1.34    1.65     1.21    1.67
+O2 R5000SC 180MHz 512K:                      1.16    1.40     1.17    1.41    [<A HREF = "hinv017.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                      1.14    1.51     1.14    1.52    [<A HREF = "hinv122.txt">hinv</A>]
+O2 R10000SC 150MHz 1MB:                      0.97    1.33     0.97    1.33    [<A HREF = "hinv016.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):    0.88    2.15     0.88    2.23    [<A HREF = "hinv104.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):   0.88    2.14     0.88    2.21    [<A HREF = "hinv002.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):   0.87    2.09     0.87    2.20    [<A HREF = "hinv018.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):   0.86    2.09     0.87    2.17    [<A HREF = "hinv021.txt">hinv</A>]
+Indy R5000SC 180MHz 512K XL24:               0.41    0.36     0.53    0.40
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):      0.38    0.96     0.38    0.97
+Indy R5000SC 180MHz 512K XZ (4GE):           0.38    0.96     0.38    0.97
+Indy R4400SC 200MHz 1MB XZ (4GE):            0.38    0.96     0.38    0.97
+Indy R4600SC 133MHz 512K L2 XZ (4GE):        0.38    0.96     0.38    0.97    [<A HREF = "hinv109.txt">hinv</A>]
+Indy R5000PC 150MHz XZ (4GE):                0.38    0.96     0.38    0.96    [<A HREF = "hinv108.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):      0.38    0.95     0.38    0.97
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):    0.38    0.94     0.38    0.95    [<A HREF = "hinv027.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):                0.37    0.94     0.37    0.94    [<A HREF = "hinv029.txt">hinv</A>]
+Indigo R3000 33MHz GR2-Elan (4GE):           0.37    0.93     0.37    0.94    [<A HREF = "hinv041.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB XL24:                0.36    0.32     0.41    0.35
+Indy R5000PC 150MHz XL24:                    0.35    0.26     0.39    0.31
+Indy R4400SC/200 1MB XL24:                   0.29    0.27     0.33    0.31
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):        0.24    0.59     0.24    0.59
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):        0.23    0.57     0.23    0.57    [<A HREF = "hinv015.txt">hinv</A>]
+Indigo R3000 33MHz GR2-XZ (2GE):             0.20    0.48     0.20    0.49    [<A HREF = "hinv106.txt">hinv</A>]
+Indy R4600PC/133 XL24:                       0.15    0.15     0.16    0.17
+Indy R4600PC/100 XL24:                       0.13    0.15     0.13    0.17
+Indigo R3000 33MHz XS24Z (1GE):              0.10    0.24     0.10    0.24    [<A HREF = "hinv039.txt">hinv</A>]
+Indigo R3000 33MHz Entry:                    0.06    0.07     0.06    0.08    [<A HREF = "hinv038.txt">hinv</A>]
+</PRE><P><BR>
+
+Test J: lothian400.iv (318402 polygons). This is a different
+landscape model [<A HREF = "prfcmppics.html#GFX1J">screenshot</A>],
+400x400 grid, of the area of Lothian region, Scotland (East coast). I
+live on this mesh somewhere! 8)  NOTE: for O2, R4K/250 HighIMPACT
+Indigo2, Onyx2 and other fast systems, this test is CPU-limited, ie.
+the bottleneck is not in the graphics pipe (the extra three CPUs in
+the Onyx2 are not used by ivview, so the gfx system is not going as
+fast as it could if more than one main CPU could be utilised, or if a
+better CPU were present). In fact, the R4K/250 HighIMPACT I2 becomes
+CPU-bound at the 100x100 stage. Landscape data supplied by the Radar
+Research Lab at Heriot Watt University, Edinburgh, Scotland.<P>
+
+<PRE>
+                                             MW     MW/W     SW     SW/W
+
+Tezro R16000 1GHz 16MB L2 V12:             10.44    6.19   10.59    6.25    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:             10.43    6.20   10.58    6.25    [<A HREF = "hinv079.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:          10.43    6.20   10.58    6.25    [<A HREF = "hinv113.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:             10.43    6.20   10.57    6.25    [<A HREF = "hinv098.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:             10.42    6.19   10.57    6.25    [<A HREF = "hinv092.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                  10.41    6.19   10.58    6.25    [<A HREF = "hinv068.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                  10.41    6.19   10.57    6.24    [<A HREF = "hinv072.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:           10.40    5.02   10.56    5.22    [<A HREF = "hinv110.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:            10.39    5.05   10.47    5.23
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:       9.57    2.40    9.62    2.41    [<A HREF = "hinv080.txt">hinv</A>]
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:      9.58    2.40    9.59    2.40    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:       9.48    2.40    9.48    2.40    [<A HREF = "hinv000.txt">hinv</A>]
+Onyx2 IR R10K/195 1-CPU 1RM:                7.50     ?      7.50     ?      [<A HREF = "hinv003.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:       7.70    2.41    7.67    2.40    [<A HREF = "hinv125.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:      7.35    2.43    7.35    2.54    [<A HREF = "hinv051.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:            3.41    1.41    3.45    1.41    [<A HREF = "hinv071.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:      2.40    2.15    4.27    2.16    [<A HREF = "hinv047.txt">hinv</A>] [not convinced these are correct!]
+Octane2 R14000SC/600 2MB L2 MXE:            3.29    1.60    3.32    1.61    [<A HREF = "hinv107.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:      2.39    1.21    2.41    1.21    [<A HREF = "hinv035.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:      2.38    1.21    2.40    1.21    [<A HREF = "hinv050.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:      2.33    1.20    2.38    1.20    [<A HREF = "hinv006.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:      2.31    1.21    2.33    1.21
+Octane R10000SC/250 2MB L2 MXI:             2.21    1.19    2.23    1.19    [<A HREF = "hinv106.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 SSI:             2.19    1.19    2.23    1.19    [<A HREF = "hinv105.txt">hinv</A>]
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:      1.99    1.18    2.00    1.18    [<A HREF = "hinv049.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:           1.77    0.86    1.77    0.86    [<A HREF = "hinv005.txt">hinv</A>]
+Octane R10000SC/250 1MB L2 SE+Texture:      1.71    0.82    1.73    0.83
+Octane2 R14000SC/550 2MB L2 SE+Texture:     1.69    0.94    1.71    0.95    [<A HREF = "hinv117.txt">hinv</A>]
+Octane R12000SC/400 2MB L2 SE+Texture:      1.67    0.97    1.69    0.97
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:         1.68    0.87    1.67    0.86    [<A HREF = "hinv114.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:         1.68    0.86    1.66    0.86    [<A HREF = "hinv115.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:           1.67    0.86    1.68    0.86    [<A HREF = "hinv026.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:         1.67    0.86    1.67    0.86    [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:           1.67    0.86    1.66    0.86    [<A HREF = "hinv111.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 1RM4:           1.66    0.86    1.66    0.86    [<A HREF = "hinv005.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:      1.64    0.84    1.67    0.87    [<A HREF = "hinv007.txt">hinv</A>]
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:      1.64    0.85    1.64    0.85    [<A HREF = "hinv031.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:           1.63    0.85    1.68    0.86    [<A HREF = "hinv014.txt">hinv</A>]
+O2 R7000SC 600MHz 256K/1MB L2/L3:           1.61    1.39    1.62    1.41    [<A HREF = "hinv086.txt">hinv</A>]
+Octane R10000SC/195 1MB L2 SE+Texture:      1.57    0.71    1.59    0.72
+O2 R12000 400MHz 2MB:                       1.38    1.27    1.39    1.28    [<A HREF = "hinv101.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB HighIMPACT 1MB:     1.37    0.83    1.38    0.83
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:   1.37    0.68    1.38    0.69    [<A HREF = "hinv033.txt">hinv</A>]
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:  1.36    0.68    1.37    0.69    [<A HREF = "hinv046.txt">hinv</A>]
+Octane R10000/175 1MB L2 SI+Tex:            1.31    0.77    1.32    0.77
+POWER Series R4400SC/150 RE 4RM:            1.13    0.83    1.13    0.84    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:            1.12    0.83    1.12    0.83    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4000SC/100 RE 2RM:            1.11    0.83    1.12    0.84
+POWER Series R4400SC/150 RE 1RM:            1.11    0.83    1.11    0.83    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4000SC/100 RE 1RM:            1.10    0.83    1.13    0.83
+O2 R7000 350MHz 256K/1MB:                   1.09    1.18    1.10    1.19    [<A HREF = "hinv121.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SI+Texture:     1.07    0.79    1.08    0.79    [<A HREF = "hinv118.txt">hinv</A>]
+O2 R12000SC 300MHz 1MB:                     1.04    1.31    1.10    1.38    [<A HREF = "hinv043.txt">hinv</A>]
+O2 R12000 270MHz 1MB:                       0.98    1.39    0.98    1.46    [<A HREF = "hinv100.txt">hinv</A>]
+O2 R10000 250MHz 1MB:                       0.89    1.40    0.89    1.50    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                      0.82    1.11    0.83    1.12    [<A HREF = "hinv090.txt">hinv</A>]
+POWER Series R3000SC/33 RE 1RM:             0.80    0.83    0.80    0.83
+O2 R10000SC 225MHz 1MB:                     0.77    1.19    0.78    1.21    [<A HREF = "hinv123.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                     0.73    1.14    0.73    1.15    [<A HREF = "hinv070.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                     0.63    0.86    0.64    0.87    [<A HREF = "hinv122.txt">hinv</A>]
+O2 R5000SC 200MHz 1MB:                      0.63    0.86    0.63    0.86
+O2 R5000SC 180MHz 512K:                     0.61    0.80    0.61    0.80    [<A HREF = "hinv017.txt">hinv</A>]
+O2 R10000SC 150MHz 1MB:                     0.55    0.75    0.55    0.75    [<A HREF = "hinv016.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):   0.49    1.24    0.49    1.27    [<A HREF = "hinv104.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):  0.49    1.23    0.49    1.25    [<A HREF = "hinv002.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):  0.49    1.23    0.49    1.25    [<A HREF = "hinv018.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):  0.49    1.21    0.49    1.23    [<A HREF = "hinv021.txt">hinv</A>]
+Indy R5000SC 180MHz 512K XL24:              0.28    0.24    0.33    0.29
+Indy R4600SC 133MHz 512K L2 XZ (4GE):       0.21    0.55    0.22    0.55    [<A HREF = "hinv109.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):     0.21    0.54    0.21    0.55
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):     0.21    0.54    0.22    0.54
+Indy R5000SC 180MHz 512K XZ (4GE):          0.21    0.54    0.21    0.55
+Indy R4400SC 200MHz 1MB XZ (4GE):           0.21    0.54    0.21    0.55
+Indy R5000PC 150MHz XZ (4GE):               0.21    0.54    0.21    0.54    [<A HREF = "hinv108.txt">hinv</A>]
+Indigo R3000 33MHz GR2-Elan (4GE):          0.21    0.54    0.21    0.54    [<A HREF = "hinv107.txt">hinv</A>]
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):   0.21    0.53    0.21    0.53    [<A HREF = "hinv027.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):               0.21    0.53    0.21    0.53    [<A HREF = "hinv029.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB XL24:               0.21    0.20    0.23    0.24
+Indy R5000PC 150MHz XL24:                   0.21    0.16    0.24    0.19
+Indy R4400SC/200 1MB XL24:                  0.17    0.16    0.19    0.19
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):       0.13    0.33    0.13    0.33
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):       0.12    0.32    0.12    0.32    [<A HREF = "hinv015.txt">hinv</A>]
+Indigo R3000 33MHz GR2-XZ (2GE):            0.11    0.27    0.11    0.27    [<A HREF = "hinv106.txt">hinv</A>]
+Indy R4600PC/133 XL24:                      0.09    0.11    0.10    0.13
+Indy R4600PC/100 XL24:                      0.08    0.09    0.08    0.11
+</PRE><P><BR>
+
+Test K: arm2.iv (810 polygons). This is a simple but highly accurate
+model of a robot arm [<A HREF =
+"prfcmppics.html#GFX1K">screenshot</A>]; the model file actually
+contains Inventor constructs to allow the joint angles to be
+altered. The real arm [<A HREF = "pcp/realarm.jpg">129K JPEG
+Photo</A>] resides in the Ocean Systems Research Laboratory at Heriot
+Watt University, Edinburgh, where I conducted undersea augmented reality
+research during early 1995.<P>
+
+<PRE>
+                                              MW      MW/W    MW/HL      SW      SW/W    SW/HL
+
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:      1365.38  1183.68  1794.30  1448.64  1252.46  2006.00    [<A HREF = "hinv000.txt">hinv</A>]
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:     1011.50   938.50  1284.36  1473.00  1240.50  1992.00    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:       963.05   895.28  1238.12  1472.32  1246.00  1990.25    [<A HREF = "hinv080.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:           420.15   416.30   654.85  1317.87  1117.47  1634.79    [<A HREF = "hinv113.txt">hinv</A>]
+Tezro R16000 1GHz 16MB L2 V12:              410.29   408.09   647.35  1295.00  1088.50  1629.00    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:              410.29   409.00   647.00  1286.00  1088.00  1623.00    [<A HREF = "hinv079.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:              407.80   408.30   645.00  1283.50  1103.13  1622.00    [<A HREF = "hinv098.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:              407.63   407.07   636.81  1280.54  1087.21  1620.25    [<A HREF = "hinv092.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:       380.00   373.63   622.29  1364.50  1022.50  1656.00    [<A HREF = "hinv125.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:      439.08   458.88   615.01   886.13   766.39  1190.88    [<A HREF = "hinv051.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                   384.79   386.50   609.96  1241.15  1060.49  1510.08    [<A HREF = "hinv072.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                   366.86   377.82           1244.79  1036.19             [<A HREF = "hinv068.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:            333.50   296.53   441.80  1123.47   773.81  1051.71    [<A HREF = "hinv110.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:             314.25   286.27   406.04   960.41   742.32   968.74    [<A HREF = "hinv060.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:           252.87   207.09   324.62   268.88   297.01   385.20    [<A HREF = "hinv005.txt">hinv</A>]
+Octane2 R14000SC/600 2MB L2 MXE:            187.90   183.55   287.43   499.79   412.98   637.60    [<A HREF = "hinv107.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:            175.67   172.54   271.90   415.10   358.60   565.72    [<A HREF = "hinv071.txt">hinv</A>]
+Octane R12000SC/300 2MB L2 SSE:             167.31   171.97   253.23   412.58   358.46   553.97    [<A HREF = "hinv062.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:         199.75   167.33   261.00   279.86   272.73   366.82    [<A HREF = "hinv114.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:           191.61   167.50   255.01   276.21   285.21   370.38    [<A HREF = "hinv026.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:           189.89   166.22   252.47   278.46   284.01   369.82    [<A HREF = "hinv014.txt">hinv</A>]
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:      187.82   165.99   257.43   276.62   284.12   367.37    [<A HREF = "hinv031.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:      188.54   165.83   257.36   272.98   274.21   363.53    [<A HREF = "hinv007.txt">hinv</A>]
+POWER Series R4400SC/150 RE 4RM:            177.55   171.74   248.33   183.31   197.22   267.55    [<A HREF = "hinv004.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 MXI:             165.50   159.92   252.57   354.76   304.42   464.65    [<A HREF = "hinv106.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 SSI:             168.58   160.04   249.03   334.17   290.28   442.11    [<A HREF = "hinv105.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:      165.13   149.92   236.23   406.43   283.24   437.78    [<A HREF = "hinv035.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:      161.91   150.36   233.00   396.38   284.11   436.55    [<A HREF = "hinv006.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:            176.34   163.51   222.31   183.58   195.96   265.95    [<A HREF = "hinv004.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:      155.23   143.16   221.63   345.55   254.91   385.09    [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:      141.93   140.51   205.53   322.52   251.17   375.40
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:      148.24   136.57   207.47   313.40   235.16   343.01    [<A HREF = "hinv050.txt">hinv</A>]
+POWER Series R4000SC/100 RE 2RM:            150.30   143.23   198.50   158.81   164.51   222.40
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:         119.72   114.27   176.41   287.46   259.74   363.52    [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:         118.96   113.93   175.91   290.85   262.24   365.82    [<A HREF = "hinv115.txt">hinv</A>]
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:      128.11   118.34   175.68   224.79   182.85   256.90    [<A HREF = "hinv049.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:           118.83   114.90   176.39   275.45   260.36   362.40    [<A HREF = "hinv111.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 1RM4:           108.24   109.30   162.45   270.01   256.67   356.99    [<A HREF = "hinv005.txt">hinv</A>]
+POWER Series R4400SC/150 RE 1RM:            109.78   107.29   157.00   176.27   178.82   249.18    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4000SC/100 RE 1RM:            103.39   104.42   168.21   161.98   160.10   222.06
+O2 R12000 400MHz 2MB:                        96.96   100.72   147.41   284.57   239.95   348.09    [<A HREF = "hinv101.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SE+Texture:      94.83    95.65   150.74   278.32   224.58   347.72    [<A HREF = "hinv117.txt">hinv</A>]
+O2 R7000SC 600MHz 256K/1MB L2/L3:            89.90    95.61   143.67   277.45   247.75   358.66    [<A HREF = "hinv086.txt">hinv</A>]
+O2 R7000 350MHz 256K/1MB:                    91.71    98.31   143.50   244.60   228.81   319.06    [<A HREF = "hinv121.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SI+Texture:      93.78    91.19   143.56   256.37   198.77   302.55    [<A HREF = "hinv118.txt">hinv</A>]
+Octane R12000SC/400 2MB L2 SE+Texture:       87.47    88.77   138.46   257.65   217.23   329.30
+Octane R12000SC/300 2MB L2 SE:               85.30    87.98   134.57   246.75   211.55   312.05    [<A HREF = "hinv061.txt">hinv</A>]
+O2 R12000SC 300MHz 1MB:                      86.20    89.47   133.88   230.46   204.09   293.84    [<A HREF = "hinv043.txt">hinv</A>]
+O2 R10000SC 225MHz 1MB:                      85.05    92.75   135.62   199.76   209.05   285.07    [<A HREF = "hinv123.txt">hinv</A>]  No idea why this is so fast. Weird.
+Octane R10000SC/250 1MB L2 SE+Texture:       83.73    85.95   135.20   222.22   199.00   297.41
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:    86.81    82.17   130.27   247.51   169.67   268.32    [<A HREF = "hinv033.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB HighIMPACT 1MB:      83.30    81.71   126.80   221.61   174.19   262.21
+Indigo2 R4400SC/200 2MB HighIMPACT-AA 1MB:   80.00    83.08   125.37   214.00   186.31   274.18    [<A HREF = "hinv032.txt">hinv</A>]
+Octane R10000/175 1MB L2 SI+Tex:             80.72    82.50   125.80   216.21   176.50   260.56
+Octane R10000SC/195 1MB L2 SE+Texture:       79.73    81.64   129.06   183.62   167.18   249.80
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:   84.03    78.71   123.90   212.94   151.67   237.22    [<A HREF = "hinv046.txt">hinv</A>]
+O2 R12000 270MHz 1MB:                        83.38    87.33   131.31   214.82   199.40   284.36    [<A HREF = "hinv100.txt">hinv</A>]
+O2 R12000SC 270MHz 1MB:                      79.51    87.64   124.38   212.03   198.40   286.14    [<A HREF = "hinv044.txt">hinv</A>]
+O2 R10000 250MHz 1MB:                        80.96    87.44   130.01   196.36   198.97   283.36    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                       78.11    87.34   127.94   181.36   197.57   267.89    [<A HREF = "hinv090.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                      78.90    86.18   126.72   182.43   192.15   262.20    [<A HREF = "hinv070.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                      79.45    87.47   125.31   167.36   176.24   230.52    [<A HREF = "hinv122.txt">hinv</A>]
+O2 R10000SC 150MHz 1MB:                      75.99    83.09   118.80   147.63   158.26   208.82    [<A HREF = "hinv016.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):    75.69    97.23   101.83   118.57   169.05   185.49    [<A HREF = "hinv104.txt">hinv</A>]
+O2 R5000SC 200MHz 1MB:                       72.45    81.25   118.97   153.45   165.13   222.73
+POWER Series R3000SC/33 RE 1RM:              97.09    91.36   118.21    99.09    96.00   128.95
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):   72.75    91.21    95.39   110.40   154.81   168.47    [<A HREF = "hinv002.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):   70.04    87.42    91.36   105.03   145.12   160.44    [<A HREF = "hinv018.txt">hinv</A>]
+O2 R5000SC 180MHz 512K:                      68.30    75.36   108.34   131.50   142.54   188.71
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):   68.19    83.97    88.59    98.85   135.06   150.95    [<A HREF = "hinv021.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):      39.80    50.86    52.41    62.34    89.88    98.61
+Indy R4400SC 200MHz 1MB XZ (4GE):            39.17    49.69    51.98    62.64    89.78    99.47
+Indy R5000SC 180MHz 512K XZ (4GE):           38.90    49.40    50.84    62.63    89.85    99.43
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):      38.90    48.20    48.80    60.93    88.55    97.37
+Indy R4600SC 133MHz 512K L2 XZ (4GE):        37.17    47.06    49.40    56.59    82.12    90.04    [<A HREF = "hinv109.txt">hinv</A>]
+Indy R5000PC 150MHz XZ (4GE):                37.11    47.32    48.67    55.94    79.62    86.74    [<A HREF = "hinv108.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):        33.72    46.65    48.16    50.58    77.49    86.15
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):    36.54    46.33    48.01    55.67    76.65    84.70    [<A HREF = "hinv027.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):        33.29    44.63    45.83    48.58    73.39    80.24    [<A HREF = "hinv015.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):                34.13    42.78    44.02    49.51    67.72    75.27    [<A HREF = "hinv029.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB XL24:                29.72    37.59    37.10    52.32    55.57    60.30
+Indigo R3000 33MHz GR2-Elan (4GE):           30.47    36.75    38.55    41.17    52.19    60.15    [<A HREF = "hinv041.txt">hinv</A>]
+Indy R5000SC 180MHz 512K XL24:               29.46    36.38    37.86    56.06    53.53    61.22
+Indigo R3000 33MHz GR2-XZ (2GE):             26.32    34.22    36.00    33.00    45.48    52.86    [<A HREF = "hinv106.txt">hinv</A>]
+Indy R4400SC/200 1MB XL24:                   23.52    27.65    27.90    42.10    43.05    48.67
+Indigo R4000SC/100 1MB GR2-XS24Z (1GE):      19.27    29.59    31.54    23.04    39.36    43.13    [<A HREF = "hinv054.txt">hinv</A>]
+Indy R5000PC 150MHz XL24:                    20.04    26.52    26.15    39.23    37.55    42.87
+Indigo R3000 33MHz XS24Z (1GE):              17.49    25.74    27.67    20.24    32.23    36.40    [<A HREF = "hinv039.txt">hinv</A>]
+Indy R4600PC/133 XL24:                       13.10    19.00    17.72    20.33    26.28    27.93
+Indy R4600PC/100 XL24:                       12.01    15.21    15.20    19.12    21.08    23.78
+Indigo R3000 33MHz Entry:                     7.26     9.34     9.61     9.90    11.89    12.54    [<A HREF = "hinv038.txt">hinv</A>]
+</PRE><P><BR>
+
+Test L: stars4.iv (0 polygons, 300000 points). This model is a
+simple, very large point data set [<A HREF =
+"prfcmppics.html#GFX1L">screenshot</A>], constructed by placing
+random points in a spherical volume, which was then squashed
+vertically. Unlike Test F, this test is a single defined Inventor
+object; there is no screenshot available since the object just
+resembles a white blob when shown in an Inventor window (one must
+zoom-in to see the individual points). For the maximum size window
+(MW), I zoomed the object so that it just filled the ivview window
+area (this is only reliably possible to do because the object is
+circular). Note that a system needs more than 64MB RAM to run this
+test properly.<P>
+
+<PRE>
+                                              MW      SW
+
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:      44.53   44.55    [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:       39.87   24.50    [<A HREF = "hinv080.txt">hinv</A>]
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:       37.40   38.00    [<A HREF = "hinv000.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:       25.94   34.00    [<A HREF = "hinv125.txt">hinv</A>]
+Tezro R16000 1GHz 16MB L2 V12:              20.20   23.08    [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:              20.14   22.81    [<A HREF = "hinv079.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:              20.09   22.72    [<A HREF = "hinv098.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:           20.08   23.08    [<A HREF = "hinv113.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:              20.08   22.66    [<A HREF = "hinv092.txt">hinv</A>]
+Octane R12000SC/400 2MB L2 V12:             20.07   21.78    [<A HREF = "hinv048.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                   18.24   22.66    [<A HREF = "hinv068.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                   17.55   20.57    [<A HREF = "hinv072.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:      15.42   15.44    [<A HREF = "hinv051.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:            12.53   13.03    [<A HREF = "hinv071.txt">hinv</A>]
+Octane2 R14000SC/600 2MB L2 MXE:            11.95   12.35    [<A HREF = "hinv107.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SE+Texture:     11.44   12.24    [<A HREF = "hinv117.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 SSI:             11.40   11.75    [<A HREF = "hinv105.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 MXI:             11.36   11.73    [<A HREF = "hinv106.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:            10.53   11.56    [<A HREF = "hinv110.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SI+Texture:      9.81   10.30    [<A HREF = "hinv118.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:          9.42    9.63    [<A HREF = "hinv114.txt">hinv</A>]
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:       9.38    9.62    [<A HREF = "hinv031.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:            9.36    9.56    [<A HREF = "hinv026.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:       9.33    9.55    [<A HREF = "hinv007.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:            9.23    9.40    [<A HREF = "hinv014.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:          8.83    9.19    [<A HREF = "hinv115.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:          8.82    9.18    [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:            8.74    9.11    [<A HREF = "hinv111.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:            8.48    8.38    [<A HREF = "hinv005.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 1RM4:            8.43    8.70    [<A HREF = "hinv005.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:       7.76    7.93    [<A HREF = "hinv006.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:       7.74    7.92    [<A HREF = "hinv035.txt">hinv</A>]
+Indigo2 R10000 195MHz 1MB L2 SolidIMPACT:    7.64    8.20    [<A HREF = "hinv033.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:       7.64    7.83    [<A HREF = "hinv050.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:       7.36    7.53    [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:   7.16    7.51    [<A HREF = "hinv046.txt">hinv</A>]
+POWER Series R4400SC/150 RE 4RM:             7.24    7.30    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:             7.23    7.30    [<A HREF = "hinv004.txt">hinv</A>]
+O2 R12000 400MHz 2MB:                        7.08    7.46    [<A HREF = "hinv101.txt">hinv</A>]
+O2 R7000SC 600MHz 256K/1MB L2/L3:            6.96    7.47    [<A HREF = "hinv086.txt">hinv</A>]
+POWER Series R4400SC/150 RE 1RM:             6.93    7.02    [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4000SC/100 RE 2RM:             6.71    6.75
+POWER Series R4000SC/100 RE 1RM:             6.65    6.69
+POWER Series R3000SC/33 RE 1RM:              6.14    6.23
+O2 R12000SC 300MHz 1MB:                      5.88    6.14    [<A HREF = "hinv043.txt">hinv</A>]
+O2 R12000 270MHz 1MB:                        6.06    6.27    [<A HREF = "hinv100.txt">hinv</A>]
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:       5.18    5.26    [<A HREF = "hinv049.txt">hinv</A>]
+O2 R7000 350MHz 256K/1MB:                    5.12    5.30    [<A HREF = "hinv121.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                      5.03    5.22    [<A HREF = "hinv070.txt">hinv</A>]  ??
+O2 R10000 250MHz 1MB:                        4.85    5.03    [<A HREF = "hinv099.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                       4.83    5.01    [<A HREF = "hinv090.txt">hinv</A>]
+O2 R10000SC 225MHz 1MB:                      4.51    4.63    [<A HREF = "hinv123.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):    4.35    4.43    [<A HREF = "hinv104.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):   4.28    4.32    [<A HREF = "hinv002.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):   4.25    4.31    [<A HREF = "hinv018.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):   4.20    4.25    [<A HREF = "hinv021.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                      3.76    3.84    [<A HREF = "hinv122.txt">hinv</A>]
+O2 R5000SC 200MHz 1MB:                       3.63    3.76
+O2 R5000SC 180MHz 512K:                      3.25    3.32    [<A HREF = "hinv017.txt">hinv</A>]
+O2 R10000SC 150MHz 1MB:                      3.22    3.27    [<A HREF = "hinv016.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):      2.74    2.80
+Indy R4600SC 133MHz 512K L2 XZ (4GE):        2.73    2.80    [<A HREF = "hinv109.txt">hinv</A>]
+Indy R5000SC 180MHz 512K XZ (4GE):           2.73    2.78    [<A HREF = "hinv019.txt">hinv</A>]
+Indy R4400SC 200MHz 1MB XZ (4GE):            2.73    2.78
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):      2.72    2.78
+Indy R5000PC 150MHz XZ (4GE):                2.71    2.77    [<A HREF = "hinv108.txt">hinv</A>]
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):    2.65    2.69    [<A HREF = "hinv027.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):                2.62    2.64    [<A HREF = "hinv029.txt">hinv</A>]
+Indigo R3000 33MHz GR2-Elan (4GE):           1.85    1.89    [<A HREF = "hinv041.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):        1.66    1.69
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):        1.64    1.65    [<A HREF = "hinv015.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB XL24:                1.10    1.20
+Indy R5000SC 180MHz 512K XL24:               1.06    1.20
+Indy R4400SC/200 1MB XL24:                   0.81    1.02
+Indigo R3000 33MHz GR2-XZ (2GE):             1.38    1.39    [<A HREF = "hinv106.txt">hinv</A>]
+Indy R5000PC 150MHz XL24:                    0.79    0.87
+Indigo R3000 33MHz XS24Z (1GE):              0.69    0.69    [<A HREF = "hinv039.txt">hinv</A>]
+Indy R4600PC/133 XL24:                       0.43    0.68
+Indy R4600PC/100 XL24:                       0.40    0.44
+Indigo R3000 33MHz Entry:                    0.19    0.20    [<A HREF = "hinv038.txt">hinv</A>]
+</PRE><P><BR>
+
+Test M: spacestation.iv (10237 polygons). This is the famous model
+from the /usr/share/data/models/vehicles directory [<A HREF =
+"prfcmppics.html#GFX1M">screenshot</A>].<P>
+
+<PRE>
+                                              MW    MW/W    MW/HL    SW     SW/W    SW/HL
+
+Tezro R16000 1GHz 16MB L2 V12:             201.20  115.54  250.47  401.30  165.57  197.90   [<A HREF = "hinv087.txt">hinv</A>]
+Fuel R14000 600MHz 4MB L2 V12:             199.25  115.10  149.23  396.74  166.08  198.60   [<A HREF = "hinv092.txt">hinv</A>]
+Fuel R16000 900MHz 8MB L2 V12:             198.70  114.00  148.22  398.63  165.42  197.25   [<A HREF = "hinv079.txt">hinv</A>]
+Fuel R16000 800MHz 4MB L2 V10:             195.90  113.94  147.48  397.50  165.17  197.21   [<A HREF = "hinv098.txt">hinv</A>]
+Fuel R16K/700 4MB L2 V10:                  194.81  112.44     ?    400.30  162.59     ?     [<A HREF = "hinv068.txt">hinv</A>]
+Fuel R14K/500 2MB L2 V10:                  190.76  111.50  144.72  388.26  165.17  197.00   [<A HREF = "hinv072.txt">hinv</A>]
+Octane2 R14000 600MHz 2MB L2 V12:          181.57  106.79  138.58  377.62  163.09  194.81   [<A HREF = "hinv113.txt">hinv</A>]
+Onyx2 IR3 R12K/400 8MB L2 2RM10/256MB:     284.72  109.89  180.55  335.33   83.13  145.64   [<A HREF = "hinv126.txt">hinv</A>]
+Onyx2 IR2E R12K/400 8MB L2 2RM9/64MB:      332.83   96.45  176.82  333.83   78.96  131.41   [<A HREF = "hinv080.txt">hinv</A>]
+Onyx2 IR2E R10K/250 4MB L2 4RM9/64MB:      223.79  102.42  159.78  223.93  103.79  150.37   [<A HREF = "hinv000.txt">hinv</A>]
+Onyx2 Reality R12K/400 8MB 2RM8/64MB:      164.00   92.63  140.72  333.67   92.41  149.33   [<A HREF = "hinv125.txt">hinv</A>]
+Onyx R10000SC/195 1MB L2 IR 1RM6/64MB:     161.99  130.17   87.49  162.87  127.78   82.98   [<A HREF = "hinv051.txt">hinv</A>]
+Octane2 R12000 400MHz 2MB L2 V6:           125.24   63.70   85.26  271.86  108.09  129.50   [<A HREF = "hinv110.txt">hinv</A>]
+Octane R12000 300MHz 2MB L2 V6:            123.04   62.95   84.39  255.32  107.10  129.38
+Octane2 R14000SC/600 2MB L2 MXE:            77.61   43.61   62.76  118.15   51.23   76.06   [<A HREF = "hinv107.txt">hinv</A>]
+Octane2 R12000SC/400 2MB L2 MXE:            75.47   41.12   59.85  118.38   47.88   72.50   [<A HREF = "hinv071.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 2RM4:         69.43   31.27   47.38   88.28   35.61   54.35   [<A HREF = "hinv114.txt">hinv</A>]
+Onyx R4400SC/250 4MB L2 RE2 2RM4:           68.69   31.13   46.93   87.06   35.66   54.27   [<A HREF = "hinv026.txt">hinv</A>]
+POWER Onyx R8000SC/90 4MB L2 RE2 2RM5:      68.13   31.13   47.02   84.67   35.48   53.92   [<A HREF = "hinv031.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 2RM5:           66.68   31.16   46.75   82.59   35.42   53.93   [<A HREF = "hinv014.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 4RM4:           59.68   32.31   48.52   62.19   35.48   53.68   [<A HREF = "hinv005.txt">hinv</A>]
+POWER Onyx R8000SC/75 4MB L2 RE2 2RM5:      62.94   30.67   45.93   68.74   34.94   53.35   [<A HREF = "hinv007.txt">hinv</A>]
+Indigo2 R10K/195 1MB L2 MaxIMPACT 4MB:      54.20   28.99   42.93   76.19   32.78   51.76   [<A HREF = "hinv006.txt">hinv</A>]
+Onyx R10000 195MHz 1MB L2 RE2 1RM4:         53.65   27.12   40.24   83.79   34.38   52.40   [<A HREF = "hinv115.txt">hinv</A>]
+Onyx R10000 195MHz 2MB L2 RE2 1RM5:         52.29   26.90   39.49   84.79   34.40   52.11   [<A HREF = "hinv112.txt">hinv</A>]
+Onyx R4400SC/200 4MB L2 RE2 1RM5:           52.20   26.74   39.66   78.92   33.95   51.59   [<A HREF = "hinv111.txt">hinv</A>]
+Indigo2 R10K/175 1MB L2 MaxIMPACT 4MB:      48.46   28.88   40.38   77.88   32.84   50.29   [<A HREF = "hinv035.txt">hinv</A>]
+Onyx R4400SC/150 1MB L2 RE2 1RM4:           48.70   26.01   38.35   62.35   33.53   50.48   [<A HREF = "hinv005.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 4MB:      42.70   28.49   39.02   61.29   33.27   49.24   [<A HREF = "hinv047.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB MaxIMPACT 1MB:      41.01   28.01   38.57   62.66   32.50   49.57
+Indigo2 R4400SC/200 1MB MaxIMPACT 4MB:      40.38   28.23   38.54   53.18   31.96   46.60   [<A HREF = "hinv050.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 SSI:             39.60   26.72   34.30   79.10   30.70   47.41   [<A HREF = "hinv105.txt">hinv</A>]
+Octane R10000SC/250 2MB L2 MXI:             40.65   26.75   34.76   78.13   30.51   46.55   [<A HREF = "hinv106.txt">hinv</A>]
+POWER Series R4400SC/150 RE 4RM:            57.90   25.72   38.36   54.88   26.96   40.49   [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 2RM:            51.62   25.16   38.21   56.48   26.97   40.34   [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4400SC/150 RE 1RM:            42.48   23.13   33.89   52.99   26.44   39.29   [<A HREF = "hinv004.txt">hinv</A>]
+POWER Series R4000SC/100 RE 2RM:            33.78   24.94   35.56   34.27   25.78   36.73
+POWER Series R4000SC/100 RE 1RM:            33.09   22.51   32.90   33.88   25.92   36.58
+Octane2 R14000SC/550 2MB L2 SE+Texture:     27.37   20.37   26.17   54.84   25.20   37.43   [<A HREF = "hinv117.txt">hinv</A>]
+Indigo2 R4000SC/100 1MB MaxIMPACT 4MB:      23.76   27.26   32.38   26.08   30.22   34.83   [<A HREF = "hinv049.txt">hinv</A>]
+O2 R12000 400MHz 2MB:                       22.37   19.25   24.73   44.20   30.95   43.47   [<A HREF = "hinv101.txt">hinv</A>]
+O2 R7000SC 600MHz 256K/1MB L2/L3:           21.14   20.40   23.83   43.40   31.65   44.61   [<A HREF = "hinv086.txt">hinv</A>]
+Octane2 R14000SC/550 2MB L2 SI+Texture:     24.07   17.46   22.34   47.06   21.28   31.50   [<A HREF = "hinv118.txt">hinv</A>]
+O2 R7000 350MHz 256K/1MB:                   20.37   18.00   23.33   33.12   28.74   38.73   [<A HREF = "hinv121.txt">hinv</A>]
+O2 R12000SC 300MHz 1MB:                     21.11   17.31   23.26   35.07   25.94   36.62   [<A HREF = "hinv043.txt">hinv</A>]
+Indigo2 R4400SC 250MHz 2MB L2 SolidIMPACT:  20.66   19.35   15.36   45.41   28.10   18.50   [<A HREF = "hinv046.txt">hinv</A>]
+Octane R12000SC/400 2MB L2 SE+Texture:      19.88   17.72   20.63   49.87   23.82   34.23
+Octane R10000SC/250 1MB L2 SE+Texture:      20.11   16.44   19.70   49.37   20.66   30.69
+Octane R10000SC/195 1MB L2 SE+Texture:      19.06   14.48   17.80   42.67   17.38   25.95
+POWER Series R3000SC/33 RE 1RM:             16.61   19.35   22.73   16.59   22.66   23.95
+O2 R12000 270MHz 1MB:                       17.28   15.82   20.12   29.84   23.74   33.45   [<A HREF = "hinv100.txt">hinv</A>]
+O2 R10000SC 225MHz 1MB:                     15.28   16.42   19.88   26.88   27.45   35.42   [<A HREF = "hinv123.txt">hinv</A>]
+O2 R10000 250MHz 1MB:                       15.43   15.90   19.28   25.96   25.02   33.22   [<A HREF = "hinv099.txt">hinv</A>]
+O2 R5200SC 300MHz 1MB:                      15.13   16.40   19.95   24.84   27.62   35.36   [<A HREF = "hinv090.txt">hinv</A>]
+O2 R10000SC 195MHz 1MB:                     14.43   15.29   18.72   23.58   27.29   34.65   [<A HREF = "hinv070.txt">hinv</A>]
+O2 R10000SC 175MHz 1MB:                     13.76   15.13   18.00   21.82   23.40   29.13   [<A HREF = "hinv122.txt">hinv</A>]
+O2 R10000SC 150MHz 1MB:                     13.67   15.07   19.44   18.46   20.67   26.60   [<A HREF = "hinv016.txt">hinv</A>]
+O2 R5000SC 200MHz 1MB:                      12.85   14.60   17.35   20.03   24.26   30.73
+Indigo2 R4400SC/250 2MB GU1-Extreme (8GE):  13.26   14.68   12.22   19.49   23.13   19.08   [<A HREF = "hinv002.txt">hinv</A>]
+O2 R5000SC 180MHz 512K:                     11.88   14.44   17.18   15.94   20.66   25.63   [<A HREF = "hinv017.txt">hinv</A>]
+Indigo2 R10000/195 1MB GU1-Extreme (8GE):   12.50   12.17   13.66   18.47   17.08   20.02   [<A HREF = "hinv104.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GU1-Extreme (8GE):  12.84   11.79   14.13   15.97   16.67   18.32   [<A HREF = "hinv018.txt">hinv</A>]
+Indigo2 R4400SC/150 1MB GU1-Extreme (8GE):  11.40   10.48   12.23   16.98   16.54   19.51   [<A HREF = "hinv021.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB GR3-Elan (4GE):      6.22    6.12    6.87    8.95    9.29   10.80
+Indigo R4000SC 100MHz 1MB GR2-Elan (4GE):    6.16    6.53    5.72    7.70    8.61    7.63   [<A HREF = "hinv027.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GR3-Elan (4GE):      6.13    6.12    6.90    7.85    7.88    9.20
+Indy R4400SC 200MHz 1MB XZ (4GE):            6.05    6.09    6.70    7.97    7.90    9.13
+Indy R5000SC 180MHz 512K XZ (4GE):           6.05    5.95    6.75    7.83    7.84    9.13
+Indy R5000PC 150MHz XZ (4GE):                6.04    5.97    6.63    7.55    7.63    8.53   [<A HREF = "hinv108.txt">hinv</A>]
+Indy R4600PC 133MHz XZ (4GE):                6.04    5.61    6.48    8.07    7.81    9.10   [<A HREF = "hinv029.txt">hinv</A>]
+Indy R4600SC 133MHz 512K L2 XZ (4GE):        5.97    5.63    6.45    7.83    7.57    8.63 ? [<A HREF = "hinv109.txt">hinv</A>]
+Indigo R3000 33MHz GR2-Elan (4GE):           5.64    5.38    6.19    7.35    7.47    8.53   [<A HREF = "hinv041.txt">hinv</A>]
+Indigo2 R4400SC/200 1MB GR3-XZ (2GE):        5.33    5.75    6.51    6.50    7.17    8.05
+Indigo2 R4400SC/150 1MB GR3-XZ (2GE):        5.22    5.57    6.33    6.33    6.89    7.91   [<A HREF = "hinv015.txt">hinv</A>]
+Indigo R3000 33MHz GR2-XZ (2GE):             4.59    4.89    5.62    5.17    5.60    6.62   [<A HREF = "hinv106.txt">hinv</A>]
+Indigo R4000SC/100 1MB GR2-XS24Z (1GE):      2.82    3.24    3.65    3.04    3.43    4.09   [<A HREF = "hinv054.txt">hinv</A>]
+Indigo R3000 33MHz XS24Z (1GE):              2.80    3.30    3.70    2.90    3.56    4.05   [<A HREF = "hinv039.txt">hinv</A>]
+Indigo2 R4400SC/250 2MB XL24:                2.44    2.63    2.63    4.21    4.68    5.17
+Indy R5000SC 180MHz 512K XL24:               2.14    2.34    2.36    4.72    4.20    5.10
+Indy R4400SC/200 1MB XL24:                   1.60    2.21    2.32    5.58    4.49    5.92
+Indy R5000PC 150MHz XL24:                    1.61    1.81    1.77    3.50    3.25    3.73
+Indy R4600PC/133 XL24:                       1.03    1.31    1.33    2.81    3.02    3.50
+Indy R4600PC/100 XL24:                       0.95    1.13    1.14    2.34    2.44    2.88
+Indigo R3000 33MHz Entry:                    0.67    0.84    0.82    0.84    1.09    1.00   [<A HREF = "hinv038.txt">hinv</A>]
+</PRE><P><BR>
+
+I may add further tests of other models at a later date. If you have
+any suggestions, feel free to <A HREF =
+"mailto:mapesdhs@yahoo.com">email me</A>.<P>
+
+Info on the R3000SC POWER Series RE system, from Simon Pigot:<P>
+
+<DL><DT><DD><PRE>
+Here are some tests for 8 x 33MHz R3000 256k/SC with 256Mb RAM and
+RealityEngine with 1 x RM4. The tests were all done under Irix 5.3xfs
+with the Open Inventor 2.1.1 eoe plus the 5.3xfs Recommended patches.
+Certainly lags behind the R4000 and R4400 RE but still isn't too bad....
+
+BTW: Tried quake on 6.2 RE with R4400/150 the other day - seems to work
+just fine. In fact it looks to me to be somewhere between O2 and Octane
+in its performance - not bad.
+</PRE></DL><P>
+
+Speaking of Quake, an Onyx2 R10K/250 (4MB L2) IR2E 4RM/64 system I tested
+gives 30fps at 3840x1024 (3-screen RealityCentre).<P>
+
+A note about the V12 results compared to V6: from what I can gather,
+only the power of the GE subsystem was increased from V6/8 to V10/12.
+Thus, please make careful note of the following table when looking at
+the V6 and V12 numbers:<P>
+
+<H5><PRE>
+                     CAD-oriented, fewer    GIS, imaging, heavy texture
+                     hw features, not so    oriented, complex animation,
+                     much VRAM or TRAM.     more features, dual-head, etc.
+
+Old Series VPro         V6 (32MB RAM)               V8 (128MB RAM)
+Original GE speed
+
+New Series VPro         V10 (32MB RAM)              V12 (128MB RAM)
+2X Faster GE speed
+</PRE></H5><P>
+
+Some observations which result from the above:<P>
+
+<UL>
+
+<LI>For fill-limited tasks, V12 will not be that much faster than V6
+or V8 at the same resolution. There will be some speedup, but not
+much. This is clear in tests such as full-screen-textured
+HugeEngineModel.<P>
+
+<LI>For geometry-limited tasks, V12 will be much faster, up to 100%
+faster, than V6 or V8 at the same resolution. This is very clear in
+the stars3 and stars4 results, which (taking the screen resolution
+difference into account) show a perfect doubling of speed from V6 to
+V12.<P>
+
+<LI>For other tasks, the speedup from V6 to V12 varies since both
+fill and geometry can matter to different degrees. Thus, for shaded
+tasks, there is a speedup, and a better speedup than for textured.
+For wireframe, there is a significant speedup (typically 50%) because
+fill rate is less important for wireframe, though it does still
+matter when a model is large.<P>
+
+</UL>
+
+So if you're a V6 user, do you need V10? If you're a V8 user, do you
+need V12?  Well, it depends on what you're doing. This is definitely
+a case of try before you buy. One should also analyse main CPU issues
+before considering a gfx upgrade - maybe the main CPU is the
+bottleneck. What does osview say when an application is active? The
+models tested here don't cause much in the way of dynamic data
+transfer between main RAM and the graphic board, so more complex
+applications may behave differently, eg. Octane MXI should perform
+much better than Indigo2 MaxIMPACT for a RAM intensive 3D
+task.<P><BR>
+
+Curiosities:<P>
+
+<UL>
+
+<LI>Why is R4K/200 (1MB L2) MaxIMPACT/4MB slightly faster than
+R4K/250 (2MB L2) MaxIMPACT/4MB for the stars4 test? The difference is
+small, but it is repeatable. The 250 is always about 7.35, while the
+200 is always about 7.60. Wierd!<P>
+
+<LI>O2 R10K/250 tends to be almost the same or slightly quicker than
+O2 R12K/270 for wireframe models. I think this is probably because
+the cache speed is different for the R12K, perhaps in some way reducing
+wireframe performance.<P>
+
+</UL>
+
+Comments welcome! :)<P>
+
+</HTML>

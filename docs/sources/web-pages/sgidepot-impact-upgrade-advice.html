@@ -1,0 +1,205 @@
+<HTML>
+
+<TITLE>IMPACT Upgrade Advice...</TITLE>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+
+<CENTER><B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B><P>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+</CENTER>
+
+<CENTER><H1>IMPACT Graphics, Video and OS Information</H1></CENTER>
+
+My thanks to <A HREF = "mailto:robj@reading.sgi.com">Rob Jenkins</A>
+at SGI who sent me this information after I posted the O2/Indigo2
+comparison info to comp.sys.sgi.hardware.<P>
+
+<H3>Rob says...</H3>
+
+The main thing to know for texturing is that IMPACT machines with 1MB
+of TRAM (texture memory) only support up to 16bit textures. If an
+OpenGL (or Iris GL) application uses 4 channel (RGBA) textures then
+the maximum resolution is 4bits per colour component. This can mean
+that on textures with subtle colour gradients some banding may be
+apparent. To check the hardware on the machine do:<P>
+
+<PRE>
+   /usr/gfx/gfxinfo
+</PRE><P>
+
+If customers require 32 bit texture in their applications, they'd need a
+4 meg texture memory system, or they would have to use the above texture
+formats that are supported by the 1 TRAM system. <P>
+
+In summary, the following are the supported texture formats on different
+TRAM configurations.<P>
+
+<PRE>
+   BITS/COMPONENT  4   4   4   4   8   8   8   8   12   12   12   12
+   COMPONENTS      1   2   3   4   1   2   3   4    1    2    3    4
+
+   1 TRAM          Y   Y   Y   Y   Y   Y   N   N    N    N    N    N
+   4 TRAM          Y   Y   Y   Y   Y   Y   Y   Y    Y    Y    Y    Y
+</PRE><P>
+
+I have a collection of IMPACT texture info collected from various people
+so I'll paste that below:<P>
+
+<OL>
+<LI> The largest texture you can load with one TRAM is 512x512... if a
+polygon is supposed to be textured but shows up white, this is a good
+candidate for your problem.<P>
+<LI>Textures <I>must</I> be a power of 2 on each edge... i.e. 8x8, 16x16,
+32x32, etc.<P>
+</UL>
+
+More specifically, the texture size is bounded by the TRAM size. We have
+1M TRAMs, so the largest texture <I>size</I> is 1M. The amount of texture
+data is dependent on the number of TRAMs in the system. There can be
+either 1 or 4 TRAMs. With one TRAM, all channels of a texture are
+multiplexed into the same TRAM. With 4 TRAMs, each channel is split out
+into the individual TRAMs.<P>
+
+So, if you have 2D Luminance textures, you can create 1K x 1K textures
+on a 1 or 4 TRAM system. But if you have RGBA textures, on a 1 TRAM
+system, you can only create a 512 x 512 texture. A 1K x 1K RGBA texture
+will work on a 4 TRAM system, each 1M R, G, B, and A channel will fill
+the full 1M of each of the 4 TRAMs. <P>
+
+Same goes for 1D or 3D textures. The largest 3D texture size is still
+1M, a possible size is 128 * 128 * 64. Depending on the number of
+channels: Luminance, Luminance-Alpha, RGB, or RGBA, and the number of
+TRAMs in the system, the texture size may have to be reduced.<P>
+
+There is an environment variable to control use of HW or SW texturing on
+a 1MB TRAM IMPACT:<P>
+
+<PRE>
+   setenv USE_SOFT_TEXTURE 1
+</PRE><P>
+
+This will disable hardware texturing - only on 1 TRAM machines
+though. Obviously just use unsetenv or set it back to 0 to
+re-enable.  This isn't global, in other words if you set this in a
+shell it only effects programs run in that shell afterwards -if you
+run the same code in another shell ( without the variable set) it'll
+use hardware texturing. Also if you use OpenInventor you can also use
+the textureQuality field in a SoComplexity node set to 1.0 to achieve
+this, which is useful if you are suffering from banded textures and
+can take the obvious performance hit of using software
+texturing.<P><BR>
+
+<B>IMPACT Video:</B><P>
+
+There are two video boards available for IMPACT machines:<P>
+
+<UL>
+<LI>Indigo2Video for IMPACT is the equivalent of Indigo2Video for
+XL/XZ/Extreme (it's the same board respun to fit the IMPACT
+machine).<P>
+<LI>IMPACT video which is a digital-only broadcast quality board with
+<I>many</I> more features than Galileo for XL/XZ/Extreme.<P>
+</UL>
+
+There is also a Color Space/Video Texture Daughter Card and a
+compression card (Cosmo 2.0) for IMPACT video.<P><BR>
+
+<B>A couple of IMPACT 'Gotchas':</B><P>
+
+When using/testing Indigo2 IMPACTs make sure the latest gfx patches
+are installed, at the moment Irix 6.2 should have patch 1447, Irix
+5.3 pacth 1333. There are other recommended patches for IMPACT but
+these gfx ones are essential.<P>
+
+On pre-Irix5.x operating systems software was compiled into COFF
+format executables, after Irix 5.x executables are ELF format.  Any
+COFF executables calling Iris GL will run <I>very</I> slowly on
+IMPACTs as the Iris GL calls go via the Distributed GL (DGL) daemon
+which is like running remotely. So, if you have problems where
+certian graphics applications run very slowly check the executable
+format by doing:<P>
+
+<PRE>
+   file &LT;executable name&GT;
+</PRE><P>
+
+if it's COFF then that's why it's slow, get a newer version (that's
+been compiled on Irix 5.x). NOTE: COFF will not be supported at all
+from Irix 6.2 onwards so I think (not sure) but O2 won't support COFF
+executables, even if it does I'm sure it would be better to move to
+ELF.<P>
+
+<HR>
+
+<CENTER>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B></CENTER><P>
+
+</HTML>
+

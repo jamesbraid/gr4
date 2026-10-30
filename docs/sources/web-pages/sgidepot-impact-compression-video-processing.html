@@ -1,0 +1,509 @@
+<HTML>
+
+<TITLE>Video Processing with IMPACT Compression...</TITLE>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+
+<CENTER><B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B><P>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+</CENTER>
+
+<CENTER>
+
+<H1>Video Processing with IMPACT Compression</H1>
+
+<H3>Last Change: 05/Jan/2004</H3>
+
+<H5>(this page is still under construction)</H5>
+
+</CENTER>
+
+All the information on this page can be found in the various man pages
+and other information sources available for IMPACT Compression (IMPCOM
+for short); however, it's always good to be able to start using an
+option board straight away, so this page contains what I would regard
+as the most useful items of information which will allow one to exploit
+an IMPCOM board without delay. You should still read the various man pages
+later though.<P>
+
+The most important fact about using IMPCOM is to forget about using
+MediaRecorder. Like MovieMaker, MediaRecorder has not been written to
+properly support IMPCOM. Besides, MediaRecorder is just a GUI
+interface to dmrecord anyway, so using dmrecord directly will be more
+reliable as there is less overhead processing going on. Plus, if you
+get used to use command line tools like dmrecord and dmplay, then
+creating custom scripts for more complex tasks (such as batch
+processing or scheduled video capture) is alot easier. Similarly, I
+don't use MediaPlayer when dealing with IMPCOM-generated data. I
+always playback files with dmplay directly. It seems that most of the
+later work on the media tools was designed to support O2's ICE more
+than the old Cosmo boards, so in general the command line tools are
+better for using IMPCOM.<P><BR>
+
+<B>Background</B><P>
+
+I assume here that you're using an IMPACT Indigo2 with an IMPCOM board
+installed. None of the examples listed require anything better than
+SolidIMPACT graphics, and - at least for the moment - it is assumed
+you do not also have an IMPACT Video board (IMPVID). The implications
+of having just an IMPCOM board are explained along the way.<P>
+
+I'm also assuming that your system is using IRIX 6.5, and preferably
+6.5.15. This is because many versions after 6.5.15 have bugs in the
+video libraries which certainly create problems with using an O2 or
+Cosmo1 Indigo2 for video tasks and so very like adversely affects
+Cosmo2 systems too (that includes IMPCOM Indigo2 and Octane with
+Octane Compression). All of my video systems have 6.5.15 installed.<P>
+
+I don't know if more recent IRIX releases (6.5.20 or later) have had
+the bugs fixed; the latest update I have is 6.5.17 and so far I haven't
+had a need to upgrade beyond that.<P>
+
+IMPCOM is great for video capture and playback. It is capable of
+quality levels better than that supported by O2 and is generally more
+reliable with the supplied video tools. IMPCOM also seems to be more
+resistant to signal noise and so is better than O2 at capturing from
+standard VHS sources. It still helps to have a clean signal source
+though, if possible.<P>
+
+IMPCOM is less flexible than O2 though. It can only handle MJPEG (or
+uncompressed) data, whereas O2 can deal with MPEG and other formats.
+However, for my purposes (archiving my vast VHS library of documentaries),
+it is ideal.<P>
+
+The examples given here use only the supplied programs which are part
+of the IRIS Digital Media Tools. Even with 6.5.15, these do have bugs.
+They're not professional applications. However, used in the appropriate
+way they can be most effective and are perfectly adequate for many tasks.
+The key point about the video tools is that although dmrecord and dmplay
+have been coded to use IMPCOM, the MovieMaker application has not. Thus,
+one can capture and playback using IMPCOM, but editing would be done
+in software. My advice is to edit using an O2 if you can (even an R5K/180
+would do fine) and then either use the O2 or the IMPCOM for final playback.
+Editing on the Indigo2 will still work, but it will be slow.<P>
+
+An interesting point: movies captured with O2 always seem to give a
+one-time non-fatal error when loaded into MovieMaker and played for
+the first time (ie. it doesn't prevent one editing the movie), whereas
+movies recorded with IMPCOM do not give any such error. The error
+doesn't seem to harm how MovieMaker works, but it does suggest the
+code which uses IMPCOM within dmrecord is more robust than the
+equivalent code for the O2 version.<P>
+
+With respect to main CPU speed, I would expect an R4K/200 or better would
+be just fine, but please note that all examples given here have only
+been tested with an R10K/195 Indigo2. As for RAM, 256MB should be ok. I
+don't think the capture process uses that much. My own Indigo2 has 1GB
+but that's overkill. Lastly, I'm assuming you have plenty of disk space
+available; my system has an 18GB system disk and a 36GB option disk. I
+do have a disk array, but the examples described here are designed to work
+fine for those who do not have any fast disk array. Here is the hinv of
+my system:<P>
+
+<PRE>
+  FPU: MIPS R10010 Floating Point Chip Revision: 0.0
+  CPU: MIPS R10000 Processor Chip Revision: 2.6
+  1 195 MHZ IP28 Processor
+  Main memory size: 1024 Mbytes
+  Secondary unified instruction/data cache size: 1 Mbyte
+  Instruction cache size: 32 Kbytes
+  Data cache size: 32 Kbytes
+  Integral SCSI controller 0: Version WD33C93B, revision D
+    Disk drive: unit 1 on SCSI controller 0
+    Disk drive: unit 2 on SCSI controller 0
+    CDROM: unit 3 on SCSI controller 0
+  Integral SCSI controller 1: Version WD33C93B, revision D
+  On-board serial ports: 2
+  On-board bi-directional parallel port
+  Graphics board: Solid Impact
+  Integral Ethernet: ec0, version 1
+  Iris Audio Processor: version A2 revision 1.1.0
+  EISA bus: adapter 0
+  IMPACT Compression: unit 0, revision 0:0
+</PRE><P><BR>
+
+<B>Preparation</B><P>
+
+After installing the IMPCOM drivers, make sure the video daemon is active. Enter:<P>
+
+<PRE>
+    chkconfig videod on
+</PRE><P>
+
+and either reboot or restart videod:<P>
+
+<PRE>
+    /etc/init.d/videod start
+</PRE><P>
+
+Next, because I use an O2 for video editing, I try and get used to using a
+screen refresh of 50Hz, so before anything else I use xsetmon to set
+the display to 1280x1024 at 50Hz. This is more useful when using an O2,
+and for those who do have an IMPVID board installed. However, it's
+wise to become accustomed to using 50Hz if you can. Since I don't use
+IMPVID, this probably doesn't make any difference in practice. Or one
+could use 75Hz instead. The important point is to encourage the use of
+a screen refresh which is a fixed multiple of the video source rate,
+ie. some multiple of 25 for PAL, or some multiple of 30 for NTSC. Users
+of PAL have more options here, ie. 50 or 75. NTSC users are pretty much
+stuck with 60Hz. I've not yested tested the example commands on this
+page with a 75Hz refresh; they'll probably work fine though I expect.<P>
+
+When processing data to or from a video device, it helps if there is a
+minimum of interuptions from other processes, especially background
+daemons. Thus, make sure there isn't anything else running which is
+obvious, eg. any desktop clock programs or other utilities which cause
+constant CPU activity. Much more importantly, I find it definitely
+helps to deactive the web server and the mediad processes. To aid this
+task, I create two extra programs in /usr/local/bin, called <I>editon
+</I> and <I>editoff</I>. These are simple scripts to save typing.
+editon should contain the following:<P>
+
+<PRE>
+   #!/bin/sh
+   /etc/init.d/sgi_apache stop
+   /etc/init.d/mediad stop
+</PRE><P>
+
+while editoff should contain:
+
+<PRE>
+   #!/bin/sh
+   /etc/init.d/sgi_apache start
+   /etc/init.d/mediad start
+</PRE><P>
+
+Remember to use chmod to make these scripts executable (and any other
+scripts described on this page), ie.:<P>
+
+<PRE>
+   chmod ugo+rx scriptname
+</PRE><P>
+
+If you have any other non-essential background daemons which can be
+turned off, then add them to the list of actions in the appropriate
+way. Use the 'top' command to see what processes are running. If all
+is well, there ought to be just 3 or 4 processes regularly doing
+anything, ie. the X server, fam and the shell one is using, and of
+course top itself. Check before and after using editon - you will see
+a noticable difference in CPU activity.<P>
+
+Lastly by way of preparation, you should have some kind of TV device
+connected to the video output for playback checking. As mentioned
+earlier, without an IMPVID board installed one cannot play video to
+the screen with sound at the same time using the supplied tools
+(because there is no direct link from IMPCOM to the graphics
+subsystem). Note that this likely only applies to the supplied tools,
+in particular the version of dmplay which is installed. I highly doubt
+it is a general restriction; indeed, one could probably write a custom
+program which sets up a video to memory and then a memory to graphics
+path which would allow playback with only an IMPCOM board just fine.
+Unfortunately, dmplay always tries to connect as video to graphics.
+dmplay can play a movie to the screen without sound ok, but if you try
+to play a movie with sound aswell then the system suddenly becomes
+very unresponsive and frames are dropped, and it's difficult to quit
+the dmplay. Thus, after capturing a video sequence, you can check the
+basic visual quality by playing back to the screen, but it's best to
+have a TV or other device connected so that a proper check can be made
+by playing the movie to video out.<P>
+
+My own setup is a Panasonic NV-FJ780 VCR with a Watson 28" TV
+attached; the VCR has the very useful bonus of having <I>three </I> AV
+inputs aswell as a separate dedicated AV output. Most VCRs only have
+two SCART AV inputs and perhaps a separate phono AV output. The FJ780
+has two SCART sockets for general AV I/O (AV1 and AV2), one set of
+phono sockets for dedicated AV input (AV3) and an extra set for AV
+output (it is this which is connected to my TV). I use AV3 for monitoring
+playback checks and recording from the IMPCOM board. AV1 is connected
+to my cable and AV2 is connected to a switch box which has inputs
+from my PS2 and other devices.<P>
+
+Note that the source code for dmrecord, dmplay and lots of other
+example programs is included under /usr/share/src; for someone with
+any C/C++ programming competence, there should easily be enough material
+present to write a version of dmplay that can do screen playback with
+sound.<P><BR>
+
+<B>Video Capture</B><P>
+
+Assuming you have all video devices connected and are ready to go,
+here is a typical example capture command using dmrecord, in this case
+grabbing approximately six minutes of PAL video from a camcorder with
+mono sound:<P>
+
+<H5><PRE>
+   dmrecord -p video,device=impact,comp=jpeg,engine=impact,brate=30000000 -p audio,channels=1 test.mv
+</PRE></H5><P>
+
+and here is the output:<P>
+
+<PRE>
+  Hit the Enter key to begin recording... 
+  Hit <ctrl>-c to stop recording...
+  Recording was done in real time successfully.
+  Post-processing output file 'test.mv' ... 
+  Timing information:
+  9090 image frames = 363.60 seconds of video captured.
+
+  Compression information:
+  Average compressed frame size:   149769.9 bytes
+  Average compression ratio:       5.9 : 1
+  Bit rate achieved:               29953989.4 bits/sec
+</PRE><P>
+
+Not a single dropped frame! The file size was 1.4GB, or 1396606575
+bytes to be exact. When I did this test, the system disk was a 9GB IBM
+7200rpm 50pin DNES 309170, so it is clear than an older disk will work
+just fine. Since then, to have more space, I've replaced the disk with
+an 18GB 10000rpm IBM drive and added a 36GB option disk.<P>
+
+In the command sequence, 'device' selects which video device to use
+(in this case 'impact'), comp selects which compression scheme to use
+(jpeg here), engine selects which device to use for the compression
+processing (the IMPCOM board; one could use software mode instead) and
+brate determines the capture bitrate (and thus the overall picture
+quality). The example uses a 30Mbit bitrate, but other tests I've done
+show a bitrate as low as 20 to 25Mbit still gives good quality. IMPCOM
+is capable of capturing as high as 87Mbit, but that is a quality level
+far beyond what one could conceivably ever need for general video
+tasks. If you try to use bitrates over 40 to 45Mbit then you will
+probably start to see dropped frames since that will start to get too
+close the physical hard sustained limit of the FastSCSI2 channel.<P>
+
+The audio setting selects mono sound (typical of many camcorders). When
+dealing with VHS material one would usually use channels=2.<P>
+
+Using dmrecord in the above way does not begin recording until one
+presses the Enter key. Hold down CTRL and press C at any time to
+stop recording.<P>
+
+Alternatively, one can specify a certain number of frames to capture
+and then stop recording. This is done with the -t option, eg. one could
+capture exactly 5 minutes of video with:<P>
+
+<H5><PRE>
+   dmrecord -t 300 -p video,device=impact,comp=jpeg,engine=impact,brate=30000000 -p audio,channels=1 test.mv
+</PRE></H5><P>
+
+Again, recording would not begin until Enter is pressed. It is also
+possible to make recording begin immediately using a different option
+(I'll include an example of this later).<P><BR>
+
+<B>Playback</B><P>
+
+To playback the movie to the screen without sound, a typical use
+of dmplay would be thus:<P>
+
+<PRE>
+  dmplay -p graphics,engine=impact -E auto test.mv
+</PRE><P>
+
+The -E option with 'auto' specifies that the dmplay application will
+exit automatically when the movie has finished playing - otherwise the
+dmplay window will remain until one does CTRL+C in the relevant xterm.<P>
+
+To playback to the video output with sound (and thus to a TV, VCR,
+etc.) this would be the usual method:<P>
+
+<PRE>
+   dmplay -p video,engine=impact -p audio -E auto test.mv 
+</PRE><P>
+
+Again, no frame drops at all with the example I used.<P>
+
+As a side note, if you try to play to the screen with audio, what
+happens is the audio is played ok, but frames are dropped and the
+system becomes unresponsive. A typical output in the xterm is:<P>
+
+<PRE>
+  # dmplay -p graphics,engine=impact -p audio test.mv
+  dmplay: frame 3 skipped
+  dmplay: frame 7 skipped
+  dmplay: frame 14 skipped
+  dmplay: frame 18 skipped
+  (and so on...)
+</PRE><P>
+
+One has to CTRL-C the application, or enter killall dmplay in a
+different xterm, or rlogin from elsewhere and kill off dmplay
+remotely. This doesn't really matter though since, for proper
+production work, I'd rather playback a sequence to video output for
+display on a TV and with the audio going through a proper hifi. The
+example command shown earlier which plays to video output does exactly
+that. Thus, as the above shows, grabbing from one source such as a
+video camera and then recording to another, eg. VCR, is very easy
+indeed.<P>
+
+The source code for serveral example programs are included with the
+IMPCOM drivers; I haven't tried them out yet because my Indigo2
+doesn't have the compilers installed at the moment. The impactcomp man
+page says:<P>
+
+<PRE>
+  * blendicomp: Real-time decompression of a JPEG compressed movie file,
+    alpha blended with graphics (Requires an
+    IMPACT Video option).
+
+  * compdecomp: Real-time compression of video input and
+    decompression to video output to demonstrate the effect of
+    a selected compression ratio on the video source images.
+
+  * comptodsk: Low compression ratio data capture to disk.
+
+  * contcapt: Continueous real-time capture of uncompressed video to disk.
+</PRE><P>
+
+The man page lists the location incorrectly though; the examples can
+be found in:<P>
+
+<PRE>
+   /usr/share/src/dmedia/compression/impact
+</PRE><P>
+
+and there are lots of other example programs and source code resources
+under /usr/share too, eg.:<P>
+
+<PRE>
+   # ls /usr/share/src/dmedia
+   audio/               midi/
+   cd+dat/              movie/
+   compression/         pluginmgr/
+   dmnet/               plugins/
+   dmplay/              scsiplayer/
+   dmrecord/            soundcommands/
+   dvaudiotest/         soundplayer/
+   libTransportButton/  timecode/
+   libmidifile/         tools/
+   libmidiplayer/       video/
+</PRE><P><BR>
+
+<B>Alias Commands and Scripts</B><P>
+
+One can use aliases and scripts to simplify the use of dmrecord and dmplay.
+For example, if one is always going to use a bitrate of, say, 30Mbit, then
+one could create a script in /usr/local/bin called, for example, 'dmr' which
+could contain the following:<P>
+
+<H5><PRE>
+   dmrecord -p video,device=impact,comp=jpeg,engine=impact,brate=30000000 -p audio,channels=2 $1
+</PRE></H5><P>
+
+Thus, to record some data, one could just enter:<P>
+
+<PRE>
+   dmr filename.mv
+</PRE><P>
+
+One can take this another step by, for example, having an environment variable
+to set the bitrate, eg. have the following in .cshrc:<P>
+
+<PRE>
+   setenv BITRATE 30000000
+</PRE><P>
+
+and changing /usr/local/bin/dmr to contain:<P>
+
+<H5><PRE>
+   dmrecord -p video,device=impact,comp=jpeg,engine=impact,brate=$BITRATE -p audio,channels=2 $1
+</PRE></H5><P>
+
+Similarly, one could create a script called dmp (for dmplay) in /usr/local/bin
+containing:<P>
+
+<PRE>
+   dmplay -p video,engine=impact -p audio -E auto $1
+</PRE><P>
+
+and perhaps a second script for playing to the graphics screen, called dmg:<P>
+
+<PRE>
+   dmplay -p graphics,engine=impact -E auto $1
+</PRE><P>
+
+Thus, a full capture and test playback would consist simply of:<P>
+
+<PRE>
+   dmr filename.mv
+   (various output shown onscreen)
+   dmp filename.mv
+</PRE><P>
+
+One could have a separate script for recording to a set number of frames, and/or
+any other differences required.<P>
+
+I'll add more to this page later. Comments and suggestions welcome!<P>
+
+<HR>
+
+<CENTER>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B></CENTER><P>
+
+</HTML>
+

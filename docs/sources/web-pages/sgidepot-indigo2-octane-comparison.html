@@ -1,0 +1,313 @@
+<HTML>
+
+<TITLE>Indigo2/Octane Comparison...</TITLE>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+
+<CENTER><B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B><P>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+</CENTER>
+
+<CENTER><H1>Indigo2/Octane Comparison</H1></CENTER>
+
+This discussion given here assumes that you have already read the <A
+HREF = "octnarch.html">Octane Architecture</A> summary.<P>
+
+Octane's memory latency is 48% less than on Indigo2 (less is better);
+combined with XIO, this leads to the following basic performance
+improvements on Octane compared to Indigo2/IMPACT:<P>
+
+<PRE>
+<UL>
+<LI>Texture loading:  70% faster
+<LI>Pixel Read/Write: 200% faster
+<LI>A/W's Maya:       400% faster
+<LI>Volume Roaming:   500% faster
+</UL>
+</PRE><P>
+
+Note that these improvements do not include the additional speed
+increases offered by MXE over MXI (40% better geometry system, 15%
+better texture system), SSE over SSI and SE over SI (40% better
+geometry system).<P>
+
+Alan Commike of SGI said about volume roaming on Octane:<P>
+
+<DL><DT><DD> "You could think of volume roaming as a superset of
+volume rendering. It means that the whole volume to render is not
+resident in memory at all times. Each frame, only a Region of
+Interest is rendered. The roam allows you to change the ROI [Region
+of Interest] and not drop the frame rate. Kinda like terrain
+fly-overs, but instead of terrain you might have a 3D seismic survey
+of the gulf of mexico, a high resolution CT scan, etc.<P>
+
+The Octane architecture allows one CPU to be paging 3D textures in
+and out of memory, while the other CPU is doing the rendering. The
+bus bandwidth and I/O capabilities are high enough that you don't
+take much of a hit moving all the data around the system."<P>
+</DL><P><BR>
+
+<CENTER><B>SPEC95</B></CENTER><P>
+
+Octane's better memory and I/O design leads to vastly improved
+SPECfp95 results for the R10000 compared to Indigo2 and newer
+compiler releases offer better integer performance too (I2 =
+Indigo2). Here are the single-CPU results:<P>
+
+<DL><DT><DD><PRE>
+           I2/175   Octane/175 | I2/195   Octane/195
+SPECint95   8.0       8.4 (*)  |  8.9       11.0
+SPECfp95    10.3       15.5    |  10.6      17.0
+</PRE></DL><P>
+
+(*) The SPECint95 figure for Octane/175 would actually be higher
+because of compiler changes, but SGI has not released any updated
+figures.<P>
+
+Then there are the figures for R10K/250 (as used in Octane/MXE)
+which has its L2 cache running at 2/3rds core speed:<P>
+
+<DL><DT><DD>
+<PRE>
+            Octane/250
+SPECint95      13.6
+SPECfp95       20.3
+</PRE></DL><P>
+
+There is also the 225MHz R10000 which is used with Octane/SE and
+Octane/SSE. I do not yet have performance figures for R10K/225.
+Finally, note the obvious point that Octane can have two CPUs while
+Indigo2 can only have one.<P>
+
+See my <A HREF = "r10kcomp.html">R10000 performance comparison
+page</A> for further details of processor differences between Indigo2
+and Octane. I have a further page on the performance of <A HREF =
+"r10k250comp.html">R10K/250</A>.<P>
+
+<BR>
+
+<CENTER><B>Memory Bandwidth</B></CENTER><P>
+
+The STREAM numbers speak for themselves. Octane leads the field at
+the moment for desktop workstations.
+
+<PRE>
+                        STREAM    
+Indigo2 IMPACT/10000:     117  *********
+Octane 1x195MHz R10000:   358  ****************************
+Sun Ultra 2 (1x200MHz):   210  ****************
+Octane 2x195MHz R10000:   515  ****************************************
+Sun Ultra 2 (2x200MHz):   305  ***********************
+HP C180:                  195  ***************
+DEC 500-5 400MHz:         178  **************
+</PRE><P><BR>
+
+<CENTER><H3>Viewperf</H3></CENTER>
+
+The comparisons given here concern Octane/SI vs. Indigo2 SolidIMPACT,
+Octane/SI+Texture vs. Indigo2 HighIMPACT and Octane/MXI vs. Indigo2
+MaxIMPACT. Thus, please remember that SE, SSE and MXE graphics
+options for Octane <I>will</I> be considerably faster than any
+equivalent Indigo2 configuration.<P><BR>
+
+<CENTER><B>Viewperf: Data Explorer</B></CENTER><P>
+
+Low-end desktop (eg. SolidIMPACT): little difference between Indigo2
+and Octane as the task is graphics (gfx) bound (the bottleneck is raw
+gfx power, not memory bandwidth, etc.) The newer SE graphics option
+offers improved performance.<P>
+
+High-end desktop (eg. MaxIMPACT): big difference because of XIO and
+faster memory bandwidth (Octane/SSI is 44% faster than Indigo2
+MaxIMPACT - ie. same pixel fill and geometry power, yet Octane is
+much faster). Hence, SSE and MXE are considerably faster than any
+Indigo2 configuration.<P><BR>
+
+<CENTER><B>Viewperf: Lightscape</B></CENTER><P>
+
+XIO and memory bandwidth gives Octane a huge lead over all other
+machines. Octane/SI is 35% faster than Indigo2/SolidIMPACT and
+Octane/SSI is 55% faster than Indigo2/MaxIMPACT. SE, SSE and MXE
+offer even greater improvements.<P><BR>
+
+<CENTER><B>Viewperf: CDRS</B></CENTER><P>
+
+This benchmark uses display lists exclusively and isn't bus bound on
+Indigo2, hence there is no speed up on Octane SI/SSI/MXI. Rival
+systems do well on CDRS as a relatively simple wireframe model makes
+up half the benchmark, though the nature of the CDRS test means rival
+systems end up with severely skewed and misleading final averages.
+Note that SPEC has announced that CDRS as a benchmark is now
+officially out-of-date and will be replaced when an improved
+benchmark is available.<P>
+
+Obviously, SE/SSE/MXE gives much better results over any equivalent
+Indigo2 configuration.<P><BR>
+
+<CENTER><I>(now for the Viewperf tests that mainly involve
+texturing...)</I></CENTER><P><BR>
+
+<CENTER><B>Viewperf: Advanced Visualiser</B></CENTER><P>
+
+As this benchmark uses a relatively small model and relies heavily on
+lighting and texture mapping, the bottleneck here is graphics and so
+SI, SSI and MXI are not faster than equivalent Indigo2 configurations
+(ie. a larger more complex model would certainly show Octane to be
+faster than Indigo2). Of course, SE, SSE and MXE do offer significant
+performance improvements.<P><BR>
+
+<CENTER><B>Viewperf: Design Review</B></CENTER><P>
+
+At the low end of desktop workstations, one is geometry bound and so
+the speedup on Octane is not great (6% better for Octane/SI+texture
+compared to Indigo2/HighIMPACT), but at the high-end of the desktop
+the large models in Design Review can take advantage of Octane's
+faster memory bandwidth and XIO to give a 32% performance increase
+with Octane/MXI over Indigo2/MaxIMPACT. MXE offers even better
+performance.<P><BR>
+
+<CENTER><B>Image Pixel Operations</B></CENTER><P>
+
+(these comments refer to SI, SSI and MXI, not SE, SSE and MXE)<P>
+
+For image transfers, pixel read performance on Octane is 200% better
+than Indigo2, pixel draw performance is 400% better, pixel copy is
+300% better and textured image download is 200% better. These
+improvements are due to the higher XIO bandwidth. This can accelerate
+some applications by an enormous margin, eg. IL ELT is 50% faster on
+Octane compared to Indigo2/IMPACT. Anything involving compositing
+will be faster too.<P><BR>
+
+<CENTER><B>3D and Engineering Applications</B></CENTER><P>
+
+Dual processor systems will automatically accelerate Performer
+applications. Some databases have moved from 20Hz update on
+Indigo2/IMPACT to 30Hz update on Octane. The newer 225MHz and 250MHz
+R10000 configurations will obviously give improved performance
+compared to lower-clocked Indigo2 systems.<P>
+
+In general, the larger and more complex a task or model, the greater
+the improvement of Octane over Indigo2/IMPACT (eg. large models in
+Maya run at least 67% faster on Octane compared to Indigo2).<P>
+
+Despite the smaller L2 cache in Octane than in Origin2000, Octane's
+performance on tasks such as engineering analysis (eg. LSDyna)
+compares very well with Origin: a two-CPU Origin2000 is just 4%
+faster than two-CPU Octane for LSDyna (single CPU difference is 8%);
+dual CPU Octane is 60% faster than single CPU Octane for LSDyna.<P>
+
+Other engineering applications on Octane show a 50% improvment over
+Indigo2. This includes Ansys, Fluent, Nadina and Nastran.<P>
+
+The CPU-intensive aspects of ProEngineer run 42% faster on Octane
+than on Indigo2/R10K, whilst the graphics aspects of Pro/E are much
+the same (though SE, SSE and MXE obviously offer improvements).
+Overall, for the various models used in the Pro/E test, speedups
+range from 7% to at least 29%. Of course, in the real world, anyone
+manipulating complex models will get much better performance from
+Octane compared to Indigo2.<P>
+
+SDRC: Octane/SI runs on average 23% faster than Indigo2/Solid IMPACT,
+while Octane/MXI runs on average a massive 217% faster compared to
+Indigo2/MaxIMPACT; larger models show greater performance gains due to
+XIO, etc.<P>
+
+For CATIA, Octane is between 14% and 72% faster than Indigo2 (I don't
+have any figures for Octane's newer gfx and CPU options).<P>
+
+For non-parallelised code, dual-CPU Octane gives little improvement
+over single-CPU Octane (eg. SDRC, CATIA), as one might expect. Bare
+this in mind when considering a dual-CPU system: don't expect any
+speedup if your application does not contain support for parallel
+execution - check with the software vendor. For general compilation,
+one can take advantage of the Autoparallelising Option, <I>if</I> one
+is using an appropriate kind of code.<P>
+
+Finally, when SGI hosted their online chat about Octane, I asked the
+host about software support for dual-processor configurations. This
+was the reply:<P>
+
+<DL><DT><DD>
+
+"Most of the applications in engineering analysis (fluid dynamics and
+structural mechanics), chemistry, visual simulation, and some
+digital prototyping applications have been parallelized to take
+advantage of multiple CPUs on Silicon Graphics high-end systems for
+some time now. OCTANE will inherit all of this work and these
+applications will take advantage of dual CPUs on OCTANE."
+</DL><P>
+
+<HR>
+
+<CENTER>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B></CENTER><P>
+
+</HTML>
+

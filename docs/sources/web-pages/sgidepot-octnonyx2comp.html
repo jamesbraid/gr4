@@ -1,0 +1,321 @@
+<HTML>
+
+<TITLE>Comparison of Octane MXE to Deskside Onyx2...</TITLE>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+
+<CENTER><B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B><P>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+</CENTER>
+
+<CENTER><H1>Comparison of Octane MXE to Deskside Onyx2</H1></CENTER>
+
+<IMG ALT = "[Octane]" WIDTH = 123 HEIGHT = 141 ALIGN = LEFT SRC =
+"octane/octane.jpg">
+
+For some problems, the question may arise as to whether a high-end
+Octane or low-end Onyx2 is the best choice for a project. Due to the
+nature of real-world tasks, the answer often depends on various
+technical aspects of how the target problem needs to be solved.<P>
+
+In general, if you're faced with this choice, I would say go with
+Onyx2, ie. if you're considering the very top end of an Octane's
+current capabilities, then there is a danger that you will have no
+room to grow your computational resources should project requirements
+exceed original expectations - a common occurence I expect. Think of
+this as rather like buying a hifi speaker system: if one finds
+oneself contemplating the very top-end of a particular model's
+capabilities, then one should get the next model up that can handle
+the task easily, rather than at the peak of its capabilities.<P>
+
+<IMG ALT = "[Octane]" WIDTH = 156 HEIGHT = 187 ALIGN = RIGHT SRC =
+"octane/image_vr.jpg">
+
+This page gives some detailed examples of why Onyx2 is the better
+choice when faced with such a decision in the world of 3D real-time
+graphics, especially VR. Obviously, there may be budget limitations
+which leave one with no choice, but my comments here are targeted
+more at customers who tend to have higher budgets:  aerospace,
+automotive, government, medical, oil industry, etc. Such industries
+would prefer to go with cheaper systems whenever possible, but
+they're much more likely to select a faster system if they believe
+there is sufficient justification for their purchase or lease. When
+it comes to what I call 'industrial' quality projects, it is unlikely
+that managers would be so short-sighted as to limit the scope of a
+research program by under-equipping the research team. The team's
+focus should be on the problem, not on getting round the limitations
+of their equipment.<P>
+
+Many of the comments I give below are based on an email I received
+from someone working on an automotive VR research project who had
+exactly the above conumdrum to solve. First some summary tables to
+convey the basic differences between Octane-MXE and low-end Onyx2 as
+they are right now (this data is extracted from my <A HREF =
+"gfxtables.html">SGI Graphics Performance Comparison Tables</A> page;
+see that page for a 'key', eg. 'R' = Reality, as in Onyx2
+Reality):<P>
+
+<DL><DT><DD>
+<PRE>
+                           3D        Flat     Lit GZ    Lit        Lit  
+                    X      Depth     Tri      Tri/sec   Tex        GZ   
+                  Lines    Cued GZ   Strips             GZ         Indep
+                           Lines     No Z               Tri/sec    Quads
+
+Octane MXE:       3.88M    2.29M     ?        2.19M     1.42M      880K 
+Onyx2 R:          ?        ?         ?        ?         5.5M       ?
+Onyx2 IR (9):     ?        ?         ?        ?         11.0M      ?
+Onyx2 IR2 (9):    ?        ?         ?        ?         13.1M      ?
+
+
+                  GF        Tex GFZ   Conv(3x3)   Conv(5x5)   Color
+                  Pix/sec   pix/sec                           Lookups/sec
+
+Octane MXE:       240M      138M      33.7M       27.12M      96.4M
+Onyx2 Reality:    448M      188M      ?           30M         ?
+Onyx2 IR (9):     896M      624M      ?           60M         ?
+Onyx2 IR2 (9):    896M      768M      ?           60M         ?
+
+
+                  Data       CDRS       Design     Advanced      Lightscape
+                  Explorer              Review     Visualiser
+
+OCT MXE/250:      18.37      55.46      10.62      20.09         1.55
+Onyx2 R/180:      21.72      91.54      15.83      23.70         2.41
+Onyx2 R/195:      21.90      92.72      16.27      23.84         2.61
+Onyx2 IR/195:     35.65      161.29     20.82      45.43         2.65
+Onyx2 IR/250:     41.60      ?          23.96      ?             3.30
+
+
+                  Characters    Screen     Max Framebuffer    3D Vectors
+                  Per Second    Clear      Memory Size        Per Second
+
+
+Octane MXE:       ?             ?          27MB               ?
+Onyx2 R:          ?             ?          80MB               ?
+Onyx2 IR:         ?             ?          320MB              ?
+</PRE><P><BR>
+</DL>
+
+NB: Reality series graphics for Onyx2 is being phased out in favour
+of InfiniteReality. This is probably for several reasons:<P>
+
+<UL>
+<LI>The appearance of the new SGI NT Visual Workstation,<P>
+<LI>The doubtless approach of new graphics options for Octane and
+Onyx2 (processors too),<P>
+<LI>People who need something as powerful as Onyx2 Reality almost
+certainly actually need something more like InfiniteReality, ie. in
+terms of what one can be given for the cost of a high-end Octane
+compared to the cost of a low-end Onyx2, there is an inbetween
+zone of performance which customers rarely consider. In other
+words, if I'm happy with MXE's 1.5M triangles/sec, then fine. If not,
+then I'd rather have 10M/sec than 5M/sec (ie. the added cost of moving
+to Onyx2 and having Reality graphics isn't worth just a 3.5X increase
+in performance - better to go for a larger performance increase if
+there to be added cost).<P><BR>
+</UL>
+
+I said earlier that the above figures refer to the situation for
+Octane and Onyx2 right now. When both systems get their new graphics
+options, I expect Octane's new graphics system to be as fast as
+InfiniteReality (or better) and, as usual, Onyx2's new graphics to be
+an order of magnitude faster than that. Over the years, SGI has, in
+general, always maintained an order of magnitude performance
+difference between each level of its product line (low-end, mid-range
+and high-end).<P>
+
+Please don't ask me when new products will be released as I honestly
+have no idea. One can merely judge from common sense that Octane's
+current graphics technology, which is based the IMPACT technology
+from the old Indigo2 days, is showing its age, while InfiniteReality
+in its basic form is more than 2 years old now. With the release of
+the Visual Workstation, I find it highly unlikely that the current
+options for Octane and Onyx2 would be left alone for much more than a
+month or two.<P>
+
+So, why is Onyx2 better than Octane for VR projects, etc.? Here are
+some reasons:<P>
+
+<UL>
+
+<LI>Greater main processing power (ie. larger number of
+processors).<P>
+
+Having a fast graphics system is no use if there is insufficient main
+CPU power to handle application overhead. Plus, complex projects may,
+for example, require setups such as 3 or more simultaneous video
+outputs; for efficient processing and reliable performance, it is
+common to organise such projects by allocating different CPUs for
+distinct tasks. Exactly what is appropriate depends on the specifics
+of the application.<P>
+
+It is not possible to get the most out of a graphics system like
+InfiniteReality without having good main CPU power, and that means -
+for tough problems - at least 4 CPUs. My <A HREF =
+"perfcomp.html">SGI General Performance Comparisons</A> page has some
+examples where the speed of an Onyx2 InfiniteReality is limited by
+the speed of the main CPU rather than the graphics system.<P>
+
+<LI>VR projects often need multiple display outputs, perhaps because
+one requires more than one person immersed in the 3D environment, or
+because one needs an instructor display as well as a VR output, or
+both. Octane could handle two displays, but the person who contacted
+me wanted <I>three</I> 1280x1024 VR displays and probably an
+instructor station too.<P><BR>
+
+</UL>
+
+There are several issues associated with requiring multiple
+high-quality display outputs:<P>
+
+<OL>
+
+<LI>One needs lots of frame buffer video memory to support the
+multiple outputs.<P>
+
+<LI>If one require high-quality full-scene multispatial anti-aliasing
+(definitely needed for good quality VR), then <I>lots</I> of video
+memory is required (8 times the normal amount).<P>
+
+<LI>In order to sustain high frame rates at high-resolution, one
+needs high pixel fill rates. This is why something like an Intergaph
+Wildcat is useless for VR applications: 90M textured pixels/second is
+nowhere near enough to handle complex scenes at 1280x1024 60fps.
+Besides, Wildcat does not offer quad-buffered 48bit RGBA anyway.
+InfiniteReality offers 800M pixels/second, as well as features such
+as dynamic resolution rendering to ensure consistent update rates.<P>
+
+For VR work, high frame rates are critical; those involved with video
+conferencing technologies have found a negative effect if the frame
+rate of a video link is too low - in the same way, a VR display will
+not be able to offer good insight into solving a problem if the
+display update rate is low (the level of interaction and cognitive
+would be insufficient to gain any further understanding of the
+problem).<P>
+
+<LI>If there are to be multiple viewpoints, then that will require
+multiple preprocessing for the graphics pipe, ie. being able to assign
+1 CPU per viewpoint ensures efficient usage of available host
+compute power.<P>
+
+</OL>
+
+Many of these factors are related, eg. multiple displays, high
+quality anti-aliasing and high update rates all imply a need for high
+pixel fill rates.<P>
+
+In the above example, where at least 3 displays are required (more
+likely 4 since an instructor display is also usually needed), again
+Onyx2 is the choice since an option card offers up to 8 display
+outputs whereas I believe Octane is limited to 2.<P>
+
+I know of a researcher at a medical institution in Alaska who was
+organising an upgrade to their SGI system. They were considering
+an Onyx2 Reality as an upgrade over their old IRIS Crimson. After
+some consideration and demonstrations, they eventually chose
+InfiniteReality instead (2X faster than Reality). A wise move.<P><BR>
+
+Final notes:<P>
+
+<UL>
+<LI><I>Definitely</I> get 64MB texture memory if you purchase or lease
+a system like Onyx2 IR - what is the point of obtaining such high
+quality equipment if that equipment is under-resourced and thus unable
+to offer the best of its abilities?<P>
+<LI>Anyone considering purchasing high-end image generation hardware
+should <I>always</I> ask for a hands-on demonstration by their local
+SGI sales representative; never buy any computer hardware until
+you've tested a target system and are sure it meets your needs - what
+if even IR isn't fast enough and it turns out you need multiple IR
+graphics pipes?<P>
+</UL>
+
+A video clip I have shows Ford Motor Company's Onyx IR system doing
+real-time VR-based car design, using <I>six</I> IR subsystems. Asking
+for demonstrations also gives you a chance to talk to SGI people who
+know more about the subject and can offer detailed advice, and gives
+an opportunity to enquire about other costs such as software,
+peripherals, etc. (try out different HMDs before you buy/lease! Maybe
+you don't <I>need</I> a 1280x1024 HMD in order to obtain the quality
+level required for the project? Maybe 1024x768 is enough? Or maybe
+you need better than SXGA, ie. perhaps 1600x1200?)<P>
+
+Your focus should be on solving the problem, whatever that may be:
+research program, specific task, etc. Don't obtain a system that
+can't help you solve your problem.<P>
+
+<HR>
+
+<CENTER>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B></CENTER><P>
+
+</HTML>
+
