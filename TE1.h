@@ -26,7 +26,7 @@ extern "C" {
  * ARCHITECTURE OVERVIEW: TE1 TEXTURE ENGINE & TR1 TETRAM
  * ============================================================================
  *
- * Gate Count:      ~250,000 gates
+ * Gate Count:      295,000 gates (Indigo2 IMPACT Product Guide)
  * Operating Clock: 50 MHz
  *
  * Introduced on the SGI High Impact and Maximum Impact in 1995, the TE1/TR1

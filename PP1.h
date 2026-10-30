@@ -26,7 +26,7 @@ extern "C" {
  * ARCHITECTURE OVERVIEW: PP1 PIXEL PROCESSOR & RDRAM
  * ============================================================================
  *
- * Gate Count:      ~120,000 gates per chip
+ * Gate Count:      290,000 gates per chip (Indigo2 IMPACT Product Guide)
  * Operating Clock: 50 MHz core / 500 MHz Rambus channel
  *
  * PP1 is the backend memory interface ASIC in the Raster Subsystem (RSS).

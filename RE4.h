@@ -26,7 +26,7 @@ extern "C" {
  * ARCHITECTURE OVERVIEW: RE4 RASTER ENGINE
  * ============================================================================
  *
- * Gate Count:      ~200,000 gates
+ * Gate Count:      300,000 gates (Indigo2 IMPACT Product Guide)
  * Operating Clock: 50 MHz
  * Pipeline Depth:  30-50 stages
  *
