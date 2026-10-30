@@ -118,3 +118,6 @@ In addition to hardware ASIC headers, we generate local headers capturing intern
   - `extract_libglcore_mgras.py`: Extracts OpenGL driver CUs, types, and functions.
   - `extract_impact_ddx.py`: Extracts X11 DDX symbols, GOT dispatch tables, and drawing operations.
   - `extract_irisgl.py`: Extracts "igloo" IrisGL layer types and translation calls.
+- **Ghidra (`ghidra/`, entry point [ghidra/README.md](ghidra/README.md))**:
+  - `ghidra/scripts/`: the shared headless scripts for IRIX MIPS binaries (`IrixGp`, `IrixJumpTables`, `FindWindowStores`, `DumpCallEdges`, `ApplyStruct`, `DecompileFunctions`) and [their guide](ghidra/scripts/README.md): when to use Ghidra rather than `m2c`, and what each tool gets wrong. Run `IrixGp.java` and `IrixJumpTables.java` before trusting any switch or global in Ghidra's output.
+  - `ghidra/processors/ge11/`: a processor module for GE11 microcode. It loads `mgras_ge*.u`, `mgras_ge*.hex`, `ge11*.bin` and the 6.5.7 diagnostic program, decompiles routines, and labels source modules, `mgras_geif.u` entries and diagnostic labels. Words that come without their decoded records go through `data/ge11_decode.tsv` (`tools/ge11_decode.py`). The instruction word itself is in `GE11.h`.
