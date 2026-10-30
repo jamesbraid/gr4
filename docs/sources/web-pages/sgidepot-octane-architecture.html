@@ -1,0 +1,444 @@
+<HTML>
+
+<TITLE>Octane Architecture...</TITLE>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+
+<CENTER><B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B><P>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+</CENTER>
+
+<CENTER>
+
+<H1>Octane Architecture</H1>
+
+<H3>Last Change: 20/Mar/2006</H3>
+
+</CENTER>
+
+Like O2, Octane does not use a bus design, but there the similarities
+end. Octane employs the technology used in the high-end Origin
+systems and its features reflect this.<P>
+
+A multiprocessor system, Octane supports one or two R10000, R12000 or
+R14000 CPUs. There is a range of possible clock speeds and cache
+sizes. The ones I know of are:<P>
+
+<DL><DT><DD><PRE>
+R10000 175MHz (1MB L2)
+R10000 195MHz (1MB L2)
+R10000 225MHz (1MB L2)
+R10000 250MHz (1MB L2)
+R10000 250MHz (2MB L2)
+R12000 270MHz (2MB L2)
+R12000 300MHz (2MB L2)
+R12000 360MHz (2MB L2)
+R12000 400MHz (2MB L2)
+R14000 550MHz (2MB L2)
+R14000 600MHz (2MB L2)
+</PRE></DL><P>
+
+I don't think the R16K/700, or anything after that, was made
+available for Octane, though many have had success clocking-up
+existing modules, eg. a 360 can be increased to run at 425.<P>
+
+Original early Octanes typically used either a 175 or 195MHz R10K.
+Such systems often had SI graphics and were very popular for CAD
+design. Later, such systems typically had an R10K/250 with SE
+graphics instead. Note that for dual processor systems, both
+processors always run at the same clock speed.<P>
+
+Later, SGI released a newer motherboard to support faster processors
+and increased RAM capacity (up to 8GB instead of the original 2GB
+limit).<P>
+
+Importantly, unlike many dual processor systems (especially PCs),
+Octane's design permits maximum exploitation of both CPUs at the same
+time, ie. two processes running in parallel will not interfere with
+each other due to the large memory, subsystem and I/O bandwidth that
+is available in the system. Both can be running flat out without
+having to compete for resources. Later in Octane's life cycle, SGI
+increased the speed of the frontplane board in order to ensure this
+would still be possible even when using the faster CPUs and top-end
+VPro graphics.<P>
+
+The heart of Octane is an 8-port non-blocking high-speed crossbar
+switch, completely replacing the old bus design. This crossbar chip
+is the same device used in the high-end Origin line, the only
+difference being that Octane does not have support for connecting
+multiple Octanes together CrayLink-style. In Origin, one port of the
+crossbar is connected to a second HUB chip on another node board (a
+node board has one or two CPUs) and is partly the means by which
+Origin can offer more than two CPUs in a system. Thus, in Octane,
+this port is not used.<P>
+
+Note: the above means that if you want larger multiprocessing
+capability combined with fast graphics, you should use Tezro
+or suitable Onyx systems. Remember that a 2nd-hand quad-CPU Onyx2
+might be cheaper than a Tezro.<P>
+
+Here is a diagram describing the internal structure of Octane, though
+note this diagram does not reflect the later CPUs and graphics
+options:<P>
+
+<CENTER><IMG ALT = "[Octane Structural Diagram]" WIDTH = 596 HEIGHT =
+629 SRC = "octndiag.gif"></CENTER><P>
+
+Earlier graphics boards produced for Octane used IMPACT-based (MGRAS)
+technology, but the new architecture combined with improvements in
+key ASICs provides great performance improvements and enhancements
+over Indigo2 IMPACT systems, especially in certain areas. In the
+first half of 1998, SGI released new versions of the geometry and
+texturing ASICs, giving 15% faster texture performance, 40% faster
+geometry performance, and faster texture data loading. These options
+were given 'E' versions of the original names to reflect the
+improvements as follows:<P>
+
+<PRE>
+
+<B>Original Option</B>      <B>Improved Option</B>
+
+      SI                    SE
+ SI + Texture          SE + Texture
+     SSI                   SSE
+     MXI                   MXE
+</PRE><P>
+
+Octane has three 3.5" SCSI bays (for disks or other devices), 2 to 3
+high-speed XIO slots and - if the PCI card cage option is installed -
+3 separate PCI64 slots (2 full-height, 1 half-height). This allows
+for enormous I/O and connectivity support. Also supplied as standard
+are 2 high speed serial ports (460Kbaud each), two Ultra FastWide
+SCSI channels (one internal, one external, each 40MB/sec), a parallel
+port, 10/100Mbit autosensing Ethernet and analogue, AES serial
+digital plus ADAT optical digital audio connections. Video
+capabilities are available as XIO option cards (analogue, digital and
+compression). Most minor peripherals (CDROM, floppy, DAT, DLT, etc.)
+are housed in new standardised external cases, although an internal
+DAT option is also available. Note that although Octane's internal
+SCSI system is limited to 40MB/sec per channel, one can use an U160
+QLOGIC PCI card (model QLA12160) to give much faster bandwidth if
+required. Various QLOGIC FibreChannel (FC) cards are also supported.<P><BR>
+
+<CENTER><H3>Bandwidth and I/O Reliability</H3></CENTER>
+
+The crossbar in Octane has been designed so that software
+applications can be <I>guaranteed</I> the bandwidth they need for
+critical/priority data streams if required, eg. CPU from/to GFX,
+video from/to RAM. Multiple simultaneous connections through the
+crossbar can occur and these can be continuously altered. A
+programmer has the ability to define a data stream as 'priority' -
+the system then ensures that nothing interferes with the required XIO
+bandwidth allocation.<P>
+
+This results in better performance, smoother graphics, more steady
+frame rates, improved interactivity and ensures that CPU and graphics
+pipelines are always kept busy to their maximum potential. Further,
+when applications are not using the time slices they have reserved,
+these spare connection opportunities can still be utilised for other
+tasks, ensuring that no bandwidth capacity is wasted. The end result
+is an incredibly responsive system. I was once told that animators
+describe such good responsiveness as 'snappyness'; fast feedback is
+essential for animation design, so Octane is ideal for such tasks.<P>
+
+Octane also allows processing subsystems to stream data directly to
+one another, eg. a video subsystem can stream data straight to disk
+without having to go via main RAM first. This feature enables Octane
+to fully take advantage of 'smart' peripheral devices.<P>
+
+The importance of Octane's crossbar is that no subsystem (eg. CPU,
+graphics, etc.) has to compete with any other subsystem for the
+bandwidth it needs, ie. each subsystem has its own sustainable
+1.2GB/sec connection (1.6GB/sec peak) to the crossbar switch.
+Actually, these connections consist of two paths, both 800MB/sec
+(peak): a From link and a To link, rather like separate lanes on a
+2-lane highway. This means that data traffic heading in one direction
+does not conflict with traffic heading in the other direction.<P>
+
+Greatly improved memory latency (about 40% better than Indigo2)
+combined with the new XIO system results in enormous improvements in
+memory bandwidth as typical benchmarks such as STREAM can
+demonstrate, and note that the CRC error checking used by the XIO
+system is better than ECC or parity. Also, R10000 in Indigo2 only
+supported one outstanding cache miss, whereas R10000 in Octane
+supports four - the maximum possible with the current R10000
+design. I'm not sure if this was increased again with R12000.<P>
+
+<CENTER><H3>Graphics</H3></CENTER>
+
+To deliniate from Indigo2, Octane uses a different naming convention
+when describing the original graphics options. Compared to Indigo2,
+the names are:
+
+<PRE>
+      Indigo2          Older Octanes        Newer octanes
+
+    Solid IMPACT       SI                   SE
+    High IMPACT        SI + Texture         SE + Texture
+    (not available)    SSI                  SSE
+    Max IMPACT         MXI                  MXE
+</PRE><P>
+
+The above should make it obvious that Octane offers a graphics
+configuration that was not available on Indigo2, namely SSE (formerly
+SSI when using the older ASICs). SSE offers more than twice the
+geometry and pixel fill power of Solid IMPACT, but does not include
+hardware texturing; a hardware texture option can be added to any
+Octane configuration which does not already have it. Note that 4MB of
+texture RAM is standard on all Octane configurations that employ the
+texture option, ie. the 1MB option as used in Indigo2 is not used in
+Octane at all, which is logical since the TRAM option boards for
+Octane include the texture mapping hardware aswell as the memory. A
+minor point: the texture memory used in IMPACT technology is the same
+kind of memory that's used in the Nintendo64, namely Rambus. It is
+very high speed RAM (500MHz system event speed, ie. a 250MHz clock
+driving transfers on both clock edges) and as such one can think of
+it more as texture <I>cache</I> than merely memory.<P>
+
+With the improved architecture, Octane with SE/SSE/MXE provides for a
+significant performance improvement over Indigo2/IMPACT systems, a
+fact which can easily be seen by examining the various <A HREF =
+"gfxtables.html">benchmark figures</A>.<P>
+
+Octane's design removes the memory and I/O bottlenecks in
+graphics applications; this is an important step in improving
+performance, consistency, efficiency and responsiveness for users.<P>
+
+One note on SI, SSI and MXI: it can be easy to assume that these
+physical graphics boards used in Octane are actually the same as for
+Indigo2 IMPACT systems, but this isn't true. In fact, the board
+layouts are different, the voltage levels, track lengths,
+capacitances, and revisions of various ASICs are all different. It is
+better to say that SI, SSI and MXI use the same 'level' of graphics
+technology as their IMPACT equivalents, but Octane can get more out
+of them.<P>
+
+Some years after initial launch, SGI released a new generation of
+graphics options for Octane, called VPro. A single-chip GPU design,
+VPro graphics options offer significant speed advantages over the
+older MGRAS boards, aswell as more advanced features, higher
+resolution support and a large increase in available memory. The
+VPro boards use a single memory pool for both texture data and
+general video buffers.<P>
+
+The initial VPro boards to be released were V6 and V8. Both run at
+the same speed, but the latter has considerably more combined total
+memory (128MB vs 32MB), and also supports more resolutions than V6.<P>
+
+Note that V6/V8 do not support 1280x1024 at 72Hz - a bizarre
+'feature' (caused by a timing bug) which means that older monitors,
+if running at 1280x1024, will have to operate at 60Hz with the board
+using a reduced frame buffer depth (8 bytes per pixel). To get the
+most out of a V6 board, use a monitor that can run at 96Hz in order
+to allow the use of the maximum frame buffer depth, eg. the SGI
+GDM5411 monitor, or (for V8) use 1600x1200. The later V10/V12 boards
+do not have this restriction though, ie. they can use 72Hz or other
+frequencies just fine. When my own system was a V8, I just ran it
+at 1600x1200 at 75Hz.<P>
+
+In order to use a VPro board, an Octane must have at least XBow 1.3,
+though even if this is present, the system must also have the later
+Cherokee PSU. Any Octane which has all its main subsystems of the
+later type (PSU, XBow and motherboard) can effectively be regared as
+an Octane2. Thus, any older Octane can be upgraded to an Octane2 by
+simple part swaps.<P>
+
+SGI later doubled the speed of the geometry system in their VPro GPU
+design and added some more features and other abilities, especially
+with respect to dual-channel/dual-display. The later boards, called
+V10 and V12, run at the same speed, but share the same difference in
+memory allocation as V6/V8.<P>
+
+Thus, the boards can be summarised as follows:<P>
+
+<PRE>
+                     CAD-oriented, fewer    GIS, imaging, heavy texture
+                     hw features, not so    oriented, complex animation,
+                     much VRAM or TRAM.     more features, dual-head, etc.
+
+Old Series VPro         V6 (32MB RAM)               V8 (128MB RAM)
+Original GE speed
+
+New Series VPro         V10 (32MB RAM)              V12 (128MB RAM)
+2X Faster GE speed
+</PRE><P>
+
+V6 and V10 can have up to 8MB RAM allocated to textures (2X more than
+the textured-enabled MGRAS options), while V8 and V12 can have up to
+108MB RAM used for textures. As with the MGRAS boards, all VPro
+boards support the OpenGL ARB imaging extensions, allowing for
+hardware acceleration of numerous imaging operations at real-time
+rates. It's also worth noting that the freeware mplayer application
+can use any VPro board to hardware accelerate video playback, thus
+allowing fullscreen playback of a full-size/rate PAL DivX file -
+something O2 cannot do since relevant codecs for ICE were never
+written for this.<P>
+
+Another simple difference: Quake3 plays very nicely on VPro systems,
+but is far too slow on an older MGRAS system such as MXI.<P>
+
+Lastly, since V12 is the best graphics option available for Octane,<BR>
+
+<CENTER><H3>System Expansion</H3></CENTER>
+
+Octane provides for enormous expansion and I/O capabilities. For
+example, using XIO and/or PCI cards, Octane can support up to
+<I>forty</I> digital audio streams (8 AES serial digital and 32 ADAT
+optical digital audio I/O).<P>
+
+Octane uses XIO-based expansion cards to provide analogue and digital
+video processing capabilities, thus allowing better price points for
+those who do not need such features. Available options include
+Digital Video, Personal Video and Compression.<P>
+
+<B>Octane Digital Video</B> (ODV) provides two 10bit CCIR-601 video
+I/O streams. These can be configured as real-time connections to/from
+graphics screen/memory/etc. This interface allows a single stream of
+full frame-rate video with an alpha or key channel, or two streams of
+field-rate video to be texture mapped onto a polygonal surface with
+real-time mipmapping for high image quality. Also included is a
+high-quality hardware colour space converter, incorporating new
+constant-hue technology to minimise distortion when converting
+internally generated RGB images to YUV-based video.<P>
+
+<B>Octane Personal Video</B> (OPV) is a high quality analogue/digital
+video board. Offering many of the features of the digital video
+option but at a lower cost (one digital stream instead of two), OPV
+includes composite I/O connectors, a digital input for use with the
+bundled O2Cam (this input can be converted to full CCIR 601 I/O via
+3rd-party adapator from Miranda Technologies), an audio channel, a
+reference-timing input, plus the same hardware colour space converter
+found in the ODV option to provide for conversion of the entire
+1280x1024 screen display, or just a portion of it, down to video
+resolution which can then be streamed to video out and/or main
+memory.<P>
+
+<B>Octane Compression</B> (OC) provides 2 streams of motion JPEG with
+compression ratios as low as 2:1 for very high image quality (again
+employing a hardware colour space converter), a composite/S-Video I/O
+port and an analogue genlock loop-through, allowing one to compress
+incoming video or data resident in memory (eg. rendered frames) in
+real-time. The analogue video hardware can be used to playback these
+streams for preview or broadcast. OC has a direct connection to ODV
+(if installed), so two streams of digital 601 video can be
+independently compressed or decompressed in real-time. Note that
+one can use MediaRecorder and MediaPlayer to capture or playback
+full-size/rate video with Octane Compression, but MovieMaker does not
+know about Octane Compression (or any of the other Cosmo boards) and
+so cannot be used to do real-time editing (if you want built-in
+editing with the supplied tools, use O2; eg. one could capture with
+Octane and then edit with O2).<P>
+
+Video/Audio referencing enables video and audio to be locked for
+accurate recording, playback, synchronisation and editing.<P>
+
+Octane's PCI expansion slots provide for FDDI, extra 10/100BaseTX
+Ethernet, ISDN, ATM, HIPPI, Token Ring, Fibre Channel, UltraSCSI and
+extra audio systems (refer to www.sgi.com for availability).<P>
+
+Octane's XIO slots can take advantage of the XIO cards used on
+Origin2000 and Onyx2 via the use of a simple mechanical fastener.
+The XIO slots can utilise various video expansion options, dual head
+configurations, presenter panels, multi-Ethernet banks (4-port),
+multi-UltraSCSI banks (4-port), dual-FibreChannel, HIPPI (1-port),
+multi-ATM OC3 (4-port) and ATM OCM12 (1-port) expansion options.<P>
+
+<CENTER><H3>Summary</H3></CENTER>
+
+I think many people were expecting Octane to be brand new in every
+respect (architecture, graphics, maybe even new CPUs) but with
+hindsight that was too much to ask and would have been too big a
+change at the time. It cannot be emphasised enough that Octane is an
+important step in workstation development. When one looks at older
+systems that use CPUs such as the R10000, it is very clear that
+memory bandwidth, I/O bandwidth and memory latency have become
+critical in real-world application performance as opposed to
+synthetic benchmark results.<P>
+
+Looking at other vendors' systems then, it's obvious that older
+bus-based workstations containing fast main-CPUs cannot deliver the
+kind of performance that the main CPU is theoretically capable of
+providing (eg. 500MHz Alpha) - at the end of the day, this amounts to
+wasted money. It's a key reason why, even though the R10000 is not
+the best CPU available for any single SPEC95 test, SGI consistently
+does so well on multi-CPU metrics.<P>
+
+Octane has shown that polygons/sec and main CPU power aren't enough
+when it comes to delivering high-performance graphics workstations.
+The foundations that the graphics and CPU systems rely on are just as
+important too.<P>
+
+<HR>
+
+<CENTER>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B></CENTER><P>
+
+</HTML>
+

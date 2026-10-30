@@ -1,0 +1,156 @@
+<HTML>
+
+<TITLE>Indigo2 IMPACT TRAM Module Technical Information...</TITLE>
+
+<BODY BGCOLOR="#ffffff" TEXT="#000000">
+
+<CENTER><B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B><P>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+</CENTER>
+
+<CENTER>
+
+<H2>Indigo2 IMPACT<BR>
+TRAM Module Technical Information</H2>
+
+</CENTER>
+
+Many companies which sell SGIs aren't quite familiar with some of the
+technical issues concering texture memory, which can be important
+when correct sales information/advice is dependent on technical
+details. So, here's a handy summary table - the 'Texture RAM' numbers
+shown are in MBytes:<P>
+
+<PRE>
+                    Geometry           Raster         Texture RAM
+                  Engines (GEs)     Engines (REs)    per RE (in MB)
+
+   SolidIMPACT:         1                 1                0
+   HighIMPACT:          1                 1              1 or 4
+   HighIMPACT-AA:       2                 1              1 or 4    (very rare)
+   MaxIMPACT:           2                 2              1 or 4
+
+
+Thus:
+
+   HighIMPACT:
+                             Physical TRAM        Logical TRAM
+                           (never discussed)     (user visible)
+
+      Without TRAM Option:         1                    1
+      With TRAM Option:            4                    4
+
+
+   MaxIMPACT:
+                             Physical TRAM        Logical TRAM
+                           (never discussed)     (user visible)
+
+      Without TRAM Option:         2                    1
+      With TRAM Option:            8                    4
+</PRE><P>
+
+Without the texture option, HighIMPACT has 1MB TRAM, while MaxIMPACT
+has 2MB TRAM, but the latter is just a way of parallelising the
+texture mapping process, ie. the user only 'sees' a visible/usable
+1MB TRAM in a MaxIMPACT system without the texture option (2MB
+physical, 1MB logical). What actually happens is that texture data is
+sent to *both* TRAM units in parallel (because there are 2 Raster
+Engines, each having 1MB physical TRAM) so that each RE can access
+its own local copy of the texture data. With the texture option
+installed (an extra 3MB TRAM per RE), HighIMPACT has 4MB physical and
+4MB logical TRAM, while MaxIMPACT has 8MB physical and 4MB logical.
+Thus, in terms of how the user thinks of the actual available TRAM
+for programming purposes, both systems have either 1 or 4 MB, but the
+actual physical amount present is not the same.<P>
+
+Anyway, this is important for sales information because many buyers
+don't understand why the '4MB TRAM option' for MaxIMPACT costs
+roughly twice as much as the '4MB TRAM option' for HighIMPACT - it's
+simply because the actual physical upgrades consist of +6MB (Max) and
++3MB (High), even though both give the user a logical visible 4MB.<P>
+
+With 4MB logical TRAM, High and Max IMPACT can do 24bit RGB or 32bit
+RGBA (8 bits per channel) instead of just 16bit colour, can handle
+more textures, and can also do 36bit RGB for advanced 2D imaging (12
+bits per channel) as well as more advanced video operations, etc.
+Also, a 4MB TRAM system has the TRAM organised as four 1MB banks,
+allowing an RGBA texture to be stored as red in bank 0, green in bank
+1, etc. which speeds up computation.<P>
+
+Lastly, 4MB TRAM makes Quake2, etc. look <I>much</I> nicer! And that's what
+really matters... ;)<P>
+
+<HR>
+
+<CENTER>
+
+<H3><A HREF = "http://www.sgidepot.co.uk/sgidepot/">Ian's SGI Depot: FOR SALE! SGI Systems,
+Parts, Spares and Upgrades</A></H3>
+
+<B><A HREF = "http://uk.four.ebid.net/perl/main.cgi?words=mapesdhs&mo=search&type=user">(check my current auctions!)</A></B>
+
+<HR>
+
+<FONT SIZE=2><B>
+
+[<A HREF = "whatsnew.html">WhatsNew</A>]
+[<A HREF = "pi/">P.I.</A>]
+[<A HREF = "indigo/">Indigo</A>]
+[<A HREF = "indy/">Indy</A>]
+[<A HREF = "o2/">O2</A>]
+[<A HREF = "indigo2/">Indigo2</A>]
+[<A HREF = "crimson/">Crimson</A>]
+[<A HREF = "challenge/">Challenge</A>]
+[<A HREF = "onyx/">Onyx</A>]
+[<A HREF = "octane/">Octane</A>]
+[<A HREF = "origin/">Origin</A>]
+[<A HREF = "onyx2/">Onyx2</A>]
+
+</B></FONT>
+
+<HR>
+
+<B>
+
+[<A HREF = "future.html">Future Technology Research Index</A>]
+[<A HREF = "sgi.html"><I>SGI Tech/Advice Index</I></A>]
+[<A HREF = "n64.html">Nintendo64 Tech Info Index</A>]
+
+</B></CENTER><P>
+
+</HTML>
+
