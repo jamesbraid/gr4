@@ -121,3 +121,9 @@ In addition to hardware ASIC headers, we generate local headers capturing intern
 - **Ghidra (`ghidra/`, entry point [ghidra/README.md](ghidra/README.md))**:
   - `ghidra/scripts/`: the shared headless scripts for IRIX MIPS binaries (`IrixGp`, `IrixJumpTables`, `FindWindowStores`, `DumpCallEdges`, `ApplyStruct`, `DecompileFunctions`) and [their guide](ghidra/scripts/README.md): when to use Ghidra rather than `m2c`, and what each tool gets wrong. Run `IrixGp.java` and `IrixJumpTables.java` before trusting any switch or global in Ghidra's output.
   - `ghidra/processors/ge11/`: a processor module for GE11 microcode. It loads `mgras_ge*.u`, `mgras_ge*.hex`, `ge11*.bin` and the 6.5.7 diagnostic program, decompiles routines, and labels source modules, `mgras_geif.u` entries and diagnostic labels. Words that come without their decoded records go through `data/ge11_decode.tsv` (`tools/ge11_decode.py`). The instruction word itself is in `GE11.h`.
+
+---
+
+## 7. Published Documents
+
+Every published SGI document, white paper and public web page found that bears on IMPACT is stored in full under `docs/sources/`, with its SHA-256 and source URL in [docs/sources/INDEX.md](docs/sources/INDEX.md) (`sha256sum -c SHA256SUMS` verifies the set). Facts taken from them, each labelled established, secondary or inferred and cited by page, are in [docs/IMPACT_BOARD_FACTS.md](docs/IMPACT_BOARD_FACTS.md). Cite a document by its file name and printed page. No register-level manual for any IMPACT chip has been found; chip behaviour still comes from the binaries and source in sections 3 and 6.
