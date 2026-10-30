@@ -7,7 +7,14 @@
  * Synthesized from:
  *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
  *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_ge11.c, ge11symtab.h, ge_inst.h, cp_ge_sim_tokens.h)
- *   - GE11 microcode binaries and symbols (ucode/ge11.bin, ucode/mgras_ge.hex)
+ *   - IRIX 6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/: mgras_ge11_main.c (host
+ *     tests and their expected replies), mgras_ge.hex (the diagnostic program),
+ *     mgrashw.h.diag and mgras_const.h (GE11 register map), doc/diag_docs/ge_desc
+ *     (memory description); stand/arcs/lib/libsk/graphics/MGRAS/mgras_init.c
+ *     (production loader)
+ *   - GE11 microcode binaries and symbols (ucode/ge11.bin, ucode/mgras_ge.hex,
+ *     ucode/mgras_ge.u with its line table, ucode/mgras_geif.u), IRIX 6.5.0,
+ *     decoded with ghidra/processors/ge11
  *   - SGI OpenGL Core driver (libGLcore.so) DWARF metadata (mgras_xform.c, mgras_lighting.c)
  */
 
@@ -53,9 +60,12 @@ extern "C" {
  *      perspective division (1/w) and normal vector normalization (1/sqrt(x^2+y^2+z^2)).
  *
  * 4. ON-CHIP SRAM STORES:
- *    - Microcode RAM: 64K to 256K words x 64 bits (loaded at boot from ge11.bin / mgras_ge.hex).
- *    - CRAM (Constant RAM): 1,024 words storing standard matrix identities, lighting constants,
- *      trigonometric tables, and material parameters.
+ *    - Microcode RAM: 256K words x 72 bits (GE11_UCODERAM_LEN, mgrashw.h.diag;
+ *      18-bit breakpoint address). gfxinit loads ge11.bin; the 6.5.0 program
+ *      uses 0x0000-0xD5D8. See MICROCODE INSTRUCTION WORD.
+ *    - CRAM (Constant RAM): 512 words of 32 bits, one bank with a single port,
+ *      for data all the cores read at once (ge_desc): matrix identities,
+ *      lighting constants and the like.
  *    - ERAM (External RAM): NOT on chip. 64K words of RAM behind each GE11 (the
  *      kernel addresses it up to 0xDDEB on a 6.5.22 Maximum Impact). It holds the
  *      saved GE state of each GL context (fixed-size slots) and resources
@@ -147,6 +157,173 @@ extern "C" {
 
 #define GE11_DIAG_PASSED_SIG            0x0000CAFE
 #define GE11_DIAG_FAILED_SIG            0xBAADCAFE
+
+/*
+ * ============================================================================
+ * MICROCODE INSTRUCTION WORD
+ * ============================================================================
+ *
+ * The GE11 runs the 72-bit instruction set of the InfiniteReality (KONA)
+ * geometry engine; the full field-by-field reading, with the evidence for
+ * each field, is the KONA repository's ucode/ge_isa.md and ucode/ge_ops.md.
+ * What ties the two chips together:
+ *   - the 6.5.7 diagnostic's 172 expected words (ge_inst.h) are, in order,
+ *     the 172 words the KONA diagnostic irsaudit expects, and 931 words of
+ *     mgras_ge.hex equal KONA diagnostic words in the same order (one
+ *     ge_inst.s assembled for both);
+ *   - where the two production programs hold the same 72-bit word (9133
+ *     words), the assembler wrote the same 256-bit decoded record for 9132
+ *     of them; the other, 782001d7c000000000, differs in two bits of a
+ *     group no known field uses.
+ * So every field and operation below applies to the GE11 as it does to
+ * KONA. Labels: ESTABLISHED (read from the files or the host tests),
+ * INFERRED (with the reason), UNKNOWN.
+ *
+ * Files (ESTABLISHED, IRIX 6.5.0):
+ *   mgras_ge.hex       one word a line: 4-digit address, 18 hex digits (W).
+ *   mgras_ge.u         the same program as 256-bit decoded records (magic
+ *                      0x45900003), plus a line table naming 142 source
+ *                      files; the record is what the module reads, and the
+ *                      decode from W to record is not known as logic
+ *                      (ghidra/processors/ge11/data/ge11_decode.tsv learns
+ *                      it from the six programs that ship both forms).
+ *   ge11.bin           what gfxinit loads: 12-byte words, W bits 31-0,
+ *                      63-32, then 71-64 in the low byte; 0xE800 words,
+ *                      the addresses the program leaves unused filled with
+ *                      FEBAADCAFEBAADCAFE. Equal to mgras_ge.hex word for
+ *                      word. _revB, _revB_HQ4 and the _DB builds alike.
+ *   mgras_geif.u       512 big-endian 32-bit words; 90 are nonzero, each an
+ *                      address inside the program (see VERTEX PATH MODULES).
+ *                      No 6.5.0 binary names the file; its reader is UNKNOWN.
+ *   6.5.7 diagnostic   stand/arcs/ide/isddevices/graphics/MGRAS/mgras_ge.hex,
+ *                      12836 words, labels in ge11symtab.h.
+ *
+ * Loading and starting (ESTABLISHED, mgras_init.c, mgrashw.h.diag): word n
+ * goes to diagnostic window 0x200000 + 4n as three 32-bit writes, bits 31-0,
+ * 63-32, then 71-64 (read-back masked to 8 bits). Word 0 is written again to
+ * reset the PC, then execution control 0x40000 gets GE11_GO with bit 4 clear:
+ * microcode latency four (GE11_EXEC_UCODE_LAT_4).
+ *
+ * Word layout (ESTABLISHED by wiring: each record field equals a W bit in
+ * every word of a form):
+ *   W[70:67]   form, 15 layouts (4 never occurs). 6.5.0 non-padding words
+ *              per form: 0:2891 1:63 2:481 3:787 5:1618 6:39 7:1107 8:507
+ *              9:671 10:601 11:1480 12:4227 13:7996 14:13760 15:4088.
+ *   W[71]      thread B (INFERRED: the diagnostic's vol_aalu3_cond_B repeats
+ *              the thread-A flag test with W71 set and reads FPU_COND_B;
+ *              the six per-thread output-FIFO status registers, 0x40020-
+ *              0x40034, ESTABLISH two threads). 1909 words carry it.
+ *   immediates form 14: W[17:0], sign-extended; form 15: W[31:0], also
+ *              IEEE single constants; form 5: W[40:31].
+ *   operands   A, B, C, G (5 bits) and D, E, F (6 bits) at fixed record
+ *              places, fed from W by form. A+D read, B+E write (an address
+ *              register and an offset, INFERRED); 0x1F is the command input,
+ *              0x1E the word's own immediate.
+ *
+ * Execution (ESTABLISHED for both chips unless marked):
+ *   - two arithmetic units: unit 1 (adds, logic, compares, conversions) and
+ *     unit 2 (multiplies, Newton-Raphson steps), plus a seed unit (reciprocal
+ *     and reciprocal-square-root seeds, read by unit 2 two words later);
+ *   - a result is forwarded to a later word 4 to 7 words after it is made;
+ *   - the condition word (FPU_COND_A, low nibble unit 1, high nibble unit 2)
+ *     is tested twelve words after the word that sets it;
+ *   - a transfer takes effect after four delay words, a return after eight
+ *     (Send_data_to_HQ: its store is the eighth word after the return);
+ *     calls are group-0 transfers, returns R88 transfers in group 4.
+ *
+ * GE11-only facts (ESTABLISHED by the 6.5.7 host tests, mgras_ge11_main.c;
+ * KONA's software never exercises them):
+ *   - integer add (unit-1 code 0x40) saturates: iadd expects 0x7FFFFFFF +
+ *     0x7FFFFFFF = 0x7FFFFFFF;
+ *   - the address unit (F = 0x3F adds A and C) is 18 bits and wraps: aalu3
+ *     expects 0x3FFFE + 2 = 0 and 0x3FFFF + 0x3FFFF = 0x3FFFE. Programs keep
+ *     0xFFFE0000 (special registers) and 0xFFFF0000 (output window) as
+ *     18-bit values with bit 17 set;
+ *   - special register 6, CHIP_REV, is read at 0xFFFE0018 by the revision
+ *     program the kernel loads before the real microcode (gevers_ucode,
+ *     mgras_init.c reads the reply into GE11Rev);
+ *   - integer multiply (unit-2 code 0x0F) keeps the low 32 bits of the
+ *     product (imul: 0x123 * 0x123 = 0x14AC9, 0x7FFFFFFF squared = 1). Its
+ *     two rows with negative operands expect the first operand back; the
+ *     table is compiled only for manufacturing and never run, so those rows
+ *     are INFERRED to be wrong, not the chip.
+ *
+ * Operation codes, unit 1 (M[6:0]; 0x7F idle) with their 6.5.0 production
+ * counts. Each is ESTABLISHED by a word of the shared instruction test whose
+ * reply ge_inst.h gives, unless marked:
+ *   0x20 dadd 100   0x22 dsub 28    0x40 iadd 376   0x42 isub 431
+ *   0x4A mov 7674   0x4B movb 14    0x50 and 714 (INFERRED)
+ *   0x54 or 458 (INFERRED)          0x56 xor 72 (INFERRED)    0x58 not 27
+ *   0x5B sra 62, 0x5D srl 286, 0x5F sll 325 (INFERRED, shift by operand 2)
+ *   0x60 fadd 3608  0x62 fsub 934 (operand 1 - operand 2)
+ *   0x66 fmin 173, 0x68 fmax 172 (INFERRED)   0x71 ftoi 224 (INFERRED)
+ *   0x73 itof 259   0x7C clamp to [0, 1] 139
+ *   UNKNOWN: 0x23 (44), 0x2A, 0x35, 0x41, 0x44, 0x46, 0x4C (78), 0x4E,
+ *   0x51 (150), 0x55, 0x57, 0x63 (91), 0x69, 0x6A (112), 0x6B, 0x6C, 0x6D,
+ *   0x6E, 0x70, 0x72, 0x74, 0x75, 0x76, 0x77 (69), 0x79, 0x7B (63), 0x7D,
+ *   0x08, 0x0B.
+ * Unit 2 (M[10:7] = k; 0xD idle):
+ *   k 0 dmul 224    k 1 imul 169 (low 32 bits, see above)
+ *   k 4 fmov 305    k 6 dmov 45      k 8 fmul 5234
+ *   k 9 2 - a*b 149 (reciprocal Newton-Raphson step)
+ *   k 10 (3 - a*b) / 2 98 (reciprocal square root step)
+ *   UNKNOWN: k 5 (393; returns operand 2 in the shared test), k 7 (6),
+ *   k 11 (98).
+ * The 41 operations the instruction test fixes all decode as listed in the
+ * 6.5.7 diagnostic (ghidra/processors/ge11/tests/check.py, test c).
+ */
+
+/*
+ * ============================================================================
+ * VERTEX PATH MODULES (6.5.0 mgras_ge.u line table, mgras_geif.u)
+ * ============================================================================
+ *
+ * The program is 142 source files laid end to end; the line table gives the
+ * first word of each. The vertex path (ESTABLISHED by file name and
+ * address; what each computes is INFERRED from the name unless a decompile
+ * is cited):
+ *   0x0B7A utexgen.s   0x0C6B ucull.s      0x0CBB udecompose.s
+ *   0x0D30 udecompose2.s  0x0D61 ulight.s  0x0E09 umath.s
+ *   0x0E58 umatrix.s   0x1004 umemove.s    0x107A uscreen.s
+ *   0x10AF uscreen2.s  0x114E uxform.s     0x27A5 linegeom.s
+ *   0x28B9 linetex.s   0x2956 triflatz.s   0x298F trigeom.s
+ *   0x2A4C trirgbz.s   0x2B3A tritex.s     0x2D1A tritex1d.s
+ *   0x2D43 tritex3d.s  0x305F pointgeom.s  0x309D pointwidegeom.s
+ *   0x31A6 pointtex.s  0xB95E pntclip.S    0xBC09 linclip.S
+ *   0xBF24 clip.S      0xC648 mxform.S     0xC960 mlight.S
+ *   0xC9EF mcull.S     0xCA60 mscreen.S    0xCADA mtexgen.S
+ * The lower-case u*.s files sit at the bottom of the program next to the
+ * evaluators and pixel modules; the m*.S files are their counterparts in the
+ * command half (entry.S, ge.S, attrib.S, ...).
+ *
+ * mgras_geif.u, nonzero words by index (ESTABLISHED; that the index is a
+ * module number the pipeline is assembled from is INFERRED from the
+ * grouping):
+ *   0x082 ucull.s      0x083 0x085 ulight.s     0x086-0x08B uxform.s (six
+ *   entries: 0x114E 0x1182 0x11C9 0x1234 0x1292 0x125B)
+ *   0x08D uscreen.s    0x08E 0x08F uscreen2.s   0x07E trigeom.s
+ *   0x077 linegeom.s   0x07B pointgeom.s        0x07F pointwidegeom.s
+ *   0x07D polymode.S   0x066-0x071 udecompose*.s, mdecompose*.S
+ *   0x004 0x005 linclip.S   0x006 pntclip.S     0x008 0x009 0x012 0x055 clip.S
+ *   0x047 0x049 0x04A 0x053 umatrix.s   0x045 0x046 0x048 0x04B 0x04D 0x013
+ *   matrix.S   0x017-0x042 and 0x084 lighting (primmtrllight.S,
+ *   generallight*.S, material.S, lightsource.S, lightsubroutines.S)   0x05A-0x062 the evaluators (ueval*.s)
+ *   0x002 0x00A 0x00F mmemove.S   0x00B 0x010 0x011 memove.S
+ *   0x00E 0x04C 0x050 ge.S   0x00C 0x063 0x08C fluff.S   0x043 fog.S
+ *   0x056 umath.s   0x058 0x059 umemove.s
+ * These indices are not the HQ token numbers (HQ3.h HQ_TOK_*): token 0x002
+ * is COLOR4F, index 0x002 a copy routine.
+ *
+ * trigeom.s (0x298F, decompiled with ghidra/processors/ge11): it reads
+ * vertex records through address registers, words 0x23 and 0x24 of each
+ * (INFERRED x and y), forms differences of word 0x24 between records, and
+ * takes the reciprocal of each as a seed refined by one Newton-Raphson step
+ * (x0 * (2 - x0 * d), unit-2 k 9): the 1/dy the slope setup needs. The
+ * rest of the module mixes the UNKNOWN unit-1 codes 0x63, 0x6A, 0x70, 0x72,
+ * 0x77, 0x79, 0x7B and unit-2 k 5 with integer adds and shifts; reading
+ * those codes is the next step to the setup words it sends the raster
+ * engine (TRIANGLE SETUP below).
+ */
 
 /*
  * ============================================================================
