@@ -281,6 +281,24 @@ typedef union {
 #define MGRAS_DCB_DEV_VC3       8   /* VC3 Video Controller (0x62000, dcbctrl[8]: 0x68020) */
 #define MGRAS_DCB_DEV_BDVERS    9   /* Board version / strapping resistors (0x62400, dcbctrl[9]: 0x68024) */
 #define MGRAS_DCB_DEV_I2C       11  /* Corona / DDC I2C bus controller (0x62C00, dcbctrl[11]: 0x6802C) */
+/*
+ * Device 11 is shared by two parts. The Corona I2C controller takes its
+ * data and control bytes at CRS 0 and CRS 1 (6.5.7
+ * stand/arcs/lib/libsk/graphics/MGRAS/mgras_corona_i2c.c). The multi-channel
+ * option (MCO) board takes an index byte at CRS 2 and data bytes at CRS 3,
+ * a 16-bit value as two bytes, high first: the kernel's mgras_mco.o and the
+ * X server write the pair (impactpc.so mgrasAttachXvc and mgrasBlankScreen,
+ * found by a Ghidra scan for stores into the board window). The X server
+ * sets device 11's DCB timing to 0x6319 first. mgrasBlankScreen has two
+ * branches. Both write 0x0400 to indices 0x20 and 0x30. One then writes
+ * 0x0000 to 0x22 and 0x32, the byte 0x32 to 0x06 and 0x16 and 0 to 0x02
+ * and 0x12; the other writes 0xFFFF, 0x30 and 0xFF to the same indices.
+ * What the MCO indices control is not known from these sources.
+ */
+#define MGRAS_DCB_DEV_MCO       11
+#define MGRAS_MCO_INDEX         (MGRAS_DCB_CRS(2) | MGRAS_DCB_DATAWIDTH_1)  /* 0x62D08 */
+#define MGRAS_MCO_DATA          (MGRAS_DCB_CRS(3) | MGRAS_DCB_DATAWIDTH_1)  /* 0x62D88 */
+#define MGRAS_DCBCTRL_MCO       0x6319      /* Dev 11 (0x6802C), set by the X server */
 
 /* DCB Address Encoding Macros */
 #define MGRAS_DCB_CRS(x)        (((x) & 0x7) << 7)
@@ -355,6 +373,9 @@ typedef union {
 #define MGRAS_XMAP_DIB          (MGRAS_DCB_CRS(6) | MGRAS_DCB_DATAWIDTH_4)
 #define MGRAS_XMAP_DIB_DW       (MGRAS_DCB_CRS(6) | MGRAS_DCB_DATAWIDTH_4 | MGRAS_DCB_ENDATAPACK)
 #define MGRAS_XMAP_RE_RAC       (MGRAS_DCB_CRS(7) | MGRAS_DCB_DATAWIDTH_4)
+/* The kernel's mgras_update_pp1ccv (mgras_retrace.o) writes CONFIG one
+ * byte at a time (0x61D08): */
+#define MGRAS_XMAP_CONFIG_BYTE  (MGRAS_DCB_CRS(2) | MGRAS_DCB_DATAWIDTH_1)
 
 typedef struct {
     uint8_t             pad0[MGRAS_XMAP_PP1_SELECT];
@@ -424,6 +445,10 @@ typedef struct {
 #define MGRAS_DAC_PAL           (MGRAS_DCB_CRS(1) | MGRAS_DCB_DATAWIDTH_2)
 #define MGRAS_DAC_CMD           (MGRAS_DCB_CRS(2) | MGRAS_DCB_DATAWIDTH_1)
 #define MGRAS_DAC_MODE          (MGRAS_DCB_CRS(3) | MGRAS_DCB_DATAWIDTH_1)
+/* After the MCO sequence (device 11 above) the X server's mgrasBlankScreen
+ * writes 4 to byte 1 of ADDR (0x61811), then 0 or 0xFF, by branch, to CRS 2
+ * as a 16-bit access (0x61910). Which DAC register that reaches is not
+ * known. */
 
 typedef struct {
     uint8_t             pad0[MGRAS_DAC_ADDR];
