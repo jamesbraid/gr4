@@ -26,7 +26,7 @@ extern "C" {
  * ARCHITECTURE OVERVIEW: HQ3 / HQ4 COMMAND ENGINE
  * ============================================================================
  *
- * Gate Count:      ~150,000 gates
+ * Gate Count:      300,000 gates (Indigo2 IMPACT Product Guide)
  * Operating Clock: 33 MHz (GIO64 on Indigo2) / 100 MHz (XIO Crosstalk on Octane HQ4)
  * Microcode RAM:   6,144 instructions x 24 bits (loaded from hq3.bin)
  *
