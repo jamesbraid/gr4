@@ -116,6 +116,17 @@ cd root/var/sysgen/boot && ar x mgras.a
 | `mgras_ge.u` | `/usr/gfx/ucode/MG/mgras_ge.u` | `ucode/mgras_ge.u` |
 | `mgras_geif.u` | `/usr/gfx/ucode/MG/mgras_geif.u` | `ucode/mgras_geif.u` |
 
+### F. GE11 Diagnostic Program (optional, `ghidra/processors/ge11` tests)
+Not part of the IRIX distribution: these come from the IDE diagnostic sources of the IRIX 6.5.7 source tree. Place them under `root/irix-6.5.7-src/` at their own paths:
+
+| File | Source Path | Used For |
+|---|---|---|
+| `mgras_ge.hex` | `stand/arcs/ide/isddevices/graphics/MGRAS/mgras_ge.hex` | the diagnostic GE11 program, words only |
+| `ge11symtab.h` | `stand/arcs/ide/isddevices/graphics/MGRAS/ge11symtab.h` | its 82 labels |
+| `ge_inst.h` | `stand/arcs/ide/isddevices/graphics/MGRAS/ge_inst.h` | the 172 words its instruction test expects |
+
+The decode table (`ghidra/processors/ge11/tools/ge11_decode.py`) is learnt from all six `mgras_ge*.hex` / `mgras_ge*.u` pairs in `/usr/gfx/ucode/MG`, so copy that directory whole.
+
 ---
 
 ## 3. How to Populate `root/` from an IRIX 6.5 System or CD
