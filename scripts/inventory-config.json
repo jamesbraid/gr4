@@ -1,0 +1,87 @@
+{
+  "family": "Impact (GR4 / MGRAS)",
+  "docs": {
+    "prose": [
+      "docs/*.md",
+      "README.md"
+    ],
+    "headers": [
+      "*.h",
+      "*/include/*.h"
+    ],
+    "tables": [
+      "docs/*/*.tsv"
+    ],
+    "index": [
+      "AGENTS.md",
+      "IRIX_FILES.md"
+    ],
+    "skip": []
+  },
+  "binaries": [
+    {
+      "group": "kernel",
+      "role": "board-kernel",
+      "paths": [
+        "usr/cpu/sysgen/IP28boot/mgras.a"
+      ]
+    },
+    {
+      "group": "kernel-shared",
+      "role": "shared-kernel",
+      "paths": [
+        "usr/cpu/sysgen/IP28boot/gfx.o",
+        "usr/cpu/sysgen/IP28boot/rrm.o"
+      ]
+    },
+    {
+      "group": "libraries",
+      "role": "board-library",
+      "paths": [
+        "usr/gfx/arch/IP28GR432/libGL.so",
+        "usr/gfx/arch/IP28GR432/libGLcore.so"
+      ]
+    },
+    {
+      "group": "shared-libraries",
+      "role": "shared-library",
+      "paths": [
+        "usr/gfx/arch/IGLOO32/libgl.so",
+        "usr/lib32/libfm.so"
+      ]
+    },
+    {
+      "group": "x-module",
+      "role": "board-x-module",
+      "paths": [
+        "usr/lib/X11/dyDDX/impactpc.so"
+      ]
+    },
+    {
+      "group": "x-shared",
+      "role": "shared-x-server",
+      "paths": [
+        "usr/lib/X11/dyDDX/glx.so"
+      ]
+    },
+    {
+      "group": "board-tools",
+      "role": "board-tool",
+      "paths": [
+        "usr/gfx/MGRAS/HQ3/ge11dump.HQ3"
+      ]
+    },
+    {
+      "group": "microcode",
+      "role": "board-microcode",
+      "paths": [
+        "usr/gfx/ucode/ge11*.bin",
+        "usr/gfx/ucode/hq3*.bin",
+        "usr/gfx/ucode/MGRAS/hq3*.u",
+        "usr/gfx/ucode/MG/mgras_ge*.hex",
+        "usr/gfx/ucode/MG/mgras_ge*.u",
+        "usr/gfx/ucode/MG/mgras_geif*.u"
+      ]
+    }
+  ]
+}
