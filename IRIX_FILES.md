@@ -6,6 +6,15 @@ For legal and clean-room licensing reasons, proprietary SGI binaries are **not t
 
 Top-level subdirectories (`ddx/`, `libglcore/`, `irisgl/`, `mgras_kernel/`, `ge11dump/`, `ucode/`) use relative symbolic links pointing to their respective targets under `root/`.
 
+### 0. What `root/` holds now
+
+`root/` is an extraction from the June 1998 IRIX 6.5 base CDs. Its files are listed in the extraction index kept beside it, and the 46 files the inventory reads are pinned in `scripts/inventory-root.sha256`.
+
+- `unix` is a candidate only. It is the miniroot `unix.IP28`, not confirmed to be the running kernel. The inventory does not read it.
+- `unix.map` is not held.
+- The GE11 diagnostic is at `usr/gfx/MGRAS/HQ3/ge11dump.HQ3`. `usr/gfx/MGRAS/ge11dump` is a link to it.
+- The boot modules are under `usr/cpu/sysgen/IP28boot/` and also under `var/sysgen/boot/`, byte-identical. The inventory reads the `usr/cpu/sysgen/IP28boot/` copies.
+
 ---
 
 ## 1. Directory Structure Overview
@@ -14,8 +23,8 @@ All files should be installed into `root/` mirroring their authentic IRIX paths:
 
 ```
 root/
-├── unix                                       <- IRIX kernel binary (IP28 or IP22)
-├── unix.map                                   <- Kernel symbol map
+├── unix                                       <- candidate only: the miniroot unix.IP28, unverified as the running kernel
+├── unix.map                                   <- not held
 ├── usr/
 │   ├── gfx/
 │   │   ├── arch/
