@@ -1,0 +1,1 @@
+../retools/scripts/test_inventory.py
