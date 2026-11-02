@@ -116,6 +116,6 @@ Facts mined from these documents are in [../IMPACT_BOARD_FACTS.md](../IMPACT_BOA
 - Origin200 and Origin2000 owner's and maintenance guides (007-3415, 007-3708, 007-3709, 007-3453), the Origin and Onyx2 programmer's reference (007-3410) and the Onyx2 technical report: text search finds no IMPACT, Solid IMPACT or SI board content in them.
 - Octane2 manuals: Octane2 shipped with VPro graphics, a different family.
 - Octane digital video, compression and personal video guides: option boards on the XIO module, not the graphics board.
-- Patents on texture mapping and antialiasing in the Library: none names the IMPACT chips.
+- Patents on texture mapping and antialiasing that were reviewed: none names the IMPACT chips.
 - The O2/Octane marketing white paper at sgidepot.co.uk/octane/manuf_wp.pdf: no mention of IMPACT.
-- No SGI-published register-level manual for HQ3, HQ4, GE11, RE4, TE1, PP1 or VC3 turned up in the Library or on the public web.
+- No SGI-published register-level manual for HQ3, HQ4, GE11, RE4, TE1, PP1 or VC3 turned up on the public web.
