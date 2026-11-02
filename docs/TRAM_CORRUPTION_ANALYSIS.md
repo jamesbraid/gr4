@@ -3,7 +3,7 @@
 **Author:** Antigravity / Reverse Engineering Toolchain  
 **Date:** October 14, 2026  
 **Target:** SGI IRIX `libGLcore.so` (Impact MGRAS / GR4 Architecture)  
-**Correlated Artifacts:** [`TE1.h` (line 488)](file:///home/dbehr/gits/iris/ignore/gr4/TE1.h#L488), [`mgras_texture.c`](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/decomp/MGRAS/mgras_texture.c), [`mgras_texman.c`](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/decomp/MGRAS/mgras_texman.c), [`mgras_tex_io.c`](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/decomp/MGRAS/mgras_tex_io.c)
+**Correlated Artifacts:** [`TE1.h` (line 488)](../TE1.h#L488), [`mgras_texture.c`](../libglcore/decomp/MGRAS/mgras_texture.c), [`mgras_texman.c`](../libglcore/decomp/MGRAS/mgras_texman.c), [`mgras_tex_io.c`](../libglcore/decomp/MGRAS/mgras_tex_io.c)
 
 ---
 
@@ -113,7 +113,7 @@ Attached to texture object levels (`level->unk1C`).
 
 ### Bug 1: Premature Fast-Path Bypass in `mgrTM_TexImage2D_setup`
 
-In [`mgras_texture.c` (lines 2742–2765)](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/decomp/MGRAS/mgras_texture.c#L2742-L2765) and [`mgras_texture.s` (lines 5955–6145)](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/asm/MGRAS/mgras_texture.s#L5955-L6145):
+In [`mgras_texture.c` (lines 2742–2765)](../libglcore/decomp/MGRAS/mgras_texture.c#L2742-L2765) and [`mgras_texture.s` (lines 5955–6145)](../libglcore/asm/MGRAS/mgras_texture.s#L5955-L6145):
 
 ```c
 if (memcmp(sp, (void *) var_a1_2, 0x18) == 0) {
@@ -140,13 +140,13 @@ When Quake calls `glTexImage2D` with identical parameters (`256×256`, `GL_RGB`,
 3. If `unk59 == 0`, it invokes `mgrTM_MakeResident(sp48, temp_a1_3, 1, 1, 1)`.
 4. It **never checks if `mgrTM_MakeResident` succeeded** (the function returns `void`). It immediately branches to `block_97` and reports success.
 
-In [`mgrTM_TexSubImage2D_setup` (lines 3060–3074)](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/decomp/MGRAS/mgras_texture.c#L3060-L3074), the exact same bypass occurs: it calls `mgrTM_MakeResident(sp30, temp_a1, 1, 1, var_a4_3)` and never invokes `do_placement`.
+In [`mgrTM_TexSubImage2D_setup` (lines 3060–3074)](../libglcore/decomp/MGRAS/mgras_texture.c#L3060-L3074), the exact same bypass occurs: it calls `mgrTM_MakeResident(sp30, temp_a1, 1, 1, var_a4_3)` and never invokes `do_placement`.
 
 ---
 
 ### Bug 2: Missing Stale Page Invalidation on Eviction (`ReturnDesc`)
 
-Under TRAM memory pressure, static wall textures require room. The placement engine calls [`EstablishLocation` (`0xdab9968`)](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/asm/MGRAS/mgras_texman.s#L5183), which selects the 16-page block at `0x28–0x37` (since the warp texture is unbound between frames) and evicts it via [`ReturnDesc` (`0xdaba72c`)](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/asm/MGRAS/mgras_texman.s#L6463):
+Under TRAM memory pressure, static wall textures require room. The placement engine calls [`EstablishLocation` (`0xdab9968`)](../libglcore/asm/MGRAS/mgras_texman.s#L5183), which selects the 16-page block at `0x28–0x37` (since the warp texture is unbound between frames) and evicts it via [`ReturnDesc` (`0xdaba72c`)](../libglcore/asm/MGRAS/mgras_texman.s#L6463):
 
 ```assembly
 # ReturnDesc in mgras_texman.s (lines 6510-6544)
@@ -170,7 +170,7 @@ Under TRAM memory pressure, static wall textures require room. The placement eng
 
 When Quake uploads the warp texture on the very next frame, `mgrTM_TexImage2D_setup` sees `level->unk59 == 0` and calls `mgrTM_MakeResident(texmgr, level, 1, 1, 1)`.
 
-Look at lines 6631–6637 in [`mgras_texman.s`](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/asm/MGRAS/mgras_texman.s#L6631-L6637):
+Look at lines 6631–6637 in [`mgras_texman.s`](../libglcore/asm/MGRAS/mgras_texman.s#L6631-L6637):
 ```assembly
 mgrTM_MakeResident:
 .L0daba8c0:
@@ -189,7 +189,7 @@ And at `.L0dabaec4` (line 7131):
 ```
 
 #### Why is `unk55` zero?
-In [`mgras_tex_io.c` (line 787)](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/decomp/MGRAS/mgras_tex_io.c#L787) and [`mgras_tex_io.s` (line 895)](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/asm/MGRAS/mgras_tex_io.s#L895):
+In [`mgras_tex_io.c` (line 787)](../libglcore/decomp/MGRAS/mgras_tex_io.c#L787) and [`mgras_tex_io.s` (line 895)](../libglcore/asm/MGRAS/mgras_tex_io.s#L895):
 ```c
 if (gc->texMgr->unk4D4 != 0) {
     mgrTM_SaveData(gc, level);
@@ -207,20 +207,20 @@ Even if `unk55 == 1`, line 6646 dereferences `level->unk0`:
 lw    $a6, 0($s2)           # a6 = level->unk0 (DANGLING POINTER!)
 lw    $a6, 0($a6)           # DEREFERENCES FREED MEMORY
 ```
-Because `level->unk0` was freed, dereferencing `0($a6)` traverses invalid descriptor chains. When TRAM is 100% full, `SearchAllSpaces` returns 0. When it returns 0, [`MovePlacement`](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/asm/MGRAS/mgras_texman.s#L7326) is never called, leaving `level->unk4A` frozen at `0x28`.
+Because `level->unk0` was freed, dereferencing `0($a6)` traverses invalid descriptor chains. When TRAM is 100% full, `SearchAllSpaces` returns 0. When it returns 0, [`MovePlacement`](../libglcore/asm/MGRAS/mgras_texman.s#L7326) is never called, leaving `level->unk4A` frozen at `0x28`.
 
 ---
 
 ### Bug 4: Blind DMA Streaming in `mgrTM_DoTexLoad`
 
-In [`__glMgrim_TexImage2D` (lines 5175–5203)](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/asm/MGRAS/mgras_texture.s#L5175-L5203), because setup returned non-zero, it proceeds directly to `mgrTM_DoTexLoad`:
+In [`__glMgrim_TexImage2D` (lines 5175–5203)](../libglcore/asm/MGRAS/mgras_texture.s#L5175-L5203), because setup returned non-zero, it proceeds directly to `mgrTM_DoTexLoad`:
 
 ```assembly
 # __glMgrim_TexImage2D in mgras_texture.s
 jal   mgrTM_DoTexLoad       # Called unconditionally after setup
 ```
 
-In [`mgras_tex_io.c` (lines 402–405)](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/decomp/MGRAS/mgras_tex_io.c#L402-L405) and [`mgras_tex_io.s` (lines 601–615)](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/asm/MGRAS/mgras_tex_io.s#L601-L615):
+In [`mgras_tex_io.c` (lines 402–405)](../libglcore/decomp/MGRAS/mgras_tex_io.c#L402-L405) and [`mgras_tex_io.s` (lines 601–615)](../libglcore/asm/MGRAS/mgras_tex_io.s#L601-L615):
 ```assembly
 lw    $a0, 28($s4)          # a0 = level descriptor
 lh    $a0, 74($a0)          # a0 = level->unk4A (STALE 0x28!)
@@ -249,7 +249,7 @@ Because pages `0x28–0x37` are currently assigned to active wall textures, ever
 ## 5. Potential Fixes & Mitigations
 
 ### 1. Driver-Level Binary Patch (`libGLcore.so`)
-In `mgrTM_TexImage2D_setup` ([`mgras_texture.s:6096`](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/asm/MGRAS/mgras_texture.s#L6096)):
+In `mgrTM_TexImage2D_setup` ([`mgras_texture.s:6096`](../libglcore/asm/MGRAS/mgras_texture.s#L6096)):
 ```assembly
 # Original:
 lbu   $t0, 89($a1)        # level->unk59
@@ -261,7 +261,7 @@ beqz  $t0, .L0da96f60     # Branch to mgrTM_MakeResident
 ```
 
 ### 2. Invalidation Fix in `ReturnDesc`
-In `ReturnDesc` ([`mgras_texman.s:6544`](file:///home/dbehr/gits/iris/ignore/gr4/libglcore/asm/MGRAS/mgras_texman.s#L6544)):
+In `ReturnDesc` ([`mgras_texman.s:6544`](../libglcore/asm/MGRAS/mgras_texman.s#L6544)):
 ```assembly
 # When evicting a level:
 sb   $zero, 88($at)       # Clear residency flag
