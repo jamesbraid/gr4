@@ -3,7 +3,7 @@
  *
  * Texture Engine 1 (TE1), TETRAM Controller (TR1), and Texture Subsystem for SGI Impact (GR4).
  *
- * Reverse-engineered documentation and single source of truth for IRIS emulator.
+ * Reverse-engineered hardware documentation.
  * Synthesized from:
  *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
  *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_tetr.c, mgras_tetramfunc.c, mgras_tex_load.c)
@@ -361,7 +361,7 @@ extern "C" {
  *     GL_INVALID_VALUE unless the sub-image covers the level's full width,
  *     or is at least 32 texels wide and ends on a 32-texel boundary or at
  *     the level's edge (__glMgrim_TexSubImage2DEXT). This is real IMPACT
- *     behaviour, not an emulation fault.
+ *     behaviour.
  *   - A sub-image loads like a level: the same 0x511A SEND_PIXELS, with
  *     ERAM block 0xDA8's origin and size.
  *   - glCopyTexImage2D reads the screen to host memory (GET_PIXELS,
@@ -486,7 +486,7 @@ extern "C" {
  *     (0x34038 = slot 3) and TL_NO_TABLE (0x09B).
  *
  * TyrQuake after an overnight demo loop (glq.log, 2026-10-10; cause still
- * open, libGLcore bookkeeping or emulation). Its water/lava warp is
+ * open, libGLcore bookkeeping or the host). Its water/lava warp is
  * rebuilt every frame: two GET_PIXELS_BITMAP_PIO reads of the screen, then
  * a TL load (TL_MODE 0x34024 RGB, TL_SPEC 0x880, TL_MIPMAP 0x28) in four
  * 64 x 256 strips (0xDA8 at s = 0, 0x40, 0x80, 0xC0), sampled as TXSIZE

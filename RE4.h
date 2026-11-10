@@ -3,12 +3,11 @@
  *
  * Raster Engine 4 (RE4) and Raster Subsystem (RSS) Architecture for SGI Impact (GR4).
  *
- * Reverse-engineered documentation and single source of truth for IRIS emulator.
+ * Reverse-engineered hardware documentation.
  * Synthesized from:
  *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
  *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_re4.c, mgras_re4func.c, mgras_rss_utils.c)
  *   - IRIX 6.5.0 kernel modules (mgras.o, mgras_init.o, mgras_dma.o)
- *   - Existing IRIS emulator implementation (~/gits/iris/src/dev/mgras/raster.rs)
  */
 
 #ifndef _SGI_RE4_H_

@@ -3,12 +3,11 @@
  *
  * Video Controller 3 (VC3), Video Timing, Cursor, and DID Frame Composition for SGI Impact (GR4).
  *
- * Reverse-engineered documentation and single source of truth for IRIS emulator.
+ * Reverse-engineered hardware documentation.
  * Synthesized from:
  *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
  *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_vc3.c, mgras_vc3_register.c)
  *   - IRIX 6.5.0 kernel modules (mgras_retrace.o, mgras_timing.o, mgras_init.o)
- *   - Existing IRIS emulator implementation (~/gits/iris/src/dev/mgras/dcb.rs)
  */
 
 #ifndef _SGI_VC3_H_

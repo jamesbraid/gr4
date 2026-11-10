@@ -3,12 +3,11 @@
  *
  * Colormap ASICs (CMAP0, CMAP1), TrueColor RAMDAC, and XMAP Display Router for SGI Impact (GR4).
  *
- * Reverse-engineered documentation and single source of truth for IRIS emulator.
+ * Reverse-engineered hardware documentation.
  * Synthesized from:
  *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
  *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_cmap.c, mgras_dac.c, mgras_xmap.c)
  *   - IRIX 6.5.0 kernel modules (mgras.o, mgras_init.o)
- *   - Existing IRIS emulator implementation (~/gits/iris/src/dev/mgras/dcb.rs)
  */
 
 #ifndef _SGI_CMAP_H_
@@ -216,13 +215,12 @@ extern "C" {
  *       glprim's 4,4,4,4 visual and electropaint (pixel format 0).
  *   7   the 5,5,5,1 pairs (octahedra, pixel format 0x100): RGB 5:5:5 in
  *       bits 14:0 / 29:15 of the word (libGLcore's plane masks, PP1.h).
- *       iris still displays 7 as 4:4:4 halves.
  *   21  (0x15) 24-bit RGB double-buffered on two pages: BUF_SELECT picks
  *       DIB's second page.
  *   25  (0x19) 36-bit RGB, the RGBA 12,12,12 visual (gltest, 2026-10-10:
  *       DIDs 12 0x17B9 and 17 0x1419, BUF_SELECT bit 17 flipping on its
  *       swaps; second page like 0x15). Presumably scanout takes the
- *       twelve bits (PP1.h layout); iris shows the 8-bit parts.
+ *       twelve bits (PP1.h layout).
  *   4, 8, 19, 23  seen, unmodelled (8 = unused DIDs 20-31).
  * The RGB DIDs name block 29 (0x7A0), which holds an identity ramp. RGB
  * pixels are believed to bypass the CMAP and go straight to the DAC's

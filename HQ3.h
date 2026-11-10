@@ -3,12 +3,11 @@
  *
  * Command Engine, Host Bus Interface, FIFO Controller, and Graphics TLB for SGI Impact (GR4).
  *
- * Reverse-engineered documentation and single source of truth for IRIS emulator.
+ * Reverse-engineered hardware documentation.
  * Synthesized from:
  *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
  *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_hq3.c, mgras_hq3_cp.c, mgras_host_hqdma.c)
  *   - IRIX 6.5.0 kernel modules (mgras.o, mgras_init.o, mgras_dma.o)
- *   - Existing IRIS emulator implementation (~/gits/iris/src/dev/mgras/mod.rs)
  */
 
 #ifndef _SGI_HQ3_H_

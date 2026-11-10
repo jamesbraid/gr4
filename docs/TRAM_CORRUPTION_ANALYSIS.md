@@ -9,7 +9,7 @@
 
 ## 1. Executive Summary & Problem Statement
 
-When running TyrQuake / GLQuake on an emulated or physical SGI Impact workstation (Indigo2 / Octane with Solid Impact, High Impact, or Maximum Impact) for an extended period (such as an overnight demo loop), textures across the level become progressively corrupted. Specifically, castle walls, floors, and doors begin sampling and animating the water, lava, or slime warp texture instead of their assigned surface textures.
+When running TyrQuake / GLQuake on an SGI Impact workstation (Indigo2 / Octane with Solid Impact, High Impact, or Maximum Impact) for an extended period (such as an overnight demo loop), textures across the level become progressively corrupted. Specifically, castle walls, floors, and doors begin sampling and animating the water, lava, or slime warp texture instead of their assigned surface textures.
 
 A fresh run of Quake does not exhibit this behavior. The issue only manifests after prolonged gameplay under **TRAM (TETRAM) memory pressure**.
 
@@ -268,8 +268,3 @@ sb   $zero, 88($at)       # Clear residency flag
 sh   $zero, 74($s2)       # CLEAR level->unk4A = 0 (or 0xFFFF invalid)
 sw   $zero, 0($s2)        # CLEAR level->unk0 = NULL (prevent dangling dereference)
 ```
-
-### 3. Emulator Safeguard (`iris`)
-In the MGRAS emulator TE1 / TR1 DMA controller:
-- Track page allocation ownership per texture descriptor.
-- If a DMA load arrives for pages currently bound and sampled by other resident textures without a preceding valid placement transaction, log a warning or dynamically isolate the pages to prevent visible corruption.

@@ -3,7 +3,7 @@
  *
  * Geometry Engine 11 (GE11) Vector Floating-Point Processor for SGI Impact (GR4).
  *
- * Reverse-engineered documentation and single source of truth for IRIS emulator.
+ * Reverse-engineered hardware documentation.
  * Synthesized from:
  *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
  *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_ge11.c, ge11symtab.h, ge_inst.h, cp_ge_sim_tokens.h)
@@ -429,18 +429,6 @@ extern "C" {
  *   alternating primitives) is drained by the switch. Unverified on
  *   hardware.
  *   A one-GE board presumably does each transfer once; not traced.
- *
- * Emulator (iris, hq3.rs): one GE HLE with one live state. A switch copies
- *   it into and out of GE0's ERAM slot, as the microcode does. GE1 gets its
- *   own ERAM array: a transfer repeating GE0's last one is GE1's (a read at
- *   one below GE0's last address with the same count, or a write set
- *   starting where GE0's set started), and GE1's reads are offset by one
- *   word. Nothing reads GE1's copy. Before this, GE1's half (read at S - 1)
- *   landed on GE0's copy one word off and shifted the restored state by a
- *   field. Avid Matador came back from being iconified with its RGB context
- *   flagged colour-index (PP1 fill mode format 6, colour mask 0xFFF).
- *   Possible later: serve GE1 reads from GE0's ERAM and drop GE1's writes
- *   (rules/mgras/eram-state-ideas.md).
  */
 
 /*

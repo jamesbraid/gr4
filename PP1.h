@@ -3,12 +3,11 @@
  *
  * Pixel Processor 1 (PP1), Rambus RDRAM, and RAC Architecture for SGI Impact (GR4).
  *
- * Reverse-engineered documentation and single source of truth for IRIS emulator.
+ * Reverse-engineered hardware documentation.
  * Synthesized from:
  *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
  *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_pp1.c, mgras_pp1func.c, mgras_rdram_rac.c)
  *   - IRIX 6.5.0 kernel modules (mgras.o, mgras_init.o, mgras_ccv.o)
- *   - Existing IRIS emulator implementation (~/gits/iris/src/dev/mgras)
  */
 
 #ifndef _SGI_PP1_H_
@@ -192,8 +191,7 @@ extern "C" {
  *   colour index: CI12 format 0x400, masks 0xFFF / 0xFFF000; CI8 0x600
  *           (or 0x500) with 0xFF / 0xFF000
  * So 5,5,5,1 is real (15-bit halves), not 4:4:4; the component order
- * inside the 15 bits is not known (red lowest by analogy). iris models
- * formats 0 and 0x100 alike as 4:4:4 halves without alpha (2026-10-10).
+ * inside the 15 bits is not known (red lowest by analogy).
  * GL_DITHER (HQ3 token 0x067) is sent, but no fill mode bit for dither
  * has been seen; our model dithers GL's 12-bit writes with REX3's 4x4
  * Bayer matrix (a model-private bit 3).
@@ -381,7 +379,7 @@ extern "C" {
  * each draws only its own scanlines; the XMAP CONFIG register carries
  * the RSS count too (XMAP_CONFIG_DEFAULT(numRE), bits 21:20). With a
  * one-RE4 layout assumed, buffers overlap and the screen shows bands of
- * 16 rows (seen in iris before the fix).
+ * 16 rows (seen on a model that assumed one RE4).
  *
  * Drawing: both X servers put the target buffer's page in DRBpointers
  * bits 9:0 and switch it for overlay drawing (6.5.0: 0x90240 main /

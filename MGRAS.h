@@ -4,7 +4,7 @@
  * Historic 3D Graphics Architecture for SGI Indigo2 (IP22/IP26/IP28)
  * and Octane (IP30).
  *
- * Reverse-engineered documentation and single source of truth for IRIS emulator.
+ * Reverse-engineered hardware documentation.
  * Synthesized from:
  *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
  *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS)
@@ -12,7 +12,6 @@
  *   - SGI OpenGL core driver (libGLcore.so) DWARF metadata
  *   - SGI IrisGL compatibility library ("igloo" libgl.so)
  *   - SGI X11 DDX driver (impactpc.so)
- *   - Existing IRIS emulator implementation (~/gits/iris/src/dev/mgras)
  *   - OpenBSD / NetBSD sgi/sgimips driver sources
  */
 
@@ -100,7 +99,7 @@ typedef union {
  * counts. The PROM names 2 GEs + 2 REs + TRAMs "Maximum Impact", 2 GEs + 1
  * RE "High-AA Impact". The RA revision gfxinfo prints is CMAP1's revision
  * register (MGRAS_CMAP_RA_REV); RARev < 3 makes the IP22/IP28 kernel lower
- * the HPC3 voltage margin (rev B PP1s). Board IDs iris uses (BDVERS0,
+ * the HPC3 voltage margin (rev B PP1s). Board ID strap values (BDVERS0,
  * BDVERS1): Solid 0x70, 0x21; High 0x72, 0x01; Max 0x0A, 0x02. 6.5.22 on
  * IP28 then reports "2 GEs, 2 REs, 4 TRAMs" for Max; the IP28 kernel names
  * every IMPACT "IMPACTPC" (a string in its mgras_init.o).
@@ -115,7 +114,7 @@ typedef union {
  * TRAM "SSI", 2 GEs + TRAMs "MXI", each prefixed "E" when the GE11 revision
  * is above 2. The serial-number record's name is GM10 for one RE and GM20
  * for two; texture comes on mezzanines (TMEZZ: one for SI, two for MXI).
- * Board IDs iris uses (BDVERS0, BDVERS1): SI 0x0F, 0x45; SI with texture
+ * Board ID strap values (BDVERS0, BDVERS1): SI 0x0F, 0x45; SI with texture
  * 0x0C, 0x45; MXI 0x00, 0x66. gfxinfo then reports "Product ID 0x2, 1 GE,
  * 1 RE, 4 TRAMs" and "Product ID 0x3, 2 GEs, 2 REs, 4 TRAMs".
  *
@@ -167,7 +166,7 @@ typedef union {
  * ============================================================================
  *
  * As glXGetConfig / glXGetFBConfigAttribSGIX report them (glprim
- * --listvisuals in iris, 2026-10-10; not yet compared with a real board):
+ * --listvisuals, 2026-10-10; not yet compared with a real board):
  *   CI8     z24s8 or none, single-buffered; level 1 (overlay) visuals too
  *   CI12    z24s8 or none; single, double, double stereo
  *   RGBA 4,4,4,4   double-buffered only, z24s8 or none, accum 16, stereo

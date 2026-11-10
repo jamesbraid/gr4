@@ -1,7 +1,7 @@
 # SGI Impact Graphics (GR4 / MGRAS) Reverse Engineering Project
 
 This project reverse-engineers the historic **SGI Impact Graphics** (internal architecture name **MGRAS** / **Mardi Gras**, hardware designation **GR4**) subsystem.
-The primary goal is developing cycle-accurate and behavioral emulation in the SGI Indy / Indigo2 / Octane emulator (`iris`), and documenting the architecture for the vintage SGI enthusiast and FPGA recreation communities.
+The goal is documenting the architecture for the vintage SGI enthusiast and FPGA recreation communities.
 
 ---
 
