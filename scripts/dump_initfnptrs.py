@@ -1,1 +1,0 @@
-../retools/scripts/gr4/dump_initfnptrs.py

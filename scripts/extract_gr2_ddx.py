@@ -1,1 +1,0 @@
-../retools/scripts/gr4/extract_gr2_ddx.py

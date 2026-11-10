@@ -12,8 +12,6 @@ ghidra/
                        tests/, tools/)
   import/<name>/       loader and import scripts for firmware images
   types/<name>/        data-type scripts
-  scripts/             the shared IRIX scripts (IrixGp, IrixJumpTables,
-                       FindWindowStores, ...), linked from the retools submodule
 ```
 
 ## Build and run
@@ -22,11 +20,11 @@ Run a component's `tests/run-ghidra.sh` in the Ghidra image, then its
 `tests/check.py` on the dump directory it writes:
 
 ```sh
-re-run --workspace . --ghidra -- ghidra/processors/NAME/tests/run-ghidra.sh .cache/NAME
-re-run --workspace . -- python3 ghidra/processors/NAME/tests/check.py .cache/NAME
+retools/tools/re-run --ghidra ghidra/processors/NAME/tests/run-ghidra.sh .cache/NAME
+retools/tools/re-run python3 ghidra/processors/NAME/tests/check.py .cache/NAME
 ```
 
-(`re-run` mounts the workspace at `/work`, the Ghidra image with `--ghidra` and
+(`retools/tools/re-run` mounts the workspace at `/work`, the Ghidra image with `--ghidra` and
 the toolchain image without.)
 
 ## Components
@@ -34,7 +32,7 @@ the toolchain image without.)
 | Path | What it is |
 |---|---|
 | [processors/ge11/](processors/ge11/) | the GE11 geometry-engine microcode: SLEIGH spec, importer and the word-to-record decode table (below) |
-| [scripts/](scripts/) | the shared IRIX scripts and the guide to them ([scripts/README.md](scripts/README.md)); here they run over `mgras_kernel/*.o`, `ddx/impactpc.so` and `libglcore/libGLcore.so` |
+| [retools/ghidra/scripts/](../retools/ghidra/scripts/) | the shared IRIX scripts (in the retools submodule, not here) and the guide to them ([README](../retools/ghidra/scripts/README.md)); here they run over `mgras_kernel/*.o`, `ddx/impactpc.so` and `libglcore/libGLcore.so` |
 
 ## GE11 microcode (processors/ge11)
 

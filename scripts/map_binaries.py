@@ -1,1 +1,0 @@
-../retools/scripts/gr4/map_binaries.py

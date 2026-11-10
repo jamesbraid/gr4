@@ -1,1 +1,0 @@
-../retools/scripts/gr4/detailed_fifo_analysis.py

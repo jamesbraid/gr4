@@ -1,1 +1,0 @@
-../retools/scripts/gr4/generate_gl_headers.py

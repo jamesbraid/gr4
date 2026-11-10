@@ -1,1 +1,0 @@
-../retools/scripts/gr4/resolve_got.py
