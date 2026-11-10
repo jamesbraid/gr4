@@ -4,9 +4,9 @@
  * Colormap ASICs (CMAP0, CMAP1), TrueColor RAMDAC, and XMAP Display Router for SGI Impact (GR4).
  *
  * Reverse-engineered hardware documentation.
- * Synthesized from:
- *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
- *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_cmap.c, mgras_dac.c, mgras_xmap.c)
+ * Derived from the shipped binaries:
+ *   - SGI IRIX PROM graphics code
+ *   - SGI IDE diagnostics for the CMAP, DAC and XMAP parts
  *   - IRIX 6.5.0 kernel modules (mgras.o, mgras_init.o)
  */
 

@@ -4,11 +4,11 @@
  * Texture Engine 1 (TE1), TETRAM Controller (TR1), and Texture Subsystem for SGI Impact (GR4).
  *
  * Reverse-engineered hardware documentation.
- * Synthesized from:
- *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
- *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_tetr.c, mgras_tetramfunc.c, mgras_tex_load.c)
+ * Derived from the shipped binaries:
+ *   - SGI IRIX PROM graphics code
+ *   - SGI IDE diagnostics for the TETRAM, its functions and texture load
  *   - IRIX 6.5.0 kernel modules (mgras_tex.o, mgras_tex_io.o, mgras_texsr.o)
- *   - SGI OpenGL core driver (libGLcore.so) DWARF metadata (mgras_texture.c, mgras_texman.c)
+ *   - SGI OpenGL core driver (libGLcore.so) DWARF metadata
  */
 
 #ifndef _SGI_TE1_H_
@@ -319,7 +319,7 @@ extern "C" {
  *     fetches past the edge read TXBCOLOR_RG/BA (GL_TEXTURE_BORDER_COLOR,
  *     12 bits per component).
  *
- * Loader border modes (IDE mgras_hqpio_redma.c names TL_MODE fields; bit
+ * Loader border modes (IDE diagnostics name TL_MODE fields; bit
  * positions unknown):
  *   - tlsoutbrd_en: store borders at the outer edge;
  *   - tlsoutrep_en: border replication (hardware edge extension while
@@ -499,8 +499,8 @@ extern "C" {
  *
  * CAUTION: the register bitfield layouts (the *u unions) are not in the
  * sources we have. The TEXMODE2/TXSIZE/TXLOD bit positions below are
- * guesses; mgras_const.h's TEXMODE2_* defines are field values, not bit
- * numbers. Values seen in practice:
+ * guesses; the diagnostic constants' TEXMODE2_* defines are field values, not
+ * bit numbers. Values seen in practice:
  *   - TEXMODE2 = 0x11800 | (compdepth + 1) << 2 | db_enable << 4
  *   - TXSIZE  = 0xD6D6 for a whole-page read
  */

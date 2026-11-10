@@ -5,9 +5,9 @@
  * and Octane (IP30).
  *
  * Reverse-engineered hardware documentation.
- * Synthesized from:
- *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
- *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS)
+ * Derived from the shipped binaries:
+ *   - SGI IRIX PROM graphics code
+ *   - SGI IDE diagnostics
  *   - IRIX 6.5.0 kernel modules (mgras.o, mgras_init.o, mgras_dma.o, rrm.o)
  *   - SGI OpenGL core driver (libGLcore.so) DWARF metadata
  *   - SGI IrisGL compatibility library ("igloo" libgl.so)
@@ -282,8 +282,8 @@ typedef union {
 #define MGRAS_DCB_DEV_I2C       11  /* Corona / DDC I2C bus controller (0x62C00, dcbctrl[11]: 0x6802C) */
 /*
  * Device 11 is shared by two parts. The Corona I2C controller takes its
- * data and control bytes at CRS 0 and CRS 1 (6.5.7
- * stand/arcs/lib/libsk/graphics/MGRAS/mgras_corona_i2c.c). The multi-channel
+ * data and control bytes at CRS 0 and CRS 1 (PROM code, 6.5.7). The
+ * multi-channel
  * option (MCO) board takes an index byte at CRS 2 and data bytes at CRS 3,
  * a 16-bit value as two bytes, high first: the kernel's mgras_mco.o and the
  * X server write the pair (impactpc.so mgrasAttachXvc and mgrasBlankScreen,

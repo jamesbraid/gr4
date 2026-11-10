@@ -4,9 +4,9 @@
  * Pixel Processor 1 (PP1), Rambus RDRAM, and RAC Architecture for SGI Impact (GR4).
  *
  * Reverse-engineered hardware documentation.
- * Synthesized from:
- *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
- *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_pp1.c, mgras_pp1func.c, mgras_rdram_rac.c)
+ * Derived from the shipped binaries:
+ *   - SGI IRIX PROM graphics code
+ *   - SGI IDE diagnostics for the PP1, its functions and RDRAM/RAC
  *   - IRIX 6.5.0 kernel modules (mgras.o, mgras_init.o, mgras_ccv.o)
  */
 
@@ -354,9 +354,9 @@ extern "C" {
  * 2 * 448 + 128 = 1024 pages exactly (two 36-bit buffers + overlay), the
  * buffer counts the Octane report's Table 4.2 gives.
  *
- * DRBsize (0x16E), per MgrasSetRSSTiming (libsk mgras_init.c) and the IDE
- * diags (mgras_info.c packs bits 10:6 as "drb_misc = 0x9: DRB_RSS=1,
- * DMAlinecnt=2, AFE=0"; mgras_hqpio_redma.c sets DRB_RSS = numRE4s - 1):
+ * DRBsize (0x16E), per MgrasSetRSSTiming (PROM code) and the IDE
+ * diags (the info code packs bits 10:6 as "drb_misc = 0x9: DRB_RSS=1,
+ * DMAlinecnt=2, AFE=0"; the redma code sets DRB_RSS = numRE4s - 1):
  *   bits 1:0   DRB_Xtiles9  = ceil(width / 768)
  *   bits 5:2   DRB_Xtiles36 = ceil(width / 192)
  *   bits 7:6   DRB_RSS      = raster engines - 1 (PP_1_RSS / PP_2_RSS)

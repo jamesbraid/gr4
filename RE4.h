@@ -4,9 +4,9 @@
  * Raster Engine 4 (RE4) and Raster Subsystem (RSS) Architecture for SGI Impact (GR4).
  *
  * Reverse-engineered hardware documentation.
- * Synthesized from:
- *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
- *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_re4.c, mgras_re4func.c, mgras_rss_utils.c)
+ * Derived from the shipped binaries:
+ *   - SGI IRIX PROM graphics code
+ *   - SGI IDE diagnostics for the RE4, its functions and the RSS utilities
  *   - IRIX 6.5.0 kernel modules (mgras.o, mgras_init.o, mgras_dma.o)
  */
 
@@ -170,7 +170,7 @@ extern "C" {
 #define RE4_REG_XFRSIZE             0x0153      /* Transfer size (lines:16, width:16) */
 #define RE4_REG_XFRINITFACTOR       0x0154      /* Zoom initial factor */
 #define RE4_REG_XFRFACTOR           0x0155      /* Zoom step factor */
-/* XFRFACTOR / XFRINITFACTOR: 17 bits testable (IDE mgras_re4.c). Values
+/* XFRFACTOR / XFRINITFACTOR: 17 bits testable (IDE diagnostics). Values
  * libGLcore sent for glDrawPixels: 0x101423AC / 0 at zoom (1, -1) (Mirai),
  * 0x3BFC00 / 0x1010090 at zoom 1 (Avid Matador). Encoding not known. The
  * zoom direction also shows in the GE's pixel block (HQ3.h, ERAM 0xDA8). */
@@ -358,7 +358,7 @@ extern "C" {
  * formats XFRMODE_CI1, _L1, _RGB3, _RGBA4 and types XFRMODE_1U, _2U, _4444U.
  * The format values below are earlier guesses.
  *
- * As libGLcore uses it (traced with test/gltest/pixtest.c, 6.5.22):
+ * As libGLcore uses it (traced with the gltest pixel test, 6.5.22):
  *   3:0   component type: 0 u8, 1 u16, 3 u32, 4 s8, 5 s16, 7 s32,
  *         8 / 10 packed (4-4-4-4, 5-5-5; the X server's)
  *   7:4   format: 0 colour index, 1 stencil, 2 depth, 3 R, 4 G, 5 B, 6 A,

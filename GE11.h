@@ -4,18 +4,17 @@
  * Geometry Engine 11 (GE11) Vector Floating-Point Processor for SGI Impact (GR4).
  *
  * Reverse-engineered hardware documentation.
- * Synthesized from:
- *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
- *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_ge11.c, ge11symtab.h, ge_inst.h, cp_ge_sim_tokens.h)
- *   - IRIX 6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/: mgras_ge11_main.c (host
- *     tests and their expected replies), mgras_ge.hex (the diagnostic program),
- *     mgrashw.h.diag and mgras_const.h (GE11 register map), doc/diag_docs/ge_desc
- *     (memory description); stand/arcs/lib/libsk/graphics/MGRAS/mgras_init.c
- *     (production loader)
+ * Derived from the shipped binaries:
+ *   - SGI IRIX PROM graphics code
+ *   - SGI IDE diagnostics for the GE11 (symbol labels, instruction words,
+ *     command-processor tokens)
+ *   - IRIX 6.5.7 diagnostic: the GE11 host tests and their expected replies,
+ *     the diagnostic program (mgras_ge.hex), the GE11 register map and the
+ *     memory description
  *   - GE11 microcode binaries and symbols (ucode/ge11.bin, ucode/mgras_ge.hex,
  *     ucode/mgras_ge.u with its line table, ucode/mgras_geif.u), IRIX 6.5.0,
  *     decoded with ghidra/processors/ge11
- *   - SGI OpenGL Core driver (libGLcore.so) DWARF metadata (mgras_xform.c, mgras_lighting.c)
+ *   - SGI OpenGL Core driver (libGLcore.so) DWARF metadata
  */
 
 #ifndef _SGI_GE11_H_
@@ -167,10 +166,10 @@ extern "C" {
  * geometry engine; the full field-by-field reading, with the evidence for
  * each field, is the KONA repository's ucode/ge_isa.md and ucode/ge_ops.md.
  * What ties the two chips together:
- *   - the 6.5.7 diagnostic's 172 expected words (ge_inst.h) are, in order,
+ *   - the 6.5.7 diagnostic's 172 expected words are, in order,
  *     the 172 words the KONA diagnostic irsaudit expects, and 931 words of
  *     mgras_ge.hex equal KONA diagnostic words in the same order (one
- *     ge_inst.s assembled for both);
+ *     assembly source assembled for both);
  *   - where the two production programs hold the same 72-bit word (9133
  *     words), the assembler wrote the same 256-bit decoded record for 9132
  *     of them; the other, 782001d7c000000000, differs in two bits of a
@@ -182,8 +181,8 @@ extern "C" {
  * Files (ESTABLISHED, IRIX 6.5.0):
  *   mgras_ge.hex       one word a line: 4-digit address, 18 hex digits (W).
  *   mgras_ge.u         the same program as 256-bit decoded records (magic
- *                      0x45900003), plus a line table naming 142 source
- *                      files; the record is what the module reads, and the
+ *                      0x45900003), plus a line table naming 142 modules;
+ *                      the record is what the module reads, and the
  *                      decode from W to record is not known as logic
  *                      (ghidra/processors/ge11/data/ge11_decode.tsv learns
  *                      it from the six programs that ship both forms).
@@ -195,10 +194,10 @@ extern "C" {
  *   mgras_geif.u       512 big-endian 32-bit words; 90 are nonzero, each an
  *                      address inside the program (see VERTEX PATH MODULES).
  *                      No 6.5.0 binary names the file; its reader is UNKNOWN.
- *   6.5.7 diagnostic   stand/arcs/ide/isddevices/graphics/MGRAS/mgras_ge.hex,
- *                      12836 words, labels in ge11symtab.h.
+ *   6.5.7 diagnostic   mgras_ge.hex,
+ *                      12836 words, labels in the diagnostic's symbol table.
  *
- * Loading and starting (ESTABLISHED, mgras_init.c, mgrashw.h.diag): word n
+ * Loading and starting (ESTABLISHED, PROM loader code and 6.5.7 register map): word n
  * goes to diagnostic window 0x200000 + 4n as three 32-bit writes, bits 31-0,
  * 63-32, then 71-64 (read-back masked to 8 bits). Word 0 is written again to
  * reset the PC, then execution control 0x40000 gets GE11_GO with bit 4 clear:
@@ -231,7 +230,7 @@ extern "C" {
  *     (Send_data_to_HQ: its store is the eighth word after the return);
  *     calls are group-0 transfers, returns R88 transfers in group 4.
  *
- * GE11-only facts (ESTABLISHED by the 6.5.7 host tests, mgras_ge11_main.c;
+ * GE11-only facts (ESTABLISHED by the 6.5.7 host tests;
  * KONA's software never exercises them):
  *   - integer add (unit-1 code 0x40) saturates: iadd expects 0x7FFFFFFF +
  *     0x7FFFFFFF = 0x7FFFFFFF;
@@ -241,7 +240,7 @@ extern "C" {
  *     18-bit values with bit 17 set;
  *   - special register 6, CHIP_REV, is read at 0xFFFE0018 by the revision
  *     program the kernel loads before the real microcode (gevers_ucode,
- *     mgras_init.c reads the reply into GE11Rev);
+ *     the PROM loader reads the reply into GE11Rev);
  *   - integer multiply (unit-2 code 0x0F) keeps the low 32 bits of the
  *     product (imul: 0x123 * 0x123 = 0x14AC9, 0x7FFFFFFF squared = 1). Its
  *     two rows with negative operands expect the first operand back; the
@@ -278,43 +277,43 @@ extern "C" {
  * VERTEX PATH MODULES (6.5.0 mgras_ge.u line table, mgras_geif.u)
  * ============================================================================
  *
- * The program is 142 source files laid end to end; the line table gives the
- * first word of each. The vertex path (ESTABLISHED by file name and
+ * The program is 142 modules laid end to end; the line table gives the
+ * first word of each. The vertex path (ESTABLISHED by module label and
  * address; what each computes is INFERRED from the name unless a decompile
  * is cited):
- *   0x0B7A utexgen.s   0x0C6B ucull.s      0x0CBB udecompose.s
- *   0x0D30 udecompose2.s  0x0D61 ulight.s  0x0E09 umath.s
- *   0x0E58 umatrix.s   0x1004 umemove.s    0x107A uscreen.s
- *   0x10AF uscreen2.s  0x114E uxform.s     0x27A5 linegeom.s
- *   0x28B9 linetex.s   0x2956 triflatz.s   0x298F trigeom.s
- *   0x2A4C trirgbz.s   0x2B3A tritex.s     0x2D1A tritex1d.s
- *   0x2D43 tritex3d.s  0x305F pointgeom.s  0x309D pointwidegeom.s
- *   0x31A6 pointtex.s  0xB95E pntclip.S    0xBC09 linclip.S
- *   0xBF24 clip.S      0xC648 mxform.S     0xC960 mlight.S
- *   0xC9EF mcull.S     0xCA60 mscreen.S    0xCADA mtexgen.S
- * The lower-case u*.s files sit at the bottom of the program next to the
- * evaluators and pixel modules; the m*.S files are their counterparts in the
- * command half (entry.S, ge.S, attrib.S, ...).
+ *   0x0B7A utexgen   0x0C6B ucull      0x0CBB udecompose
+ *   0x0D30 udecompose2  0x0D61 ulight  0x0E09 umath
+ *   0x0E58 umatrix   0x1004 umemove    0x107A uscreen
+ *   0x10AF uscreen2  0x114E uxform     0x27A5 linegeom
+ *   0x28B9 linetex   0x2956 triflatz   0x298F trigeom
+ *   0x2A4C trirgbz   0x2B3A tritex     0x2D1A tritex1d
+ *   0x2D43 tritex3d  0x305F pointgeom  0x309D pointwidegeom
+ *   0x31A6 pointtex  0xB95E pntclip    0xBC09 linclip
+ *   0xBF24 clip      0xC648 mxform     0xC960 mlight
+ *   0xC9EF mcull     0xCA60 mscreen    0xCADA mtexgen
+ * The lower-case u* modules sit at the bottom of the program next to the
+ * evaluators and pixel modules; the m* modules are their counterparts in the
+ * command half (entry, ge, attrib, ...).
  *
  * mgras_geif.u, nonzero words by index (ESTABLISHED; that the index is a
  * module number the pipeline is assembled from is INFERRED from the
  * grouping):
- *   0x082 ucull.s      0x083 0x085 ulight.s     0x086-0x08B uxform.s (six
+ *   0x082 ucull      0x083 0x085 ulight     0x086-0x08B uxform (six
  *   entries: 0x114E 0x1182 0x11C9 0x1234 0x1292 0x125B)
- *   0x08D uscreen.s    0x08E 0x08F uscreen2.s   0x07E trigeom.s
- *   0x077 linegeom.s   0x07B pointgeom.s        0x07F pointwidegeom.s
- *   0x07D polymode.S   0x066-0x071 udecompose*.s, mdecompose*.S
- *   0x004 0x005 linclip.S   0x006 pntclip.S     0x008 0x009 0x012 0x055 clip.S
- *   0x047 0x049 0x04A 0x053 umatrix.s   0x045 0x046 0x048 0x04B 0x04D 0x013
- *   matrix.S   0x017-0x042 and 0x084 lighting (primmtrllight.S,
- *   generallight*.S, material.S, lightsource.S, lightsubroutines.S)   0x05A-0x062 the evaluators (ueval*.s)
- *   0x002 0x00A 0x00F mmemove.S   0x00B 0x010 0x011 memove.S
- *   0x00E 0x04C 0x050 ge.S   0x00C 0x063 0x08C fluff.S   0x043 fog.S
- *   0x056 umath.s   0x058 0x059 umemove.s
+ *   0x08D uscreen    0x08E 0x08F uscreen2   0x07E trigeom
+ *   0x077 linegeom   0x07B pointgeom        0x07F pointwidegeom
+ *   0x07D polymode   0x066-0x071 udecompose*, mdecompose*
+ *   0x004 0x005 linclip   0x006 pntclip     0x008 0x009 0x012 0x055 clip
+ *   0x047 0x049 0x04A 0x053 umatrix   0x045 0x046 0x048 0x04B 0x04D 0x013
+ *   matrix   0x017-0x042 and 0x084 lighting (primmtrllight,
+ *   generallight*, material, lightsource, lightsubroutines)   0x05A-0x062 the evaluators (ueval*)
+ *   0x002 0x00A 0x00F mmemove   0x00B 0x010 0x011 memove
+ *   0x00E 0x04C 0x050 ge   0x00C 0x063 0x08C fluff   0x043 fog
+ *   0x056 umath   0x058 0x059 umemove
  * These indices are not the HQ token numbers (HQ3.h HQ_TOK_*): token 0x002
  * is COLOR4F, index 0x002 a copy routine.
  *
- * trigeom.s (0x298F, decompiled with ghidra/processors/ge11): it reads
+ * trigeom (0x298F, decompiled with ghidra/processors/ge11): it reads
  * vertex records through address registers, words 0x23 and 0x24 of each
  * (INFERRED x and y), forms differences of word 0x24 between records, and
  * takes the reciprocal of each as a seed refined by one Newton-Raphson step
@@ -498,7 +497,7 @@ extern "C" {
  * IMAGING ENGINE: THE GE PIXEL PIPELINE
  * ============================================================================
  *
- * Mapped 2026-10 from IRIX 6.5.22 libGLcore with test/gltest/pixtest.c
+ * Mapped 2026-10 from IRIX 6.5.22 libGLcore with the gltest pixel test program
  * (one GL call a case; recorded with `mgras rec`, decoded with
  * tools/mgras-pixdecode.py --summary --ucode mgras_ge.u). Our model is
  * src/dev/mgras/pixpipe.rs. The HQ side (tokens, payloads, readbacks) is
@@ -552,7 +551,7 @@ extern "C" {
  *               type at ERAM 0xDBB: __glMgrInitPixelPipe, which sends the
  *               module states, does not run on that path. The copy relies
  *               on whatever the GE already holds there (traced 2026-10-15,
- *               test/gltest/cicopy.c and PowerAnimator 9's front/back
+ *               the gltest CI copy test and PowerAnimator 9's front/back
  *               copies; nothing on a fresh boot ever writes 0x1D6). Where
  *               a real GE gets those words from is not known; our model
  *               passes the indices through when they were never loaded.
@@ -638,7 +637,7 @@ extern "C" {
  * STATE READBACK: WHERE glGet* FINDS EACH PIECE OF GL STATE
  * ============================================================================
  *
- * Mapped 2026-10-13 with test/gltest/glstate.c (every queryable GL state
+ * Mapped 2026-10-13 with the gltest state query (every queryable GL state
  * set to a non-default value and read back; markers split the recording,
  * tools/mgras-statemap.py) and `mgras probe` runs (the GE answers chosen
  * words, tools/mgras-probe-states.py, which show how libGLcore decodes

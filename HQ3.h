@@ -4,9 +4,9 @@
  * Command Engine, Host Bus Interface, FIFO Controller, and Graphics TLB for SGI Impact (GR4).
  *
  * Reverse-engineered hardware documentation.
- * Synthesized from:
- *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
- *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_hq3.c, mgras_hq3_cp.c, mgras_host_hqdma.c)
+ * Derived from the shipped binaries:
+ *   - SGI IRIX PROM graphics code
+ *   - SGI IDE diagnostics for the HQ3, its command processor and host DMA
  *   - IRIX 6.5.0 kernel modules (mgras.o, mgras_init.o, mgras_dma.o)
  */
 
@@ -450,7 +450,7 @@ extern "C" {
 #define HAG_CTX_CMD_BASE            0x800
 
 /*
- * Display lists (traced, IRIX 6.5.22 libGLcore mgras_dldma.c; glprim's
+ * Display lists (traced, IRIX 6.5.22 libGLcore; glprim's
  * dlist scene):
  *   Storage: host memory only. libGLcore compiles a list into a pool of
  *   pinned pages it registers with the kernel, which writes DL_TABLE_BASE
@@ -628,7 +628,7 @@ extern "C" {
 
 /*
  * ============================================================================
- * PIXEL OPERATIONS (mapped with test/gltest/pixtest.c, 6.5.22, 2026-10)
+ * PIXEL OPERATIONS (mapped with the gltest pixel test, 6.5.22, 2026-10)
  * ============================================================================
  * The GE program and its modules: GE11.h "IMAGING ENGINE". Raster
  * transfer formats: RE4.h XFRMODE.
@@ -801,7 +801,7 @@ extern "C" {
 
 /*
  * Command-processor tokens of SGI's diagnostic and bring-up microcode
- * (cp_ge_sim_tokens.h in the IDE sources). The production kernel sends some
+ * (defined in the IDE diagnostics). The production kernel sends some
  * of them while initialising the GE11s and around context switches.
  */
 #define CP_DUMP_FOREVER             0xF3
@@ -956,9 +956,8 @@ extern "C" {
  * polling the status register (0x70000) bit 1.
  */
 /*
- * glEnable / glDisable and clears, as libGLcore sends them (mgras_attrib.c,
- * mgras_clear.c): most enables only set bits in the context and are sent
- * later; these go out directly.
+ * glEnable / glDisable and clears, as libGLcore sends them: most enables only
+ * set bits in the context and are sent later; these go out directly.
  *   0x066 (1 word)  GL_DEPTH_TEST: 1 / 0 (0 also when the visual has no Z)
  *   0x067 (1 word)  GL_DITHER: 3 / 0
  *   0x06E (1 word)  GL_SCISSOR_TEST: 1 / 0
@@ -1000,7 +999,7 @@ extern "C" {
 #define HQ_TOK_CLEAR_DEPTH_BUFFER         0x04A
 #define HQ_TOK_CLEAR_STENCIL_BUFFER       0x04C
 /*
- * Lighting, fog, clip planes (libGLcore mgras_lighting.c, Fogfv; traced):
+ * Lighting, fog, clip planes (libGLcore, Fogfv; traced):
  *   0x007 normal (3 floats); 0x00D / 0x00E lighting on / off
  *   0x011 glMaterial: face (GL_FRONT/BACK/FRONT_AND_BACK), pname (GL enum),
  *         4 values (shininess in the first)
@@ -1018,7 +1017,7 @@ extern "C" {
  *         start, 0x0B6 end, 0x0B7 density, 0x0B8 index
  *   0x0A5 glClipPlane: 0x3000 + plane, a, b, c, d (object space);
  *         0x0A6 / 0x0A7 plane on / off (0x3000 + plane)
- * IRIS GL through IGLOO (mgras_igloo.c): 0x0DC swaptmesh, 0x0DD / 0x0DE
+ * IRIS GL through IGLOO: 0x0DC swaptmesh, 0x0DD / 0x0DE
  *   lmcolor(LMC_COLOR) on / off, 0x0DF n3f (3 floats); CLEAR_COLOR with
  *   the words 4, 5, 6, 7 = clear to the current colour (GE state addresses).
  * Readbacks: __MGR_RETURN_MODE addresses 0x3A-0x49 = the current matrix
@@ -1186,7 +1185,7 @@ extern "C" {
 #define HQ_TOK_SAVE_TEXMODE               0x0E9  /*  16 bytes: __glMgrSaveTexmode */
 #define HQ_TOK_RESTORE_TEXMODE            0x0EA  /*   0 bytes: __glMgrRestoreTexmode */
 /*
- * Traced 2026-10-16 with test/gltest/toktest.c (one GL feature a step) on
+ * Traced 2026-10-16 with the gltest token test (one GL feature a step) on
  * IRIX 6.5.22, Maximum Impact:
  *   0x06C [1] / [0]  glEnable / glDisable(GL_POINT_SMOOTH) (also [0] from
  *                    the pick code's soft-path setup).

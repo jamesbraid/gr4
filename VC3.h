@@ -4,9 +4,9 @@
  * Video Controller 3 (VC3), Video Timing, Cursor, and DID Frame Composition for SGI Impact (GR4).
  *
  * Reverse-engineered hardware documentation.
- * Synthesized from:
- *   - SGI IRIX PROM (stand/arcs/lib/libsk/graphics/MGRAS)
- *   - SGI IDE diagnostics (stand/arcs/ide/isddevices/graphics/MGRAS/mgras_vc3.c, mgras_vc3_register.c)
+ * Derived from the shipped binaries:
+ *   - SGI IRIX PROM graphics code
+ *   - SGI IDE diagnostics for the VC3 and its registers
  *   - IRIX 6.5.0 kernel modules (mgras_retrace.o, mgras_timing.o, mgras_init.o)
  */
 
@@ -161,7 +161,7 @@ extern "C" {
 
 /*
  * ============================================================================
- * STANDARD VIDEO TIMING CODES (mgras_const.h & PROM)
+ * STANDARD VIDEO TIMING CODES (diagnostic constants & PROM)
  * ============================================================================
  */
 #define VC3_TIMING_1600_1200_60     0x159       /* 1600x1200 @ 60Hz */
