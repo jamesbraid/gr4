@@ -171,6 +171,7 @@ extern "C" {
 #define HQ3_CONFIG_DIAG_READ_GE1    (3 << 4)    /* Route diagnostics to GE1 */
 #define HQ3_CONFIG_DIAG_GIO_CP      BIT(7)      /* Loopback diagnostic path */
 #define HQ3_CONFIG_DEFAULT          0x0000008E  /* Default boot configuration */
+/* The 6.5.22 kernel's init writes 0x00007E8C here (0x00007E8D in the board-information routine) and 0x765B900F to the GIO configuration register. */
 
 /* GIO Configuration Register (HQ3_GIO_CONFIG: 0x50114) */
 #define HQ3_GIOCFG_GIO_BIGENDIAN    BIT(0)      /* GIO bus big endian */
@@ -242,7 +243,8 @@ extern "C" {
  *     1 = MgrasGeneralInterrupt, 2 = MgrasRetraceInterrupt.
  *   - HQ3_INTR_ENAB_SET bits above the flag causes drive vector 0:
  *     bit 26 CFIFO at/above high water, 27 CFIFO below low water, 30 DFIFO
- *     above high water, 31 DFIFO below low water. Boot value 0x4400E200.
+ *     above high water, 31 DFIFO below low water. Boot value 0x4400E200,
+ *     which includes the error-cause group 0x0000E200 (flag bits 9, 13, 14, 15).
  *   - STATUS bits as the drivers test them (the BIT() names above are
  *     older guesses): bit 0 HQ3 has run every command (libGLcore waits
  *     for it before a read DMA), bit 1 whole pipe idle (glFinish spins on

@@ -34,11 +34,11 @@
 /* REG: HQ.rss_diag 0x3000 rw32 reset=unknown inferred */
 /* REG: HQ.config 0x4000 rw32 reset=unknown inferred */
 /* REG: HQ.flag_ctx 0x4001 rw32 reset=unknown inferred */
-/* REG: HQ.flag_set_priv 0x4002 w32 reset=unknown inferred */
+/* REG: HQ.flag_set_priv 0x4002 rw32 reset=unknown established */
 /* REG: HQ.flag_clr_priv 0x4003 w32 reset=unknown inferred */
-/* REG: HQ.flag_enab_set 0x4004 w32 reset=unknown inferred */
+/* REG: HQ.flag_enab_set 0x4004 rw32 reset=unknown established */
 /* REG: HQ.flag_enab_clr 0x4005 w32 reset=unknown inferred */
-/* REG: HQ.intr_enab_set 0x4006 w32 reset=unknown inferred */
+/* REG: HQ.intr_enab_set 0x4006 rw32 reset=unknown established */
 /* REG: HQ.intr_enab_clr 0x4007 w32 reset=unknown inferred */
 /* REG: HQ.cfifo_hiwater 0x4008 rw32 reset=unknown inferred */
 /* REG: HQ.cfifo_lowater 0x4009 rw32 reset=unknown inferred */
@@ -113,6 +113,21 @@
 #define HQ_GIO_CONFIG_FIFO_HIGH_WATER_SHIFT 12
 #define HQ_GIO_CONFIG_FIFO_HIGH_WATER_MASK  0x1u
 
+/*
+ * Flag and interrupt-cause bits (one bit each). The flag register is 25 bits
+ * wide (the interrupt handler and the diagnostics both mask with 0x1ffffff).
+ * Bits 9, 13, 14 and 15 are the four error causes: the shipped kernel's
+ * general interrupt handler tests exactly that group (mask 0x0000e200) and reports,
+ * in that bit order, a microcode error, a DMA address range error, a
+ * command-FIFO privilege violation and a DMA access or stack overflow, then
+ * clears the cause through the interrupt-enable clear register. The kernel
+ * enables them at boot (interrupt enable 0x4400e200). The handler never
+ * tests bit 8, so the bus-or-protocol-error reading in older notes rests on
+ * nothing in the shipped kernel and is dropped here. Bit 20 is enabled in the
+ * flag-enable register at start-up (0x11000f is bits 3:0, 16 and 20); the
+ * buffer-swap path reads it, clears it, and flushes the command FIFO, but
+ * what raises it is not known.
+ */
 /* Flag and interrupt-cause bits (one bit each). */
 /* FIELD: HQ.flag_set.retrace 0:0 inferred */
 #define HQ_FLAG_SET_RETRACE_SHIFT 0
@@ -138,9 +153,21 @@
 /* FIELD: HQ.flag_set.error 8:8 inferred */
 #define HQ_FLAG_SET_ERROR_SHIFT 8
 #define HQ_FLAG_SET_ERROR_MASK  0x1u
+/* FIELD: HQ.flag_set.ucode_error 9:9 established */
+#define HQ_FLAG_SET_UCODE_ERROR_SHIFT 9
+#define HQ_FLAG_SET_UCODE_ERROR_MASK  0x1u
 /* FIELD: HQ.flag_set.buffer_swap 10:10 inferred */
 #define HQ_FLAG_SET_BUFFER_SWAP_SHIFT 10
 #define HQ_FLAG_SET_BUFFER_SWAP_MASK  0x1u
+/* FIELD: HQ.flag_set.dma_address_error 13:13 established */
+#define HQ_FLAG_SET_DMA_ADDRESS_ERROR_SHIFT 13
+#define HQ_FLAG_SET_DMA_ADDRESS_ERROR_MASK  0x1u
+/* FIELD: HQ.flag_set.cfifo_privilege_violation 14:14 established */
+#define HQ_FLAG_SET_CFIFO_PRIVILEGE_VIOLATION_SHIFT 14
+#define HQ_FLAG_SET_CFIFO_PRIVILEGE_VIOLATION_MASK  0x1u
+/* FIELD: HQ.flag_set.dma_access_or_stack_overflow 15:15 established */
+#define HQ_FLAG_SET_DMA_ACCESS_OR_STACK_OVERFLOW_SHIFT 15
+#define HQ_FLAG_SET_DMA_ACCESS_OR_STACK_OVERFLOW_MASK  0x1u
 /* FIELD: HQ.flag_set.done 16:16 inferred */
 #define HQ_FLAG_SET_DONE_SHIFT 16
 #define HQ_FLAG_SET_DONE_MASK  0x1u
@@ -153,6 +180,30 @@
 /* FIELD: HQ.flag_set.context_saved 19:19 inferred */
 #define HQ_FLAG_SET_CONTEXT_SAVED_SHIFT 19
 #define HQ_FLAG_SET_CONTEXT_SAVED_MASK  0x1u
+
+/*
+ * Interrupt enables. The three set registers (flag_set_priv, flag_enab_set,
+ * intr_enab_set) read back what was set, which is how the diagnostics walk
+ * a one and a zero through all 25 bits and how the kernel's handler reads
+ * the pending causes (flag_set_priv AND intr_enab_set, masked to 23 bits).
+ * Above the flag causes, intr_enab_set has four bits that have no flag bit:
+ * they are level interrupts on the FIFO status bits of the same polarity.
+ * The kernel enables the high-water bit, and on that interrupt swaps it for
+ * the low-water bit (and back), so the writer is blocked only while the FIFO
+ * is full.
+ */
+/* FIELD: HQ.intr_enab_set.cfifo_above_high 26:26 established */
+#define HQ_INTR_ENAB_SET_CFIFO_ABOVE_HIGH_SHIFT 26
+#define HQ_INTR_ENAB_SET_CFIFO_ABOVE_HIGH_MASK  0x1u
+/* FIELD: HQ.intr_enab_set.cfifo_below_low 27:27 established */
+#define HQ_INTR_ENAB_SET_CFIFO_BELOW_LOW_SHIFT 27
+#define HQ_INTR_ENAB_SET_CFIFO_BELOW_LOW_MASK  0x1u
+/* FIELD: HQ.intr_enab_set.dfifo_above_high 30:30 established */
+#define HQ_INTR_ENAB_SET_DFIFO_ABOVE_HIGH_SHIFT 30
+#define HQ_INTR_ENAB_SET_DFIFO_ABOVE_HIGH_MASK  0x1u
+/* FIELD: HQ.intr_enab_set.dfifo_below_low 31:31 established */
+#define HQ_INTR_ENAB_SET_DFIFO_BELOW_LOW_SHIFT 31
+#define HQ_INTR_ENAB_SET_DFIFO_BELOW_LOW_MASK  0x1u
 
 /* Command FIFO status as the drivers read it. */
 /* FIELD: HQ.fifo_status.cfifo_depth 6:0 inferred */
@@ -222,9 +273,44 @@
 #define HQ_DMA_BUSY_ADDRESS_GEN_DMA_SHIFT 12
 #define HQ_DMA_BUSY_ADDRESS_GEN_DMA_MASK  0x1u
 
-/* Watermark defaults older notes recorded; the drivers program other values. */
-#define HQ_CFIFO_HIWATER_DEFAULT 40 /* inferred */
-#define HQ_CFIFO_LOWATER_DEFAULT 20 /* inferred */
+/*
+ * Watermark defaults. The values below marked diagnostic are the ones the
+ * standalone diagnostics program; the shipped kernel programs the init
+ * values further down instead.
+ */
+#define HQ_CFIFO_HIWATER_DEFAULT 40 /* established, diagnostic */
+#define HQ_CFIFO_LOWATER_DEFAULT 20 /* established, diagnostic */
+#define HQ_CFIFO_DELAY_DEFAULT 100 /* established, diagnostic */
+#define HQ_DFIFO_HIWATER_DEFAULT 40 /* established, diagnostic */
+#define HQ_DFIFO_LOWATER_DEFAULT 20 /* established, diagnostic */
+#define HQ_DFIFO_DELAY_DEFAULT 100 /* established, diagnostic */
+#define HQ_BFIFO_HIWATER_DEFAULT 8 /* established, diagnostic */
+#define HQ_BFIFO_LOWATER_DEFAULT 2 /* established, diagnostic */
+#define HQ_BFIFO_DELAY_DEFAULT 100 /* established, diagnostic */
+
+/*
+ * Values the shipped kernel writes when it brings the host interface up
+ * (established). The command-FIFO high watermark is 0x20, lowered by twice
+ * a per-board count when that count is positive. The routine that gathers
+ * board information writes the configuration register as 0x00007e8d (the
+ * same bits plus bit 0).
+ * Configuration bits 14:9 are set at init and are not placed above; the
+ * register is 15 bits wide on this chip (the diagnostics test it with mask
+ * 0x7fff, and 0x3ffff on the later host-interface part).
+ */
+#define HQ_INIT_CONFIG 0x00007e8c /* established */
+#define HQ_INIT_GIO_CONFIG 0x765b900f /* established */
+#define HQ_INIT_CFIFO_HIWATER 0x20 /* established */
+#define HQ_INIT_CFIFO_LOWATER 0x14 /* established */
+#define HQ_INIT_CFIFO_DELAY 0x64 /* established */
+#define HQ_INIT_DFIFO_HIWATER 0x28 /* established */
+#define HQ_INIT_DFIFO_LOWATER 0x14 /* established */
+#define HQ_INIT_DFIFO_DELAY 0xfff /* established */
+#define HQ_INIT_BFIFO_HIWATER 6 /* established */
+#define HQ_INIT_BFIFO_LOWATER 2 /* established */
+#define HQ_INIT_BFIFO_DELAY 0x8c /* established */
+#define HQ_INIT_FLAG_ENABLE 0x11000f /* established */
+#define HQ_INIT_INTR_ENABLE 0x4400e200 /* established */
 #define HQ_BFIFO_MAX 16 /* inferred */
 #define HQ_TLB_ENTRIES 32 /* established */
 #define HQ_TLB_PAGE_SHIFT 12 /* established */
@@ -234,6 +320,18 @@
  */
 /*
  * TESTVEC: 0x0000000f as HQ.gio_config => host_big_endian=1, display_bus_big_endian=1, ext_pipe_register=1, tlb_update=1, bus_bypass=0, fifo_high_water=0
+ */
+/*
+ * TESTVEC: 0x765b900f as HQ.gio_config => host_big_endian=1, display_bus_big_endian=1, ext_pipe_register=1, tlb_update=1, bus_bypass=0, fifo_high_water=1
+ */
+/*
+ * TESTVEC: 0x00007e8c as HQ.config => big_endian=1, ucode_stall=1, diag_route=0, diag_loopback=1
+ */
+/*
+ * TESTVEC: 0x4400e200 as HQ.intr_enab_set => cfifo_above_high=1, cfifo_below_low=0, dfifo_above_high=1, dfifo_below_low=0
+ */
+/*
+ * TESTVEC: 0x0000e200 as HQ.flag_set => ucode_error=1, dma_address_error=1, cfifo_privilege_violation=1, dma_access_or_stack_overflow=1
  */
 
 #endif
