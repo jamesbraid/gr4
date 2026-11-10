@@ -170,10 +170,21 @@ extern "C" {
 #define RE4_REG_XFRSIZE             0x0153      /* Transfer size (lines:16, width:16) */
 #define RE4_REG_XFRINITFACTOR       0x0154      /* Zoom initial factor */
 #define RE4_REG_XFRFACTOR           0x0155      /* Zoom step factor */
-/* XFRFACTOR / XFRINITFACTOR: 17 bits testable (IDE diagnostics). Values
- * libGLcore sent for glDrawPixels: 0x101423AC / 0 at zoom (1, -1) (Mirai),
- * 0x3BFC00 / 0x1010090 at zoom 1 (Avid Matador). Encoding not known. The
- * zoom direction also shows in the GE's pixel block (HQ3.h, ERAM 0xDA8). */
+/* XFRFACTOR / XFRINITFACTOR: 17 bits testable (IDE diagnostics). Encoding
+ * (established, libGLcore.so host-to-raster setup routine and its
+ * twin for the DMA path, which write 0x155 then 0x154 through the shadow
+ * writer): 8.8 fixed point, 0x100 = 1.0. With no zoom both are 0x100. When
+ * magnifying, both hold the zoom factor times 256 and the destination width
+ * is (source width * factor + 255) >> 8. When shrinking, the step is
+ * (source words << 8) / destination width and the initial value is
+ * (((source words << 8) / step - destination width) << 8) + step, a
+ * remainder-carrying start (inferred reading of the arithmetic).
+ * The earlier pairs recorded here (0x101423AC / 0 and 0x3BFC00 /
+ * 0x1010090) cannot be these registers' values by this routine: they
+ * are not 8.8 numbers and the no-zoom path writes 0x100. They were most
+ * likely other words of the shadow-writer triple stream (inferred; the
+ * traces are not in this repository to recheck). The zoom direction also
+ * shows in the GE's pixel block (HQ3.h, ERAM 0xDA8). */
 #define RE4_REG_XFRMASKLOW          0x0156      /* Transfer mask low word */
 #define RE4_REG_XFRMASKHIGH         0x0157      /* Transfer mask high word */
 #define RE4_REG_XFRCOUNTERS         0x0158      /* Current transfer line & pixel count */

@@ -634,9 +634,10 @@ extern "C" {
  * the same either way; only this block shows the flip. A negative x zoom
  * presumably gives x1 < x0 the same way (not traced).
  * libGLcore also sends the raster engine's zoom registers through
- * RSS_REG_SHADOW: XFRFACTOR 0x155 / XFRINITFACTOR 0x154, seen as
- * 0x101423AC / 0 (Mirai, zoom (1, -1)) and 0x3BFC00 / 0x1010090 (Avid
- * Matador, zoom 1). Not decoded.
+ * RSS_REG_SHADOW: XFRFACTOR 0x155 / XFRINITFACTOR 0x154, 8.8 fixed point
+ * (0x100 = no zoom; see RE4.h). The values once recorded here, 0x101423AC /
+ * 0 (Mirai, zoom (1, -1)) and 0x3BFC00 / 0x1010090 (Avid Matador, zoom 1),
+ * are not these registers' values (RE4.h says why).
  *
  * Applications that keep their two buffers in step by hand (Mirai 1.0):
  * after each swap they read the region just changed from the front buffer
