@@ -1,4 +1,4 @@
-// generated from gr4 7fc7b2b630eb MGRAS_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 cd4aad0265a1 MGRAS_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Board-level words of the Impact graphics subsystem.
 //!
@@ -46,6 +46,55 @@ impl DcbAddrDataWidth {
             Self::OneByte => 0x1,
             Self::TwoBytes => 0x2,
             Self::ThreeBytes => 0x3,
+            Self::Other(v) => v as u32,
+        }
+    }
+}
+
+/// Values of `bank` in `McoIndex` that the header names.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum McoIndexBank {
+    /// established.
+    OverlayDacA,
+    /// established.
+    OverlayDacB,
+    /// established.
+    TrueColourDacA,
+    /// established.
+    TrueColourDacB,
+    /// established.
+    Control1,
+    /// established.
+    Control2,
+    /// established.
+    Control3,
+    /// A value the notes do not name.
+    Other(u8),
+}
+
+impl McoIndexBank {
+    pub const fn from_bits(v: u32) -> Self {
+        match v {
+            0x0 => Self::OverlayDacA,
+            0x1 => Self::OverlayDacB,
+            0x2 => Self::TrueColourDacA,
+            0x3 => Self::TrueColourDacB,
+            0x8 => Self::Control1,
+            0x9 => Self::Control2,
+            0xa => Self::Control3,
+            _ => Self::Other(v as u8),
+        }
+    }
+
+    pub const fn bits(self) -> u32 {
+        match self {
+            Self::OverlayDacA => 0x0,
+            Self::OverlayDacB => 0x1,
+            Self::TrueColourDacA => 0x2,
+            Self::TrueColourDacB => 0x3,
+            Self::Control1 => 0x8,
+            Self::Control2 => 0x9,
+            Self::Control3 => 0xa,
             Self::Other(v) => v as u32,
         }
     }
@@ -124,6 +173,30 @@ impl DcbAddr {
     }
 }
 
+/// The `MCO_INDEX` word.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct McoIndex(u32);
+
+impl McoIndex {
+    pub const fn new(word: u32) -> Self {
+        Self(word)
+    }
+
+    pub const fn raw(self) -> u32 {
+        self.0
+    }
+
+    /// Bits 3:0, established.
+    pub const fn port(self) -> u32 {
+        self.0 & 0xf
+    }
+
+    /// Bits 7:4, established.
+    pub const fn bank(self) -> McoIndexBank {
+        McoIndexBank::from_bits((self.0 >> 4) & 0xf)
+    }
+}
+
 /// The `GIO_ID` word.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct GioId(u32);
@@ -175,5 +248,42 @@ mod tests {
         assert_eq!(w.cs_width(), 3, "cs_width");
         assert_eq!(w.cs_hold(), 6, "cs_hold");
         assert_eq!(w.cs_setup(), 4, "cs_setup");
+    }
+
+    #[test]
+    fn testvec_mgras_dcb_ctrl_318() {
+        let w = DcbCtrl::new(0x318);
+        assert_eq!(w.sync_ack() as u32, 0, "sync_ack");
+        assert_eq!(w.async_ack() as u32, 0, "async_ack");
+        assert_eq!(w.cs_width(), 6, "cs_width");
+        assert_eq!(w.cs_hold(), 4, "cs_hold");
+        assert_eq!(w.cs_setup(), 0, "cs_setup");
+    }
+
+    #[test]
+    fn testvec_mgras_dcb_ctrl_6319() {
+        let w = DcbCtrl::new(0x6319);
+        assert_eq!(w.sync_ack() as u32, 1, "sync_ack");
+        assert_eq!(w.async_ack() as u32, 0, "async_ack");
+        assert_eq!(w.cs_width(), 6, "cs_width");
+        assert_eq!(w.cs_hold(), 4, "cs_hold");
+        assert_eq!(w.cs_setup(), 0, "cs_setup");
+    }
+
+    #[test]
+    fn testvec_mgras_dcb_ctrl_631a() {
+        let w = DcbCtrl::new(0x631a);
+        assert_eq!(w.sync_ack() as u32, 0, "sync_ack");
+        assert_eq!(w.async_ack() as u32, 1, "async_ack");
+        assert_eq!(w.cs_width(), 6, "cs_width");
+        assert_eq!(w.cs_hold(), 4, "cs_hold");
+        assert_eq!(w.cs_setup(), 0, "cs_setup");
+    }
+
+    #[test]
+    fn testvec_mco_index_90() {
+        let w = McoIndex::new(0x90);
+        assert_eq!(w.port(), 0, "port");
+        assert_eq!(w.bank().bits(), 9, "bank");
     }
 }

@@ -1,4 +1,4 @@
-// generated from gr4 7fc7b2b630eb HQ3_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 5555cb7f8c02 HQ3_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Host interface and command processor registers of the Impact graphics subsystem.
 //!
@@ -9,10 +9,50 @@
 
 #![allow(dead_code)]
 
-/// inferred.
+/// established, diagnostic.
 pub const CFIFO_HIWATER_DEFAULT: u32 = 40;
-/// inferred.
+/// established, diagnostic.
 pub const CFIFO_LOWATER_DEFAULT: u32 = 20;
+/// established, diagnostic.
+pub const CFIFO_DELAY_DEFAULT: u32 = 100;
+/// established, diagnostic.
+pub const DFIFO_HIWATER_DEFAULT: u32 = 40;
+/// established, diagnostic.
+pub const DFIFO_LOWATER_DEFAULT: u32 = 20;
+/// established, diagnostic.
+pub const DFIFO_DELAY_DEFAULT: u32 = 100;
+/// established, diagnostic.
+pub const BFIFO_HIWATER_DEFAULT: u32 = 8;
+/// established, diagnostic.
+pub const BFIFO_LOWATER_DEFAULT: u32 = 2;
+/// established, diagnostic.
+pub const BFIFO_DELAY_DEFAULT: u32 = 100;
+/// established.
+pub const INIT_CONFIG: u32 = 0x7e8c;
+/// established.
+pub const INIT_GIO_CONFIG: u32 = 0x765b900f;
+/// established.
+pub const INIT_CFIFO_HIWATER: u32 = 32;
+/// established.
+pub const INIT_CFIFO_LOWATER: u32 = 20;
+/// established.
+pub const INIT_CFIFO_DELAY: u32 = 100;
+/// established.
+pub const INIT_DFIFO_HIWATER: u32 = 40;
+/// established.
+pub const INIT_DFIFO_LOWATER: u32 = 20;
+/// established.
+pub const INIT_DFIFO_DELAY: u32 = 0xfff;
+/// established.
+pub const INIT_BFIFO_HIWATER: u32 = 6;
+/// established.
+pub const INIT_BFIFO_LOWATER: u32 = 2;
+/// established.
+pub const INIT_BFIFO_DELAY: u32 = 140;
+/// established.
+pub const INIT_FLAG_ENABLE: u32 = 0x11000f;
+/// established.
+pub const INIT_INTR_ENABLE: u32 = 0x4400e200;
 /// inferred.
 pub const BFIFO_MAX: u32 = 16;
 /// established.
@@ -33,19 +73,19 @@ pub const REG_CONFIG_WIDTH: u32 = 32;
 /// Host interface register `flag_ctx`: read/write, 32-bit; reset unknown; inferred.
 pub const REG_FLAG_CTX: u32 = 0x4001;
 pub const REG_FLAG_CTX_WIDTH: u32 = 32;
-/// Host interface register `flag_set_priv`: write, 32-bit; reset unknown; inferred.
+/// Host interface register `flag_set_priv`: read/write, 32-bit; reset unknown; established.
 pub const REG_FLAG_SET_PRIV: u32 = 0x4002;
 pub const REG_FLAG_SET_PRIV_WIDTH: u32 = 32;
 /// Host interface register `flag_clr_priv`: write, 32-bit; reset unknown; inferred.
 pub const REG_FLAG_CLR_PRIV: u32 = 0x4003;
 pub const REG_FLAG_CLR_PRIV_WIDTH: u32 = 32;
-/// Host interface register `flag_enab_set`: write, 32-bit; reset unknown; inferred.
+/// Host interface register `flag_enab_set`: read/write, 32-bit; reset unknown; established.
 pub const REG_FLAG_ENAB_SET: u32 = 0x4004;
 pub const REG_FLAG_ENAB_SET_WIDTH: u32 = 32;
 /// Host interface register `flag_enab_clr`: write, 32-bit; reset unknown; inferred.
 pub const REG_FLAG_ENAB_CLR: u32 = 0x4005;
 pub const REG_FLAG_ENAB_CLR_WIDTH: u32 = 32;
-/// Host interface register `intr_enab_set`: write, 32-bit; reset unknown; inferred.
+/// Host interface register `intr_enab_set`: read/write, 32-bit; reset unknown; established.
 pub const REG_INTR_ENAB_SET: u32 = 0x4006;
 pub const REG_INTR_ENAB_SET_WIDTH: u32 = 32;
 /// Host interface register `intr_enab_clr`: write, 32-bit; reset unknown; inferred.
@@ -319,9 +359,29 @@ impl FlagSet {
         (self.0 >> 8) & 1 != 0
     }
 
+    /// Bit 9, established.
+    pub const fn ucode_error(self) -> bool {
+        (self.0 >> 9) & 1 != 0
+    }
+
     /// Bit 10, inferred.
     pub const fn buffer_swap(self) -> bool {
         (self.0 >> 10) & 1 != 0
+    }
+
+    /// Bit 13, established.
+    pub const fn dma_address_error(self) -> bool {
+        (self.0 >> 13) & 1 != 0
+    }
+
+    /// Bit 14, established.
+    pub const fn cfifo_privilege_violation(self) -> bool {
+        (self.0 >> 14) & 1 != 0
+    }
+
+    /// Bit 15, established.
+    pub const fn dma_access_or_stack_overflow(self) -> bool {
+        (self.0 >> 15) & 1 != 0
     }
 
     /// Bit 16, inferred.
@@ -342,6 +402,40 @@ impl FlagSet {
     /// Bit 19, inferred.
     pub const fn context_saved(self) -> bool {
         (self.0 >> 19) & 1 != 0
+    }
+}
+
+/// The `intr_enab_set` register word.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct IntrEnabSet(u32);
+
+impl IntrEnabSet {
+    pub const fn new(word: u32) -> Self {
+        Self(word)
+    }
+
+    pub const fn raw(self) -> u32 {
+        self.0
+    }
+
+    /// Bit 26, established.
+    pub const fn cfifo_above_high(self) -> bool {
+        (self.0 >> 26) & 1 != 0
+    }
+
+    /// Bit 27, established.
+    pub const fn cfifo_below_low(self) -> bool {
+        (self.0 >> 27) & 1 != 0
+    }
+
+    /// Bit 30, established.
+    pub const fn dfifo_above_high(self) -> bool {
+        (self.0 >> 30) & 1 != 0
+    }
+
+    /// Bit 31, established.
+    pub const fn dfifo_below_low(self) -> bool {
+        (self.0 >> 31) & 1 != 0
     }
 }
 
@@ -523,5 +617,43 @@ mod tests {
         assert_eq!(w.tlb_update() as u32, 1, "tlb_update");
         assert_eq!(w.bus_bypass() as u32, 0, "bus_bypass");
         assert_eq!(w.fifo_high_water() as u32, 0, "fifo_high_water");
+    }
+
+    #[test]
+    fn testvec_hq_gio_config_765b900f() {
+        let w = GioConfig::new(0x765b900f);
+        assert_eq!(w.host_big_endian() as u32, 1, "host_big_endian");
+        assert_eq!(w.display_bus_big_endian() as u32, 1, "display_bus_big_endian");
+        assert_eq!(w.ext_pipe_register() as u32, 1, "ext_pipe_register");
+        assert_eq!(w.tlb_update() as u32, 1, "tlb_update");
+        assert_eq!(w.bus_bypass() as u32, 0, "bus_bypass");
+        assert_eq!(w.fifo_high_water() as u32, 1, "fifo_high_water");
+    }
+
+    #[test]
+    fn testvec_hq_config_7e8c() {
+        let w = Config::new(0x7e8c);
+        assert_eq!(w.big_endian() as u32, 1, "big_endian");
+        assert_eq!(w.ucode_stall() as u32, 1, "ucode_stall");
+        assert_eq!(w.diag_route().bits(), 0, "diag_route");
+        assert_eq!(w.diag_loopback() as u32, 1, "diag_loopback");
+    }
+
+    #[test]
+    fn testvec_hq_intr_enab_set_4400e200() {
+        let w = IntrEnabSet::new(0x4400e200);
+        assert_eq!(w.cfifo_above_high() as u32, 1, "cfifo_above_high");
+        assert_eq!(w.cfifo_below_low() as u32, 0, "cfifo_below_low");
+        assert_eq!(w.dfifo_above_high() as u32, 1, "dfifo_above_high");
+        assert_eq!(w.dfifo_below_low() as u32, 0, "dfifo_below_low");
+    }
+
+    #[test]
+    fn testvec_hq_flag_set_e200() {
+        let w = FlagSet::new(0xe200);
+        assert_eq!(w.ucode_error() as u32, 1, "ucode_error");
+        assert_eq!(w.dma_address_error() as u32, 1, "dma_address_error");
+        assert_eq!(w.cfifo_privilege_violation() as u32, 1, "cfifo_privilege_violation");
+        assert_eq!(w.dma_access_or_stack_overflow() as u32, 1, "dma_access_or_stack_overflow");
     }
 }
