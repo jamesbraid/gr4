@@ -204,8 +204,22 @@ extern "C" {
  * Main mode words as the 6.5.22 X server and kernel program them (traced,
  * IP28 HighImpact 1024x768 and 1280x1024, 2026-10): bits 4:0 a format,
  * bits 9:5 a colormap block (block * 256 = CMAP entry base), bits 12:10
- * unknown (bit 10 set on nearly every DID, bit 11 on DIDs 14-16, bit 12
- * on 12 and 19). The format values do not follow the XMAP_VISUAL_*
+ * (bit 10 set on nearly every DID, bit 11 on DIDs 14-16, bit 12 on 12 and
+ * 19). The X server's mode-word routine (mgrasValidateMode, decompiled
+ * from the display-server objects) gives bit 10 a rule (established
+ * from that decompilation; the decompiler is not exact, so check against
+ * the disassembly before relying on a detail): for DIDs 0-31 it takes the
+ * window's stored word, replaces bits 9:5 with the block (mask 0x3E0), and
+ * then sets bit 10 unless a per-visual table value equals 7, in which case
+ * it clears it. For DIDs 32 and up the block sits in bits 7:3 and the bit
+ * toggled is bit 8. Bit 10 is therefore "the visual's table value is not
+ * 7"; what that value is, is unknown. Bits 11 and 12 are not set by that
+ * routine or by any other store found by searching the decompiled display
+ * server for the masks 0x800 and 0x1000 (a text search, not an exhaustive
+ * data-flow trace), so they arrive in the stored word (inferred). What
+ * would settle them: print the word before and after that routine for a
+ * window of each visual class and see which DIDs carry bits 11 and 12.
+ * The format values do not follow the XMAP_VISUAL_*
  * guesses above:
  *   1   colour index, 8-bit PseudoColor desktop windows (DIDs 0-7, blocks
  *       16-23, one colormap block each)
