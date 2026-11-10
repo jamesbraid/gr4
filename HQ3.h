@@ -1225,11 +1225,19 @@ extern "C" {
  *   0x0EB [0], twice, then TEX_OFF (0x00C)  before every texture load;
  *                    meaning not known.
  *   0x05F [0]        three per texture load (texture manager, after
- *                    __glMgrSaveTexmode); the data is a GLenum from
- *                    __glMgrim_Enable/Disable elsewhere. Meaning of [0] not
- *                    known.
- *   0x097, 0x0DA, 0x096 (0 bytes)  in glCopyPixels and glCopyTexImage2D;
- *                    meaning not known.
+ *                    __glMgrSaveTexmode). One operand word, not a GL enum:
+ *                    0 here, 0xE0100 or 0 from the enable/disable entry
+ *                    points when they switch texturing, a float from the
+ *                    routine that sends the second texture-mode word. INFERRED:
+ *                    a second texture-mode word, cleared during a load.
+ *   0x096 / 0x097 (0 bytes)  start and end of a pixel read-back (glReadPixels,
+ *                    colour-table copy, slow copy path; glCopyPixels and
+ *                    glCopyTexImage2D go through the same routine).
+ *                    ESTABLISHED from the library's call order.
+ *   0x0DA (0 bytes) sent after a board-to-host transfer is set up and the
+ *                    host has waited on user status bit 1; the texture read
+ *                    path does the same, then restores the raster state.
+ *                    What the microcode does with it is not known.
  *   __MGR_RETURN_MODE [3, 0, 0]  before every texture load and pixel
  *                    operation; the host polls for it and reads the answer
  *                    but does not use it: a round trip that waits for the
