@@ -1,0 +1,88 @@
+[project]
+name = "gr4"
+
+[rust]
+out_dir = "generated/impact-regs"
+
+[checks]
+address_bits = 16
+
+[allowlists]
+leak = "scripts/leak-allow.txt"
+
+[[headers]]
+file = "RE4_DECODE.h"
+block = "RE"
+module = "re4"
+rust_prefix = "RE4_"
+register_doc = "Raster engine register"
+description = ["Raster engine registers of the Impact graphics subsystem."]
+notes_corpus = ["RE4.h"]
+
+[[headers]]
+file = "GE11_DECODE.h"
+block = "GE"
+module = "ge11"
+rust_prefix = "GE_"
+register_doc = "Geometry engine control register"
+description = ["Geometry engine control registers of the Impact graphics subsystem."]
+
+[[headers]]
+file = "HQ3_DECODE.h"
+block = "HQ"
+module = "hq3"
+rust_prefix = "HQ_"
+register_doc = "Host interface register"
+description = ["Host interface and command processor registers of the Impact graphics subsystem."]
+notes_corpus = ["HQ3.h"]
+
+[[headers]]
+file = "MGRAS_DECODE.h"
+block = "MGRAS"
+module = "mgras"
+rust_prefix = "MGRAS_"
+register_doc = "Board-level register"
+description = ["Board-level words of the Impact graphics subsystem."]
+notes_corpus = ["MGRAS.h"]
+
+[[claims]]
+group = "RE4_DECODE.h"
+label = "config y flip bit"
+doc = "RE4.h"
+regex = 'RE4_CFG_YFLIP\s+BIT\((\d+)\)'
+binds = [["F", "RE.config.y_flip", 1]]
+
+[[claims]]
+group = "RE4_DECODE.h"
+label = "fill mode block type position"
+doc = "RE4.h"
+regex = 'RE4_FM_BLOCK_TYPE_MASK\s+\(0x7 << (\d+)\)'
+binds = [["LO", "RE.fill_mode.block_type", 1, 0]]
+
+[[claims]]
+group = "RE4_DECODE.h"
+label = "instruction setup bit"
+doc = "RE4.h"
+regex = 'RE4_IR_SETUP\s+BIT\((\d+)\)'
+binds = [["F", "RE.instr.setup", 1]]
+
+[[claims]]
+group = "HQ3_DECODE.h"
+label = "bus config tlb update bit"
+doc = "HQ3.h"
+regex = 'HQ3_GIOCFG_TLB_UPDATE\s+BIT\((\d+)\)'
+binds = [["F", "HQ.gio_config.tlb_update", 1]]
+
+[[claims]]
+group = "GE11_DECODE.h"
+label = "exec breakpoint enable bit"
+doc = "GE11.h"
+regex = 'GE11_EXEC_BREAKPOINT_EN\s+BIT\((\d+)\)'
+binds = [["F", "GE.exec_control.breakpoint_enable", 1]]
+
+[[claims]]
+group = "MGRAS_DECODE.h"
+label = "board id revision nibble"
+doc = "MGRAS.h"
+regex = 'MGRAS_REV_MASK\s+0x0000000?(F)0'
+binds = [["WHEX", "GIO_ID.revision", 1]]
