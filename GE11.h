@@ -420,14 +420,28 @@ extern "C" {
  *     restore: buffer [0]      -> S (7 chunks), 0xFA
  *              buffer [0x17C7] -> S (7 chunks), 0xFA
  *   GE1 is read from one word below the slot, yet both halves go back to
- *   the same address. So GE1's read output evidently arrives one word late
- *   (inferred from the kernel's offset). The extra word requested (0x17C8
- *   against a 0x17C7-word slot and DMA) covers that delay.
+ *   the same address. This is a host-buffer alignment rule, not a GE
+ *   property (established, mgras.o MgrasEramRead, text offset 0x1058, the address test at 0x11ec:
+ *   the loop runs once per GE, advancing the host buffer by count * 4
+ *   bytes). When bit 2 of the host destination address is set, i.e. the
+ *   buffer starts on an odd word, the kernel asks for one word more
+ *   starting one ERAM word lower, so the DMA's first word is a throw-away
+ *   and the real data lands on the buffer's real start. GE1's buffer
+ *   starts at an odd word only because the slot is 0x17C7 words long.
+ *   The extra word in the request (0x17C8 against a 0x17C7-word slot)
+ *   is the even-rounding the command takes anyway.
+ *   Which GE answers the second pass is not chosen by anything the kernel
+ *   writes: both passes issue the same command words (apart from that
+ *   address shift). The alternation is presumably the host-interface
+ *   microcode's, unknown. A test: with two GE11s, issue one
+ *   pass-through read of a word each GE has been given a different
+ *   value for, twice in a row, and see which GE answers each.
  *   Both GEs receive every state command, so their saved GL attribute state
  *   should be identical. Per-GE scratch (vertices in flight from the
  *   alternating primitives) is drained by the switch. Unverified on
  *   hardware.
- *   A one-GE board presumably does each transfer once; not traced.
+ *   A one-GE board does each transfer once: both loops run for as many
+ *   passes as the board's GE count byte says (established, same routines).
  */
 
 /*

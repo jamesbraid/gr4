@@ -828,8 +828,10 @@ extern "C" {
  *   Seen: slot evictions read 0x17C8 words from a slot into a per-context
  *   host buffer (0x8000 bytes apart); the X server writes one word at
  *   0xA9A, just below the first slot. Data is big-endian words in host
- *   memory. With two GE11s the kernel repeats each transfer per GE (how the
- *   second GE is picked is not known).
+ *   memory. With two GE11s the kernel repeats each transfer once per GE with
+ *   the same command words; nothing it writes names the GE, so the order
+ *   alone does (see GE11.h; how the host-interface microcode picks the
+ *   second GE is not known).
  */
 #define CP_PASS_THROUGH_GE_WRAM_5   0xF9
 #define CP_PASS_THROUGH_GE_WRAM_4   0xFA    /* kernel GE init, no data */
