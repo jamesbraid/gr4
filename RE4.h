@@ -376,11 +376,18 @@ extern "C" {
  *         7 RGB, 8 RGBA, 9 one-component texel, 10 two-component texel
  *   10:8  begin skip, bytes
  *   17:14 stride skip, bytes (the GL row padding; up to 6 seen)
- *   18    PIO reads in the DMA component order. Only the X server sets
- *         it (XGetImage reads with 0x40080 and takes the pixel word as
- *         0x00BBGGRR); libGLcore never does. Our reading from both
- *         clients' unpacking code; SGI's StrideSkipBytes (22:14) cannot
- *         be right, since RGBorder sits at 22.
+ *   18    PIO reads in the DMA component order. The X server sets it
+ *         (XGetImage reads with 0x40080 and takes the pixel word as
+ *         0x00BBGGRR). libGLcore ORs it into its default transfer-mode
+ *         shadow at context creation and clears it in the copy paths
+ *         (raster to raster, raster to texture), so the PIO-order reading
+ *         is not the whole meaning: ESTABLISHED that the library sets and
+ *         clears it, INFERRED what it does. SGI's StrideSkipBytes (22:14)
+ *         cannot be right, since RGBorder sits at 22: every writer in the
+ *         library and the X server masks the stride as 3 bits (16:14).
+ *   17    a one-bit flag the copy paths clear; nothing sets it. Bits 17, 18
+ *         and 21 are the candidates for LSB-first and the read mask;
+ *         bit 21 is never touched by any software examined.
  *   19    zoom: scale by XFRFACTOR
  *   20    decimate (zoom below 1)
  *   22    RGBorder: 1 = red first in host memory, 0 = ABGR
