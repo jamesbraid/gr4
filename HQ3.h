@@ -403,13 +403,24 @@ extern "C" {
  *                into ERAM before the switch), bit 29 window state in words
  *                2-15 changed, bit 27 words 18-39 carry the X server's
  *                raster shadow (latched by the driver into a board-global
- *                copy before the switch), bit 26 unknown. The kernel clears
- *                bits 31, 30, 29 and 26 after a load (not for its own
- *                context), and bit 27 when it latches.
+ *                copy before the switch), bit 26 the bank selection in words
+ *                16-17 changed (established: mgras.o MgrasValidateBanks,
+ *                text offset 0x3390, sets it when it writes those words into
+ *                an image that is not loaded), bit 28 unknown (see below).
+ *                The kernel clears bits 31, 30, 29 and 26 after a load (not
+ *                for its own context), and bit 27 when it latches.
  *   words 2-15   window state (HQ_TOK_KERN_WINDOW); masks that word 3
  *                (window mode) leaves disabled can hold junk (traced:
  *                mask 2 = 0x3955EFA8 / 0x20D37000 with mode 0x11)
- *   words 16-17  unknown (1, 1 in a GL context after its window changed)
+ *   words 16-17  bank selection (established, same routine): each is the
+ *                inverse (xor 1) of one field of the context's two draw
+ *                surface descriptors, the same pair a loaded context sends
+ *                as the two VALIDATE_BANKS arguments (0x098, below) and the
+ *                same pair of numbers the in-place path writes. Traced (1, 1).
+ *                A model reads the pair as the front/back bank the next
+ *                frame draws, which is what the token's name and use say;
+ *                which descriptor field it is, and which value is which
+ *                bank, is inferred.
  *   words 18-39  the X server's screen-wide raster registers, taken from
  *                its shadow (the shadow is indexed by RSS register number
  *                times 4), in this order: 0x046, 0x047, 0x153, 0x110
@@ -419,7 +430,7 @@ extern "C" {
  *                6.5.22 at 1024x768: 0x4601BC 0x5601CB 0x100011 0x100000
  *                0x7B0810 0x5C0 0xCAC 0xC006204 0 0xFFFFFF 0xFFFFFF 0 0 0 0
  *                0 0 0 0x3FF 0x2FF 0xFFFFFF 0xFFFFFF. Present in every GL
- *                context's image (word 1 bit 26 set) and the kernel's, zero
+ *                context's image and the kernel's, zero
  *                in the X server's own: a context loads with X's
  *                screen-wide setup (pixel format, CONFIG, plane masks,
  *                screen limits), presumably written to the RSS by the load
@@ -434,8 +445,16 @@ extern "C" {
  * pp1fillmode and the colour masks before drawing). Nothing reads raster
  * registers back to save them. Traced word 1 values: X 0x20000000, GL
  * 0x04000000 (0x0C000000 / 0x2C000000 with new X state or a new window),
- * the kernel's context 0x90000000 (first load every time, bit 28 unknown;
- * the kernel does not clear bits on its own image).
+ * the kernel's context 0x90000000 (first load every time; the kernel does
+ * not clear bits on its own image). Bit 28 is set only by the routine that
+ * creates a context's board record, together with bit 31, and only for the
+ * kernel's own context. No mask of that bit appears in the decompiled
+ * kernel objects (a shift-and-sign test would not show as a mask, so this is
+ * inferred, not exhaustive); if the kernel never reads it, the reader is
+ * the load microcode. It settles by reading the load phase of the
+ * host-interface microcode for the image bits it branches on, or by
+ * loading a copy of the kernel's image with bit 28 cleared and watching for
+ * a difference in what the load writes.
  *
  * Kernel and X versus GL: each has its own hardware context, so they never
  * share loaded state; the kernel does its own pipe work (ERAM transfers,
