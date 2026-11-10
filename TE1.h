@@ -134,8 +134,9 @@ extern "C" {
  *   - TL_SPEC = lod (3:0) | log2 S (7:4) | log2 T (11:8); the IDE's
  *     0x1641/0x2532/0x3423 for levels 1-3 suggest bits 15:12 are the level
  *     again or max LOD.
- *   - TL_MODE: components - 1 in 2:1 (3 = RGBA), bit 14 always set, 0x30000
- *     for RGBA8 in and out (the IDE's comment), 0xE00 not yet known.
+ *   - TL_MODE: components - 1 in 2:1 (3 = RGBA), bit 14 set, 0x30000
+ *     for RGBA8 in and out (the IDE's comment), 0xE00 the loader's border
+ *     enables (see the TL_MODE bit table under BORDERS AND CLAMPING).
  *   - SAVE_RSS (fill mode 0x01400000), INIT_PIXEL_STATE_ERAM and
  *     PIXEL_STATE blocks, XFRMODE = 0xC00080, then SEND_PIXELS with routine
  *     0x511A (glDrawPixels uses 0x49D0): one host-DMA line of 256 bytes, the
@@ -319,8 +320,36 @@ extern "C" {
  *     fetches past the edge read TXBCOLOR_RG/BA (GL_TEXTURE_BORDER_COLOR,
  *     12 bits per component).
  *
+ * TL_MODE as libGLcore composes it (established: libGLcore.so, the
+ * routine that sends the loader mode, found by its write to register
+ * 0x1A1 with four masks; every bit below is set or cleared by a distinct
+ * statement, the inputs are fields of the texture object, so which input
+ * means what is inferred from the two traced values):
+ *   bits 18:16  always 3 (the routine clears 18:16 and sets 17:16)
+ *   bit 14      set when one object flag is clear (every traced texture);
+ *               when that flag is set, bit 7 is set instead if a second
+ *               flag is on. Not exercised by a traced texture; meaning
+ *               unknown.
+ *   bits 6:5    component depth (2 bits from the object)
+ *   bits 4:3    cell slot (2 bits from the object, same field as the
+ *               sampler's TEXMODE1 bits 8:7)
+ *   bits 2:1    components - 1 (2 bits from the object)
+ *   bit 8       one object flag, copied
+ *   bits 12:9   four enables. For an ordinary load (no border): 11, 10 and
+ *               9 set, 12 clear. For a load with border texels: 10 clear,
+ *               12 set, 11 and 9 stay set. This reproduces the traced
+ *               0x34E26 and 0x35A26. When the object's format selector is
+ *               0, the routine also sets bit 0 and bit 12; when it is 8, it
+ *               clears 12, 11 and 9.
+ * The four enables at 12:9 are presumably the loader border modes the IDE
+ * diagnostics name below, by count; which bit is which is NOT settled (the
+ * diagnostics' mapping is by name only). Settles with a load of a bordered
+ * image whose TL_MODE has exactly one of 12:9 set at a time, comparing where
+ * the border texels land, or with the loader's bit definitions in the IDE
+ * diagnostic.
+ *
  * Loader border modes (IDE diagnostics name TL_MODE fields; bit
- * positions unknown):
+ * positions among 12:9 as above, assignment unknown):
  *   - tlsoutbrd_en: store borders at the outer edge;
  *   - tlsoutrep_en: border replication (hardware edge extension while
  *     loading?);
