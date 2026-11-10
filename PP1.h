@@ -363,7 +363,11 @@ extern "C" {
  *   bits 9:8   DMA_line_count_mask (PP_DMA_LCM_1_RSS / _2_RSS; 3 and 2
  *              as traced)
  *   bit  10    AutoFlushEnab_n (0 = auto flush on)
- *   top byte   unknown (6.5.22 writes 0x90)
+ *   bits 31:11 not a programmed setting: the kernel's writer builds bits
+ *              10:0 from the screen width and RE4 count and leaves the rest as
+ *              an uninitialised stack word (6.5 and 6.5.30 kernels; so the 0x90
+ *              seen under 6.5.22 is a leftover, INFERRED). The diagnostics write
+ *              them 0. Whether the chip latches them is unknown.
  * Traced (6.5.22, IP28, 1024x768): High Impact 0x9000031A (6, 2, one
  * RSS, LCM 3); Maximum Impact 0x9000025A (6, 2, two RSS, LCM 2).
  *
