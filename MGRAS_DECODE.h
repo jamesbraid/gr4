@@ -70,7 +70,41 @@
 /* ENUM: DCB_ADDR.data_width 3 three_bytes inferred */
 #define MGRAS_DCB_ADDR_DATA_WIDTH_THREE_BYTES 3
 
-/* Identification word read at the start of the board's window. */
+/*
+ * Index byte of the multi-channel option board, written to the board's
+ * index port before each access to its data port. The high nibble picks a
+ * device, the low nibble a port on it. Banks 2 and 3 are the two
+ * true-colour DACs of the option, banks 0 and 1 its two overlay-palette
+ * DACs, and banks 8 to 10 its three control registers. Ports on a DAC are
+ * offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.
+ */
+/* FIELD: MCO_INDEX.port 3:0 established */
+#define MGRAS_MCO_INDEX_PORT_SHIFT 0
+#define MGRAS_MCO_INDEX_PORT_MASK  0xfu
+/* FIELD: MCO_INDEX.bank 7:4 established */
+#define MGRAS_MCO_INDEX_BANK_SHIFT 4
+#define MGRAS_MCO_INDEX_BANK_MASK  0xfu
+/* ENUM: MCO_INDEX.bank 0 overlay_dac_a established */
+#define MGRAS_MCO_INDEX_BANK_OVERLAY_DAC_A 0
+/* ENUM: MCO_INDEX.bank 1 overlay_dac_b established */
+#define MGRAS_MCO_INDEX_BANK_OVERLAY_DAC_B 1
+/* ENUM: MCO_INDEX.bank 2 true_colour_dac_a established */
+#define MGRAS_MCO_INDEX_BANK_TRUE_COLOUR_DAC_A 2
+/* ENUM: MCO_INDEX.bank 3 true_colour_dac_b established */
+#define MGRAS_MCO_INDEX_BANK_TRUE_COLOUR_DAC_B 3
+/* ENUM: MCO_INDEX.bank 8 control_1 established */
+#define MGRAS_MCO_INDEX_BANK_CONTROL_1 8
+/* ENUM: MCO_INDEX.bank 9 control_2 established */
+#define MGRAS_MCO_INDEX_BANK_CONTROL_2 9
+/* ENUM: MCO_INDEX.bank 10 control_3 established */
+#define MGRAS_MCO_INDEX_BANK_CONTROL_3 10
+
+/*
+ * Identification word read at the start of the board's window. The kernel's
+ * probe compares only bits 6:0 (must be 0x10), bit 16 (set), bit 17 (clear)
+ * and bits 31:18 (must be 1); bits 15:7 are not examined, so the split into
+ * revision and product below is a reading, not what the probe tests.
+ */
 /* FIELD: GIO_ID.revision 7:4 inferred */
 #define MGRAS_GIO_ID_REVISION_SHIFT 4
 #define MGRAS_GIO_ID_REVISION_MASK  0xfu
@@ -86,6 +120,22 @@
  */
 /*
  * TESTVEC: 0x0000318c as MGRAS.dcb_ctrl => cs_width=3, cs_hold=6, cs_setup=4
+ */
+/*
+ * The option board's three timing words differ only in how the bus waits
+ * for the peripheral: none for its configuration ports, a synchronous
+ * acknowledge for its index and data ports, an asynchronous acknowledge for
+ * its timing chip. Bits 14:13 are set in the last two and are not placed.
+ * TESTVEC: 0x00000318 as MGRAS.dcb_ctrl => sync_ack=0, async_ack=0, cs_width=6, cs_hold=4, cs_setup=0
+ */
+/*
+ * TESTVEC: 0x00006319 as MGRAS.dcb_ctrl => sync_ack=1, async_ack=0, cs_width=6, cs_hold=4, cs_setup=0
+ */
+/*
+ * TESTVEC: 0x0000631a as MGRAS.dcb_ctrl => sync_ack=0, async_ack=1, cs_width=6, cs_hold=4, cs_setup=0
+ */
+/*
+ * TESTVEC: 0x00000090 as MCO_INDEX => port=0, bank=9
  */
 /*
  * EXAMPLE (unverified): 0x00000388 as DCB_ADDR => data_width=1, crs=7

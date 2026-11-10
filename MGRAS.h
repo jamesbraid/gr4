@@ -283,16 +283,95 @@ typedef union {
 /*
  * Device 11 is shared by two parts. The Corona I2C controller takes its
  * data and control bytes at CRS 0 and CRS 1 (PROM code, 6.5.7). The
- * multi-channel
- * option (MCO) board takes an index byte at CRS 2 and data bytes at CRS 3,
- * a 16-bit value as two bytes, high first: the kernel's mgras_mco.o and the
- * X server write the pair (impactpc.so mgrasAttachXvc and mgrasBlankScreen,
- * found by a Ghidra scan for stores into the board window). The X server
- * sets device 11's DCB timing to 0x6319 first. mgrasBlankScreen has two
- * branches. Both write 0x0400 to indices 0x20 and 0x30. One then writes
- * 0x0000 to 0x22 and 0x32, the byte 0x32 to 0x06 and 0x16 and 0 to 0x02
- * and 0x12; the other writes 0xFFFF, 0x30 and 0xFF to the same indices.
- * What the MCO indices control is not known from these sources.
+ * multi-channel option (MCO) board has its own register set in the same
+ * window. The kernel's multi-channel-option object (mgras_mco.o, 6.5.22)
+ * programs all of it; the X server (impactpc.so mgrasAttachXvc and
+ * mgrasBlankScreen, found by a Ghidra scan for stores into the board
+ * window) writes the index pair.
+ *
+ * MCO register map. ESTABLISHED by that kernel object, text offsets 0x0
+ * (probe), 0x30c (FPGA load), 0x590 and 0x96c (the two DAC families),
+ * 0xb24 (timing chip), 0x11a0 (device 11 timing word), 0x127c (control
+ * registers) and 0x1328 (7162 register pointer). The part names are
+ * ESTABLISHED by that object's routine names and by the option's
+ * diagnostic command list (6.5.7 ide IP30 command registry).
+ *   CRS 0 byte (0x62C08)  board ID on read; on write the FPGA
+ *       configuration data byte. Probe: write 0xFF, read, write 0, read;
+ *       the two reads must agree, and the byte is a board ID if it is 1 or
+ *       0xAn, the low nibble being the revision. No board: the probe
+ *       reports 0xFF.
+ *   CRS 1 byte (0x62C88)  FPGA configuration control (write) and status
+ *       (read). Writing 0xFE then 0x01 pulses the configuration line. The
+ *       load expects status bits 2:0 to read 000 after 0xFE, 110 after
+ *       0x01 and 110 after every data byte, and bits 1 and 0 both set
+ *       (bit 2 not checked) once all 0xF688 bytes are in and 20 padding
+ *       zero bytes are clocked out. Bits 2, 1, 0 are configuration-line
+ *       readback, status and configuration-done (INFERRED from the order
+ *       of the diagnostic's failure messages; the expected values are
+ *       ESTABLISHED, the pin names are not). The kernel waits 100 ms after
+ *       each of the first two writes and after the padding.
+ *   CRS 2 byte (0x62D08)  index. It selects a port; CRS 3 byte (0x62D88)
+ *       is that port's data. The index is a bank in the high nibble and a
+ *       port in the low:
+ *         bank 2 (0x20) and bank 3 (0x30)  ADV7162 true-colour DACs, 7162
+ *             channels 1 and 2 (ESTABLISHED: a per-channel base table in
+ *             the kernel holds 0x20 and 0x30 for them)
+ *         bank 0 (0x00) and bank 1 (0x10)  ADV473-class overlay-palette
+ *             DACs, channels 3 and 4 (table entries 0x00 and 0x10)
+ *         0x80, 0x90, 0xA0  board control registers 1, 2, 3
+ *             (ESTABLISHED: the routine at 0x127c selects exactly these).
+ *             Register 2 takes the value 5 in the clock-start routine (text offset 0x1248); the
+ *             diagnostic text says writing it starts the on-board
+ *             oscillator that clocks the video timing chip (what each bit
+ *             does is UNKNOWN).
+ *       ADV7162 ports (base + n), ESTABLISHED by config_7162 and the gamma
+ *       loader: base+0 is a 10-bit register address pointer, written as
+ *       two bytes, the low 8 bits then bits 9:8; base+1 is the palette
+ *       data port, 256 entries of six bytes (red, green, blue, each its
+ *       high 8 bits then its low 2 bits, taken from bits 7:6 of the 16-bit
+ *       gamma value); base+2 is the data port of the register the pointer
+ *       selects (the kernel writes the mode, command and PLL registers
+ *       this way, pointer values 6, 7, 8, 9, 0xC, 0xD, 0xF and 0x204 from
+ *       a per-video-format table). base+3 is used by the probe, which
+ *       writes 3, then 2, then one table byte through it and reads the
+ *       byte back (role UNKNOWN). The probe also points the pointer at 3
+ *       and reads base+2: a healthy part returns 0x79, so register 3 is
+ *       the part's identification register (ESTABLISHED, the kernel
+ *       compares against it).
+ *       ADV473-class ports: 0 is the palette write address (the kernel
+ *       writes 0, then streams entries), 1 the palette data, three bytes
+ *       per entry (the high bytes of the 16-bit gamma values), 256
+ *       entries, and 6 the command register (the kernel writes one table
+ *       byte there); all ESTABLISHED. Port 2 is INFERRED to be the pixel
+ *       read mask: it is the port the X server writes 0 and 0xFF to (see
+ *       below), and that is where this DAC family keeps the mask.
+ *   CRS 4 byte (0x62E08) and CRS 5 two-byte (0x62EB0)  the MCO's own video
+ *       timing chip. The first selects one of its registers (0x1F, 0, 6,
+ *       7 and 0x10 are used), the second is that register's 16-bit data.
+ *       CRS 7 two-byte (0x62F90) is the auto-incrementing data port of its
+ *       timing RAM, reached by selecting register 7 and writing the RAM
+ *       start address. The kernel loads two tables this way, at RAM
+ *       offsets 0 and 0x400, and verifies each by reading it back. The
+ *       kernel calls the chip VC2, not VC3. The sequence is ESTABLISHED;
+ *       what each register number means is UNKNOWN.
+ *
+ * Display-bus timing words for device 11 (ESTABLISHED, text offset 0x11a0 of that object):
+ * 0x318 for the CRS 0 and CRS 1 FPGA ports, 0x6319 for the index and data
+ * ports (the X server sets the same value), 0x631A for the timing chip's
+ * ports. The same routine can write 0x318 into device 0's word (0x68000)
+ * for selector values 20, 21 and 23; which callers use that is UNKNOWN.
+ *
+ * Blanking, as the X server does it (mgrasBlankScreen). For each ADV7162
+ * channel it points the register pointer at 4 (the bytes 0x04, 0x00 to the
+ * index-0x20 and 0x30 ports) and writes 16 bits to the data port: 0x0000
+ * to blank, 0xFFFF to unblank. For each ADV473-class channel it writes
+ * port 2 (0 or 0xFF) and port 6 (0x32 to blank, 0x30 to unblank). So
+ * ADV7162 register 4 is a 16-bit mask over every pixel (INFERRED to
+ * be the pixel read mask: the effect is ESTABLISHED by the blank and
+ * unblank values, the name is not, and no ADV7162 datasheet is in the
+ * Library to check the register number against). Bit 1 of the 473-class
+ * command register is all that differs between the two branches (meaning
+ * UNKNOWN).
  */
 #define MGRAS_DCB_DEV_MCO       11
 #define MGRAS_MCO_INDEX         (MGRAS_DCB_CRS(2) | MGRAS_DCB_DATAWIDTH_1)  /* 0x62D08 */
@@ -446,8 +525,11 @@ typedef struct {
 #define MGRAS_DAC_MODE          (MGRAS_DCB_CRS(3) | MGRAS_DCB_DATAWIDTH_1)
 /* After the MCO sequence (device 11 above) the X server's mgrasBlankScreen
  * writes 4 to byte 1 of ADDR (0x61811), then 0 or 0xFF, by branch, to CRS 2
- * as a 16-bit access (0x61910). Which DAC register that reaches is not
- * known. */
+ * as a 16-bit access (0x61910). That is register pointer 4 of the same
+ * ADV7162 part the MCO board carries: a mask that is 0 when blanked and all
+ * ones when not (see the MCO blanking sequence above). The register number
+ * is ESTABLISHED by the pointer write; calling it the pixel read mask is
+ * INFERRED. */
 
 typedef struct {
     uint8_t             pad0[MGRAS_DAC_ADDR];
