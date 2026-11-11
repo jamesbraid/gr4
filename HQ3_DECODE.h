@@ -150,9 +150,7 @@
 /* FIELD: HQ.flag_set.tlb_miss 7:7 inferred */
 #define HQ_FLAG_SET_TLB_MISS_SHIFT 7
 #define HQ_FLAG_SET_TLB_MISS_MASK  0x1u
-/* FIELD: HQ.flag_set.error 8:8 inferred */
-#define HQ_FLAG_SET_ERROR_SHIFT 8
-#define HQ_FLAG_SET_ERROR_MASK  0x1u
+/* Bit 8 is not placed: no handler tests it (see above). */
 /* FIELD: HQ.flag_set.ucode_error 9:9 established */
 #define HQ_FLAG_SET_UCODE_ERROR_SHIFT 9
 #define HQ_FLAG_SET_UCODE_ERROR_MASK  0x1u

@@ -1,4 +1,4 @@
-// generated from gr4 5555cb7f8c02 HQ3_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 dea1e830fbb6 HQ3_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Host interface and command processor registers of the Impact graphics subsystem.
 //!
@@ -352,11 +352,6 @@ impl FlagSet {
     /// Bit 7, inferred.
     pub const fn tlb_miss(self) -> bool {
         (self.0 >> 7) & 1 != 0
-    }
-
-    /// Bit 8, inferred.
-    pub const fn error(self) -> bool {
-        (self.0 >> 8) & 1 != 0
     }
 
     /// Bit 9, established.

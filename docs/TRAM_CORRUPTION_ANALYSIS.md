@@ -24,12 +24,12 @@ A fresh run of Quake does not exhibit this behavior. The issue only manifests af
 ## 2. Hardware Architecture & Driver Data Structures
 
 ### Hardware TRAM Architecture (TE1 / TR1)
-- **Page Size:** 4 KB per page (64×64 texels at 1 byte/texel, or 64 texels × 32 rows for 16-bit texels, etc.).
+- **Page Size:** one page holds 64 texels of width and, per TRAM, 4 KB; the page therefore grows with the TRAM count (16 KB with four TRAMs). The kernel's save path moves 256 pages of 4096 bytes times the TRAM count (as `TE1.h` records it); the one-TRAM size below follows from that formula and was not separately traced. See `TE1.h` ("TRAM pages are 16 KB with 4 TRAMs"). An earlier version of this note said 4 KB pages and 1024 pages at 4 MB; that contradicts the traced placement, which ends at page 255 on a four-TRAM board.
 - **TRAM Capacity:**
-  - 1 MB TRAM (Solid Impact / High Impact): 256 pages (`0x00–0xFF`).
-  - 4 MB TRAM (Maximum Impact / TRAM module): 1024 pages (`0x000–0x3FF`).
+  - 1 MB TRAM (one TRAM): 256 pages of 4 KB (`0x00-0xFF`).
+  - 4 MB TRAM (four TRAMs): 256 pages of 16 KB (`0x00-0xFF`), per `TE1.h`. The driver field at context offset `0x4D0` is recorded below as "256 or 1024"; the 1024 case is unconfirmed and does not fit the traced page range.
 - **Texture Dimensions:** A 256×256 RGB texture occupies 65,536 texels = **16 contiguous TRAM pages** (6.25% of total TRAM on a 1 MB board).
-- **Hardware Register:** TE1 register `0x191` / `0x1A1` (`TL_MIPMAP`), holding the base TRAM page index for DMA loads and sampling.
+- **Hardware Registers:** the loader's `TL_MIPMAP` is TE1 register `0x1A4` (the page a load starts at; `TL_MODE` is `0x1A1`). The sampler side uses `TXMIPMAP` at `0x191` (page | bank << 8). Register numbers as in `TE1.h`; an earlier version of this note named `0x191` / `0x1A1` as `TL_MIPMAP`, which mixed the two.
 
 ### Texture Manager Internal Structures
 
@@ -55,7 +55,7 @@ Attached to texture object levels (`level->unk1C`).
 
 #### 3. Global Texture Manager Context (`gc->unk91FC` / `gc + 0x91FC`)
 - `offset 0x1E8`: Currently active load level (`unk1E8`).
-- `offset 0x4D0` (`1232`): Total TRAM pages available (256 or 1024).
+- `offset 0x4D0` (`1232`): Total TRAM pages available (recorded as 256 or 1024; only 256 matches the traced page range, see Hardware TRAM Architecture).
 - `offset 0x4D4` (`1236`): `save_data_enabled` flag (whether host Save Arena backing store is active).
 - `offset 0x4D6` (`1238`): Running counter of restored pages from host memory.
 
@@ -225,7 +225,7 @@ In [`mgras_tex_io.c` (lines 402–405)](../libglcore/decomp/MGRAS/mgras_tex_io.c
 lw    $a0, 28($s4)          # a0 = level descriptor
 lh    $a0, 74($a0)          # a0 = level->unk4A (STALE 0x28!)
 ...
-jal   __glMgrInitPixelStateERAM # Programs TE1 TL_MIPMAP (0x191) with 0x28
+jal   __glMgrInitPixelStateERAM # Programs TE1 TL_MIPMAP (0x1A4) with 0x28
 ```
 
 The driver programs TE1 register `TL_MIPMAP = 0x28`, arms the GIO64 DMA channel, and streams 64 KB of water/lava pixels directly into TRAM pages **`0x28–0x37`**.
