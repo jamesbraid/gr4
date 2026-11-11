@@ -66,7 +66,7 @@ DCB window address. The display-bus windows start 0x60000 above the board base (
 7. **CMAP, RAMDAC & XMAP**:
    - **XMAP (inside PP1s)**: Per-pixel Window ID (WID/DID) decoding, front/back buffer selection, overlay plane switching, and visual format routing (Color Index to CMAP vs raw RGB to DAC); contains no gamma tables.
    - **CMAP0 / CMAP1**: Dual 8K x 24-bit color lookup tables (CLUTs; 8192 entries established by the diagnostic's 0-8191 range, the 24-bit width inferred) translating Color Index and overlay pixels to 24-bit RGB.
-   - **RAMDAC (ADV7161 / ADV7162)**: Triple 10-bit DAC with video PLL (220 MHz is the part's quoted rate, unverified: no data sheet held) and screen-wide 256x10-bit (established: the option's DAC loader writes 256 ten-bit entries per colour) Global Gamma Look-Up Table (LUT) correcting all display pixels before analog output.
+   - **RAMDAC (ADV7161 / ADV7162)**: Triple 10-bit DAC with video PLL (220 MHz is the part's quoted rate, unverified: no data sheet held; settling test: retrieve the ADV7161 and ADV7162 data sheets through the Library acquisition tooling by part number and read the pixel-clock rating of the speed grade the boards use, or take the highest pixel clock in the kernel's video timing tables and check that it does not exceed 220 MHz, which would refute it as the PLL ceiling) and screen-wide 256x10-bit (established: the option's DAC loader writes 256 ten-bit entries per colour) Global Gamma Look-Up Table (LUT) correcting all display pixels before analog output.
 
 ---
 
