@@ -118,7 +118,8 @@
  * palette data (256 entries of six bytes: each colour's high 8 bits, then
  * its low 2), port 2 the data port of the register the pointer selects.
  * Port 3 is written by the probe with 3, 2 and a table byte; its role is
- * unknown. Register 3 is the identification register: a healthy part reads
+ * unknown. A data sheet port map (not held) or a capture of a write to this
+ * port followed by a read of it would settle it. Register 3 is the identification register: a healthy part reads
  * 0x79 and the loader compares against it.
  */
 #define MGRAS_ADV7162_PORT_POINTER 0 /* established */

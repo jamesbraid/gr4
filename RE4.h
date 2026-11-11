@@ -179,6 +179,8 @@ extern "C" {
  * (source words << 8) / destination width and the initial value is
  * (((source words << 8) / step - destination width) << 8) + step, a
  * remainder-carrying start (inferred reading of the arithmetic).
+ * The no-zoom pair is stored when a state word of the destination is 5, 6 or
+ * 7 (established, 6.5.30 build); what those values mean is unknown.
  * The earlier pairs recorded here (0x101423AC / 0 and 0x3BFC00 /
  * 0x1010090) cannot be these registers' values by this routine: they
  * are not 8.8 numbers and the no-zoom path writes 0x100. They were most
