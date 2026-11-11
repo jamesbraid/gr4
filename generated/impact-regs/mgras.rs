@@ -1,4 +1,4 @@
-// generated from gr4 136a8bc692fd MGRAS_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 2b3b335bb506 MGRAS_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Board-level words of the Impact graphics subsystem.
 //!
@@ -9,6 +9,14 @@
 
 #![allow(dead_code)]
 
+/// established.
+pub const MCO_ID_PROBE_WRITE_FIRST: u32 = 255;
+/// established.
+pub const MCO_ID_PROBE_WRITE_SECOND: u32 = 0;
+/// established, probe result for no board.
+pub const MCO_ID_ABSENT: u32 = 255;
+/// established, a whole-byte value also accepted.
+pub const MCO_ID_SPECIAL_PRESENT: u32 = 1;
 /// established.
 pub const MCO_BANK_BASE_CH0: u32 = 0;
 /// established.
@@ -151,6 +159,31 @@ impl McoIndexBank {
     }
 }
 
+/// Values of `board` in `McoId` that the header names.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum McoIdBoard {
+    /// established.
+    Present,
+    /// A value the notes do not name.
+    Other(u8),
+}
+
+impl McoIdBoard {
+    pub const fn from_bits(v: u32) -> Self {
+        match v {
+            0xa => Self::Present,
+            _ => Self::Other(v as u8),
+        }
+    }
+
+    pub const fn bits(self) -> u32 {
+        match self {
+            Self::Present => 0xa,
+            Self::Other(v) => v as u32,
+        }
+    }
+}
+
 /// The `dcb_ctrl` register word.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct DcbCtrl(u32);
@@ -245,6 +278,30 @@ impl McoIndex {
     /// Bits 7:4, established.
     pub const fn bank(self) -> McoIndexBank {
         McoIndexBank::from_bits((self.0 >> 4) & 0xf)
+    }
+}
+
+/// The `MCO_ID` word.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct McoId(u32);
+
+impl McoId {
+    pub const fn new(word: u32) -> Self {
+        Self(word)
+    }
+
+    pub const fn raw(self) -> u32 {
+        self.0
+    }
+
+    /// Bits 3:0, established.
+    pub const fn revision(self) -> u32 {
+        self.0 & 0xf
+    }
+
+    /// Bits 7:4, established.
+    pub const fn board(self) -> McoIdBoard {
+        McoIdBoard::from_bits((self.0 >> 4) & 0xf)
     }
 }
 

@@ -100,6 +100,28 @@
 #define MGRAS_MCO_INDEX_BANK_CONTROL_3 10
 
 /*
+ * Identification byte of the multi-channel option board (the byte at the
+ * index port's register select 0, read back after a write). The kernel's
+ * probe writes 0xff and reads, writes 0 and reads again; the reads must
+ * match. The board is present when the value is 1 or its high nibble is
+ * 0xa; the low nibble is then the revision. Anything else reports 0xff, no
+ * board. Established from the probe routine's machine words in the one
+ * option object held; not a bus measurement, and no other build was checked.
+ */
+/* FIELD: MCO_ID.revision 3:0 established */
+#define MGRAS_MCO_ID_REVISION_SHIFT 0
+#define MGRAS_MCO_ID_REVISION_MASK  0xfu
+/* FIELD: MCO_ID.board 7:4 established */
+#define MGRAS_MCO_ID_BOARD_SHIFT 4
+#define MGRAS_MCO_ID_BOARD_MASK  0xfu
+/* ENUM: MCO_ID.board 10 present established */
+#define MGRAS_MCO_ID_BOARD_PRESENT 10
+#define MGRAS_MCO_ID_PROBE_WRITE_FIRST 0xff /* established */
+#define MGRAS_MCO_ID_PROBE_WRITE_SECOND 0x00 /* established */
+#define MGRAS_MCO_ID_ABSENT 0xff /* established, probe result for no board */
+#define MGRAS_MCO_ID_SPECIAL_PRESENT 0x01 /* established, a whole-byte value also accepted */
+
+/*
  * Multi-channel option: bank base of each output channel, from the five-entry
  * table in the loader's data (index 0 to 4). Channels 1 and 2 are the
  * true-colour DACs, 3 and 4 the overlay-palette DACs; channel 0's entry equals

@@ -201,9 +201,17 @@ extern "C" {
 #define HQ3_BFIFO_LOWATER_DEF       2
 #define HQ3_BFIFO_DELAY_DEF         100
 
-/* Status Register (HQ3_STATUS: 0x70000) */
+/* Status Register (HQ3_STATUS: 0x70000)
+ * Bit names are an early layout; HQ3_DECODE.h carries the reading the drivers
+ * support, which wins where they differ (bits 3 to 8 differ). Bit 1 is
+ * checked: glFinish sends a one-word state read through the pipeline and then
+ * spins until bit 1 reads set (libGLcore, __glMgrim_Finish, re-read this
+ * pass); the DMA read-back waits spin on the same bit (their polarity was
+ * not re-read). A full-FIFO flag would not rise after
+ * the pipeline has drained, so the name CFIFO_FULL is wrong; the decode
+ * header's name is pipe_idle (polarity established, meaning inferred). */
 #define HQ3_STATUS_CFIFO_EMPTY      BIT(0)      /* CFIFO is completely empty */
-#define HQ3_STATUS_CFIFO_FULL       BIT(1)      /* CFIFO is completely full */
+#define HQ3_STATUS_CFIFO_FULL       BIT(1)      /* set when the pipeline has drained; not CFIFO full (see above) */
 #define HQ3_STATUS_VBLANK           BIT(2)      /* Vertical blanking active */
 #define HQ3_STATUS_CFIFO_HALF       BIT(3)      /* CFIFO is half full */
 #define HQ3_STATUS_DFIFO_EMPTY      BIT(4)      /* DFIFO is empty */

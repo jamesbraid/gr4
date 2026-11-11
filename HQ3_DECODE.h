@@ -375,4 +375,26 @@
  * TESTVEC: 0x0000e200 as HQ.flag_set => ucode_error=1, dma_address_error=1, cfifo_privilege_violation=1, dma_access_or_stack_overflow=1
  */
 
+/*
+ * Command-stream tokens whose meaning the library's call order settles. The
+ * value is the token number sent through the command FIFO; the layout of the
+ * word that carries it is not stated here. 0x096 and 0x097 bracket a pixel
+ * read-back: glReadPixels, the colour-table copy and the slow copy path send
+ * 0x096, run the read-back, then send 0x097 (established, from the call order
+ * in the shipped graphics library). 0x0da carries no operand and follows the
+ * host's wait for a board-to-host transfer to finish (established ordering);
+ * that it releases the pipeline is inferred, what the microcode does with it
+ * is unknown. 0x05f carries one operand word that is not a GL enum
+ * (established): 0 from the texture manager right after the texture mode is
+ * saved aside, 0 or 0xe0100 from the enable and disable entry points when
+ * they switch texturing, a float from the routine named for sending the
+ * second texture-mode word. Calling it the second texture-mode word is
+ * inferred; the older table name for it, a disable token, comes from the
+ * first routine found sending it and is not its meaning.
+ */
+#define HQ_TOKEN_READBACK_BEGIN 0x096 /* established */
+#define HQ_TOKEN_READBACK_END 0x097 /* established */
+#define HQ_TOKEN_TRANSFER_DONE 0x0da /* ordering established, meaning inferred */
+#define HQ_TOKEN_SECOND_TEXMODE 0x05f /* operand established, meaning inferred */
+
 #endif

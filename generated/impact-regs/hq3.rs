@@ -1,4 +1,4 @@
-// generated from gr4 136a8bc692fd HQ3_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 2b3b335bb506 HQ3_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Host interface and command processor registers of the Impact graphics subsystem.
 //!
@@ -65,6 +65,14 @@ pub const INIT_INTR_ENABLE: u32 = 0x4400e200;
 pub const BFIFO_MAX: u32 = 16;
 /// established.
 pub const TLB_ENTRIES: u32 = 32;
+/// established.
+pub const TOKEN_READBACK_BEGIN: u32 = 150;
+/// established.
+pub const TOKEN_READBACK_END: u32 = 151;
+/// ordering established, meaning inferred.
+pub const TOKEN_TRANSFER_DONE: u32 = 218;
+/// operand established, meaning inferred.
+pub const TOKEN_SECOND_TEXMODE: u32 = 95;
 
 /// Host interface register `pc`: read/write, 32-bit; reset unknown; inferred.
 pub const REG_PC: u32 = 0x1800;
