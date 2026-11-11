@@ -100,6 +100,70 @@
 #define MGRAS_MCO_INDEX_BANK_CONTROL_3 10
 
 /*
+ * Multi-channel option: bank base of each output channel, from the five-entry
+ * table in the loader's data (index 0 to 4). Channels 1 and 2 are the
+ * true-colour DACs, 3 and 4 the overlay-palette DACs; channel 0's entry equals
+ * channel 3's and what it stands for is not stated. Each base is the bank
+ * number in the high nibble of the index byte, shifted into place.
+ */
+#define MGRAS_MCO_BANK_BASE_CH0 0x00 /* established */
+#define MGRAS_MCO_BANK_BASE_CH1 0x20 /* established */
+#define MGRAS_MCO_BANK_BASE_CH2 0x30 /* established */
+#define MGRAS_MCO_BANK_BASE_CH3 0x00 /* established */
+#define MGRAS_MCO_BANK_BASE_CH4 0x10 /* established */
+
+/*
+ * Ports of an ADV7162 true-colour DAC channel, as offsets from its bank base.
+ * Port 0 is a 10-bit register pointer written as two bytes, port 1 the
+ * palette data (256 entries of six bytes: each colour's high 8 bits, then
+ * its low 2), port 2 the data port of the register the pointer selects.
+ * Port 3 is written by the probe with 3, 2 and a table byte; its role is
+ * unknown. Register 3 is the identification register: a healthy part reads
+ * 0x79 and the loader compares against it.
+ */
+#define MGRAS_ADV7162_PORT_POINTER 0 /* established */
+#define MGRAS_ADV7162_PORT_PALETTE 1 /* established */
+#define MGRAS_ADV7162_PORT_DATA 2 /* established */
+#define MGRAS_ADV7162_PORT_PROBE 3 /* unknown */
+#define MGRAS_ADV7162_REG_ID 3 /* established */
+#define MGRAS_ADV7162_ID_VALUE 0x79 /* established */
+
+/*
+ * The display server's blanking sequence writes ADV7162 register 4, 16 bits
+ * wide: zero to blank, all ones to restore. The register number and width
+ * are established; that it is the pixel read mask is inferred, and no part
+ * data sheet has been checked for the number.
+ */
+#define MGRAS_ADV7162_REG_BLANK 4 /* established */
+#define MGRAS_ADV7162_BLANK_VALUE 0x0000 /* established */
+#define MGRAS_ADV7162_RESTORE_VALUE 0xffff /* established */
+
+/*
+ * Multi-channel option configuration path on device 11. The register select
+ * (crs) picks the target: 0 the programmable-logic configuration data byte,
+ * 1 its control and status, 4 the timing chip's register number, 5 that
+ * chip's 16-bit data, 7 its auto-incrementing timing RAM.
+ */
+#define MGRAS_MCO_SEL_FPGA_DATA 0 /* established */
+#define MGRAS_MCO_SEL_FPGA_CTRL 1 /* established */
+#define MGRAS_MCO_SEL_TIMING_REG 4 /* established */
+#define MGRAS_MCO_SEL_TIMING_DATA 5 /* established */
+#define MGRAS_MCO_SEL_TIMING_RAM 7 /* established */
+
+/*
+ * Configuration load sequence. Status bits 2:0 must read 0 after the first
+ * control write (value 0xfe), 6 after the second (value 0x01) and again 6
+ * after every data byte; after the last byte status bits 1:0 must both be
+ * set. The image is 0xf688 bytes followed by 20 zero bytes of padding.
+ */
+#define MGRAS_MCO_LOAD_CTRL_FIRST 0xfe /* established */
+#define MGRAS_MCO_LOAD_CTRL_SECOND 0x01 /* established */
+#define MGRAS_MCO_LOAD_STATUS_FIRST 0 /* established */
+#define MGRAS_MCO_LOAD_STATUS_AFTER_SECOND 6 /* established */
+#define MGRAS_MCO_LOAD_IMAGE_BYTES 0xf688 /* established */
+#define MGRAS_MCO_LOAD_PAD_BYTES 20 /* established */
+
+/*
  * Identification word read at the start of the board's window. The kernel's
  * probe compares only bits 6:0 (must be 0x10), bit 16 (set), bit 17 (clear)
  * and bits 31:18 (must be 1); bits 15:7 are not examined, so the split into

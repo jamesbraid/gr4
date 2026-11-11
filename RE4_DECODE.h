@@ -282,9 +282,12 @@
 /*
  * Transfer mode. Placed from what the drivers write: component type in 3:0,
  * pixel format in 7:4, begin skip bytes in 10:8, begin skip bits in 13:11,
- * and bit 23 set for every pixel draw. The stride-skip, byte order, zoom and
- * decimate bits exist but their positions are only partly known and are not
- * placed here.
+ * stride skip bytes in 16:14 (three bits in every writer read), zoom in 19,
+ * decimate in 20, RGB order in 22, and bit 23 set for every pixel draw.
+ * Bits 17 and 18 are one-bit flags the shipped library sets or clears (it
+ * sets 18 in its default state and clears 17 to 20 in the copy paths); what
+ * they do is not known, and the unpack-order and read-mask flags are among
+ * bits 17, 18 and 21. Bit 21 is never written by software examined.
  */
 /* REG: RE.xfer_mode 0xe159 rw32 reset=unknown inferred */
 /* FIELD: RE.xfer_mode.comp_type 3:0 inferred */
@@ -309,6 +312,24 @@
 /* FIELD: RE.xfer_mode.begin_skip_bits 13:11 inferred */
 #define RE_XFER_MODE_BEGIN_SKIP_BITS_SHIFT 11
 #define RE_XFER_MODE_BEGIN_SKIP_BITS_MASK  0x7u
+/* FIELD: RE.xfer_mode.stride_skip_bytes 16:14 inferred */
+#define RE_XFER_MODE_STRIDE_SKIP_BYTES_SHIFT 14
+#define RE_XFER_MODE_STRIDE_SKIP_BYTES_MASK  0x7u
+/* FIELD: RE.xfer_mode.flag17 17:17 inferred */
+#define RE_XFER_MODE_FLAG17_SHIFT 17
+#define RE_XFER_MODE_FLAG17_MASK  0x1u
+/* FIELD: RE.xfer_mode.flag18 18:18 inferred */
+#define RE_XFER_MODE_FLAG18_SHIFT 18
+#define RE_XFER_MODE_FLAG18_MASK  0x1u
+/* FIELD: RE.xfer_mode.zoom 19:19 inferred */
+#define RE_XFER_MODE_ZOOM_SHIFT 19
+#define RE_XFER_MODE_ZOOM_MASK  0x1u
+/* FIELD: RE.xfer_mode.decimate 20:20 inferred */
+#define RE_XFER_MODE_DECIMATE_SHIFT 20
+#define RE_XFER_MODE_DECIMATE_MASK  0x1u
+/* FIELD: RE.xfer_mode.rgb_order 22:22 inferred */
+#define RE_XFER_MODE_RGB_ORDER_SHIFT 22
+#define RE_XFER_MODE_RGB_ORDER_MASK  0x1u
 /* FIELD: RE.xfer_mode.opaque 23:23 inferred */
 #define RE_XFER_MODE_OPAQUE_SHIFT 23
 #define RE_XFER_MODE_OPAQUE_MASK  0x1u
@@ -354,6 +375,9 @@
  */
 /*
  * TESTVEC: 0x00418008 as RE.fill_mode => glyph_stipple=1, block_type=1
+ */
+/*
+ * TESTVEC: 0x00040080 as RE.xfer_mode => comp_type=0, format=8, flag18=1, stride_skip_bytes=0
  */
 
 #endif

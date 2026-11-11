@@ -272,6 +272,49 @@
 #define HQ_DMA_BUSY_ADDRESS_GEN_DMA_MASK  0x1u
 
 /*
+ * Context image, word 1 (the flags word of the host-memory image the kernel
+ * keeps per context). Bits 26 and 27 are read from the kernel's code that
+ * writes them; 29 to 31 come from traced values and the kernel clearing them
+ * after a load; the reader of bit 28 is not found (set only on the kernel's
+ * own context at creation).
+ */
+/* FIELD: CTX_W1.banks_changed 26:26 established */
+#define HQ_CTX_W1_BANKS_CHANGED_SHIFT 26
+#define HQ_CTX_W1_BANKS_CHANGED_MASK  0x1u
+/* FIELD: CTX_W1.xserver_shadow 27:27 established */
+#define HQ_CTX_W1_XSERVER_SHADOW_SHIFT 27
+#define HQ_CTX_W1_XSERVER_SHADOW_MASK  0x1u
+/* FIELD: CTX_W1.bit28 28:28 unknown */
+#define HQ_CTX_W1_BIT28_SHIFT 28
+#define HQ_CTX_W1_BIT28_MASK  0x1u
+/* FIELD: CTX_W1.window_changed 29:29 inferred */
+#define HQ_CTX_W1_WINDOW_CHANGED_SHIFT 29
+#define HQ_CTX_W1_WINDOW_CHANGED_MASK  0x1u
+/* FIELD: CTX_W1.nothing_saved 30:30 inferred */
+#define HQ_CTX_W1_NOTHING_SAVED_SHIFT 30
+#define HQ_CTX_W1_NOTHING_SAVED_MASK  0x1u
+/* FIELD: CTX_W1.first_load 31:31 inferred */
+#define HQ_CTX_W1_FIRST_LOAD_SHIFT 31
+#define HQ_CTX_W1_FIRST_LOAD_MASK  0x1u
+
+/*
+ * Image words 16 and 17 hold the bank pair: each is the inverse (xor 1) of
+ * one field of the context's two draw-surface descriptors, the same two
+ * values a loaded context sends as the arguments of the bank-validation
+ * command. That they name the front and back bank the next frame draws
+ * rests on the command's name and use and is inferred. Words 18 to 39 carry
+ * the X server's screen-wide raster registers when bit 27 is set.
+ */
+#define HQ_CTX_BANK_WORD_FIRST 16 /* established */
+#define HQ_CTX_BANK_WORD_SECOND 17 /* established */
+#define HQ_CTX_XSERVER_WORD_FIRST 18 /* inferred */
+#define HQ_CTX_XSERVER_WORD_LAST 39 /* inferred */
+
+/*
+ * TESTVEC: 0x0c000000 as CTX_W1 => banks_changed=1, xserver_shadow=1, bit28=0, first_load=0
+ */
+
+/*
  * Watermark defaults. The values below marked diagnostic are the ones the
  * standalone diagnostics program; the shipped kernel programs the init
  * values further down instead.

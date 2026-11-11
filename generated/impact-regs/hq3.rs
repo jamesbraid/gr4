@@ -1,4 +1,4 @@
-// generated from gr4 dea1e830fbb6 HQ3_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 136a8bc692fd HQ3_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Host interface and command processor registers of the Impact graphics subsystem.
 //!
@@ -9,6 +9,14 @@
 
 #![allow(dead_code)]
 
+/// established.
+pub const CTX_BANK_WORD_FIRST: u32 = 16;
+/// established.
+pub const CTX_BANK_WORD_SECOND: u32 = 17;
+/// inferred.
+pub const CTX_XSERVER_WORD_FIRST: u32 = 18;
+/// inferred.
+pub const CTX_XSERVER_WORD_LAST: u32 = 39;
 /// established, diagnostic.
 pub const CFIFO_HIWATER_DEFAULT: u32 = 40;
 /// established, diagnostic.
@@ -590,9 +598,62 @@ impl DmaBusy {
     }
 }
 
+/// The `CTX_W1` word.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct CtxW1(u32);
+
+impl CtxW1 {
+    pub const fn new(word: u32) -> Self {
+        Self(word)
+    }
+
+    pub const fn raw(self) -> u32 {
+        self.0
+    }
+
+    /// Bit 26, established.
+    pub const fn banks_changed(self) -> bool {
+        (self.0 >> 26) & 1 != 0
+    }
+
+    /// Bit 27, established.
+    pub const fn xserver_shadow(self) -> bool {
+        (self.0 >> 27) & 1 != 0
+    }
+
+    /// Bit 28, unknown.
+    pub const fn bit28(self) -> bool {
+        (self.0 >> 28) & 1 != 0
+    }
+
+    /// Bit 29, inferred.
+    pub const fn window_changed(self) -> bool {
+        (self.0 >> 29) & 1 != 0
+    }
+
+    /// Bit 30, inferred.
+    pub const fn nothing_saved(self) -> bool {
+        (self.0 >> 30) & 1 != 0
+    }
+
+    /// Bit 31, inferred.
+    pub const fn first_load(self) -> bool {
+        (self.0 >> 31) & 1 != 0
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn testvec_ctx_w1_c000000() {
+        let w = CtxW1::new(0xc000000);
+        assert_eq!(w.banks_changed() as u32, 1, "banks_changed");
+        assert_eq!(w.xserver_shadow() as u32, 1, "xserver_shadow");
+        assert_eq!(w.bit28() as u32, 0, "bit28");
+        assert_eq!(w.first_load() as u32, 0, "first_load");
+    }
 
     #[test]
     fn testvec_hq_config_8e() {

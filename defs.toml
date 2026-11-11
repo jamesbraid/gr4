@@ -86,3 +86,17 @@ label = "board id revision nibble"
 doc = "MGRAS.h"
 regex = 'MGRAS_REV_MASK\s+0x0000000?(F)0'
 binds = [["WHEX", "GIO_ID.revision", 1]]
+
+[[headers]]
+file = "XTALK_DECODE.h"
+module = "xtalk"
+rust_prefix = "XTALK_"
+register_doc = "Crosstalk widget register"
+description = ["Expected power-up values of the crosstalk widget block on the Octane host interface."]
+
+[[headers]]
+file = "TE1_DECODE.h"
+module = "te1"
+rust_prefix = "TE_"
+register_doc = "Texture engine register"
+description = ["Texture RAM revision words of the Impact graphics subsystem."]

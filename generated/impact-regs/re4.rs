@@ -1,4 +1,4 @@
-// generated from gr4 7fc7b2b630eb RE4_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 136a8bc692fd RE4_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Raster engine registers of the Impact graphics subsystem.
 //!
@@ -720,6 +720,36 @@ impl XferMode {
         (self.0 >> 11) & 0x7
     }
 
+    /// Bits 16:14, inferred.
+    pub const fn stride_skip_bytes(self) -> u32 {
+        (self.0 >> 14) & 0x7
+    }
+
+    /// Bit 17, inferred.
+    pub const fn flag17(self) -> bool {
+        (self.0 >> 17) & 1 != 0
+    }
+
+    /// Bit 18, inferred.
+    pub const fn flag18(self) -> bool {
+        (self.0 >> 18) & 1 != 0
+    }
+
+    /// Bit 19, inferred.
+    pub const fn zoom(self) -> bool {
+        (self.0 >> 19) & 1 != 0
+    }
+
+    /// Bit 20, inferred.
+    pub const fn decimate(self) -> bool {
+        (self.0 >> 20) & 1 != 0
+    }
+
+    /// Bit 22, inferred.
+    pub const fn rgb_order(self) -> bool {
+        (self.0 >> 22) & 1 != 0
+    }
+
     /// Bit 23, inferred.
     pub const fn opaque(self) -> bool {
         (self.0 >> 23) & 1 != 0
@@ -793,5 +823,14 @@ mod tests {
         let w = FillMode::new(0x418008);
         assert_eq!(w.glyph_stipple() as u32, 1, "glyph_stipple");
         assert_eq!(w.block_type().bits(), 1, "block_type");
+    }
+
+    #[test]
+    fn testvec_re_xfer_mode_40080() {
+        let w = XferMode::new(0x40080);
+        assert_eq!(w.comp_type(), 0, "comp_type");
+        assert_eq!(w.format().bits(), 8, "format");
+        assert_eq!(w.flag18() as u32, 1, "flag18");
+        assert_eq!(w.stride_skip_bytes(), 0, "stride_skip_bytes");
     }
 }

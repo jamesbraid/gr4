@@ -1,4 +1,4 @@
-// generated from gr4 cd4aad0265a1 MGRAS_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 136a8bc692fd MGRAS_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Board-level words of the Impact graphics subsystem.
 //!
@@ -8,6 +8,57 @@
 //! silicon.
 
 #![allow(dead_code)]
+
+/// established.
+pub const MCO_BANK_BASE_CH0: u32 = 0;
+/// established.
+pub const MCO_BANK_BASE_CH1: u32 = 32;
+/// established.
+pub const MCO_BANK_BASE_CH2: u32 = 48;
+/// established.
+pub const MCO_BANK_BASE_CH3: u32 = 0;
+/// established.
+pub const MCO_BANK_BASE_CH4: u32 = 16;
+/// established.
+pub const ADV7162_PORT_POINTER: u32 = 0;
+/// established.
+pub const ADV7162_PORT_PALETTE: u32 = 1;
+/// established.
+pub const ADV7162_PORT_DATA: u32 = 2;
+/// unknown.
+pub const ADV7162_PORT_PROBE: u32 = 3;
+/// established.
+pub const ADV7162_REG_ID: u32 = 3;
+/// established.
+pub const ADV7162_ID_VALUE: u32 = 121;
+/// established.
+pub const ADV7162_REG_BLANK: u32 = 4;
+/// established.
+pub const ADV7162_BLANK_VALUE: u32 = 0;
+/// established.
+pub const ADV7162_RESTORE_VALUE: u32 = 0xffff;
+/// established.
+pub const MCO_SEL_FPGA_DATA: u32 = 0;
+/// established.
+pub const MCO_SEL_FPGA_CTRL: u32 = 1;
+/// established.
+pub const MCO_SEL_TIMING_REG: u32 = 4;
+/// established.
+pub const MCO_SEL_TIMING_DATA: u32 = 5;
+/// established.
+pub const MCO_SEL_TIMING_RAM: u32 = 7;
+/// established.
+pub const MCO_LOAD_CTRL_FIRST: u32 = 254;
+/// established.
+pub const MCO_LOAD_CTRL_SECOND: u32 = 1;
+/// established.
+pub const MCO_LOAD_STATUS_FIRST: u32 = 0;
+/// established.
+pub const MCO_LOAD_STATUS_AFTER_SECOND: u32 = 6;
+/// established.
+pub const MCO_LOAD_IMAGE_BYTES: u32 = 0xf688;
+/// established.
+pub const MCO_LOAD_PAD_BYTES: u32 = 20;
 
 /// Board-level register `dcb_ctrl`: read/write, 32-bit, 12 consecutive registers; reset unknown; inferred.
 pub const REG_DCB_CTRL: u32 = 0xa000;

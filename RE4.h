@@ -363,14 +363,14 @@ extern "C" {
 #define RE4_XFR_STATUS_BUSY         BIT(4)      /* Transfer currently active */
 
 /*
- * Transfer Mode Register (RE4_REG_XFRMODE: 0x0159). SGI's fields:
- * PixelCompType (3:0), PixelFormat (7:4), BeginSkipBytes (10:8),
- * BeginSkipBits (13:11), StrideSkipBytes (22:14), BitMapOpaque (23), and
- * RGBorder, UnpackLSBfirst, EnableZoom, EnableDecimate, EnableReadMask
- * (positions not known). Format/type pairs the X server and kernel use,
+ * Transfer Mode Register (RE4_REG_XFRMODE: 0x0159). Placed fields: component
+ * type (3:0), pixel format (7:4), begin skip bytes (10:8), begin skip bits
+ * (13:11), stride skip bytes (16:14), bitmap-opaque (23). RGB order, zoom and
+ * decimate are placed by the trace below (22, 19, 20); the unpack-order and
+ * read-mask flags are among bits 17, 18 and 21 (see docs/OPEN_QUESTIONS.md,
+ * entry 12). Format/type pairs the X server and kernel use,
  * with the bytes per pixel the model gives them: (0,0) 1, (0,1) 2,
- * (8,8) 2 (4-4-4-4), (8,10) 2 (5-5-5), (8,0) 4, (7,1) 6. SGI names
- * formats XFRMODE_CI1, _L1, _RGB3, _RGBA4 and types XFRMODE_1U, _2U, _4444U.
+ * (8,8) 2 (4-4-4-4), (8,10) 2 (5-5-5), (8,0) 4, (7,1) 6.
  * The format values below are earlier guesses.
  *
  * As libGLcore uses it (traced with the gltest pixel test, 6.5.22):
@@ -379,15 +379,16 @@ extern "C" {
  *   7:4   format: 0 colour index, 1 stencil, 2 depth, 3 R, 4 G, 5 B, 6 A,
  *         7 RGB, 8 RGBA, 9 one-component texel, 10 two-component texel
  *   10:8  begin skip, bytes
- *   17:14 stride skip, bytes (the GL row padding; up to 6 seen)
+ *   16:14 stride skip, bytes (the GL row padding; up to 6 seen). Three bits
+ *         in every writer read; bit 17 is a separate flag
  *   18    PIO reads in the DMA component order. The X server sets it
  *         (XGetImage reads with 0x40080 and takes the pixel word as
  *         0x00BBGGRR). libGLcore ORs it into its default transfer-mode
  *         shadow at context creation and clears it in the copy paths
  *         (raster to raster, raster to texture), so the PIO-order reading
  *         is not the whole meaning: ESTABLISHED that the library sets and
- *         clears it, INFERRED what it does. SGI's StrideSkipBytes (22:14)
- *         cannot be right, since RGBorder sits at 22: every writer in the
+ *         clears it, INFERRED what it does. A stride field reaching up to
+ *         bit 22 cannot be right, since RGB order sits at 22: every writer in the
  *         library and the X server masks the stride as 3 bits (16:14).
  *   17    a one-bit flag the copy paths clear; nothing sets it. Bits 17, 18
  *         and 21 are the candidates for LSB-first and the read mask;
@@ -395,7 +396,7 @@ extern "C" {
  *   19    zoom: scale by XFRFACTOR
  *   20    decimate (zoom below 1)
  *   22    RGBorder: 1 = red first in host memory, 0 = ABGR
- *   23    always set for pixel draws (BitMapOpaque in SGI's list)
+ *   23    always set for pixel draws (the bitmap-opaque bit)
  * Host components are the framebuffer's top bits (no rounding) when
  * reading wider than the framebuffer stores, and truncated when writing.
  * A PIO read (character registers) delivers RGB(A) in the reverse of the
@@ -417,7 +418,7 @@ extern "C" {
 #define RE4_XFRMODE_FORMAT_1B_GLYPH (3 << 4)    /* 1-bit monochrome glyph */
 #define RE4_XFRMODE_BEGIN_SKIP_B(b) (((b) & 0x7) << 8)
 #define RE4_XFRMODE_BEGIN_SKIP_BITS(b) (((b) & 0x7) << 11)
-#define RE4_XFRMODE_STRIDE_SKIP_B(b) (((b) & 0x1FF) << 14)
+#define RE4_XFRMODE_STRIDE_SKIP_B(b) (((b) & 0x7) << 14)
 #define RE4_XFRMODE_BITMAP_OPAQUE   BIT(23)
 
 /* Status Register (RE4_REG_STATUS: 0x015E) */
