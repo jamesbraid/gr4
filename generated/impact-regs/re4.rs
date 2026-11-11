@@ -1,4 +1,4 @@
-// generated from gr4 136a8bc692fd RE4_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 f3286d9d1470 RE4_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Raster engine registers of the Impact graphics subsystem.
 //!
@@ -8,6 +8,9 @@
 //! silicon.
 
 #![allow(dead_code)]
+
+/// established.
+pub const RE_XFER_ZOOM_UNITY: u32 = 0x100;
 
 /// Raster engine register `tri_x_major`: write, 32-bit; reset unknown; inferred.
 pub const REG_TRI_X_MAJOR: u32 = 0xe000;

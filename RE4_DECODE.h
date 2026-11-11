@@ -275,6 +275,15 @@
 
 /* REG: RE.xfer_zoom_init 0xe154 rw32 reset=unknown inferred */
 /* REG: RE.xfer_zoom_step 0xe155 rw32 reset=unknown inferred */
+/*
+ * Zoom encoding: both registers hold 8.8 fixed point, 0x100 meaning a factor of
+ * 1.0 (no zoom). Established: the library's host-to-raster setup routines write
+ * the pair this way, and the no-zoom path stores 0x100 in both. The magnifying
+ * and shrinking arithmetic that derives other values is inferred and not
+ * stated here.
+ */
+#define RE_XFER_ZOOM_UNITY 0x100 /* established */
+
 /* REG: RE.xfer_mask_lo 0xe156 rw32 reset=unknown inferred */
 /* REG: RE.xfer_mask_hi 0xe157 rw32 reset=unknown inferred */
 /* REG: RE.xfer_counters 0xe158 r32 reset=unknown inferred */

@@ -95,8 +95,18 @@ register_doc = "Crosstalk widget register"
 description = ["Expected power-up values of the crosstalk widget block on the Octane host interface."]
 
 [[headers]]
+file = "PP1_DECODE.h"
+block = "PP"
+module = "pp1"
+rust_prefix = "PP_"
+register_doc = "Pixel processor register"
+description = ["Display read buffer registers of the Impact graphics subsystem."]
+notes_corpus = ["PP1.h"]
+
+[[headers]]
 file = "TE1_DECODE.h"
+block = "TE"
 module = "te1"
 rust_prefix = "TE_"
 register_doc = "Texture engine register"
-description = ["Texture RAM revision words of the Impact graphics subsystem."]
+description = ["Texture RAM revision words and loader registers of the Impact graphics subsystem."]
