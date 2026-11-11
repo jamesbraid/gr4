@@ -83,5 +83,197 @@
         "usr/gfx/ucode/MG/mgras_geif*.u"
       ]
     }
-  ]
+  ],
+  "windows": [
+    {
+      "name": "mmio",
+      "size": "0x100000",
+      "docs": [
+        "MGRAS.h",
+        "HQ3.h"
+      ],
+      "regions": [
+        {
+          "name": "gio-id",
+          "lo": "0x0",
+          "hi": "0x40000",
+          "docs": [
+            "MGRAS.h"
+          ]
+        },
+        {
+          "name": "hq3-ucode",
+          "lo": "0x40000",
+          "hi": "0x46000",
+          "docs": [
+            "MGRAS.h",
+            "HQ3.h"
+          ]
+        },
+        {
+          "name": "hq3-pc",
+          "lo": "0x46000",
+          "hi": "0x47000",
+          "docs": [
+            "MGRAS.h",
+            "HQ3.h"
+          ]
+        },
+        {
+          "name": "cp-data",
+          "lo": "0x47000",
+          "hi": "0x4c000",
+          "docs": [
+            "MGRAS.h",
+            "HQ3.h"
+          ]
+        },
+        {
+          "name": "rss-diag",
+          "lo": "0x4c000",
+          "hi": "0x50000",
+          "docs": [
+            "MGRAS.h",
+            "HQ3.h"
+          ]
+        },
+        {
+          "name": "priv-regs",
+          "lo": "0x50000",
+          "hi": "0x60000",
+          "docs": [
+            "MGRAS.h",
+            "HQ3.h"
+          ]
+        },
+        {
+          "name": "dcb",
+          "lo": "0x60000",
+          "hi": "0x68000",
+          "docs": [
+            "MGRAS.h"
+          ]
+        },
+        {
+          "name": "dcb-ctrl",
+          "lo": "0x68000",
+          "hi": "0x70000",
+          "docs": [
+            "MGRAS.h"
+          ]
+        },
+        {
+          "name": "user-regs",
+          "lo": "0x70000",
+          "hi": "0x7c000",
+          "docs": [
+            "MGRAS.h",
+            "HQ3.h"
+          ]
+        },
+        {
+          "name": "rss-reg",
+          "lo": "0x7c000",
+          "hi": "0x7d000",
+          "docs": [
+            "MGRAS.h"
+          ]
+        },
+        {
+          "name": "rss-exec",
+          "lo": "0x7d000",
+          "hi": "0x80000",
+          "docs": [
+            "MGRAS.h"
+          ]
+        },
+        {
+          "name": "cfifo-cmd",
+          "lo": "0x80000",
+          "hi": "0x100000",
+          "docs": [
+            "MGRAS.h",
+            "HQ3.h"
+          ]
+        }
+      ]
+    }
+  ],
+  "bases": [
+    {
+      "type": "argument",
+      "function": "MgrasInitBoardGfx|MgrasProbe|MgrasReset|MgrasBlankScreen|MgrasDownloadUcode|MgrasInitCCR|CCInit|PhaseOne|PhaseTwo|MgrasStartDMA|MgrasWaitDMA|MgrasEnableRetraceInterrupts|MgrasEnableVideoTiming|MgrasLoadVC3SRAM|MgrasInitCursor|MgrasClearCursor",
+      "reg": 4,
+      "window": "mmio",
+      "label": "register base argument",
+      "binaries": [
+        "usr/cpu/sysgen/IP28boot/*"
+      ],
+      "why": "mgras_kern.h declares each of these with mgras_hw *base as its first argument, the mapped register aperture"
+    },
+    {
+      "type": "field",
+      "disp": 38544,
+      "loads": [
+        "ld"
+      ],
+      "window": "mmio",
+      "label": "context +0x9690",
+      "binaries": [
+        "*libGLcore.so"
+      ],
+      "why": "glcore_mgras.h puts the mgras_hw pointer at context offset 0x9690, and libGLcore stores register writes through it"
+    }
+  ],
+  "tokens": {
+    "value_width": 4,
+    "docs": [
+      "HQ3.h",
+      "GE11.h"
+    ],
+    "sources": [
+      {
+        "type": "header",
+        "label": "GE11.h",
+        "kind": "geometry token",
+        "file": "GE11.h",
+        "pattern": "^#define\\s+(GE11_TOKEN_\\w+)\\s+(0x[0-9A-Fa-f]+)\\b"
+      },
+      {
+        "type": "stores",
+        "label": "command FIFO",
+        "kind": "command word",
+        "window": "mmio",
+        "lo": "0x80000",
+        "hi": "0x100000",
+        "known_only": true,
+        "binaries": [
+          "usr/cpu/sysgen/IP28boot/*",
+          "*libGLcore.so"
+        ]
+      }
+    ]
+  },
+  "ioctls": {
+    "send_functions": [
+      "ioctl"
+    ],
+    "ranges": [
+      [
+        "0x6D670000",
+        "0x6D67FFFF"
+      ]
+    ],
+    "classes": [
+      {
+        "lo": "0x6D670000",
+        "hi": "0x6D67FFFF",
+        "name": "mgras"
+      }
+    ],
+    "docs": [
+      "docs/*.md",
+      "README.md"
+    ]
+  }
 }
