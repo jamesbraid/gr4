@@ -1,4 +1,4 @@
-// generated from gr4 81567987163d MGRAS_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 cfbe87f5793d MGRAS_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Board-level words of the Impact graphics subsystem.
 //!
@@ -39,6 +39,12 @@ pub const ADV7162_PORT_PROBE: u32 = 3;
 pub const ADV7162_REG_ID: u32 = 3;
 /// established.
 pub const ADV7162_ID_VALUE: u32 = 121;
+/// established.
+pub const ADV473_PORT_ADDR: u32 = 0;
+/// established.
+pub const ADV473_PORT_PALETTE: u32 = 1;
+/// established as a write, role inferred.
+pub const ADV473_PORT_COMMAND: u32 = 6;
 /// established.
 pub const ADV7162_REG_BLANK: u32 = 4;
 /// established.
@@ -258,6 +264,11 @@ impl DcbAddr {
     /// Bits 4:3, inferred.
     pub const fn data_width(self) -> DcbAddrDataWidth {
         DcbAddrDataWidth::from_bits((self.0 >> 3) & 0x3)
+    }
+
+    /// Bits 14:10, inferred.
+    pub const fn device(self) -> u32 {
+        (self.0 >> 10) & 0x1f
     }
 }
 

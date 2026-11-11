@@ -32,6 +32,25 @@
 /* REG: TE.tl_addr 0xf1a3 w32 reset=unknown inferred */
 /* REG: TE.tl_mipmap 0xf1a4 w32 reset=unknown inferred */
 
+/*
+ * Sampler mipmap table entry. The texture-bind routine builds each entry by
+ * OR-ing a 16-bit page value from the level's texture-memory record with a
+ * byte-wide bank value shifted left by 8 (established, one build of the
+ * OpenGL core library; the same split is composed for the loader's table
+ * entry, tl_mipmap). The split position is established. The field widths in
+ * the hardware and the page and bank names are inferred: the code does not
+ * say how many bits the chip keeps. The loader table registers tl_addr and
+ * tl_mipmap keep their inferred grade: their numbers appear as constants in
+ * that build but not in a later one (per-build detail in
+ * docs/TRAM_CORRUPTION_ANALYSIS.md).
+ */
+/* FIELD: TE.tx_mipmap.page 7:0 inferred */
+#define TE_TX_MIPMAP_PAGE_SHIFT 0
+#define TE_TX_MIPMAP_PAGE_MASK  0xffu
+/* FIELD: TE.tx_mipmap.bank 15:8 inferred */
+#define TE_TX_MIPMAP_BANK_SHIFT 8
+#define TE_TX_MIPMAP_BANK_MASK  0xffu
+
 /* Loader mode word. Bits not listed here are not placed. */
 /* FIELD: TE.tl_mode.components_minus_1 2:1 inferred */
 #define TE_TL_MODE_COMPONENTS_MINUS_1_SHIFT 1

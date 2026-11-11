@@ -102,7 +102,7 @@ module = "pp1"
 rust_prefix = "PP_"
 register_doc = "Pixel processor register"
 description = ["Display read buffer registers of the Impact graphics subsystem."]
-notes_corpus = ["PP1.h"]
+notes_corpus = ["PP1.h", "docs/OPEN_QUESTIONS.md"]
 
 [[headers]]
 file = "TE1_DECODE.h"

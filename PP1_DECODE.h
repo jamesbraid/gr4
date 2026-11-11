@@ -57,13 +57,18 @@
  * xtiles36 the width in 192-pixel tiles rounded up. The routine fixes each
  * field's position (established); the tile sizes are inferred from the
  * board's tile layout. auto_flush_off set means auto flush is disabled
- * (inferred from traced values). The two examples are the low bits of the
- * size words traced on the two Impact boards (one and two raster engines);
- * the traced words also carry the stack-leftover top bits described above,
- * which are not decoded.
+ * (inferred from traced values).
  *
- * EXAMPLE (unverified): 0x31a as PP.drb_size => xtiles9=2, xtiles36=6, raster_engines_minus_1=0, dma_line_count_mask=3, auto_flush_off=0
- * EXAMPLE (unverified): 0x25a as PP.drb_size => xtiles9=2, xtiles36=6, raster_engines_minus_1=1, dma_line_count_mask=2, auto_flush_off=0
+ * The two values below are what the routine computes for a 1024-pixel width
+ * with one and with two raster engines (re-read in the held kernel object:
+ * width 768 and 192 divisors, the raster-engine count compare, and the
+ * line-count-mask field taking 3 for any count but two and 2 for two). Both
+ * are established as the low bits the routine produces. The full words the
+ * boards were seen to carry also hold the stack-leftover top bits and come
+ * from a trace this header does not re-read.
+ *
+ * TESTVEC: 0x31a as PP.drb_size => xtiles9=2, xtiles36=6, raster_engines_minus_1=0, dma_line_count_mask=3, auto_flush_off=0
+ * TESTVEC: 0x25a as PP.drb_size => xtiles9=2, xtiles36=6, raster_engines_minus_1=1, dma_line_count_mask=2, auto_flush_off=0
  */
 
 #endif

@@ -1,4 +1,4 @@
-// generated from gr4 f3286d9d1470 PP1_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 b0b868e9bfd9 PP1_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Display read buffer registers of the Impact graphics subsystem.
 //!
@@ -57,5 +57,30 @@ impl DrbSize {
     /// Bit 10, inferred.
     pub const fn auto_flush_off(self) -> bool {
         (self.0 >> 10) & 1 != 0
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn testvec_pp_drb_size_31a() {
+        let w = DrbSize::new(0x31a);
+        assert_eq!(w.xtiles9(), 2, "xtiles9");
+        assert_eq!(w.xtiles36(), 6, "xtiles36");
+        assert_eq!(w.raster_engines_minus_1(), 0, "raster_engines_minus_1");
+        assert_eq!(w.dma_line_count_mask(), 3, "dma_line_count_mask");
+        assert_eq!(w.auto_flush_off() as u32, 0, "auto_flush_off");
+    }
+
+    #[test]
+    fn testvec_pp_drb_size_25a() {
+        let w = DrbSize::new(0x25a);
+        assert_eq!(w.xtiles9(), 2, "xtiles9");
+        assert_eq!(w.xtiles36(), 6, "xtiles36");
+        assert_eq!(w.raster_engines_minus_1(), 1, "raster_engines_minus_1");
+        assert_eq!(w.dma_line_count_mask(), 2, "dma_line_count_mask");
+        assert_eq!(w.auto_flush_off() as u32, 0, "auto_flush_off");
     }
 }

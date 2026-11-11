@@ -217,7 +217,15 @@
 #define HQ_FIFO_STATUS_CFIFO_HIWATER_MARK_SHIFT 22
 #define HQ_FIFO_STATUS_CFIFO_HIWATER_MARK_MASK  0x7fu
 
-/* Status bits as the drivers test them. */
+/*
+ * Status bits as the drivers test them. This register is the one the user
+ * window exposes at the start of its control block; the word index above
+ * counts from the start of the control window, so the register the
+ * drivers poll after a DMA read-back and in a finish is this one, and bit 1
+ * (pipe_idle) is the bit they spin on. Polarity (set when drained) is
+ * established for the finish path; for the DMA read-back waits it was not
+ * re-read.
+ */
 /* FIELD: HQ.status.commands_done 0:0 inferred */
 #define HQ_STATUS_COMMANDS_DONE_SHIFT 0
 #define HQ_STATUS_COMMANDS_DONE_MASK  0x1u

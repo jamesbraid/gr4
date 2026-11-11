@@ -61,6 +61,9 @@
 /* FIELD: DCB_ADDR.data_width 4:3 inferred */
 #define MGRAS_DCB_ADDR_DATA_WIDTH_SHIFT 3
 #define MGRAS_DCB_ADDR_DATA_WIDTH_MASK  0x3u
+/* FIELD: DCB_ADDR.device 14:10 inferred */
+#define MGRAS_DCB_ADDR_DEVICE_SHIFT 10
+#define MGRAS_DCB_ADDR_DEVICE_MASK  0x1fu
 /* ENUM: DCB_ADDR.data_width 0 four_bytes inferred */
 #define MGRAS_DCB_ADDR_DATA_WIDTH_FOUR_BYTES 0
 /* ENUM: DCB_ADDR.data_width 1 one_byte inferred */
@@ -164,6 +167,23 @@
 #define MGRAS_ADV7162_ID_VALUE 0x79 /* established */
 
 /*
+ * Ports of an ADV473-class overlay-palette channel (banks 0 and 1), as offsets
+ * from its bank base. Port 0 is the palette write address and port 1 the
+ * palette data, three bytes per entry, one byte each from three 256-entry
+ * colour tables (established: both re-read in the option's 473 loader and its
+ * 473 gamma loader). Port 6 takes one value taken from the caller's first word
+ * (established: the 473 loader writes index base + 6 and then that word);
+ * calling it the command register is inferred. Port 2 is inferred to be the
+ * pixel read mask: the display server writes 0 or 0xff to it in its blanking
+ * sequence and the family's register order puts the mask there. Not a bus
+ * measurement; no data sheet of the part is held.
+ */
+#define MGRAS_ADV473_PORT_ADDR 0 /* established */
+#define MGRAS_ADV473_PORT_PALETTE 1 /* established */
+#define MGRAS_ADV473_PORT_MASK 2 /* inferred */
+#define MGRAS_ADV473_PORT_COMMAND 6 /* established as a write, role inferred */
+
+/*
  * The display server's blanking sequence writes ADV7162 register 4, 16 bits
  * wide: zero to blank, all ones to restore. The register number and width
  * are established; that it is the pixel read mask is inferred, and no part
@@ -235,6 +255,25 @@
  */
 /*
  * TESTVEC: 0x00000090 as MCO_INDEX => port=0, bank=9
+ */
+/*
+ * Board-ID probe accesses, double-read build family (the Indigo2-class kernel
+ * object held in this workspace): the four byte accesses of the probe are all
+ * at the same offset from the board register base, which decodes as device 11,
+ * register select 0, one-byte width. That is the option's identification and
+ * configuration-data byte at select 0, as stated above. The option's index
+ * and data ports are the same device at selects 2 and 3. The offsets are
+ * established from the routine's machine words; the decode through the window
+ * layout is inferred. The single-read family reads a byte at an offset that
+ * is not the offset it wrote, and is not decoded here: whether the two name
+ * one register is unknown (test in docs/OPEN_QUESTIONS.md).
+ * EXAMPLE (unverified): 0x00002c08 as DCB_ADDR => encrs_inc=0, endata_pack=0, crs=0, data_width=1, device=11
+ */
+/*
+ * EXAMPLE (unverified): 0x00002d08 as DCB_ADDR => encrs_inc=0, endata_pack=0, crs=2, data_width=1, device=11
+ */
+/*
+ * EXAMPLE (unverified): 0x00002d88 as DCB_ADDR => encrs_inc=0, endata_pack=0, crs=3, data_width=1, device=11
  */
 /*
  * EXAMPLE (unverified): 0x00000388 as DCB_ADDR => data_width=1, crs=7
