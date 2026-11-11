@@ -25,7 +25,8 @@ extern "C" {
  * ARCHITECTURE OVERVIEW: VC3 VIDEO CONTROLLER
  * ============================================================================
  *
- * Gate Count:      ~80,000 gates
+ * Gate Count:      ~80,000 gates (UNKNOWN grade: an estimate with no held source;
+ *                  no held document gives a VC3 figure)
  * Dot Clock:       Up to 220 MHz (drives ADV7125 / Brooktree RAMDAC)
  * SRAM Capacity:   32,768 x 16-bit words (64 KB total internal SRAM)
  *

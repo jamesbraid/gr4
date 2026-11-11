@@ -29,7 +29,7 @@ A fresh run of Quake does not exhibit this behavior. The issue only manifests af
   - 1 MB TRAM (one TRAM): 256 pages of 4 KB (`0x00-0xFF`).
   - 4 MB TRAM (four TRAMs): 256 pages of 16 KB (`0x00-0xFF`), per `TE1.h`. The driver field at context offset `0x4D0` is recorded below as "256 or 1024"; the 1024 case is unconfirmed and does not fit the traced page range.
 - **Texture Dimensions:** A 256×256 RGB texture occupies 65,536 texels = **16 contiguous TRAM pages** (6.25% of total TRAM on a 1 MB board).
-- **Hardware Registers:** the loader's `TL_MIPMAP` is TE1 register `0x1A4` (the page a load starts at; `TL_MODE` is `0x1A1`). The sampler side uses `TXMIPMAP` at `0x191` (page | bank << 8). Register numbers as in `TE1.h`; an earlier version of this note named `0x191` / `0x1A1` as `TL_MIPMAP`, which mixed the two.
+- **Hardware Registers:** the loader's `TL_MIPMAP` is TE1 register `0x1A4` (the page a load starts at; `TL_MODE` is `0x1A1`). The sampler side uses `TXMIPMAP` at `0x191` (page | bank << 8). Grades, checked against the 6.5.30 build of the OpenGL core library with routine facts: `TL_MODE` 0x1A1, `TL_SPEC` 0x1A2 and `TXMIPMAP` 0x191 are established (each appears as a constant in the texture load, read or copy routines that program them). `TL_ADDR` 0x1A3 and `TL_MIPMAP` 0x1A4 did not appear as constants in any routine of that library that was scanned for them; they stay inferred from the traced write order recorded in `TE1.h`, and the roles stated here are unchecked. Register numbers as in `TE1.h`; an earlier version of this note named `0x191` / `0x1A1` as `TL_MIPMAP`, which mixed the two.
 
 ### Texture Manager Internal Structures
 

@@ -296,10 +296,12 @@ typedef union {
  * ESTABLISHED by that object's routine names and by the option's
  * diagnostic command list (6.5.7 ide IP30 command registry).
  *   CRS 0 byte (0x62C08)  board ID on read; on write the FPGA
- *       configuration data byte. Probe: write 0xFF, read, write 0, read;
- *       the two reads must agree, and the byte is a board ID if it is 1 or
- *       0xAn, the low nibble being the revision. No board: the probe
- *       reports 0xFF.
+ *       configuration data byte. Probe (ESTABLISHED for the held 6.5.30
+ *       object by routine facts; the 6.5.22 object is not held): write
+ *       0xFF, read one byte, board present if the high nibble is 4, the
+ *       low nibble being the revision. No board: the probe reports 0xFF.
+ *       An earlier reading (two reads agreeing, 1 or 0xAn) was not found
+ *       in that object and is withdrawn until a 6.5.22 object shows it.
  *   CRS 1 byte (0x62C88)  FPGA configuration control (write) and status
  *       (read). Writing 0xFE then 0x01 pulses the configuration line. The
  *       load expects status bits 2:0 to read 000 after 0xFE, 110 after
