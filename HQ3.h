@@ -777,6 +777,9 @@ extern "C" {
  *   bit  21     sync
  *   bit  22     set by the kernel; the X server leaves it 0
  *   bits 29:23  convert (formatter control)
+ *   bit  30     pad flag, set by the library in the forms that give fewer than
+ *               three components of a vertex or texture coordinate (glVertex2s
+ *               sends 0x59000004); its effect is inferred, not read
  *
  * Pixel command (bit 31 = 1): raw pixel data follows,
  * sent as doublewords.
@@ -1153,7 +1156,8 @@ extern "C" {
  * signed, bit 3 normalise (GL rules), bits 2:0 source size (0 32-bit, 1
  * byte, 2 short, 4 double); bit 6 appends a fourth component of 1.0.
  * Examples: glColor4ub 0x29, glColor3f 0x40, glVertex3s 0x72, glNormal3b
- * 0x39, glVertex4d 0x24.
+ * 0x39, glVertex4d 0x24. Whole control words: glVertex3s 0x39000006, glVertex2s
+ * 0x59000004 (bit 30 set, convert 0x32; one data word, x in the upper half).
  */
 #define HQ_TOK_KERN_WINDOW                0x0E4  /*  60 bytes: GL window state, kernel */
 /*

@@ -1,4 +1,4 @@
-// generated from gr4 2b3b335bb506 HQ3_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 710441e716d5 HQ3_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Host interface and command processor registers of the Impact graphics subsystem.
 //!
@@ -650,6 +650,55 @@ impl CtxW1 {
     }
 }
 
+/// The `CFIFO_CTL` word.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct CfifoCtl(u32);
+
+impl CfifoCtl {
+    pub const fn new(word: u32) -> Self {
+        Self(word)
+    }
+
+    pub const fn raw(self) -> u32 {
+        self.0
+    }
+
+    /// Bits 7:0, established.
+    pub const fn bytes(self) -> u32 {
+        self.0 & 0xff
+    }
+
+    /// Bits 20:8, established.
+    pub const fn command(self) -> u32 {
+        (self.0 >> 8) & 0x1fff
+    }
+
+    /// Bit 21, established.
+    pub const fn sync(self) -> bool {
+        (self.0 >> 21) & 1 != 0
+    }
+
+    /// Bit 22, established.
+    pub const fn kernel(self) -> bool {
+        (self.0 >> 22) & 1 != 0
+    }
+
+    /// Bits 29:23, established.
+    pub const fn convert(self) -> u32 {
+        (self.0 >> 23) & 0x7f
+    }
+
+    /// Bit 30, inferred.
+    pub const fn pad_flag(self) -> bool {
+        (self.0 >> 30) & 1 != 0
+    }
+
+    /// Bit 31, established.
+    pub const fn pixel(self) -> bool {
+        (self.0 >> 31) & 1 != 0
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -661,6 +710,30 @@ mod tests {
         assert_eq!(w.xserver_shadow() as u32, 1, "xserver_shadow");
         assert_eq!(w.bit28() as u32, 0, "bit28");
         assert_eq!(w.first_load() as u32, 0, "first_load");
+    }
+
+    #[test]
+    fn testvec_cfifo_ctl_59000004() {
+        let w = CfifoCtl::new(0x59000004);
+        assert_eq!(w.bytes(), 4, "bytes");
+        assert_eq!(w.command(), 0, "command");
+        assert_eq!(w.sync() as u32, 0, "sync");
+        assert_eq!(w.kernel() as u32, 0, "kernel");
+        assert_eq!(w.convert(), 50, "convert");
+        assert_eq!(w.pad_flag() as u32, 1, "pad_flag");
+        assert_eq!(w.pixel() as u32, 0, "pixel");
+    }
+
+    #[test]
+    fn testvec_cfifo_ctl_39000006() {
+        let w = CfifoCtl::new(0x39000006);
+        assert_eq!(w.bytes(), 6, "bytes");
+        assert_eq!(w.command(), 0, "command");
+        assert_eq!(w.sync() as u32, 0, "sync");
+        assert_eq!(w.kernel() as u32, 0, "kernel");
+        assert_eq!(w.convert(), 114, "convert");
+        assert_eq!(w.pad_flag() as u32, 0, "pad_flag");
+        assert_eq!(w.pixel() as u32, 0, "pixel");
     }
 
     #[test]

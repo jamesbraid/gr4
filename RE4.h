@@ -398,6 +398,11 @@ extern "C" {
  *   19    zoom: scale by XFRFACTOR
  *   20    decimate (zoom below 1)
  *   22    RGBorder: 1 = red first in host memory, 0 = ABGR
+ * glReadPixels of RGBA bytes in two parts (6.5.13f and 6.5.30m, traced): 0xC10080 at
+ * destination offset 0xD68 then 0xC10480 at 0x212C, and 0xC00080 then 0xC10480.
+ * Bit 16 is bit 2 of the stride skip (4 bytes); the library clears 18 and 10:8
+ * and sets 16:14 from a per-context byte; 10:8 matches the destination offset &
+ * 7 (inferred). See docs/OPEN_QUESTIONS.md entry 17.
  *   23    always set for pixel draws (the bitmap-opaque bit)
  * Host components are the framebuffer's top bits (no rounding) when
  * reading wider than the framebuffer stores, and truncated when writing.

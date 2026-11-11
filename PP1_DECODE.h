@@ -36,6 +36,29 @@
 #define PP_DRB_SIZE_COMMAND_WORD 0x00196e04u /* established, kernel constant table */
 #define PP_DRB_POINTERS_COMMAND_WORD 0x00196d04u /* established, kernel constant table */
 
+/*
+ * Pointer word. Bits 9:0 and 19:10 are two 10-bit page pointers; the software
+ * that builds the word treats them so (established): the display server's
+ * frame-buffer read routine masks a page with 0x3FF, places it in bits 9:0 and
+ * a copy in bits 19:10, and keeps bits 31:20 of the previous word, and the
+ * kernel's routine for GL windows composes the word as page A | page B << 10
+ * under the mask 0xFFF003FF. The display server holds two prebuilt words per
+ * screen mode, main and overlay, read from the mode's video format file; which
+ * one it writes picks the planes, there is no plane select in the word (see
+ * docs/OPEN_QUESTIONS.md entry 15). Page A is the buffer drawn and read, page
+ * B the second buffer of a double-buffered window (inferred from the
+ * values: B is A plus the buffer size, or a copy of A when there is no second
+ * buffer). Bits 31:20 are not placed: no format file sets them and the kernel
+ * routine leaves them as stack residue (inferred), so whether the pixel
+ * processor latches them is unknown.
+ */
+/* FIELD: PP.drb_pointers.page_a 9:0 established */
+#define PP_DRB_POINTERS_PAGE_A_SHIFT 0
+#define PP_DRB_POINTERS_PAGE_A_MASK  0x3ffu
+/* FIELD: PP.drb_pointers.page_b 19:10 established */
+#define PP_DRB_POINTERS_PAGE_B_SHIFT 10
+#define PP_DRB_POINTERS_PAGE_B_MASK  0x3ffu
+
 /* FIELD: PP.drb_size.xtiles9 1:0 established */
 #define PP_DRB_SIZE_XTILES9_SHIFT 0
 #define PP_DRB_SIZE_XTILES9_MASK  0x3u
@@ -69,6 +92,17 @@
  *
  * TESTVEC: 0x31a as PP.drb_size => xtiles9=2, xtiles36=6, raster_engines_minus_1=0, dma_line_count_mask=3, auto_flush_off=0
  * TESTVEC: 0x25a as PP.drb_size => xtiles9=2, xtiles36=6, raster_engines_minus_1=1, dma_line_count_mask=2, auto_flush_off=0
+ */
+
+/*
+ * Pointer words from the video format files for 1280 x 1024 at 60 Hz, one
+ * raster engine and two (the files are the same in the two releases compared;
+ * established, read at the field offsets the files' own tables give).
+ *
+ * TESTVEC: 0x90240 as PP.drb_pointers => page_a=576, page_b=576
+ * TESTVEC: 0x101c0 as PP.drb_pointers => page_a=448, page_b=64
+ * TESTVEC: 0xc8240 as PP.drb_pointers => page_a=576, page_b=800
+ * TESTVEC: 0x380e0 as PP.drb_pointers => page_a=224, page_b=224
  */
 
 #endif

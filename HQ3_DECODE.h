@@ -323,6 +323,46 @@
  */
 
 /*
+ * Command-FIFO control word (bit 31 clear). The word every OpenGL library
+ * entry point stores first; the data words follow.
+ */
+/* FIELD: CFIFO_CTL.bytes 7:0 established */
+#define HQ_CFIFO_CTL_BYTES_SHIFT 0
+#define HQ_CFIFO_CTL_BYTES_MASK  0xffu
+/* FIELD: CFIFO_CTL.command 20:8 established */
+#define HQ_CFIFO_CTL_COMMAND_SHIFT 8
+#define HQ_CFIFO_CTL_COMMAND_MASK  0x1fffu
+/* FIELD: CFIFO_CTL.sync 21:21 established */
+#define HQ_CFIFO_CTL_SYNC_SHIFT 21
+#define HQ_CFIFO_CTL_SYNC_MASK  0x1u
+/* FIELD: CFIFO_CTL.kernel 22:22 established */
+#define HQ_CFIFO_CTL_KERNEL_SHIFT 22
+#define HQ_CFIFO_CTL_KERNEL_MASK  0x1u
+/* FIELD: CFIFO_CTL.convert 29:23 established */
+#define HQ_CFIFO_CTL_CONVERT_SHIFT 23
+#define HQ_CFIFO_CTL_CONVERT_MASK  0x7fu
+/* FIELD: CFIFO_CTL.pad_flag 30:30 inferred */
+#define HQ_CFIFO_CTL_PAD_FLAG_SHIFT 30
+#define HQ_CFIFO_CTL_PAD_FLAG_MASK  0x1u
+/* FIELD: CFIFO_CTL.pixel 31:31 established */
+#define HQ_CFIFO_CTL_PIXEL_SHIFT 31
+#define HQ_CFIFO_CTL_PIXEL_MASK  0x1u
+
+/*
+ * pad_flag. Set by the library in the forms that supply fewer than three
+ * components of a vertex or texture coordinate and clear in the others (the
+ * same in two releases); what the command does with it is inferred from that
+ * pattern and was not read in the microcode. Convert bits 5:3 and 2:0 are
+ * float conversion (bit 5), signed (4), normalise (3) and source size (2:0, 2 =
+ * short), and bit 6 appends a final 1.0.
+ *
+ * glVertex2s sends the control word below and one data word, x in the upper
+ * half and y in the lower. The second value is the three-component short form.
+ * TESTVEC: 0x59000004 as CFIFO_CTL => bytes=4, command=0, sync=0, kernel=0, convert=50, pad_flag=1, pixel=0
+ * TESTVEC: 0x39000006 as CFIFO_CTL => bytes=6, command=0, sync=0, kernel=0, convert=114, pad_flag=0, pixel=0
+ */
+
+/*
  * Watermark defaults. The values below marked diagnostic are the ones the
  * standalone diagnostics program; the shipped kernel programs the init
  * values further down instead.

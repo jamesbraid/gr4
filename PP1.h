@@ -122,8 +122,8 @@ extern "C" {
  * bit 4 + n is set; all four clear means no check (the PROM and the X server
  * keep it 0). CIDmask at bits 11:10 write-enabling the two ID planes is our
  * reading of 0xC00; CIDdata (9:8 by elimination) has not been seen nonzero.
- * Where the IDs sit in RDRAM is not known: X draws them with DRBpointers at
- * the main buffer.
+ * Where the IDs sit in RDRAM is not known. X's clip-ID fill never writes
+ * DRBpointers; it draws into whatever the previous draw left, the main word.
  */
 #define PP1_WINMODE_WINX_LSBS       0x00000003  /* window origin x & 3 */
 #define PP1_WINMODE_WINY_LSBS       0x0000000C  /* window origin y & 3 */
@@ -384,8 +384,11 @@ extern "C" {
  * 16 rows (seen on a model that assumed one RE4).
  *
  * Drawing: both X servers put the target buffer's page in DRBpointers
- * bits 9:0 and switch it for overlay drawing (6.5.0: 0x90240 main /
- * 0x101C0 overlay; 6.5.22: 0xB81C0 / 0x38120); the fill mode DrawBuffer
+ * bits 9:0 and switch it for overlay drawing. The two words are read from the
+ * mode's video format file, so they depend on the raster engine count, not the
+ * release (1280x1024 one engine 0x90240 main / 0x101C0 overlay; two engines
+ * 0xC8240 / 0x380E0; 1024x768 one engine 0xB81C0 / 0x38120, two 0xDC2E0 /
+ * 0x24090; see docs/OPEN_QUESTIONS.md entry 15); the fill mode DrawBuffer
  * field (diag names: DBUFA = 0x01, DOVERA_OR_B = 0x41; X uses 0x4F for the
  * overlay, 0x50 for window IDs) says how to read that buffer's words.
  *

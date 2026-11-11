@@ -1,4 +1,4 @@
-// generated from gr4 b0b868e9bfd9 PP1_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 710441e716d5 PP1_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Display read buffer registers of the Impact graphics subsystem.
 //!
@@ -20,6 +20,30 @@ pub const REG_DRB_POINTERS_WIDTH: u32 = 32;
 /// Pixel processor register `drb_size`: write, 32-bit; reset unknown; inferred.
 pub const REG_DRB_SIZE: u32 = 0xf16e;
 pub const REG_DRB_SIZE_WIDTH: u32 = 32;
+
+/// The `drb_pointers` register word.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct DrbPointers(u32);
+
+impl DrbPointers {
+    pub const fn new(word: u32) -> Self {
+        Self(word)
+    }
+
+    pub const fn raw(self) -> u32 {
+        self.0
+    }
+
+    /// Bits 9:0, established.
+    pub const fn page_a(self) -> u32 {
+        self.0 & 0x3ff
+    }
+
+    /// Bits 19:10, established.
+    pub const fn page_b(self) -> u32 {
+        (self.0 >> 10) & 0x3ff
+    }
+}
 
 /// The `drb_size` register word.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -82,5 +106,33 @@ mod tests {
         assert_eq!(w.raster_engines_minus_1(), 1, "raster_engines_minus_1");
         assert_eq!(w.dma_line_count_mask(), 2, "dma_line_count_mask");
         assert_eq!(w.auto_flush_off() as u32, 0, "auto_flush_off");
+    }
+
+    #[test]
+    fn testvec_pp_drb_pointers_90240() {
+        let w = DrbPointers::new(0x90240);
+        assert_eq!(w.page_a(), 576, "page_a");
+        assert_eq!(w.page_b(), 576, "page_b");
+    }
+
+    #[test]
+    fn testvec_pp_drb_pointers_101c0() {
+        let w = DrbPointers::new(0x101c0);
+        assert_eq!(w.page_a(), 448, "page_a");
+        assert_eq!(w.page_b(), 64, "page_b");
+    }
+
+    #[test]
+    fn testvec_pp_drb_pointers_c8240() {
+        let w = DrbPointers::new(0xc8240);
+        assert_eq!(w.page_a(), 576, "page_a");
+        assert_eq!(w.page_b(), 800, "page_b");
+    }
+
+    #[test]
+    fn testvec_pp_drb_pointers_380e0() {
+        let w = DrbPointers::new(0x380e0);
+        assert_eq!(w.page_a(), 224, "page_a");
+        assert_eq!(w.page_b(), 224, "page_b");
     }
 }

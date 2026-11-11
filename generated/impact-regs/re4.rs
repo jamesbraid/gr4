@@ -1,4 +1,4 @@
-// generated from gr4 f3286d9d1470 RE4_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 b0b868e9bfd9 RE4_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Raster engine registers of the Impact graphics subsystem.
 //!
@@ -835,5 +835,41 @@ mod tests {
         assert_eq!(w.format().bits(), 8, "format");
         assert_eq!(w.flag18() as u32, 1, "flag18");
         assert_eq!(w.stride_skip_bytes(), 0, "stride_skip_bytes");
+    }
+
+    #[test]
+    fn testvec_re_xfer_mode_c10080() {
+        let w = XferMode::new(0xc10080);
+        assert_eq!(w.comp_type(), 0, "comp_type");
+        assert_eq!(w.format().bits(), 8, "format");
+        assert_eq!(w.begin_skip_bytes(), 0, "begin_skip_bytes");
+        assert_eq!(w.stride_skip_bytes(), 4, "stride_skip_bytes");
+        assert_eq!(w.flag18() as u32, 0, "flag18");
+        assert_eq!(w.rgb_order() as u32, 1, "rgb_order");
+        assert_eq!(w.opaque() as u32, 1, "opaque");
+    }
+
+    #[test]
+    fn testvec_re_xfer_mode_c10480() {
+        let w = XferMode::new(0xc10480);
+        assert_eq!(w.comp_type(), 0, "comp_type");
+        assert_eq!(w.format().bits(), 8, "format");
+        assert_eq!(w.begin_skip_bytes(), 4, "begin_skip_bytes");
+        assert_eq!(w.stride_skip_bytes(), 4, "stride_skip_bytes");
+        assert_eq!(w.flag18() as u32, 0, "flag18");
+        assert_eq!(w.rgb_order() as u32, 1, "rgb_order");
+        assert_eq!(w.opaque() as u32, 1, "opaque");
+    }
+
+    #[test]
+    fn testvec_re_xfer_mode_c00080() {
+        let w = XferMode::new(0xc00080);
+        assert_eq!(w.comp_type(), 0, "comp_type");
+        assert_eq!(w.format().bits(), 8, "format");
+        assert_eq!(w.begin_skip_bytes(), 0, "begin_skip_bytes");
+        assert_eq!(w.stride_skip_bytes(), 0, "stride_skip_bytes");
+        assert_eq!(w.flag18() as u32, 0, "flag18");
+        assert_eq!(w.rgb_order() as u32, 1, "rgb_order");
+        assert_eq!(w.opaque() as u32, 1, "opaque");
     }
 }

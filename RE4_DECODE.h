@@ -388,5 +388,15 @@
 /*
  * TESTVEC: 0x00040080 as RE.xfer_mode => comp_type=0, format=8, flag18=1, stride_skip_bytes=0
  */
+/*
+ * Words a GL read of RGBA bytes writes in two parts (the library clears bit 18
+ * and 10:8, then sets the stride skip from a per-context byte; bits 23:22 are
+ * its defaults). Bit 16 is bit 2 of the stride skip, a skip of 4 bytes. The
+ * begin-skip value matches the part's destination address & 7 in the traces
+ * (inferred).
+ * TESTVEC: 0x00c10080 as RE.xfer_mode => comp_type=0, format=8, begin_skip_bytes=0, stride_skip_bytes=4, flag18=0, rgb_order=1, opaque=1
+ * TESTVEC: 0x00c10480 as RE.xfer_mode => comp_type=0, format=8, begin_skip_bytes=4, stride_skip_bytes=4, flag18=0, rgb_order=1, opaque=1
+ * TESTVEC: 0x00c00080 as RE.xfer_mode => comp_type=0, format=8, begin_skip_bytes=0, stride_skip_bytes=0, flag18=0, rgb_order=1, opaque=1
+ */
 
 #endif
