@@ -68,10 +68,12 @@ typedef union {
  *
  * 2. DEDICATED GEOMETRY VECTOR PROCESSORS (GE11):
  *    Equipped with 1 or 2 GE11 Geometry Engine ASICs running custom microcode (ge11.bin),
- *    evaluating matrix transforms, clipping, and lighting models at 1-2 GFLOPS.
+ *    evaluating matrix transforms, clipping, and lighting models at 480 MFLOPS per GE11, 960 for two (published peak,
+ *    established: product guide).
  *
  * 3. INTERLEAVED RAMBUS RDRAM FRAMEBUFFER:
- *    The Raster Subsystem (RSS) drives 4 or 5 Pixel Processor ASICs (PP1), each
+ *    The Raster Subsystem (RSS) drives two Pixel Processor ASICs (PP1) per Raster Engine, four on a
+ *    two-RE board (count established: product guide; per-RE split inferred), each
  *    managing an independent 9-bit Rambus channel to RDRAM, delivering unprecedented
  *    fill rates, hardware 24-bit depth buffering, 8-bit stencil, and fast clears.
  *
@@ -148,7 +150,7 @@ typedef union {
  *  │       TETRAM controller, mipmapping,     │
  *  │       3D texturing, trilinear filtering  │
  *  ├──────────────────────────────────────────┤
- *  │  PP1: Pixel Processors (x4 or x5)        │
+ *  │  PP1: Pixel Processors (2/RE, 4 MaxI)    │
  *  │       Rambus RDRAM & RAC interface,      │
  *  │       logic ops, blend, depth, stencil   │
  *  └───────────────────┬──────────────────────┘
@@ -1054,7 +1056,7 @@ typedef struct mgras_info_s {
     uint32_t            board_rev;          /* Board revision number */
     uint32_t            ge_count;           /* Number of GE11 ASICs (1 or 2) */
     uint32_t            re_count;           /* Number of RE4 ASICs (1 or 2) */
-    uint32_t            pp1_count;          /* Number of PP1 ASICs (4 or 5) */
+    uint32_t            pp1_count;          /* Number of PP1 ASICs (2 High, 4 Maximum; established) */
     uint32_t            tram_count;         /* Number of TRAM chips (0, 1, or 4) */
     uint32_t            tram_size_mb;       /* Texture memory in MB (0, 1, or 4) */
     uint32_t            has_zbuffer;        /* Z-buffer present flag */

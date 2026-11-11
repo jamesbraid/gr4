@@ -36,16 +36,23 @@ extern "C" {
  *
  * 1. DUAL CMAP ASICs (CMAP0 & CMAP1, Devices 4 & 5: 0x61000, 0x61400; Broadcast Device 3: 0x60C00):
  *    - Dual 8,192-entry (8K) x 24-bit palette ASICs (8-bit Red, 8-bit Green, 8-bit Blue).
+ *      The 8192 entries are established (the Octane diagnostic tests addresses 0 to
+ *      8191 on each map); the 24-bit entry width is inferred.
  *    - Translates Color Index pixels (8-bit CI, 12-bit CI, overlay planes, popup planes)
  *      into 24-bit RGB (8:8:8).
  *    - Outputs 24-bit RGB to the video multiplexer (VIO) / RAMDAC.
  *    - NOTE: CMAP does NOT perform global gamma; it translates index to RGB.
  *
  * 2. TRUECOLOR RAMDAC (Analog Devices ADV7161 / ADV7162, Device 6: 0x61800):
- *    - Triple 10-bit high-speed D/A converters driving analog RGB outputs up to 220 MHz.
+ *    - Triple 10-bit high-speed D/A converters driving analog RGB outputs up to 220 MHz
+ *      (the part's quoted rate: unverified, no data sheet for it is held; a
+ *      data sheet from the Library would settle it).
  *    - Integrated programmable PLL generates pixel dot clocks for all video formats.
  *    - Contains the GLOBAL SCREEN-WIDE GAMMA LOOK-UP TABLE (LUT):
  *        * Triple 256-entry x 10-bit RAM (RedGamma[256], GrnGamma[256], BluGamma[256]).
+ *          (256 entries of 10 bits established for the option's ADV7162 channels: the
+ *          option's DAC loader writes 256 six-byte entries, 8 high bits then 2 low
+ *          bits per colour. The main board's DAC is not separately traced: inferred.)
  *        * Programmed via dac.pal by the IRIX kernel (MgrasSetGammaRamp).
  *        * Translates 8-bit R, G, B channel inputs (from either TrueColor RGB or CMAP CI lookup)
  *          into 10-bit gamma-corrected DAC levels (0..1023).
@@ -81,7 +88,7 @@ extern "C" {
 #define CMAP_REG_REV                (MGRAS_DCB_CRS(6) | MGRAS_DCB_DATAWIDTH_1)
 #define CMAP_REG_RESERVED           (MGRAS_DCB_CRS(7) | MGRAS_DCB_DATAWIDTH_1)
 
-#define MGRAS_CMAP_TOTAL_ENTRIES    8192        /* 8K palette entries per chip */
+#define MGRAS_CMAP_TOTAL_ENTRIES    8192        /* 8K palette entries per chip, established */
 #define MGRAS_CMAP_RAM_MASK         0x1FFF
 
 /* CMAP Silicon Revisions */

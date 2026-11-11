@@ -9,8 +9,8 @@ The goal is documenting the architecture for the vintage SGI enthusiast and FPGA
 
 Introduced in 1995 for the SGI Indigo2 (and later Octane), Impact Graphics was a landmark milestone in workstation 3D computer graphics:
 - **First Desktop Hardware Texture Mapping**: Provided real-time trilinear mipmapped 2D and 3D texture mapping via dedicated Texture Engine (TE1) and Rambus Texture RAM (TRAM).
-- **High-Performance Geometry Pipeline**: 1 or 2 Geometry Engine ASICs (GE11) delivering 1-2 GFLOPS of dedicated floating-point coordinate transformations, lighting, and clipping.
-- **Rambus RDRAM Framebuffer Architecture**: Interleaved Rambus DRAM accessed via 4-5 Pixel Processors (PP1), achieving unprecedented fill rates and bandwidth.
+- **High-Performance Geometry Pipeline**: 1 or 2 Geometry Engine ASICs (GE11) delivering 480 MFLOPS per GE11, 960 for two (published peak, established: product guide, `docs/IMPACT_BOARD_FACTS.md` fact 1) of dedicated floating-point coordinate transformations, lighting, and clipping.
+- **Rambus RDRAM Framebuffer Architecture**: Interleaved Rambus DRAM accessed via two Pixel Processors (PP1) per Raster Engine: two on High IMPACT, four on Maximum IMPACT (established count, product guide; the per-RE split is inferred, fact 1 and the contradictions list), achieving unprecedented fill rates and bandwidth.
 - **Complete Native OpenGL 1.1 Implementation**: The flagship hardware target for Silicon Graphics' advanced OpenGL capabilities.
 - **Dual Display Subsystems**: High-resolution video timings driven by the VC3 Video Controller and true-color / multi-layer compositing via XMAP and CMAP RAMDACs.
 
@@ -19,7 +19,7 @@ Subsystem Configurations:
 |---|---|---|---|---|---|---|
 | **Solid Impact (SI / SIO)** | GR4 rev <3 | 1 GE11 | 1 RE4 | None | 24-bit RGB + Z | Indigo2 / Octane |
 | **High Impact (HI / HIO)** | GR4 | 1 GE11 | 1 RE4 | 1 MB or 4 MB | 24-bit RGB + Z + Tex | Indigo2 / Octane |
-| **Maximum Impact (MaxI / EMX)** | GR4 | 2 GE11 | 2 RE4 (dual RSS) | 4 MB TRAM | 24-bit RGB + Z + Tex | Indigo2 / Octane |
+| **Maximum Impact (MaxI / EMX)** | GR4 | 2 GE11 | 2 RE4 (dual RSS) | 1 TRAM; 4 with the option | 24-bit RGB + Z + Tex | Indigo2 / Octane |
 
 ---
 
@@ -48,7 +48,7 @@ Subsystem Configurations:
          ├─────────────────────┤                            └─► BDVERS / I2C / Corona
          │  RE4: Raster Engine │ Setup, span, line, z-test, blend, logic ops
          │  TE1: Texture Engine│ Mipmaps, 3D texturing, filtering, LOD
-         │  PP1: Pixel Proc x4 │ Framebuffer RAMBUS (RDRAM) controllers
+         │  PP1: Pixel Proc x2 │ Framebuffer RAMBUS (RDRAM) controllers
          └─────────────────────┘
 ```
 
@@ -61,8 +61,8 @@ Subsystem Configurations:
 6. **VC3 (Video Controller 3)**: Master video timing generator, horizontal/vertical sync, cursor positioning/bitmap, and Display ID (DID) frame composition.
 7. **CMAP, RAMDAC & XMAP**:
    - **XMAP (inside PP1s)**: Per-pixel Window ID (WID/DID) decoding, front/back buffer selection, overlay plane switching, and visual format routing (Color Index to CMAP vs raw RGB to DAC); contains no gamma tables.
-   - **CMAP0 / CMAP1**: Dual 8K x 24-bit color lookup tables (CLUTs) translating Color Index and overlay pixels to 24-bit RGB.
-   - **RAMDAC (ADV7161 / ADV7162)**: Triple 10-bit 220 MHz DAC with video PLL and screen-wide 256x10-bit Global Gamma Look-Up Table (LUT) correcting all display pixels before analog output.
+   - **CMAP0 / CMAP1**: Dual 8K x 24-bit color lookup tables (CLUTs; 8192 entries established by the diagnostic's 0-8191 range, the 24-bit width inferred) translating Color Index and overlay pixels to 24-bit RGB.
+   - **RAMDAC (ADV7161 / ADV7162)**: Triple 10-bit DAC with video PLL (220 MHz is the part's quoted rate, unverified: no data sheet held) and screen-wide 256x10-bit (established: the option's DAC loader writes 256 ten-bit entries per colour) Global Gamma Look-Up Table (LUT) correcting all display pixels before analog output.
 
 ---
 
