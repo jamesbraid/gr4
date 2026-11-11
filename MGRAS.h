@@ -298,13 +298,30 @@ typedef union {
  * ESTABLISHED by that object's routine names and by the option's
  * diagnostic command list (6.5.7 ide IP30 command registry).
  *   CRS 0 byte (0x62C08)  board ID on read; on write the FPGA
- *       configuration data byte. Probe (ESTABLISHED for the held
- *       object by routine facts): write 0xFF and read one byte, write 0
- *       and read a second byte; the two reads must match, and the board
- *       is present if the value is 1 or its high nibble is 0xA, the low
- *       nibble being the revision. Otherwise the probe reports 0xFF, no
- *       board. A single-read test on a high nibble of 4 is not in the
- *       held object (no such constant, no single-read path).
+ *       configuration data byte. Probe: ESTABLISHED per build from the
+ *       routine's machine words, and the builds differ in shape by CPU
+ *       board, not by release. Per-build table with hashes and routine
+ *       addresses: docs/OPEN_QUESTIONS.md, "Board-ID probe, per build".
+ *       Do not merge the two shapes; each is right for the builds named.
+ *       - IP22 and IP28 kernels (6.5.22 IP22; one IP28 object): the ID
+ *         byte is at register base + 0x62C08 for both the write and the
+ *         reads. Write 0xFF and read; write 0 and read; the two reads
+ *         must match; present if the value is 1 or its high nibble is
+ *         0xA, the low nibble being the revision. Otherwise 0xFF, no
+ *         board. There is no high-nibble-4 test in these objects.
+ *       - IP27 and IP30 kernels (6.5.22 and 6.5.30, byte-identical
+ *         probe; also one IP30 object from an earlier 6.5 build tree):
+ *         write 0xFF to register base + 0x72C08, read ONE byte from
+ *         register base + 0x70008 (not the address written), present if
+ *         its high nibble is 4, the low nibble being the revision.
+ *         Otherwise 0xFF, no board. There is no second write and no
+ *         match test. The routine sets the timing word 0x14 before the
+ *         write and 0 after it. Whether the two address sets name one
+ *         board register is UNKNOWN: both are only the machine words'
+ *         offsets from the object's argument.
+ *       Established by routine facts, not by a bus measurement. No IP22
+ *       or IP28 object of 6.5.30 is held, so how those two boards probe
+ *       in 6.5.30 is unknown (not inferred from IP27/IP30).
  *   CRS 1 byte (0x62C88)  FPGA configuration control (write) and status
  *       (read). Writing 0xFE then 0x01 pulses the configuration line. The
  *       load expects status bits 2:0 to read 000 after 0xFE, 110 after

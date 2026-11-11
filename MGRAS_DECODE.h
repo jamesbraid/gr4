@@ -101,12 +101,22 @@
 
 /*
  * Identification byte of the multi-channel option board (the byte at the
- * index port's register select 0, read back after a write). The kernel's
- * probe writes 0xff and reads, writes 0 and reads again; the reads must
- * match. The board is present when the value is 1 or its high nibble is
- * 0xa; the low nibble is then the revision. Anything else reports 0xff, no
- * board. Established from the probe routine's machine words in the one
- * option object held; not a bus measurement, and no other build was checked.
+ * index port's register select 0). The kernel's probe has two shapes,
+ * split by the host machine family and not by software release; both give
+ * the low nibble as the revision and report 0xff for no board. They are
+ * not interchangeable.
+ *  - Indigo2-class host kernels (the double-read shape): write 0xff and
+ *    read, write 0 and read again; the reads must match; present when the
+ *    value is 1 or its high nibble is 0xa.
+ *  - Octane and Origin host kernels (the single-read shape), identical in
+ *    both releases held: write 0xff, read one byte; present when its high
+ *    nibble is 4. No second write, no match test, and the byte read is at
+ *    a different offset from the byte written; whether those name one
+ *    register is unknown.
+ * Established from the probe routine's machine words in each held build,
+ * not a bus measurement. Not held: an Indigo2-class kernel from the later
+ * of the two releases, so its shape there is unknown. The build-by-build
+ * table is in docs/OPEN_QUESTIONS.md.
  */
 /* FIELD: MCO_ID.revision 3:0 established */
 #define MGRAS_MCO_ID_REVISION_SHIFT 0
@@ -116,10 +126,12 @@
 #define MGRAS_MCO_ID_BOARD_MASK  0xfu
 /* ENUM: MCO_ID.board 10 present established */
 #define MGRAS_MCO_ID_BOARD_PRESENT 10
-#define MGRAS_MCO_ID_PROBE_WRITE_FIRST 0xff /* established */
-#define MGRAS_MCO_ID_PROBE_WRITE_SECOND 0x00 /* established */
-#define MGRAS_MCO_ID_ABSENT 0xff /* established, probe result for no board */
-#define MGRAS_MCO_ID_SPECIAL_PRESENT 0x01 /* established, a whole-byte value also accepted */
+/* ENUM: MCO_ID.board 4 present_single_read established */
+#define MGRAS_MCO_ID_BOARD_PRESENT_SINGLE_READ 4
+#define MGRAS_MCO_ID_PROBE_WRITE_FIRST 0xff /* established, both shapes */
+#define MGRAS_MCO_ID_PROBE_WRITE_SECOND 0x00 /* established, double-read shape only */
+#define MGRAS_MCO_ID_ABSENT 0xff /* established, probe result for no board, both shapes */
+#define MGRAS_MCO_ID_SPECIAL_PRESENT 0x01 /* established, a whole-byte value also accepted, double-read shape only */
 
 /*
  * Multi-channel option: bank base of each output channel, from the five-entry

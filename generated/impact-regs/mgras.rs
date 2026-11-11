@@ -1,4 +1,4 @@
-// generated from gr4 2b3b335bb506 MGRAS_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 81567987163d MGRAS_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Board-level words of the Impact graphics subsystem.
 //!
@@ -9,13 +9,13 @@
 
 #![allow(dead_code)]
 
-/// established.
+/// established, both shapes.
 pub const MCO_ID_PROBE_WRITE_FIRST: u32 = 255;
-/// established.
+/// established, double-read shape only.
 pub const MCO_ID_PROBE_WRITE_SECOND: u32 = 0;
-/// established, probe result for no board.
+/// established, probe result for no board, both shapes.
 pub const MCO_ID_ABSENT: u32 = 255;
-/// established, a whole-byte value also accepted.
+/// established, a whole-byte value also accepted, double-read shape only.
 pub const MCO_ID_SPECIAL_PRESENT: u32 = 1;
 /// established.
 pub const MCO_BANK_BASE_CH0: u32 = 0;
@@ -164,6 +164,8 @@ impl McoIndexBank {
 pub enum McoIdBoard {
     /// established.
     Present,
+    /// established.
+    PresentSingleRead,
     /// A value the notes do not name.
     Other(u8),
 }
@@ -172,6 +174,7 @@ impl McoIdBoard {
     pub const fn from_bits(v: u32) -> Self {
         match v {
             0xa => Self::Present,
+            0x4 => Self::PresentSingleRead,
             _ => Self::Other(v as u8),
         }
     }
@@ -179,6 +182,7 @@ impl McoIdBoard {
     pub const fn bits(self) -> u32 {
         match self {
             Self::Present => 0xa,
+            Self::PresentSingleRead => 0x4,
             Self::Other(v) => v as u32,
         }
     }
