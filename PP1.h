@@ -398,6 +398,13 @@ extern "C" {
  *   1024x768:  main 0x1C0 (448), second 0x2E0 (736), overlay 0x120 (288)
  *              -> 0..287, overlay 288..383, 448..735, 736..1023
  *              (384..447 unexplained)
+ *   1280x1024 one engine, 32db files (vof/1280x1024_60_32db.sdb): main
+ *              0x240 (pages 0x240 and 0), DIB 0x1C000240, two banks both
+ *              visible and no third. The second 36-bit colour buffer takes
+ *              page 0, where the plain file keeps its non-visible bank and
+ *              aux pointer (established from the files). That the plain
+ *              file's bank holds Z and stencil is inferred (entry 15 of
+ *              docs/OPEN_QUESTIONS.md).
  * PP1_REG_DRB_POINTERS takes a buffer's page pointer: which buffer the
  * PP1 draws into / reads from (the diags write 10 bits, & 0x3FF). A
  * pbuffer or back buffer is another buffer's pages, on the same (x, y)
