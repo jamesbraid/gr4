@@ -1,112 +1,112 @@
 binary	role	abi	elf_section	address	size	name	source	code_sha	rejected	scope	status	doc	section
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x0	60	gfxtable_readerlock	dwarf+symtab	456e2d2f152f		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3c	60	gfxtable_readerunlock	dwarf+symtab	483e1fb323d9		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x78	104	gfxtable_writerlock	dwarf+symtab	0dbe7ded31b6		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xe0	28	gfxtable_writerunlock	dwarf+symtab	abc356e1da00		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xfc	92	init_gfx_group_table	dwarf+symtab	4f052263be2f		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x158	172	gfx_group_find	dwarf+symtab	54fb254807ef		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x204	212	gfx_group_create	dwarf+symtab	49c9e94f169f		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2d8	248	gfx_group_destroy	dwarf+symtab	05c3610d1bd2		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3d0	96	init_gthread_table	dwarf+symtab	49c8536025d4		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x430	252	gthread_create	dwarf+symtab	657e49c559ad		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x52c	244	gthread_destroy	dwarf+symtab	83c13ddad0ef		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x620	172	gthread_attach_list	dwarf+symtab	d6af0bd572a9		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x6cc	92	gthread_detach_list	dwarf+symtab	5de034173d91		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x728	84	gthread_attach_group	dwarf+symtab	be28e727793d		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x77c	84	gthread_detach_group	dwarf+symtab	12f36c9334c6		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x7d0	188	gthread_find	dwarf+symtab	c6a7e8c9f62f		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x88c	56	gthread_find_gfxp	dwarf+symtab	9e4497960174		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x8c4	256	gthread_scan	dwarf+symtab	913d1fddb438		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x9c4	240	GfxRegisterBoard	dwarf+symtab	00bb9d3ab5e9		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xab4	332	gfx_disp	dwarf+symtab	3d93994ad9ed		in	named-only	HQ3.h:320	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xc00	232	gfx_fault	dwarf+symtab	53aa2c7821ee		in	named-only	HQ3.h:315	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xce8	448	gfx_exit	dwarf+symtab	fe1f222072fe		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xea8	652	gfx_shcheck	dwarf+symtab	af3e99d0cb0e		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1134	124	gfx_shdup	dwarf+symtab	f32bdc294df8		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x11b0	272	GfxKiller	dwarf+symtab	a733209e6045		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x12c0	40	gfxcleanup	dwarf+symtab	a5767b13a264		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x12e8	404	GfxOpen	dwarf+symtab	5bb098b21a05		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x147c	428	GfxUnmanage	dwarf+symtab	265204e48dc6		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1628	112	GfxClose	dwarf+symtab	8e5d24fd41e4		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1698	272	GfxProto	dwarf+symtab	76afa97bd828		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x17a8	160	GfxWput	dwarf+symtab	909c42201d3e		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1848	272	sendMsg	dwarf+symtab	dc8d1eb28825		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1958	168	GfxDelayedMessage	dwarf+symtab	645b9b9a8498		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1a00	396	GfxSendMessage	dwarf+symtab	71bcb9d7b3ec		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1b8c	28	GfxMessage	dwarf+symtab	f718050cf4a7		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1ba8	28	GfxIntrMessage	dwarf+symtab	0760d09f94eb		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1bc4	140	GfxRqService	dwarf+symtab	8308c51b8954		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1c50	256	GfxDetach	dwarf+symtab	275b2ccb6c74		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1d50	196	gfxinit	dwarf+symtab	da18d22b9044		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1e14	256	gfx_conflict_scan	dwarf+symtab	cf6739a855d3		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1f14	152	irisgl_sproc_setup_scan	dwarf+symtab	d1a60aff5e07		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1fac	1300	gfxopen	dwarf+symtab	71496613b4e1		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x24c0	108	irisgl_sproc_cleanup	dwarf+symtab	b3009513fab3		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x252c	1624	gfxclose	dwarf+symtab	e78630ad3a1f		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2b84	112	GfxListWriterLock	dwarf+symtab	95ec1a52ec58		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2bf4	28	GfxListWriterUnlock	dwarf+symtab	abc356e1da00		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c10	60	GfxListReaderLock	dwarf+symtab	5e24f2076a26		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c4c	72	GfxListReaderUnlock	dwarf+symtab	5be5325d2b28		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c94	8	gfxread	dwarf+symtab	9a0f9311b660		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c9c	8	gfxwrite	dwarf+symtab	9a0f9311b660		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2ca4	2312	gfxioctl	dwarf+symtab	95aee6177422		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x35ac	8	gfxmap	dwarf+symtab	9a0f9311b660		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x35b4	8	gfxunmap	dwarf+symtab	9a0f9311b660		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x35bc	220	gfx_shalloc	dwarf+symtab	0599eafa0dfe		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3698	44	gfx_shfree	dwarf+symtab	bcd0285ba8c0		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x36c4	12	gfx_frs_valid_pipenum	dwarf+symtab	39da106f1751		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x36d0	140	irix5_to_gfx_getboardinfo_args	dwarf+symtab	6c422f307fee		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x375c	180	irix5_to_gfx_download_args	dwarf+symtab	4da24b92d298		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3810	132	irix5_to_gfx_attach_board_args	dwarf+symtab	de00bfdf53bd		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x0	212	MgrasFlushHQ3Poll	dwarf+symtab	bd4554ea0041		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xd4	648	MgrasFlushHQ3	dwarf+symtab	c61460d707b8		in	named-only	HQ3.h:266	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x35c	324	MgrasThrowManagerRssShadow	dwarf+symtab	4dc47ce535b5		in	named-only	HQ3.h:394	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x4a0	296	MgrasSetShadowRgn	dwarf+symtab	28a09879d28e		in	named-only	HQ3.h:391	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5c8	244	MgrasGE11EramInit	dwarf+symtab	dfa15f3bf540		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x6bc	44	freenode	dwarf+symtab	f66d5bd52d28		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x6e8	40	getnode	dwarf+symtab	ce8627d88d89		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x710	108	insertnode	dwarf+symtab	c29c19363971		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x77c	32	removenode	dwarf+symtab	b56187981298		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x79c	84	findblock	dwarf+symtab	134f74741b03		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x7f0	48	findbuddy	dwarf+symtab	0d7b0d9e7c27		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x820	136	freeblock	dwarf+symtab	e5819e647e01		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8a8	68	logbase2	dwarf+symtab	fdaec0c5207b		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8ec	684	getblock	dwarf+symtab	b95106bbde99		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xb98	632	reservelow	dwarf+symtab	73c7cc3f32cb		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xe10	164	MgrasGlContextInit	dwarf+symtab	f73eb6fa2783		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xeb4	104	MgrasGlContextAlloc	dwarf+symtab	7af6ead6292c		in	named-only	HQ3.h:301	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xf1c	52	MgrasGlContextFree	dwarf+symtab	d5d009790fd9		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xf50	152	MgrasEramBufAlloc	dwarf+symtab	20ffd69cf6f0		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xfe8	112	MgrasEramBufFree	dwarf+symtab	447e5cd36bd9		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1058	836	MgrasEramRead	dwarf+symtab	66d68b5642e6		in	named-only	docs/OPEN_QUESTIONS.md#8-per-engine-transfers-and-the-late-word	8. Per-engine transfers and the "late word"
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x139c	112	MgrasNextEramResource	dwarf+symtab	68432ddf643d		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x140c	772	MgrasEramWrite	dwarf+symtab	a355c092ded0		in	named-only	docs/OPEN_QUESTIONS.md#8-per-engine-transfers-and-the-late-word	8. Per-engine transfers and the "late word"
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1710	616	MgrasValidateEramRes	dwarf+symtab	4a0ce6fe4ffb		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1978	72	MgrasEramManagerTimeout	dwarf+symtab	a0db3a46c8f8		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x19c0	420	MgrasMoveDemarcationUp	dwarf+symtab	10a3f1746ead		in	named-only	HQ3.h:366	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1b64	440	MgrasMoveDemarcationDown	dwarf+symtab	b023b6593421		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1d1c	132	MgrasInfo	dwarf+symtab	6be1d85e342e		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1da0	108	mgras_regmatch	dwarf+symtab	fd9c4fad6baa		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1e0c	348	MgrasAttach	dwarf+symtab	96e605a1a410		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1f68	44	MgrasDetach	dwarf+symtab	3a99fa84eb31		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1f94	456	MgrasInitialize	dwarf+symtab	84aad335ecc7		in	named-only	docs/OPEN_QUESTIONS.md#3-host-interface-error-causes	3. Host interface error causes
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x215c	376	MgrasDownload	dwarf+symtab	17507b667a2d		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x22d4	1344	MgrasStart	dwarf+symtab	47d97b4691db		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2814	844	MgrasExit	dwarf+symtab	7dd546aabece		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2b60	808	MgrasCreateDDRN	dwarf+symtab	4fe974147565		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2e88	184	MgrasSetTgvRgn	dwarf+symtab	f8c9f0c8914e		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2f40	864	MgrasDestroyDDRN	dwarf+symtab	890b4ecf189b		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x32a0	240	compute_drb_pointers	dwarf+symtab	2d4000c99bb5		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3390	428	MgrasValidateBanks	dwarf+symtab	5cc7f4e1daa9		in	named-only	docs/OPEN_QUESTIONS.md#7-context-image-bank-words-and-flags	7. Context image bank words and flags
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x353c	1720	MgrasValidateClip	dwarf+symtab	7237c515290e		in	named-only	docs/OPEN_QUESTIONS.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x0	60	gfxtable_readerlock	dwarf+symtab	456e2d2f152f		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3c	60	gfxtable_readerunlock	dwarf+symtab	483e1fb323d9		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x78	104	gfxtable_writerlock	dwarf+symtab	0dbe7ded31b6		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xe0	28	gfxtable_writerunlock	dwarf+symtab	abc356e1da00		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xfc	92	init_gfx_group_table	dwarf+symtab	4f052263be2f		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x158	172	gfx_group_find	dwarf+symtab	54fb254807ef		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x204	212	gfx_group_create	dwarf+symtab	49c9e94f169f		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2d8	248	gfx_group_destroy	dwarf+symtab	05c3610d1bd2		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3d0	96	init_gthread_table	dwarf+symtab	49c8536025d4		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x430	252	gthread_create	dwarf+symtab	657e49c559ad		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x52c	244	gthread_destroy	dwarf+symtab	83c13ddad0ef		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x620	172	gthread_attach_list	dwarf+symtab	d6af0bd572a9		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x6cc	92	gthread_detach_list	dwarf+symtab	5de034173d91		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x728	84	gthread_attach_group	dwarf+symtab	be28e727793d		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x77c	84	gthread_detach_group	dwarf+symtab	12f36c9334c6		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x7d0	188	gthread_find	dwarf+symtab	c6a7e8c9f62f		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x88c	56	gthread_find_gfxp	dwarf+symtab	9e4497960174		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x8c4	256	gthread_scan	dwarf+symtab	913d1fddb438		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x9c4	240	GfxRegisterBoard	dwarf+symtab	00bb9d3ab5e9		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xab4	332	gfx_disp	dwarf+symtab	3d93994ad9ed		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xc00	232	gfx_fault	dwarf+symtab	53aa2c7821ee		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xce8	448	gfx_exit	dwarf+symtab	fe1f222072fe		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xea8	652	gfx_shcheck	dwarf+symtab	af3e99d0cb0e		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1134	124	gfx_shdup	dwarf+symtab	f32bdc294df8		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x11b0	272	GfxKiller	dwarf+symtab	a733209e6045		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x12c0	40	gfxcleanup	dwarf+symtab	a5767b13a264		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x12e8	404	GfxOpen	dwarf+symtab	5bb098b21a05		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x147c	428	GfxUnmanage	dwarf+symtab	265204e48dc6		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1628	112	GfxClose	dwarf+symtab	8e5d24fd41e4		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1698	272	GfxProto	dwarf+symtab	76afa97bd828		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x17a8	160	GfxWput	dwarf+symtab	909c42201d3e		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1848	272	sendMsg	dwarf+symtab	dc8d1eb28825		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1958	168	GfxDelayedMessage	dwarf+symtab	645b9b9a8498		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1a00	396	GfxSendMessage	dwarf+symtab	71bcb9d7b3ec		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1b8c	28	GfxMessage	dwarf+symtab	f718050cf4a7		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1ba8	28	GfxIntrMessage	dwarf+symtab	0760d09f94eb		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1bc4	140	GfxRqService	dwarf+symtab	8308c51b8954		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1c50	256	GfxDetach	dwarf+symtab	275b2ccb6c74		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1d50	196	gfxinit	dwarf+symtab	da18d22b9044		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1e14	256	gfx_conflict_scan	dwarf+symtab	cf6739a855d3		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1f14	152	irisgl_sproc_setup_scan	dwarf+symtab	d1a60aff5e07		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1fac	1300	gfxopen	dwarf+symtab	71496613b4e1		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x24c0	108	irisgl_sproc_cleanup	dwarf+symtab	b3009513fab3		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x252c	1624	gfxclose	dwarf+symtab	e78630ad3a1f		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2b84	112	GfxListWriterLock	dwarf+symtab	95ec1a52ec58		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2bf4	28	GfxListWriterUnlock	dwarf+symtab	abc356e1da00		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c10	60	GfxListReaderLock	dwarf+symtab	5e24f2076a26		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c4c	72	GfxListReaderUnlock	dwarf+symtab	5be5325d2b28		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c94	8	gfxread	dwarf+symtab	9a0f9311b660		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c9c	8	gfxwrite	dwarf+symtab	9a0f9311b660		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2ca4	2312	gfxioctl	dwarf+symtab	95aee6177422		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x35ac	8	gfxmap	dwarf+symtab	9a0f9311b660		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x35b4	8	gfxunmap	dwarf+symtab	9a0f9311b660		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x35bc	220	gfx_shalloc	dwarf+symtab	0599eafa0dfe		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3698	44	gfx_shfree	dwarf+symtab	bcd0285ba8c0		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x36c4	12	gfx_frs_valid_pipenum	dwarf+symtab	39da106f1751		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x36d0	140	irix5_to_gfx_getboardinfo_args	dwarf+symtab	6c422f307fee		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x375c	180	irix5_to_gfx_download_args	dwarf+symtab	4da24b92d298		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3810	132	irix5_to_gfx_attach_board_args	dwarf+symtab	de00bfdf53bd		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x0	212	MgrasFlushHQ3Poll	dwarf+symtab	bd4554ea0041		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xd4	648	MgrasFlushHQ3	dwarf+symtab	c61460d707b8		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x35c	324	MgrasThrowManagerRssShadow	dwarf+symtab	4dc47ce535b5		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x4a0	296	MgrasSetShadowRgn	dwarf+symtab	28a09879d28e		in	located	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5c8	244	MgrasGE11EramInit	dwarf+symtab	dfa15f3bf540		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x6bc	44	freenode	dwarf+symtab	f66d5bd52d28		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x6e8	40	getnode	dwarf+symtab	ce8627d88d89		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x710	108	insertnode	dwarf+symtab	c29c19363971		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x77c	32	removenode	dwarf+symtab	b56187981298		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x79c	84	findblock	dwarf+symtab	134f74741b03		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x7f0	48	findbuddy	dwarf+symtab	0d7b0d9e7c27		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x820	136	freeblock	dwarf+symtab	e5819e647e01		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8a8	68	logbase2	dwarf+symtab	fdaec0c5207b		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8ec	684	getblock	dwarf+symtab	b95106bbde99		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xb98	632	reservelow	dwarf+symtab	73c7cc3f32cb		in	located	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xe10	164	MgrasGlContextInit	dwarf+symtab	f73eb6fa2783		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xeb4	104	MgrasGlContextAlloc	dwarf+symtab	7af6ead6292c		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xf1c	52	MgrasGlContextFree	dwarf+symtab	d5d009790fd9		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xf50	152	MgrasEramBufAlloc	dwarf+symtab	20ffd69cf6f0		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xfe8	112	MgrasEramBufFree	dwarf+symtab	447e5cd36bd9		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1058	836	MgrasEramRead	dwarf+symtab	66d68b5642e6		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x139c	112	MgrasNextEramResource	dwarf+symtab	68432ddf643d		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x140c	772	MgrasEramWrite	dwarf+symtab	a355c092ded0		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1710	616	MgrasValidateEramRes	dwarf+symtab	4a0ce6fe4ffb		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1978	72	MgrasEramManagerTimeout	dwarf+symtab	a0db3a46c8f8		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x19c0	420	MgrasMoveDemarcationUp	dwarf+symtab	10a3f1746ead		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1b64	440	MgrasMoveDemarcationDown	dwarf+symtab	b023b6593421		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1d1c	132	MgrasInfo	dwarf+symtab	6be1d85e342e		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1da0	108	mgras_regmatch	dwarf+symtab	fd9c4fad6baa		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1e0c	348	MgrasAttach	dwarf+symtab	96e605a1a410		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1f68	44	MgrasDetach	dwarf+symtab	3a99fa84eb31		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1f94	456	MgrasInitialize	dwarf+symtab	84aad335ecc7		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x215c	376	MgrasDownload	dwarf+symtab	17507b667a2d		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x22d4	1344	MgrasStart	dwarf+symtab	47d97b4691db		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2814	844	MgrasExit	dwarf+symtab	7dd546aabece		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2b60	808	MgrasCreateDDRN	dwarf+symtab	4fe974147565		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2e88	184	MgrasSetTgvRgn	dwarf+symtab	f8c9f0c8914e		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2f40	864	MgrasDestroyDDRN	dwarf+symtab	890b4ecf189b		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x32a0	240	compute_drb_pointers	dwarf+symtab	2d4000c99bb5		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3390	428	MgrasValidateBanks	dwarf+symtab	5cc7f4e1daa9		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x353c	1720	MgrasValidateClip	dwarf+symtab	7237c515290e		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3bf4	60	MgrasSetNullClip	dwarf+symtab	42ec523ce582		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3c30	644	MgrasMapGfx	dwarf+symtab	c6c3ca5a1d6d		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3eb4	256	MgrasUnMapGfx	dwarf+symtab	fa7b442969b7		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3eb4	256	MgrasUnMapGfx	dwarf+symtab	fa7b442969b7		in	named-only	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3fb4	120	MgrasInvalTLB	dwarf+symtab	74aee928f5c5		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x402c	4924	MgrasPcxSwap	dwarf+symtab	6523460247eb		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5368	8	MgrasPcxSwitch	dwarf+symtab	87506497337c		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5370	60	mgras_ctxswtimeout	dwarf+symtab	4a9be58779d0		in	named-only	HQ3.h:344	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x53ac	28	mgras_sleepertimeout	dwarf+symtab	60b48822a231		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x53ac	28	mgras_sleepertimeout	dwarf+symtab	60b48822a231		in	named-only	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x53c8	8	MgrasSuspend	dwarf+symtab	87506497337c		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x53d0	52	MgrasResume	dwarf+symtab	775d19851c37		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5404	8	MgrasReleaseGfxSema	dwarf+symtab	87506497337c		in	named-only	docs/inventory/functions.tsv	
@@ -177,12 +177,12 @@ usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x258	80	Mg
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x2a8	264	mgras_earlyinit	dwarf+symtab	4ac20e67ed99		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x3b0	136	mgras_init	dwarf+symtab	704bee29e264		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x438	124	MgrasSetGioVectors	dwarf+symtab	a8e187b10288		in	named-only	HQ3.h:250	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x4b4	132	MgrasInitGioIntrVectors	dwarf+symtab	d958f189012b		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x4b4	132	MgrasInitGioIntrVectors	dwarf+symtab	d958f189012b		in	named-only	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x538	112	mgrasConfigureXMAP	dwarf+symtab	80a262b3ed22		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x5a8	456	mgrasInitBoard	dwarf+symtab	c4661c1af8c2		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x770	312	MgrasProbe	dwarf+symtab	7497682c18fb		in	located	docs/routines/t1-gr4-b000.md#mgrasprobe-in-usrcpusysgenip28bootmgrasamgras_inito-at-0x770	`MgrasProbe` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x770
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x8a8	1396	MgrasGatherInfo	dwarf+symtab	f008b65a9c7e		in	named-only	MGRAS.h:94	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0xe1c	204	MgrasGatherDynamicInfo	dwarf+symtab	7877b1d72e06		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0xe1c	204	MgrasGatherDynamicInfo	dwarf+symtab	7877b1d72e06		in	named-only	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0xee8	196	MgrasReset	dwarf+symtab	f3f771ae4688		in	located	docs/routines/t1-gr4-b000.md#mgrasreset-in-usrcpusysgenip28bootmgrasamgras_inito-at-0xee8	`MgrasReset` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0xee8
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0xfac	236	MgrasInitHQ	dwarf+symtab	c99740b482eb		in	named-only	docs/OPEN_QUESTIONS.md#3-host-interface-error-causes	3. Host interface error causes
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x1098	96	MgrasInitDCBctrl	dwarf+symtab	e766beb307a6		in	named-only	MGRAS.h:275	listvisuals, 2026-10-10; not yet compared with a real board):
@@ -209,22 +209,22 @@ usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x4038	148	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x40cc	192	MgrasBlackoutTiming	dwarf+symtab	cd9b231ccb1b		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x418c	172	MgrasEnableVideoTiming	dwarf+symtab	cbd6cb889a0f		in	located	docs/routines/t1-gr4-b000.md#mgrasenablevideotiming-in-usrcpusysgenip28bootmgrasamgras_inito-at-0x418c	`MgrasEnableVideoTiming` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x418c
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x4238	244	MgrasSetGenlock	dwarf+symtab	677cc87424b6		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x432c	216	MgrasDownloadHQ3Ucode	dwarf+symtab	7c76c97882a2		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x4404	2060	MgrasDownloadGE11Ucode	dwarf+symtab	a0736dd857f7		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x432c	216	MgrasDownloadHQ3Ucode	dwarf+symtab	7c76c97882a2		in	named-only	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x4404	2060	MgrasDownloadGE11Ucode	dwarf+symtab	a0736dd857f7		in	named-only	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x4c10	72	mgras_baseindex	dwarf+symtab	fabc11297881		in	named-only	docs/routines/t1-gr4-b000.md#mgrasreset-in-usrcpusysgenip28bootmgrasamgras_inito-at-0xee8	`MgrasReset` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0xee8
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x4c58	412	mgras_fp_probe	dwarf+symtab	faeefbc23c94		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x4df4	244	mgras_fp_reinit	dwarf+symtab	66955c75b794		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x4ee8	284	MgrasBlankScreen	dwarf+symtab	61ddeebdd2f5		in	located	docs/routines/t1-gr4-b000.md#mgrasblankscreen-in-usrcpusysgenip28bootmgrasamgras_inito-at-0x4ee8	`MgrasBlankScreen` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x4ee8
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0x0	304	MgrasRetraceInit	dwarf+symtab	22f81d0516c1		in	named-only	mgras_kernel/include/mgras_kern.h:158	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0x0	304	MgrasRetraceInit	dwarf+symtab	22f81d0516c1		in	named-only	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0x130	120	MgrasRetraceInterrupt	dwarf+symtab	ca237b9bed60		in	named-only	HQ3.h:251	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0x1a8	1476	MgrasRetraceHandler	dwarf+symtab	072a5e5d4bcd		in	named-only	mgras_kernel/include/mgras_kern.h:159	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0x76c	332	MgrasValidateAllRetrace	dwarf+symtab	604e828c3be4		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0x8b8	72	MgrasCheckSwapTask	dwarf+symtab	b877cc4c3f1d		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0x900	240	MgrasSchedSwapTaskCheckReturnValue	dwarf+symtab	a70b75d9bc88		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0x9f0	928	MgrasSchedSwapTask	dwarf+symtab	6acb8dea00fd		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0xd90	292	MgrasUnSchedSwapTask	dwarf+symtab	d2466847c067		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0xd90	292	MgrasUnSchedSwapTask	dwarf+symtab	d2466847c067		in	named-only	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0xeb4	176	MgrasSchedRetraceEvent	dwarf+symtab	24ef73c98dde		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0xf64	196	MgrasUnSchedRetraceEvent	dwarf+symtab	e70d2c4cac3d		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0xf64	196	MgrasUnSchedRetraceEvent	dwarf+symtab	e70d2c4cac3d		in	named-only	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0x1028	68	MgrasSchedMGRSwapBuf	dwarf+symtab	4b71e4aa5ff9		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0x106c	68	mgras_finishtimeout	dwarf+symtab	3eb1f6055d71		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	board-kernel	n64	.text	0x10b0	604	MgrasSchedSwapBuf	dwarf+symtab	3c29a72ddbc3		in	named-only	HQ3.h:1143	
@@ -336,12 +336,12 @@ usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x890	72	validate_pane_buf
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x8d8	168	validate_my_pane_buffer	dwarf+symtab	395356eaba43		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x980	1192	validate_my_pane_resources	dwarf+symtab	369f3c1fc1f0		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0xe28	216	init_panes	dwarf+symtab	7b13da9d57a9		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0xf00	208	RRM_init_panes	dwarf+symtab	d8ee1533b742		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0xf00	208	RRM_init_panes	dwarf+symtab	d8ee1533b742		in	named-only	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0xfd0	180	RRM_init	dwarf+symtab	4754d7746719		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1084	68	RRM_Init	dwarf+symtab	e0832cd1c06a		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1084	68	RRM_Init	dwarf+symtab	e0832cd1c06a		in	named-only	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x10c8	96	rrmDoUnMapGfx	dwarf+symtab	2fff38eec59d		in	named-only	HQ3.h:313	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1128	140	rrmUnMapGfx	dwarf+symtab	0bae5961623a		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x11b4	188	rrmInvalidateRN	dwarf+symtab	6af11fa2a4de		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1128	140	rrmUnMapGfx	dwarf+symtab	0bae5961623a		in	named-only	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x11b4	188	rrmInvalidateRN	dwarf+symtab	6af11fa2a4de		in	named-only	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1270	468	RRM_InvalidateRN	dwarf+symtab	40cbfaddc7b1		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1444	196	rrmUnbindProcFromRN	dwarf+symtab	246f69829bbf		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1508	260	RRM_BindProcToRN	dwarf+symtab	f9a9d7c85ead		in	named-only	docs/inventory/functions.tsv	
@@ -351,7 +351,7 @@ usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1a20	36	RRM_UnbindRNFrom
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1a44	864	RRM_OpenRN	dwarf+symtab	3e7f66cf6e57		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1da4	916	rrmCloseRN	dwarf+symtab	fd706c8e002a		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x2138	32	RRM_CloseRN	dwarf+symtab	5b470dcf9414		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x2158	640	RRM_Exit	dwarf+symtab	62560ba5cbdc		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x2158	640	RRM_Exit	dwarf+symtab	62560ba5cbdc		in	named-only	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x23d8	8	rrmGetResourceMask	dwarf+symtab	0d94b77e1c7c		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x23e0	1012	rrmSuspend	dwarf+symtab	0abd22639225		in	named-only	HQ3.h:311	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x27d4	1200	rrmResume	dwarf+symtab	09ccdb303551		in	named-only	HQ3.h:313	
@@ -367,8 +367,8 @@ usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3148	72	rrmValidateRetra
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3190	388	rrmAllocPcxid	dwarf+symtab	d28b25c18920		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3314	684	rrmValidateMyPcx	dwarf+symtab	13dd4077261d		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x35c0	332	RRM_ValidateClip	dwarf+symtab	f60c1011a814		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x370c	960	RRM_ValidFault	dwarf+symtab	13e0b7b861a0		in	named-only	HQ3.h:315	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3acc	100	RRM_CheckValidFault	dwarf+symtab	873d82267ad0		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x370c	960	RRM_ValidFault	dwarf+symtab	13e0b7b861a0		in	named-only	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3acc	100	RRM_CheckValidFault	dwarf+symtab	873d82267ad0		in	named-only	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3b30	228	rrmSwapWait	dwarf+symtab	3b3915e47c0f		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3c14	804	RRM_SwapBuf	dwarf+symtab	cce59cded90d		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3f38	216	rrmSwapUnGroup	dwarf+symtab	bfc7c7c6db9a		in	named-only	docs/inventory/functions.tsv	
@@ -390,7 +390,7 @@ usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x48a8	116	RRM_WaitVideoSy
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x491c	244	rrmWaitVideoSync	dwarf+symtab	3ff4d8c95d71		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4a10	324	rrmValidateVideoSync	dwarf+symtab	ac6bd7d4e1b2		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4b54	136	RRM_MapClipToSwapbufID	dwarf+symtab	e5526cbbd0fe		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4bdc	1384	RRM_Dispatch	dwarf+symtab	50ac3391eb64		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4bdc	1384	RRM_Dispatch	dwarf+symtab	50ac3391eb64		in	named-only	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x5144	228	irix5_to_RRM_ValidateClip	dwarf+symtab	9ce4516e40a7		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x5228	140	irix5_to_RRM_GetDisplayModes	dwarf+symtab	6c422f307fee		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tool	o32		0x403ab0	284	__start	dynsym	e4002bf31794		in	named-only	docs/inventory/functions.tsv	
