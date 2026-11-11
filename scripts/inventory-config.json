@@ -3,6 +3,7 @@
   "docs": {
     "prose": [
       "docs/*.md",
+      "docs/routines/*.md",
       "README.md"
     ],
     "headers": [
