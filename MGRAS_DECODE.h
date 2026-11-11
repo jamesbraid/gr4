@@ -137,6 +137,36 @@
 #define MGRAS_MCO_ID_SPECIAL_PRESENT 0x01 /* established, a whole-byte value also accepted, double-read shape only */
 
 /*
+ * Single-read probe accesses, offsets from the board register base (the
+ * Octane and Origin host kernels; the same in every held build of that
+ * shape). Established from the probe routine's machine words: it selects a
+ * timing set with index 0x14, then index 0, writes 0xff one byte at the first
+ * offset below and reads one byte at the second. The index is the argument of
+ * the display-bus timing routine, which uses it to pick one of 24 jump-table
+ * cases; it is not itself a timing word, and which word 0x14 selects was not
+ * read. The offsets differ by more than the window base, so the two do not
+ * obviously name one register (see the DCB_ADDR examples below).
+ */
+#define MGRAS_MCO_ID_PROBE_SINGLE_TIMING_SELECT_FIRST 0x14 /* established, single-read shape only */
+#define MGRAS_MCO_ID_PROBE_SINGLE_TIMING_SELECT_SECOND 0x00 /* established, single-read shape only */
+#define MGRAS_MCO_ID_PROBE_SINGLE_WRITE_OFFSET 0x72c08 /* established, single-read shape only */
+#define MGRAS_MCO_ID_PROBE_SINGLE_READ_OFFSET 0x70008 /* established, single-read shape only */
+
+/*
+ * Sizes of the colour map and of the option's palette RAMs. The Octane
+ * graphics diagnostic (a published transcript, not re-read in this pass) tests
+ * addresses 0 to 8191 on each colour map, so 8192 entries per map is
+ * established; the 24-bit entry width is inferred. The 256-entry, 10-bit
+ * figure is established for the option's channels only, from the option's DAC
+ * loaders, which each write 256 entries per colour (the true-colour loader as
+ * six-byte entries: 8 high bits, then 2 low). Whether the base board's own
+ * DAC has a gamma table of that size is not established here.
+ */
+#define MGRAS_CMAP_ENTRIES 8192 /* established per map; 24-bit width inferred */
+#define MGRAS_MCO_DAC_LUT_ENTRIES 256 /* established, option channels, per colour */
+#define MGRAS_MCO_DAC_LUT_ENTRY_BITS 10 /* established, ADV7162 channels only */
+
+/*
  * Multi-channel option: bank base of each output channel, from the five-entry
  * table in the loader's data (index 0 to 4). Channels 1 and 2 are the
  * true-colour DACs, 3 and 4 the overlay-palette DACs; channel 0's entry equals
@@ -232,6 +262,31 @@
 #define MGRAS_GIO_ID_PRODUCT_MASK  0xffffffu
 
 /*
+ * Second board-version word, read 0x62488 above the board register
+ * base: the start of device 9's window, register select 1, one-byte width. The
+ * kernel's board-information routine loads it as a word and works only on its
+ * top byte (the first byte at that address). Bits 30:29 of the word, bits 6:5
+ * of that byte, are the product field. The value 1 takes the path with one
+ * engine and no second board, which is how a Solid Impact board is told from
+ * the others. Established from the routine's machine words, in the kernel
+ * object of the base distribution's graphics module; not a bus measurement.
+ * The byte's other bits (1:0 and 4:2) are split off and kept as well; their
+ * roles are not placed here. How board revision numbers map to products is
+ * inferred.
+ */
+/* FIELD: BDVERS2.product 30:29 established */
+#define MGRAS_BDVERS2_PRODUCT_SHIFT 29
+#define MGRAS_BDVERS2_PRODUCT_MASK  0x3u
+/* ENUM: BDVERS2.product 1 solid_impact established */
+#define MGRAS_BDVERS2_PRODUCT_SOLID_IMPACT 1
+
+/*
+ * EXAMPLE (unverified): 0x20000000 as BDVERS2 => product=1
+ */
+/*
+ * EXAMPLE (unverified): 0x00002488 as DCB_ADDR => encrs_inc=0, endata_pack=0, crs=1, data_width=1, device=9
+ */
+/*
  * TESTVEC: 0x00050190 as GIO_ID => revision=9, product=0x501
  */
 /*
@@ -277,6 +332,15 @@
  */
 /*
  * EXAMPLE (unverified): 0x00000388 as DCB_ADDR => data_width=1, crs=7
+ */
+/*
+ * Single-read probe offsets, low 15 bits decoded with the same layout: the
+ * write lands on device 11 and the read on device 0, a different peripheral.
+ * The window layout is inferred, so this is a reading, not a finding.
+ * EXAMPLE (unverified): 0x00002c08 as DCB_ADDR => encrs_inc=0, endata_pack=0, crs=0, data_width=1, device=11
+ */
+/*
+ * EXAMPLE (unverified): 0x00000008 as DCB_ADDR => encrs_inc=0, endata_pack=0, crs=0, data_width=1, device=0
  */
 
 #endif

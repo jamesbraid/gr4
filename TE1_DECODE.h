@@ -31,6 +31,30 @@
 /* REG: TE.tl_spec 0xf1a2 w32 reset=unknown established */
 /* REG: TE.tl_addr 0xf1a3 w32 reset=unknown inferred */
 /* REG: TE.tl_mipmap 0xf1a4 w32 reset=unknown inferred */
+/* REG: TE.tl_border 0xf1a5 w32 reset=unknown inferred */
+
+/*
+ * Loader table registers, by build. The three registers tl_addr, tl_mipmap
+ * and tl_border keep an inferred grade because the two held builds of the
+ * OpenGL core library disagree, and neither reading replaces the other.
+ *  - Graphics library of the base distribution (sha256
+ *    eca0027567a5ae885ca2a996349ef838c07364c6c2e7535ba65076eb359a5c2e):
+ *    established that the loader-table sender writes tl_addr with the first
+ *    level number (0 in the page-restore routine), then for each level a
+ *    loader command word followed by tl_mipmap and a value built as the
+ *    sampler entry is (a halfword page ORed with a byte shifted left 8), and
+ *    in a second pass tl_border with the low byte of the sum of two
+ *    halfwords of the level record. The tl_border value is border-shaped by
+ *    analogy with the sampler's border register; its name follows a
+ *    separate register list, and the masked-sum role has not been matched to
+ *    a border width.
+ *  - A later build of the same library (its hash is not recorded in the notes): established that none of the three
+ *    numbers appears as a constant in any routine scanned for them. A
+ *    register number held in a variable would not show as a constant, so this
+ *    does not show the registers unused there.
+ * Roles remain inferred (loader-side twins of the sampler's index and entry
+ * registers). Settling tests are in docs/TRAM_CORRUPTION_ANALYSIS.md.
+ */
 
 /*
  * Sampler mipmap table entry. The texture-bind routine builds each entry by

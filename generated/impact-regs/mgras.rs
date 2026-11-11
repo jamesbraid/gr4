@@ -1,4 +1,4 @@
-// generated from gr4 cfbe87f5793d MGRAS_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 17185be6b897 MGRAS_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Board-level words of the Impact graphics subsystem.
 //!
@@ -17,6 +17,20 @@ pub const MCO_ID_PROBE_WRITE_SECOND: u32 = 0;
 pub const MCO_ID_ABSENT: u32 = 255;
 /// established, a whole-byte value also accepted, double-read shape only.
 pub const MCO_ID_SPECIAL_PRESENT: u32 = 1;
+/// established, single-read shape only.
+pub const MCO_ID_PROBE_SINGLE_TIMING_SELECT_FIRST: u32 = 20;
+/// established, single-read shape only.
+pub const MCO_ID_PROBE_SINGLE_TIMING_SELECT_SECOND: u32 = 0;
+/// established, single-read shape only.
+pub const MCO_ID_PROBE_SINGLE_WRITE_OFFSET: u32 = 0x72c08;
+/// established, single-read shape only.
+pub const MCO_ID_PROBE_SINGLE_READ_OFFSET: u32 = 0x70008;
+/// established per map; 24-bit width inferred.
+pub const CMAP_ENTRIES: u32 = 0x2000;
+/// established, option channels, per colour.
+pub const MCO_DAC_LUT_ENTRIES: u32 = 0x100;
+/// established, ADV7162 channels only.
+pub const MCO_DAC_LUT_ENTRY_BITS: u32 = 10;
 /// established.
 pub const MCO_BANK_BASE_CH0: u32 = 0;
 /// established.
@@ -194,6 +208,31 @@ impl McoIdBoard {
     }
 }
 
+/// Values of `product` in `Bdvers2` that the header names.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Bdvers2Product {
+    /// established.
+    SolidImpact,
+    /// A value the notes do not name.
+    Other(u8),
+}
+
+impl Bdvers2Product {
+    pub const fn from_bits(v: u32) -> Self {
+        match v {
+            0x1 => Self::SolidImpact,
+            _ => Self::Other(v as u8),
+        }
+    }
+
+    pub const fn bits(self) -> u32 {
+        match self {
+            Self::SolidImpact => 0x1,
+            Self::Other(v) => v as u32,
+        }
+    }
+}
+
 /// The `dcb_ctrl` register word.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct DcbCtrl(u32);
@@ -341,6 +380,25 @@ impl GioId {
     /// Bits 31:8, inferred.
     pub const fn product(self) -> u32 {
         self.0 >> 8
+    }
+}
+
+/// The `BDVERS2` word.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct Bdvers2(u32);
+
+impl Bdvers2 {
+    pub const fn new(word: u32) -> Self {
+        Self(word)
+    }
+
+    pub const fn raw(self) -> u32 {
+        self.0
+    }
+
+    /// Bits 30:29, established.
+    pub const fn product(self) -> Bdvers2Product {
+        Bdvers2Product::from_bits((self.0 >> 29) & 0x3)
     }
 }
 

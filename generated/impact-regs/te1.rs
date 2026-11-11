@@ -1,4 +1,4 @@
-// generated from gr4 b0b868e9bfd9 TE1_DECODE.h - do not edit, regenerate in gr4
+// generated from gr4 17185be6b897 TE1_DECODE.h - do not edit, regenerate in gr4
 //!
 //! Texture RAM revision words and loader registers of the Impact graphics subsystem.
 //!
@@ -33,6 +33,9 @@ pub const REG_TL_ADDR_WIDTH: u32 = 32;
 /// Texture engine register `tl_mipmap`: write, 32-bit; reset unknown; inferred.
 pub const REG_TL_MIPMAP: u32 = 0xf1a4;
 pub const REG_TL_MIPMAP_WIDTH: u32 = 32;
+/// Texture engine register `tl_border`: write, 32-bit; reset unknown; inferred.
+pub const REG_TL_BORDER: u32 = 0xf1a5;
+pub const REG_TL_BORDER_WIDTH: u32 = 32;
 
 /// The `tx_mipmap` register word.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
