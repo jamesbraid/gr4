@@ -1,5 +1,5 @@
 binary	group	role	kind	abi	bytes	sha256	copies	functions	address_source	access_sites	unresolved_sites	status	doc	section
-usr/cpu/sysgen/IP28boot/gfx.o	kernel-shared	shared-kernel	object	n64	51840	ab0d2dee5e02c578		59	symtab	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
+usr/cpu/sysgen/IP28boot/gfx.o	kernel-shared	shared-kernel	object	n64	51840	ab0d2dee5e02c578		59	symtab	0	0	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	kernel	board-kernel	object	n64	97060	f298c8e2e1fb9913		76	symtab	0	0	named-only	docs/OPEN_QUESTIONS.md#open-questions-and-what-the-shipped-software-settles	Open questions and what the shipped software settles
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	kernel	board-kernel	object	n64	11684	267749da7176ee06		10	symtab	1	0	named-only	IRIX_FILES.md#a-kernel-driver-modules-mgras_kernel	A. Kernel Driver Modules (`mgras_kernel/`)
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	kernel	board-kernel	object	n64	33412	3775fa54d203caaf		28	symtab	0	0	named-only	docs/OPEN_QUESTIONS.md#16-host-transfer-table-slots	16. Host transfer table slots
@@ -8,13 +8,13 @@ usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	kernel	board-kernel	object	n64	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_timing.o)	kernel	board-kernel	object	n64	14692	5cb83a5f82098279		1	symtab	0	0	named-only	IRIX_FILES.md#a-kernel-driver-modules-mgras_kernel	A. Kernel Driver Modules (`mgras_kernel/`)
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_tport.o)	kernel	board-kernel	object	n64	11988	cad639af6f2054d9		10	symtab	0	0	named-only	IRIX_FILES.md#a-kernel-driver-modules-mgras_kernel	A. Kernel Driver Modules (`mgras_kernel/`)
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex.o)	kernel	board-kernel	object	n64	12932	ecb051165217dd7b		10	symtab	0	0	named-only	IRIX_FILES.md#a-kernel-driver-modules-mgras_kernel	A. Kernel Driver Modules (`mgras_kernel/`)
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_texsr.o)	kernel	board-kernel	object	n64	9748	5f53be6157f480f9		4	symtab	0	0	named-only	IRIX_FILES.md#a-kernel-driver-modules-mgras_kernel	A. Kernel Driver Modules (`mgras_kernel/`)
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_texsr.o)	kernel	board-kernel	object	n64	9748	5f53be6157f480f9		4	symtab	0	0	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex_io.o)	kernel	board-kernel	object	n64	21044	b153568fbc47a71e		18	symtab	0	0	named-only	docs/TRAM_CORRUPTION_ANALYSIS.md#hardware-tram-architecture-te1--tr1	Hardware TRAM Architecture (TE1 / TR1)
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)	kernel	board-kernel	object	n64	19812	206c2881535836d9		23	symtab	0	0	named-only	IRIX_FILES.md#a-kernel-driver-modules-mgras_kernel	A. Kernel Driver Modules (`mgras_kernel/`)
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)	kernel	board-kernel	object	n64	18836	9ce7195504086119		18	symtab	0	0	named-only	docs/OPEN_QUESTIONS.md#open-questions-and-what-the-shipped-software-settles	Open questions and what the shipped software settles
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_share.o)	kernel	board-kernel	object	n64	5908	0e6ba7f7aad08dd4		2	symtab	0	0	named-only	IRIX_FILES.md#a-kernel-driver-modules-mgras_kernel	A. Kernel Driver Modules (`mgras_kernel/`)
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_pipeend.o)	kernel	board-kernel	object	n64	2596	1530554768cc4bc5		0	none	0	0	named-only	IRIX_FILES.md#a-kernel-driver-modules-mgras_kernel	A. Kernel Driver Modules (`mgras_kernel/`)
-usr/cpu/sysgen/IP28boot/rrm.o	kernel-shared	shared-kernel	object	n64	64440	0833465ac68a6e87		72	symtab	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
+usr/cpu/sysgen/IP28boot/rrm.o	kernel-shared	shared-kernel	object	n64	64440	0833465ac68a6e87		72	symtab	0	0	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tools	board-tool	executable	o32	54180	4cb9468054d05b1f		51	dynsym	0	0	named-only	IRIX_FILES.md#0-what-root-holds-now	0. What `root/` holds now
 usr/gfx/arch/IGLOO32/libgl.so	shared-libraries	shared-library	shared-object	n32	1682688	0158dfea8d6ce229		3810	dynsym+dwarf	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
 usr/gfx/arch/IP28GR432/libGL.so	libraries	board-library	shared-object	n32	407256	b2d3590e0b7de408		607	dynsym+dwarf (dwarf addresses translated through .MIPS.Xlate)	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
@@ -53,7 +53,7 @@ usr/gfx/ucode/hq3.bin	microcode	board-microcode	data	-	20480	08ea32fc53d27444		0
 usr/gfx/ucode/hq3_DB.bin	microcode	board-microcode	data	-	20480	e49658af694baeef		0		0	0	undocumented		
 usr/gfx/ucode/hq3_revB.bin	microcode	board-microcode	data	-	20480	9108669895aa8793		0		0	0	undocumented		
 usr/gfx/ucode/hq3_revB_DB.bin	microcode	board-microcode	data	-	20480	780dd065275f3766		0		0	0	undocumented		
-usr/gfx/ucode/hq3_revB_HQ4.bin	microcode	board-microcode	data	-	20480	2c73fecd8563fa31		0		0	0	undocumented		
+usr/gfx/ucode/hq3_revB_HQ4.bin	microcode	board-microcode	data	-	20480	2c73fecd8563fa31		0		0	0	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/gfx/ucode/hq3_revB_HQ4_DB.bin	microcode	board-microcode	data	-	20480	b2d7305d1e9ce75c		0		0	0	undocumented		
 usr/lib/X11/dyDDX/glx.so	x-shared	shared-x-server	shared-object	n32	491168	3182c3a71d10ddbd		875	dynsym	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
 usr/lib/X11/dyDDX/impactpc.so	x-module	board-x-module	shared-object	n32	1934372	e501c75dc120a7fe		616	dynsym	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence

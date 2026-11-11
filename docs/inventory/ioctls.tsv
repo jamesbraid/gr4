@@ -5,11 +5,11 @@ number	hex	table	handler	evidence	senders	binaries	example	status	doc	section
 1835466759	0x6d670007	mgras		sent	hw_acquire_pipe	1	usr/gfx/MGRAS/HQ3/ge11dump.HQ3:hw_acquire_pipe	undocumented		
 1835466760	0x6d670008	mgras		sent	hw_release_pipe	1	usr/gfx/MGRAS/HQ3/ge11dump.HQ3:hw_release_pipe	undocumented		
 1835466762	0x6d67000a	mgras		sent	MakeCurrentRead;mgrasKernInit	2	usr/gfx/arch/IP28GR432/libGLcore.so:MakeCurrentRead	undocumented		
-1835466763	0x6d67000b	mgras		sent	__glMgr_LockSingleDMAPool;__glMgr_UnlockSingleDMAPool;mgrasCloseScreen;mgrasKernInit;+4 more	2	usr/gfx/arch/IP28GR432/libGLcore.so:__glMgr_LockSingleDMAPool	undocumented		
+1835466763	0x6d67000b	mgras		sent	__glMgr_LockSingleDMAPool;__glMgr_UnlockSingleDMAPool;mgrasCloseScreen;mgrasKernInit;+4 more	2	usr/gfx/arch/IP28GR432/libGLcore.so:__glMgr_LockSingleDMAPool	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 1835466764	0x6d67000c	mgras		sent	mgrasKernInit	1	usr/lib/X11/dyDDX/impactpc.so:mgrasKernInit	undocumented		
-1835466765	0x6d67000d	mgras		sent	__glMgr_LockMultiDMAPool;__glMgr_UnlockMultiDMAPool;mgrTM_FreeDMAPool;mgrTM_InitDMAPool	1	usr/gfx/arch/IP28GR432/libGLcore.so:__glMgr_LockMultiDMAPool	undocumented		
-1835466766	0x6d67000e	mgras		sent	mgrTM_LockSaveData	1	usr/gfx/arch/IP28GR432/libGLcore.so:mgrTM_LockSaveData	undocumented		
-1835466767	0x6d67000f	mgras		sent	mgrTM_AppendPages	1	usr/gfx/arch/IP28GR432/libGLcore.so:mgrTM_AppendPages	undocumented		
+1835466765	0x6d67000d	mgras		sent	__glMgr_LockMultiDMAPool;__glMgr_UnlockMultiDMAPool;mgrTM_FreeDMAPool;mgrTM_InitDMAPool	1	usr/gfx/arch/IP28GR432/libGLcore.so:__glMgr_LockMultiDMAPool	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
+1835466766	0x6d67000e	mgras		sent	mgrTM_LockSaveData	1	usr/gfx/arch/IP28GR432/libGLcore.so:mgrTM_LockSaveData	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
+1835466767	0x6d67000f	mgras		sent	mgrTM_AppendPages	1	usr/gfx/arch/IP28GR432/libGLcore.so:mgrTM_AppendPages	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 1835466768	0x6d670010	mgras		sent	Global_TM_Interface;mgrTM_SetBasereg	1	usr/gfx/arch/IP28GR432/libGLcore.so:Global_TM_Interface	undocumented		
 1835466769	0x6d670011	mgras		sent	mgrasLoadTimingTable	1	usr/lib/X11/dyDDX/impactpc.so:mgrasLoadTimingTable	undocumented		
 1835466770	0x6d670012	mgras		sent	__glMgrAllocERAM;__glMgrim_RenderMode	1	usr/gfx/arch/IP28GR432/libGLcore.so:__glMgrAllocERAM	undocumented		
@@ -21,8 +21,8 @@ number	hex	table	handler	evidence	senders	binaries	example	status	doc	section
 1835466778	0x6d67001a	mgras		sent	MakeCurrentRead	1	usr/gfx/arch/IP28GR432/libGLcore.so:MakeCurrentRead	undocumented		
 1835466779	0x6d67001b	mgras		sent	routine@0x5e3dc1c0	1	usr/lib/X11/dyDDX/impactpc.so:routine@0x5e3dc1c0	undocumented		
 1835466780	0x6d67001c	mgras		sent	mgrasAttachXvc;mgrasLdComb;routine@0x5e3d9530	1	usr/lib/X11/dyDDX/impactpc.so:mgrasAttachXvc	undocumented		
-1835466782	0x6d67001e	mgras		sent	MakeCurrentRead	1	usr/gfx/arch/IP28GR432/libGLcore.so:MakeCurrentRead	undocumented		
-1835466783	0x6d67001f	mgras		sent	mgrTM_UnlockPages;mgrTM_UnlockSaveData	1	usr/gfx/arch/IP28GR432/libGLcore.so:mgrTM_UnlockPages	undocumented		
+1835466782	0x6d67001e	mgras		sent	MakeCurrentRead	1	usr/gfx/arch/IP28GR432/libGLcore.so:MakeCurrentRead	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
+1835466783	0x6d67001f	mgras		sent	mgrTM_UnlockPages;mgrTM_UnlockSaveData	1	usr/gfx/arch/IP28GR432/libGLcore.so:mgrTM_UnlockPages	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 1835466788	0x6d670024	mgras		sent	mgrTM_InitDMAPool	1	usr/gfx/arch/IP28GR432/libGLcore.so:mgrTM_InitDMAPool	undocumented		
 1835466791	0x6d670027	mgras		sent	MakeCurrentRead	1	usr/gfx/arch/IP28GR432/libGLcore.so:MakeCurrentRead	undocumented		
 1835466793	0x6d670029	mgras		sent	RestoreData;mgrTM_AppendPages	1	usr/gfx/arch/IP28GR432/libGLcore.so:RestoreData	undocumented		

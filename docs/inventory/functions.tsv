@@ -92,10 +92,10 @@ usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1f68	44	MgrasD
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1f94	456	MgrasInitialize	dwarf+symtab	84aad335ecc7		in	named-only	docs/OPEN_QUESTIONS.md#3-host-interface-error-causes	3. Host interface error causes
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x215c	376	MgrasDownload	dwarf+symtab	17507b667a2d		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x22d4	1344	MgrasStart	dwarf+symtab	47d97b4691db		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2814	844	MgrasExit	dwarf+symtab	7dd546aabece		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2814	844	MgrasExit	dwarf+symtab	7dd546aabece		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2b60	808	MgrasCreateDDRN	dwarf+symtab	4fe974147565		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2e88	184	MgrasSetTgvRgn	dwarf+symtab	f8c9f0c8914e		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2f40	864	MgrasDestroyDDRN	dwarf+symtab	890b4ecf189b		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2f40	864	MgrasDestroyDDRN	dwarf+symtab	890b4ecf189b		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x32a0	240	compute_drb_pointers	dwarf+symtab	2d4000c99bb5		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3390	428	MgrasValidateBanks	dwarf+symtab	5cc7f4e1daa9		in	named-only	docs/OPEN_QUESTIONS.md#7-context-image-bank-words-and-flags	7. Context image bank words and flags
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x353c	1720	MgrasValidateClip	dwarf+symtab	7237c515290e		in	named-only	docs/OPEN_QUESTIONS.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
@@ -103,7 +103,7 @@ usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3bf4	60	MgrasS
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3c30	644	MgrasMapGfx	dwarf+symtab	c6c3ca5a1d6d		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3eb4	256	MgrasUnMapGfx	dwarf+symtab	fa7b442969b7		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3fb4	120	MgrasInvalTLB	dwarf+symtab	74aee928f5c5		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x402c	4924	MgrasPcxSwap	dwarf+symtab	6523460247eb		in	named-only	HQ3.h:300	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x402c	4924	MgrasPcxSwap	dwarf+symtab	6523460247eb		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5368	8	MgrasPcxSwitch	dwarf+symtab	87506497337c		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5370	60	mgras_ctxswtimeout	dwarf+symtab	4a9be58779d0		in	named-only	HQ3.h:344	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x53ac	28	mgras_sleepertimeout	dwarf+symtab	60b48822a231		in	named-only	docs/inventory/functions.tsv	
@@ -112,13 +112,13 @@ usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x53d0	52	MgrasR
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5404	8	MgrasReleaseGfxSema	dwarf+symtab	87506497337c		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x540c	404	mgras_copyin_vc3_tables	dwarf+symtab	6cad8b10a6cd		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x55a0	264	mgras_copyin_vc2_tables	dwarf+symtab	5f8855b04061		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x56a8	6416	MgrasPrivate	dwarf+symtab	473b4e338ddc		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x56a8	6416	MgrasPrivate	dwarf+symtab	473b4e338ddc		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x6fb8	896	MgrasWriteBfifo	dwarf+symtab	0d9c93ea6151		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x7338	164	mgras_error	dwarf+symtab	295d01f8bf87		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x73dc	992	mgras_hqlook	dwarf+symtab	0a13c45110a7		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x77bc	160	mgras_fifotimeout	dwarf+symtab	df2ffdbfd1f2		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x785c	108	mgras_fifotimer	dwarf+symtab	f8f76ea84538		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x78c8	1444	MgrasCtxsw	dwarf+symtab	15d8aa2f3c83		in	named-only	HQ3.h:300	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x78c8	1444	MgrasCtxsw	dwarf+symtab	15d8aa2f3c83		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x7e6c	1292	MgrasFIFOInterrupt	dwarf+symtab	373608f0a006		in	named-only	HQ3.h:250	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8378	792	MgrasGeneralInterrupt	dwarf+symtab	29d6704affbf		in	named-only	HQ3.h:251	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8690	172	irix5_to_mgras_dma_util_single_args_xlate	dwarf+symtab	27a3cab301d0		in	named-only	docs/inventory/functions.tsv	
@@ -144,27 +144,27 @@ usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x2ac	216	Ph
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x384	236	median	dwarf+symtab	a57ce60a7b79		in	named-only	mgras_kernel/include/mgras_kern.h:150	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x470	220	CCInit	dwarf+symtab	76ffa8921557		in	named-only	mgras_kernel/include/mgras_kern.h:146	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x54c	548	MgrasInitCCR	dwarf+symtab	83b7621e9fcb		in	named-only	mgras_kernel/include/mgras_kern.h:145	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x0	224	MgrasInitDMA	dwarf+symtab	7d53580e8934		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x0	224	MgrasInitDMA	dwarf+symtab	7d53580e8934		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0xe0	248	MgrasInstallTxTbl_Kern	dwarf+symtab	1e8c519b8009		in	named-only	docs/OPEN_QUESTIONS.md#16-host-transfer-table-slots	16. Host transfer table slots
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1d8	116	MgrasResetTxTbl_Kern	dwarf+symtab	e0231c073d42		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1d8	116	MgrasResetTxTbl_Kern	dwarf+symtab	e0231c073d42		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x24c	32	mgrasFastUnlock	dwarf+symtab	5ecbad20bf50		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x26c	56	mgrasFastLock	dwarf+symtab	fbbaad698880		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x2a4	368	mgrasLockMem	dwarf+symtab	668512db7d0d		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x414	216	mgrasUnlockMem	dwarf+symtab	7aa07603f0cb		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x4ec	228	mgrasDmaFlushUtil	dwarf+symtab	49bb69fa5d57		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x5d0	68	mgrasReleasePoolTxMemory	dwarf+symtab	03f63dbdca14		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x614	292	mgrasReleasePoolUserMemory	dwarf+symtab	eec0801beb96		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x738	64	mgrasReleasePoolMemory	dwarf+symtab	c2fe625a2940		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x778	188	MgrasDestroyDMA	dwarf+symtab	c7eb03281edc		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x834	604	mgrasTeardown	dwarf+symtab	643d05c284b8		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x5d0	68	mgrasReleasePoolTxMemory	dwarf+symtab	03f63dbdca14		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x614	292	mgrasReleasePoolUserMemory	dwarf+symtab	eec0801beb96		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x738	64	mgrasReleasePoolMemory	dwarf+symtab	c2fe625a2940		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x778	188	MgrasDestroyDMA	dwarf+symtab	c7eb03281edc		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x834	604	mgrasTeardown	dwarf+symtab	643d05c284b8		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0xa90	364	mgrasGetTxTbl	dwarf+symtab	166faaf61c6f		in	named-only	docs/OPEN_QUESTIONS.md#16-host-transfer-table-slots	16. Host transfer table slots
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0xbfc	60	mgrasJamTxTbl	dwarf+symtab	f97c120f229f		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0xc38	280	mgrasPlugTxTblHoles	dwarf+symtab	58924d7efa97		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0xd50	496	mgrasFillTxTbl	dwarf+symtab	fe38dbbbe800		in	named-only	docs/OPEN_QUESTIONS.md#16-host-transfer-table-slots	16. Host transfer table slots
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0xf40	1656	mgrasDmaUtil	dwarf+symtab	619fd98fa243		in	named-only	docs/OPEN_QUESTIONS.md#16-host-transfer-table-slots	16. Host transfer table slots
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x15b8	192	mgrasGetFlushRanges	dwarf+symtab	730ef3043c5e		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1678	188	MgrasDmaUtil_Single	dwarf+symtab	b7029a34a2c7		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1734	608	MgrasDmaUtil_Multi	dwarf+symtab	e6b727294d62		in	named-only	docs/inventory/functions.tsv	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1678	188	MgrasDmaUtil_Single	dwarf+symtab	b7029a34a2c7		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1734	608	MgrasDmaUtil_Multi	dwarf+symtab	e6b727294d62		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1994	2372	MgrasDmaEditAppend	dwarf+symtab	d24b406de305		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x22d8	1804	MgrasDmaEditReplace	dwarf+symtab	65f44a7abde8		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x29e4	1024	MgrasDmaEditRelease	dwarf+symtab	2383c84caa84		in	named-only	docs/inventory/functions.tsv	
@@ -5573,8 +5573,8 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadd6ec	860	__glMgrim_B
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadda48	924	__glMgrRenderBitmap	dwarf+dynsym	99e2405c7236		in	named-only	HQ3.h:977	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaddde4	404	__glMgr_UseDMAForWrite	dwarf+dynsym	3797faf6e7a2		in	named-only	libglcore/include/glcore_prots.h:730	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaddf78	160	__glMgr_UseDMAForRead	dwarf+dynsym	0d02f336fd18		in	named-only	libglcore/include/glcore_prots.h:731	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade018	300	__glMgr_LockSingleDMAPool	dwarf+dynsym	5df9a21e9b85		in	named-only	libglcore/include/glcore_prots.h:732	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade144	196	__glMgr_UnlockSingleDMAPool	dwarf+dynsym	7e08fc8bf9e9		in	named-only	libglcore/include/glcore_prots.h:733	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade018	300	__glMgr_LockSingleDMAPool	dwarf+dynsym	5df9a21e9b85		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade144	196	__glMgr_UnlockSingleDMAPool	dwarf+dynsym	7e08fc8bf9e9		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade208	180	__glMgrBuildLockPageList	dwarf+dynsym	2b3a88b9e5e6		in	named-only	libglcore/include/glcore_prots.h:734	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade2bc	376	__glMgr_LockMultiDMAPool	dwarf+dynsym	3c19884111de		in	named-only	libglcore/include/glcore_prots.h:735	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade434	156	__glMgr_UnlockMultiDMAPool	dwarf+dynsym	018826261439		in	named-only	libglcore/include/glcore_prots.h:736	
@@ -10800,8 +10800,8 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d1ce8	344	cfb32AllocatePr
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d1e40	240	mfbAllocatePrivates	dynsym	ce94a76c48b8		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d1f30	1232	mgrasBlackCmap	dynsym	86a8d5896867		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d358c	8884	mgrasInit	dynsym	285eafbd9b8f		in	named-only	docs/OPEN_QUESTIONS.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d5840	424	mgrasCloseScreen	dynsym	eba53912a8e2		in	named-only	ddx/include/impact_ddx.h:115	
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d59e8	1088	mgrasKernInit	dynsym	9b1d442deb48		in	named-only	docs/inventory/functions.tsv	
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d5840	424	mgrasCloseScreen	dynsym	eba53912a8e2		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d59e8	1088	mgrasKernInit	dynsym	9b1d442deb48		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d5e28	288	mgrasInitDIDState	dynsym	0246e8f60640		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d5f48	692	mgrasDebugf	dynsym	136993f6d861		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d7294	372	mgrasQryMonitor	dynsym	bffb3b5483fb		in	named-only	docs/inventory/functions.tsv	
@@ -11047,7 +11047,7 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e49b474	2476	mgrasSegmentSD
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e49be20	4568	mgrasImageGlyphBltTE6	dynsym	3d8293a32712		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e49cff8	5308	mgrasImageGlyphBltTE9	dynsym	a0df79cc1067		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e49e4b4	3892	mgrasImageGlyphBltTE8	dynsym	edf25f18ebf6		in	named-only	docs/inventory/functions.tsv	
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e49f3e8	2784	mgrasWriteFBSubBlock	dynsym	3d10cc2b6b0f		in	named-only	docs/inventory/functions.tsv	
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e49f3e8	2784	mgrasWriteFBSubBlock	dynsym	3d10cc2b6b0f		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e49fec8	2540	mgrasReadFBBlock	dynsym	acd178755960		in	named-only	docs/OPEN_QUESTIONS.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a08b4	76	mgrasFreeFBBlock	dynsym	739fa3a362bc		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a0900	440	mgrasPbufAllocConfirm	dynsym	97b383e76c81		in	named-only	docs/inventory/functions.tsv	
