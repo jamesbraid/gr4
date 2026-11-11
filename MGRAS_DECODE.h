@@ -155,13 +155,13 @@
  * Configuration load sequence. Status bits 2:0 must read 0 after the first
  * control write (value 0xfe), 6 after the second (value 0x01) and again 6
  * after every data byte; after the last byte status bits 1:0 must both be
- * set. The image is 0xf688 bytes followed by 20 zero bytes of padding.
+ * set. The image is 63112 bytes followed by 20 zero bytes of padding.
  */
 #define MGRAS_MCO_LOAD_CTRL_FIRST 0xfe /* established */
 #define MGRAS_MCO_LOAD_CTRL_SECOND 0x01 /* established */
 #define MGRAS_MCO_LOAD_STATUS_FIRST 0 /* established */
 #define MGRAS_MCO_LOAD_STATUS_AFTER_SECOND 6 /* established */
-#define MGRAS_MCO_LOAD_IMAGE_BYTES 0xf688 /* established */
+#define MGRAS_MCO_LOAD_IMAGE_BYTES 63112 /* established */
 #define MGRAS_MCO_LOAD_PAD_BYTES 20 /* established */
 
 /*

@@ -89,6 +89,7 @@ binds = [["WHEX", "GIO_ID.revision", 1]]
 
 [[headers]]
 file = "XTALK_DECODE.h"
+prefix = "XTALK"
 module = "xtalk"
 rust_prefix = "XTALK_"
 register_doc = "Crosstalk widget register"
