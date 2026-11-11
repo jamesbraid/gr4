@@ -17,9 +17,11 @@ Introduced in 1995 for the SGI Indigo2 (and later Octane), Impact Graphics was a
 Subsystem Configurations:
 | Model | Board ID | GE11 Count | RE4 Count | TRAM Size | Color Depth | Typical Host |
 |---|---|---|---|---|---|---|
-| **Solid Impact (SI / SIO)** | GR4 rev <3 | 1 GE11 | 1 RE4 | None | 24-bit RGB + Z | Indigo2 / Octane |
+| **Solid Impact (SI / SIO)** | GR4, product field 1 | 1 GE11 | 1 RE4 | None | 24-bit RGB + Z | Indigo2 / Octane |
 | **High Impact (HI / HIO)** | GR4 | 1 GE11 | 1 RE4 | 1 MB or 4 MB | 24-bit RGB + Z + Tex | Indigo2 / Octane |
 | **Maximum Impact (MaxI / EMX)** | GR4 | 2 GE11 | 2 RE4 (dual RSS) | 1 TRAM; 4 with the option | 24-bit RGB + Z + Tex | Indigo2 / Octane |
+
+Board ID grades. Solid Impact is told from High and Maximum by the product field (bits 6:5 of the second board-version byte) reading 1: established, read in the board-information routine of the 6.5.0 graphics kernel object (sha256 `8369b6d4a250d395123793a8dd339bfa0f158caa32cbf218fdb76a904725c9d7`, `mgras_init.o`), which takes a one-engine, no-second-board path for that value. An earlier label "GR4 rev <3" for Solid is withdrawn: `MGRAS.h` records the below-3 test as the colormap revision, a voltage-margin rule for early pixel processors, not a product split. How board revision numbers map to products stays inferred (`docs/OPEN_QUESTIONS.md`, entry 5).
 
 ---
 
@@ -52,8 +54,10 @@ Subsystem Configurations:
          └─────────────────────┘
 ```
 
+DCB window address. The display-bus windows start 0x60000 above the board base (established for that offset: the option probe's byte accesses at +0x62C08 and the board-version read at +0x62488 land in the device 11 and device 9 windows of the layout in `MGRAS.h`). The absolute address in the diagram, 0x1F060000, adds the Indigo2 slot base 0x1F000000 and is inferred.
+
 ### Major ASIC Roles:
-1. **HQ3 / HQ4**: Host interface, privileged / user command FIFOs (`CFIFO`), direct raster bypass, DMA controller, microcode sequencer (`hq3.bin`), and Display Control Bus (`DCB`) master.
+1. **HQ3 / HQ4**: (the product guide names only HQ3; HQ4 is inferred as the Octane-side host interface, from the shipped geometry-microcode file names that carry `HQ4` and the Octane board-probe comments in `MGRAS.h`; no data sheet or guide names it) Host interface, privileged / user command FIFOs (`CFIFO`), direct raster bypass, DMA controller, microcode sequencer (`hq3.bin`), and Display Control Bus (`DCB`) master.
 2. **GE11**: Geometry Engine microcoded vector processor (`ge11.bin`, `mgras_ge.hex`). Evaluates matrix stacks, lighting equations, primitive assembly, and feeds commands into the RSS.
 3. **RE4 (Raster Engine 4)**: High-speed rasterization, edge walking, triangle setup, line generation, screen masks, scissors, window offsets, dithering, and logic ops.
 4. **TE1 / TR1 (Texture Engine & Texture RAM controller)**: Bilinear and trilinear texture filtering, 3D textures, perspective correction, texture LOD calculation, and TETRAM memory management.
@@ -87,7 +91,7 @@ The subdirectories below contain relative symbolic links resolving into `root/`:
 
 Our primary documentation output is a set of authoritative C header files mirroring the structure established in `gr2`. **The code is the document.**
 
-1. **`MGRAS.h`**: Overall memory map, GIO64 (`0x1F000000`) and XIO widget windows, board identification, DCB register transaction decode, and common types (`gr4_reg32_t`).
+1. **`MGRAS.h`**: Overall memory map, GIO64 (`0x1F000000`, inferred: the host's graphics-slot map, not read from the graphics binaries, which take the board base as a runtime argument) and XIO widget windows, board identification, DCB register transaction decode, and common types (`gr4_reg32_t`).
 2. **`HQ3.h`**: Host interface registers, privileged and user command FIFOs, interrupt management, DMA channels, microcode control, and DCB bus protocol.
 3. **`GE11.h`**: Geometry Engine instruction formats, microcode layout, FIFO token definitions, primitive opcodes, matrix / vertex registers.
 4. **`RE4.h`**: Raster Engine registers, triangle setup parameters, edge iterators, line drawing parameters, screen masks, clipping registers, and fill modes.

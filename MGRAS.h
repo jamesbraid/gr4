@@ -86,7 +86,7 @@ typedef union {
  * ----------------------------------------------------------------------------
  *  Model            Board ID    GE11 Count  RE4 Count  TRAM Size   Color Depth
  * ----------------------------------------------------------------------------
- *  Solid Impact     GR4 rev <3      1           1        None       24-bit + Z
+ *  Solid Impact     GR4 (product 1) 1           1        None       24-bit + Z
  *  High Impact      GR4             1           1       1 or 4MB    24-bit + Z + Tex
  *  Maximum Impact   GR4             2           2 (dual) 4 MB       24-bit + Z + Tex
  * ----------------------------------------------------------------------------
@@ -133,7 +133,7 @@ typedef union {
  *          ┌───────────────────────┴───────────────────────┐
  *          ▼                                               ▼
  *  ┌───────────────┐  Private FIFO                 ┌───────────────┐
- *  │  GE11 ASIC 0  │ (Geometry FIFO)               │ DCB Slow Bus  │ (0x1F060000)
+ *  │  GE11 ASIC 0  │ (Geometry FIFO)               │ DCB Slow Bus  │ (0x1F060000, inferred)
  *  │Geometry Engine│                               └───────┬───────┘
  *  └───────┬───────┘                                       │
  *          │                                               ├─► VC3 (Video / Timing / Cursor)
@@ -206,7 +206,7 @@ typedef union {
  */
 
 /* GIO Graphics Slots (Indigo2 / IP22 / IP26 / IP28) */
-#define MGRAS_SLOT_GFX_BASE     0x1F000000  /* Slot 0 base physical address */
+#define MGRAS_SLOT_GFX_BASE     0x1F000000  /* Slot 0 base physical address (inferred: host slot map; the graphics objects take the base as an argument) */
 #define MGRAS_SLOT_GFX_SIZE     0x00400000  /* 4 MB slot decode window */
 #define MGRAS_MAP_SIZE          0x00100000  /* 1 MB active register window */
 
@@ -455,7 +455,7 @@ typedef union {
  */
 
 /*
- * PP1 XMAP DCB Interface (0x1F060000 - Device 0)
+ * PP1 XMAP DCB Interface (0x1F060000 - Device 0; absolute address inferred)
  *
  * Integrated into each PP1 (Pixel Processor) ASIC.
  * Provides per-pixel Window ID (WID / DID 0..31) decoding, buffer selection
