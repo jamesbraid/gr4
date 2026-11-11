@@ -120,7 +120,7 @@ usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x77bc	160	mgras
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x785c	108	mgras_fifotimer	dwarf+symtab	f8f76ea84538		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x78c8	1444	MgrasCtxsw	dwarf+symtab	15d8aa2f3c83		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x7e6c	1292	MgrasFIFOInterrupt	dwarf+symtab	373608f0a006		in	named-only	HQ3.h:250	
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8378	792	MgrasGeneralInterrupt	dwarf+symtab	29d6704affbf		in	named-only	HQ3.h:251	
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8378	792	MgrasGeneralInterrupt	dwarf+symtab	29d6704affbf		in	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8690	172	irix5_to_mgras_dma_util_single_args_xlate	dwarf+symtab	27a3cab301d0		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x873c	180	irix5_to_mgras_dma_util_multi_args_xlate	dwarf+symtab	dff2f3bc71be		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x87f0	164	irix5_to_mgras_dma_edit_replace_args_xlate	dwarf+symtab	ee589d89f598		in	named-only	docs/inventory/functions.tsv	
