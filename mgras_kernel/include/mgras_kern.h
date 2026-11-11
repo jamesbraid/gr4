@@ -5,7 +5,7 @@
  *   - mgras.o, mgras_init.o, mgras_dma.o, mgras_retrace.o, mgras_tex.o,
  *     mgras_tex_io.o, mgras_texsr.o, mgras_timing.o, mgras_tport.o,
  *     mgras_corona_i2c.o, mgras_ccv.o, mgras_mco.o, mgras_share.o, rrm.o
- * And SGI stand/arcs/lib/libsk/graphics/MGRAS PROM sources.
+ * And the PROM graphics code.
  */
 
 #ifndef _SGI_MGRAS_KERN_H_

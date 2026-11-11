@@ -205,23 +205,23 @@ extern "C" {
 /*
  * Instruction Register (RE4_REG_IR: 0x0013, alias 0x0045). A register write
  * with "execute" (direct window +0x1000, or HQ_CMD_RSS_EXECUTE) runs the IR
- * after the write lands. SGI's field names: Opcode (bits 3:0), Setup
+ * after the write lands. Fields: opcode (bits 3:0), setup
  * (bit 4: compute the primitive's setup from its start/end registers),
- * EPF_First / EPF_Last (line endpoint flags, positions not known yet).
+ * first and last line endpoint flags (positions not known yet).
  *
- * Opcodes, from SGI's diagnostics (IR_OP_* names), X server, and GE11 ucode:
- *   0x0  IR_OP_AREA_LTOR: 3D triangle area fill whose spans walk Left-to-Right
+ * Opcodes, from the X server and GE11 ucode:
+ *   0x0  RE4_IR_OP_AREA_LTOR: 3D triangle area fill whose spans walk Left-to-Right
  *        (major edge on the left). Dispatched with Setup = 0.
- *   0x1  IR_OP_AREA_RTOL: 3D triangle area fill whose spans walk Right-to-Left
+ *   0x1  RE4_IR_OP_AREA_RTOL: 3D triangle area fill whose spans walk Right-to-Left
  *        (major edge on the right). Dispatched with Setup = 0.
- *   0x2  IR_OP_GL_LINE: sub-pixel OpenGL line interpolated from the gline_*
+ *   0x2  RE4_IR_OP_GL_LINE: sub-pixel OpenGL line interpolated from the gline_*
  *        registers, Setup = 0.
- *   0x4  IR_OP_POINT (or IR_OP_X_POINT): each execute of xline_xystarti draws
+ *   0x4  RE4_IR_OP_POINT: each execute of xline_xystarti draws
  *        one pixel there (X PolyPoint writes ir_alias = 0x4, then xline_xystarti + execute).
- *   0x5  IR_OP_X_LINE: 2D integer line, used with Setup (ir_alias = 0x15):
+ *   0x5  RE4_IR_OP_X_LINE: 2D integer line, used with Setup (ir_alias = 0x15):
  *        RE4's hardware setup unit computes integer Bresenham increments and
  *        octant codes directly from xline_xystarti to xline_xyendi.
- *   0x8  IR_OP_BLOCK: 2D rectangular block, used with Setup (0x18):
+ *   0x8  RE4_IR_OP_BLOCK: 2D rectangular block, used with Setup (0x18):
  *        RE4's hardware setup unit computes dimensions directly from
  *        block_xystarti to block_xyendi; mode is chosen by the fill mode.
  *
@@ -236,8 +236,8 @@ extern "C" {
  * 1. RE4 RASTERIZES THE ENTIRE TRIANGLE AUTONOMOUSLY:
  *    The RE4 is NOT a per-span or per-pixel slave to the GE11. Once the GE11
  *    (or host CPU) loads the triangle setup registers and dispatches a single
- *    kickoff write to the Instruction Register (IR = IR_OP_AREA_LTOR or
- *    IR_OP_AREA_RTOL, with Setup = 0), RE4 hardware executes the ENTIRE
+ *    kickoff write to the Instruction Register (IR = RE4_IR_OP_AREA_LTOR or
+ *    RE4_IR_OP_AREA_RTOL, with Setup = 0), RE4 hardware executes the ENTIRE
  *    triangle rasterization autonomously to completion:
  *      - RE4 steps scanlines down the XZ plane in the -Y direction from ymax to ymin.
  *      - RE4's internal 64-bit slope DDAs track the major edge (C->A) and upper minor
@@ -257,15 +257,16 @@ extern "C" {
  *    generator compute all edge slopes, start coordinates, and plane derivatives.
  *    The GE11 microcode then streams these precalculated parameters into RE4's
  *    register file via the OFIFO and kicks off the rasterization.
- *    (When bypassing GE11 in diagnostic or direct CPU mode, as in SGI's _mg0_FillTriangle,
- *    the host CPU performs these exact same floating-point setup calculations).
+ *    (When GE11 is bypassed and the host CPU sets up the triangle directly,
+ *    the CPU would have to perform these same floating-point calculations;
+ *    no shipped binary read here does so, so this is INFERRED).
  *
  * 3. CONTRAST WITH 2D PRIMITIVES (HARDWARE SETUP ENGINE):
- *    The RE4 has an on-chip hardware Setup engine enabled via IR_SETUP (bit 4):
- *      - For integer Bresenham lines (IR_OP_X_LINE = 0x5, IR = 0x15):
+ *    The RE4 has an on-chip hardware Setup engine enabled via RE4_IR_SETUP (bit 4):
+ *      - For integer Bresenham lines (RE4_IR_OP_X_LINE = 0x5, IR = 0x15):
  *        RE4's hardware setup unit calculates error increments (inc1, inc2), initial
  *        error, and octant codes directly from xline_xystarti and xline_xyendi.
- *      - For rectangular blocks (IR_OP_BLOCK = 0x8, IR = 0x18):
+ *      - For rectangular blocks (RE4_IR_OP_BLOCK = 0x8, IR = 0x18):
  *        RE4's hardware setup unit derives span widths, heights, and fill parameters
  *        directly from block_xystarti and block_xyendi.
  *    Because 2D lines and blocks only require simple integer differences and comparisons
@@ -274,7 +275,9 @@ extern "C" {
  *    with Setup = 0.
  *
  * 4. TRIANGLE SETUP REGISTER SPECIFICATION:
- *    (Synthesized from SGI IDE _mg0_FillTriangle and GE11 microcode).
+ *    (INFERRED from the GE11 microcode alone. Details the microcode does not
+ *    show, such as the +49151.5 position bias, are UNKNOWN as to evidence
+ *    and settle with a trace of the setup writes for one triangle.)
  *    Vertices are sorted by window Y (Y up: top C, middle B, bottom A; cw.y >= bw.y >= aw.y):
  *    - Positions: Written as IEEE-754 single-precision floats biased by +49151.5.
  *      In the range [32768, 65536), a float's 23-bit mantissa aligns such that the
@@ -294,8 +297,8 @@ extern "C" {
  *        * x2 = bw.x + dxdy2 * (bw.y - floor(bw.y)) (at y = floor(bw.y))
  *    - Direction & Opcode:
  *        * Major edge x at bw.y: xmid = cw.x + ((cw.y - bw.y)/(cw.y - aw.y)) * (aw.x - cw.x).
- *        * If xmid <= bw.x: Direction is Left-to-Right -> IR_OP_AREA_LTOR (opcode 0x0).
- *        * If xmid > bw.x:  Direction is Right-to-Left -> IR_OP_AREA_RTOL (opcode 0x1).
+ *        * If xmid <= bw.x: Direction is Left-to-Right -> RE4_IR_OP_AREA_LTOR (opcode 0x0).
+ *        * If xmid > bw.x:  Direction is Right-to-Left -> RE4_IR_OP_AREA_RTOL (opcode 0x1).
  *    - Colour & Gradient Registers (0x005C-0x0067, 12.12 fixed: value * 0xFFF000):
  *        * Starting colour at first pixel: x = ceil(x0) (for LTOR) or floor(x0) (for RTOL),
  *          y = floor(cw.y). Written to RE_RED, RE_GREEN, RE_BLUE, RE_ALPHA.
@@ -322,11 +325,12 @@ extern "C" {
 #define RE4_CFG_BRES_RND            BIT(4)      /* Bresenham line rounding mode */
 
 /*
- * Fill Mode Register (RE4_REG_FILLMODE: 0x0110). SGI's field names:
- * PolyStipEn, CharStipEn, LineStipEn, LineStipAdv, FastFill, BlockType,
- * ShadeEN, RoundEN, ZiterEN, LineAA, PointAA. Positions below are from SGI's
- * diagnostic mgrashw.h; ShadeEN, RoundEN, ZiterEN, LineAA and PointAA are
- * not placed yet. Seen from the X server:
+ * Fill Mode Register (RE4_REG_FILLMODE: 0x0110). The fields are the polygon,
+ * character and line stipple enables, line stipple advance, fast fill and
+ * block type. Only the positions the X server values below exercise are
+ * tied to a binary; the others are UNKNOWN as to evidence. The shade,
+ * round, z-iterate and antialias enables are not placed yet. Seen from the
+ * X server:
  *   0x00018000  glyph blocks: block type 0 with bits 15 and 16, then the
  *               glyph bits through char_h / char_l
  *   0x00418008  block type 1 with CharStipEn and bit 15

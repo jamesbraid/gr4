@@ -6,7 +6,6 @@
  * Reverse-engineered hardware documentation.
  * Derived from the shipped binaries:
  *   - SGI IRIX PROM graphics code
- *   - SGI IDE diagnostics for the TETRAM, its functions and texture load
  *   - IRIX 6.5.0 kernel modules (mgras_tex.o, mgras_tex_io.o, mgras_texsr.o)
  *   - SGI OpenGL core driver (libGLcore.so) DWARF metadata
  */
@@ -69,7 +68,7 @@ extern "C" {
 
 /*
  * ============================================================================
- * HOW TEXELS GET IN AND OUT (traced from the IDE TRAM tests, the kernel's
+ * HOW TEXELS GET IN AND OUT (traced from the kernel's
  * TRAM page save/restore and libGLcore's texture loader)
  * ============================================================================
  *
@@ -97,7 +96,7 @@ extern "C" {
  *     (0, 1, 2 = 1, 2, 4 TRAMs) and the texture component count.
  *   - Texels then arrive as pixel data: from libGLcore through the GE pixel
  *     pipeline (INIT_PIXEL_STATE_ERAM 0x0CD + SEND_PIXELS 0x08D, so pixel
- *     transfer ops and format conversion apply), from the kernel and the IDE
+ *     transfer ops and format conversion apply), from the kernel
  *     as a raw host DMA. The kernel moves TRAM one page at a time as a
  *     64-texel-wide block (TL_S_SIZE = 0x40, XFRSIZE = rows << 16 | 0x40).
  *
@@ -131,11 +130,10 @@ extern "C" {
  * Load:
  *   - 0x07C lists: TL_WBUFFER = 0, TEXRBUFFER = 0, TEXMODE1 = 0x40818,
  *     TL_MODE = 0x34E06, TL_SPEC = 0x330.
- *   - TL_SPEC = lod (3:0) | log2 S (7:4) | log2 T (11:8); the IDE's
- *     0x1641/0x2532/0x3423 for levels 1-3 suggest bits 15:12 are the level
- *     again or max LOD.
+ *   - TL_SPEC = lod (3:0) | log2 S (7:4) | log2 T (11:8); bits 15:12 are
+ *     UNKNOWN.
  *   - TL_MODE: components - 1 in 2:1 (3 = RGBA), bit 14 set, 0x30000
- *     for RGBA8 in and out (the IDE's comment), 0xE00 the loader's border
+ *     (meaning UNKNOWN), 0xE00 the loader's border
  *     enables (see the TL_MODE bit table under BORDERS AND CLAMPING).
  *   - SAVE_RSS (fill mode 0x01400000), INIT_PIXEL_STATE_ERAM and
  *     PIXEL_STATE blocks, XFRMODE = 0xC00080, then SEND_PIXELS with routine
@@ -170,9 +168,8 @@ extern "C" {
  *     the texture enable), border colour 0.
  *   - TXADDR = 0, then 0x0EC writes TXMIPMAP = 0 (level 0 at page 0).
  *   - TXSIZE = 0x3333 (log2 sizes, four 4-bit fields), TXLOD = 1.
- *   - TXCLAMPSIZE = 0x10008 (the IDE wrote 0x40080 for a 128x64 load, so the
- *     fields are 12 bits wide; here T reads 16 for an 8-high texture, to be
- *     explained).
+ *   - TXCLAMPSIZE = 0x10008 (field widths UNKNOWN; T reads 16 for an
+ *     8-high texture, to be explained).
  *   - Tokens 0x00B and 0x00C bracket the textured primitives.
  *
  * Same trace with 4 TRAMs reported. Only three values change:
@@ -275,7 +272,7 @@ extern "C" {
  * Detail texture (SGIS_detail_texture): single pass, inside the sampler.
  * TXDETAIL 0x192 places it; TXSIZE carries the detail-to-base size ratio;
  * TEXMODE2 has a mag_detail enable. DETAILSCALE 0x194 is written
- * repeatedly in a row (the IDE writes it nine times), so it looks like a
+ * repeatedly in a row, so it looks like a
  * table loaded through one port: the detail function, weight against LOD.
  *
  * 3D textures: there is no R/W iterator anywhere in the register map
@@ -341,23 +338,11 @@ extern "C" {
  *               0x34E26 and 0x35A26. When the object's format selector is
  *               0, the routine also sets bit 0 and bit 12; when it is 8, it
  *               clears 12, 11 and 9.
- * The four enables at 12:9 are presumably the loader border modes the IDE
- * diagnostics name below, by count; which bit is which is NOT settled (the
- * diagnostics' mapping is by name only). Settles with a load of a bordered
+ * Which of the four enables at 12:9 is which loader border mode is NOT
+ * known, and neither are their names or roles; the traced values above fix
+ * only the set and clear pattern. Settles with a load of a bordered
  * image whose TL_MODE has exactly one of 12:9 set at a time, comparing where
- * the border texels land, or with the loader's bit definitions in the IDE
- * diagnostic.
- *
- * Loader border modes (IDE diagnostics name TL_MODE fields; bit
- * positions among 12:9 as above, assignment unknown):
- *   - tlsoutbrd_en: store borders at the outer edge;
- *   - tlsoutrep_en: border replication (hardware edge extension while
- *     loading?);
- *   - tlsinbrd_en: use border data at the S boundary between the two texel
- *     groups;
- *   - tltbrd_en: border stored on top.
- *   The IDE border tests (mgras_tex_bordertall / borderwide, with expected
- *   images) exercise these; NOT MODELLED.
+ * the border texels land. NOT MODELLED.
  *
  * OpenGL texture extensions in IMPACT's libGLcore (6.5.22, the extension
  * string of the textured configuration):
@@ -528,8 +513,7 @@ extern "C" {
  *
  * CAUTION: the register bitfield layouts (the *u unions) are not in the
  * sources we have. The TEXMODE2/TXSIZE/TXLOD bit positions below are
- * guesses; the diagnostic constants' TEXMODE2_* defines are field values, not
- * bit numbers. Values seen in practice:
+ * guesses. Values seen in practice:
  *   - TEXMODE2 = 0x11800 | (compdepth + 1) << 2 | db_enable << 4
  *   - TXSIZE  = 0xD6D6 for a whole-page read
  */

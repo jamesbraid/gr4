@@ -89,7 +89,7 @@ typedef union {
  *  Maximum Impact   GR4             2           2 (dual) 4 MB       24-bit + Z + Tex
  * ----------------------------------------------------------------------------
  *
- * How the drivers tell them apart (libsk MgrasGatherInfo, MgrasFillBoardID):
+ * How the drivers tell them apart (MgrasGatherInfo, MgrasFillBoardID):
  * BDVERS1 gives the board revision, the GE count and the product ID
  * (MGRAS_PRODUCT for High/Max, MGRAS_PRODUCT_MG10 for Solid). For
  * MGRAS_PRODUCT, BDVERS0's RB revision field (6:4) says whether the second
@@ -282,7 +282,7 @@ typedef union {
 #define MGRAS_DCB_DEV_I2C       11  /* Corona / DDC I2C bus controller (0x62C00, dcbctrl[11]: 0x6802C) */
 /*
  * Device 11 is shared by two parts. The Corona I2C controller takes its
- * data and control bytes at CRS 0 and CRS 1 (PROM code, 6.5.7). The
+ * data and control bytes at CRS 0 and CRS 1 (PROM code). The
  * multi-channel option (MCO) board has its own register set in the same
  * window. The kernel's multi-channel-option object (mgras_mco.o, 6.5.22)
  * programs all of it; the X server (impactpc.so mgrasAttachXvc and
@@ -939,9 +939,9 @@ typedef struct mgras_hw_s {
     volatile uint32_t   ge1_diag_a;                             /* 0x5004C */
     /*
      * Context switch request: the IRIX 6.5 kernel writes the microcode
-     * address of the switch routine here (e.g. 0x4FC). The 1994 diagnostic
-     * mgrashw.h put it at 0x500F8 and the privileged FIFO at 0x500F0;
-     * production drivers use the addresses below.
+     * address of the switch routine here (e.g. 0x4FC); production drivers
+     * use the address below. An earlier placement at 0x500F8 (with the
+     * privileged FIFO at 0x500F0) is UNKNOWN as to evidence and not used.
      */
     volatile uint32_t   ctxsw;                                  /* 0x50050 */
     volatile uint8_t    _pad_diag[0x50080 - 0x50054];
@@ -971,8 +971,7 @@ typedef struct mgras_hw_s {
 
     /*
      * 0x60000 - 0x67FFF: Display Control Bus (DCB) windows, 1 KB per device
-     * (MGRAS_DCB_DEV_*). The 1994 diagnostic mgrashw.h listed these in a
-     * different order; the order below is the production one, confirmed by
+     * (MGRAS_DCB_DEV_*). The order below is the production one, confirmed by
      * the per-device timing words the kernel programs (dcbctrl_* below) and
      * by the X server's accesses.
      */

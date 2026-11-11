@@ -161,7 +161,7 @@ extern "C" {
 
 /*
  * ============================================================================
- * STANDARD VIDEO TIMING CODES (diagnostic constants & PROM)
+ * STANDARD VIDEO TIMING CODES (PROM)
  * ============================================================================
  */
 #define VC3_TIMING_1600_1200_60     0x159       /* 1600x1200 @ 60Hz */

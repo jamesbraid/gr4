@@ -6,11 +6,6 @@
  * Reverse-engineered hardware documentation.
  * Derived from the shipped binaries:
  *   - SGI IRIX PROM graphics code
- *   - SGI IDE diagnostics for the GE11 (symbol labels, instruction words,
- *     command-processor tokens)
- *   - IRIX 6.5.7 diagnostic: the GE11 host tests and their expected replies,
- *     the diagnostic program (mgras_ge.hex), the GE11 register map and the
- *     memory description
  *   - GE11 microcode binaries and symbols (ucode/ge11.bin, ucode/mgras_ge.hex,
  *     ucode/mgras_ge.u with its line table, ucode/mgras_geif.u), IRIX 6.5.0,
  *     decoded with ghidra/processors/ge11
@@ -59,7 +54,7 @@ extern "C" {
  *      perspective division (1/w) and normal vector normalization (1/sqrt(x^2+y^2+z^2)).
  *
  * 4. ON-CHIP SRAM STORES:
- *    - Microcode RAM: 256K words x 72 bits (GE11_UCODERAM_LEN, mgrashw.h.diag;
+ *    - Microcode RAM: 256K words x 72 bits (GE11_UCODERAM_LEN;
  *      18-bit breakpoint address). gfxinit loads ge11.bin; the 6.5.0 program
  *      uses 0x0000-0xD5D8. See MICROCODE INSTRUCTION WORD.
  *    - CRAM (Constant RAM): 512 words of 32 bits, one bank with a single port,
@@ -79,6 +74,13 @@ extern "C" {
  * ============================================================================
  * GE11 MICROCODE & CONTROL REGISTERS (Offset 0x40000 - 0x4003C)
  * ============================================================================
+ *
+ * Grade: the window base and the execution-control GO bit are used by the
+ * PROM loader and the kernel's GE11 load routine (see "Loading and
+ * starting" below). The other register names, bit positions, widths and
+ * watermark defaults in this block have no binary read behind them in this
+ * file, so their evidence is UNKNOWN until each is read from the kernel
+ * graphics objects or the PROM loader code that touches it.
  */
 #define GE11_UCODE_BASE                 0x200000    /* Microcode physical load address */
 #define GE11_UCODE_SIZE                 (64 * 1024) /* 64K words standard */
@@ -142,20 +144,12 @@ extern "C" {
 #define GE11_ROUTE_RE_TO_HQ             BIT(8)      /* Loop RSS output back to HQ3 */
 
 /*
- * ============================================================================
- * KEY MICROCODE ENTRY POINTS (ge11symtab.h)
- * ============================================================================
+ * The microcode entry-point addresses (reset vector, token dispatch loop,
+ * command-FIFO loop, host read-back, context-switch dispatch, the pass and
+ * fail report words) are UNKNOWN for the production program. They settle
+ * by reading the module names in the 6.5.0 mgras_ge.u line table and the
+ * entry addresses in mgras_geif.u.
  */
-#define GE11_SYM_RESET_ENTRY            0x00000000  /* "HereWeGo" boot vector */
-#define GE11_SYM_MAIN_LOOP              0x000020C2  /* "MAIN_LOOP" token dispatch */
-#define GE11_SYM_CMDFIFO_DRAIN          0x000028B7  /* "CMDFIFO" processing loop */
-#define GE11_SYM_SEND_DATA_TO_HQ        0x00002D1C  /* "Send_data_to_HQ" readback */
-#define GE11_SYM_SWITCH_GE              0x00002D00  /* Context switch dispatch */
-#define GE11_SYM_REPORT_PASSED          0x00002D13  /* Diagnostic pass flag (0xCAFE) */
-#define GE11_SYM_REPORT_FAILED          0x00002D0A  /* Diagnostic fail flag (0xBAADCAFE) */
-
-#define GE11_DIAG_PASSED_SIG            0x0000CAFE
-#define GE11_DIAG_FAILED_SIG            0xBAADCAFE
 
 /*
  * ============================================================================
@@ -165,17 +159,13 @@ extern "C" {
  * The GE11 runs the 72-bit instruction set of the InfiniteReality (KONA)
  * geometry engine; the full field-by-field reading, with the evidence for
  * each field, is the KONA repository's ucode/ge_isa.md and ucode/ge_ops.md.
- * What ties the two chips together:
- *   - the 6.5.7 diagnostic's 172 expected words are, in order,
- *     the 172 words the KONA diagnostic irsaudit expects, and 931 words of
- *     mgras_ge.hex equal KONA diagnostic words in the same order (one
- *     assembly source assembled for both);
+ * What ties the two chips together is one fact:
  *   - where the two production programs hold the same 72-bit word (9133
  *     words), the assembler wrote the same 256-bit decoded record for 9132
  *     of them; the other, 782001d7c000000000, differs in two bits of a
  *     group no known field uses.
  * So every field and operation below applies to the GE11 as it does to
- * KONA. Labels: ESTABLISHED (read from the files or the host tests),
+ * KONA. Labels: ESTABLISHED (read from the files),
  * INFERRED (with the reason), UNKNOWN.
  *
  * Files (ESTABLISHED, IRIX 6.5.0):
@@ -194,10 +184,10 @@ extern "C" {
  *   mgras_geif.u       512 big-endian 32-bit words; 90 are nonzero, each an
  *                      address inside the program (see VERTEX PATH MODULES).
  *                      No 6.5.0 binary names the file; its reader is UNKNOWN.
- *   6.5.7 diagnostic   mgras_ge.hex,
- *                      12836 words, labels in the diagnostic's symbol table.
  *
- * Loading and starting (ESTABLISHED, PROM loader code and 6.5.7 register map): word n
+ * Loading and starting (INFERRED from the PROM loader code and the kernel's
+ * revision-program loader; the read-back mask, the PC reset and the latency
+ * setting are UNKNOWN until read from that code): word n
  * goes to diagnostic window 0x200000 + 4n as three 32-bit writes, bits 31-0,
  * 63-32, then 71-64 (read-back masked to 8 bits). Word 0 is written again to
  * reset the PC, then execution control 0x40000 gets GE11_GO with bit 4 clear:
@@ -208,10 +198,9 @@ extern "C" {
  *   W[70:67]   form, 15 layouts (4 never occurs). 6.5.0 non-padding words
  *              per form: 0:2891 1:63 2:481 3:787 5:1618 6:39 7:1107 8:507
  *              9:671 10:601 11:1480 12:4227 13:7996 14:13760 15:4088.
- *   W[71]      thread B (INFERRED: the diagnostic's vol_aalu3_cond_B repeats
- *              the thread-A flag test with W71 set and reads FPU_COND_B;
- *              the six per-thread output-FIFO status registers, 0x40020-
- *              0x40034, ESTABLISH two threads). 1909 words carry it.
+ *   W[71]      thread B (UNKNOWN as to meaning; the bit is set in 1909
+ *              words, and the six per-thread output-FIFO status registers,
+ *              0x40020-0x40034, suggest two threads, graded as above).
  *   immediates form 14: W[17:0], sign-extended; form 15: W[31:0], also
  *              IEEE single constants; form 5: W[40:31].
  *   operands   A, B, C, G (5 bits) and D, E, F (6 bits) at fixed record
@@ -226,30 +215,26 @@ extern "C" {
  *   - a result is forwarded to a later word 4 to 7 words after it is made;
  *   - the condition word (FPU_COND_A, low nibble unit 1, high nibble unit 2)
  *     is tested twelve words after the word that sets it;
- *   - a transfer takes effect after four delay words, a return after eight
- *     (Send_data_to_HQ: its store is the eighth word after the return);
+ *   - a transfer takes effect after four delay words, a return after eight;
  *     calls are group-0 transfers, returns R88 transfers in group 4.
  *
- * GE11-only facts (ESTABLISHED by the 6.5.7 host tests;
- * KONA's software never exercises them):
- *   - integer add (unit-1 code 0x40) saturates: iadd expects 0x7FFFFFFF +
- *     0x7FFFFFFF = 0x7FFFFFFF;
- *   - the address unit (F = 0x3F adds A and C) is 18 bits and wraps: aalu3
- *     expects 0x3FFFE + 2 = 0 and 0x3FFFF + 0x3FFFF = 0x3FFFE. Programs keep
- *     0xFFFE0000 (special registers) and 0xFFFF0000 (output window) as
- *     18-bit values with bit 17 set;
+ * GE11-only facts:
  *   - special register 6, CHIP_REV, is read at 0xFFFE0018 by the revision
  *     program the kernel loads before the real microcode (gevers_ucode,
- *     the PROM loader reads the reply into GE11Rev);
- *   - integer multiply (unit-2 code 0x0F) keeps the low 32 bits of the
- *     product (imul: 0x123 * 0x123 = 0x14AC9, 0x7FFFFFFF squared = 1). Its
- *     two rows with negative operands expect the first operand back; the
- *     table is compiled only for manufacturing and never run, so those rows
- *     are INFERRED to be wrong, not the chip.
+ *     the PROM loader reads the reply into GE11Rev); INFERRED, not yet
+ *     re-read from those binaries;
+ *   - programs keep 0xFFFE0000 (special registers) and 0xFFFF0000 (output
+ *     window) as 18-bit values with bit 17 set;
+ *   - UNKNOWN: whether integer add (unit-1 code 0x40) saturates, whether
+ *     the address unit (F = 0x3F adds A and C) wraps at 18 bits, and the
+ *     width of the integer multiply result (unit-2 code 0x0F). Settling
+ *     takes a trace of a 6.5.0 word that overflows each unit.
  *
  * Operation codes, unit 1 (M[6:0]; 0x7F idle) with their 6.5.0 production
- * counts. Each is ESTABLISHED by a word of the shared instruction test whose
- * reply ge_inst.h gives, unless marked:
+ * counts. The codes and counts are read from the 6.5.0 programs. What each
+ * code computes is INFERRED from the operands it is used with, and UNKNOWN
+ * where marked; none is ESTABLISHED, and a trace of one word of each
+ * with known operands would settle them:
  *   0x20 dadd 100   0x22 dsub 28    0x40 iadd 376   0x42 isub 431
  *   0x4A mov 7674   0x4B movb 14    0x50 and 714 (INFERRED)
  *   0x54 or 458 (INFERRED)          0x56 xor 72 (INFERRED)    0x58 not 27
@@ -262,14 +247,12 @@ extern "C" {
  *   0x6E, 0x70, 0x72, 0x74, 0x75, 0x76, 0x77 (69), 0x79, 0x7B (63), 0x7D,
  *   0x08, 0x0B.
  * Unit 2 (M[10:7] = k; 0xD idle):
- *   k 0 dmul 224    k 1 imul 169 (low 32 bits, see above)
+ *   k 0 dmul 224    k 1 imul 169
  *   k 4 fmov 305    k 6 dmov 45      k 8 fmul 5234
  *   k 9 2 - a*b 149 (reciprocal Newton-Raphson step)
  *   k 10 (3 - a*b) / 2 98 (reciprocal square root step)
- *   UNKNOWN: k 5 (393; returns operand 2 in the shared test), k 7 (6),
+ *   UNKNOWN: k 5 (393), k 7 (6),
  *   k 11 (98).
- * The 41 operations the instruction test fixes all decode as listed in the
- * 6.5.7 diagnostic (ghidra/processors/ge11/tests/check.py, test c).
  */
 
 /*
@@ -494,8 +477,8 @@ extern "C" {
  *        * Starting Z (0x0068/9) and depth gradients DZX (0x006A/B), DZE (0x006C/D)
  *        * Texture coordinate start values and derivatives (when texturing enabled)
  *    - Autonomous Kickoff:
- *      Determines scan direction: Left-to-Right (IR_OP_AREA_LTOR = 0x0) or
- *      Right-to-Left (IR_OP_AREA_RTOL = 0x1). Writes IR with opcode and execute
+ *      Determines scan direction: Left-to-Right (RE4_IR_OP_AREA_LTOR = 0x0) or
+ *      Right-to-Left (RE4_IR_OP_AREA_RTOL = 0x1). Writes IR with opcode and execute
  *      bit set (Setup = 0).
  *
  * 3. AUTONOMOUS RE4 RASTERIZATION:

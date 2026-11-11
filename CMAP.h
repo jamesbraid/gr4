@@ -46,7 +46,7 @@ extern "C" {
  *    - Integrated programmable PLL generates pixel dot clocks for all video formats.
  *    - Contains the GLOBAL SCREEN-WIDE GAMMA LOOK-UP TABLE (LUT):
  *        * Triple 256-entry x 10-bit RAM (RedGamma[256], GrnGamma[256], BluGamma[256]).
- *        * Programmed via dac.pal by the IRIX kernel (MgrasSetGammaRamp) or IDE (GammaTableLoad).
+ *        * Programmed via dac.pal by the IRIX kernel (MgrasSetGammaRamp).
  *        * Translates 8-bit R, G, B channel inputs (from either TrueColor RGB or CMAP CI lookup)
  *          into 10-bit gamma-corrected DAC levels (0..1023).
  *        * Applies uniformly across the entire display to all windows, visuals, and planes.

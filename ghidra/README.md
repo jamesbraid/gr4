@@ -38,8 +38,7 @@ the toolchain image without.)
 
 Language `GE11:BE:32:default`. Import a program raw with the `BinaryLoader`
 and run `ghidra_scripts/GE11Import.java` as a pre-script; it accepts
-`mgras_ge*.u`, `mgras_ge*.hex`, `ge11*.bin` and the 6.5.7 diagnostic
-`mgras_ge.hex` (pass `ge11symtab.h` as the script argument for its labels).
+`mgras_ge*.u`, `mgras_ge*.hex` and `ge11*.bin`.
 `tests/run-ghidra.sh` shows each form.
 
 The GE11 runs the 72-bit instruction set of the InfiniteReality geometry
@@ -62,20 +61,14 @@ that ship both forms (23969 distinct words). It reproduces every one of
 those records (`ge11_decode.py check`). On words outside them it is a
 prediction: measured on the KONA engine's programs (`ge11_decode.py
 compare`), it gives the exact record for 81.5% of the 24371 production
-words and 89.6% of the 2786 diagnostic words it was not learnt from, and
-the operation field M for 98.1% and 99.6%; the operand routing field
-`r110` is the weakest (88.6% and 97.2%). For the 6.5.7 diagnostic, 233 of
-its 3840 nonzero words occur in the 6.5.0 programs; the 41 operations its
-instruction test documents all decode right (check (c)).
+words, and the operation field M for 98.1%; the operand routing field
+`r110` is the weakest (88.6%).
 
 Tests (`tests/run-ghidra.sh`, then `tests/check.py`):
 
 - (a) `mgras_ge.hex` alone lists every word as `mgras_ge.u` does;
 - (b) `ge11.bin` alone lists the same, and its other 4757 words are the
   fill word `febaadcafebaadcafe`;
-- (c) the 6.5.7 diagnostic's output stores are the 172 words of
-  `ge_inst.h` in order plus the four thread-B words it comments out, and
-  each documented operation is the word that computes its output;
 - (d) every command handler of `mgras_geif.u`, every call target and every
   pixel module GE11.h names is a function;
 - (e) the decompiled matrix, transform and triangle modules carry float

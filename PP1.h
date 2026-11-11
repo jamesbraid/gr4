@@ -34,8 +34,7 @@ extern "C" {
  * 1. MULTI-CHIP INTERLEAVED RAMBUS INTERFACE:
  *    - Two PP1s per RE4: Solid/High Impact (one RE4) have 2 PP1 and 12MB of
  *      RDRAM; Super Solid/Maximum Impact (two RE4s) have 4 PP1 and 24MB
- *      (Octane technical report, Table 4.1; IDE diags PP_PER_RSS = 2,
- *      RDRAM_PER_PP = 3: three 2MB RDRAMs per PP1).
+ *      (Octane technical report, Table 4.1: three 2MB RDRAMs per PP1).
  *    - Each PP1 manages an independent 9-bit Rambus Channel connecting to
  *      high-speed RDRAM devices (Rambus DRAM). Pixels and scanlines are interleaved
  *      across PP1 chips to maximize parallel memory bandwidth.
@@ -329,7 +328,9 @@ extern "C" {
  * bytes), plus one 9-bit overlay buffer (8-bit CI + 1 spare bit). A buffer
  * is a run of RDRAM pages; a pointer is the page number it starts at.
  *
- * Where pixel (x, y) lives (IDE diag _xy_to_rdram, "algorithm 0"):
+ * Where pixel (x, y) lives (UNKNOWN as to evidence: the formulas below are
+ * the working model, not read from a binary; a trace of the RDRAM writes for
+ * single pixels would settle them):
  *   RE4      = y % numRE4s                 (scanlines interleave over RE4s)
  *   PP1      = x % 2
  *   y_hat    = y / numRE4s
@@ -354,9 +355,7 @@ extern "C" {
  * 2 * 448 + 128 = 1024 pages exactly (two 36-bit buffers + overlay), the
  * buffer counts the Octane report's Table 4.2 gives.
  *
- * DRBsize (0x16E), per MgrasSetRSSTiming (PROM code) and the IDE
- * diags (the info code packs bits 10:6 as "drb_misc = 0x9: DRB_RSS=1,
- * DMAlinecnt=2, AFE=0"; the redma code sets DRB_RSS = numRE4s - 1):
+ * DRBsize (0x16E), per MgrasSetRSSTiming (PROM code):
  *   bits 1:0   DRB_Xtiles9  = ceil(width / 768)
  *   bits 5:2   DRB_Xtiles36 = ceil(width / 192)
  *   bits 7:6   DRB_RSS      = raster engines - 1 (PP_1_RSS / PP_2_RSS)
@@ -366,8 +365,7 @@ extern "C" {
  *   bits 31:11 not a programmed setting: the kernel's writer builds bits
  *              10:0 from the screen width and RE4 count and leaves the rest as
  *              an uninitialised stack word (6.5 and 6.5.30 kernels; so the 0x90
- *              seen under 6.5.22 is a leftover, INFERRED). The diagnostics write
- *              them 0. Whether the chip latches them is unknown.
+ *              seen under 6.5.22 is a leftover, INFERRED). Whether the chip latches them is unknown.
  * Traced (6.5.22, IP28, 1024x768): High Impact 0x9000031A (6, 2, one
  * RSS, LCM 3); Maximum Impact 0x9000025A (6, 2, two RSS, LCM 2).
  *

@@ -762,15 +762,14 @@ extern "C" {
  * words its byte count announces (rounded up to whole words). Bit 31 picks
  * the kind of command word.
  *
- * Control command (bit 31 = 0), as SGI's diagnostics build it
- * (BUILD_CONTROL_COMMAND):
+ * Control command (bit 31 = 0):
  *   bits  7:0   byte count of the data that follows
  *   bits 20:8   command (see COMMAND SPACE)
  *   bit  21     sync
- *   bit  22     set by the kernel and the diagnostics; the X server leaves it 0
+ *   bit  22     set by the kernel; the X server leaves it 0
  *   bits 29:23  convert (formatter control)
  *
- * Pixel command (bit 31 = 1, BUILD_PIXEL_COMMAND): raw pixel data follows,
+ * Pixel command (bit 31 = 1): raw pixel data follows,
  * sent as doublewords.
  *   bits 19:0   byte count
  *   bits 21:20  destination address select
@@ -822,9 +821,9 @@ extern "C" {
 #define HQ_CMD_SET_FLAG_DONE        0x0E04
 
 /*
- * Command-processor tokens of SGI's diagnostic and bring-up microcode
- * (defined in the IDE diagnostics). The production kernel sends some
- * of them while initialising the GE11s and around context switches.
+ * Command-processor tokens. The production kernel sends some of them while
+ * initialising the GE11s and around context switches; the meaning of any
+ * the kernel is not seen to send is UNKNOWN as to evidence.
  */
 #define CP_DUMP_FOREVER             0xF3
 #define CP_GE_NOSAVE_NEXT_SWITCH    0xF4    /* kernel, after switching to its own context: skip the GE save at the next switch */
