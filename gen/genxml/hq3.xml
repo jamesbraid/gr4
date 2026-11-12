@@ -216,6 +216,23 @@ entry point stores first; the data words follow.</doc>
       <expect field="pixel" value="0"/>
     </test>
   </struct>
+  <struct name="CFIFO_INLINE" size="4" grade="inferred" from="driver and diagnostic readings">
+    <doc>Command-FIFO header of an inline data block (bit 31 set). The GL client sends
+pixel rows, bitmap images and geometry-engine tables this way. The byte length
+is in bits 19:0, and bits 23:22 give the offset of the first payload byte in
+its word. The block then takes (offset + length + 3) / 4 words. The length
+field is 20 bits wide; a reader that uses the 8-bit length of CFIFO_CTL
+consumes the wrong number of words. Read from the GL client's emitters and the
+kernel's table loader: a software expectation, not a board measurement.</doc>
+    <field name="inline_" start="31" size="1" type="uint" grade="inferred"/>
+    <field name="first_offset" start="22" size="2" type="uint" grade="inferred"/>
+    <field name="length" start="0" size="20" type="uint" grade="inferred"/>
+    <test value="0x80000214" kind="example">
+      <expect field="inline" value="1"/>
+      <expect field="first_offset" value="0"/>
+      <expect field="length" value="532"/>
+    </test>
+  </struct>
   <struct name="CTX_W1" size="4" grade="unknown" from="driver and diagnostic readings">
     <doc>Context image, word 1 (the flags word of the host-memory image the kernel
 keeps per context). Bits 26 and 27 are read from the kernel's code that
@@ -239,14 +256,37 @@ own context at creation).</doc>
   <constant name="BFIFO_HIWATER_DEFAULT" value="0x8" grade="established"/>
   <constant name="BFIFO_LOWATER_DEFAULT" value="0x2" grade="established"/>
   <constant name="BFIFO_MAX" value="0x10" grade="inferred"/>
+  <constant name="CFIFO_CLASS_DMA_BANK_0A" value="0xa" grade="inferred"/>
+  <constant name="CFIFO_CLASS_DMA_BANK_HOST" value="0x8" grade="inferred"/>
+  <constant name="CFIFO_CLASS_SYNC" value="0xe" grade="inferred"/>
+  <constant name="CFIFO_CMD_BITMAP" value="0x94" grade="inferred"/>
+  <constant name="CFIFO_CMD_CLEAR_COLOUR" value="0x15" grade="inferred"/>
+  <constant name="CFIFO_CMD_CLEAR_DEPTH" value="0x4a" grade="inferred"/>
+  <constant name="CFIFO_CMD_CLEAR_STENCIL" value="0x4c" grade="inferred"/>
+  <constant name="CFIFO_CMD_CLIP_BIND" value="0xe4" grade="inferred"/>
+  <constant name="CFIFO_CMD_CONTEXT_CONFIG" value="0x8c" grade="inferred"/>
+  <constant name="CFIFO_CMD_CONTEXT_OPEN" value="0x6" grade="inferred"/>
+  <constant name="CFIFO_CMD_ERAM_READ" value="0xfc" grade="inferred"/>
+  <constant name="CFIFO_CMD_ERAM_WRITE_ADDR" value="0xfb" grade="inferred"/>
+  <constant name="CFIFO_CMD_ERAM_WRITE_CHUNK" value="0xfd" grade="inferred"/>
+  <constant name="CFIFO_CMD_ERAM_WRITE_END" value="0xfa" grade="inferred"/>
+  <constant name="CFIFO_CMD_FILLER" value="0xe1" grade="inferred"/>
+  <constant name="CFIFO_CMD_FLUSH" value="0x36" grade="inferred"/>
+  <constant name="CFIFO_CMD_GE_TABLE_LOAD" value="0x82" grade="inferred"/>
   <constant name="CFIFO_CMD_NAME_POP" value="0xc6" grade="inferred"/>
   <constant name="CFIFO_CMD_NAME_PUSH" value="0xc7" grade="inferred"/>
   <constant name="CFIFO_CMD_NAME_REPLACE" value="0xc5" grade="inferred"/>
   <constant name="CFIFO_CMD_NAME_STACK_INIT" value="0xc4" grade="inferred"/>
+  <constant name="CFIFO_CMD_QUERY" value="0xa2" grade="inferred"/>
+  <constant name="CFIFO_CMD_RASTER_PAIRS" value="0x7f" grade="inferred"/>
+  <constant name="CFIFO_CMD_RASTER_TRIPLES" value="0x7c" grade="inferred"/>
   <constant name="CFIFO_CMD_RESULT_BEGIN" value="0x61" grade="inferred"/>
   <constant name="CFIFO_CMD_RESULT_END" value="0x62" grade="inferred"/>
+  <constant name="CFIFO_CMD_SCISSOR" value="0x39" grade="inferred"/>
   <constant name="CFIFO_CMD_SELECT_ENTER" value="0xcb" grade="inferred"/>
   <constant name="CFIFO_CMD_SELECT_EXIT" value="0xc9" grade="inferred"/>
+  <constant name="CFIFO_CMD_SWAP_TMESH" value="0xdc" grade="inferred"/>
+  <constant name="CFIFO_CMD_VIEWPORT" value="0x33" grade="inferred"/>
   <constant name="CFIFO_DELAY_DEFAULT" value="0x64" grade="established"/>
   <constant name="CFIFO_HIWATER_DEFAULT" value="0x28" grade="established"/>
   <constant name="CFIFO_LOWATER_DEFAULT" value="0x14" grade="established"/>

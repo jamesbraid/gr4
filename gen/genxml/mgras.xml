@@ -321,8 +321,19 @@ revision. Inferred from the kernel object.</doc>
   <constant name="GE1_UPLOAD_PORT_B" value="0x5804c" grade="established"/>
   <constant name="GE_READBACK_PORT_A" value="0x5822c" grade="established"/>
   <constant name="GE_READBACK_PORT_B" value="0x58230" grade="established"/>
+  <constant name="GL_CLIENT_FIFO_PROCESS_ADDR" value="0x124400" grade="inferred"/>
   <constant name="HQ4_NORMAL_FIFO_OFFSET" value="0x20400" grade="established" from="OpenBSD impact(4) driver register header"/>
   <constant name="HQ_GE_SELECT_ADDR" value="0x11000" grade="established"/>
+  <constant name="HQ_GL_DMA_STATUS_OFFSET" value="0x20200" grade="inferred"/>
+  <constant name="HQ_GL_DMA_STATUS_WAIT_MASK" value="0x1eff" grade="inferred"/>
+  <constant name="HQ_GL_FLAGS_OFFSET" value="0x20010" grade="inferred"/>
+  <constant name="HQ_GL_FLAG_CLEAR_OFFSET" value="0x20018" grade="inferred"/>
+  <constant name="HQ_GL_FLAG_FLUSH" value="0x100000" grade="inferred"/>
+  <constant name="HQ_GL_FLAG_QUERY_READY" value="0x20000" grade="inferred"/>
+  <constant name="HQ_GL_FLAG_SYNC_COMPLETE" value="0x10000" grade="inferred"/>
+  <constant name="HQ_GL_QUERY_ANSWER_OFFSET" value="0x28004" grade="inferred"/>
+  <constant name="HQ_GL_STATUS_OFFSET" value="0x20000" grade="inferred"/>
+  <constant name="HQ_GL_STATUS_PIPE_IDLE" value="0x2" grade="inferred"/>
   <constant name="MCO_BANK_BASE_CH0" value="0x0" grade="established"/>
   <constant name="MCO_BANK_BASE_CH1" value="0x20" grade="established"/>
   <constant name="MCO_BANK_BASE_CH2" value="0x30" grade="established"/>

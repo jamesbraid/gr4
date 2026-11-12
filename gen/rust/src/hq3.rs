@@ -835,6 +835,40 @@ pub mod cfifo_ctl {
         }
     }
 }
+/// Command-FIFO header of an inline data block (bit 31 set). The GL client sends pixel rows, bitmap images and geometry-engine tables this way. The byte  (inferred)
+pub mod cfifo_inline {
+    pub const WIDTH: u32 = 32;
+    pub mod inline { // bits 31:31, inferred
+        pub const SHIFT: u32 = 31;
+        pub const MASK: u32 = 0x1;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod first_offset { // bits 23:22, inferred
+        pub const SHIFT: u32 = 22;
+        pub const MASK: u32 = 0x3;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod length { // bits 19:0, inferred
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0xfffff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
 /// Context image, word 1 (the flags word of the host-memory image the kernel keeps per context). Bits 26 and 27 are read from the kernel's code that writ (unknown)
 pub mod ctx_w1 {
     pub const WIDTH: u32 = 32;
@@ -903,14 +937,37 @@ pub const BFIFO_DELAY_DEFAULT: u32 = 0x64; // established
 pub const BFIFO_HIWATER_DEFAULT: u32 = 0x8; // established
 pub const BFIFO_LOWATER_DEFAULT: u32 = 0x2; // established
 pub const BFIFO_MAX: u32 = 0x10; // inferred
+pub const CFIFO_CLASS_DMA_BANK_0A: u32 = 0xa; // inferred
+pub const CFIFO_CLASS_DMA_BANK_HOST: u32 = 0x8; // inferred
+pub const CFIFO_CLASS_SYNC: u32 = 0xe; // inferred
+pub const CFIFO_CMD_BITMAP: u32 = 0x94; // inferred
+pub const CFIFO_CMD_CLEAR_COLOUR: u32 = 0x15; // inferred
+pub const CFIFO_CMD_CLEAR_DEPTH: u32 = 0x4a; // inferred
+pub const CFIFO_CMD_CLEAR_STENCIL: u32 = 0x4c; // inferred
+pub const CFIFO_CMD_CLIP_BIND: u32 = 0xe4; // inferred
+pub const CFIFO_CMD_CONTEXT_CONFIG: u32 = 0x8c; // inferred
+pub const CFIFO_CMD_CONTEXT_OPEN: u32 = 0x6; // inferred
+pub const CFIFO_CMD_ERAM_READ: u32 = 0xfc; // inferred
+pub const CFIFO_CMD_ERAM_WRITE_ADDR: u32 = 0xfb; // inferred
+pub const CFIFO_CMD_ERAM_WRITE_CHUNK: u32 = 0xfd; // inferred
+pub const CFIFO_CMD_ERAM_WRITE_END: u32 = 0xfa; // inferred
+pub const CFIFO_CMD_FILLER: u32 = 0xe1; // inferred
+pub const CFIFO_CMD_FLUSH: u32 = 0x36; // inferred
+pub const CFIFO_CMD_GE_TABLE_LOAD: u32 = 0x82; // inferred
 pub const CFIFO_CMD_NAME_POP: u32 = 0xc6; // inferred
 pub const CFIFO_CMD_NAME_PUSH: u32 = 0xc7; // inferred
 pub const CFIFO_CMD_NAME_REPLACE: u32 = 0xc5; // inferred
 pub const CFIFO_CMD_NAME_STACK_INIT: u32 = 0xc4; // inferred
+pub const CFIFO_CMD_QUERY: u32 = 0xa2; // inferred
+pub const CFIFO_CMD_RASTER_PAIRS: u32 = 0x7f; // inferred
+pub const CFIFO_CMD_RASTER_TRIPLES: u32 = 0x7c; // inferred
 pub const CFIFO_CMD_RESULT_BEGIN: u32 = 0x61; // inferred
 pub const CFIFO_CMD_RESULT_END: u32 = 0x62; // inferred
+pub const CFIFO_CMD_SCISSOR: u32 = 0x39; // inferred
 pub const CFIFO_CMD_SELECT_ENTER: u32 = 0xcb; // inferred
 pub const CFIFO_CMD_SELECT_EXIT: u32 = 0xc9; // inferred
+pub const CFIFO_CMD_SWAP_TMESH: u32 = 0xdc; // inferred
+pub const CFIFO_CMD_VIEWPORT: u32 = 0x33; // inferred
 pub const CFIFO_DELAY_DEFAULT: u32 = 0x64; // established
 pub const CFIFO_HIWATER_DEFAULT: u32 = 0x28; // established
 pub const CFIFO_LOWATER_DEFAULT: u32 = 0x14; // established

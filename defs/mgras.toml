@@ -474,3 +474,14 @@ RSS_RE_SELECT_PIO_ADDR = { value = 0x02c448, grade = "inferred", doc = "the same
 RDRAM_ADDR_PORT_ADDR = { value = 0x02c570, grade = "inferred", doc = "RDRAM address port in the raster window, as the diagnostic uses it" }
 RDRAM_DATA_PORT_ADDR = { value = 0x02c574, grade = "established", doc = "RDRAM data port; the kernel reads it with each raster engine selected in turn" }
 RDRAM_BUFFER_PORT_ADDR = { value = 0x02c5b4, grade = "inferred", doc = "buffer pointer for the RDRAM path, as the diagnostic uses it" }
+GL_CLIENT_FIFO_PROCESS_ADDR = { value = 0x124400, grade = "inferred", doc = "address the IRIX GL client stores its command words to, in its own process mapping; the board window offset it maps to is not established (see docs/mgras-gl-commands.md)" }
+HQ_GL_STATUS_OFFSET = { value = 0x020000, grade = "inferred", doc = "HQ status word the GL client polls; bit 1 is the pipe-idle sense, the bit number the hq3 status register calls pipe_idle" }
+HQ_GL_FLAGS_OFFSET = { value = 0x020010, grade = "inferred", doc = "HQ flags word: sync complete (bit 16), query ready (bit 17) and flush (bit 20)" }
+HQ_GL_FLAG_CLEAR_OFFSET = { value = 0x020018, grade = "inferred", doc = "the client writes a flag mask here to clear those flags in the flags word" }
+HQ_GL_DMA_STATUS_OFFSET = { value = 0x020200, grade = "inferred", doc = "DMA status word; after a DMA read the client waits for the bits named by HQ_GL_DMA_STATUS_WAIT_MASK to clear" }
+HQ_GL_QUERY_ANSWER_OFFSET = { value = 0x028004, grade = "inferred", doc = "answer word read after a query flag is set; the kernel reads the same address after a geometry-engine download (GE_REVISION)" }
+HQ_GL_FLAG_SYNC_COMPLETE = { value = 0x10000, grade = "inferred", doc = "bit 16 of the flags word: a write fence sets it when earlier writes finish; the client clears it before a DMA setup" }
+HQ_GL_FLAG_QUERY_READY = { value = 0x20000, grade = "inferred", doc = "bit 17 of the flags word: the client clears it before a query and polls until the board sets it" }
+HQ_GL_FLAG_FLUSH = { value = 0x100000, grade = "inferred", doc = "bit 20 of the flags word: the client sets it itself after glFlush; the kernel's buffer-swap path reads and clears it (docs/OPEN_QUESTIONS.md)" }
+HQ_GL_STATUS_PIPE_IDLE = { value = 0x2, grade = "inferred", doc = "bit 1 of HQ_GL_STATUS_OFFSET; the client's finish and the kernel's raster idle wait both poll it" }
+HQ_GL_DMA_STATUS_WAIT_MASK = { value = 0x1eff, grade = "inferred", doc = "mask of DMA status bits the client waits to see clear after a DMA read; what each bit means is unknown" }

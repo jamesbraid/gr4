@@ -453,6 +453,28 @@ expect = { bytes = 6, command = 0, sync = 0, kernel = 0, convert = 114, pad_flag
 value = 0x59000004
 expect = { bytes = 4, command = 0, sync = 0, kernel = 0, convert = 50, pad_flag = 1, pixel = 0 }
 
+[words.CFIFO_INLINE]
+width = 32
+doc = """
+Command-FIFO header of an inline data block (bit 31 set). The GL client sends
+pixel rows, bitmap images and geometry-engine tables this way. The byte length
+is in bits 19:0, and bits 23:22 give the offset of the first payload byte in
+its word. The block then takes (offset + length + 3) / 4 words. The length
+field is 20 bits wide; a reader that uses the 8-bit length of CFIFO_CTL
+consumes the wrong number of words. Read from the GL client's emitters and the
+kernel's table loader: a software expectation, not a board measurement."""
+grade = "inferred"
+
+[words.CFIFO_INLINE.fields]
+inline = { bits = [31, 31], grade = "inferred" }
+first_offset = { bits = [23, 22], grade = "inferred" }
+length = { bits = [19, 0], grade = "inferred" }
+
+[[words.CFIFO_INLINE.tests]]
+kind = "example"
+value = 0x80000214
+expect = { inline = 1, first_offset = 0, length = 0x214 }
+
 [words.CTX_W1]
 width = 32
 doc = """
@@ -488,6 +510,29 @@ CFIFO_CMD_RESULT_BEGIN = { value = 0x61, grade = "inferred", doc = "command fiel
 CFIFO_CMD_RESULT_END = { value = 0x62, grade = "inferred", doc = "command field with no payload; ends the selection result fetch" }
 CFIFO_CMD_SELECT_ENTER = { value = 0xcb, grade = "inferred", doc = "command field with one payload word taken from the GL client's per-context state; selection entry" }
 CFIFO_CMD_SELECT_EXIT = { value = 0xc9, grade = "inferred", doc = "command field with no payload; leaving selection mode, result handling begins" }
+CFIFO_CMD_BITMAP = { value = 0x94, grade = "inferred", doc = "glBitmap small-image header; eight payload words of flags, size, origin, move and word count, then an inline block of the image" }
+CFIFO_CMD_CLEAR_COLOUR = { value = 0x15, grade = "inferred", doc = "colour-buffer clear, no payload; the GL client sends one per clear bit" }
+CFIFO_CMD_CLEAR_DEPTH = { value = 0x4a, grade = "inferred", doc = "depth-buffer clear, no payload" }
+CFIFO_CMD_CLEAR_STENCIL = { value = 0x4c, grade = "inferred", doc = "stencil-buffer clear, no payload" }
+CFIFO_CMD_CLIP_BIND = { value = 0xe4, grade = "inferred", doc = "kernel: the window clip-word packet of a loaded context, 60 payload bytes; see docs/mgras-gl-commands.md" }
+CFIFO_CMD_CONTEXT_CONFIG = { value = 0x8c, grade = "inferred", doc = "four payload bytes, one configuration int, sent after the context opener" }
+CFIFO_CMD_CONTEXT_OPEN = { value = 0x6, grade = "inferred", doc = "zero-length; the first word of each GL context setup" }
+CFIFO_CMD_ERAM_READ = { value = 0xfc, grade = "inferred", doc = "kernel: reads a context out of geometry-engine memory, with the ERAM address and word count; a DMA read follows" }
+CFIFO_CMD_ERAM_WRITE_ADDR = { value = 0xfb, grade = "inferred", doc = "kernel: the ERAM address and word count for the write-back chunk that precedes it" }
+CFIFO_CMD_ERAM_WRITE_CHUNK = { value = 0xfd, grade = "inferred", doc = "kernel: one write-back chunk of at most 0x384 words, with its count and DMA descriptor" }
+CFIFO_CMD_ERAM_WRITE_END = { value = 0xfa, grade = "inferred", doc = "kernel: ends a context write-back" }
+CFIFO_CMD_FILLER = { value = 0xe1, grade = "inferred", doc = "padding: an int count n, then n filler words the pipe discards; payload is 4n + 4 bytes" }
+CFIFO_CMD_FLUSH = { value = 0x36, grade = "inferred", doc = "glFlush, no payload" }
+CFIFO_CMD_GE_TABLE_LOAD = { value = 0x82, grade = "inferred", doc = "geometry-engine table load: a size-class int, then an inline block of descriptor and data words" }
+CFIFO_CMD_QUERY = { value = 0xa2, grade = "inferred", doc = "state query: three int payload words; the client then polls the query-ready flag and reads the answer" }
+CFIFO_CMD_RASTER_PAIRS = { value = 0x7f, grade = "inferred", doc = "raster register (register, value) pairs, after a record count and a word count" }
+CFIFO_CMD_RASTER_TRIPLES = { value = 0x7c, grade = "inferred", doc = "raster register three-word records, with the same count framing as the pairs" }
+CFIFO_CMD_SCISSOR = { value = 0x39, grade = "inferred", doc = "glScissor, four int words: x, width less one, y, height less one" }
+CFIFO_CMD_SWAP_TMESH = { value = 0xdc, grade = "inferred", doc = "IRIS GL swaptmesh inside a triangle strip, no payload" }
+CFIFO_CMD_VIEWPORT = { value = 0x33, grade = "inferred", doc = "glViewport, four int words: x, y, width, height" }
+CFIFO_CLASS_DMA_BANK_HOST = { value = 0x8, grade = "inferred", doc = "class field of the host-memory DMA descriptor bank, header 0x0008 in bits 31:16; the register number is in bits 15:8" }
+CFIFO_CLASS_DMA_BANK_0A = { value = 0xa, grade = "inferred", doc = "class field of the second DMA bank, used by the GL client's pixel read path; the meaning of registers 0x02, 0x03, 0x04 and 0x06 on a read is unknown" }
+CFIFO_CLASS_SYNC = { value = 0xe, grade = "inferred", doc = "class field of the synchronisation headers: register 0x04 is a write fence, register 0x01 a DMA-read sync" }
 CFIFO_DELAY_DEFAULT = { value = 0x64, grade = "established", doc = "diagnostic" }
 CFIFO_HIWATER_DEFAULT = { value = 0x28, grade = "established", doc = "diagnostic" }
 CFIFO_LOWATER_DEFAULT = { value = 0x14, grade = "established", doc = "diagnostic" }

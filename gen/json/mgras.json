@@ -862,6 +862,15 @@
   {
    "unit": "mgras",
    "kind": "constant",
+   "name": "GL_CLIENT_FIFO_PROCESS_ADDR",
+   "value": 1197056,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
    "name": "HQ4_NORMAL_FIFO_OFFSET",
    "value": 132096,
    "count": 1,
@@ -875,6 +884,96 @@
    "value": 69632,
    "count": 1,
    "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_GL_DMA_STATUS_OFFSET",
+   "value": 131584,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_GL_DMA_STATUS_WAIT_MASK",
+   "value": 7935,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_GL_FLAGS_OFFSET",
+   "value": 131088,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_GL_FLAG_CLEAR_OFFSET",
+   "value": 131096,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_GL_FLAG_FLUSH",
+   "value": 1048576,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_GL_FLAG_QUERY_READY",
+   "value": 131072,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_GL_FLAG_SYNC_COMPLETE",
+   "value": 65536,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_GL_QUERY_ANSWER_OFFSET",
+   "value": 163844,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_GL_STATUS_OFFSET",
+   "value": 131072,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_GL_STATUS_PIPE_IDLE",
+   "value": 2,
+   "count": 1,
+   "grade": "inferred",
    "from": "driver and firmware readings"
   },
   {

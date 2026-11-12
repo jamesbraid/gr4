@@ -332,6 +332,27 @@
 #define HQ_CFIFO_CTL_BYTES_INPLACE                   (HQ_CFIFO_CTL_BYTES_MASK << HQ_CFIFO_CTL_BYTES_SHIFT)
 
 /*
+ * Command-FIFO header of an inline data block (bit 31 set). The GL client sends
+ * pixel rows, bitmap images and geometry-engine tables this way. The byte length
+ * is in bits 19:0, and bits 23:22 give the offset of the first payload byte in
+ * its word. The block then takes (offset + length + 3) / 4 words. The length
+ * field is 20 bits wide; a reader that uses the 8-bit length of CFIFO_CTL
+ * consumes the wrong number of words. Read from the GL client's emitters and the
+ * kernel's table loader: a software expectation, not a board measurement.
+ */
+/* word CFIFO_INLINE: 32 bits; driver and diagnostic readings */
+#define HQ_CFIFO_INLINE_WIDTH                        32 /* inferred */
+#define HQ_CFIFO_INLINE_INLINE_SHIFT                 31 /* inferred */
+#define HQ_CFIFO_INLINE_INLINE_MASK                  0x1u
+#define HQ_CFIFO_INLINE_INLINE_INPLACE               (HQ_CFIFO_INLINE_INLINE_MASK << HQ_CFIFO_INLINE_INLINE_SHIFT)
+#define HQ_CFIFO_INLINE_FIRST_OFFSET_SHIFT           22 /* inferred */
+#define HQ_CFIFO_INLINE_FIRST_OFFSET_MASK            0x3u
+#define HQ_CFIFO_INLINE_FIRST_OFFSET_INPLACE         (HQ_CFIFO_INLINE_FIRST_OFFSET_MASK << HQ_CFIFO_INLINE_FIRST_OFFSET_SHIFT)
+#define HQ_CFIFO_INLINE_LENGTH_SHIFT                 0 /* inferred */
+#define HQ_CFIFO_INLINE_LENGTH_MASK                  0xfffffu
+#define HQ_CFIFO_INLINE_LENGTH_INPLACE               (HQ_CFIFO_INLINE_LENGTH_MASK << HQ_CFIFO_INLINE_LENGTH_SHIFT)
+
+/*
  * Context image, word 1 (the flags word of the host-memory image the kernel
  * keeps per context). Bits 26 and 27 are read from the kernel's code that
  * writes them; 29 to 31 come from traced values and the kernel clearing them
@@ -363,14 +384,37 @@
 #define HQ_BFIFO_HIWATER_DEFAULT                     0x8u /* established */
 #define HQ_BFIFO_LOWATER_DEFAULT                     0x2u /* established */
 #define HQ_BFIFO_MAX                                 0x10u /* inferred */
+#define HQ_CFIFO_CLASS_DMA_BANK_0A                   0xau /* inferred */
+#define HQ_CFIFO_CLASS_DMA_BANK_HOST                 0x8u /* inferred */
+#define HQ_CFIFO_CLASS_SYNC                          0xeu /* inferred */
+#define HQ_CFIFO_CMD_BITMAP                          0x94u /* inferred */
+#define HQ_CFIFO_CMD_CLEAR_COLOUR                    0x15u /* inferred */
+#define HQ_CFIFO_CMD_CLEAR_DEPTH                     0x4au /* inferred */
+#define HQ_CFIFO_CMD_CLEAR_STENCIL                   0x4cu /* inferred */
+#define HQ_CFIFO_CMD_CLIP_BIND                       0xe4u /* inferred */
+#define HQ_CFIFO_CMD_CONTEXT_CONFIG                  0x8cu /* inferred */
+#define HQ_CFIFO_CMD_CONTEXT_OPEN                    0x6u /* inferred */
+#define HQ_CFIFO_CMD_ERAM_READ                       0xfcu /* inferred */
+#define HQ_CFIFO_CMD_ERAM_WRITE_ADDR                 0xfbu /* inferred */
+#define HQ_CFIFO_CMD_ERAM_WRITE_CHUNK                0xfdu /* inferred */
+#define HQ_CFIFO_CMD_ERAM_WRITE_END                  0xfau /* inferred */
+#define HQ_CFIFO_CMD_FILLER                          0xe1u /* inferred */
+#define HQ_CFIFO_CMD_FLUSH                           0x36u /* inferred */
+#define HQ_CFIFO_CMD_GE_TABLE_LOAD                   0x82u /* inferred */
 #define HQ_CFIFO_CMD_NAME_POP                        0xc6u /* inferred */
 #define HQ_CFIFO_CMD_NAME_PUSH                       0xc7u /* inferred */
 #define HQ_CFIFO_CMD_NAME_REPLACE                    0xc5u /* inferred */
 #define HQ_CFIFO_CMD_NAME_STACK_INIT                 0xc4u /* inferred */
+#define HQ_CFIFO_CMD_QUERY                           0xa2u /* inferred */
+#define HQ_CFIFO_CMD_RASTER_PAIRS                    0x7fu /* inferred */
+#define HQ_CFIFO_CMD_RASTER_TRIPLES                  0x7cu /* inferred */
 #define HQ_CFIFO_CMD_RESULT_BEGIN                    0x61u /* inferred */
 #define HQ_CFIFO_CMD_RESULT_END                      0x62u /* inferred */
+#define HQ_CFIFO_CMD_SCISSOR                         0x39u /* inferred */
 #define HQ_CFIFO_CMD_SELECT_ENTER                    0xcbu /* inferred */
 #define HQ_CFIFO_CMD_SELECT_EXIT                     0xc9u /* inferred */
+#define HQ_CFIFO_CMD_SWAP_TMESH                      0xdcu /* inferred */
+#define HQ_CFIFO_CMD_VIEWPORT                        0x33u /* inferred */
 #define HQ_CFIFO_DELAY_DEFAULT                       0x64u /* established */
 #define HQ_CFIFO_HIWATER_DEFAULT                     0x28u /* established */
 #define HQ_CFIFO_LOWATER_DEFAULT                     0x14u /* established */

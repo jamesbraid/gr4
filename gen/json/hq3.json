@@ -1173,6 +1173,41 @@
   {
    "unit": "hq3",
    "kind": "word",
+   "name": "CFIFO_INLINE",
+   "width": 32,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "field",
+   "name": "CFIFO_INLINE.inline",
+   "hi": 31,
+   "lo": 31,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "field",
+   "name": "CFIFO_INLINE.first_offset",
+   "hi": 23,
+   "lo": 22,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "field",
+   "name": "CFIFO_INLINE.length",
+   "hi": 19,
+   "lo": 0,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "word",
    "name": "CTX_W1",
    "width": 32,
    "grade": "unknown",
@@ -1271,6 +1306,159 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CLASS_DMA_BANK_0A",
+   "value": 10,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CLASS_DMA_BANK_HOST",
+   "value": 8,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CLASS_SYNC",
+   "value": 14,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_BITMAP",
+   "value": 148,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_CLEAR_COLOUR",
+   "value": 21,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_CLEAR_DEPTH",
+   "value": 74,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_CLEAR_STENCIL",
+   "value": 76,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_CLIP_BIND",
+   "value": 228,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_CONTEXT_CONFIG",
+   "value": 140,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_CONTEXT_OPEN",
+   "value": 6,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_ERAM_READ",
+   "value": 252,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_ERAM_WRITE_ADDR",
+   "value": 251,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_ERAM_WRITE_CHUNK",
+   "value": 253,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_ERAM_WRITE_END",
+   "value": 250,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_FILLER",
+   "value": 225,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_FLUSH",
+   "value": 54,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_GE_TABLE_LOAD",
+   "value": 130,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_CMD_NAME_POP",
    "value": 198,
    "count": 1,
@@ -1307,6 +1495,33 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CMD_QUERY",
+   "value": 162,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_RASTER_PAIRS",
+   "value": 127,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_RASTER_TRIPLES",
+   "value": 124,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_CMD_RESULT_BEGIN",
    "value": 97,
    "count": 1,
@@ -1325,6 +1540,15 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CMD_SCISSOR",
+   "value": 57,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_CMD_SELECT_ENTER",
    "value": 203,
    "count": 1,
@@ -1336,6 +1560,24 @@
    "kind": "constant",
    "name": "CFIFO_CMD_SELECT_EXIT",
    "value": 201,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SWAP_TMESH",
+   "value": 220,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_VIEWPORT",
+   "value": 51,
    "count": 1,
    "grade": "inferred",
    "from": "driver and diagnostic readings"

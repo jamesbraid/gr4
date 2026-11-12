@@ -244,6 +244,7 @@ Array of 32 registers, stride 1.
 | Word | Width | Grade | Source |
 |---|---|---|---|
 | `CFIFO_CTL` | 32 | inferred | driver and diagnostic readings |
+| `CFIFO_INLINE` | 32 | inferred | driver and diagnostic readings |
 | `CTX_W1` | 32 | unknown | driver and diagnostic readings |
 
 ### Word `CFIFO_CTL`
@@ -260,6 +261,22 @@ entry point stores first; the data words follow.
 | 21 | `sync` | established |  | driver and diagnostic readings |  |
 | 20:8 | `command` | established |  | driver and diagnostic readings |  |
 | 7:0 | `bytes` | established |  | driver and diagnostic readings |  |
+
+### Word `CFIFO_INLINE`
+
+Command-FIFO header of an inline data block (bit 31 set). The GL client sends
+pixel rows, bitmap images and geometry-engine tables this way. The byte length
+is in bits 19:0, and bits 23:22 give the offset of the first payload byte in
+its word. The block then takes (offset + length + 3) / 4 words. The length
+field is 20 bits wide; a reader that uses the 8-bit length of CFIFO_CTL
+consumes the wrong number of words. Read from the GL client's emitters and the
+kernel's table loader: a software expectation, not a board measurement.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 31 | `inline` | inferred |  | driver and diagnostic readings |  |
+| 23:22 | `first_offset` | inferred |  | driver and diagnostic readings |  |
+| 19:0 | `length` | inferred |  | driver and diagnostic readings |  |
 
 ### Word `CTX_W1`
 
@@ -286,14 +303,37 @@ own context at creation).
 | `BFIFO_HIWATER_DEFAULT` | 0x8 | established | driver and diagnostic readings | diagnostic |
 | `BFIFO_LOWATER_DEFAULT` | 0x2 | established | driver and diagnostic readings | diagnostic |
 | `BFIFO_MAX` | 0x10 | inferred | driver and diagnostic readings |  |
+| `CFIFO_CLASS_DMA_BANK_0A` | 0xa | inferred | driver and diagnostic readings | class field of the second DMA bank, used by the GL client's pixel read path; the meaning of registers 0x02, 0x03, 0x04 and 0x06 on a read is unknown |
+| `CFIFO_CLASS_DMA_BANK_HOST` | 0x8 | inferred | driver and diagnostic readings | class field of the host-memory DMA descriptor bank, header 0x0008 in bits 31:16; the register number is in bits 15:8 |
+| `CFIFO_CLASS_SYNC` | 0xe | inferred | driver and diagnostic readings | class field of the synchronisation headers: register 0x04 is a write fence, register 0x01 a DMA-read sync |
+| `CFIFO_CMD_BITMAP` | 0x94 | inferred | driver and diagnostic readings | glBitmap small-image header; eight payload words of flags, size, origin, move and word count, then an inline block of the image |
+| `CFIFO_CMD_CLEAR_COLOUR` | 0x15 | inferred | driver and diagnostic readings | colour-buffer clear, no payload; the GL client sends one per clear bit |
+| `CFIFO_CMD_CLEAR_DEPTH` | 0x4a | inferred | driver and diagnostic readings | depth-buffer clear, no payload |
+| `CFIFO_CMD_CLEAR_STENCIL` | 0x4c | inferred | driver and diagnostic readings | stencil-buffer clear, no payload |
+| `CFIFO_CMD_CLIP_BIND` | 0xe4 | inferred | driver and diagnostic readings | kernel: the window clip-word packet of a loaded context, 60 payload bytes; see docs/mgras-gl-commands.md |
+| `CFIFO_CMD_CONTEXT_CONFIG` | 0x8c | inferred | driver and diagnostic readings | four payload bytes, one configuration int, sent after the context opener |
+| `CFIFO_CMD_CONTEXT_OPEN` | 0x6 | inferred | driver and diagnostic readings | zero-length; the first word of each GL context setup |
+| `CFIFO_CMD_ERAM_READ` | 0xfc | inferred | driver and diagnostic readings | kernel: reads a context out of geometry-engine memory, with the ERAM address and word count; a DMA read follows |
+| `CFIFO_CMD_ERAM_WRITE_ADDR` | 0xfb | inferred | driver and diagnostic readings | kernel: the ERAM address and word count for the write-back chunk that precedes it |
+| `CFIFO_CMD_ERAM_WRITE_CHUNK` | 0xfd | inferred | driver and diagnostic readings | kernel: one write-back chunk of at most 0x384 words, with its count and DMA descriptor |
+| `CFIFO_CMD_ERAM_WRITE_END` | 0xfa | inferred | driver and diagnostic readings | kernel: ends a context write-back |
+| `CFIFO_CMD_FILLER` | 0xe1 | inferred | driver and diagnostic readings | padding: an int count n, then n filler words the pipe discards; payload is 4n + 4 bytes |
+| `CFIFO_CMD_FLUSH` | 0x36 | inferred | driver and diagnostic readings | glFlush, no payload |
+| `CFIFO_CMD_GE_TABLE_LOAD` | 0x82 | inferred | driver and diagnostic readings | geometry-engine table load: a size-class int, then an inline block of descriptor and data words |
 | `CFIFO_CMD_NAME_POP` | 0xc6 | inferred | driver and diagnostic readings | command field of a CFIFO_CTL word with no payload; the GL client's selection name-stack pop, from the client's API handler |
 | `CFIFO_CMD_NAME_PUSH` | 0xc7 | inferred | driver and diagnostic readings | command field with one payload word (the name); the GL client's selection name push |
 | `CFIFO_CMD_NAME_REPLACE` | 0xc5 | inferred | driver and diagnostic readings | command field with one payload word (the name); the GL client's selection name replacement |
 | `CFIFO_CMD_NAME_STACK_INIT` | 0xc4 | inferred | driver and diagnostic readings | command field with no payload; the GL client's selection name-stack initialisation |
+| `CFIFO_CMD_QUERY` | 0xa2 | inferred | driver and diagnostic readings | state query: three int payload words; the client then polls the query-ready flag and reads the answer |
+| `CFIFO_CMD_RASTER_PAIRS` | 0x7f | inferred | driver and diagnostic readings | raster register (register, value) pairs, after a record count and a word count |
+| `CFIFO_CMD_RASTER_TRIPLES` | 0x7c | inferred | driver and diagnostic readings | raster register three-word records, with the same count framing as the pairs |
 | `CFIFO_CMD_RESULT_BEGIN` | 0x61 | inferred | driver and diagnostic readings | command field with no payload; the GL client brackets its selection result fetch with this and CFIFO_CMD_RESULT_END |
 | `CFIFO_CMD_RESULT_END` | 0x62 | inferred | driver and diagnostic readings | command field with no payload; ends the selection result fetch |
+| `CFIFO_CMD_SCISSOR` | 0x39 | inferred | driver and diagnostic readings | glScissor, four int words: x, width less one, y, height less one |
 | `CFIFO_CMD_SELECT_ENTER` | 0xcb | inferred | driver and diagnostic readings | command field with one payload word taken from the GL client's per-context state; selection entry |
 | `CFIFO_CMD_SELECT_EXIT` | 0xc9 | inferred | driver and diagnostic readings | command field with no payload; leaving selection mode, result handling begins |
+| `CFIFO_CMD_SWAP_TMESH` | 0xdc | inferred | driver and diagnostic readings | IRIS GL swaptmesh inside a triangle strip, no payload |
+| `CFIFO_CMD_VIEWPORT` | 0x33 | inferred | driver and diagnostic readings | glViewport, four int words: x, y, width, height |
 | `CFIFO_DELAY_DEFAULT` | 0x64 | established | driver and diagnostic readings | diagnostic |
 | `CFIFO_HIWATER_DEFAULT` | 0x28 | established | driver and diagnostic readings | diagnostic |
 | `CFIFO_LOWATER_DEFAULT` | 0x14 | established | driver and diagnostic readings | diagnostic |
@@ -338,4 +378,5 @@ A vector is a value recorded from a source. An example only shows the layout.
 | `flag_set` | 0xe200 | vector | ucode_error=1, dma_address_error=1, cfifo_privilege_violation=1, dma_access_or_stack_overflow=1 |
 | `CFIFO_CTL` | 0x39000006 | vector | bytes=6, command=0, sync=0, kernel=0, convert=114, pad_flag=0, pixel=0 |
 | `CFIFO_CTL` | 0x59000004 | vector | bytes=4, command=0, sync=0, kernel=0, convert=50, pad_flag=1, pixel=0 |
+| `CFIFO_INLINE` | 0x80000214 | example | inline=1, first_offset=0, length=532 |
 | `CTX_W1` | 0xc000000 | vector | banks_changed=1, xserver_shadow=1, bit28=0, first_load=0 |

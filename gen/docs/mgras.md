@@ -300,8 +300,19 @@ revision. Inferred from the kernel object.
 | `GE1_UPLOAD_PORT_B` | 0x5804c | established | driver and firmware readings | second of the two program upload ports for geometry engine 1 |
 | `GE_READBACK_PORT_A` | 0x5822c | established | driver and firmware readings | read-back port shared by both geometry engines; the kernel reads it to verify a download |
 | `GE_READBACK_PORT_B` | 0x58230 | established | driver and firmware readings | second read-back port shared by both geometry engines |
+| `GL_CLIENT_FIFO_PROCESS_ADDR` | 0x124400 | inferred | driver and firmware readings | address the IRIX GL client stores its command words to, in its own process mapping; the board window offset it maps to is not established (see docs/mgras-gl-commands.md) |
 | `HQ4_NORMAL_FIFO_OFFSET` | 0x20400 | established | OpenBSD impact(4) driver register header | normal command FIFO in the board's register window; the driver writes aligned 64-bit packets here |
 | `HQ_GE_SELECT_ADDR` | 0x11000 | established | driver and firmware readings | host interface control word; the geometry engine select field is HQ_GE_SELECT |
+| `HQ_GL_DMA_STATUS_OFFSET` | 0x20200 | inferred | driver and firmware readings | DMA status word; after a DMA read the client waits for the bits named by HQ_GL_DMA_STATUS_WAIT_MASK to clear |
+| `HQ_GL_DMA_STATUS_WAIT_MASK` | 0x1eff | inferred | driver and firmware readings | mask of DMA status bits the client waits to see clear after a DMA read; what each bit means is unknown |
+| `HQ_GL_FLAGS_OFFSET` | 0x20010 | inferred | driver and firmware readings | HQ flags word: sync complete (bit 16), query ready (bit 17) and flush (bit 20) |
+| `HQ_GL_FLAG_CLEAR_OFFSET` | 0x20018 | inferred | driver and firmware readings | the client writes a flag mask here to clear those flags in the flags word |
+| `HQ_GL_FLAG_FLUSH` | 0x100000 | inferred | driver and firmware readings | bit 20 of the flags word: the client sets it itself after glFlush; the kernel's buffer-swap path reads and clears it (docs/OPEN_QUESTIONS.md) |
+| `HQ_GL_FLAG_QUERY_READY` | 0x20000 | inferred | driver and firmware readings | bit 17 of the flags word: the client clears it before a query and polls until the board sets it |
+| `HQ_GL_FLAG_SYNC_COMPLETE` | 0x10000 | inferred | driver and firmware readings | bit 16 of the flags word: a write fence sets it when earlier writes finish; the client clears it before a DMA setup |
+| `HQ_GL_QUERY_ANSWER_OFFSET` | 0x28004 | inferred | driver and firmware readings | answer word read after a query flag is set; the kernel reads the same address after a geometry-engine download (GE_REVISION) |
+| `HQ_GL_STATUS_OFFSET` | 0x20000 | inferred | driver and firmware readings | HQ status word the GL client polls; bit 1 is the pipe-idle sense, the bit number the hq3 status register calls pipe_idle |
+| `HQ_GL_STATUS_PIPE_IDLE` | 0x2 | inferred | driver and firmware readings | bit 1 of HQ_GL_STATUS_OFFSET; the client's finish and the kernel's raster idle wait both poll it |
 | `MCO_BANK_BASE_CH0` | 0x0 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH1` | 0x20 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH2` | 0x30 | established | driver and firmware readings |  |
