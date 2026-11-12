@@ -293,8 +293,18 @@
 #define RE_FILL_MODE_POLY_STIPPLE_MASK               0x1u
 #define RE_FILL_MODE_POLY_STIPPLE_INPLACE            (RE_FILL_MODE_POLY_STIPPLE_MASK << RE_FILL_MODE_POLY_STIPPLE_SHIFT)
 
+/*
+ * Texture mode, first word. The client clears bits 15 to 12 before it chooses the
+ * colour table format. Its RGB-compatible table path then writes 0xe in that field.
+ * Only that value is read from the client's code; the other values of the field
+ * are not known.
+ */
 /* texmode1: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_TEXMODE1_OFFSET                           0xe111u /* inferred */
+#define RE_TEXMODE1_COLOUR_TABLE_SHIFT               12 /* inferred */
+#define RE_TEXMODE1_COLOUR_TABLE_MASK                0xfu
+#define RE_TEXMODE1_COLOUR_TABLE_INPLACE             (RE_TEXMODE1_COLOUR_TABLE_MASK << RE_TEXMODE1_COLOUR_TABLE_SHIFT)
+#define RE_TEXMODE1_COLOUR_TABLE_RGB_LOOKUP          14 /* inferred */
 
 /* config: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_CONFIG_OFFSET                             0xe112u /* inferred */

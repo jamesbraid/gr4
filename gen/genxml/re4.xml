@@ -23,6 +23,9 @@
     <value name="dma_read" value="4" grade="inferred"/>
     <value name="dma_write" value="5" grade="inferred"/>
   </enum>
+  <enum name="texmode1_colour_table">
+    <value name="rgb_lookup" value="14" grade="inferred"/>
+  </enum>
   <enum name="xfer_mode_format">
     <value name="color_index" value="0" grade="inferred"/>
     <value name="stencil" value="1" grade="inferred"/>
@@ -205,6 +208,11 @@ antialiasing of lines and points exist but are not placed.</doc>
     </test>
   </struct>
   <struct name="TEXMODE1" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe111" access="rw" space="re4_regs" reset="unknown">
+    <doc>Texture mode, first word. The client clears bits 15 to 12 before it chooses the
+colour table format. Its RGB-compatible table path then writes 0xe in that field.
+Only that value is read from the client's code; the other values of the field
+are not known.</doc>
+    <field name="colour_table" start="12" size="4" type="texmode1_colour_table" grade="inferred"/>
   </struct>
   <struct name="CONFIG" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe112" access="rw" space="re4_regs" reset="unknown">
     <field name="line_round" start="4" size="1" type="uint" grade="inferred"/>

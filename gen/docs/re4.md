@@ -294,6 +294,15 @@ antialiasing of lines and points exist but are not placed.
 
 ### Register `texmode1`
 
+Texture mode, first word. The client clears bits 15 to 12 before it chooses the
+colour table format. Its RGB-compatible table path then writes 0xe in that field.
+Only that value is read from the client's code; the other values of the field
+are not known.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 15:12 | `colour_table` | inferred | rgb_lookup=14 | driver and traffic readings |  |
+
 ### Register `config`
 
 | Bits | Field | Grade | Values | Source | Description |

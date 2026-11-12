@@ -1094,6 +1094,23 @@
   },
   {
    "unit": "re4",
+   "kind": "field",
+   "name": "texmode1.colour_table",
+   "hi": 15,
+   "lo": 12,
+   "grade": "inferred",
+   "from": "driver and traffic readings"
+  },
+  {
+   "unit": "re4",
+   "kind": "enum_value",
+   "name": "texmode1.colour_table.rgb_lookup",
+   "value": 14,
+   "grade": "inferred",
+   "from": "driver and traffic readings"
+  },
+  {
+   "unit": "re4",
    "kind": "register",
    "name": "config",
    "offset": 57618,

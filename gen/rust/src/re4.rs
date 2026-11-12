@@ -606,10 +606,40 @@ pub mod fill_mode {
         }
     }
 }
-/// (inferred)
+/// Texture mode, first word. The client clears bits 15 to 12 before it chooses the colour table format. Its RGB-compatible table path then writes 0xe in  (inferred)
 pub mod texmode1 {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe111;
+    pub mod colour_table { // bits 15:12, inferred
+        pub const SHIFT: u32 = 12;
+        pub const MASK: u32 = 0xf;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+        pub const RGB_LOOKUP: u32 = 14; // inferred
+        #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+        pub enum Value {
+            RgbLookup,
+            Other(u32),
+        }
+        impl Value {
+            pub const fn from_raw(v: u32) -> Self {
+                match v {
+                    14 => Self::RgbLookup,
+                    _ => Self::Other(v),
+                }
+            }
+            pub const fn raw(self) -> u32 {
+                match self {
+                    Self::RgbLookup => 14,
+                    Self::Other(v) => v,
+                }
+            }
+        }
+    }
 }
 /// (inferred)
 pub mod config {

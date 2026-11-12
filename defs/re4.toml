@@ -529,7 +529,19 @@ offset = 0xe111
 access = "rw"
 width = 32
 grade = "inferred"
+doc = """
+Texture mode, first word. The client clears bits 15 to 12 before it chooses the
+colour table format. Its RGB-compatible table path then writes 0xe in that field.
+Only that value is read from the client's code; the other values of the field
+are not known."""
 space = "re4_regs"
+
+[registers.texmode1.fields.colour_table]
+bits = [15, 12]
+grade = "inferred"
+
+[registers.texmode1.fields.colour_table.enums]
+rgb_lookup = { value = 0xe, grade = "inferred" }
 
 [registers.config]
 offset = 0xe112
