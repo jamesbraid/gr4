@@ -12,6 +12,7 @@ opening heading or first sentence.
 
 - [docs/IMPACT_BOARD_FACTS.md](docs/IMPACT_BOARD_FACTS.md): Facts from published SGI documents the headers did not yet carry.
 - [docs/mgras-board-identity.md](docs/mgras-board-identity.md): How IRIX reads the IMPACT board identity words, the product and revision codes, and what captured boards read back.
+- [docs/mgras-client-selection-feedback.md](docs/mgras-client-selection-feedback.md): How the IRIX GL client runs selection mode, the command forms it writes and how it reads hit records back.
 - [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md): Ledger of header unknowns and what shipped software settles.
 - [docs/ge11-program-format.md](docs/ge11-program-format.md): What the shipped GE11 microcode images show about the 72-bit instruction word, with grades and the conflicts with GE11.h.
 - [docs/TRAM_CORRUPTION_ANALYSIS.md](docs/TRAM_CORRUPTION_ANALYSIS.md): TRAM page desynchronization and texture corruption analysis for libGLcore.

@@ -239,6 +239,14 @@ own context at creation).</doc>
   <constant name="BFIFO_HIWATER_DEFAULT" value="0x8" grade="established"/>
   <constant name="BFIFO_LOWATER_DEFAULT" value="0x2" grade="established"/>
   <constant name="BFIFO_MAX" value="0x10" grade="inferred"/>
+  <constant name="CFIFO_CMD_NAME_POP" value="0xc6" grade="inferred"/>
+  <constant name="CFIFO_CMD_NAME_PUSH" value="0xc7" grade="inferred"/>
+  <constant name="CFIFO_CMD_NAME_REPLACE" value="0xc5" grade="inferred"/>
+  <constant name="CFIFO_CMD_NAME_STACK_INIT" value="0xc4" grade="inferred"/>
+  <constant name="CFIFO_CMD_RESULT_BEGIN" value="0x61" grade="inferred"/>
+  <constant name="CFIFO_CMD_RESULT_END" value="0x62" grade="inferred"/>
+  <constant name="CFIFO_CMD_SELECT_ENTER" value="0xcb" grade="inferred"/>
+  <constant name="CFIFO_CMD_SELECT_EXIT" value="0xc9" grade="inferred"/>
   <constant name="CFIFO_DELAY_DEFAULT" value="0x64" grade="established"/>
   <constant name="CFIFO_HIWATER_DEFAULT" value="0x28" grade="established"/>
   <constant name="CFIFO_LOWATER_DEFAULT" value="0x14" grade="established"/>

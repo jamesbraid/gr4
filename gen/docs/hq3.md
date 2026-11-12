@@ -286,6 +286,14 @@ own context at creation).
 | `BFIFO_HIWATER_DEFAULT` | 0x8 | established | driver and diagnostic readings | diagnostic |
 | `BFIFO_LOWATER_DEFAULT` | 0x2 | established | driver and diagnostic readings | diagnostic |
 | `BFIFO_MAX` | 0x10 | inferred | driver and diagnostic readings |  |
+| `CFIFO_CMD_NAME_POP` | 0xc6 | inferred | driver and diagnostic readings | command field of a CFIFO_CTL word with no payload; the GL client's selection name-stack pop, from the client's API handler |
+| `CFIFO_CMD_NAME_PUSH` | 0xc7 | inferred | driver and diagnostic readings | command field with one payload word (the name); the GL client's selection name push |
+| `CFIFO_CMD_NAME_REPLACE` | 0xc5 | inferred | driver and diagnostic readings | command field with one payload word (the name); the GL client's selection name replacement |
+| `CFIFO_CMD_NAME_STACK_INIT` | 0xc4 | inferred | driver and diagnostic readings | command field with no payload; the GL client's selection name-stack initialisation |
+| `CFIFO_CMD_RESULT_BEGIN` | 0x61 | inferred | driver and diagnostic readings | command field with no payload; the GL client brackets its selection result fetch with this and CFIFO_CMD_RESULT_END |
+| `CFIFO_CMD_RESULT_END` | 0x62 | inferred | driver and diagnostic readings | command field with no payload; ends the selection result fetch |
+| `CFIFO_CMD_SELECT_ENTER` | 0xcb | inferred | driver and diagnostic readings | command field with one payload word taken from the GL client's per-context state; selection entry |
+| `CFIFO_CMD_SELECT_EXIT` | 0xc9 | inferred | driver and diagnostic readings | command field with no payload; leaving selection mode, result handling begins |
 | `CFIFO_DELAY_DEFAULT` | 0x64 | established | driver and diagnostic readings | diagnostic |
 | `CFIFO_HIWATER_DEFAULT` | 0x28 | established | driver and diagnostic readings | diagnostic |
 | `CFIFO_LOWATER_DEFAULT` | 0x14 | established | driver and diagnostic readings | diagnostic |

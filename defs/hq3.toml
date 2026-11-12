@@ -480,6 +480,14 @@ BFIFO_DELAY_DEFAULT = { value = 0x64, grade = "established", doc = "diagnostic" 
 BFIFO_HIWATER_DEFAULT = { value = 0x8, grade = "established", doc = "diagnostic" }
 BFIFO_LOWATER_DEFAULT = { value = 0x2, grade = "established", doc = "diagnostic" }
 BFIFO_MAX = { value = 0x10, grade = "inferred" }
+CFIFO_CMD_NAME_POP = { value = 0xc6, grade = "inferred", doc = "command field of a CFIFO_CTL word with no payload; the GL client's selection name-stack pop, from the client's API handler" }
+CFIFO_CMD_NAME_PUSH = { value = 0xc7, grade = "inferred", doc = "command field with one payload word (the name); the GL client's selection name push" }
+CFIFO_CMD_NAME_REPLACE = { value = 0xc5, grade = "inferred", doc = "command field with one payload word (the name); the GL client's selection name replacement" }
+CFIFO_CMD_NAME_STACK_INIT = { value = 0xc4, grade = "inferred", doc = "command field with no payload; the GL client's selection name-stack initialisation" }
+CFIFO_CMD_RESULT_BEGIN = { value = 0x61, grade = "inferred", doc = "command field with no payload; the GL client brackets its selection result fetch with this and CFIFO_CMD_RESULT_END" }
+CFIFO_CMD_RESULT_END = { value = 0x62, grade = "inferred", doc = "command field with no payload; ends the selection result fetch" }
+CFIFO_CMD_SELECT_ENTER = { value = 0xcb, grade = "inferred", doc = "command field with one payload word taken from the GL client's per-context state; selection entry" }
+CFIFO_CMD_SELECT_EXIT = { value = 0xc9, grade = "inferred", doc = "command field with no payload; leaving selection mode, result handling begins" }
 CFIFO_DELAY_DEFAULT = { value = 0x64, grade = "established", doc = "diagnostic" }
 CFIFO_HIWATER_DEFAULT = { value = 0x28, grade = "established", doc = "diagnostic" }
 CFIFO_LOWATER_DEFAULT = { value = 0x14, grade = "established", doc = "diagnostic" }

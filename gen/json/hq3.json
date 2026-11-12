@@ -1271,6 +1271,78 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CMD_NAME_POP",
+   "value": 198,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_NAME_PUSH",
+   "value": 199,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_NAME_REPLACE",
+   "value": 197,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_NAME_STACK_INIT",
+   "value": 196,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_RESULT_BEGIN",
+   "value": 97,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_RESULT_END",
+   "value": 98,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SELECT_ENTER",
+   "value": 203,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SELECT_EXIT",
+   "value": 201,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_DELAY_DEFAULT",
    "value": 100,
    "count": 1,

@@ -363,6 +363,14 @@
 #define HQ_BFIFO_HIWATER_DEFAULT                     0x8u /* established */
 #define HQ_BFIFO_LOWATER_DEFAULT                     0x2u /* established */
 #define HQ_BFIFO_MAX                                 0x10u /* inferred */
+#define HQ_CFIFO_CMD_NAME_POP                        0xc6u /* inferred */
+#define HQ_CFIFO_CMD_NAME_PUSH                       0xc7u /* inferred */
+#define HQ_CFIFO_CMD_NAME_REPLACE                    0xc5u /* inferred */
+#define HQ_CFIFO_CMD_NAME_STACK_INIT                 0xc4u /* inferred */
+#define HQ_CFIFO_CMD_RESULT_BEGIN                    0x61u /* inferred */
+#define HQ_CFIFO_CMD_RESULT_END                      0x62u /* inferred */
+#define HQ_CFIFO_CMD_SELECT_ENTER                    0xcbu /* inferred */
+#define HQ_CFIFO_CMD_SELECT_EXIT                     0xc9u /* inferred */
 #define HQ_CFIFO_DELAY_DEFAULT                       0x64u /* established */
 #define HQ_CFIFO_HIWATER_DEFAULT                     0x28u /* established */
 #define HQ_CFIFO_LOWATER_DEFAULT                     0x14u /* established */
