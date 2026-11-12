@@ -45,8 +45,8 @@ extern "C" {
  *
  * 2. TRUECOLOR RAMDAC (Analog Devices ADV7161 / ADV7162, Device 6: 0x61800):
  *    - Triple 10-bit high-speed D/A converters driving analog RGB outputs up to 220 MHz
- *      (the part's quoted rate: unverified, no data sheet for it is held; a
- *      data sheet from the Library would settle it).
+ *      (established: the ADV7160/ADV7162 data sheet's fastest speed grade; which
+ *      grade the boards carry is unknown).
  *    - Integrated programmable PLL generates pixel dot clocks for all video formats.
  *    - Contains the GLOBAL SCREEN-WIDE GAMMA LOOK-UP TABLE (LUT):
  *        * Triple 256-entry x 10-bit RAM (RedGamma[256], GrnGamma[256], BluGamma[256]).
@@ -137,8 +137,8 @@ extern "C" {
 #define DAC_UNPACK_GAMMA(raw)       ((((raw) & 0xFF00) >> 6) | ((raw) & 0x03))
 
 /* Internal DAC Indirect Register Addresses */
-#define DAC_ADDR_ID                 0x03        /* Product ID (0x76 = ADV7161 Old, 0x79 = ADV7162 New) */
-#define DAC_ADDR_PIXMASK            0x04        /* Pixel read mask (0xFF = all planes active, 0 = blank) */
+#define DAC_ADDR_ID                 0x03        /* Product ID (data sheet: 0x79 = ADV7162, 0x76 = ADV7160; the ADV7161 label for 0x76 is unconfirmed) */
+#define DAC_ADDR_PIXMASK            0x04        /* Pixel mask register (data sheet: ANDed with each pixel's R, G, B; 0xFF = all planes active, 0 = blank) */
 #define DAC_ADDR_CMD1               0x05        /* Command register 1 (pixel port mode & true color format) */
 #define DAC_ADDR_CMD2               0x06        /* Command register 2 (sync on green & pedestal setup) */
 #define DAC_ADDR_CMD3               0x07        /* Command register 3 (pixel multiplexing, 4:1 mux) */
@@ -148,7 +148,7 @@ extern "C" {
 #define DAC_ADDR_REV                0x0B        /* Silicon revision */
 #define DAC_ADDR_PLL_R              0x0C        /* PLL reference divisor */
 #define DAC_ADDR_PLL_V              0x0F        /* PLL VCO multiplier */
-#define DAC_ADDR_CURS               0x204       /* Cursor palette address */
+#define DAC_ADDR_CURS               0x204       /* Cursor control register (data sheet; the cursor colours are 0x303 and 0x304) */
 
 /* Default DAC Initialization Values */
 #define DAC_INIT_MODE               0x23        /* Standard RGB 24-bit TrueColor */

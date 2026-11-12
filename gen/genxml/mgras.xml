@@ -190,7 +190,7 @@ offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.</doc>
   <constant name="ADV7162_PORT_DATA" value="0x2" grade="established"/>
   <constant name="ADV7162_PORT_PALETTE" value="0x1" grade="established"/>
   <constant name="ADV7162_PORT_POINTER" value="0x0" grade="established"/>
-  <constant name="ADV7162_PORT_PROBE" value="0x3" grade="unknown"/>
+  <constant name="ADV7162_PORT_PROBE" value="0x3" grade="inferred"/>
   <constant name="ADV7162_REG_BLANK" value="0x4" grade="established"/>
   <constant name="ADV7162_REG_ID" value="0x3" grade="established"/>
   <constant name="ADV7162_RESTORE_VALUE" value="0xffff" grade="established"/>

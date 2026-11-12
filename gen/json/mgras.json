@@ -409,7 +409,7 @@
    "name": "ADV7162_PORT_PROBE",
    "value": 3,
    "count": 1,
-   "grade": "unknown",
+   "grade": "inferred",
    "from": "driver and firmware readings"
   },
   {

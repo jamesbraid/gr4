@@ -146,7 +146,7 @@
 #define MGRAS_ADV7162_PORT_DATA                      0x2u /* established */
 #define MGRAS_ADV7162_PORT_PALETTE                   0x1u /* established */
 #define MGRAS_ADV7162_PORT_POINTER                   0x0u /* established */
-#define MGRAS_ADV7162_PORT_PROBE                     0x3u /* unknown */
+#define MGRAS_ADV7162_PORT_PROBE                     0x3u /* inferred */
 #define MGRAS_ADV7162_REG_BLANK                      0x4u /* established */
 #define MGRAS_ADV7162_REG_ID                         0x3u /* established */
 #define MGRAS_ADV7162_RESTORE_VALUE                  0xffffu /* established */

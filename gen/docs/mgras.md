@@ -129,8 +129,8 @@ offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.
 | `ADV7162_PORT_DATA` | 0x2 | established | driver and firmware readings |  |
 | `ADV7162_PORT_PALETTE` | 0x1 | established | driver and firmware readings |  |
 | `ADV7162_PORT_POINTER` | 0x0 | established | driver and firmware readings |  |
-| `ADV7162_PORT_PROBE` | 0x3 | unknown | driver and firmware readings |  |
-| `ADV7162_REG_BLANK` | 0x4 | established | driver and firmware readings |  |
+| `ADV7162_PORT_PROBE` | 0x3 | inferred | driver and firmware readings | the part's mode register: the data sheet's fourth MPU port and its 3, 2, word reset sequence match the loader's writes (established); that the board wires its index low bits to the select lines is inferred; the name is kept for consumers |
+| `ADV7162_REG_BLANK` | 0x4 | established | driver and firmware readings | the pixel mask register, 004H in the data sheet: 8 bits, ANDed with every pixel's red, green and blue bits |
 | `ADV7162_REG_ID` | 0x3 | established | driver and firmware readings |  |
 | `ADV7162_RESTORE_VALUE` | 0xffff | established | driver and firmware readings |  |
 | `CMAP_ENTRIES` | 0x2000 | established | driver and firmware readings | per map; 24-bit width inferred |

@@ -354,9 +354,12 @@ typedef union {
  *       gamma value); base+2 is the data port of the register the pointer
  *       selects (the kernel writes the mode, command and PLL registers
  *       this way, pointer values 6, 7, 8, 9, 0xC, 0xD, 0xF and 0x204 from
- *       a per-video-format table). base+3 is used by the probe, which
- *       writes 3, then 2, then one table byte through it and reads the
- *       byte back (role UNKNOWN). The probe also points the pointer at 3
+ *       a per-video-format table). base+3 is the part's mode register
+ *       (ESTABLISHED by the ADV7160/ADV7162 data sheet's port map, which has
+ *       four ports chosen by two select lines; the loader writes 3, then 2,
+ *       then one table byte through it and reads the byte back, the data
+ *       sheet's reset sequence for that register; that the board wires its
+ *       index low bits to those select lines is INFERRED). The loader also points the pointer at 3
  *       and reads base+2: a healthy part returns 0x79, so register 3 is
  *       the part's identification register (ESTABLISHED, the kernel
  *       compares against it).
@@ -388,10 +391,10 @@ typedef union {
  * index-0x20 and 0x30 ports) and writes 16 bits to the data port: 0x0000
  * to blank, 0xFFFF to unblank. For each ADV473-class channel it writes
  * port 2 (0 or 0xFF) and port 6 (0x32 to blank, 0x30 to unblank). So
- * ADV7162 register 4 is a 16-bit mask over every pixel (INFERRED to
- * be the pixel read mask: the effect is ESTABLISHED by the blank and
- * unblank values, the name is not, and no ADV7162 datasheet is in the
- * Library to check the register number against). Bit 1 of the 473-class
+ * ADV7162 register 4 is the pixel mask register (ESTABLISHED by the
+ * ADV7160/ADV7162 data sheet: register 004H, an 8-bit register ANDed with
+ * every pixel's red, green and blue bits; the 16-bit store width is the
+ * bus access, and what the part does with the upper byte is not stated). Bit 1 of the 473-class
  * command register is all that differs between the two branches (meaning
  * UNKNOWN).
  */
@@ -550,8 +553,8 @@ typedef struct {
  * as a 16-bit access (0x61910). That is register pointer 4 of the same
  * ADV7162 part the MCO board carries: a mask that is 0 when blanked and all
  * ones when not (see the MCO blanking sequence above). The register number
- * is ESTABLISHED by the pointer write; calling it the pixel read mask is
- * INFERRED. */
+ * is ESTABLISHED by the pointer write, and that it is the pixel mask
+ * register by the ADV7160/ADV7162 data sheet (register 004H). */
 
 typedef struct {
     uint8_t             pad0[MGRAS_DAC_ADDR];

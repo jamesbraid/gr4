@@ -217,8 +217,8 @@ ADV7162_ID_VALUE = { value = 0x79, grade = "established" }
 ADV7162_PORT_DATA = { value = 0x2, grade = "established" }
 ADV7162_PORT_PALETTE = { value = 0x1, grade = "established" }
 ADV7162_PORT_POINTER = { value = 0x0, grade = "established" }
-ADV7162_PORT_PROBE = { value = 0x3, grade = "unknown" }
-ADV7162_REG_BLANK = { value = 0x4, grade = "established" }
+ADV7162_PORT_PROBE = { value = 0x3, grade = "inferred", doc = "the part's mode register: the data sheet's fourth MPU port and its 3, 2, word reset sequence match the loader's writes (established); that the board wires its index low bits to the select lines is inferred; the name is kept for consumers" }
+ADV7162_REG_BLANK = { value = 0x4, grade = "established", doc = "the pixel mask register, 004H in the data sheet: 8 bits, ANDed with every pixel's red, green and blue bits" }
 ADV7162_REG_ID = { value = 0x3, grade = "established" }
 ADV7162_RESTORE_VALUE = { value = 0xffff, grade = "established" }
 CMAP_ENTRIES = { value = 0x2000, grade = "established", doc = "per map; 24-bit width inferred" }
