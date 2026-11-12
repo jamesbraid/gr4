@@ -1,7 +1,7 @@
 table	rows	out_of_scope	understood	understood_with_open	understood_distinct	templated	located	named_only	undocumented	no_software_dependency	pct_understood	pct_located_or_better	pct_mentioned	pct_done	unresolved_sites	truncated	audited_real_pct	audited_sample	audited_date	computes	reused	multi_unit	shared_address	address_unknown	input
 binaries	59	0	0	0	0	0	0	31	28	0	0.0	0.0	52.5	0.0							0				
-functions	11974	0	205	4	203	0	32	11729	8	0	1.7	2.0	99.9	1.7							0	24	1224	0	
-functions (distinct names)	11963	0	205	4	203	0	32	11718	8	0	1.7	2.0	99.9	1.7							0				
+functions	11974	0	324	10	320	0	50	11592	8	0	2.7	3.1	99.9	2.7							0	24	1224	0	
+functions (distinct names)	11963	0	324	10	320	0	50	11581	8	0	2.7	3.1	99.9	2.7							0				
 mmio	10	0	0	0	0	0	0	7	3	0	0.0	0.0	70.0	0.0	0						0				
 tokens	6	0	0	0	0	0	0	6	0	0	0.0	0.0	100.0	0.0							0				
 ioctls	27	0	0	0	0	0	0	23	4	0	0.0	0.0	85.2	0.0							0				
@@ -12,17 +12,17 @@ functions in usr/cpu/sysgen/IP28boot/gfx.o	59	0	59	0	58	0	0	0	0	0	100.0	100.0	10
 functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	76	0	76	2	75	0	0	0	0	0	100.0	100.0	100.0	100.0							0	0	0	0	
 functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	10	0	10	0	10	0	0	0	0	0	100.0	100.0	100.0	100.0							0	0	0	0	
 functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	28	0	24	0	24	0	4	0	0	0	85.7	100.0	100.0	85.7							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	43	0	20	0	20	0	8	15	0	0	46.5	65.1	100.0	46.5							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	20	0	0	0	0	0	0	20	0	0	0.0	0.0	100.0	0.0							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_timing.o)	1	0	0	0	0	0	0	1	0	0	0.0	0.0	100.0	0.0							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_tport.o)	10	0	0	0	0	0	0	10	0	0	0.0	0.0	100.0	0.0							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex.o)	10	0	0	0	0	0	0	10	0	0	0.0	0.0	100.0	0.0							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_texsr.o)	4	0	0	0	0	0	0	4	0	0	0.0	0.0	100.0	0.0							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex_io.o)	18	0	0	0	0	0	0	18	0	0	0.0	0.0	100.0	0.0							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)	23	0	0	0	0	0	0	23	0	0	0.0	0.0	100.0	0.0							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)	18	0	0	0	0	0	0	18	0	0	0.0	0.0	100.0	0.0							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_share.o)	2	0	0	0	0	0	0	2	0	0	0.0	0.0	100.0	0.0							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/rrm.o	72	0	0	0	0	0	0	72	0	0	0.0	0.0	100.0	0.0							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	43	0	28	0	28	0	15	0	0	0	65.1	100.0	100.0	65.1							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	20	0	20	0	20	0	0	0	0	0	100.0	100.0	100.0	100.0							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_timing.o)	1	0	1	0	1	0	0	0	0	0	100.0	100.0	100.0	100.0							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_tport.o)	10	0	7	0	7	0	3	0	0	0	70.0	100.0	100.0	70.0							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex.o)	10	0	6	0	6	0	4	0	0	0	60.0	100.0	100.0	60.0							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_texsr.o)	4	0	3	0	3	0	1	0	0	0	75.0	100.0	100.0	75.0							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex_io.o)	18	0	18	4	18	0	0	0	0	0	100.0	100.0	100.0	100.0							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)	23	0	20	0	18	0	3	0	0	0	87.0	100.0	100.0	87.0							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)	18	0	17	2	17	0	0	1	0	0	94.4	94.4	100.0	94.4							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_share.o)	2	0	2	0	2	0	0	0	0	0	100.0	100.0	100.0	100.0							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/rrm.o	72	0	17	0	17	0	0	55	0	0	23.6	23.6	100.0	23.6							0	0	0	0	
 functions in usr/gfx/MGRAS/HQ3/ge11dump.HQ3	51	0	0	0	0	0	2	49	0	0	0.0	3.9	100.0	0.0							0	0	0	0	
 functions in usr/gfx/arch/IGLOO32/libgl.so	3810	0	0	0	0	0	0	3810	0	0	0.0	0.0	100.0	0.0							0	0	1124	0	
 functions in usr/gfx/arch/IP28GR432/libGL.so	607	0	0	0	0	0	0	607	0	0	0.0	0.0	100.0	0.0							0	0	0	0	
