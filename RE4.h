@@ -180,7 +180,12 @@ extern "C" {
  * (((source words << 8) / step - destination width) << 8) + step, a
  * remainder-carrying start (inferred reading of the arithmetic).
  * The no-zoom pair is stored when a state word of the destination is 5, 6 or
- * 7 (established, 6.5.30 build); what those values mean is unknown.
+ * 7 (established, 6.5.0 and 6.5.30 builds). The word is a transfer-kind
+ * selector, not a pixel-format class: in the 6.5.0 build the library's
+ * pixel-descriptor builder stores its caller's constant, 0 draw, 1 copy,
+ * 2 read, 3 and 4 texture load, 6 and 7 span return and read, 8 and 9 copy
+ * to texture, and no site passes 5 (established for the constants, kind
+ * names inferred from the routine names; docs/OPEN_QUESTIONS.md entry 9).
  * The earlier pairs recorded here (0x101423AC / 0 and 0x3BFC00 /
  * 0x1010090) cannot be these registers' values by this routine: they
  * are not 8.8 numbers and the no-zoom path writes 0x100. They were most
