@@ -56,5 +56,5 @@ usr/gfx/ucode/hq3_revB_DB.bin	microcode	board-microcode	data	-	20480	780dd065275
 usr/gfx/ucode/hq3_revB_HQ4.bin	microcode	board-microcode	data	-	20480	2c73fecd8563fa31		0		0	0	named-only	docs/OPEN_QUESTIONS.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/gfx/ucode/hq3_revB_HQ4_DB.bin	microcode	board-microcode	data	-	20480	b2d7305d1e9ce75c		0		0	0	undocumented		
 usr/lib/X11/dyDDX/glx.so	x-shared	shared-x-server	shared-object	n32	491168	3182c3a71d10ddbd		875	dynsym	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
-usr/lib/X11/dyDDX/impactpc.so	x-module	board-x-module	shared-object	n32	1934372	e501c75dc120a7fe		616	dynsym	0	0	named-only	docs/OPEN_QUESTIONS.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
+usr/lib/X11/dyDDX/impactpc.so	x-module	board-x-module	shared-object	n32	1934372	e501c75dc120a7fe		616	dynsym	0	0	named-only	docs/OPEN_QUESTIONS.md#10-main-mode-bit-10-and-the-tl_mode-enables	10. Main-mode bit 10 and the TL_MODE enables
 usr/lib32/libfm.so	shared-libraries	shared-library	shared-object	n32	743692	dec3125e63be4b4c		788	dynsym+dwarf	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence

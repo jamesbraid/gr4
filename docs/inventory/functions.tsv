@@ -5078,19 +5078,19 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda83300	216	__glMgrSend
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda833d8	80	__glMgrPixelTilesAddr	dwarf+dynsym	f4318252fb08		in	named-only	libglcore/include/glcore_prots.h:234	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda83428	2416	__glMgrSendPagedRows	dwarf+dynsym	8d0a4e554931		in	named-only	libglcore/include/glcore_prots.h:235	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda83d98	1244	__glMgrFastSendPixels	dwarf+dynsym	e0b33cfbbd09		in	named-only	libglcore/include/glcore_prots.h:236	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda84274	4464	__glMgrSendPixels	dwarf+dynsym	9e537f42b0cc		in	named-only	HQ3.h:971	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda84274	4464	__glMgrSendPixels	dwarf+dynsym	9e537f42b0cc		in	understood	docs/routines/oq-gr4-b000.md#routine-readings-open-question-pass	Routine readings: open-question pass
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda853e4	1180	__glMgrCopyTile	dwarf+dynsym	deff37475677		in	named-only	HQ3.h:975	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda85880	1296	__glMgrFastCopyPixels	dwarf+dynsym	4a6903aa3ffe		in	named-only	GE11.h:546	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda85d90	1676	__glMgrSlowCopyPixels	dwarf+dynsym	a47159edd43c		in	named-only	HQ3.h:978	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda85d90	1676	__glMgrSlowCopyPixels	dwarf+dynsym	a47159edd43c		in	understood	docs/routines/oq-gr4-b000.md#routine-readings-open-question-pass	Routine readings: open-question pass
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8641c	256	__glMgrCopyPixels	dwarf+dynsym	73fef3bf016b		in	named-only	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8651c	64	__glMgrInitColorMatrix	dwarf+dynsym	f4948799717a		in	named-only	libglcore/include/glcore_prots.h:242	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda8655c	8	stackAdjustmentDummyRoutine	dwarf+funcnames	78aa5094d5ec		in	named-only	libglcore/include/glcore_prots.h:243	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda86564	3588	__glMgrDoReadPixels	dwarf+dynsym	550667709468		in	named-only	docs/OPEN_QUESTIONS.md#12-transfer-mode-register-bits-17-to-21	12. Transfer mode register, bits 17 to 21
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda87368	896	__glMgrim_ReadPixels	dwarf+dynsym	0909bd12838c		in	named-only	HQ3.h:978	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda876e8	120	__glMgrFastDrawPixels	dwarf+dynsym	a8f7758d8b0c		in	named-only	libglcore/include/glcore_prots.h:246	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda87760	3420	__glMgrim_DrawPixels	dwarf+dynsym	e38ee529e0bd		in	named-only	HQ3.h:1268	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda86564	3588	__glMgrDoReadPixels	dwarf+dynsym	550667709468		in	understood	docs/routines/oq-gr4-b000.md#routine-readings-open-question-pass	Routine readings: open-question pass
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda87368	896	__glMgrim_ReadPixels	dwarf+dynsym	0909bd12838c		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda876e8	120	__glMgrFastDrawPixels	dwarf+dynsym	a8f7758d8b0c		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda87760	3420	__glMgrim_DrawPixels	dwarf+dynsym	e38ee529e0bd		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda884bc	264	__glMgrDrawPixels	dwarf+dynsym	76ec117ebfef		in	named-only	libglcore/include/glcore_prots.h:248	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda885c4	1516	__glMgrim_CopyPixels	dwarf+dynsym	ab1142f927b6		in	named-only	HQ3.h:1268	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda885c4	1516	__glMgrim_CopyPixels	dwarf+dynsym	ab1142f927b6		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda88bb0	68	__glMgrDoCopyPixels	dwarf+dynsym	9b3e075053da		in	named-only	libglcore/include/glcore_prots.h:250	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda88bf4	4108	__glMgrim_PixelTransferf	dwarf+dynsym	6a4e171830d2		in	named-only	libglcore/include/glcore_prots.h:251	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda89c00	56	__glMgrim_PixelTransferi	dwarf+dynsym	8b8cd1741a13		in	named-only	libglcore/include/glcore_prots.h:252	
@@ -5107,7 +5107,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8a9b8	656	__glMgrim_P
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8ac48	1028	__glMgrim_PixelZoom	dwarf+dynsym	3d3c0254cd46		in	named-only	libglcore/include/glcore_prots.h:263	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8b04c	1640	__glMgrim_PixelStorei	dwarf+dynsym	8456b0f9ec27		in	named-only	libglcore/include/glcore_prots.h:264	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8b6b4	776	__glMgrim_PixelStoref	dwarf+dynsym	df4c09a5c6d2		in	named-only	libglcore/include/glcore_prots.h:265	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8b9bc	108	__glMgrFastReadPixels	dwarf+dynsym	ad615e9d22ab		in	named-only	libglcore/include/glcore_prots.h:266	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8b9bc	108	__glMgrFastReadPixels	dwarf+dynsym	ad615e9d22ab		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8ba28	68	__glMgrPickDrawPixels	dwarf+dynsym	2d404cf028c7		in	named-only	libglcore/include/glcore_prots.h:267	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8ba6c	68	__glMgrPickReadPixels	dwarf+dynsym	f87e6300cdf2		in	named-only	libglcore/include/glcore_prots.h:268	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8bab0	68	__glMgrLoadPolygonStippleRAM	dwarf+dynsym	11a826bd74bd		in	named-only	HQ3.h:954	
@@ -5210,8 +5210,8 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90404	40	__glMgrEndPo
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9042c	40	__glMgrEndGeneric	dwarf+dynsym	3cbbf0d21867		in	named-only	HQ3.h:1208	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90454	344	__glMgrim_Begin	dwarf+dynsym	f58a1c009054		in	named-only	libglcore/include/glcore_prots.h:367	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda905ac	96	__glMgrim_End	dwarf+dynsym	a537bca5d570		in	named-only	libglcore/include/glcore_prots.h:368	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90708	996	__glMgrReadSpan	dwarf+dynsym	e451129c39d6		in	named-only	libglcore/include/glcore_prots.h:369	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90aec	1160	__glMgrReturnSpan	dwarf+dynsym	1ee7b0159da0		in	named-only	libglcore/include/glcore_prots.h:370	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90708	996	__glMgrReadSpan	dwarf+dynsym	e451129c39d6		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90aec	1160	__glMgrReturnSpan	dwarf+dynsym	1ee7b0159da0		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda913d8	556	__glMgrInitRGB	dwarf+dynsym	c9978c7050bd		in	named-only	HQ3.h:893	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda91604	296	simCatch	dwarf+funcnames	d073c2c39e52		in	named-only	libglcore/include/glcore_prots.h:372	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda9172c	1208	branchdelay	dwarf+funcnames	8e24968ea1e2		in	named-only	libglcore/include/glcore_prots.h:373	
@@ -5475,7 +5475,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf29c	228	__glMgrasWr
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf380	172	__glMgrasSet	dwarf+dynsym	53e1ef78d9cb		in	named-only	docs/routines/t2-gr4-r4-b002.md#routine-roles-tier-2-reading-batch-2-of-gr4	Routine roles, tier-2 reading batch 2 of gr4
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf42c	36	__glMgrSaveTexmode	dwarf+dynsym	0f3ffdf265fb		in	named-only	HQ3.h:1221	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf450	20	__glMgrRestoreTexmode	dwarf+dynsym	b2a94311343e		in	named-only	HQ3.h:1222	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf464	4064	mgrTM_DoTexLoad	dwarf+dynsym	81eb4e5a103c		in	named-only	docs/TRAM_CORRUPTION_ANALYSIS.md#3-the-four-intersecting-bugs	3. The Four Intersecting Bugs
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf464	4064	mgrTM_DoTexLoad	dwarf+dynsym	81eb4e5a103c		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac0444	4352	mgrTM_DoTexRead	dwarf+dynsym	88a883e4efd2		in	located	docs/routines/t1-gr4-b000.md#mgrtm_dotexread-in-usrgfxarchip28gr432libglcoreso-at-0xdac0444	`mgrTM_DoTexRead` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdac0444
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac1544	2148	mgrTM_DoCopyTex	dwarf+dynsym	2329962f6005		in	located	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac1da8	452	__glMgrInitHostToTE	dwarf+dynsym	6ca1fcce2701		in	named-only	libglcore/include/glcore_prots.h:637	
@@ -5509,7 +5509,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac9e08	1284	__glMgr_Fo
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdaca30c	124	__Mgr_ReturnHistPIO	dwarf+funcnames	c68ccdb026e6		in	named-only	HQ3.h:974	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaca388	444	__glMgr_ReadEramDMAHQSetup	dwarf+dynsym	76b6bb66b5ed		in	named-only	libglcore/include/glcore_prots.h:666	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaca544	3604	__glMgr_PackHistogram	dwarf+dynsym	97939429fad9		in	named-only	libglcore/include/glcore_prots.h:667	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacb358	1884	__glMgrim_GetHistogramEXT	dwarf+dynsym	7d2fe4c6e1d4		in	named-only	HQ3.h:1267	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacb358	1884	__glMgrim_GetHistogramEXT	dwarf+dynsym	7d2fe4c6e1d4		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacbab4	148	__glMgrim_ResetHistogramEXT	dwarf+dynsym	e6a3631a6afd		in	named-only	libglcore/include/glcore_prots.h:669	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacbb48	784	__glMgrim_GetHistogramParameterivEXT	dwarf+dynsym	eb9248f36acc		in	named-only	libglcore/include/glcore_prots.h:670	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacbe58	920	__glMgrim_GetHistogramParameterfvEXT	dwarf+dynsym	09d4577705e5		in	named-only	libglcore/include/glcore_prots.h:671	
@@ -5518,7 +5518,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacc2cc	264	__glMgrim_M
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacc3d4	1312	__glMgr_FormatMinmax	dwarf+dynsym	17caa4c525bf		in	named-only	libglcore/include/glcore_prots.h:674	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacc8f4	320	__glMgr_ReadCramDMAHQSetup	dwarf+dynsym	9955b87980bf		in	named-only	libglcore/include/glcore_prots.h:675	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacca34	2020	__glMgr_PackMinmax	dwarf+dynsym	cfb3579fb110		in	named-only	libglcore/include/glcore_prots.h:676	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacd218	1676	__glMgrim_GetMinmaxEXT	dwarf+dynsym	059481f4c425		in	named-only	HQ3.h:1267	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacd218	1676	__glMgrim_GetMinmaxEXT	dwarf+dynsym	059481f4c425		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacd8a4	124	__glMgrim_ResetMinmaxEXT	dwarf+dynsym	0c45ce1928b1		in	named-only	libglcore/include/glcore_prots.h:678	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacd920	248	__glMgrim_GetMinmaxParameterivEXT	dwarf+dynsym	bd5de8715ee5		in	named-only	libglcore/include/glcore_prots.h:679	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacda18	280	__glMgrim_GetMinmaxParameterfvEXT	dwarf+dynsym	515455f74709		in	named-only	libglcore/include/glcore_prots.h:680	
@@ -5571,8 +5571,8 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadcef8	300	__glMgrim_C
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdadd024	1736	__glMgrGeneralBitmap	dwarf+funcnames	1fda0a302aad		in	named-only	HQ3.h:976	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadd6ec	860	__glMgrim_Bitmap	dwarf+dynsym	0f5a580eb5f9		in	named-only	HQ3.h:977	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadda48	924	__glMgrRenderBitmap	dwarf+dynsym	99e2405c7236		in	named-only	HQ3.h:977	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaddde4	404	__glMgr_UseDMAForWrite	dwarf+dynsym	3797faf6e7a2		in	named-only	libglcore/include/glcore_prots.h:730	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaddf78	160	__glMgr_UseDMAForRead	dwarf+dynsym	0d02f336fd18		in	named-only	libglcore/include/glcore_prots.h:731	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaddde4	404	__glMgr_UseDMAForWrite	dwarf+dynsym	3797faf6e7a2		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaddf78	160	__glMgr_UseDMAForRead	dwarf+dynsym	0d02f336fd18		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade018	300	__glMgr_LockSingleDMAPool	dwarf+dynsym	5df9a21e9b85		in	understood	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade144	196	__glMgr_UnlockSingleDMAPool	dwarf+dynsym	7e08fc8bf9e9		in	understood	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade208	180	__glMgrBuildLockPageList	dwarf+dynsym	2b3a88b9e5e6		in	named-only	libglcore/include/glcore_prots.h:734	
@@ -5717,7 +5717,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf24f4	280	__glMgrim_S
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf260c	264	__glMgrim_SoftRasterPos4fv	dwarf+dynsym	06dd9fd91727		in	named-only	libglcore/include/glcore_prots.h:873	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf2714	308	__glMgrim_SoftRasterPos4iv	dwarf+dynsym	c99b1488c640		in	named-only	libglcore/include/glcore_prots.h:874	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf2848	308	__glMgrim_SoftRasterPos4sv	dwarf+dynsym	a240004ba61b		in	named-only	libglcore/include/glcore_prots.h:875	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf297c	392	__glMgrInitPixels	dwarf+dynsym	93e40a51b626		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf297c	392	__glMgrInitPixels	dwarf+dynsym	93e40a51b626		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf2b04	124	__glMgrFreePixelState	dwarf+dynsym	cb60f371bb52		in	named-only	libglcore/include/glcore_prots.h:877	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf2b80	508	__glMgrMakePages	dwarf+dynsym	808d97822405		in	named-only	libglcore/include/glcore_prots.h:878	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf2d7c	264	__glMgrMakeFastPathTiles	dwarf+dynsym	4fd7bc1bf7aa		in	named-only	libglcore/include/glcore_prots.h:879	
@@ -5733,7 +5733,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf4f00	1792	__glMgrExt
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf5600	388	__glMgrExtractInternalTypeInfo	dwarf+dynsym	d8d1e325f600		in	named-only	libglcore/include/glcore_prots.h:889	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf5784	2064	__glMgrExtractFormatInfo	dwarf+dynsym	79659b3ca939		in	named-only	libglcore/include/glcore_prots.h:890	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf5f94	120	__glMgrGetCurrentConvFilter	dwarf+dynsym	ea325cf9ccd6		in	named-only	libglcore/include/glcore_prots.h:891	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf600c	1712	__glMgrMakePixelDesc	dwarf+dynsym	7d5d2aa817af		in	named-only	libglcore/include/glcore_prots.h:892	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf600c	1712	__glMgrMakePixelDesc	dwarf+dynsym	7d5d2aa817af		in	understood	docs/routines/oq-gr4-b000.md#routine-readings-open-question-pass	Routine readings: open-question pass
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf66c8	100	__glMgrGetAccum	dwarf+dynsym	e00890aa35e8		in	named-only	libglcore/include/glcore_prots.h:893	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf672c	544	__glMgrGetColorBuffer	dwarf+dynsym	883382a375ff		in	named-only	libglcore/include/glcore_prots.h:894	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf694c	260	__glMgrGetCurrentBuffer	dwarf+dynsym	cb254d24ea01		in	named-only	libglcore/include/glcore_prots.h:895	
@@ -11056,7 +11056,7 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a1c90	5308	mgrasPolyGlyph
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a3890	3544	mgrasValidateClip	dynsym	0fe550436bd7		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4668	268	mgrasValidateSwapbuf	dynsym	7240e7590599		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4774	236	mgrasValidateReservedMode	dynsym	a5d8d0e781a7		in	understood	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4860	860	mgrasValidateMode	dynsym	706601f1b418		in	named-only	CMAP.h:215	(Direct RGB)-----------------------------> (Global 256x10 Gamma LUT)
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4860	860	mgrasValidateMode	dynsym	706601f1b418		in	understood	docs/routines/oq-gr4-b000.md#routine-readings-open-question-pass	Routine readings: open-question pass
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4bbc	896	mgrasChangeDIDCmap	dynsym	387388ce9116		in	named-only	ddx/include/impact_ddx.h:139	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4f3c	416	mgrasNeedCID	dynsym	003c9688a86b		in	named-only	PP1.h:106	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a50dc	3148	mgrasReadConvertPixels	dynsym	d1696ad30e60		in	named-only	docs/inventory/functions.tsv	
