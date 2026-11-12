@@ -55,5 +55,6 @@
 #define TE_TRAM_REV_WORD0_HIGH_HALF                  0x1c01u /* established */
 #define TE_TRAM_REV_WORD0_LOW_HALF                   0x1401u /* established */
 #define TE_TRAM_REV_WORD1                            0xc000400u /* established */
+#define TE_TRAM_TEXTURE_BYTES                        0x400000u /* established */
 
 #endif /* TE_GEN_H */

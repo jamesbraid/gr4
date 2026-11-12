@@ -126,6 +126,7 @@ pub const TRAM_REV_WORD0: u32 = 0x1c011401; // established
 pub const TRAM_REV_WORD0_HIGH_HALF: u32 = 0x1c01; // established
 pub const TRAM_REV_WORD0_LOW_HALF: u32 = 0x1401; // established
 pub const TRAM_REV_WORD1: u32 = 0xc000400; // established
+pub const TRAM_TEXTURE_BYTES: u32 = 0x400000; // established
 
 #[cfg(test)]
 mod tests {

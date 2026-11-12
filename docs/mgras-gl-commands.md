@@ -279,6 +279,63 @@ bit 0 and the raster status register at `0x02c578` bit 8, then reads units from
 `0x02d1c0` and `0x02c1c4`. Several of these register meanings are unknown; the
 pixel-read words are software expectations only.
 
+## Texture transfers
+
+Texture memory moves two ways: the kernel saves and restores it in 16 KiB blocks
+through host DMA, and the client reads it back and restores it through the
+geometry engine. The words below are as the kernel and client routines send
+them. They are graded **established** where the routine's code shows the word,
+an exception to the page's rule that listing facts are inferred: each entry
+says which routine it came from, so a reviewer can downgrade it. What the words
+do to texture memory is in [two-engine boards](mgras-two-re.md#texture-memory-on-two-engine-boards).
+
+- **Base write.** The kernel writes `TOKEN_TEX_BASE_WRITE` (`0x0000eb04`) with
+  the base in its low half, once with base 0 and then with the new base when it
+  adds a texture space. The restore path uses the same routine. Which texture
+  copy a base reaches is in the two-engine page.
+- **Header decode.** Under the framing above, `0x0000e50c` is opcode `0xe5` with
+  12 payload bytes, which are three words: a row count, a format word and
+  `0x0000400d`. The `0x400d` is the third payload word, not a separate token.
+- **Block save.** The kernel sends:
+  1. register pairs for the texture state (TXSIZE `0xd6d6`, TXLOD 0,
+     TXCLAMPSIZE `0x80000`, TL_MODE, TEXMODE1, TEXMODE2 and TXADDR 0);
+  2. `0x0000d214` with `-1, 0x1001000, 0x1fc0ff, 0, 0`;
+  3. `TOKEN_TEX_READ_SETUP` with the block's row count (the save record's
+     `+0xc`), a format word `0x400000 | table[+0x23] << 4 | (+0x24 & 0xf)`, and
+     `0x0000400d`;
+  4. a DMA read kick on slot 2, byte `0xbd` (`(slot << 1) | 0xb9`);
+  5. `0x000a0704` with 0, `0x000c0004` with `0xe00`, `0x0000da00` and
+     `0x0000d300`.
+  A save block is 64 words wide and 64 rows tall at 4 bytes a word, so 16 KiB.
+  **Established.**
+- **Block restore.** The kernel sends:
+  1. register writes for TL_MODE, TL_WBUFFER, TEXRBUFFER, TEXMODE2, TEXMODE1,
+     TL_ADDR 0, TL_MIPMAP (the block) and TL_SPEC `0xd60`;
+  2. `0x0000d214` with `-1, 0x1400000, 0, 0, 3`;
+  3. TL_S_SIZE 64, TL_T_SIZE (the record's rows), TL_S_LEFT 0, TL_T_BOTTOM 0,
+     XFRMODE, and XFRSIZE and XFRCOUNTERS both `rows << 16 | 64`;
+  4. `TOKEN_TEX_RESTORE_PREP` (`0x0000e300`);
+  5. `TOKEN_TEX_WRITE_SETUP` (`0x0000d80c`), with the word count
+     `(record +8) / 4 × rows` split into three 9-bit parts;
+  6. clears HQ flag 16, then a DMA write kick on slot 2, byte `0xa5`
+     (`(slot << 1) | 0xa1`);
+  7. the fence `0x000e0400`, then a poll of flags bit 16;
+  8. XFRMASKLOW `-1`, then `0x0000d300`.
+  **Established.** Among the sixteen graphics members read, `0xe300` and `0xd80c`
+  occur as immediates only in the kernel's texture member.
+- **Client read-back.** Each pass runs `0x0000d214`, then asks the kernel for
+  `0x0000e50c` with the pass's rows, a format word and `0x0000400d`, and a DMA
+  read of those rows. After it the client sends `0x000a0704` with 0, then
+  `0x000c0004` with `0xe00`, polls HQ status bit 1, and sends `0x0000da00` and
+  `0x0000d300`. The pass limit per engine count is in the two-engine page.
+  **Established.**
+- **Client restore.** The client sends `TOKEN_CLIENT_GE_DMA_SETUP` (`0x00009d10`)
+  and four words, then the descriptor words `0x00080010` (four words),
+  `0x00080504`, `0x00080804`, `0x00080904`, `0x00080704` and `0x00080b04`, then
+  kick `0xa3` with the fence `0x000e0400` and flag `0x10000`. The kick byte is
+  slot 1 under the framing above, which is **inferred**. The `0x00080xxx` words
+  are the same DMA descriptor bank as the table above.
+
 ## Kernel context image and eviction
 
 The kernel keeps a 63-word image per GL context and writes it at each switch.

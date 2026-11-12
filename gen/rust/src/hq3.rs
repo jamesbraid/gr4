@@ -993,9 +993,14 @@ pub const INIT_GIO_CONFIG: u32 = 0x765b900f; // established
 pub const INIT_INTR_ENABLE: u32 = 0x4400e200; // established
 pub const TLB_ENTRIES: u32 = 0x20; // established
 pub const TLB_PAGE_SHIFT: u32 = 0xc; // established
+pub const TOKEN_CLIENT_GE_DMA_SETUP: u32 = 0x9d; // established
 pub const TOKEN_READBACK_BEGIN: u32 = 0x96; // established
 pub const TOKEN_READBACK_END: u32 = 0x97; // established
 pub const TOKEN_SECOND_TEXMODE: u32 = 0x5f; // established
+pub const TOKEN_TEX_BASE_WRITE: u32 = 0xeb; // established
+pub const TOKEN_TEX_READ_SETUP: u32 = 0xe5; // established
+pub const TOKEN_TEX_RESTORE_PREP: u32 = 0xe3; // established
+pub const TOKEN_TEX_WRITE_SETUP: u32 = 0xd8; // established
 pub const TOKEN_TRANSFER_DONE: u32 = 0xda; // established
 
 #[cfg(test)]

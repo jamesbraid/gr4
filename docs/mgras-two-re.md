@@ -136,6 +136,70 @@ or an address bit to choose an engine.
   assembles it is unknown. Row interleaving is the natural reading.
   **Inferred.**
 
+## Texture memory on two-engine boards
+
+This section is about MXI and the other two-engine boards with texture. The
+texture words themselves are in [GL command stream](mgras-gl-commands.md#texture-transfers).
+Sources: the Octane report, sections 4.2.4 and 4.2.5 (PDF page 76) and Table 4.1;
+the IRIX 6.5.30 IP27 kernel members `mgras_tex.o`, `mgras_tex_io.o`,
+`mgras_texsr.o` and `mgras_init.o` from `mgras.a`, read as disassembly; the client
+`libGLcore.so` for `IP27GR532`; and the Octane IDE diagnostic `ide.IP30` 6.5.30.
+Kernel offsets are member file offsets. Client and diagnostic addresses are
+virtual addresses.
+
+- **Established** (report). Each texture engine (TE1) has one TRAM ASIC with 4 MB
+  of texture memory, and Table 4.1 gives MXI 8 MB. Section 4.2.5 says a textured
+  SSI needs one texture daughterboard for each raster engine. That sentence is
+  about the SSI option. Taking it to MXI is **inferred** from Table 4.1.
+- **Established** (negative, from the routines named). The kernel's texture base
+  write, the client's texture download and the kernel's texture save and restore
+  never read the raster engine count and never write `RSS_RE_SELECT_REG` (0x112).
+  A texture load therefore carries no engine number. **Inferred** from that: one
+  command stream fills both TRAM copies, and a base write applies to both.
+- **Inferred**: each path holds the whole texture. The reasons are that a textured
+  primitive samples any texel on every row while each engine draws only its own
+  rows; that the kernel's save and restore work on one set of blocks and name no
+  path; that the client never addresses a path; and that Table 4.1's 8 MB does not
+  say texture capacity doubles. The kernel never reads the second per-path TRAM
+  count it stores (**established** negative, from all sixteen `mgras.a` members).
+  That count is software's record, not a board register, so it is not a
+  hardware fact here.
+- **Inferred**: software sees 4 MiB of texture per context set, not 8, because
+  the two paths hold copies. The kernel sizes the texture store as 256 blocks of
+  16 KiB for four TRAMs (**established** arithmetic). That matches the 16 KB page
+  for four TRAMs in [TRAM_CORRUPTION_ANALYSIS.md](TRAM_CORRUPTION_ANALYSIS.md),
+  which is itself inferred.
+- **Established**: the kernel saves and restores texture one 16 KiB block per call,
+  64 words by 64 rows, through host DMA slot 2. Neither routine names an engine.
+- **Established**: the client reads texture back in passes of at most a row limit
+  from a four-word table indexed by the engine count. The table gives 0x2000 rows
+  for one engine and 0x1000 for two. Each pass reads the smaller of the remaining
+  rows and the limit. Why two engines halve the pass is **unknown**. Candidates
+  are a read-back that assembles rows from both paths and a per-pass size bound.
+- **Established**: the client restores texture by a geometry-engine DMA set-up
+  (`TOKEN_CLIENT_GE_DMA_SETUP`), four payload words, and a page-list. The DMA kick
+  byte is `0xa3`. That kick is slot 1 and a write to the geometry engine is
+  **inferred** from the byte.
+- **Established** (client code): with pixel texture active, `__glMgrim_DrawPixels`
+  loops the pass number from 0 to the engine count less one. Each pass is stored
+  in the pixel descriptor's pass word, at `+0x194` of the descriptor, which sits
+  at context `+0x7bb4`. Pass `k` sends source rows `k`, `k + n`, and so on, where
+  `n` is the engine count. Without pixel texture the loop runs once. The client
+  takes the pixel-texture path only with pixel texgen enabled and a bound texture
+  whose class byte is 4 or 6. That those are the 3-D and 4-D classes is
+  **inferred**.
+- **Inferred**: the geometry engine places row `i` of pass `k` on destination row
+  `k + n·i`, so the passes together draw each row once. The pass number is the
+  only word that tells the passes apart, and the row split is whole alternate rows.
+- **Established** (diagnostic): the TRAM test with an RSS number and an engine
+  count of 2 or more writes 0x112 with that number, bit 2 clear, then writes 4.
+  **Inferred**: `k` with bit 2 clear addresses path `k`'s TRAM, and 4 reaches both
+  paths. That reading is what makes the per-RSS test mean anything. Which
+  direction of the transfer honours the selection is unknown.
+- **Established** (diagnostic): the diagnostic accepts an engine count of 1 to 4.
+  Without an RSS, a read writes `((last row) mod engine count) | 4` to the select
+  register. [The row split](#which-engine-draws-which-rows) gives the same modulus.
+
 ## Geometry engines
 
 - The kernel loads engine 0 through `GE0_UPLOAD_PORT_A` and `GE0_UPLOAD_PORT_B`,
@@ -173,6 +237,14 @@ or an address bit to choose an engine.
 | The load-balancing rule and completion order of the two geometry engines | A bus trace of a real board |
 | Which geometry engine answers the revision read | A real board |
 | Whether the command FIFO is at the address the kernel's packet writes use (0x120400) or at the normal FIFO address of the public driver (0x020400, in [defs/mgras.toml](../defs/mgras.toml)) | Which address the kernel's command writes reach on a board, checked against the driver's packet layout |
+| Whether a texture read returns one path's copy or both, and which path the kernel's block save reads | A trace of a real MXI texture load, or the diagnostic's TRAM transfer branches read to the end |
+| Whether the two TRAM copies are filled by the hardware from one stream or by a loop in the board | The same trace. The texture download path reads no engine count, so a loop is not in the software |
+| Whether the kernel's restore reaches both copies | The same trace |
+| Why the client halves its read-back pass with two engines | A trace of a real board |
+| How the geometry engine turns pixel-texture pass `k` into destination rows | A read of the geometry-engine program for pixel texture, or a trace of a real board |
+| Whether a fast pixel draw sends a different geometry-engine DMA set-up from the restore | A read of the fast pixel path, which is not yet traced |
+| Whether texture colour-table loads go to each engine | Disassemble the indirect callee of `image1D_to_texturecolortable` in `libGLcore.so` |
+| The reset state of texture memory per path | A physical write, reset and read-back. Last resort |
 
 ## Not on this page
 

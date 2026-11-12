@@ -558,7 +558,12 @@ INIT_GIO_CONFIG = { value = 0x765b900f, grade = "established" }
 INIT_INTR_ENABLE = { value = 0x4400e200, grade = "established" }
 TLB_ENTRIES = { value = 0x20, grade = "established" }
 TLB_PAGE_SHIFT = { value = 0xc, grade = "established" }
+TOKEN_CLIENT_GE_DMA_SETUP = { value = 0x9d, grade = "established", doc = "client's geometry-engine DMA set-up: header 0x00009d10 followed by four payload words; see docs/mgras-gl-commands.md" }
 TOKEN_READBACK_BEGIN = { value = 0x96, grade = "established" }
 TOKEN_READBACK_END = { value = 0x97, grade = "established" }
 TOKEN_SECOND_TEXMODE = { value = 0x5f, grade = "established", doc = "operand, meaning inferred" }
+TOKEN_TEX_BASE_WRITE = { value = 0xeb, grade = "established", doc = "kernel texture base write: word 0x0000eb04 with the base in its low half, stored at the command window plus the base argument; the board's reading of it is not checked" }
+TOKEN_TEX_READ_SETUP = { value = 0xe5, grade = "established", doc = "texture read-back set-up, sent by the kernel and the client: header 0x0000e50c with 12 payload bytes: a row count, a format word and one fixed third word; see docs/mgras-gl-commands.md" }
+TOKEN_TEX_RESTORE_PREP = { value = 0xe3, grade = "established", doc = "kernel texture restore, sent after the transfer register set-up and before the write set-up; payload not read" }
+TOKEN_TEX_WRITE_SETUP = { value = 0xd8, grade = "established", doc = "kernel texture restore write set-up: header 0x0000d80c with three payload words, the transfer's word count split into 9-bit parts" }
 TOKEN_TRANSFER_DONE = { value = 0xda, grade = "established", doc = "ordering, meaning inferred" }

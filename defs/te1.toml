@@ -80,3 +80,4 @@ TRAM_REV_WORD0 = { value = 0x1c011401, grade = "established", doc = "diagnostic"
 TRAM_REV_WORD0_HIGH_HALF = { value = 0x1c01, grade = "established", doc = "diagnostic", from = "diagnostic transcript" }
 TRAM_REV_WORD0_LOW_HALF = { value = 0x1401, grade = "established", doc = "diagnostic", from = "diagnostic transcript" }
 TRAM_REV_WORD1 = { value = 0xc000400, grade = "established", doc = "diagnostic", from = "diagnostic transcript" }
+TRAM_TEXTURE_BYTES = { value = 0x400000, grade = "established", doc = "texture memory of one TRAM ASIC, one per texture engine; OCTANE Technical Report section 4.2.5", from = "published report" }

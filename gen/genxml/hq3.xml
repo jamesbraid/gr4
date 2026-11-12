@@ -312,8 +312,13 @@ own context at creation).</doc>
   <constant name="INIT_INTR_ENABLE" value="0x4400e200" grade="established"/>
   <constant name="TLB_ENTRIES" value="0x20" grade="established"/>
   <constant name="TLB_PAGE_SHIFT" value="0xc" grade="established"/>
+  <constant name="TOKEN_CLIENT_GE_DMA_SETUP" value="0x9d" grade="established"/>
   <constant name="TOKEN_READBACK_BEGIN" value="0x96" grade="established"/>
   <constant name="TOKEN_READBACK_END" value="0x97" grade="established"/>
   <constant name="TOKEN_SECOND_TEXMODE" value="0x5f" grade="established"/>
+  <constant name="TOKEN_TEX_BASE_WRITE" value="0xeb" grade="established"/>
+  <constant name="TOKEN_TEX_READ_SETUP" value="0xe5" grade="established"/>
+  <constant name="TOKEN_TEX_RESTORE_PREP" value="0xe3" grade="established"/>
+  <constant name="TOKEN_TEX_WRITE_SETUP" value="0xd8" grade="established"/>
   <constant name="TOKEN_TRANSFER_DONE" value="0xda" grade="established"/>
 </genxml>

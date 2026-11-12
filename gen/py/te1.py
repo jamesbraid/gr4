@@ -7,7 +7,7 @@ WORDS = {}
 FIELDS = {'tx_mipmap': {'bank': (15, 8), 'page': (7, 0)}, 'tl_mode': {'fixed': (18, 16), 'bit14': (14, 14), 'enables': (12, 9), 'flag8': (8, 8), 'component_depth': (6, 5), 'cell_slot': (4, 3), 'components_minus_1': (2, 1)}, 'tl_spec': {}, 'tl_addr': {}, 'tl_mipmap': {}, 'tl_border': {}}
 ENUMS = {}
 FIELD_ENUM = {}
-CONSTANTS = {'TRAM_REV_WORD0': {'value': 469832705, 'count': 1, 'stride': 1}, 'TRAM_REV_WORD0_HIGH_HALF': {'value': 7169, 'count': 1, 'stride': 1}, 'TRAM_REV_WORD0_LOW_HALF': {'value': 5121, 'count': 1, 'stride': 1}, 'TRAM_REV_WORD1': {'value': 201327616, 'count': 1, 'stride': 1}}
+CONSTANTS = {'TRAM_REV_WORD0': {'value': 469832705, 'count': 1, 'stride': 1}, 'TRAM_REV_WORD0_HIGH_HALF': {'value': 7169, 'count': 1, 'stride': 1}, 'TRAM_REV_WORD0_LOW_HALF': {'value': 5121, 'count': 1, 'stride': 1}, 'TRAM_REV_WORD1': {'value': 201327616, 'count': 1, 'stride': 1}, 'TRAM_TEXTURE_BYTES': {'value': 4194304, 'count': 1, 'stride': 1}}
 TESTS = [('tl_mode', 216614, {'components_minus_1': 3, 'cell_slot': 0, 'component_depth': 1, 'flag8': 0, 'enables': 7, 'bit14': 1, 'fixed': 3}), ('tl_mode', 219686, {'components_minus_1': 3, 'cell_slot': 0, 'component_depth': 1, 'flag8': 0, 'enables': 13, 'bit14': 1, 'fixed': 3})]
 
 

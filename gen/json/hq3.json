@@ -1810,6 +1810,15 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "TOKEN_CLIENT_GE_DMA_SETUP",
+   "value": 157,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "TOKEN_READBACK_BEGIN",
    "value": 150,
    "count": 1,
@@ -1830,6 +1839,42 @@
    "kind": "constant",
    "name": "TOKEN_SECOND_TEXMODE",
    "value": 95,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "TOKEN_TEX_BASE_WRITE",
+   "value": 235,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "TOKEN_TEX_READ_SETUP",
+   "value": 229,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "TOKEN_TEX_RESTORE_PREP",
+   "value": 227,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "TOKEN_TEX_WRITE_SETUP",
+   "value": 216,
    "count": 1,
    "grade": "established",
    "from": "driver and diagnostic readings"

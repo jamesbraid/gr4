@@ -359,9 +359,14 @@ own context at creation).
 | `INIT_INTR_ENABLE` | 0x4400e200 | established | driver and diagnostic readings |  |
 | `TLB_ENTRIES` | 0x20 | established | driver and diagnostic readings |  |
 | `TLB_PAGE_SHIFT` | 0xc | established | driver and diagnostic readings |  |
+| `TOKEN_CLIENT_GE_DMA_SETUP` | 0x9d | established | driver and diagnostic readings | client's geometry-engine DMA set-up: header 0x00009d10 followed by four payload words; see docs/mgras-gl-commands.md |
 | `TOKEN_READBACK_BEGIN` | 0x96 | established | driver and diagnostic readings |  |
 | `TOKEN_READBACK_END` | 0x97 | established | driver and diagnostic readings |  |
 | `TOKEN_SECOND_TEXMODE` | 0x5f | established | driver and diagnostic readings | operand, meaning inferred |
+| `TOKEN_TEX_BASE_WRITE` | 0xeb | established | driver and diagnostic readings | kernel texture base write: word 0x0000eb04 with the base in its low half, stored at the command window plus the base argument; the board's reading of it is not checked |
+| `TOKEN_TEX_READ_SETUP` | 0xe5 | established | driver and diagnostic readings | texture read-back set-up, sent by the kernel and the client: header 0x0000e50c with 12 payload bytes: a row count, a format word and one fixed third word; see docs/mgras-gl-commands.md |
+| `TOKEN_TEX_RESTORE_PREP` | 0xe3 | established | driver and diagnostic readings | kernel texture restore, sent after the transfer register set-up and before the write set-up; payload not read |
+| `TOKEN_TEX_WRITE_SETUP` | 0xd8 | established | driver and diagnostic readings | kernel texture restore write set-up: header 0x0000d80c with three payload words, the transfer's word count split into 9-bit parts |
 | `TOKEN_TRANSFER_DONE` | 0xda | established | driver and diagnostic readings | ordering, meaning inferred |
 
 ## Test vectors

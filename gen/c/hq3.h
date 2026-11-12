@@ -440,9 +440,14 @@
 #define HQ_INIT_INTR_ENABLE                          0x4400e200u /* established */
 #define HQ_TLB_ENTRIES                               0x20u /* established */
 #define HQ_TLB_PAGE_SHIFT                            0xcu /* established */
+#define HQ_TOKEN_CLIENT_GE_DMA_SETUP                 0x9du /* established */
 #define HQ_TOKEN_READBACK_BEGIN                      0x96u /* established */
 #define HQ_TOKEN_READBACK_END                        0x97u /* established */
 #define HQ_TOKEN_SECOND_TEXMODE                      0x5fu /* established */
+#define HQ_TOKEN_TEX_BASE_WRITE                      0xebu /* established */
+#define HQ_TOKEN_TEX_READ_SETUP                      0xe5u /* established */
+#define HQ_TOKEN_TEX_RESTORE_PREP                    0xe3u /* established */
+#define HQ_TOKEN_TEX_WRITE_SETUP                     0xd8u /* established */
 #define HQ_TOKEN_TRANSFER_DONE                       0xdau /* established */
 
 #endif /* HQ_GEN_H */

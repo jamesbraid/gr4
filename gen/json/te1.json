@@ -203,6 +203,15 @@
    "count": 1,
    "grade": "established",
    "from": "diagnostic transcript"
+  },
+  {
+   "unit": "te1",
+   "kind": "constant",
+   "name": "TRAM_TEXTURE_BYTES",
+   "value": 4194304,
+   "count": 1,
+   "grade": "established",
+   "from": "driver readings"
   }
  ]
 }

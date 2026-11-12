@@ -46,4 +46,5 @@
   <constant name="TRAM_REV_WORD0_HIGH_HALF" value="0x1c01" grade="established" from="diagnostic transcript"/>
   <constant name="TRAM_REV_WORD0_LOW_HALF" value="0x1401" grade="established" from="diagnostic transcript"/>
   <constant name="TRAM_REV_WORD1" value="0xc000400" grade="established" from="diagnostic transcript"/>
+  <constant name="TRAM_TEXTURE_BYTES" value="0x400000" grade="established"/>
 </genxml>

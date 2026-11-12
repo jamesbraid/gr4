@@ -61,6 +61,7 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | `TRAM_REV_WORD0_HIGH_HALF` | 0x1c01 | established | diagnostic transcript | diagnostic |
 | `TRAM_REV_WORD0_LOW_HALF` | 0x1401 | established | diagnostic transcript | diagnostic |
 | `TRAM_REV_WORD1` | 0xc000400 | established | diagnostic transcript | diagnostic |
+| `TRAM_TEXTURE_BYTES` | 0x400000 | established | driver readings | texture memory of one TRAM ASIC, one per texture engine; OCTANE Technical Report section 4.2.5 |
 
 ## Test vectors
 
