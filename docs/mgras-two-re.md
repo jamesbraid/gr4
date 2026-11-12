@@ -188,6 +188,14 @@ virtual addresses.
   takes the pixel-texture path only with pixel texgen enabled and a bound texture
   whose class byte is 4 or 6. That those are the 3-D and 4-D classes is
   **inferred**.
+- **Inferred** (client code, not a board measurement): with pixel texture on, the
+  client crops the input in Y from the second query answer, whose halves are signed.
+  For positive unit zoom, a negative adjustment is `min(low - exclusive image end + 1, 0)`,
+  and a positive lower-edge adjustment is `max(high - image start, 0)`. The listing
+  is `libGLcore.so` from the IRIX 6.5.30 build named in
+  [the GL command sources](mgras-gl-commands.md#sources-and-grades), at
+  `0xd969d84` to `0xd969ec4` and from `0xd96a4d8`. The X calculations begin at
+  `0xd969ee8`. Their effect on the transmitted width is not settled.
 - **Inferred**: the geometry engine places row `i` of pass `k` on destination row
   `k + n·i`, so the passes together draw each row once. The pass number is the
   only word that tells the passes apart, and the row split is whole alternate rows.

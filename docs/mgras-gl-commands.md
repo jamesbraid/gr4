@@ -209,6 +209,12 @@ board does with the token is unknown.
   three int words. Poll flags bit 17 until set. Read the answer at `0x028004`.
   Which answer each query index expects is unknown. The client's query routine is
   called from more than a hundred sites.
+- **Answer halves.** The client reads an answer word as two signed halves, low and
+  high, and sign-extends each one. With pixel texture enabled it makes two such
+  queries, both with arguments 1 and 1, and uses the second answer to crop the input
+  in Y. **Inferred**: client code in the library listed under
+  [sources and grades](#sources-and-grades). The index values it uses are not
+  settled here. See [two-engine boards](mgras-two-re.md) for the crop arithmetic.
 - **Fence.** Write `0x000e0400` and poll flags bit 16 until set.
 - **DMA-read sync.** Write `0x000e0100`, then poll `0x020200` until `& 0x1eff`
   is zero.
