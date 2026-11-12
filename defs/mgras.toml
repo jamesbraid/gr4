@@ -415,6 +415,22 @@ grade = "established"
 ge0 = { value = 2, grade = "established" }
 ge1 = { value = 3, grade = "established" }
 
+[words.HQ_SERIAL_SLOT]
+width = 32
+grade = "established"
+doc = """
+One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET,
+written as one 32-bit store. The low-drive time sits in bits 19:10 and the
+sample offset in bits 9:2. The reader waits for bit 1 (done) and takes the
+wire level from bit 0. Read by the stock Octane PROM and by the Octane IDE
+diagnostic. The chip family on IMPACT boards is unknown."""
+
+[words.HQ_SERIAL_SLOT.fields]
+drive_time = { bits = [19, 10], grade = "established" }
+sample_offset = { bits = [9, 2], grade = "established" }
+done = { bits = [1, 1], grade = "established" }
+level = { bits = [0, 0], grade = "established" }
+
 [constants]
 ADV473_PORT_ADDR = { value = 0x0, grade = "established" }
 ADV473_PORT_COMMAND = { value = 0x6, grade = "established", doc = "as a write, role inferred" }
@@ -485,3 +501,45 @@ HQ_GL_FLAG_QUERY_READY = { value = 0x20000, grade = "inferred", doc = "bit 17 of
 HQ_GL_FLAG_FLUSH = { value = 0x100000, grade = "inferred", doc = "bit 20 of the flags word: the client sets it itself after glFlush; the kernel's buffer-swap path reads and clears it (docs/OPEN_QUESTIONS.md)" }
 HQ_GL_STATUS_PIPE_IDLE = { value = 0x2, grade = "inferred", doc = "bit 1 of HQ_GL_STATUS_OFFSET; the client's finish and the kernel's raster idle wait both poll it" }
 HQ_GL_DMA_STATUS_WAIT_MASK = { value = 0x1eff, grade = "inferred", doc = "mask of DMA status bits the client waits to see clear after a DMA read; what each bit means is unknown" }
+HQ_INTR_STATUS_OFFSET = { value = 0x011020, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "interrupt status word; the general handler reads it masked by the enable word. The switch tail writes 0x80 to it and reads bit 5 back; what the write does is unknown" }
+HQ_INTR_PENDING_CLEAR_OFFSET = { value = 0x011028, grade = "inferred", from = "IRIX 6.5.30 IP27 kernel", doc = "write-one-to-clear for the status word. The handler clears the bit it served; the switch writes 0x80 before its work and 0x70 after it" }
+HQ_INTR_ENAB_SET_OFFSET = { value = 0x011040, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "interrupt enable word, readable. Start-up writes 0x3008a200 to it. The kernel's writes and their order are established; a write setting only the bits it names is inferred" }
+HQ_INTR_ENAB_CLEAR_OFFSET = { value = 0x011048, grade = "inferred", from = "IRIX 6.5.30 IP27 kernel", doc = "write-one-to-clear for the enable word above. Every kernel site fits this pairing; the register is not named in the binary" }
+HQ_CTX_WORD_OFFSET = { value = 0x011008, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "per-context word saved by the context switch and written from the incoming context after the first handshake interrupt; meaning unknown" }
+HQ_CTX_ENAB_OFFSET = { value = 0x011030, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "per-context word saved and restored by the context switch; meaning unknown" }
+HQ_CTX_ENAB_CLEAR_OFFSET = { value = 0x011038, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "written all ones by the context switch tail; meaning unknown" }
+HQ_INTR_LEVEL2_ENAB_OFFSET = { value = 0x011050, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "second-level interrupt enable. Bit 4 is the FIFO low-water enable. The switch saves and restores the word so bit 4 is clear after a switch. Bit 3 and bits 0x1e8 are unknown" }
+HQ_INTR_LEVEL2_CLEAR_OFFSET = { value = 0x011058, grade = "inferred", from = "IRIX 6.5.30 IP27 kernel", doc = "write-one-to-clear for the second-level word. The switch writes 0xffffffef; the flush routine writes the bits it changed" }
+HQ_INTR_VECTOR_OFFSET = { value = 0x011070, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "packs three interrupt vectors the attach routine connects: low-water in bits 7:0, general in bits 15:8, retrace in bits 23:16" }
+HQ_INTR_LEVEL2_LOWATER = { value = 0x10, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "bit 4 of HQ_INTR_LEVEL2_ENAB_OFFSET, the FIFO low-water source" }
+HQ_INTR_ENAB_DEFAULT = { value = 0x3008a200, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "enable word start-up writes after setting the enable clear word to all ones. Enables sources 9, 13, 15, 19, 28 and 29" }
+HQ_INTR_SRC_RELEASE = { value = 0x10000, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "status bit 16; the general handler releases a board semaphore and acknowledges the bit. No routine enables or waits on it" }
+HQ_INTR_SRC_SWAP = { value = 0x400, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "status bit 10; enabled only around a buffer swap" }
+HQ_INTR_SRC_PROGRAM_ERROR = { value = 0x200, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "status bit 9; the general handler reports an HQ program error" }
+HQ_INTR_SRC_DMA_RANGE = { value = 0x2000, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "status bit 13; the general handler reports a DMA address-range error" }
+HQ_INTR_SRC_PRIV = { value = 0x4000, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "status bit 14; the general handler reports a command-FIFO privilege violation" }
+HQ_INTR_SRC_DMA_OVERFLOW = { value = 0x8000, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "status bit 15; the general handler reports a DMA access or stack overflow and marks the board failed" }
+HQ_INTR_SRC_CTX_ACK1 = { value = 0x80000, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "status bit 19; the first context-switch handshake. The handler releases the first switch semaphore" }
+HQ_INTR_SRC_CTX_ACK2 = { value = 0x10000000, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "status bit 28; the second context-switch handshake, after the 63 image words. The handler releases the second switch semaphore" }
+HQ_INTR_SRC_FIFO_OVERFLOW = { value = 0x20000000, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "status bit 29; the general handler reports a flow-control or command-FIFO overflow" }
+HQ_SWAP_ACK_VALUE = { value = 0x401, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "acknowledge the swap path writes to the pending-clear word, covering status bit 10 and the flag at bit 0. The bit-0 mirror is inferred" }
+HQ_SWAP_CMD = { value = 0x3700, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "class 0, opcode 0x37, no payload. Written to the command port after source 10 is enabled. That the board raises source 10 once the queue ahead of it drains is inferred" }
+HQ_CTXSW_RETURN_CMD = { value = 0xf400, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "word the switch tail writes to the command port only when the incoming context is the default context" }
+HQ_CTXSW_START_OFFSET = { value = 0x130500, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "microcode start register. The switch writes HQ_CTXSW_START_VALUE, the only value the kernel writes here" }
+HQ_CTXSW_START_VALUE = { value = 0x4fc, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "value written to HQ_CTXSW_START_OFFSET" }
+HQ_CTXSW_WAIT_OFFSET = { value = 0x008000, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "polled until the bits in HQ_CTXSW_WAIT_MASK are zero, before the start register is written; meaning unknown" }
+HQ_CTXSW_WAIT_MASK = { value = 0x1eff, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "mask for HQ_CTXSW_WAIT_OFFSET" }
+HQ_CTXSW_TAIL_OFFSET = { value = 0x040088, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "written 1 by the switch tail; meaning unknown" }
+HQ_FIFO_CTL0_OFFSET = { value = 0x040000, grade = "inferred", from = "Octane IDE diagnostic", doc = "FIFO control word; the diagnostic's start-up writes 0x28. Its role is inferred from the layout of the other FIFO controls" }
+HQ_FIFO_LOWATER_OFFSET = { value = 0x040008, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "FIFO low-water level. The flush routine writes the wanted level plus one before it sleeps and 0x14 when it wakes. The diagnostic's start-up writes 0x14 too" }
+HQ_FIFO_CTL2_OFFSET = { value = 0x040010, grade = "inferred", from = "Octane IDE diagnostic", doc = "FIFO control word; the diagnostic's start-up writes 0x0a. Role inferred" }
+HQ_FIFO_CTL3_OFFSET = { value = 0x040020, grade = "inferred", from = "Octane IDE diagnostic", doc = "FIFO control word; the diagnostic's start-up writes 0x28. Role inferred" }
+HQ_FIFO_CTL4_OFFSET = { value = 0x040028, grade = "inferred", from = "Octane IDE diagnostic", doc = "FIFO control word; the diagnostic's start-up writes 0x14. Role inferred" }
+HQ_FIFO_CTL5_OFFSET = { value = 0x040030, grade = "inferred", from = "Octane IDE diagnostic", doc = "FIFO control word; the diagnostic's start-up writes 0x0a. Role inferred" }
+HQ_FLOW_TIMEOUT_OFFSET = { value = 0x040078, grade = "inferred", from = "Octane IDE diagnostic", doc = "flow-control timeout; the diagnostic's register test uses mask 0x3ff" }
+HQ_FIFO_STATUS_OFFSET = { value = 0x020008, grade = "inferred", from = "IRIX 6.5.30 IP27 kernel", doc = "FIFO status. Its low byte is the level the flush routine waits to fall to. The wait for an empty FIFO requires that byte to be exactly zero" }
+HQ_BUS_STATUS_OFFSET = { value = 0x020100, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "bus status. The kernel waits for bits 4:0 to show room before it writes display registers. What the other bits mean is unknown" }
+HQ_VC3_RETRACE_OFFSET = { value = 0x072038, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "VC3 register 0x1e, written by the kernel's retrace enable. The kernel sets bit 0; that bit gates the board's retrace message is inferred" }
+HQ_ID_PART_EXPECTED = { value = 0xc003, grade = "inferred", from = "Octane IDE diagnostic", doc = "part number the diagnostic's HQ4 probe accepts, at bits 27:12 of the identity word, the first board word" }
+HQ_ID_MANUFACTURER_EXPECTED = { value = 0x2aa, grade = "inferred", from = "Octane IDE diagnostic", doc = "manufacturer code the diagnostic's HQ4 probe accepts, at bits 11:1 of the identity word, the first board word" }
+HQ_SERIAL_MASTER_OFFSET = { value = 0x011098, grade = "established", from = "stock Octane PROM and Octane IDE diagnostic", doc = "one-wire master for the board's serial-number record; each bit slot is one 32-bit store, see HQ_SERIAL_SLOT" }

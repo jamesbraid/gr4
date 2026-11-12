@@ -427,6 +427,50 @@ pub mod hq_revision {
         }
     }
 }
+/// One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET, written as one 32-bit store. The low-drive time sits in bits 19:10 and t (established)
+pub mod hq_serial_slot {
+    pub const WIDTH: u32 = 32;
+    pub mod drive_time { // bits 19:10, established
+        pub const SHIFT: u32 = 10;
+        pub const MASK: u32 = 0x3ff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod sample_offset { // bits 9:2, established
+        pub const SHIFT: u32 = 2;
+        pub const MASK: u32 = 0xff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod done { // bits 1:1, established
+        pub const SHIFT: u32 = 1;
+        pub const MASK: u32 = 0x1;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod level { // bits 0:0, established
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0x1;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
 /// Identification byte of the multi-channel option board (the byte at the index port's register select 0). The kernel's probe has two shapes, split by th (established)
 pub mod mco_id {
     pub const WIDTH: u32 = 32;
@@ -683,6 +727,24 @@ pub const GE_READBACK_PORT_A: u32 = 0x5822c; // established
 pub const GE_READBACK_PORT_B: u32 = 0x58230; // established
 pub const GL_CLIENT_FIFO_PROCESS_ADDR: u32 = 0x124400; // inferred
 pub const HQ4_NORMAL_FIFO_OFFSET: u32 = 0x20400; // established
+pub const HQ_BUS_STATUS_OFFSET: u32 = 0x20100; // established
+pub const HQ_CTXSW_RETURN_CMD: u32 = 0xf400; // established
+pub const HQ_CTXSW_START_OFFSET: u32 = 0x130500; // established
+pub const HQ_CTXSW_START_VALUE: u32 = 0x4fc; // established
+pub const HQ_CTXSW_TAIL_OFFSET: u32 = 0x40088; // established
+pub const HQ_CTXSW_WAIT_MASK: u32 = 0x1eff; // established
+pub const HQ_CTXSW_WAIT_OFFSET: u32 = 0x8000; // established
+pub const HQ_CTX_ENAB_CLEAR_OFFSET: u32 = 0x11038; // established
+pub const HQ_CTX_ENAB_OFFSET: u32 = 0x11030; // established
+pub const HQ_CTX_WORD_OFFSET: u32 = 0x11008; // established
+pub const HQ_FIFO_CTL0_OFFSET: u32 = 0x40000; // inferred
+pub const HQ_FIFO_CTL2_OFFSET: u32 = 0x40010; // inferred
+pub const HQ_FIFO_CTL3_OFFSET: u32 = 0x40020; // inferred
+pub const HQ_FIFO_CTL4_OFFSET: u32 = 0x40028; // inferred
+pub const HQ_FIFO_CTL5_OFFSET: u32 = 0x40030; // inferred
+pub const HQ_FIFO_LOWATER_OFFSET: u32 = 0x40008; // established
+pub const HQ_FIFO_STATUS_OFFSET: u32 = 0x20008; // inferred
+pub const HQ_FLOW_TIMEOUT_OFFSET: u32 = 0x40078; // inferred
 pub const HQ_GE_SELECT_ADDR: u32 = 0x11000; // established
 pub const HQ_GL_DMA_STATUS_OFFSET: u32 = 0x20200; // inferred
 pub const HQ_GL_DMA_STATUS_WAIT_MASK: u32 = 0x1eff; // inferred
@@ -694,6 +756,30 @@ pub const HQ_GL_FLAG_SYNC_COMPLETE: u32 = 0x10000; // inferred
 pub const HQ_GL_QUERY_ANSWER_OFFSET: u32 = 0x28004; // inferred
 pub const HQ_GL_STATUS_OFFSET: u32 = 0x20000; // inferred
 pub const HQ_GL_STATUS_PIPE_IDLE: u32 = 0x2; // inferred
+pub const HQ_ID_MANUFACTURER_EXPECTED: u32 = 0x2aa; // inferred
+pub const HQ_ID_PART_EXPECTED: u32 = 0xc003; // inferred
+pub const HQ_INTR_ENAB_CLEAR_OFFSET: u32 = 0x11048; // inferred
+pub const HQ_INTR_ENAB_DEFAULT: u32 = 0x3008a200; // established
+pub const HQ_INTR_ENAB_SET_OFFSET: u32 = 0x11040; // established
+pub const HQ_INTR_LEVEL2_CLEAR_OFFSET: u32 = 0x11058; // inferred
+pub const HQ_INTR_LEVEL2_ENAB_OFFSET: u32 = 0x11050; // established
+pub const HQ_INTR_LEVEL2_LOWATER: u32 = 0x10; // established
+pub const HQ_INTR_PENDING_CLEAR_OFFSET: u32 = 0x11028; // inferred
+pub const HQ_INTR_SRC_CTX_ACK1: u32 = 0x80000; // established
+pub const HQ_INTR_SRC_CTX_ACK2: u32 = 0x10000000; // established
+pub const HQ_INTR_SRC_DMA_OVERFLOW: u32 = 0x8000; // established
+pub const HQ_INTR_SRC_DMA_RANGE: u32 = 0x2000; // established
+pub const HQ_INTR_SRC_FIFO_OVERFLOW: u32 = 0x20000000; // established
+pub const HQ_INTR_SRC_PRIV: u32 = 0x4000; // established
+pub const HQ_INTR_SRC_PROGRAM_ERROR: u32 = 0x200; // established
+pub const HQ_INTR_SRC_RELEASE: u32 = 0x10000; // established
+pub const HQ_INTR_SRC_SWAP: u32 = 0x400; // established
+pub const HQ_INTR_STATUS_OFFSET: u32 = 0x11020; // established
+pub const HQ_INTR_VECTOR_OFFSET: u32 = 0x11070; // established
+pub const HQ_SERIAL_MASTER_OFFSET: u32 = 0x11098; // established
+pub const HQ_SWAP_ACK_VALUE: u32 = 0x401; // established
+pub const HQ_SWAP_CMD: u32 = 0x3700; // established
+pub const HQ_VC3_RETRACE_OFFSET: u32 = 0x72038; // established
 pub const MCO_BANK_BASE_CH0: u32 = 0x0; // established
 pub const MCO_BANK_BASE_CH1: u32 = 0x20; // established
 pub const MCO_BANK_BASE_CH2: u32 = 0x30; // established

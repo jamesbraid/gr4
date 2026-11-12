@@ -40,6 +40,7 @@ Array of 12 registers, stride 4.
 | `HQ4_NUMERIC_PACKET` | 64 | established | OpenBSD impact(4) driver register header |
 | `HQ_GE_SELECT` | 32 | established | driver and firmware readings |
 | `HQ_REVISION` | 32 | inferred | driver and firmware readings |
+| `HQ_SERIAL_SLOT` | 32 | established | driver and firmware readings |
 | `MCO_ID` | 32 | established | driver and firmware readings |
 | `MCO_INDEX` | 32 | established | driver and firmware readings |
 | `MONITOR_ID` | 8 | inferred | driver and firmware readings |
@@ -166,6 +167,21 @@ Inferred from the kernel object, not a bus measurement.
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
 | 31:28 | `hq_revision` | inferred |  | driver and firmware readings |  |
+
+### Word `HQ_SERIAL_SLOT`
+
+One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET,
+written as one 32-bit store. The low-drive time sits in bits 19:10 and the
+sample offset in bits 9:2. The reader waits for bit 1 (done) and takes the
+wire level from bit 0. Read by the stock Octane PROM and by the Octane IDE
+diagnostic. The chip family on IMPACT boards is unknown.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 19:10 | `drive_time` | established |  | driver and firmware readings |  |
+| 9:2 | `sample_offset` | established |  | driver and firmware readings |  |
+| 1 | `done` | established |  | driver and firmware readings |  |
+| 0 | `level` | established |  | driver and firmware readings |  |
 
 ### Word `MCO_ID`
 
@@ -302,6 +318,24 @@ revision. Inferred from the kernel object.
 | `GE_READBACK_PORT_B` | 0x58230 | established | driver and firmware readings | second read-back port shared by both geometry engines |
 | `GL_CLIENT_FIFO_PROCESS_ADDR` | 0x124400 | inferred | driver and firmware readings | address the IRIX GL client stores its command words to, in its own process mapping; the board window offset it maps to is not established (see docs/mgras-gl-commands.md) |
 | `HQ4_NORMAL_FIFO_OFFSET` | 0x20400 | established | OpenBSD impact(4) driver register header | normal command FIFO in the board's register window; the driver writes aligned 64-bit packets here |
+| `HQ_BUS_STATUS_OFFSET` | 0x20100 | established | driver and firmware readings | bus status. The kernel waits for bits 4:0 to show room before it writes display registers. What the other bits mean is unknown |
+| `HQ_CTXSW_RETURN_CMD` | 0xf400 | established | driver and firmware readings | word the switch tail writes to the command port only when the incoming context is the default context |
+| `HQ_CTXSW_START_OFFSET` | 0x130500 | established | driver and firmware readings | microcode start register. The switch writes HQ_CTXSW_START_VALUE, the only value the kernel writes here |
+| `HQ_CTXSW_START_VALUE` | 0x4fc | established | driver and firmware readings | value written to HQ_CTXSW_START_OFFSET |
+| `HQ_CTXSW_TAIL_OFFSET` | 0x40088 | established | driver and firmware readings | written 1 by the switch tail; meaning unknown |
+| `HQ_CTXSW_WAIT_MASK` | 0x1eff | established | driver and firmware readings | mask for HQ_CTXSW_WAIT_OFFSET |
+| `HQ_CTXSW_WAIT_OFFSET` | 0x8000 | established | driver and firmware readings | polled until the bits in HQ_CTXSW_WAIT_MASK are zero, before the start register is written; meaning unknown |
+| `HQ_CTX_ENAB_CLEAR_OFFSET` | 0x11038 | established | driver and firmware readings | written all ones by the context switch tail; meaning unknown |
+| `HQ_CTX_ENAB_OFFSET` | 0x11030 | established | driver and firmware readings | per-context word saved and restored by the context switch; meaning unknown |
+| `HQ_CTX_WORD_OFFSET` | 0x11008 | established | driver and firmware readings | per-context word saved by the context switch and written from the incoming context after the first handshake interrupt; meaning unknown |
+| `HQ_FIFO_CTL0_OFFSET` | 0x40000 | inferred | driver and firmware readings | FIFO control word; the diagnostic's start-up writes 0x28. Its role is inferred from the layout of the other FIFO controls |
+| `HQ_FIFO_CTL2_OFFSET` | 0x40010 | inferred | driver and firmware readings | FIFO control word; the diagnostic's start-up writes 0x0a. Role inferred |
+| `HQ_FIFO_CTL3_OFFSET` | 0x40020 | inferred | driver and firmware readings | FIFO control word; the diagnostic's start-up writes 0x28. Role inferred |
+| `HQ_FIFO_CTL4_OFFSET` | 0x40028 | inferred | driver and firmware readings | FIFO control word; the diagnostic's start-up writes 0x14. Role inferred |
+| `HQ_FIFO_CTL5_OFFSET` | 0x40030 | inferred | driver and firmware readings | FIFO control word; the diagnostic's start-up writes 0x0a. Role inferred |
+| `HQ_FIFO_LOWATER_OFFSET` | 0x40008 | established | driver and firmware readings | FIFO low-water level. The flush routine writes the wanted level plus one before it sleeps and 0x14 when it wakes. The diagnostic's start-up writes 0x14 too |
+| `HQ_FIFO_STATUS_OFFSET` | 0x20008 | inferred | driver and firmware readings | FIFO status. Its low byte is the level the flush routine waits to fall to. The wait for an empty FIFO requires that byte to be exactly zero |
+| `HQ_FLOW_TIMEOUT_OFFSET` | 0x40078 | inferred | driver and firmware readings | flow-control timeout; the diagnostic's register test uses mask 0x3ff |
 | `HQ_GE_SELECT_ADDR` | 0x11000 | established | driver and firmware readings | host interface control word; the geometry engine select field is HQ_GE_SELECT |
 | `HQ_GL_DMA_STATUS_OFFSET` | 0x20200 | inferred | driver and firmware readings | DMA status word; after a DMA read the client waits for the bits named by HQ_GL_DMA_STATUS_WAIT_MASK to clear |
 | `HQ_GL_DMA_STATUS_WAIT_MASK` | 0x1eff | inferred | driver and firmware readings | mask of DMA status bits the client waits to see clear after a DMA read; what each bit means is unknown |
@@ -313,6 +347,30 @@ revision. Inferred from the kernel object.
 | `HQ_GL_QUERY_ANSWER_OFFSET` | 0x28004 | inferred | driver and firmware readings | answer word read after a query flag is set; the kernel reads the same address after a geometry-engine download (GE_REVISION) |
 | `HQ_GL_STATUS_OFFSET` | 0x20000 | inferred | driver and firmware readings | HQ status word the GL client polls; bit 1 is the pipe-idle sense, the bit number the hq3 status register calls pipe_idle |
 | `HQ_GL_STATUS_PIPE_IDLE` | 0x2 | inferred | driver and firmware readings | bit 1 of HQ_GL_STATUS_OFFSET; the client's finish and the kernel's raster idle wait both poll it |
+| `HQ_ID_MANUFACTURER_EXPECTED` | 0x2aa | inferred | driver and firmware readings | manufacturer code the diagnostic's HQ4 probe accepts, at bits 11:1 of the identity word, the first board word |
+| `HQ_ID_PART_EXPECTED` | 0xc003 | inferred | driver and firmware readings | part number the diagnostic's HQ4 probe accepts, at bits 27:12 of the identity word, the first board word |
+| `HQ_INTR_ENAB_CLEAR_OFFSET` | 0x11048 | inferred | driver and firmware readings | write-one-to-clear for the enable word above. Every kernel site fits this pairing; the register is not named in the binary |
+| `HQ_INTR_ENAB_DEFAULT` | 0x3008a200 | established | driver and firmware readings | enable word start-up writes after setting the enable clear word to all ones. Enables sources 9, 13, 15, 19, 28 and 29 |
+| `HQ_INTR_ENAB_SET_OFFSET` | 0x11040 | established | driver and firmware readings | interrupt enable word, readable. Start-up writes 0x3008a200 to it. The kernel's writes and their order are established; a write setting only the bits it names is inferred |
+| `HQ_INTR_LEVEL2_CLEAR_OFFSET` | 0x11058 | inferred | driver and firmware readings | write-one-to-clear for the second-level word. The switch writes 0xffffffef; the flush routine writes the bits it changed |
+| `HQ_INTR_LEVEL2_ENAB_OFFSET` | 0x11050 | established | driver and firmware readings | second-level interrupt enable. Bit 4 is the FIFO low-water enable. The switch saves and restores the word so bit 4 is clear after a switch. Bit 3 and bits 0x1e8 are unknown |
+| `HQ_INTR_LEVEL2_LOWATER` | 0x10 | established | driver and firmware readings | bit 4 of HQ_INTR_LEVEL2_ENAB_OFFSET, the FIFO low-water source |
+| `HQ_INTR_PENDING_CLEAR_OFFSET` | 0x11028 | inferred | driver and firmware readings | write-one-to-clear for the status word. The handler clears the bit it served; the switch writes 0x80 before its work and 0x70 after it |
+| `HQ_INTR_SRC_CTX_ACK1` | 0x80000 | established | driver and firmware readings | status bit 19; the first context-switch handshake. The handler releases the first switch semaphore |
+| `HQ_INTR_SRC_CTX_ACK2` | 0x10000000 | established | driver and firmware readings | status bit 28; the second context-switch handshake, after the 63 image words. The handler releases the second switch semaphore |
+| `HQ_INTR_SRC_DMA_OVERFLOW` | 0x8000 | established | driver and firmware readings | status bit 15; the general handler reports a DMA access or stack overflow and marks the board failed |
+| `HQ_INTR_SRC_DMA_RANGE` | 0x2000 | established | driver and firmware readings | status bit 13; the general handler reports a DMA address-range error |
+| `HQ_INTR_SRC_FIFO_OVERFLOW` | 0x20000000 | established | driver and firmware readings | status bit 29; the general handler reports a flow-control or command-FIFO overflow |
+| `HQ_INTR_SRC_PRIV` | 0x4000 | established | driver and firmware readings | status bit 14; the general handler reports a command-FIFO privilege violation |
+| `HQ_INTR_SRC_PROGRAM_ERROR` | 0x200 | established | driver and firmware readings | status bit 9; the general handler reports an HQ program error |
+| `HQ_INTR_SRC_RELEASE` | 0x10000 | established | driver and firmware readings | status bit 16; the general handler releases a board semaphore and acknowledges the bit. No routine enables or waits on it |
+| `HQ_INTR_SRC_SWAP` | 0x400 | established | driver and firmware readings | status bit 10; enabled only around a buffer swap |
+| `HQ_INTR_STATUS_OFFSET` | 0x11020 | established | driver and firmware readings | interrupt status word; the general handler reads it masked by the enable word. The switch tail writes 0x80 to it and reads bit 5 back; what the write does is unknown |
+| `HQ_INTR_VECTOR_OFFSET` | 0x11070 | established | driver and firmware readings | packs three interrupt vectors the attach routine connects: low-water in bits 7:0, general in bits 15:8, retrace in bits 23:16 |
+| `HQ_SERIAL_MASTER_OFFSET` | 0x11098 | established | driver and firmware readings | one-wire master for the board's serial-number record; each bit slot is one 32-bit store, see HQ_SERIAL_SLOT |
+| `HQ_SWAP_ACK_VALUE` | 0x401 | established | driver and firmware readings | acknowledge the swap path writes to the pending-clear word, covering status bit 10 and the flag at bit 0. The bit-0 mirror is inferred |
+| `HQ_SWAP_CMD` | 0x3700 | established | driver and firmware readings | class 0, opcode 0x37, no payload. Written to the command port after source 10 is enabled. That the board raises source 10 once the queue ahead of it drains is inferred |
+| `HQ_VC3_RETRACE_OFFSET` | 0x72038 | established | driver and firmware readings | VC3 register 0x1e, written by the kernel's retrace enable. The kernel sets bit 0; that bit gates the board's retrace message is inferred |
 | `MCO_BANK_BASE_CH0` | 0x0 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH1` | 0x20 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH2` | 0x30 | established | driver and firmware readings |  |

@@ -191,6 +191,28 @@
 #define MGRAS_HQ_REVISION_HQ_REVISION_INPLACE        (MGRAS_HQ_REVISION_HQ_REVISION_MASK << MGRAS_HQ_REVISION_HQ_REVISION_SHIFT)
 
 /*
+ * One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET,
+ * written as one 32-bit store. The low-drive time sits in bits 19:10 and the
+ * sample offset in bits 9:2. The reader waits for bit 1 (done) and takes the
+ * wire level from bit 0. Read by the stock Octane PROM and by the Octane IDE
+ * diagnostic. The chip family on IMPACT boards is unknown.
+ */
+/* word HQ_SERIAL_SLOT: 32 bits; driver and firmware readings */
+#define MGRAS_HQ_SERIAL_SLOT_WIDTH                   32 /* established */
+#define MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_SHIFT        10 /* established */
+#define MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_MASK         0x3ffu
+#define MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_INPLACE      (MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_MASK << MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_SHIFT)
+#define MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_SHIFT     2 /* established */
+#define MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_MASK      0xffu
+#define MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_INPLACE   (MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_MASK << MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_SHIFT)
+#define MGRAS_HQ_SERIAL_SLOT_DONE_SHIFT              1 /* established */
+#define MGRAS_HQ_SERIAL_SLOT_DONE_MASK               0x1u
+#define MGRAS_HQ_SERIAL_SLOT_DONE_INPLACE            (MGRAS_HQ_SERIAL_SLOT_DONE_MASK << MGRAS_HQ_SERIAL_SLOT_DONE_SHIFT)
+#define MGRAS_HQ_SERIAL_SLOT_LEVEL_SHIFT             0 /* established */
+#define MGRAS_HQ_SERIAL_SLOT_LEVEL_MASK              0x1u
+#define MGRAS_HQ_SERIAL_SLOT_LEVEL_INPLACE           (MGRAS_HQ_SERIAL_SLOT_LEVEL_MASK << MGRAS_HQ_SERIAL_SLOT_LEVEL_SHIFT)
+
+/*
  * Identification byte of the multi-channel option board (the byte at the
  * index port's register select 0). The kernel's probe has two shapes,
  * split by the host machine family and not by software release; both give
@@ -346,6 +368,24 @@
 #define MGRAS_GE_READBACK_PORT_B                     0x58230u /* established */
 #define MGRAS_GL_CLIENT_FIFO_PROCESS_ADDR            0x124400u /* inferred */
 #define MGRAS_HQ4_NORMAL_FIFO_OFFSET                 0x20400u /* established */
+#define MGRAS_HQ_BUS_STATUS_OFFSET                   0x20100u /* established */
+#define MGRAS_HQ_CTXSW_RETURN_CMD                    0xf400u /* established */
+#define MGRAS_HQ_CTXSW_START_OFFSET                  0x130500u /* established */
+#define MGRAS_HQ_CTXSW_START_VALUE                   0x4fcu /* established */
+#define MGRAS_HQ_CTXSW_TAIL_OFFSET                   0x40088u /* established */
+#define MGRAS_HQ_CTXSW_WAIT_MASK                     0x1effu /* established */
+#define MGRAS_HQ_CTXSW_WAIT_OFFSET                   0x8000u /* established */
+#define MGRAS_HQ_CTX_ENAB_CLEAR_OFFSET               0x11038u /* established */
+#define MGRAS_HQ_CTX_ENAB_OFFSET                     0x11030u /* established */
+#define MGRAS_HQ_CTX_WORD_OFFSET                     0x11008u /* established */
+#define MGRAS_HQ_FIFO_CTL0_OFFSET                    0x40000u /* inferred */
+#define MGRAS_HQ_FIFO_CTL2_OFFSET                    0x40010u /* inferred */
+#define MGRAS_HQ_FIFO_CTL3_OFFSET                    0x40020u /* inferred */
+#define MGRAS_HQ_FIFO_CTL4_OFFSET                    0x40028u /* inferred */
+#define MGRAS_HQ_FIFO_CTL5_OFFSET                    0x40030u /* inferred */
+#define MGRAS_HQ_FIFO_LOWATER_OFFSET                 0x40008u /* established */
+#define MGRAS_HQ_FIFO_STATUS_OFFSET                  0x20008u /* inferred */
+#define MGRAS_HQ_FLOW_TIMEOUT_OFFSET                 0x40078u /* inferred */
 #define MGRAS_HQ_GE_SELECT_ADDR                      0x11000u /* established */
 #define MGRAS_HQ_GL_DMA_STATUS_OFFSET                0x20200u /* inferred */
 #define MGRAS_HQ_GL_DMA_STATUS_WAIT_MASK             0x1effu /* inferred */
@@ -357,6 +397,30 @@
 #define MGRAS_HQ_GL_QUERY_ANSWER_OFFSET              0x28004u /* inferred */
 #define MGRAS_HQ_GL_STATUS_OFFSET                    0x20000u /* inferred */
 #define MGRAS_HQ_GL_STATUS_PIPE_IDLE                 0x2u /* inferred */
+#define MGRAS_HQ_ID_MANUFACTURER_EXPECTED            0x2aau /* inferred */
+#define MGRAS_HQ_ID_PART_EXPECTED                    0xc003u /* inferred */
+#define MGRAS_HQ_INTR_ENAB_CLEAR_OFFSET              0x11048u /* inferred */
+#define MGRAS_HQ_INTR_ENAB_DEFAULT                   0x3008a200u /* established */
+#define MGRAS_HQ_INTR_ENAB_SET_OFFSET                0x11040u /* established */
+#define MGRAS_HQ_INTR_LEVEL2_CLEAR_OFFSET            0x11058u /* inferred */
+#define MGRAS_HQ_INTR_LEVEL2_ENAB_OFFSET             0x11050u /* established */
+#define MGRAS_HQ_INTR_LEVEL2_LOWATER                 0x10u /* established */
+#define MGRAS_HQ_INTR_PENDING_CLEAR_OFFSET           0x11028u /* inferred */
+#define MGRAS_HQ_INTR_SRC_CTX_ACK1                   0x80000u /* established */
+#define MGRAS_HQ_INTR_SRC_CTX_ACK2                   0x10000000u /* established */
+#define MGRAS_HQ_INTR_SRC_DMA_OVERFLOW               0x8000u /* established */
+#define MGRAS_HQ_INTR_SRC_DMA_RANGE                  0x2000u /* established */
+#define MGRAS_HQ_INTR_SRC_FIFO_OVERFLOW              0x20000000u /* established */
+#define MGRAS_HQ_INTR_SRC_PRIV                       0x4000u /* established */
+#define MGRAS_HQ_INTR_SRC_PROGRAM_ERROR              0x200u /* established */
+#define MGRAS_HQ_INTR_SRC_RELEASE                    0x10000u /* established */
+#define MGRAS_HQ_INTR_SRC_SWAP                       0x400u /* established */
+#define MGRAS_HQ_INTR_STATUS_OFFSET                  0x11020u /* established */
+#define MGRAS_HQ_INTR_VECTOR_OFFSET                  0x11070u /* established */
+#define MGRAS_HQ_SERIAL_MASTER_OFFSET                0x11098u /* established */
+#define MGRAS_HQ_SWAP_ACK_VALUE                      0x401u /* established */
+#define MGRAS_HQ_SWAP_CMD                            0x3700u /* established */
+#define MGRAS_HQ_VC3_RETRACE_OFFSET                  0x72038u /* established */
 #define MGRAS_MCO_BANK_BASE_CH0                      0x0u /* established */
 #define MGRAS_MCO_BANK_BASE_CH1                      0x20u /* established */
 #define MGRAS_MCO_BANK_BASE_CH2                      0x30u /* established */

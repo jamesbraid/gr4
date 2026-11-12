@@ -431,6 +431,50 @@
   {
    "unit": "mgras",
    "kind": "word",
+   "name": "HQ_SERIAL_SLOT",
+   "width": 32,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "HQ_SERIAL_SLOT.drive_time",
+   "hi": 19,
+   "lo": 10,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "HQ_SERIAL_SLOT.sample_offset",
+   "hi": 9,
+   "lo": 2,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "HQ_SERIAL_SLOT.done",
+   "hi": 1,
+   "lo": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "HQ_SERIAL_SLOT.level",
+   "hi": 0,
+   "lo": 0,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
    "name": "MCO_ID",
    "width": 32,
    "grade": "established",
@@ -880,6 +924,168 @@
   {
    "unit": "mgras",
    "kind": "constant",
+   "name": "HQ_BUS_STATUS_OFFSET",
+   "value": 131328,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_CTXSW_RETURN_CMD",
+   "value": 62464,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_CTXSW_START_OFFSET",
+   "value": 1246464,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_CTXSW_START_VALUE",
+   "value": 1276,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_CTXSW_TAIL_OFFSET",
+   "value": 262280,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_CTXSW_WAIT_MASK",
+   "value": 7935,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_CTXSW_WAIT_OFFSET",
+   "value": 32768,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_CTX_ENAB_CLEAR_OFFSET",
+   "value": 69688,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_CTX_ENAB_OFFSET",
+   "value": 69680,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_CTX_WORD_OFFSET",
+   "value": 69640,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_FIFO_CTL0_OFFSET",
+   "value": 262144,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_FIFO_CTL2_OFFSET",
+   "value": 262160,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_FIFO_CTL3_OFFSET",
+   "value": 262176,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_FIFO_CTL4_OFFSET",
+   "value": 262184,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_FIFO_CTL5_OFFSET",
+   "value": 262192,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_FIFO_LOWATER_OFFSET",
+   "value": 262152,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_FIFO_STATUS_OFFSET",
+   "value": 131080,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_FLOW_TIMEOUT_OFFSET",
+   "value": 262264,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
    "name": "HQ_GE_SELECT_ADDR",
    "value": 69632,
    "count": 1,
@@ -974,6 +1180,222 @@
    "value": 2,
    "count": 1,
    "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_ID_MANUFACTURER_EXPECTED",
+   "value": 682,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_ID_PART_EXPECTED",
+   "value": 49155,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_ENAB_CLEAR_OFFSET",
+   "value": 69704,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_ENAB_DEFAULT",
+   "value": 805872128,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_ENAB_SET_OFFSET",
+   "value": 69696,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_LEVEL2_CLEAR_OFFSET",
+   "value": 69720,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_LEVEL2_ENAB_OFFSET",
+   "value": 69712,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_LEVEL2_LOWATER",
+   "value": 16,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_PENDING_CLEAR_OFFSET",
+   "value": 69672,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_SRC_CTX_ACK1",
+   "value": 524288,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_SRC_CTX_ACK2",
+   "value": 268435456,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_SRC_DMA_OVERFLOW",
+   "value": 32768,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_SRC_DMA_RANGE",
+   "value": 8192,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_SRC_FIFO_OVERFLOW",
+   "value": 536870912,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_SRC_PRIV",
+   "value": 16384,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_SRC_PROGRAM_ERROR",
+   "value": 512,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_SRC_RELEASE",
+   "value": 65536,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_SRC_SWAP",
+   "value": 1024,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_STATUS_OFFSET",
+   "value": 69664,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_VECTOR_OFFSET",
+   "value": 69744,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_SERIAL_MASTER_OFFSET",
+   "value": 69784,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_SWAP_ACK_VALUE",
+   "value": 1025,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_SWAP_CMD",
+   "value": 14080,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_VC3_RETRACE_OFFSET",
+   "value": 467000,
+   "count": 1,
+   "grade": "established",
    "from": "driver and firmware readings"
   },
   {

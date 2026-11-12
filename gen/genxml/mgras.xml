@@ -220,6 +220,17 @@ IRIX kernel's board-information routine; the other bits are not read.
 Inferred from the kernel object, not a bus measurement.</doc>
     <field name="hq_revision" start="28" size="4" type="uint" grade="inferred"/>
   </struct>
+  <struct name="HQ_SERIAL_SLOT" size="4" grade="established" from="driver and firmware readings">
+    <doc>One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET,
+written as one 32-bit store. The low-drive time sits in bits 19:10 and the
+sample offset in bits 9:2. The reader waits for bit 1 (done) and takes the
+wire level from bit 0. Read by the stock Octane PROM and by the Octane IDE
+diagnostic. The chip family on IMPACT boards is unknown.</doc>
+    <field name="drive_time" start="10" size="10" type="uint" grade="established"/>
+    <field name="sample_offset" start="2" size="8" type="uint" grade="established"/>
+    <field name="done" start="1" size="1" type="uint" grade="established"/>
+    <field name="level" start="0" size="1" type="uint" grade="established"/>
+  </struct>
   <struct name="MCO_ID" size="4" grade="established" from="driver and firmware readings">
     <doc>Identification byte of the multi-channel option board (the byte at the
 index port's register select 0). The kernel's probe has two shapes,
@@ -323,6 +334,24 @@ revision. Inferred from the kernel object.</doc>
   <constant name="GE_READBACK_PORT_B" value="0x58230" grade="established"/>
   <constant name="GL_CLIENT_FIFO_PROCESS_ADDR" value="0x124400" grade="inferred"/>
   <constant name="HQ4_NORMAL_FIFO_OFFSET" value="0x20400" grade="established" from="OpenBSD impact(4) driver register header"/>
+  <constant name="HQ_BUS_STATUS_OFFSET" value="0x20100" grade="established"/>
+  <constant name="HQ_CTXSW_RETURN_CMD" value="0xf400" grade="established"/>
+  <constant name="HQ_CTXSW_START_OFFSET" value="0x130500" grade="established"/>
+  <constant name="HQ_CTXSW_START_VALUE" value="0x4fc" grade="established"/>
+  <constant name="HQ_CTXSW_TAIL_OFFSET" value="0x40088" grade="established"/>
+  <constant name="HQ_CTXSW_WAIT_MASK" value="0x1eff" grade="established"/>
+  <constant name="HQ_CTXSW_WAIT_OFFSET" value="0x8000" grade="established"/>
+  <constant name="HQ_CTX_ENAB_CLEAR_OFFSET" value="0x11038" grade="established"/>
+  <constant name="HQ_CTX_ENAB_OFFSET" value="0x11030" grade="established"/>
+  <constant name="HQ_CTX_WORD_OFFSET" value="0x11008" grade="established"/>
+  <constant name="HQ_FIFO_CTL0_OFFSET" value="0x40000" grade="inferred"/>
+  <constant name="HQ_FIFO_CTL2_OFFSET" value="0x40010" grade="inferred"/>
+  <constant name="HQ_FIFO_CTL3_OFFSET" value="0x40020" grade="inferred"/>
+  <constant name="HQ_FIFO_CTL4_OFFSET" value="0x40028" grade="inferred"/>
+  <constant name="HQ_FIFO_CTL5_OFFSET" value="0x40030" grade="inferred"/>
+  <constant name="HQ_FIFO_LOWATER_OFFSET" value="0x40008" grade="established"/>
+  <constant name="HQ_FIFO_STATUS_OFFSET" value="0x20008" grade="inferred"/>
+  <constant name="HQ_FLOW_TIMEOUT_OFFSET" value="0x40078" grade="inferred"/>
   <constant name="HQ_GE_SELECT_ADDR" value="0x11000" grade="established"/>
   <constant name="HQ_GL_DMA_STATUS_OFFSET" value="0x20200" grade="inferred"/>
   <constant name="HQ_GL_DMA_STATUS_WAIT_MASK" value="0x1eff" grade="inferred"/>
@@ -334,6 +363,30 @@ revision. Inferred from the kernel object.</doc>
   <constant name="HQ_GL_QUERY_ANSWER_OFFSET" value="0x28004" grade="inferred"/>
   <constant name="HQ_GL_STATUS_OFFSET" value="0x20000" grade="inferred"/>
   <constant name="HQ_GL_STATUS_PIPE_IDLE" value="0x2" grade="inferred"/>
+  <constant name="HQ_ID_MANUFACTURER_EXPECTED" value="0x2aa" grade="inferred"/>
+  <constant name="HQ_ID_PART_EXPECTED" value="0xc003" grade="inferred"/>
+  <constant name="HQ_INTR_ENAB_CLEAR_OFFSET" value="0x11048" grade="inferred"/>
+  <constant name="HQ_INTR_ENAB_DEFAULT" value="0x3008a200" grade="established"/>
+  <constant name="HQ_INTR_ENAB_SET_OFFSET" value="0x11040" grade="established"/>
+  <constant name="HQ_INTR_LEVEL2_CLEAR_OFFSET" value="0x11058" grade="inferred"/>
+  <constant name="HQ_INTR_LEVEL2_ENAB_OFFSET" value="0x11050" grade="established"/>
+  <constant name="HQ_INTR_LEVEL2_LOWATER" value="0x10" grade="established"/>
+  <constant name="HQ_INTR_PENDING_CLEAR_OFFSET" value="0x11028" grade="inferred"/>
+  <constant name="HQ_INTR_SRC_CTX_ACK1" value="0x80000" grade="established"/>
+  <constant name="HQ_INTR_SRC_CTX_ACK2" value="0x10000000" grade="established"/>
+  <constant name="HQ_INTR_SRC_DMA_OVERFLOW" value="0x8000" grade="established"/>
+  <constant name="HQ_INTR_SRC_DMA_RANGE" value="0x2000" grade="established"/>
+  <constant name="HQ_INTR_SRC_FIFO_OVERFLOW" value="0x20000000" grade="established"/>
+  <constant name="HQ_INTR_SRC_PRIV" value="0x4000" grade="established"/>
+  <constant name="HQ_INTR_SRC_PROGRAM_ERROR" value="0x200" grade="established"/>
+  <constant name="HQ_INTR_SRC_RELEASE" value="0x10000" grade="established"/>
+  <constant name="HQ_INTR_SRC_SWAP" value="0x400" grade="established"/>
+  <constant name="HQ_INTR_STATUS_OFFSET" value="0x11020" grade="established"/>
+  <constant name="HQ_INTR_VECTOR_OFFSET" value="0x11070" grade="established"/>
+  <constant name="HQ_SERIAL_MASTER_OFFSET" value="0x11098" grade="established"/>
+  <constant name="HQ_SWAP_ACK_VALUE" value="0x401" grade="established"/>
+  <constant name="HQ_SWAP_CMD" value="0x3700" grade="established"/>
+  <constant name="HQ_VC3_RETRACE_OFFSET" value="0x72038" grade="established"/>
   <constant name="MCO_BANK_BASE_CH0" value="0x0" grade="established"/>
   <constant name="MCO_BANK_BASE_CH1" value="0x20" grade="established"/>
   <constant name="MCO_BANK_BASE_CH2" value="0x30" grade="established"/>

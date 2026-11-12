@@ -14,6 +14,7 @@ opening heading or first sentence.
 - [docs/mgras-board-identity.md](docs/mgras-board-identity.md): How IRIX reads the IMPACT board identity words, the product and revision codes, and what captured boards read back.
 - [docs/mgras-client-selection-feedback.md](docs/mgras-client-selection-feedback.md): How the IRIX GL client runs selection mode, the command forms it writes and how it reads hit records back.
 - [docs/mgras-gl-commands.md](docs/mgras-gl-commands.md): The word framing and command forms the IRIX GL client writes to the command port, the status and flag offsets it polls, and the kernel's context image and clip words.
+- [docs/mgras-hq4.md](docs/mgras-hq4.md): The HQ4 host interface as the IRIX software drives it: the interrupt block and sources, the context-switch handshake, the swap command, the status waits, the FIFO thresholds and the Octane page-list layout, with grades and open questions.
 - [docs/mgras-two-re.md](docs/mgras-two-re.md): How the two-raster-engine boards split the screen, select a pixel processor and reach their two geometry engines, with grades and open questions.
 - [docs/mgras-visual-buffers.md](docs/mgras-visual-buffers.md): The published Octane frame buffer building blocks, the 1280 by 1024 visuals per model and the stereo modes.
 - [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md): Ledger of header unknowns and what shipped software settles.
