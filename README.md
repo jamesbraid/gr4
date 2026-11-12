@@ -21,6 +21,12 @@ Not listed one by one:
 - `docs/sources/`: 73 more stored documents (44 PDF, 22 HTML, 7 other files) and their `SHA256SUMS`. Use [docs/sources/INDEX.md](docs/sources/INDEX.md).
 - `docs/inventory/*.tsv`: generated extraction tables, not documents.
 
+## Hardware definitions
+
+- [defs/](defs/): the hardware facts, one TOML file per unit. Each register, field, word and constant has a grade and a source. Edit facts here.
+- [gen/](gen/): generated from `defs/` and committed; never edit by hand. [gen/docs/](gen/docs/) has the reference page for each unit.
+- `*_DECODE.h` at the top level: forwarding headers that include `gen/c/`.
+
 ## Other
 
 - [ghidra/README.md](ghidra/README.md): Ghidra tooling; everything that runs inside Ghidra lives here.

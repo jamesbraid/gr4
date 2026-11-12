@@ -21,7 +21,7 @@ Subsystem Configurations:
 | **High Impact (HI / HIO)** | GR4 | 1 GE11 | 1 RE4 | 1 MB or 4 MB | 24-bit RGB + Z + Tex | Indigo2 / Octane |
 | **Maximum Impact (MaxI / EMX)** | GR4 | 2 GE11 | 2 RE4 (dual RSS) | 1 TRAM; 4 with the option | 24-bit RGB + Z + Tex | Indigo2 / Octane |
 
-Board ID grades. Solid Impact is told from High and Maximum by the product field (bits 6:5 of the second board-version byte) reading 1: established, read in the board-information routine of the 6.5.0 graphics kernel object (sha256 `8369b6d4a250d395123793a8dd339bfa0f158caa32cbf218fdb76a904725c9d7`, `mgras_init.o`), which takes a one-engine, no-second-board path for that value (field position and value carried in `MGRAS_DECODE.h` as the second board-version word). An earlier label "GR4 rev <3" for Solid is withdrawn: `MGRAS.h` records the below-3 test as the colormap revision, a voltage-margin rule for early pixel processors, not a product split. How board revision numbers map to products stays inferred (`docs/OPEN_QUESTIONS.md`, entry 5).
+Board ID grades. Solid Impact is told from High and Maximum by the product field (bits 6:5 of the second board-version byte) reading 1: established, read in the board-information routine of the 6.5.0 graphics kernel object (sha256 `8369b6d4a250d395123793a8dd339bfa0f158caa32cbf218fdb76a904725c9d7`, `mgras_init.o`), which takes a one-engine, no-second-board path for that value (field position and value carried in `defs/mgras.toml` as the second board-version word). An earlier label "GR4 rev <3" for Solid is withdrawn: `MGRAS.h` records the below-3 test as the colormap revision, a voltage-margin rule for early pixel processors, not a product split. How board revision numbers map to products stays inferred (`docs/OPEN_QUESTIONS.md`, entry 5).
 
 ---
 
@@ -65,7 +65,7 @@ DCB window address. The display-bus windows start 0x60000 above the board base (
 6. **VC3 (Video Controller 3)**: Master video timing generator, horizontal/vertical sync, cursor positioning/bitmap, and Display ID (DID) frame composition.
 7. **CMAP, RAMDAC & XMAP**:
    - **XMAP (inside PP1s)**: Per-pixel Window ID (WID/DID) decoding, front/back buffer selection, overlay plane switching, and visual format routing (Color Index to CMAP vs raw RGB to DAC); contains no gamma tables.
-   - **CMAP0 / CMAP1**: Dual 8K x 24-bit color lookup tables (CLUTs; 8192 entries established by the diagnostic's 0-8191 range, the 24-bit width inferred; the count is in `MGRAS_DECODE.h`) translating Color Index and overlay pixels to 24-bit RGB.
+   - **CMAP0 / CMAP1**: Dual 8K x 24-bit color lookup tables (CLUTs; 8192 entries established by the diagnostic's 0-8191 range, the 24-bit width inferred; the count is in `defs/mgras.toml`) translating Color Index and overlay pixels to 24-bit RGB.
    - **RAMDAC (ADV7161 / ADV7162)**: Triple 10-bit DAC with video PLL (220 MHz is the part's quoted rate, unverified: no data sheet held; settling test: retrieve the ADV7161 and ADV7162 data sheets through the Library acquisition tooling by part number and read the pixel-clock rating of the speed grade the boards use, or take the highest pixel clock in the kernel's video timing tables and check that it does not exceed 220 MHz, which would refute it as the PLL ceiling) and screen-wide 256x10-bit (established for the multi-channel option's DAC channels only: its DAC loaders write 256 ten-bit entries per colour; whether the base board's own DAC has a table of that size is not established) Global Gamma Look-Up Table (LUT) correcting all display pixels before analog output.
 
 ---
@@ -99,6 +99,8 @@ Our primary documentation output is a set of authoritative C header files mirror
 6. **`TE1.h`**: Texture Engine registers, TETRAM layout, texture formats, mipmapping parameters, wrap/clamp modes, texture environments, and texture DMA.
 7. **`VC3.h`**: Video Controller registers, video timing generators, cursor memory/positioning, DID table registers, and frame synchronization.
 8. **`CMAP.h`**: Colormap palette registers (CMAP0/1), ADV7161/7162 RAMDAC control and screen-wide 256x10-bit Global Gamma LUT, and PP1 XMAP per-pixel WID scanout routing.
+
+**Hardware definitions.** The register, field, word and constant facts for the chips and boards live in `defs/`, one TOML file per unit: `re4`, `ge11`, `hq3`, `mgras`, `pp1`, `te1` and `xtalk`. Every item has a grade (established, inferred or unknown) and a source. `defs/check.toml` holds the checks and the publication profile. `gen/` is generated from `defs/` and is never edited by hand: `gen/c/` (C headers), `gen/rust/` (crate), `gen/py/`, `gen/json/`, `gen/genxml/`, and `gen/docs/<unit>.md`, the published reference pages. The `*_DECODE.h` files at the top level are forwarding headers that include `gen/c/`, kept so existing consumers keep building. To change a fact, edit `defs/`, run `retools/tools/defs/defs-gen`, then `retools/tools/defs/defs-check --build`. CI runs `retools/tools/defs/ci-check`.
 
 ---
 

@@ -202,7 +202,7 @@ extern "C" {
 #define HQ3_BFIFO_DELAY_DEF         100
 
 /* Status Register (HQ3_STATUS: 0x70000)
- * Bit names are an early layout; HQ3_DECODE.h carries the reading the drivers
+ * Bit names are an early layout; defs/hq3.toml carries the reading the drivers
  * support, which wins where they differ (bits 3 to 8 differ). Bit 1 is
  * checked: glFinish sends a one-word state read through the pipeline and then
  * spins until bit 1 reads set (libGLcore, __glMgrim_Finish, re-read this
