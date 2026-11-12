@@ -62,6 +62,28 @@ Page numbers are the printed page numbers of the document unless marked "PDF pag
 
 **24. Texture RAM revision words and failure report format.** Established. Same guide, pp. A-1 and A-2: the texture test reads two revision words per RSS, shown as 0x1c011401 and 0xc000400 on a healthy RSS-0 in the sample; the failing sample read 0x1401 where the high half should be 0x1c01. The test runs once per RSS, each with four texture RAMs on a two-RE board. A framebuffer RDRAM failure prints the RSS, PP1 and RDRAM number, the RDRAM address, the X and Y pixel and the expected and received words (sample: RSS 1, PP1, RDRAM 2, address 0x0160218a8, pixel 833,29). Chapter 8 (p. 8-1) says a texture failure always blames the whole graphics board when the fault may be one of the texture mezzanine cards.
 
+## Octane graphics configurations and pipeline
+
+**25. Component counts per Octane graphics subsystem.** Established. OCTANE Technical Report (`octane-technical-report.pdf`), Table 4.1, PDF page 69, and section 4.1.4 (PDF page 72): the four columns are SI, SI with texture, SSI and MXI.
+
+| Component | SI | SI with texture | SSI | MXI |
+|---|---|---|---|---|
+| Geometry Engine (GE11) | 1 | 1 | 2 | 2 |
+| Raster Engine (RE4) | 1 | 1 | 2 | 2 |
+| Texture Engine (TE1) | -- | 1 | -- | 2 |
+| Texture memory (TRAM) | -- | 4MB | -- | 8MB |
+| Pixel Engine (PP1) | 2 | 2 | 4 | 4 |
+| Colour mapper (CMAP) | 2 | 2 | 2 | 2 |
+| Pixel memory (RDRAM) | 12MB | 12MB | 24MB | 24MB |
+
+These are Octane boards. The Indigo2 rows in fact 4 and in `AGENTS.md` are a different product line and are not comparable to these columns.
+
+**26. HQ4 spreads work across GE11 engines by FIFO fill.** Established. OCTANE Technical Report, section 4.2.1, PDF page 74: on systems with more than one GE11, the HQ4 balances load by the fill of each GE11's command FIFO. The report does not give the balancing rule beyond that.
+
+**27. RE4 precision.** Established. OCTANE Technical Report, section 4.2.3, PDF page 75: the RE4 computes X and Y with 8 bits of subpixel precision and iterates R, G, B and A in 12 bits and Z in 24 bits.
+
+**28. TRAM size per texture engine.** Established. OCTANE Technical Report, section 4.2.5, PDF page 76: the TRAM ASIC holds 4MB of texture memory and works with one texture engine. Table 4.1 gives MXI 8MB for its two texture engines, so 4MB each.
+
 ## Contradictions found
 
 - The chip headers' gate counts (PP1 ~120,000, TE1 ~250,000, RE4 ~200,000, HQ3 ~150,000) disagreed with fact 1; the headers now carry the published figures. The guide gives no VC3 figure, so VC3 stays an estimate, graded unknown in `VC3.h` (no source), unlike the other four chips' published figures. No test can settle it from what is held: the Hardware Developer Handbook 2.0 text has no VC3 entry and no gate count, and the product guide lists five chips without it. A VC3 data sheet or a gate figure in another SGI product guide would settle it; look it up in the Library by chip name and by the title of the Indigo2 IMPACT display documents before using the estimate in a claim.
