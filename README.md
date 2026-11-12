@@ -11,6 +11,7 @@ opening heading or first sentence.
 ## docs/
 
 - [docs/IMPACT_BOARD_FACTS.md](docs/IMPACT_BOARD_FACTS.md): Facts from published SGI documents the headers did not yet carry.
+- [docs/mgras-antialiasing.md](docs/mgras-antialiasing.md): What the published Octane description says the board does for antialiased points and lines, with grades and open questions.
 - [docs/mgras-board-identity.md](docs/mgras-board-identity.md): How IRIX reads the IMPACT board identity words, the product and revision codes, and what captured boards read back.
 - [docs/mgras-client-selection-feedback.md](docs/mgras-client-selection-feedback.md): How the IRIX GL client runs selection mode, the command forms it writes and how it reads hit records back.
 - [docs/mgras-display-timing.md](docs/mgras-display-timing.md): How the IRIX kernel programs MGRAS video timing, the PLL and VC3 clock arithmetic, and the stock 1280 by 1024 retrace rate.
