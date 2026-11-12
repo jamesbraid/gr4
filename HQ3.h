@@ -331,7 +331,7 @@ extern "C" {
  *   half-received command (the owner was descheduled between the words of
  *   one command): the host-interface state (HQ3_HIF_CTX) is part of the
  *   saved context, so the command finishes when its owner gets the pipe
- *   back. A model must keep the FIFO parser per context.
+ *   back. The FIFO parser state is per context.
  *
  * The switch (MgrasCtxsw, outgoing -> incoming)
  *   1. Save into the outgoing context's kernel record: HQ3_CONFIG,
@@ -426,7 +426,7 @@ extern "C" {
  *                surface descriptors, the same pair a loaded context sends
  *                as the two VALIDATE_BANKS arguments (0x098, below) and the
  *                same pair of numbers the in-place path writes. Traced (1, 1).
- *                A model reads the pair as the front/back bank the next
+ *                The pair reads as the front/back bank the next
  *                frame draws, which is what the token's name and use say;
  *                which descriptor field it is, and which value is which
  *                bank, is inferred.
@@ -659,7 +659,7 @@ extern "C" {
 
 /*
  * ============================================================================
- * PIXEL OPERATIONS (mapped with the gltest pixel test, 6.5.22, 2026-10)
+ * PIXEL OPERATIONS (mapped from IRIX 6.5.22 runs, 2026-10; inferred)
  * ============================================================================
  * The GE program and its modules: GE11.h "IMAGING ENGINE". Raster
  * transfer formats: RE4.h XFRMODE.
@@ -707,8 +707,8 @@ extern "C" {
  *   each word.
  *
  * Large glDrawPixels images come by host DMA in column chunks: 156
- *   RGBA or 144 RGB pixels wide (traced with pixtest zoombig, matching
- *   atomchild411's traces in PR #221). Before each chunk 0xDA8 gives its
+ *   RGBA or 144 RGB pixels wide (traced from IRIX 6.5.22 runs, not a board
+ *   capture). Before each chunk 0xDA8 gives its
  *   rectangle relative to the raster position, already zoomed (60 rows at
  *   y zoom 3.2: 192 high; 156 columns at x zoom 1.2: 187 wide), and the
  *   DMA (LINE_BYTES 0x804 = the image's row bytes) brings the chunk's
@@ -722,8 +722,7 @@ extern "C" {
  *   width, height, 0.5, 0.5, xfrmode, 0x400D). Transfer formats 9 (one
  *   component) and 10 (two) are the texel formats.
  *
- * Where libGLcore itself departs from GL 1.1 (the board does as told;
- * pixtest reports these as XFAIL):
+ * Where libGLcore itself departs from GL 1.1 (the board does as told):
  *   - glTexEnv GL_REPLACE is sent as MODULATE (__glMgrim_TexEnviv).
  *   - glReadPixels applies no pixel transfer (scale, bias, maps).
  *   - glBitmap starts at UNPACK_SKIP_PIXELS / 8 bytes and drops the
@@ -739,7 +738,7 @@ extern "C" {
  * GENERAL_BITMAP format word: bit 17 = UNPACK_LSB_FIRST, bits 16:14 = row
  * padding.
  *
- * Colour-index visuals (pixtest --ci 8 / --ci 12, 2026-10-13): both GL
+ * Colour-index visuals (8- and 12-bit visuals, 2026-10-13): both GL
  *   CI visuals draw with PP1 fill mode 0xC006604 (pixel type 6); only the
  *   plane masks differ, ColorMaskLSBs 0xFF for 8 bits and 0xFFF for 12
  *   (INDEX_MASK 0x03D carries the same). Draws go out in XFRMODE format
@@ -752,7 +751,7 @@ extern "C" {
  *   CPU: plain truncation for the signed types (GL wants a mask to
  *   2^(n-1) - 1), and no read transfer. The board returns the 12-bit index
  *   field; on an 8-bit visual planes 11:8 keep whatever was there, and
- *   nothing masks them off (our model; unverified on hardware).
+ *   nothing masks them off (inferred; unverified on hardware).
  *   glReadPixels(GL_RGBA) from a CI visual fails with
  *   GL_INVALID_OPERATION in libGLcore.
  */
@@ -1221,8 +1220,8 @@ extern "C" {
 #define HQ_TOK_SAVE_TEXMODE               0x0E9  /*  16 bytes: __glMgrSaveTexmode */
 #define HQ_TOK_RESTORE_TEXMODE            0x0EA  /*   0 bytes: __glMgrRestoreTexmode */
 /*
- * Traced 2026-10-16 with the gltest token test (one GL feature a step) on
- * IRIX 6.5.22, Maximum Impact:
+ * Traced 2026-10-16, one GL feature a step, from IRIX 6.5.22 for a Maximum
+ * Impact (not a board capture, so inferred):
  *   0x06C [1] / [0]  glEnable / glDisable(GL_POINT_SMOOTH) (also [0] from
  *                    the pick code's soft-path setup).
  *   0x0E9 [1, 0, 0, 0] ... 0x0EA  around glDrawPixels, glCopyPixels,

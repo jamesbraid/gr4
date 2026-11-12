@@ -192,8 +192,8 @@ extern "C" {
  * So 5,5,5,1 is real (15-bit halves), not 4:4:4; the component order
  * inside the 15 bits is not known (red lowest by analogy).
  * GL_DITHER (HQ3 token 0x067) is sent, but no fill mode bit for dither
- * has been seen; our model dithers GL's 12-bit writes with REX3's 4x4
- * Bayer matrix (a model-private bit 3).
+ * has been seen, and the dither pattern is unknown (REX3's 4x4 Bayer
+ * matrix is the nearest analogy).
  */
 
 /* Buffer Configuration (bits 13:11) */
@@ -329,7 +329,7 @@ extern "C" {
  * is a run of RDRAM pages; a pointer is the page number it starts at.
  *
  * Where pixel (x, y) lives (UNKNOWN as to evidence: the formulas below are
- * the working model, not read from a binary; a trace of the RDRAM writes for
+ * the working hypothesis, not read from a binary; a trace of the RDRAM writes for
  * single pixels would settle them):
  *   RE4      = y % numRE4s                 (scanlines interleave over RE4s)
  *   PP1      = x % 2
@@ -380,8 +380,8 @@ extern "C" {
  * to both RE4s (config DestRE = CONFIG_RE4_ALL, the PROM's default), and
  * each draws only its own scanlines; the XMAP CONFIG register carries
  * the RSS count too (XMAP_CONFIG_DEFAULT(numRE), bits 21:20). With a
- * one-RE4 layout assumed, buffers overlap and the screen shows bands of
- * 16 rows (seen on a model that assumed one RE4).
+ * one-RE4 layout assumed, buffers would overlap and the screen show bands of
+ * 16 rows (inferred; not observed on a board).
  *
  * Drawing: both X servers put the target buffer's page in DRBpointers
  * bits 9:0 and switch it for overlay drawing. The two words are read from the

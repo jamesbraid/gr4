@@ -119,7 +119,7 @@ In addition to hardware ASIC headers, we generate local headers capturing intern
 - **`dwarfdump`**: Native build of `libdwarf-code` (`libdwarf-code/build/src/bin/dwarfdump/dwarfdump`) capable of parsing SGI MIPS DWARF-2.
 - **`mips-unknown-linux-gnu-`**: Cross-compilation and inspection toolchain (`objdump`, `readelf`, `nm`, `gcc`).
 - **`m2c`**: Assembly-to-C decompiler configured for MIPS IDO C / N32 / 64-bit (`m2c/m2c.py`).
-- **Extraction Scripts (`retools/tools/gr4/`)**: run from the repository root; they find this workspace from the current directory (or `--repo`, or `$ORIGAMI_RE_WORKSPACE`). Run them in the build image: `retools/tools/re-run python3 retools/tools/gr4/NAME.py`.
+- **Extraction Scripts (`retools/tools/gr4/`)**: run from the repository root; they find this workspace from the current directory (or `--repo`). Run them in the build image: `retools/tools/re-run python3 retools/tools/gr4/NAME.py`.
   - `extract_libglcore_mgras.py`: Extracts OpenGL driver CUs, types, and functions.
   - `extract_impact_ddx.py`: Extracts X11 DDX symbols, GOT dispatch tables, and drawing operations.
   - `extract_irisgl.py`: Extracts "igloo" IrisGL layer types and translation calls.

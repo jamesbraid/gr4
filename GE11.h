@@ -494,10 +494,10 @@ extern "C" {
  * IMAGING ENGINE: THE GE PIXEL PIPELINE
  * ============================================================================
  *
- * Mapped 2026-10 from IRIX 6.5.22 libGLcore with the gltest pixel test program
- * (one GL call a case; recorded with `mgras rec`, decoded with
- * tools/mgras-pixdecode.py --summary --ucode mgras_ge.u). Our model is
- * src/dev/mgras/pixpipe.rs. The HQ side (tokens, payloads, readbacks) is
+ * Mapped 2026-10 from IRIX 6.5.22 libGLcore, one GL call a case, from recorded
+ * command streams decoded against the GE microcode. Grade: inferred. The
+ * streams were not captured from a board; a capture of the same GL calls
+ * from a board would settle each value. The HQ side (tokens, payloads, readbacks) is
  * in HQ3.h "PIXEL OPERATIONS", the raster side (XFRMODE) in RE4.h.
  *
  * Who does what, per GL call:
@@ -548,10 +548,9 @@ extern "C" {
  *               type at ERAM 0xDBB: __glMgrInitPixelPipe, which sends the
  *               module states, does not run on that path. The copy relies
  *               on whatever the GE already holds there (traced 2026-10-15,
- *               the gltest CI copy test and PowerAnimator 9's front/back
+ *               a colour-index copy test and PowerAnimator 9's front/back
  *               copies; nothing on a fresh boot ever writes 0x1D6). Where
- *               a real GE gets those words from is not known; our model
- *               passes the indices through when they were never loaded.
+ *               a real GE gets those words from is not known.
  *   scalebias   12 (bias, scale) pairs from [5], cycling. GL's
  *               c * scale + bias (*_SCALE / *_BIAS), and libGLcore folds
  *               the signed types' 2/255 + (-1) correction into it.
@@ -634,11 +633,11 @@ extern "C" {
  * STATE READBACK: WHERE glGet* FINDS EACH PIECE OF GL STATE
  * ============================================================================
  *
- * Mapped 2026-10-13 with the gltest state query (every queryable GL state
- * set to a non-default value and read back; markers split the recording,
- * tools/mgras-statemap.py) and `mgras probe` runs (the GE answers chosen
- * words, tools/mgras-probe-states.py, which show how libGLcore decodes
- * them). IRIX 6.5.22 libGLcore. Our model: src/dev/mgras/glquery.rs.
+ * Mapped 2026-10-13 from IRIX 6.5.22 libGLcore by setting every queryable GL
+ * state to a non-default value and reading it back, and by feeding the library
+ * chosen words from the GE to see how it decodes them. Grade: inferred; the
+ * streams were not captured from a board, and a board capture would settle
+ * each value.
  *
  * Selection (glRenderMode(GL_SELECT); libGLcore 6.5.22, disassembled and
  * traced): the GE keeps the name stack and the hit records. Tokens: 0x0CB
@@ -733,7 +732,7 @@ extern "C" {
  *                equation (GL enums)
  *   0xC16 / 0xC18  polygon offset factor / units
  *   0xC59 / 0xC60  selection name stack (GET_FEEDBACK_DATA 0x061; not
- *                modelled)
+ *                decoded)
  *
  * libGLcore's own departures (glstate XFAIL): glGetBooleanv of
  * POLYGON_OFFSET_LINE / POINT and TEXTURE_4D_SGIS is GL_INVALID_ENUM;

@@ -247,11 +247,11 @@ extern "C" {
  *       bits 14:0 / 29:15 of the word (libGLcore's plane masks, PP1.h).
  *   21  (0x15) 24-bit RGB double-buffered on two pages: BUF_SELECT picks
  *       DIB's second page.
- *   25  (0x19) 36-bit RGB, the RGBA 12,12,12 visual (gltest, 2026-10-10:
+ *   25  (0x19) 36-bit RGB, the RGBA 12,12,12 visual (2026-10-10, not a board capture:
  *       DIDs 12 0x17B9 and 17 0x1419, BUF_SELECT bit 17 flipping on its
  *       swaps; second page like 0x15). Presumably scanout takes the
  *       twelve bits (PP1.h layout).
- *   4, 8, 19, 23  seen, unmodelled (8 = unused DIDs 20-31).
+ *   4, 8, 19, 23  seen, role not decoded (8 = unused DIDs 20-31).
  * The RGB DIDs name block 29 (0x7A0), which holds an identity ramp. RGB
  * pixels are believed to bypass the CMAP and go straight to the DAC's
  * gamma table, so the block is probably ignored for them.

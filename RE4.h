@@ -376,11 +376,11 @@ extern "C" {
  * decimate are placed by the trace below (22, 19, 20); the unpack-order and
  * read-mask flags are among bits 17, 18 and 21 (see docs/OPEN_QUESTIONS.md,
  * entry 12). Format/type pairs the X server and kernel use,
- * with the bytes per pixel the model gives them: (0,0) 1, (0,1) 2,
+ * with the bytes per pixel inferred for them: (0,0) 1, (0,1) 2,
  * (8,8) 2 (4-4-4-4), (8,10) 2 (5-5-5), (8,0) 4, (7,1) 6.
  * The format values below are earlier guesses.
  *
- * As libGLcore uses it (traced with the gltest pixel test, 6.5.22):
+ * As libGLcore uses it (traced from IRIX 6.5.22 runs, not a board capture):
  *   3:0   component type: 0 u8, 1 u16, 3 u32, 4 s8, 5 s16, 7 s32,
  *         8 / 10 packed (4-4-4-4, 5-5-5; the X server's)
  *   7:4   format: 0 colour index, 1 stencil, 2 depth, 3 R, 4 G, 5 B, 6 A,

@@ -342,7 +342,7 @@ extern "C" {
  * known, and neither are their names or roles; the traced values above fix
  * only the set and clear pattern. Settles with a load of a bordered
  * image whose TL_MODE has exactly one of 12:9 set at a time, comparing where
- * the border texels land. NOT MODELLED.
+ * the border texels land. Not decoded.
  *
  * OpenGL texture extensions in IMPACT's libGLcore (6.5.22, the extension
  * string of the textured configuration):
@@ -366,9 +366,6 @@ extern "C" {
  *   SGIX_pixel_texture        pixel path through a 4D texture
  *   SGIX_texture_multi_buffer double-buffered texture loads (TL_WBUFFER /
  *                             TEXRBUFFER)
- * Modelled so far: EXT_texture (all sized formats),
- * EXT_texture_object, EXT_subtexture, EXT_copy_texture, EXT_abgr,
- * SGIS_texture_border_clamp. The rest are not yet.
  *
  * Sub-images and copies (traced, IRIX 6.5.22):
  *   - libGLcore rejects glTexSubImage2D and glCopyTexSubImage2D with
@@ -411,8 +408,7 @@ extern "C" {
  *     are shared with the fog lookup table, so they cannot be used with
  *     fog at the same time. Fog is computed per pixel with 8 bits through
  *     that table, so the fog factor is probably looked up per pixel from
- *     an iterated value. NOT MODELLED: the tables, and fog through them
- *     (the model fogs from a GE-computed plane).
+ *     an iterated value. The tables, and fog through them, are not decoded.
  *   - Textures have 1-4 components of 4, 8 or 12 bits (texels up to 48
  *     bits). The 4 MB TRAM is needed for 3- and 4-component 8-bit texels
  *     and 2-, 3- and 4-component 12-bit texels.
