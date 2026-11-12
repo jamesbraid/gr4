@@ -165,6 +165,20 @@
 #define MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_INPLACE     (MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_MASK << MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_SHIFT)
 
 /*
+ * Host interface control word. Its geometry engine select field chooses which
+ * geometry engine the next program upload reaches. The kernel sets the field
+ * before it loads each engine and restores the old word afterwards. The bus
+ * meaning of each value is inferred.
+ */
+/* word HQ_GE_SELECT: 32 bits; driver and firmware readings */
+#define MGRAS_HQ_GE_SELECT_WIDTH                     32 /* established */
+#define MGRAS_HQ_GE_SELECT_GE_SELECT_SHIFT           4 /* established */
+#define MGRAS_HQ_GE_SELECT_GE_SELECT_MASK            0x3u
+#define MGRAS_HQ_GE_SELECT_GE_SELECT_INPLACE         (MGRAS_HQ_GE_SELECT_GE_SELECT_MASK << MGRAS_HQ_GE_SELECT_GE_SELECT_SHIFT)
+#define MGRAS_HQ_GE_SELECT_GE_SELECT_GE0             2 /* established */
+#define MGRAS_HQ_GE_SELECT_GE_SELECT_GE1             3 /* established */
+
+/*
  * Board word at address 0x000000, the first identity read IRIX makes.
  * Bits 31:28 are the HQ revision: 1 is rev A, 2 is rev B. Read by the
  * IRIX kernel's board-information routine; the other bits are not read.
@@ -247,6 +261,19 @@
 #define MGRAS_MONITOR_ID_MONITOR_ASSUMED_19_INCH     15 /* inferred */
 
 /*
+ * Pixel processor word reached through the XMAP data port with XMAP index 0
+ * selected. Bits 21:20 hold the raster engine count less one. The kernel writes
+ * this field to every pixel processor when it initialises the board, so each
+ * pixel processor learns how many raster engines share the screen. The field
+ * being written is established; the pixel processor's use of it is inferred.
+ */
+/* word PP1_CONFIG: 32 bits; driver and firmware readings */
+#define MGRAS_PP1_CONFIG_WIDTH                       32 /* inferred */
+#define MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_SHIFT     20 /* inferred */
+#define MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_MASK      0x3u
+#define MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_INPLACE   (MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_MASK << MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_SHIFT)
+
+/*
  * Index write of 4 to the byte at address 0x071c88, then a 32-bit read of
  * 0x071d00. Bits 2:0 are the PP1 revision (XMAP index 4). Owner captures
  * of E-series boards read 4 here, while a reading of the IRIX Octane diagnostic's
@@ -269,6 +296,22 @@
 #define MGRAS_RE4_REVISION_RE4_REVISION_SHIFT        4 /* inferred */
 #define MGRAS_RE4_REVISION_RE4_REVISION_MASK         0xfu
 #define MGRAS_RE4_REVISION_RE4_REVISION_INPLACE      (MGRAS_RE4_REVISION_RE4_REVISION_MASK << MGRAS_RE4_REVISION_RE4_REVISION_SHIFT)
+
+/*
+ * Raster engine status word, read after the raster engine select register has
+ * chosen one engine. The IDE diagnostic expects the selected engine's number in
+ * bits 3:2 and the engine count less one in bits 1:0, so the word differs from
+ * one engine to the next. Inferred from the diagnostic's checks, not from a bus
+ * measurement. The revision field is RE4_REVISION.
+ */
+/* word RE4_STATUS: 32 bits; driver and firmware readings */
+#define MGRAS_RE4_STATUS_WIDTH                       32 /* inferred */
+#define MGRAS_RE4_STATUS_SELECTED_RE_SHIFT           2 /* inferred */
+#define MGRAS_RE4_STATUS_SELECTED_RE_MASK            0x3u
+#define MGRAS_RE4_STATUS_SELECTED_RE_INPLACE         (MGRAS_RE4_STATUS_SELECTED_RE_MASK << MGRAS_RE4_STATUS_SELECTED_RE_SHIFT)
+#define MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_SHIFT     0 /* inferred */
+#define MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_MASK      0x3u
+#define MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_INPLACE   (MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_MASK << MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_SHIFT)
 
 /*
  * Byte write of 0x1f to address 0x072008, then a 16-bit read of
@@ -295,7 +338,14 @@
 #define MGRAS_ADV7162_REG_ID                         0x3u /* established */
 #define MGRAS_ADV7162_RESTORE_VALUE                  0xffffu /* established */
 #define MGRAS_CMAP_ENTRIES                           0x2000u /* established */
+#define MGRAS_GE0_UPLOAD_PORT_A                      0x58040u /* established */
+#define MGRAS_GE0_UPLOAD_PORT_B                      0x58044u /* established */
+#define MGRAS_GE1_UPLOAD_PORT_A                      0x58048u /* established */
+#define MGRAS_GE1_UPLOAD_PORT_B                      0x5804cu /* established */
+#define MGRAS_GE_READBACK_PORT_A                     0x5822cu /* established */
+#define MGRAS_GE_READBACK_PORT_B                     0x58230u /* established */
 #define MGRAS_HQ4_NORMAL_FIFO_OFFSET                 0x20400u /* established */
+#define MGRAS_HQ_GE_SELECT_ADDR                      0x11000u /* established */
 #define MGRAS_MCO_BANK_BASE_CH0                      0x0u /* established */
 #define MGRAS_MCO_BANK_BASE_CH1                      0x20u /* established */
 #define MGRAS_MCO_BANK_BASE_CH2                      0x30u /* established */
@@ -322,5 +372,15 @@
 #define MGRAS_MCO_SEL_TIMING_DATA                    0x5u /* established */
 #define MGRAS_MCO_SEL_TIMING_RAM                     0x7u /* established */
 #define MGRAS_MCO_SEL_TIMING_REG                     0x4u /* established */
+#define MGRAS_PP1_SELECT_ADDR                        0x71c08u /* established */
+#define MGRAS_RDRAM_ADDR_PORT_ADDR                   0x2c570u /* inferred */
+#define MGRAS_RDRAM_BUFFER_PORT_ADDR                 0x2c5b4u /* inferred */
+#define MGRAS_RDRAM_DATA_PORT_ADDR                   0x2c574u /* established */
+#define MGRAS_RSS_RE_SELECT_PIO_ADDR                 0x2c448u /* inferred */
+#define MGRAS_RSS_RE_SELECT_REG                      0x112u /* established */
+#define MGRAS_WINDOW_MODE_MAIN_ADDR                  0x71e00u /* established */
+#define MGRAS_WINDOW_MODE_OVERLAY_ADDR               0x71e80u /* established */
+#define MGRAS_WINDOW_SELECT_ADDR                     0x71d80u /* established */
+#define MGRAS_XMAP_INDEX_ADDR                        0x71c88u /* established */
 
 #endif /* MGRAS_GEN_H */

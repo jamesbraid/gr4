@@ -375,6 +375,44 @@ pub mod hq4_numeric_packet {
         }
     }
 }
+/// Host interface control word. Its geometry engine select field chooses which geometry engine the next program upload reaches. The kernel sets the field (established)
+pub mod hq_ge_select {
+    pub const WIDTH: u32 = 32;
+    pub mod ge_select { // bits 5:4, established
+        pub const SHIFT: u32 = 4;
+        pub const MASK: u32 = 0x3;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+        pub const GE0: u32 = 2; // established
+        pub const GE1: u32 = 3; // established
+        #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+        pub enum Value {
+            Ge0,
+            Ge1,
+            Other(u32),
+        }
+        impl Value {
+            pub const fn from_raw(v: u32) -> Self {
+                match v {
+                    2 => Self::Ge0,
+                    3 => Self::Ge1,
+                    _ => Self::Other(v),
+                }
+            }
+            pub const fn raw(self) -> u32 {
+                match self {
+                    Self::Ge0 => 2,
+                    Self::Ge1 => 3,
+                    Self::Other(v) => v,
+                }
+            }
+        }
+    }
+}
 /// Board word at address 0x000000, the first identity read IRIX makes. Bits 31:28 are the HQ revision: 1 is rev A, 2 is rev B. Read by the IRIX kernel's  (inferred)
 pub mod hq_revision {
     pub const WIDTH: u32 = 32;
@@ -543,6 +581,20 @@ pub mod monitor_id {
         }
     }
 }
+/// Pixel processor word reached through the XMAP data port with XMAP index 0 selected. Bits 21:20 hold the raster engine count less one. The kernel write (inferred)
+pub mod pp1_config {
+    pub const WIDTH: u32 = 32;
+    pub mod re_count_less_one { // bits 21:20, inferred
+        pub const SHIFT: u32 = 20;
+        pub const MASK: u32 = 0x3;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
 /// Index write of 4 to the byte at address 0x071c88, then a 32-bit read of 0x071d00. Bits 2:0 are the PP1 revision (XMAP index 4). Owner captures of E-se (inferred)
 pub mod pp1_revision {
     pub const WIDTH: u32 = 32;
@@ -563,6 +615,30 @@ pub mod re4_revision {
     pub mod re4_revision { // bits 7:4, inferred
         pub const SHIFT: u32 = 4;
         pub const MASK: u32 = 0xf;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
+/// Raster engine status word, read after the raster engine select register has chosen one engine. The IDE diagnostic expects the selected engine's number (inferred)
+pub mod re4_status {
+    pub const WIDTH: u32 = 32;
+    pub mod selected_re { // bits 3:2, inferred
+        pub const SHIFT: u32 = 2;
+        pub const MASK: u32 = 0x3;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod re_count_less_one { // bits 1:0, inferred
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0x3;
         pub const fn get(v: u32) -> u32 {
             (v >> SHIFT) & MASK
         }
@@ -599,7 +675,14 @@ pub const ADV7162_REG_BLANK: u32 = 0x4; // established
 pub const ADV7162_REG_ID: u32 = 0x3; // established
 pub const ADV7162_RESTORE_VALUE: u32 = 0xffff; // established
 pub const CMAP_ENTRIES: u32 = 0x2000; // established
+pub const GE0_UPLOAD_PORT_A: u32 = 0x58040; // established
+pub const GE0_UPLOAD_PORT_B: u32 = 0x58044; // established
+pub const GE1_UPLOAD_PORT_A: u32 = 0x58048; // established
+pub const GE1_UPLOAD_PORT_B: u32 = 0x5804c; // established
+pub const GE_READBACK_PORT_A: u32 = 0x5822c; // established
+pub const GE_READBACK_PORT_B: u32 = 0x58230; // established
 pub const HQ4_NORMAL_FIFO_OFFSET: u32 = 0x20400; // established
+pub const HQ_GE_SELECT_ADDR: u32 = 0x11000; // established
 pub const MCO_BANK_BASE_CH0: u32 = 0x0; // established
 pub const MCO_BANK_BASE_CH1: u32 = 0x20; // established
 pub const MCO_BANK_BASE_CH2: u32 = 0x30; // established
@@ -626,6 +709,16 @@ pub const MCO_SEL_FPGA_DATA: u32 = 0x0; // established
 pub const MCO_SEL_TIMING_DATA: u32 = 0x5; // established
 pub const MCO_SEL_TIMING_RAM: u32 = 0x7; // established
 pub const MCO_SEL_TIMING_REG: u32 = 0x4; // established
+pub const PP1_SELECT_ADDR: u32 = 0x71c08; // established
+pub const RDRAM_ADDR_PORT_ADDR: u32 = 0x2c570; // inferred
+pub const RDRAM_BUFFER_PORT_ADDR: u32 = 0x2c5b4; // inferred
+pub const RDRAM_DATA_PORT_ADDR: u32 = 0x2c574; // established
+pub const RSS_RE_SELECT_PIO_ADDR: u32 = 0x2c448; // inferred
+pub const RSS_RE_SELECT_REG: u32 = 0x112; // established
+pub const WINDOW_MODE_MAIN_ADDR: u32 = 0x71e00; // established
+pub const WINDOW_MODE_OVERLAY_ADDR: u32 = 0x71e80; // established
+pub const WINDOW_SELECT_ADDR: u32 = 0x71d80; // established
+pub const XMAP_INDEX_ADDR: u32 = 0x71c88; // established
 
 #[cfg(test)]
 mod tests {

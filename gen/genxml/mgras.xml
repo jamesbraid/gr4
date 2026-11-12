@@ -18,6 +18,10 @@
     <value name="two_bytes" value="2" grade="inferred"/>
     <value name="three_bytes" value="3" grade="inferred"/>
   </enum>
+  <enum name="hq_ge_select_ge_select">
+    <value name="ge0" value="2" grade="established"/>
+    <value name="ge1" value="3" grade="established"/>
+  </enum>
   <enum name="mco_id_board">
     <value name="present_single_read" value="4" grade="established"/>
     <value name="present" value="10" grade="established"/>
@@ -202,6 +206,13 @@ software expectation; what the board does with each field is not established.</d
       <expect field="payload" value="24"/>
     </test>
   </struct>
+  <struct name="HQ_GE_SELECT" size="4" grade="established" from="driver and firmware readings">
+    <doc>Host interface control word. Its geometry engine select field chooses which
+geometry engine the next program upload reaches. The kernel sets the field
+before it loads each engine and restores the old word afterwards. The bus
+meaning of each value is inferred.</doc>
+    <field name="ge_select" start="4" size="2" type="hq_ge_select_ge_select" grade="established"/>
+  </struct>
   <struct name="HQ_REVISION" size="4" grade="inferred" from="driver and firmware readings">
     <doc>Board word at address 0x000000, the first identity read IRIX makes.
 Bits 31:28 are the HQ revision: 1 is rev A, 2 is rev B. Read by the
@@ -253,6 +264,14 @@ monitor assumed to be 19 inches. Whether 0xf is what a board reports with no
 monitor attached is unknown. Inferred from the kernel object and owner captures.</doc>
     <field name="monitor" start="4" size="4" type="monitor_id_monitor" grade="inferred"/>
   </struct>
+  <struct name="PP1_CONFIG" size="4" grade="inferred" from="driver and firmware readings">
+    <doc>Pixel processor word reached through the XMAP data port with XMAP index 0
+selected. Bits 21:20 hold the raster engine count less one. The kernel writes
+this field to every pixel processor when it initialises the board, so each
+pixel processor learns how many raster engines share the screen. The field
+being written is established; the pixel processor's use of it is inferred.</doc>
+    <field name="re_count_less_one" start="20" size="2" type="uint" grade="inferred"/>
+  </struct>
   <struct name="PP1_REVISION" size="4" grade="inferred" from="driver and firmware readings">
     <doc>Index write of 4 to the byte at address 0x071c88, then a 32-bit read of
 0x071d00. Bits 2:0 are the PP1 revision (XMAP index 4). Owner captures
@@ -266,6 +285,15 @@ object and owner captures.</doc>
 Bits 7:4 are the RE4 revision. The value written is not recorded in the
 source this was taken from. Inferred from the kernel object.</doc>
     <field name="re4_revision" start="4" size="4" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="RE4_STATUS" size="4" grade="inferred" from="driver and firmware readings">
+    <doc>Raster engine status word, read after the raster engine select register has
+chosen one engine. The IDE diagnostic expects the selected engine's number in
+bits 3:2 and the engine count less one in bits 1:0, so the word differs from
+one engine to the next. Inferred from the diagnostic's checks, not from a bus
+measurement. The revision field is RE4_REVISION.</doc>
+    <field name="selected_re" start="2" size="2" type="uint" grade="inferred"/>
+    <field name="re_count_less_one" start="0" size="2" type="uint" grade="inferred"/>
   </struct>
   <struct name="VC3_REVISION" size="2" grade="inferred" from="driver and firmware readings">
     <doc>Byte write of 0x1f to address 0x072008, then a 16-bit read of
@@ -287,7 +315,14 @@ revision. Inferred from the kernel object.</doc>
   <constant name="ADV7162_REG_ID" value="0x3" grade="established"/>
   <constant name="ADV7162_RESTORE_VALUE" value="0xffff" grade="established"/>
   <constant name="CMAP_ENTRIES" value="0x2000" grade="established"/>
+  <constant name="GE0_UPLOAD_PORT_A" value="0x58040" grade="established"/>
+  <constant name="GE0_UPLOAD_PORT_B" value="0x58044" grade="established"/>
+  <constant name="GE1_UPLOAD_PORT_A" value="0x58048" grade="established"/>
+  <constant name="GE1_UPLOAD_PORT_B" value="0x5804c" grade="established"/>
+  <constant name="GE_READBACK_PORT_A" value="0x5822c" grade="established"/>
+  <constant name="GE_READBACK_PORT_B" value="0x58230" grade="established"/>
   <constant name="HQ4_NORMAL_FIFO_OFFSET" value="0x20400" grade="established" from="OpenBSD impact(4) driver register header"/>
+  <constant name="HQ_GE_SELECT_ADDR" value="0x11000" grade="established"/>
   <constant name="MCO_BANK_BASE_CH0" value="0x0" grade="established"/>
   <constant name="MCO_BANK_BASE_CH1" value="0x20" grade="established"/>
   <constant name="MCO_BANK_BASE_CH2" value="0x30" grade="established"/>
@@ -314,4 +349,14 @@ revision. Inferred from the kernel object.</doc>
   <constant name="MCO_SEL_TIMING_DATA" value="0x5" grade="established"/>
   <constant name="MCO_SEL_TIMING_RAM" value="0x7" grade="established"/>
   <constant name="MCO_SEL_TIMING_REG" value="0x4" grade="established"/>
+  <constant name="PP1_SELECT_ADDR" value="0x71c08" grade="established"/>
+  <constant name="RDRAM_ADDR_PORT_ADDR" value="0x2c570" grade="inferred"/>
+  <constant name="RDRAM_BUFFER_PORT_ADDR" value="0x2c5b4" grade="inferred"/>
+  <constant name="RDRAM_DATA_PORT_ADDR" value="0x2c574" grade="established"/>
+  <constant name="RSS_RE_SELECT_PIO_ADDR" value="0x2c448" grade="inferred"/>
+  <constant name="RSS_RE_SELECT_REG" value="0x112" grade="established"/>
+  <constant name="WINDOW_MODE_MAIN_ADDR" value="0x71e00" grade="established"/>
+  <constant name="WINDOW_MODE_OVERLAY_ADDR" value="0x71e80" grade="established"/>
+  <constant name="WINDOW_SELECT_ADDR" value="0x71d80" grade="established"/>
+  <constant name="XMAP_INDEX_ADDR" value="0x71c88" grade="established"/>
 </genxml>

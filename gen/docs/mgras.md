@@ -38,12 +38,15 @@ Array of 12 registers, stride 4.
 | `GE_REVISION` | 32 | inferred | driver and firmware readings |
 | `GIO_ID` | 32 | inferred | driver and firmware readings |
 | `HQ4_NUMERIC_PACKET` | 64 | established | OpenBSD impact(4) driver register header |
+| `HQ_GE_SELECT` | 32 | established | driver and firmware readings |
 | `HQ_REVISION` | 32 | inferred | driver and firmware readings |
 | `MCO_ID` | 32 | established | driver and firmware readings |
 | `MCO_INDEX` | 32 | established | driver and firmware readings |
 | `MONITOR_ID` | 8 | inferred | driver and firmware readings |
+| `PP1_CONFIG` | 32 | inferred | driver and firmware readings |
 | `PP1_REVISION` | 32 | inferred | driver and firmware readings |
 | `RE4_REVISION` | 32 | inferred | driver and firmware readings |
+| `RE4_STATUS` | 32 | inferred | driver and firmware readings |
 | `VC3_REVISION` | 16 | inferred | driver and firmware readings |
 
 ### Word `BDVERS1`
@@ -142,6 +145,17 @@ software expectation; what the board does with each field is not established.
 | 47:40 | `selector` | established |  | OpenBSD impact(4) driver register header |  |
 | 31:0 | `payload` | established |  | OpenBSD impact(4) driver register header |  |
 
+### Word `HQ_GE_SELECT`
+
+Host interface control word. Its geometry engine select field chooses which
+geometry engine the next program upload reaches. The kernel sets the field
+before it loads each engine and restores the old word afterwards. The bus
+meaning of each value is inferred.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 5:4 | `ge_select` | established | ge0=2, ge1=3 | driver and firmware readings |  |
+
 ### Word `HQ_REVISION`
 
 Board word at address 0x000000, the first identity read IRIX makes.
@@ -205,6 +219,18 @@ monitor attached is unknown. Inferred from the kernel object and owner captures.
 |---|---|---|---|---|---|
 | 7:4 | `monitor` | inferred | unidentified=0, assumed_19_inch=15 | driver and firmware readings |  |
 
+### Word `PP1_CONFIG`
+
+Pixel processor word reached through the XMAP data port with XMAP index 0
+selected. Bits 21:20 hold the raster engine count less one. The kernel writes
+this field to every pixel processor when it initialises the board, so each
+pixel processor learns how many raster engines share the screen. The field
+being written is established; the pixel processor's use of it is inferred.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 21:20 | `re_count_less_one` | inferred |  | driver and firmware readings |  |
+
 ### Word `PP1_REVISION`
 
 Index write of 4 to the byte at address 0x071c88, then a 32-bit read of
@@ -226,6 +252,19 @@ source this was taken from. Inferred from the kernel object.
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
 | 7:4 | `re4_revision` | inferred |  | driver and firmware readings |  |
+
+### Word `RE4_STATUS`
+
+Raster engine status word, read after the raster engine select register has
+chosen one engine. The IDE diagnostic expects the selected engine's number in
+bits 3:2 and the engine count less one in bits 1:0, so the word differs from
+one engine to the next. Inferred from the diagnostic's checks, not from a bus
+measurement. The revision field is RE4_REVISION.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 3:2 | `selected_re` | inferred |  | driver and firmware readings |  |
+| 1:0 | `re_count_less_one` | inferred |  | driver and firmware readings |  |
 
 ### Word `VC3_REVISION`
 
@@ -255,7 +294,14 @@ revision. Inferred from the kernel object.
 | `ADV7162_REG_ID` | 0x3 | established | driver and firmware readings |  |
 | `ADV7162_RESTORE_VALUE` | 0xffff | established | driver and firmware readings |  |
 | `CMAP_ENTRIES` | 0x2000 | established | driver and firmware readings | per map; 24-bit width inferred |
+| `GE0_UPLOAD_PORT_A` | 0x58040 | established | driver and firmware readings | first of the two program upload ports for geometry engine 0 |
+| `GE0_UPLOAD_PORT_B` | 0x58044 | established | driver and firmware readings | second of the two program upload ports for geometry engine 0 |
+| `GE1_UPLOAD_PORT_A` | 0x58048 | established | driver and firmware readings | first of the two program upload ports for geometry engine 1 |
+| `GE1_UPLOAD_PORT_B` | 0x5804c | established | driver and firmware readings | second of the two program upload ports for geometry engine 1 |
+| `GE_READBACK_PORT_A` | 0x5822c | established | driver and firmware readings | read-back port shared by both geometry engines; the kernel reads it to verify a download |
+| `GE_READBACK_PORT_B` | 0x58230 | established | driver and firmware readings | second read-back port shared by both geometry engines |
 | `HQ4_NORMAL_FIFO_OFFSET` | 0x20400 | established | OpenBSD impact(4) driver register header | normal command FIFO in the board's register window; the driver writes aligned 64-bit packets here |
+| `HQ_GE_SELECT_ADDR` | 0x11000 | established | driver and firmware readings | host interface control word; the geometry engine select field is HQ_GE_SELECT |
 | `MCO_BANK_BASE_CH0` | 0x0 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH1` | 0x20 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH2` | 0x30 | established | driver and firmware readings |  |
@@ -282,6 +328,16 @@ revision. Inferred from the kernel object.
 | `MCO_SEL_TIMING_DATA` | 0x5 | established | driver and firmware readings |  |
 | `MCO_SEL_TIMING_RAM` | 0x7 | established | driver and firmware readings |  |
 | `MCO_SEL_TIMING_REG` | 0x4 | established | driver and firmware readings |  |
+| `PP1_SELECT_ADDR` | 0x71c08 | established | driver and firmware readings | pixel processor select: which pixel processors the XMAP registers reach |
+| `RDRAM_ADDR_PORT_ADDR` | 0x2c570 | inferred | driver and firmware readings | RDRAM address port in the raster window, as the diagnostic uses it |
+| `RDRAM_BUFFER_PORT_ADDR` | 0x2c5b4 | inferred | driver and firmware readings | buffer pointer for the RDRAM path, as the diagnostic uses it |
+| `RDRAM_DATA_PORT_ADDR` | 0x2c574 | established | driver and firmware readings | RDRAM data port; the kernel reads it with each raster engine selected in turn |
+| `RSS_RE_SELECT_PIO_ADDR` | 0x2c448 | inferred | driver and firmware readings | the same raster register as the diagnostic reaches it through the programmed I/O window |
+| `RSS_RE_SELECT_REG` | 0x112 | established | driver and firmware readings | raster register that selects one raster engine; the kernel writes the engine number as its value |
+| `WINDOW_MODE_MAIN_ADDR` | 0x71e00 | established | driver and firmware readings | display mode words for window IDs 0 to 31, under XMAP index (ID & 0x1f) << 2 |
+| `WINDOW_MODE_OVERLAY_ADDR` | 0x71e80 | established | driver and firmware readings | display mode words for overlay window IDs 32 to 39 |
+| `WINDOW_SELECT_ADDR` | 0x71d80 | established | driver and firmware readings | one bit per window ID, written at each buffer swap; overlay IDs use XMAP index 4. What a set bit shows is inferred |
+| `XMAP_INDEX_ADDR` | 0x71c88 | established | driver and firmware readings | byte index that picks the XMAP register the XMAP data ports reach |
 
 ## Test vectors
 

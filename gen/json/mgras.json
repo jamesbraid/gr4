@@ -381,6 +381,39 @@
   {
    "unit": "mgras",
    "kind": "word",
+   "name": "HQ_GE_SELECT",
+   "width": 32,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "HQ_GE_SELECT.ge_select",
+   "hi": 5,
+   "lo": 4,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "HQ_GE_SELECT.ge_select.ge0",
+   "value": 2,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "HQ_GE_SELECT.ge_select.ge1",
+   "value": 3,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
    "name": "HQ_REVISION",
    "width": 32,
    "grade": "inferred",
@@ -555,6 +588,23 @@
   {
    "unit": "mgras",
    "kind": "word",
+   "name": "PP1_CONFIG",
+   "width": 32,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "PP1_CONFIG.re_count_less_one",
+   "hi": 21,
+   "lo": 20,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
    "name": "PP1_REVISION",
    "width": 32,
    "grade": "inferred",
@@ -583,6 +633,32 @@
    "name": "RE4_REVISION.re4_revision",
    "hi": 7,
    "lo": 4,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "RE4_STATUS",
+   "width": 32,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "RE4_STATUS.selected_re",
+   "hi": 3,
+   "lo": 2,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "RE4_STATUS.re_count_less_one",
+   "hi": 1,
+   "lo": 0,
    "grade": "inferred",
    "from": "driver and firmware readings"
   },
@@ -732,11 +808,74 @@
   {
    "unit": "mgras",
    "kind": "constant",
+   "name": "GE0_UPLOAD_PORT_A",
+   "value": 360512,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "GE0_UPLOAD_PORT_B",
+   "value": 360516,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "GE1_UPLOAD_PORT_A",
+   "value": 360520,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "GE1_UPLOAD_PORT_B",
+   "value": 360524,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "GE_READBACK_PORT_A",
+   "value": 361004,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "GE_READBACK_PORT_B",
+   "value": 361008,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
    "name": "HQ4_NORMAL_FIFO_OFFSET",
    "value": 132096,
    "count": 1,
    "grade": "established",
    "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_GE_SELECT_ADDR",
+   "value": 69632,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
   },
   {
    "unit": "mgras",
@@ -968,6 +1107,96 @@
    "kind": "constant",
    "name": "MCO_SEL_TIMING_REG",
    "value": 4,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "PP1_SELECT_ADDR",
+   "value": 465928,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "RDRAM_ADDR_PORT_ADDR",
+   "value": 181616,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "RDRAM_BUFFER_PORT_ADDR",
+   "value": 181684,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "RDRAM_DATA_PORT_ADDR",
+   "value": 181620,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "RSS_RE_SELECT_PIO_ADDR",
+   "value": 181320,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "RSS_RE_SELECT_REG",
+   "value": 274,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "WINDOW_MODE_MAIN_ADDR",
+   "value": 466432,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "WINDOW_MODE_OVERLAY_ADDR",
+   "value": 466560,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "WINDOW_SELECT_ADDR",
+   "value": 466304,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "XMAP_INDEX_ADDR",
+   "value": 466056,
    "count": 1,
    "grade": "established",
    "from": "driver and firmware readings"

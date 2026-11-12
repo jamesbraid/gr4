@@ -371,6 +371,50 @@ control_3 = { value = 10, grade = "established" }
 value = 0x90
 expect = { port = 0, bank = 9 }
 
+[words.PP1_CONFIG]
+width = 32
+grade = "inferred"
+doc = """
+Pixel processor word reached through the XMAP data port with XMAP index 0
+selected. Bits 21:20 hold the raster engine count less one. The kernel writes
+this field to every pixel processor when it initialises the board, so each
+pixel processor learns how many raster engines share the screen. The field
+being written is established; the pixel processor's use of it is inferred."""
+
+[words.PP1_CONFIG.fields]
+re_count_less_one = { bits = [21, 20], grade = "inferred" }
+
+[words.RE4_STATUS]
+width = 32
+grade = "inferred"
+doc = """
+Raster engine status word, read after the raster engine select register has
+chosen one engine. The IDE diagnostic expects the selected engine's number in
+bits 3:2 and the engine count less one in bits 1:0, so the word differs from
+one engine to the next. Inferred from the diagnostic's checks, not from a bus
+measurement. The revision field is RE4_REVISION."""
+
+[words.RE4_STATUS.fields]
+selected_re = { bits = [3, 2], grade = "inferred" }
+re_count_less_one = { bits = [1, 0], grade = "inferred" }
+
+[words.HQ_GE_SELECT]
+width = 32
+grade = "established"
+doc = """
+Host interface control word. Its geometry engine select field chooses which
+geometry engine the next program upload reaches. The kernel sets the field
+before it loads each engine and restores the old word afterwards. The bus
+meaning of each value is inferred."""
+
+[words.HQ_GE_SELECT.fields.ge_select]
+bits = [5, 4]
+grade = "established"
+
+[words.HQ_GE_SELECT.fields.ge_select.enums]
+ge0 = { value = 2, grade = "established" }
+ge1 = { value = 3, grade = "established" }
+
 [constants]
 ADV473_PORT_ADDR = { value = 0x0, grade = "established" }
 ADV473_PORT_COMMAND = { value = 0x6, grade = "established", doc = "as a write, role inferred" }
@@ -413,3 +457,20 @@ MCO_SEL_FPGA_DATA = { value = 0x0, grade = "established" }
 MCO_SEL_TIMING_DATA = { value = 0x5, grade = "established" }
 MCO_SEL_TIMING_RAM = { value = 0x7, grade = "established" }
 MCO_SEL_TIMING_REG = { value = 0x4, grade = "established" }
+PP1_SELECT_ADDR = { value = 0x071c08, grade = "established", doc = "pixel processor select: which pixel processors the XMAP registers reach" }
+XMAP_INDEX_ADDR = { value = 0x071c88, grade = "established", doc = "byte index that picks the XMAP register the XMAP data ports reach" }
+WINDOW_SELECT_ADDR = { value = 0x071d80, grade = "established", doc = "one bit per window ID, written at each buffer swap; overlay IDs use XMAP index 4. What a set bit shows is inferred" }
+WINDOW_MODE_MAIN_ADDR = { value = 0x071e00, grade = "established", doc = "display mode words for window IDs 0 to 31, under XMAP index (ID & 0x1f) << 2" }
+WINDOW_MODE_OVERLAY_ADDR = { value = 0x071e80, grade = "established", doc = "display mode words for overlay window IDs 32 to 39" }
+HQ_GE_SELECT_ADDR = { value = 0x011000, grade = "established", doc = "host interface control word; the geometry engine select field is HQ_GE_SELECT" }
+GE0_UPLOAD_PORT_A = { value = 0x058040, grade = "established", doc = "first of the two program upload ports for geometry engine 0" }
+GE0_UPLOAD_PORT_B = { value = 0x058044, grade = "established", doc = "second of the two program upload ports for geometry engine 0" }
+GE1_UPLOAD_PORT_A = { value = 0x058048, grade = "established", doc = "first of the two program upload ports for geometry engine 1" }
+GE1_UPLOAD_PORT_B = { value = 0x05804c, grade = "established", doc = "second of the two program upload ports for geometry engine 1" }
+GE_READBACK_PORT_A = { value = 0x05822c, grade = "established", doc = "read-back port shared by both geometry engines; the kernel reads it to verify a download" }
+GE_READBACK_PORT_B = { value = 0x058230, grade = "established", doc = "second read-back port shared by both geometry engines" }
+RSS_RE_SELECT_REG = { value = 0x112, grade = "established", doc = "raster register that selects one raster engine; the kernel writes the engine number as its value" }
+RSS_RE_SELECT_PIO_ADDR = { value = 0x02c448, grade = "inferred", doc = "the same raster register as the diagnostic reaches it through the programmed I/O window" }
+RDRAM_ADDR_PORT_ADDR = { value = 0x02c570, grade = "inferred", doc = "RDRAM address port in the raster window, as the diagnostic uses it" }
+RDRAM_DATA_PORT_ADDR = { value = 0x02c574, grade = "established", doc = "RDRAM data port; the kernel reads it with each raster engine selected in turn" }
+RDRAM_BUFFER_PORT_ADDR = { value = 0x02c5b4, grade = "inferred", doc = "buffer pointer for the RDRAM path, as the diagnostic uses it" }
