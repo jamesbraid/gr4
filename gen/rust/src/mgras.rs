@@ -587,7 +587,7 @@ pub mod mco_index {
         }
     }
 }
-/// Byte at address 0x071308. Bits 7:4 are the monitor ID, which depends on the attached monitor, not on the board. Bits 3:0 are not read. The value 0 mea (inferred)
+/// Byte at address 0x071308. Bits 7:4 are the monitor ID, which depends on the attached monitor, not on the board. The kernel does not read bits 3:0. The (inferred)
 pub mod monitor_id {
     pub const WIDTH: u32 = 8;
     pub mod monitor { // bits 7:4, inferred
@@ -812,6 +812,25 @@ pub const RDRAM_BUFFER_PORT_ADDR: u32 = 0x2c5b4; // inferred
 pub const RDRAM_DATA_PORT_ADDR: u32 = 0x2c574; // established
 pub const RSS_RE_SELECT_PIO_ADDR: u32 = 0x2c448; // inferred
 pub const RSS_RE_SELECT_REG: u32 = 0x112; // established
+pub const VC3_REG_CURS_EP: u32 = 0x1; // established
+pub const VC3_REG_CURS_TBL_PTR: u32 = 0xc; // established
+pub const VC3_REG_CURS_X_LOC: u32 = 0x2; // established
+pub const VC3_REG_CURS_Y_LOC: u32 = 0x3; // established
+pub const VC3_REG_CUR_CURSOR_X: u32 = 0xe; // established
+pub const VC3_REG_DID_EP1: u32 = 0x4; // established
+pub const VC3_REG_DID_EP2: u32 = 0x5; // established
+pub const VC3_REG_DID_FRAMETAB1: u32 = 0x10; // established
+pub const VC3_REG_DID_FRAMETAB2: u32 = 0x12; // established
+pub const VC3_REG_DID_LINETAB1: u32 = 0x11; // established
+pub const VC3_REG_DID_LINETAB2: u32 = 0x13; // established
+pub const VC3_REG_RAM_ADDR: u32 = 0x7; // established
+pub const VC3_REG_SCAN_LENGTH: u32 = 0x6; // established
+pub const VC3_REG_VERT_LINE_COUNT: u32 = 0xb; // established
+pub const VC3_REG_VID_EP: u32 = 0x0; // established
+pub const VC3_REG_VT_FRAME_TBL_PTR: u32 = 0x8; // established
+pub const VC3_REG_VT_LINES_RUN: u32 = 0xa; // established
+pub const VC3_REG_VT_LINE_SEQ_PTR: u32 = 0x9; // established
+pub const VC3_REG_WORKING_CURS_Y: u32 = 0xd; // established
 pub const WINDOW_MODE_MAIN_ADDR: u32 = 0x71e00; // established
 pub const WINDOW_MODE_OVERLAY_ADDR: u32 = 0x71e80; // established
 pub const WINDOW_SELECT_ADDR: u32 = 0x71d80; // established

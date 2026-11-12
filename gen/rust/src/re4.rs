@@ -686,10 +686,30 @@ pub mod scissor_y {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe114;
 }
-/// (inferred)
+/// Window origin (XYWIN). OpenBSD's impact(4) header packs it as (y << 16) | x, so x is the low half and y the high half. That is a software expectation  (inferred)
 pub mod window_origin {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe115;
+    pub mod y { // bits 31:16, inferred
+        pub const SHIFT: u32 = 16;
+        pub const MASK: u32 = 0xffff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod x { // bits 15:0, inferred
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0xffff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
 }
 /// Colours shared with the texture engine and double buffered. Opaque stipples draw their zero bits in the background colour: in RGB modes it is twelve b (inferred)
 pub mod background_rg {
@@ -746,47 +766,47 @@ pub mod aaline_config {
         }
     }
 }
-/// (inferred)
+/// Screen mask 1, x range, written as x1 << 16 | (x2 - 1): x1 is the first column and x2 the column past the last. The IRIX kernel writes this word for e (inferred)
 pub mod screen_mask1_x {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe147;
 }
-/// (inferred)
+/// Screen mask 1, y range, written as (H - y2) << 16 | (H - 1 - y1): H is the screen height (1024 in the X server's listing), y1 the first row and y2 the (inferred)
 pub mod screen_mask1_y {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe148;
 }
-/// (inferred)
+/// Screen mask 2, x range, same encoding as screen_mask1_x. The kernel writes masks 1 to 4 with this encoding (established as its words); the X server's  (inferred)
 pub mod screen_mask2_x {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe149;
 }
-/// (inferred)
+/// Screen mask 2, y range, same encoding as screen_mask1_y. Established for masks 1 to 4 as the kernel's words, as for the x range. (inferred)
 pub mod screen_mask2_y {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe14a;
 }
-/// (inferred)
+/// Screen mask 3, x range, same encoding as screen_mask1_x. Established as the kernel's words for mask 3. (inferred)
 pub mod screen_mask3_x {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe14b;
 }
-/// (inferred)
+/// Screen mask 3, y range, same encoding as screen_mask1_y. Established as the kernel's words for mask 3. (inferred)
 pub mod screen_mask3_y {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe14c;
 }
-/// (inferred)
+/// Screen mask 4, x range, same encoding as screen_mask1_x. The kernel's register shadow holds mask 4 at 0x14d and 0x14e. Established as the kernel's wor (inferred)
 pub mod screen_mask4_x {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe14d;
 }
-/// (inferred)
+/// Screen mask 4, y range, same encoding as screen_mask1_y. Established as the kernel's words for mask 4. (inferred)
 pub mod screen_mask4_y {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe14e;
 }
-/// Window mode: per mask n (1 to 4) an enable at bit n-1 and an inside/outside select at bit n+3. Only mask 1 has been seen used (value 0x11: enabled, ke (inferred)
+/// Window mode. Bits 3:0 enable masks 1 to 4, mask n at bit n-1. The kernel's clip validation writes 0x11, 0x13, 0x17 or 0x1f for one to four visible rec (inferred)
 pub mod window_mode {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe14f;

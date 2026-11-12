@@ -324,8 +324,21 @@
 /* scissor_y: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_SCISSOR_Y_OFFSET                          0xe114u /* inferred */
 
+/*
+ * Window origin (XYWIN). OpenBSD's impact(4) header packs it as (y << 16) | x, so
+ * x is the low half and y the high half. That is a software expectation from the
+ * public driver, not a board measurement. The driver's one write sets x to 0 and
+ * y to 0x3ff (1023). How the origin shifts RE_POINT and RE_LINE, and which way y
+ * counts, is not settled here.
+ */
 /* window_origin: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_WINDOW_ORIGIN_OFFSET                      0xe115u /* inferred */
+#define RE_WINDOW_ORIGIN_Y_SHIFT                     16 /* inferred */
+#define RE_WINDOW_ORIGIN_Y_MASK                      0xffffu
+#define RE_WINDOW_ORIGIN_Y_INPLACE                   (RE_WINDOW_ORIGIN_Y_MASK << RE_WINDOW_ORIGIN_Y_SHIFT)
+#define RE_WINDOW_ORIGIN_X_SHIFT                     0 /* inferred */
+#define RE_WINDOW_ORIGIN_X_MASK                      0xffffu
+#define RE_WINDOW_ORIGIN_X_INPLACE                   (RE_WINDOW_ORIGIN_X_MASK << RE_WINDOW_ORIGIN_X_SHIFT)
 
 /*
  * Colours shared with the texture engine and double buffered. Opaque
@@ -361,34 +374,81 @@
 #define RE_AALINE_CONFIG_SMOOTH_MASK                 0x1u
 #define RE_AALINE_CONFIG_SMOOTH_INPLACE              (RE_AALINE_CONFIG_SMOOTH_MASK << RE_AALINE_CONFIG_SMOOTH_SHIFT)
 
+/*
+ * Screen mask 1, x range, written as x1 << 16 | (x2 - 1): x1 is the first column
+ * and x2 the column past the last. The IRIX kernel writes this word for
+ * each rectangle of a window's visible region, and the X server writes it for
+ * each clip box. Established as those words. That the raster engine discards
+ * pixels outside the box is inferred.
+ */
 /* screen_mask1_x: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_SCREEN_MASK1_X_OFFSET                     0xe147u /* inferred */
 
+/*
+ * Screen mask 1, y range, written as (H - y2) << 16 | (H - 1 - y1): H is the
+ * screen height (1024 in the X server's listing), y1 the first row and y2 the row
+ * past the last, counted from the top. The high half counts rows from the bottom.
+ * Established as the kernel's and the X server's words. That the raster engine
+ * discards pixels outside the box is inferred.
+ */
 /* screen_mask1_y: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_SCREEN_MASK1_Y_OFFSET                     0xe148u /* inferred */
 
+/*
+ * Screen mask 2, x range, same encoding as screen_mask1_x. The kernel writes
+ * masks 1 to 4 with this encoding (established as its words); the X server's
+ * listing shows mask 1 only.
+ */
 /* screen_mask2_x: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_SCREEN_MASK2_X_OFFSET                     0xe149u /* inferred */
 
+/*
+ * Screen mask 2, y range, same encoding as screen_mask1_y. Established for masks
+ * 1 to 4 as the kernel's words, as for the x range.
+ */
 /* screen_mask2_y: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_SCREEN_MASK2_Y_OFFSET                     0xe14au /* inferred */
 
+/*
+ * Screen mask 3, x range, same encoding as screen_mask1_x. Established as the
+ * kernel's words for mask 3.
+ */
 /* screen_mask3_x: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_SCREEN_MASK3_X_OFFSET                     0xe14bu /* inferred */
 
+/*
+ * Screen mask 3, y range, same encoding as screen_mask1_y. Established as the
+ * kernel's words for mask 3.
+ */
 /* screen_mask3_y: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_SCREEN_MASK3_Y_OFFSET                     0xe14cu /* inferred */
 
+/*
+ * Screen mask 4, x range, same encoding as screen_mask1_x. The kernel's register
+ * shadow holds mask 4 at 0x14d and 0x14e. Established as the kernel's words.
+ */
 /* screen_mask4_x: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_SCREEN_MASK4_X_OFFSET                     0xe14du /* inferred */
 
+/*
+ * Screen mask 4, y range, same encoding as screen_mask1_y. Established as the
+ * kernel's words for mask 4.
+ */
 /* screen_mask4_y: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_SCREEN_MASK4_Y_OFFSET                     0xe14eu /* inferred */
 
 /*
- * Window mode: per mask n (1 to 4) an enable at bit n-1 and an inside/outside
- * select at bit n+3. Only mask 1 has been seen used (value 0x11: enabled, keep
- * pixels inside); the positions for masks 2 to 4 follow by pattern.
+ * Window mode. Bits 3:0 enable masks 1 to 4, mask n at bit n-1. The kernel's clip
+ * validation writes 0x11, 0x13, 0x17 or 0x1f for one to four visible rectangles,
+ * so bit 4 is set for every count and bits 7:4 hold 1 (established, kernel words).
+ * When a window field is zero the kernel writes 0x23 instead: masks 1 and 2, with
+ * mode 2 in bits 7:4 (established; what mode 2 does is unknown). The X server
+ * draws each primitive once per clip box, with 0x11 written here for each box and
+ * 0 after the last one (established, X server listing). That the raster engine
+ * keeps only pixels inside the enabled boxes is inferred from that redraw.
+ * The per-mask inside flags in the fields below are not settled. The kernel sets
+ * only bit 4 when four masks are enabled, which fits one mode field in bits 7:4
+ * better.
  */
 /* window_mode: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_WINDOW_MODE_OFFSET                        0xe14fu /* inferred */

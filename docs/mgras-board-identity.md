@@ -95,6 +95,12 @@ The kernel prints revisions as letters, with these codes (inferred):
 - RE4, PP1, VC3: 0 is A, then consecutive letters.
 - GE: a value of 2 is GE11 rev B; 3 or more is the GE12 line, with 3 as rev A.
 - A failed GE download makes the kernel store 0xff in the GE revision field.
+- The IDE diagnostic's CMAP check reads bits 2:0 of `0x071308` and of
+  `0x071708` as CMAP revisions. A value below 2 is an error. Values of 5 and up
+  warn. The two bytes must agree, or the diagnostic reports a CMAP revision
+  mismatch. This is **established** as the diagnostic's own checks, a software
+  expectation of a working board. The kernel does not read bits 2:0 of
+  `0x071308`.
 
 ## Octane and Origin attachment
 

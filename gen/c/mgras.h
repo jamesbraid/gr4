@@ -268,7 +268,9 @@
 
 /*
  * Byte at address 0x071308. Bits 7:4 are the monitor ID, which depends
- * on the attached monitor, not on the board. Bits 3:0 are not read. The value
+ * on the attached monitor, not on the board. The kernel does not read bits 3:0.
+ * The IDE diagnostic's CMAP check reads bits 2:0 as the first CMAP's revision
+ * (see CMAP_RA_STATUS). The value
  * 0 means no monitor identified; 0xf is the value every captured Origin and
  * Octane board reported, which the IRIX graphics tools print as an unknown
  * monitor assumed to be 19 inches. Whether 0xf is what a board reports with no
@@ -453,6 +455,25 @@
 #define MGRAS_RDRAM_DATA_PORT_ADDR                   0x2c574u /* established */
 #define MGRAS_RSS_RE_SELECT_PIO_ADDR                 0x2c448u /* inferred */
 #define MGRAS_RSS_RE_SELECT_REG                      0x112u /* established */
+#define MGRAS_VC3_REG_CURS_EP                        0x1u /* established */
+#define MGRAS_VC3_REG_CURS_TBL_PTR                   0xcu /* established */
+#define MGRAS_VC3_REG_CURS_X_LOC                     0x2u /* established */
+#define MGRAS_VC3_REG_CURS_Y_LOC                     0x3u /* established */
+#define MGRAS_VC3_REG_CUR_CURSOR_X                   0xeu /* established */
+#define MGRAS_VC3_REG_DID_EP1                        0x4u /* established */
+#define MGRAS_VC3_REG_DID_EP2                        0x5u /* established */
+#define MGRAS_VC3_REG_DID_FRAMETAB1                  0x10u /* established */
+#define MGRAS_VC3_REG_DID_FRAMETAB2                  0x12u /* established */
+#define MGRAS_VC3_REG_DID_LINETAB1                   0x11u /* established */
+#define MGRAS_VC3_REG_DID_LINETAB2                   0x13u /* established */
+#define MGRAS_VC3_REG_RAM_ADDR                       0x7u /* established */
+#define MGRAS_VC3_REG_SCAN_LENGTH                    0x6u /* established */
+#define MGRAS_VC3_REG_VERT_LINE_COUNT                0xbu /* established */
+#define MGRAS_VC3_REG_VID_EP                         0x0u /* established */
+#define MGRAS_VC3_REG_VT_FRAME_TBL_PTR               0x8u /* established */
+#define MGRAS_VC3_REG_VT_LINES_RUN                   0xau /* established */
+#define MGRAS_VC3_REG_VT_LINE_SEQ_PTR                0x9u /* established */
+#define MGRAS_VC3_REG_WORKING_CURS_Y                 0xdu /* established */
 #define MGRAS_WINDOW_MODE_MAIN_ADDR                  0x71e00u /* established */
 #define MGRAS_WINDOW_MODE_OVERLAY_ADDR               0x71e80u /* established */
 #define MGRAS_WINDOW_SELECT_ADDR                     0x71d80u /* established */

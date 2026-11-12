@@ -93,6 +93,16 @@ Bits 15:13 give the component count, bits 12:8 the source type, and bit 7 marks
 byte-sized components. That reading is inferred from the table, not from a
 board.
 
+**Register numbers from 0x200 up.** The IDE diagnostic's register table names
+registers in the `0x200` to `0x2ca` range, in the groups below. Each entry sits `0x200` above the first register
+of a `0x0xx` pair and takes that register's mask. Entries exist at `0x200` to
+`0x210`, `0x242`, `0x244`, `0x25c`, `0x25e` and `0x260` to `0x26c` (raster
+engine), and at `0x280` to `0x28a` and `0x2c0` to `0x2ca` (texture engine).
+For example, `0x268` is named `Z_HI_LOW`, mask `0x7ff`, over `0x068` (`Z_HI`)
+and `0x069` (`Z_LOW`). The table is **established** as the diagnostic's
+content. Whether a write to a `0x2xx` register reaches the pair, and how wide
+that write is, is **unknown**.
+
 ## Attribute headers
 
 Entry points inside `glBegin`/`glEnd`, and raster positions outside them. The
@@ -285,6 +295,40 @@ The data-port read uses `0x00008f08` and two zeros, polls status
 bit 0 and the raster status register at `0x02c578` bit 8, then reads units from
 `0x02d1c0` and `0x02c1c4`. Several of these register meanings are unknown; the
 pixel-read words are software expectations only.
+
+### Raster DMA read start
+
+These are the orders the software uses to arm and kick a read or write through
+the raster side. They show what the software does. They do not show which event
+starts the transfer on the board.
+
+**Established**, from the X server module `impactpc.so` (SHA-256 prefix
+`e501c75dc120`), the read routine at `0x5e4a0544` to `0x5e4a05e8`:
+
+- Read: the host kick `0xbf` (slot 3) is sent first, in one 64-bit packet. Then
+  FILLMODE `0x01000000`, register 6 `0xa`, XFRCONTROL (`0x102`) `8`,
+  GLINE_XSTARTF `1`, the IR_ALIAS execute `0x18`, and XFRCONTROL `9`. The
+  routine polls the DMA status until its masked bits clear, then waits for HQ
+  status bit 1, and later writes XFRCONTROL `0`.
+- Write, same module: register 6 `0xc`, GLINE_XSTARTF `1`, IR_ALIAS `0x18`,
+  XFRCONTROL `1`, the descriptor and page-list words, then the kick `0xb7` with
+  the sync token `0x000e0400`. The server then writes `0x10000` to window offset
+  `0x7000c` and polls `0x70008` for bit 16.
+- Write, public X.Org IMPACT 0.2.0 driver: IR_ALIAS `0x18`, XFRCONTROL `1`, the
+  page-list words, the kick `(p << 1) | 0xb1`, then the sync token.
+
+Register 6 is the DMA type word. The public driver writes `0xc` for a
+host-to-board transfer. The read paths above write `0xa`, and the listings
+write `0xc` for writes. What the bits select is **unknown**.
+
+**Inferred**, from those orders alone: the transfer runs once both the host kick
+and the raster-side start have happened, whichever comes last. A read ends on
+the XFRCONTROL `9` start, or on the GL client's register 5 write (see the
+client's read above). A write ends on the kick.
+
+**Unknown:** what XFRCONTROL `9` does when no kick came before it, or after a
+transfer has already run. The status bits the software tests (`0x162f` for the
+Indigo2 module's read, `0x1f` for done) have no stated meaning.
 
 ## Texture transfers
 

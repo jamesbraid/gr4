@@ -1194,6 +1194,24 @@
   },
   {
    "unit": "re4",
+   "kind": "field",
+   "name": "window_origin.y",
+   "hi": 31,
+   "lo": 16,
+   "grade": "inferred",
+   "from": "driver and traffic readings"
+  },
+  {
+   "unit": "re4",
+   "kind": "field",
+   "name": "window_origin.x",
+   "hi": 15,
+   "lo": 0,
+   "grade": "inferred",
+   "from": "driver and traffic readings"
+  },
+  {
+   "unit": "re4",
    "kind": "register",
    "name": "background_rg",
    "offset": 57664,

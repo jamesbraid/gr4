@@ -13,6 +13,7 @@ opening heading or first sentence.
 - [docs/IMPACT_BOARD_FACTS.md](docs/IMPACT_BOARD_FACTS.md): Facts from published SGI documents the headers did not yet carry.
 - [docs/mgras-board-identity.md](docs/mgras-board-identity.md): How IRIX reads the IMPACT board identity words, the product and revision codes, and what captured boards read back.
 - [docs/mgras-client-selection-feedback.md](docs/mgras-client-selection-feedback.md): How the IRIX GL client runs selection mode, the command forms it writes and how it reads hit records back.
+- [docs/mgras-display-timing.md](docs/mgras-display-timing.md): How the IRIX kernel programs MGRAS video timing, the PLL and VC3 clock arithmetic, and the stock 1280 by 1024 retrace rate.
 - [docs/mgras-gl-commands.md](docs/mgras-gl-commands.md): The word framing and command forms the IRIX GL client writes to the command port, the status and flag offsets it polls, and the kernel's context image and clip words.
 - [docs/mgras-hq4.md](docs/mgras-hq4.md): The HQ4 host interface as the IRIX software drives it: the interrupt block and sources, the context-switch handshake, the swap command, the status waits, the FIFO thresholds and the Octane page-list layout, with grades and open questions.
 - [docs/mgras-pixel-texture.md](docs/mgras-pixel-texture.md): The words the IRIX GL client writes for pixel texture (record 0x18a and its bits), its colour-table upload and the four-dimensional image path, with grades and open questions.

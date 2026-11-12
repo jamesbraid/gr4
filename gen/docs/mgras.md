@@ -225,7 +225,9 @@ offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.
 ### Word `MONITOR_ID`
 
 Byte at address 0x071308. Bits 7:4 are the monitor ID, which depends
-on the attached monitor, not on the board. Bits 3:0 are not read. The value
+on the attached monitor, not on the board. The kernel does not read bits 3:0.
+The IDE diagnostic's CMAP check reads bits 2:0 as the first CMAP's revision
+(see CMAP_RA_STATUS). The value
 0 means no monitor identified; 0xf is the value every captured Origin and
 Octane board reported, which the IRIX graphics tools print as an unknown
 monitor assumed to be 19 inches. Whether 0xf is what a board reports with no
@@ -403,6 +405,25 @@ revision. Inferred from the kernel object.
 | `RDRAM_DATA_PORT_ADDR` | 0x2c574 | established | driver and firmware readings | RDRAM data port; the kernel reads it with each raster engine selected in turn |
 | `RSS_RE_SELECT_PIO_ADDR` | 0x2c448 | inferred | driver and firmware readings | the same raster register as the diagnostic reaches it through the programmed I/O window |
 | `RSS_RE_SELECT_REG` | 0x112 | established | driver and firmware readings | raster register that selects one raster engine; the kernel writes the engine number as its value |
+| `VC3_REG_CURS_EP` | 0x1 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
+| `VC3_REG_CURS_TBL_PTR` | 0xc | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
+| `VC3_REG_CURS_X_LOC` | 0x2 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Hardware cursor X |
+| `VC3_REG_CURS_Y_LOC` | 0x3 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Hardware cursor Y |
+| `VC3_REG_CUR_CURSOR_X` | 0xe | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
+| `VC3_REG_DID_EP1` | 0x4 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. First display-ID entry point, with its own frame and line tables |
+| `VC3_REG_DID_EP2` | 0x5 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Second display-ID entry point |
+| `VC3_REG_DID_FRAMETAB1` | 0x10 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Frame table of the first display-ID entry point |
+| `VC3_REG_DID_FRAMETAB2` | 0x12 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Frame table of the second display-ID entry point |
+| `VC3_REG_DID_LINETAB1` | 0x11 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Line table of the first display-ID entry point |
+| `VC3_REG_DID_LINETAB2` | 0x13 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Line table of the second display-ID entry point |
+| `VC3_REG_RAM_ADDR` | 0x7 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Reads back the SRAM address it was loaded with |
+| `VC3_REG_SCAN_LENGTH` | 0x6 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
+| `VC3_REG_VERT_LINE_COUNT` | 0xb | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
+| `VC3_REG_VID_EP` | 0x0 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Main display frame table pointer; see docs/mgras-display-timing.md |
+| `VC3_REG_VT_FRAME_TBL_PTR` | 0x8 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
+| `VC3_REG_VT_LINES_RUN` | 0xa | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
+| `VC3_REG_VT_LINE_SEQ_PTR` | 0x9 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
+| `VC3_REG_WORKING_CURS_Y` | 0xd | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
 | `WINDOW_MODE_MAIN_ADDR` | 0x71e00 | established | driver and firmware readings | display mode words for window IDs 0 to 31, under XMAP index (ID & 0x1f) << 2 |
 | `WINDOW_MODE_OVERLAY_ADDR` | 0x71e80 | established | driver and firmware readings | display mode words for overlay window IDs 32 to 39 |
 | `WINDOW_SELECT_ADDR` | 0x71d80 | established | driver and firmware readings | one bit per window ID, written at each buffer swap; overlay IDs use XMAP index 4. What a set bit shows is inferred |

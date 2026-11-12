@@ -317,6 +317,17 @@ are not known.
 
 ### Register `window_origin`
 
+Window origin (XYWIN). OpenBSD's impact(4) header packs it as (y << 16) | x, so
+x is the low half and y the high half. That is a software expectation from the
+public driver, not a board measurement. The driver's one write sets x to 0 and
+y to 0x3ff (1023). How the origin shifts RE_POINT and RE_LINE, and which way y
+counts, is not settled here.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 31:16 | `y` | inferred |  | driver and traffic readings |  |
+| 15:0 | `x` | inferred |  | driver and traffic readings |  |
+
 ### Register `background_rg`
 
 Colours shared with the texture engine and double buffered. Opaque
@@ -344,25 +355,64 @@ the index sits in the low twelve bits of the first.
 
 ### Register `screen_mask1_x`
 
+Screen mask 1, x range, written as x1 << 16 | (x2 - 1): x1 is the first column
+and x2 the column past the last. The IRIX kernel writes this word for
+each rectangle of a window's visible region, and the X server writes it for
+each clip box. Established as those words. That the raster engine discards
+pixels outside the box is inferred.
+
 ### Register `screen_mask1_y`
+
+Screen mask 1, y range, written as (H - y2) << 16 | (H - 1 - y1): H is the
+screen height (1024 in the X server's listing), y1 the first row and y2 the row
+past the last, counted from the top. The high half counts rows from the bottom.
+Established as the kernel's and the X server's words. That the raster engine
+discards pixels outside the box is inferred.
 
 ### Register `screen_mask2_x`
 
+Screen mask 2, x range, same encoding as screen_mask1_x. The kernel writes
+masks 1 to 4 with this encoding (established as its words); the X server's
+listing shows mask 1 only.
+
 ### Register `screen_mask2_y`
+
+Screen mask 2, y range, same encoding as screen_mask1_y. Established for masks
+1 to 4 as the kernel's words, as for the x range.
 
 ### Register `screen_mask3_x`
 
+Screen mask 3, x range, same encoding as screen_mask1_x. Established as the
+kernel's words for mask 3.
+
 ### Register `screen_mask3_y`
+
+Screen mask 3, y range, same encoding as screen_mask1_y. Established as the
+kernel's words for mask 3.
 
 ### Register `screen_mask4_x`
 
+Screen mask 4, x range, same encoding as screen_mask1_x. The kernel's register
+shadow holds mask 4 at 0x14d and 0x14e. Established as the kernel's words.
+
 ### Register `screen_mask4_y`
+
+Screen mask 4, y range, same encoding as screen_mask1_y. Established as the
+kernel's words for mask 4.
 
 ### Register `window_mode`
 
-Window mode: per mask n (1 to 4) an enable at bit n-1 and an inside/outside
-select at bit n+3. Only mask 1 has been seen used (value 0x11: enabled, keep
-pixels inside); the positions for masks 2 to 4 follow by pattern.
+Window mode. Bits 3:0 enable masks 1 to 4, mask n at bit n-1. The kernel's clip
+validation writes 0x11, 0x13, 0x17 or 0x1f for one to four visible rectangles,
+so bit 4 is set for every count and bits 7:4 hold 1 (established, kernel words).
+When a window field is zero the kernel writes 0x23 instead: masks 1 and 2, with
+mode 2 in bits 7:4 (established; what mode 2 does is unknown). The X server
+draws each primitive once per clip box, with 0x11 written here for each box and
+0 after the last one (established, X server listing). That the raster engine
+keeps only pixels inside the enabled boxes is inferred from that redraw.
+The per-mask inside flags in the fields below are not settled. The kernel sets
+only bit 4 when four masks are enabled, which fits one mode field in bits 7:4
+better.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|

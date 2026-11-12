@@ -268,7 +268,9 @@ offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.</doc>
   </struct>
   <struct name="MONITOR_ID" size="1" grade="inferred" from="driver and firmware readings">
     <doc>Byte at address 0x071308. Bits 7:4 are the monitor ID, which depends
-on the attached monitor, not on the board. Bits 3:0 are not read. The value
+on the attached monitor, not on the board. The kernel does not read bits 3:0.
+The IDE diagnostic's CMAP check reads bits 2:0 as the first CMAP's revision
+(see CMAP_RA_STATUS). The value
 0 means no monitor identified; 0xf is the value every captured Origin and
 Octane board reported, which the IRIX graphics tools print as an unknown
 monitor assumed to be 19 inches. Whether 0xf is what a board reports with no
@@ -419,6 +421,25 @@ revision. Inferred from the kernel object.</doc>
   <constant name="RDRAM_DATA_PORT_ADDR" value="0x2c574" grade="established"/>
   <constant name="RSS_RE_SELECT_PIO_ADDR" value="0x2c448" grade="inferred"/>
   <constant name="RSS_RE_SELECT_REG" value="0x112" grade="established"/>
+  <constant name="VC3_REG_CURS_EP" value="0x1" grade="established"/>
+  <constant name="VC3_REG_CURS_TBL_PTR" value="0xc" grade="established"/>
+  <constant name="VC3_REG_CURS_X_LOC" value="0x2" grade="established"/>
+  <constant name="VC3_REG_CURS_Y_LOC" value="0x3" grade="established"/>
+  <constant name="VC3_REG_CUR_CURSOR_X" value="0xe" grade="established"/>
+  <constant name="VC3_REG_DID_EP1" value="0x4" grade="established"/>
+  <constant name="VC3_REG_DID_EP2" value="0x5" grade="established"/>
+  <constant name="VC3_REG_DID_FRAMETAB1" value="0x10" grade="established"/>
+  <constant name="VC3_REG_DID_FRAMETAB2" value="0x12" grade="established"/>
+  <constant name="VC3_REG_DID_LINETAB1" value="0x11" grade="established"/>
+  <constant name="VC3_REG_DID_LINETAB2" value="0x13" grade="established"/>
+  <constant name="VC3_REG_RAM_ADDR" value="0x7" grade="established"/>
+  <constant name="VC3_REG_SCAN_LENGTH" value="0x6" grade="established"/>
+  <constant name="VC3_REG_VERT_LINE_COUNT" value="0xb" grade="established"/>
+  <constant name="VC3_REG_VID_EP" value="0x0" grade="established"/>
+  <constant name="VC3_REG_VT_FRAME_TBL_PTR" value="0x8" grade="established"/>
+  <constant name="VC3_REG_VT_LINES_RUN" value="0xa" grade="established"/>
+  <constant name="VC3_REG_VT_LINE_SEQ_PTR" value="0x9" grade="established"/>
+  <constant name="VC3_REG_WORKING_CURS_Y" value="0xd" grade="established"/>
   <constant name="WINDOW_MODE_MAIN_ADDR" value="0x71e00" grade="established"/>
   <constant name="WINDOW_MODE_OVERLAY_ADDR" value="0x71e80" grade="established"/>
   <constant name="WINDOW_SELECT_ADDR" value="0x71d80" grade="established"/>
