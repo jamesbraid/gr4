@@ -1,5 +1,9 @@
 {
   "family": "Impact (GR4 / MGRAS)",
+  "review_required": [
+    "docs/routines/t1-*.md",
+    "docs/routines/t2-*.md"
+  ],
   "docs": {
     "prose": [
       "docs/*.md",
