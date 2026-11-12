@@ -9418,7 +9418,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd99a8	12	glPushClient
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd99b4	12	glSampleMaskSGIS	dwarf+dynsym	048df4ee9c6e		in	named-only	libglcore/include/glcore_prots.h:4531	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd99c0	12	glSamplePatternSGIS	dwarf+dynsym	908104d1e69d		in	named-only	libglcore/include/glcore_prots.h:4532	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd99cc	12	glTagSampleBufferSGIX	dwarf+dynsym	d3f288a027a9		in	named-only	libglcore/include/glcore_prots.h:4533	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd99d8	12	glDetailTexFuncSGIS	dwarf+dynsym	0242c2197851		in	named-only	libglcore/include/glcore_prots.h:4534	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd99d8	12	glDetailTexFuncSGIS	dwarf+dynsym	0242c2197851		in	named-only	docs/mgras-texture.md#detail-texture	Detail texture
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd99e4	12	glGetDetailTexFuncSGIS	dwarf+dynsym	6affa245291f		in	named-only	libglcore/include/glcore_prots.h:4535	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd99f0	12	glSharpenTexFuncSGIS	dwarf+dynsym	bc4f4c33ba8f		in	named-only	libglcore/include/glcore_prots.h:4536	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd99fc	12	glGetSharpenTexFuncSGIS	dwarf+dynsym	0d36effff4f2		in	named-only	libglcore/include/glcore_prots.h:4537	
