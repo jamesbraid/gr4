@@ -12,6 +12,7 @@ opening heading or first sentence.
 
 - [docs/IMPACT_BOARD_FACTS.md](docs/IMPACT_BOARD_FACTS.md): Facts from published SGI documents the headers did not yet carry.
 - [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md): Ledger of header unknowns and what shipped software settles.
+- [docs/ge11-program-format.md](docs/ge11-program-format.md): What the shipped GE11 microcode images show about the 72-bit instruction word, with grades and the conflicts with GE11.h.
 - [docs/TRAM_CORRUPTION_ANALYSIS.md](docs/TRAM_CORRUPTION_ANALYSIS.md): TRAM page desynchronization and texture corruption analysis for libGLcore.
 - [docs/octane-technical-report.pdf](docs/octane-technical-report.pdf): Octane technical report, stored unmodified; source and checksum in the sources index.
 - [docs/sources/INDEX.md](docs/sources/INDEX.md): Index of stored published documents with SHA-256 and source URLs.
