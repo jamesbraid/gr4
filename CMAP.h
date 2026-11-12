@@ -212,20 +212,29 @@ extern "C" {
  * IP28 HighImpact 1024x768 and 1280x1024, 2026-10): bits 4:0 a format,
  * bits 9:5 a colormap block (block * 256 = CMAP entry base), bits 12:10
  * (bit 10 set on nearly every DID, bit 11 on DIDs 14-16, bit 12 on 12 and
- * 19). The X server's mode-word routine (mgrasValidateMode, decompiled
- * from the display-server objects) gives bit 10 a rule (established
- * from that decompilation; the decompiler is not exact, so check against
- * the disassembly before relying on a detail): for DIDs 0-31 it takes the
- * window's stored word, replaces bits 9:5 with the block (mask 0x3E0), and
- * then sets bit 10 unless a per-visual table value equals 7, in which case
- * it clears it. For DIDs 32 and up the block sits in bits 7:3 and the bit
- * toggled is bit 8. Bit 10 is therefore "the visual's table value is not
- * 7"; what that value is, is unknown. Bits 11 and 12 are not set by that
- * routine or by any other store found by searching the decompiled display
- * server for the masks 0x800 and 0x1000 (a text search, not an exhaustive
- * data-flow trace), so they arrive in the stored word (inferred). What
- * would settle them: print the word before and after that routine for a
- * window of each visual class and see which DIDs carry bits 11 and 12.
+ * 19). The X server's mode-word routine (mgrasValidateMode, 0x5e4a4860 in
+ * the held display-server object; read from its disassembly, which
+ * replaces the earlier decompiler reading) builds the word for a DID in
+ * a1[0x14] from the stored word in a1[0x24]. For DIDs 0-31 (test at
+ * 0x5e4a49a0) it replaces bits 9:5 with a block taken from a per-visual
+ * word (shifted left 5, mask 0x3E0). If bit 3 of a halfword in the DID's
+ * 36-byte record (third argument + 0x98 + 36 * DID) is set (0x5e4a49a8,
+ * 0x5e4a49c0), it then takes bits 21:10
+ * and 4:0 from the record's word at +0xC (masks 0x3FFC1F, 0x5e4a49e0), which
+ * is where bits 11 and 12 can come from; what the record holds is set
+ * elsewhere and not read here (unknown). Last, bit 10 is set unless the
+ * word at offset 4 of the visual's 20-byte record equals 7, in which case
+ * it is cleared (xor at 0x5e4a4a34, conditional move at 0x5e4a4a4c;
+ * established by the disassembly). For DIDs 32 and up the block sits in
+ * bits 7:3, bits 8 and 2:0 come from the record word under the same flag
+ * (mask 0x107, 0x5e4a4b04), and the bit toggled by the 7 rule is bit 8.
+ * Bit 10 is therefore "the visual's table value is not 7"; what that value
+ * is, is unknown. The word the kernel receives (ioctl 0x3f9, payload word
+ * at 0x5e4a4a50) is the result after the 7 rule and after a bit 30 rule
+ * (set when request flags 2 and 4 are both set, cleared when only 2 is);
+ * the copy kept in a1[0x24] (0x5e4a4a0c) is taken before both. What would
+ * settle bits 11 and 12 for each DID: print the record word at +0xC and its
+ * flag halfword for a window of each visual class.
  * The format values do not follow the XMAP_VISUAL_*
  * guesses above:
  *   1   colour index, 8-bit PseudoColor desktop windows (DIDs 0-7, blocks
