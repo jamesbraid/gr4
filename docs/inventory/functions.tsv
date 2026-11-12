@@ -1,6 +1,6 @@
 binary	role	abi	elf_section	address	size	name	source	code_sha	rejected	scope	status	doc	section
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x0	60	gfxtable_readerlock	dwarf+symtab	456e2d2f152f		in	located	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3c	60	gfxtable_readerunlock	dwarf+symtab	483e1fb323d9		in	located	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x0	60	gfxtable_readerlock	dwarf+symtab	456e2d2f152f		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3c	60	gfxtable_readerunlock	dwarf+symtab	483e1fb323d9		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x78	104	gfxtable_writerlock	dwarf+symtab	0dbe7ded31b6		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xe0	28	gfxtable_writerunlock	dwarf+symtab	abc356e1da00		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0xfc	92	init_gfx_group_table	dwarf+symtab	4f052263be2f		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
@@ -8,12 +8,12 @@ usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x158	172	gfx_group_find	d
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x204	212	gfx_group_create	dwarf+symtab	49c9e94f169f		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2d8	248	gfx_group_destroy	dwarf+symtab	05c3610d1bd2		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3d0	96	init_gthread_table	dwarf+symtab	49c8536025d4		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x430	252	gthread_create	dwarf+symtab	657e49c559ad		in	located	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x430	252	gthread_create	dwarf+symtab	657e49c559ad		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x52c	244	gthread_destroy	dwarf+symtab	83c13ddad0ef		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x620	172	gthread_attach_list	dwarf+symtab	d6af0bd572a9		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x6cc	92	gthread_detach_list	dwarf+symtab	5de034173d91		in	located	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x728	84	gthread_attach_group	dwarf+symtab	be28e727793d		in	located	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x77c	84	gthread_detach_group	dwarf+symtab	12f36c9334c6		in	located	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x6cc	92	gthread_detach_list	dwarf+symtab	5de034173d91		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x728	84	gthread_attach_group	dwarf+symtab	be28e727793d		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x77c	84	gthread_detach_group	dwarf+symtab	12f36c9334c6		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x7d0	188	gthread_find	dwarf+symtab	c6a7e8c9f62f		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x88c	56	gthread_find_gfxp	dwarf+symtab	9e4497960174		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x8c4	256	gthread_scan	dwarf+symtab	913d1fddb438		in	understood	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
@@ -29,24 +29,24 @@ usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x12e8	404	GfxOpen	dwarf+s
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x147c	428	GfxUnmanage	dwarf+symtab	265204e48dc6		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1628	112	GfxClose	dwarf+symtab	8e5d24fd41e4		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1698	272	GfxProto	dwarf+symtab	76afa97bd828		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x17a8	160	GfxWput	dwarf+symtab	909c42201d3e		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x17a8	160	GfxWput	dwarf+symtab	909c42201d3e		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1848	272	sendMsg	dwarf+symtab	dc8d1eb28825		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1958	168	GfxDelayedMessage	dwarf+symtab	645b9b9a8498		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1a00	396	GfxSendMessage	dwarf+symtab	71bcb9d7b3ec		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1b8c	28	GfxMessage	dwarf+symtab	f718050cf4a7		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1ba8	28	GfxIntrMessage	dwarf+symtab	0760d09f94eb		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1ba8	28	GfxIntrMessage	dwarf+symtab	0760d09f94eb		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1bc4	140	GfxRqService	dwarf+symtab	8308c51b8954		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1c50	256	GfxDetach	dwarf+symtab	275b2ccb6c74		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1d50	196	gfxinit	dwarf+symtab	da18d22b9044		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1e14	256	gfx_conflict_scan	dwarf+symtab	cf6739a855d3		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1f14	152	irisgl_sproc_setup_scan	dwarf+symtab	d1a60aff5e07		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1fac	1300	gfxopen	dwarf+symtab	71496613b4e1		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x24c0	108	irisgl_sproc_cleanup	dwarf+symtab	b3009513fab3		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1f14	152	irisgl_sproc_setup_scan	dwarf+symtab	d1a60aff5e07		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x1fac	1300	gfxopen	dwarf+symtab	71496613b4e1		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x24c0	108	irisgl_sproc_cleanup	dwarf+symtab	b3009513fab3		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x252c	1624	gfxclose	dwarf+symtab	e78630ad3a1f		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2b84	112	GfxListWriterLock	dwarf+symtab	95ec1a52ec58		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2b84	112	GfxListWriterLock	dwarf+symtab	95ec1a52ec58		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2bf4	28	GfxListWriterUnlock	dwarf+symtab	abc356e1da00		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c10	60	GfxListReaderLock	dwarf+symtab	5e24f2076a26		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c4c	72	GfxListReaderUnlock	dwarf+symtab	5be5325d2b28		in	located	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c10	60	GfxListReaderLock	dwarf+symtab	5e24f2076a26		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c4c	72	GfxListReaderUnlock	dwarf+symtab	5be5325d2b28		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c94	8	gfxread	dwarf+symtab	9a0f9311b660		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2c9c	8	gfxwrite	dwarf+symtab	9a0f9311b660		in	understood	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x2ca4	2312	gfxioctl	dwarf+symtab	95aee6177422		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
@@ -55,14 +55,14 @@ usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x35b4	8	gfxunmap	dwarf+sy
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x35bc	220	gfx_shalloc	dwarf+symtab	0599eafa0dfe		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3698	44	gfx_shfree	dwarf+symtab	bcd0285ba8c0		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x36c4	12	gfx_frs_valid_pipenum	dwarf+symtab	39da106f1751		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
-usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x36d0	140	irix5_to_gfx_getboardinfo_args	dwarf+symtab	6c422f307fee		in	located	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x36d0	140	irix5_to_gfx_getboardinfo_args	dwarf+symtab	6c422f307fee		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x375c	180	irix5_to_gfx_download_args	dwarf+symtab	4da24b92d298		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/gfx.o	shared-kernel	n64	.text	0x3810	132	irix5_to_gfx_attach_board_args	dwarf+symtab	de00bfdf53bd		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x0	212	MgrasFlushHQ3Poll	dwarf+symtab	bd4554ea0041		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xd4	648	MgrasFlushHQ3	dwarf+symtab	c61460d707b8		in	located	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xd4	648	MgrasFlushHQ3	dwarf+symtab	c61460d707b8		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x35c	324	MgrasThrowManagerRssShadow	dwarf+symtab	4dc47ce535b5		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x4a0	296	MgrasSetShadowRgn	dwarf+symtab	28a09879d28e		in	located	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5c8	244	MgrasGE11EramInit	dwarf+symtab	dfa15f3bf540		in	located	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x4a0	296	MgrasSetShadowRgn	dwarf+symtab	28a09879d28e		in	understood	docs/routines/t2-gr4-r5-b000.md#routine-readings-gr4-round-r5-batch-0	Routine readings: gr4 round r5, batch 0
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5c8	244	MgrasGE11EramInit	dwarf+symtab	dfa15f3bf540		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x6bc	44	freenode	dwarf+symtab	f66d5bd52d28		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x6e8	40	getnode	dwarf+symtab	ce8627d88d89		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x710	108	insertnode	dwarf+symtab	c29c19363971		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
@@ -71,39 +71,39 @@ usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x79c	84	findblo
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x7f0	48	findbuddy	dwarf+symtab	0d7b0d9e7c27		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x820	136	freeblock	dwarf+symtab	e5819e647e01		in	understood	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8a8	68	logbase2	dwarf+symtab	fdaec0c5207b		in	located	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8ec	684	getblock	dwarf+symtab	b95106bbde99		in	located	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xb98	632	reservelow	dwarf+symtab	73c7cc3f32cb		in	located	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xe10	164	MgrasGlContextInit	dwarf+symtab	f73eb6fa2783		in	located	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xeb4	104	MgrasGlContextAlloc	dwarf+symtab	7af6ead6292c		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xf1c	52	MgrasGlContextFree	dwarf+symtab	d5d009790fd9		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8ec	684	getblock	dwarf+symtab	b95106bbde99		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xb98	632	reservelow	dwarf+symtab	73c7cc3f32cb		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xe10	164	MgrasGlContextInit	dwarf+symtab	f73eb6fa2783		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xeb4	104	MgrasGlContextAlloc	dwarf+symtab	7af6ead6292c		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xf1c	52	MgrasGlContextFree	dwarf+symtab	d5d009790fd9		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xf50	152	MgrasEramBufAlloc	dwarf+symtab	20ffd69cf6f0		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xfe8	112	MgrasEramBufFree	dwarf+symtab	447e5cd36bd9		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1058	836	MgrasEramRead	dwarf+symtab	66d68b5642e6		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x139c	112	MgrasNextEramResource	dwarf+symtab	68432ddf643d		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x140c	772	MgrasEramWrite	dwarf+symtab	a355c092ded0		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0xfe8	112	MgrasEramBufFree	dwarf+symtab	447e5cd36bd9		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1058	836	MgrasEramRead	dwarf+symtab	66d68b5642e6		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x139c	112	MgrasNextEramResource	dwarf+symtab	68432ddf643d		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x140c	772	MgrasEramWrite	dwarf+symtab	a355c092ded0		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1710	616	MgrasValidateEramRes	dwarf+symtab	4a0ce6fe4ffb		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1978	72	MgrasEramManagerTimeout	dwarf+symtab	a0db3a46c8f8		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x19c0	420	MgrasMoveDemarcationUp	dwarf+symtab	10a3f1746ead		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1b64	440	MgrasMoveDemarcationDown	dwarf+symtab	b023b6593421		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1978	72	MgrasEramManagerTimeout	dwarf+symtab	a0db3a46c8f8		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x19c0	420	MgrasMoveDemarcationUp	dwarf+symtab	10a3f1746ead		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1b64	440	MgrasMoveDemarcationDown	dwarf+symtab	b023b6593421		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1d1c	132	MgrasInfo	dwarf+symtab	6be1d85e342e		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1da0	108	mgras_regmatch	dwarf+symtab	fd9c4fad6baa		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1da0	108	mgras_regmatch	dwarf+symtab	fd9c4fad6baa		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1e0c	348	MgrasAttach	dwarf+symtab	96e605a1a410		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1f68	44	MgrasDetach	dwarf+symtab	3a99fa84eb31		in	understood	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1f94	456	MgrasInitialize	dwarf+symtab	84aad335ecc7		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x215c	376	MgrasDownload	dwarf+symtab	17507b667a2d		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x22d4	1344	MgrasStart	dwarf+symtab	47d97b4691db		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x1f94	456	MgrasInitialize	dwarf+symtab	84aad335ecc7		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x215c	376	MgrasDownload	dwarf+symtab	17507b667a2d		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x22d4	1344	MgrasStart	dwarf+symtab	47d97b4691db		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2814	844	MgrasExit	dwarf+symtab	7dd546aabece		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2b60	808	MgrasCreateDDRN	dwarf+symtab	4fe974147565		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2e88	184	MgrasSetTgvRgn	dwarf+symtab	f8c9f0c8914e		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2f40	864	MgrasDestroyDDRN	dwarf+symtab	890b4ecf189b		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x32a0	240	compute_drb_pointers	dwarf+symtab	2d4000c99bb5		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3390	428	MgrasValidateBanks	dwarf+symtab	5cc7f4e1daa9		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x353c	1720	MgrasValidateClip	dwarf+symtab	7237c515290e		in	located	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2e88	184	MgrasSetTgvRgn	dwarf+symtab	f8c9f0c8914e		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x2f40	864	MgrasDestroyDDRN	dwarf+symtab	890b4ecf189b		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x32a0	240	compute_drb_pointers	dwarf+symtab	2d4000c99bb5		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3390	428	MgrasValidateBanks	dwarf+symtab	5cc7f4e1daa9		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x353c	1720	MgrasValidateClip	dwarf+symtab	7237c515290e		in	understood	docs/routines/t2-gr4-r5-b001.md#routine-readings-gr4-round-r5-batch-1	Routine readings: gr4 round r5, batch 1
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3bf4	60	MgrasSetNullClip	dwarf+symtab	42ec523ce582		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3c30	644	MgrasMapGfx	dwarf+symtab	c6c3ca5a1d6d		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3eb4	256	MgrasUnMapGfx	dwarf+symtab	fa7b442969b7		in	located	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3eb4	256	MgrasUnMapGfx	dwarf+symtab	fa7b442969b7		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x3fb4	120	MgrasInvalTLB	dwarf+symtab	74aee928f5c5		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x402c	4924	MgrasPcxSwap	dwarf+symtab	6523460247eb		in	located	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x402c	4924	MgrasPcxSwap	dwarf+symtab	6523460247eb		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5368	8	MgrasPcxSwitch	dwarf+symtab	87506497337c		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5370	60	mgras_ctxswtimeout	dwarf+symtab	4a9be58779d0		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x53ac	28	mgras_sleepertimeout	dwarf+symtab	60b48822a231		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
@@ -112,40 +112,40 @@ usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x53d0	52	MgrasR
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x5404	8	MgrasReleaseGfxSema	dwarf+symtab	87506497337c		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x540c	404	mgras_copyin_vc3_tables	dwarf+symtab	6cad8b10a6cd		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x55a0	264	mgras_copyin_vc2_tables	dwarf+symtab	5f8855b04061		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x56a8	6416	MgrasPrivate	dwarf+symtab	473b4e338ddc		in	located	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x6fb8	896	MgrasWriteBfifo	dwarf+symtab	0d9c93ea6151		in	located	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x7338	164	mgras_error	dwarf+symtab	295d01f8bf87		in	located	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x56a8	6416	MgrasPrivate	dwarf+symtab	473b4e338ddc		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x6fb8	896	MgrasWriteBfifo	dwarf+symtab	0d9c93ea6151		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x7338	164	mgras_error	dwarf+symtab	295d01f8bf87		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x73dc	992	mgras_hqlook	dwarf+symtab	0a13c45110a7		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x77bc	160	mgras_fifotimeout	dwarf+symtab	df2ffdbfd1f2		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x785c	108	mgras_fifotimer	dwarf+symtab	f8f76ea84538		in	understood	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x78c8	1444	MgrasCtxsw	dwarf+symtab	15d8aa2f3c83		in	located	docs/routines/t2-gr4-r3-b000.md#routine-readings-gr4-tier-2-round-3-batch-0	Routine readings: gr4 tier-2 round 3, batch 0
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x7e6c	1292	MgrasFIFOInterrupt	dwarf+symtab	373608f0a006		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8378	792	MgrasGeneralInterrupt	dwarf+symtab	29d6704affbf		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8690	172	irix5_to_mgras_dma_util_single_args_xlate	dwarf+symtab	27a3cab301d0		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x873c	180	irix5_to_mgras_dma_util_multi_args_xlate	dwarf+symtab	dff2f3bc71be		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x87f0	164	irix5_to_mgras_dma_edit_replace_args_xlate	dwarf+symtab	ee589d89f598		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8894	148	irix5_to_mgras_dma_edit_release_args_xlate	dwarf+symtab	dda1b2eb4496		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8928	172	irix5_to_mgras_dma_edit_append_args_xlate	dwarf+symtab	b00ffb484f9d		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x89d4	124	irix5_to_mgras_set_shadow_rgn_args_xlate	dwarf+symtab	d4b2006ac209		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8a50	132	irix5_to_mgras_set_tgv_rgn_args_xlate	dwarf+symtab	6dd14b9b1885		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8ad4	140	irix5_to_mgras_eram_resource_arg_xlate	dwarf+symtab	c3a4fabb87ba		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8b60	132	irix5_to_mgras_eram_resource_arg_xlateout	dwarf+symtab	422fd5c2a14b		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8be4	140	irix5_to_mgras_fpi2c_cmd_arg_xlate	dwarf+symtab	d4993868d1c7		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8c70	132	irix5_to_mgras_fpi2c_cmd_arg_xlateout	dwarf+symtab	581b51212ad8		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8cf4	336	irix5_to_mgras_load_timing_table_args_xlate	dwarf+symtab	2bf2da0957a9		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8e44	392	irix5_to_mgras_load_video_format_combination_args_xlate	dwarf+symtab	5f8d6f706e8f		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x0	152	writeCC	dwarf+symtab	f60d405c3a05		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x98	144	readCC	dwarf+symtab	0495ba1cffca		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x128	56	writeData	dwarf+symtab	42d828af88dc		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x160	60	readData	dwarf+symtab	367620f3a1bd		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x19c	52	countOnes	dwarf+symtab	27dda0f61752		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x78c8	1444	MgrasCtxsw	dwarf+symtab	15d8aa2f3c83		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x7e6c	1292	MgrasFIFOInterrupt	dwarf+symtab	373608f0a006		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8378	792	MgrasGeneralInterrupt	dwarf+symtab	29d6704affbf		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8690	172	irix5_to_mgras_dma_util_single_args_xlate	dwarf+symtab	27a3cab301d0		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x873c	180	irix5_to_mgras_dma_util_multi_args_xlate	dwarf+symtab	dff2f3bc71be		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x87f0	164	irix5_to_mgras_dma_edit_replace_args_xlate	dwarf+symtab	ee589d89f598		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8894	148	irix5_to_mgras_dma_edit_release_args_xlate	dwarf+symtab	dda1b2eb4496		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8928	172	irix5_to_mgras_dma_edit_append_args_xlate	dwarf+symtab	b00ffb484f9d		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x89d4	124	irix5_to_mgras_set_shadow_rgn_args_xlate	dwarf+symtab	d4b2006ac209		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8a50	132	irix5_to_mgras_set_tgv_rgn_args_xlate	dwarf+symtab	6dd14b9b1885		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8ad4	140	irix5_to_mgras_eram_resource_arg_xlate	dwarf+symtab	c3a4fabb87ba		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8b60	132	irix5_to_mgras_eram_resource_arg_xlateout	dwarf+symtab	422fd5c2a14b		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8be4	140	irix5_to_mgras_fpi2c_cmd_arg_xlate	dwarf+symtab	d4993868d1c7		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8c70	132	irix5_to_mgras_fpi2c_cmd_arg_xlateout	dwarf+symtab	581b51212ad8		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8cf4	336	irix5_to_mgras_load_timing_table_args_xlate	dwarf+symtab	2bf2da0957a9		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	board-kernel	n64	.text	0x8e44	392	irix5_to_mgras_load_video_format_combination_args_xlate	dwarf+symtab	5f8d6f706e8f		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x0	152	writeCC	dwarf+symtab	f60d405c3a05		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x98	144	readCC	dwarf+symtab	0495ba1cffca		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x128	56	writeData	dwarf+symtab	42d828af88dc		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x160	60	readData	dwarf+symtab	367620f3a1bd		in	understood	docs/routines/t2-gr4-r5-b002.md#routine-readings-gr4-tier-2-round-r5-batch-2	Routine readings: gr4 tier-2 round r5 batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x19c	52	countOnes	dwarf+symtab	27dda0f61752		in	understood	docs/routines/t2-gr4-r5-b003.md#routine-roles-tier-2-reading-round-r5-batch-3	Routine roles, tier-2 reading round r5, batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x1d0	220	PhaseOne	dwarf+symtab	65665d73eab1		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x2ac	216	PhaseTwo	dwarf+symtab	1a58cacfa692		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x384	236	median	dwarf+symtab	a57ce60a7b79		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x470	220	CCInit	dwarf+symtab	76ffa8921557		in	located	docs/routines/t2-gr4-r3-b001.md#gr4-routine-role-statements-tier-2-round-3-batch-1	gr4 routine role statements, tier-2 round 3 batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x470	220	CCInit	dwarf+symtab	76ffa8921557		in	understood	docs/routines/t2-gr4-r5-b003.md#routine-roles-tier-2-reading-round-r5-batch-3	Routine roles, tier-2 reading round r5, batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	board-kernel	n64	.text	0x54c	548	MgrasInitCCR	dwarf+symtab	83b7621e9fcb		in	located	docs/routines/t1-gr4-b000.md#mgrasinitccr-in-usrcpusysgenip28bootmgrasamgras_ccvo-at-0x54c	`MgrasInitCCR` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)` at 0x54c
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x0	224	MgrasInitDMA	dwarf+symtab	7d53580e8934		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0xe0	248	MgrasInstallTxTbl_Kern	dwarf+symtab	1e8c519b8009		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x0	224	MgrasInitDMA	dwarf+symtab	7d53580e8934		in	understood	docs/routines/t2-gr4-r5-b003.md#routine-roles-tier-2-reading-round-r5-batch-3	Routine roles, tier-2 reading round r5, batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0xe0	248	MgrasInstallTxTbl_Kern	dwarf+symtab	1e8c519b8009		in	understood	docs/routines/t2-gr4-r5-b003.md#routine-roles-tier-2-reading-round-r5-batch-3	Routine roles, tier-2 reading round r5, batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1d8	116	MgrasResetTxTbl_Kern	dwarf+symtab	e0231c073d42		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x24c	32	mgrasFastUnlock	dwarf+symtab	5ecbad20bf50		in	understood	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x26c	56	mgrasFastLock	dwarf+symtab	fbbaad698880		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
@@ -163,13 +163,13 @@ usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0xc38	280	mg
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0xd50	496	mgrasFillTxTbl	dwarf+symtab	fe38dbbbe800		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0xf40	1656	mgrasDmaUtil	dwarf+symtab	619fd98fa243		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x15b8	192	mgrasGetFlushRanges	dwarf+symtab	730ef3043c5e		in	understood	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1678	188	MgrasDmaUtil_Single	dwarf+symtab	b7029a34a2c7		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1678	188	MgrasDmaUtil_Single	dwarf+symtab	b7029a34a2c7		in	understood	docs/routines/t2-gr4-r5-b003.md#routine-roles-tier-2-reading-round-r5-batch-3	Routine roles, tier-2 reading round r5, batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1734	608	MgrasDmaUtil_Multi	dwarf+symtab	e6b727294d62		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x1994	2372	MgrasDmaEditAppend	dwarf+symtab	d24b406de305		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x22d8	1804	MgrasDmaEditReplace	dwarf+symtab	65f44a7abde8		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x29e4	1024	MgrasDmaEditRelease	dwarf+symtab	2383c84caa84		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x2de4	232	MgrasDmaUpdateTMTLB	dwarf+symtab	96020d9cb0f7		in	located	docs/routines/t2-gr4-r3-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x2ecc	168	irix5_to_mgras_pointers_xlate	dwarf+symtab	79ee10077795		in	located	docs/routines/t2-gr4-r3-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x2ecc	168	irix5_to_mgras_pointers_xlate	dwarf+symtab	79ee10077795		in	understood	docs/routines/t2-gr4-r5-b003.md#routine-roles-tier-2-reading-round-r5-batch-3	Routine roles, tier-2 reading round r5, batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x2f74	176	irix5_to_mgras_dma_flush_defn_xlate	dwarf+symtab	ebc9c4339713		in	located	docs/routines/t2-gr4-r3-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	board-kernel	n64	.text	0x3024	192	irix5_to_mgras_dma_replace_defn_xlate	dwarf+symtab	ffedc144649a		in	located	docs/routines/t2-gr4-r3-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	board-kernel	n64	.text	0x0	600	MgrasInitBoardGfx	dwarf+symtab	71430153d7b3		in	understood	docs/routines/t2-gr4-r3-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
@@ -5110,7 +5110,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8b6b4	776	__glMgrim_P
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8b9bc	108	__glMgrFastReadPixels	dwarf+dynsym	ad615e9d22ab		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8ba28	68	__glMgrPickDrawPixels	dwarf+dynsym	2d404cf028c7		in	named-only	libglcore/include/glcore_prots.h:267	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8ba6c	68	__glMgrPickReadPixels	dwarf+dynsym	f87e6300cdf2		in	named-only	libglcore/include/glcore_prots.h:268	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8bab0	68	__glMgrLoadPolygonStippleRAM	dwarf+dynsym	11a826bd74bd		in	named-only	HQ3.h:953	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8bab0	68	__glMgrLoadPolygonStippleRAM	dwarf+dynsym	11a826bd74bd		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8baf4	72	__glMgrConvertStipple	dwarf+dynsym	f11081ded6ad		in	named-only	libglcore/include/glcore_prots.h:270	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8bb3c	8	__glMgrDlistOptimizer	dwarf+dynsym	78aa5094d5ec		in	named-only	libglcore/include/glcore_prots.h:271	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8bb44	324	__glMgr_Push	dwarf+dynsym	66b97c36c1f5		in	named-only	libglcore/include/glcore_prots.h:272	
@@ -5496,7 +5496,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac3cec	820	__glMgrim_G
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac4020	1144	__glMgrim_GetColorTableParameterfvSGI	dwarf+dynsym	2ac807bc88af		in	named-only	libglcore/include/glcore_prots.h:652	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac4498	444	__glMgrim_GetColorTableParameterivSGI	dwarf+dynsym	21dd8726605c		in	named-only	libglcore/include/glcore_prots.h:653	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac4654	116	__glMgrUpdateTextureColorTableState	dwarf+dynsym	99ed94a19cca		in	named-only	libglcore/include/glcore_prots.h:654	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac46c8	20156	image1D_to_texturecolortable	dwarf+dynsym	2aeb0634b533		in	named-only	libglcore/include/glcore_prots.h:655	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac46c8	20156	image1D_to_texturecolortable	dwarf+dynsym	2aeb0634b533		in	named-only	docs/mgras-two-re.md#unknowns	Unknowns
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdac9584	84	__glMgrFreeHistogramMemory	dwarf+funcnames	f931b224f6e5		in	named-only	libglcore/include/glcore_prots.h:656	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdac95d8	428	allocHistogramMemory	dwarf+funcnames	a97e76f48380		in	named-only	libglcore/include/glcore_prots.h:657	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac9784	72	__glMgr_InitPixelStatState	dwarf+dynsym	97f46cc4f0dc		in	named-only	libglcore/include/glcore_prots.h:658	
@@ -9008,23 +9008,23 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8874	12	glCallLists	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8880	12	glDeleteLists	dwarf+dynsym	1b0fb2e6dafb		in	named-only	libglcore/include/gl_1_1.h:92	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd888c	12	glGenLists	dwarf+dynsym	37bc441e61a3		in	named-only	libglcore/include/gl_1_1.h:134	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8898	12	glListBase	dwarf+dynsym	7b5c2904d6b4		in	named-only	docs/IMPACT_BOARD_FACTS.md#software-limits	Software limits
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88a4	12	glBegin	dwarf+dynsym	994317eb404b		in	named-only	irisgl/include/igloo_prots.h:23	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88b0	12	glBitmap	dwarf+dynsym	3c277e72178b		in	named-only	GE11.h:505	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88bc	12	glColor3b	dwarf+dynsym	22b5c89a8403		in	named-only	libglcore/include/gl_1_1.h:33	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88a4	12	glBegin	dwarf+dynsym	994317eb404b		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88b0	12	glBitmap	dwarf+dynsym	3c277e72178b		in	named-only	docs/mgras-gl-commands.md#word-framing	Word framing
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88bc	12	glColor3b	dwarf+dynsym	22b5c89a8403		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88c8	12	glColor3bv	dwarf+dynsym	34248c9b8ed6		in	named-only	libglcore/include/gl_1_1.h:34	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88d4	12	glColor3d	dwarf+dynsym	90565176cef6		in	named-only	libglcore/include/gl_1_1.h:35	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88d4	12	glColor3d	dwarf+dynsym	90565176cef6		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88e0	12	glColor3dv	dwarf+dynsym	9cb3a0502d7c		in	named-only	libglcore/include/gl_1_1.h:36	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88ec	12	glColor3f	dwarf+dynsym	e78ba4554ac5		in	named-only	HQ3.h:1157	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88ec	12	glColor3f	dwarf+dynsym	e78ba4554ac5		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd88f8	12	glColor3fv	dwarf+dynsym	d7a7804f0a13		in	named-only	libglcore/include/gl_1_1.h:38	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8904	12	glColor3i	dwarf+dynsym	b421dbe07660		in	named-only	libglcore/include/gl_1_1.h:39	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8904	12	glColor3i	dwarf+dynsym	b421dbe07660		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8910	12	glColor3iv	dwarf+dynsym	bb16fd8e7119		in	named-only	libglcore/include/gl_1_1.h:40	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd891c	12	glColor3s	dwarf+dynsym	44f45a03c11e		in	named-only	libglcore/include/gl_1_1.h:41	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd891c	12	glColor3s	dwarf+dynsym	44f45a03c11e		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8928	12	glColor3sv	dwarf+dynsym	3d3306e75ac9		in	named-only	libglcore/include/gl_1_1.h:42	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8934	12	glColor3ub	dwarf+dynsym	c1bb7660156a		in	named-only	libglcore/include/gl_1_1.h:43	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8934	12	glColor3ub	dwarf+dynsym	c1bb7660156a		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8940	12	glColor3ubv	dwarf+dynsym	7d2d6972427c		in	named-only	libglcore/include/gl_1_1.h:44	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd894c	12	glColor3ui	dwarf+dynsym	5f5bb944d470		in	named-only	libglcore/include/gl_1_1.h:45	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd894c	12	glColor3ui	dwarf+dynsym	5f5bb944d470		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8958	12	glColor3uiv	dwarf+dynsym	c4057159d0af		in	named-only	libglcore/include/gl_1_1.h:46	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8964	12	glColor3us	dwarf+dynsym	f4780ae0f681		in	named-only	libglcore/include/gl_1_1.h:47	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8964	12	glColor3us	dwarf+dynsym	f4780ae0f681		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8970	12	glColor3usv	dwarf+dynsym	1dd1c76c9fae		in	named-only	libglcore/include/gl_1_1.h:48	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd897c	12	glColor4b	dwarf+dynsym	75a4cfb2e7c6		in	named-only	libglcore/include/gl_1_1.h:49	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8988	12	glColor4bv	dwarf+dynsym	70dd8929ab18		in	named-only	libglcore/include/gl_1_1.h:50	
@@ -9044,20 +9044,20 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a24	12	glColor4us	d
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a30	12	glColor4usv	dwarf+dynsym	e4d496250cff		in	named-only	libglcore/include/gl_1_1.h:64	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a3c	12	glEdgeFlag	dwarf+dynsym	eecb5fd38d02		in	named-only	libglcore/include/gl_1_1.h:105	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a48	12	glEdgeFlagv	dwarf+dynsym	34c71de73842		in	named-only	libglcore/include/gl_1_1.h:108	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a54	12	glEnd	dwarf+dynsym	d69149afb813		in	named-only	irisgl/include/igloo_prots.h:24	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a60	12	glIndexd	dwarf+dynsym	462a4a1d7ce5		in	named-only	libglcore/include/gl_1_1.h:186	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a54	12	glEnd	dwarf+dynsym	d69149afb813		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a60	12	glIndexd	dwarf+dynsym	462a4a1d7ce5		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a6c	12	glIndexdv	dwarf+dynsym	df5d9a429a8a		in	named-only	libglcore/include/gl_1_1.h:187	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a78	12	glIndexf	dwarf+dynsym	f5e829440a52		in	named-only	libglcore/include/gl_1_1.h:188	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a78	12	glIndexf	dwarf+dynsym	f5e829440a52		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a84	12	glIndexfv	dwarf+dynsym	4c3287b9e61d		in	named-only	libglcore/include/gl_1_1.h:189	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a90	12	glIndexi	dwarf+dynsym	6205c884d572		in	named-only	irisgl/include/igloo_prots.h:31	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a90	12	glIndexi	dwarf+dynsym	6205c884d572		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a9c	12	glIndexiv	dwarf+dynsym	efe181072b7c		in	named-only	libglcore/include/gl_1_1.h:191	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8aa8	12	glIndexs	dwarf+dynsym	f49183f72e77		in	named-only	libglcore/include/gl_1_1.h:192	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8aa8	12	glIndexs	dwarf+dynsym	f49183f72e77		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ab4	12	glIndexsv	dwarf+dynsym	11f159317664		in	named-only	libglcore/include/gl_1_1.h:193	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ac0	12	glNormal3b	dwarf+dynsym	23b65814b881		in	named-only	HQ3.h:1157	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8acc	12	glNormal3bv	dwarf+dynsym	b86b35ca6ed9		in	named-only	libglcore/include/gl_1_1.h:236	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ad8	12	glNormal3d	dwarf+dynsym	38b6fb71d579		in	named-only	libglcore/include/gl_1_1.h:237	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ae4	12	glNormal3dv	dwarf+dynsym	7af1decd3631		in	named-only	libglcore/include/gl_1_1.h:238	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8af0	12	glNormal3f	dwarf+dynsym	d0251c871b22		in	named-only	irisgl/include/igloo_prots.h:28	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8af0	12	glNormal3f	dwarf+dynsym	d0251c871b22		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8afc	12	glNormal3fv	dwarf+dynsym	d7788771e597		in	named-only	libglcore/include/gl_1_1.h:240	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b08	12	glNormal3i	dwarf+dynsym	d25d25f6df36		in	named-only	libglcore/include/gl_1_1.h:241	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b14	12	glNormal3iv	dwarf+dynsym	802c47e6e682		in	named-only	libglcore/include/gl_1_1.h:242	
@@ -9065,9 +9065,9 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b20	12	glNormal3s	d
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b2c	12	glNormal3sv	dwarf+dynsym	3d61dc675da4		in	named-only	libglcore/include/gl_1_1.h:244	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b38	12	glRasterPos2d	dwarf+dynsym	4ff9594e8e89		in	named-only	libglcore/include/gl_1_1.h:272	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b44	12	glRasterPos2dv	dwarf+dynsym	87d2be33f777		in	named-only	libglcore/include/gl_1_1.h:273	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b50	12	glRasterPos2f	dwarf+dynsym	6ada1e80c207		in	named-only	libglcore/include/gl_1_1.h:274	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b50	12	glRasterPos2f	dwarf+dynsym	6ada1e80c207		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b5c	12	glRasterPos2fv	dwarf+dynsym	39d597d0bd56		in	named-only	libglcore/include/gl_1_1.h:275	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b68	12	glRasterPos2i	dwarf+dynsym	802195b959fe		in	named-only	libglcore/include/gl_1_1.h:276	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b68	12	glRasterPos2i	dwarf+dynsym	802195b959fe		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b74	12	glRasterPos2iv	dwarf+dynsym	c4a3cd382320		in	named-only	libglcore/include/gl_1_1.h:277	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b80	12	glRasterPos2s	dwarf+dynsym	d5894de7ee09		in	named-only	libglcore/include/gl_1_1.h:278	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8b8c	12	glRasterPos2sv	dwarf+dynsym	e806004c7c16		in	named-only	libglcore/include/gl_1_1.h:279	
@@ -9105,7 +9105,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d00	12	glTexCoord1s
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d0c	12	glTexCoord1sv	dwarf+dynsym	9d1bda332594		in	named-only	libglcore/include/gl_1_1.h:327	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d18	12	glTexCoord2d	dwarf+dynsym	581361a46919		in	named-only	libglcore/include/gl_1_1.h:328	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d24	12	glTexCoord2dv	dwarf+dynsym	86069cfbba39		in	named-only	libglcore/include/gl_1_1.h:329	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d30	12	glTexCoord2f	dwarf+dynsym	840e4f32698a		in	named-only	irisgl/include/igloo_prots.h:32	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d30	12	glTexCoord2f	dwarf+dynsym	840e4f32698a		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d3c	12	glTexCoord2fv	dwarf+dynsym	1952c6ec253b		in	named-only	libglcore/include/gl_1_1.h:331	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d48	12	glTexCoord2i	dwarf+dynsym	0876e7198a2f		in	named-only	libglcore/include/gl_1_1.h:332	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d54	12	glTexCoord2iv	dwarf+dynsym	06c1b5b38192		in	named-only	libglcore/include/gl_1_1.h:333	
@@ -9115,23 +9115,23 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d78	12	glTexCoord3d
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d84	12	glTexCoord3dv	dwarf+dynsym	48a591f0d53e		in	named-only	libglcore/include/gl_1_1.h:337	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d90	12	glTexCoord3f	dwarf+dynsym	0a98b008265d		in	named-only	libglcore/include/gl_1_1.h:338	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8d9c	12	glTexCoord3fv	dwarf+dynsym	879fb29370db		in	named-only	libglcore/include/gl_1_1.h:339	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8da8	12	glTexCoord3i	dwarf+dynsym	bdeabca632c2		in	named-only	libglcore/include/gl_1_1.h:340	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8da8	12	glTexCoord3i	dwarf+dynsym	bdeabca632c2		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8db4	12	glTexCoord3iv	dwarf+dynsym	a04f47754f73		in	named-only	libglcore/include/gl_1_1.h:341	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8dc0	12	glTexCoord3s	dwarf+dynsym	13ef3334118a		in	named-only	libglcore/include/gl_1_1.h:342	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8dcc	12	glTexCoord3sv	dwarf+dynsym	9ee295cd441f		in	named-only	libglcore/include/gl_1_1.h:343	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8dd8	12	glTexCoord4d	dwarf+dynsym	c7d434003d43		in	named-only	libglcore/include/gl_1_1.h:344	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8de4	12	glTexCoord4dv	dwarf+dynsym	77c7b2237772		in	named-only	libglcore/include/gl_1_1.h:345	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8df0	12	glTexCoord4f	dwarf+dynsym	5aef239aabad		in	named-only	libglcore/include/gl_1_1.h:346	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8df0	12	glTexCoord4f	dwarf+dynsym	5aef239aabad		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8dfc	12	glTexCoord4fv	dwarf+dynsym	235ac5c2d8ba		in	named-only	libglcore/include/gl_1_1.h:347	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e08	12	glTexCoord4i	dwarf+dynsym	7152be5e3b0d		in	named-only	libglcore/include/gl_1_1.h:348	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e14	12	glTexCoord4iv	dwarf+dynsym	a66dcfa74561		in	named-only	libglcore/include/gl_1_1.h:349	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e20	12	glTexCoord4s	dwarf+dynsym	d0884d275c2a		in	named-only	libglcore/include/gl_1_1.h:350	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e2c	12	glTexCoord4sv	dwarf+dynsym	a4e79b6aca39		in	named-only	libglcore/include/gl_1_1.h:351	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e38	12	glVertex2d	dwarf+dynsym	0d6f06ffe757		in	named-only	libglcore/include/gl_1_1.h:379	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e38	12	glVertex2d	dwarf+dynsym	0d6f06ffe757		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e44	12	glVertex2dv	dwarf+dynsym	272368b7c93d		in	named-only	libglcore/include/gl_1_1.h:380	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e50	12	glVertex2f	dwarf+dynsym	31f3fad0e6b2		in	named-only	irisgl/include/igloo_prots.h:25	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e50	12	glVertex2f	dwarf+dynsym	31f3fad0e6b2		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e5c	12	glVertex2fv	dwarf+dynsym	4f3ec13cf7d4		in	named-only	libglcore/include/gl_1_1.h:382	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e68	12	glVertex2i	dwarf+dynsym	0ca495794e40		in	named-only	libglcore/include/gl_1_1.h:383	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e68	12	glVertex2i	dwarf+dynsym	0ca495794e40		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e74	12	glVertex2iv	dwarf+dynsym	a154c145c246		in	named-only	libglcore/include/gl_1_1.h:384	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e80	12	glVertex2s	dwarf+dynsym	5d2fc072ac94		in	named-only	docs/OPEN_QUESTIONS.md#18-two-component-vertex-control-word-hq-command-0x59000004	18. Two-component vertex control word (HQ command 0x59000004)
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8e8c	12	glVertex2sv	dwarf+dynsym	0a01185f3f9b		in	named-only	docs/OPEN_QUESTIONS.md#18-two-component-vertex-control-word-hq-command-0x59000004	18. Two-component vertex control word (HQ command 0x59000004)
@@ -9151,14 +9151,14 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f28	12	glVertex4i	d
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f34	12	glVertex4iv	dwarf+dynsym	63e0518ecd34		in	named-only	libglcore/include/gl_1_1.h:400	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f40	12	glVertex4s	dwarf+dynsym	326bef2a389c		in	named-only	libglcore/include/gl_1_1.h:401	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f4c	12	glVertex4sv	dwarf+dynsym	74bcb08bc21e		in	named-only	libglcore/include/gl_1_1.h:402	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f58	12	glClipPlane	dwarf+dynsym	58a611cd8aa7		in	named-only	HQ3.h:1052	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f58	12	glClipPlane	dwarf+dynsym	58a611cd8aa7		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f64	12	glColorMaterial	dwarf+dynsym	33cbb2dbb23f		in	named-only	HQ3.h:1048	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f70	12	glCullFace	dwarf+dynsym	8eec72191491		in	named-only	libglcore/include/gl_1_1.h:91	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f70	12	glCullFace	dwarf+dynsym	8eec72191491		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f7c	12	glFogf	dwarf+dynsym	71b4ee9f6a59		in	named-only	libglcore/include/gl_1_1.h:128	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f88	12	glFogfv	dwarf+dynsym	f270b9303580		in	named-only	libglcore/include/gl_1_1.h:129	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f94	12	glFogi	dwarf+dynsym	a78d57577342		in	named-only	libglcore/include/gl_1_1.h:130	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8fa0	12	glFogiv	dwarf+dynsym	0b8f316fbed2		in	named-only	libglcore/include/gl_1_1.h:131	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8fac	12	glFrontFace	dwarf+dynsym	c63c21682c23		in	named-only	libglcore/include/gl_1_1.h:132	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8fac	12	glFrontFace	dwarf+dynsym	c63c21682c23		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8fb8	12	glHint	dwarf+dynsym	cf812a9f28e1		in	named-only	libglcore/include/gl_1_1.h:181	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8fc4	12	glLightf	dwarf+dynsym	7681e4692933		in	named-only	libglcore/include/gl_1_1.h:206	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8fd0	12	glLightfv	dwarf+dynsym	4f497030b7b1		in	named-only	libglcore/include/gl_1_1.h:207	
@@ -9168,17 +9168,17 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ff4	12	glLightModel
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9000	12	glLightModelfv	dwarf+dynsym	0266f94596de		in	named-only	libglcore/include/gl_1_1.h:203	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd900c	12	glLightModeli	dwarf+dynsym	f4926d7abe8e		in	named-only	libglcore/include/gl_1_1.h:204	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9018	12	glLightModeliv	dwarf+dynsym	bc7a3bd5249c		in	named-only	libglcore/include/gl_1_1.h:205	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9024	12	glLineStipple	dwarf+dynsym	fd4ab3aeb344		in	named-only	libglcore/include/gl_1_1.h:210	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9030	12	glLineWidth	dwarf+dynsym	fa15f89e9a17		in	named-only	libglcore/include/gl_1_1.h:211	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9024	12	glLineStipple	dwarf+dynsym	fd4ab3aeb344		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9030	12	glLineWidth	dwarf+dynsym	fa15f89e9a17		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd903c	12	glMaterialf	dwarf+dynsym	a275f14d87cc		in	named-only	libglcore/include/gl_1_1.h:226	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9048	12	glMaterialfv	dwarf+dynsym	3bf337be2ae1		in	named-only	libglcore/include/gl_1_1.h:227	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9054	12	glMateriali	dwarf+dynsym	8a27e3cd4140		in	named-only	libglcore/include/gl_1_1.h:228	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9060	12	glMaterialiv	dwarf+dynsym	a2be6eda55a4		in	named-only	libglcore/include/gl_1_1.h:229	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd906c	12	glPointSize	dwarf+dynsym	ed1c27ba4f97		in	named-only	libglcore/include/gl_1_1.h:257	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9078	12	glPolygonMode	dwarf+dynsym	1172cb33902b		in	named-only	libglcore/include/gl_1_1.h:258	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9084	12	glPolygonStipple	dwarf+dynsym	697c89c01629		in	named-only	libglcore/include/gl_1_1.h:261	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9090	12	glScissor	dwarf+dynsym	721619f8418c		in	named-only	irisgl/include/igloo_prots.h:57	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd909c	12	glShadeModel	dwarf+dynsym	d7948fc7b8a8		in	named-only	irisgl/include/igloo_prots.h:50	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd906c	12	glPointSize	dwarf+dynsym	ed1c27ba4f97		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9078	12	glPolygonMode	dwarf+dynsym	1172cb33902b		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9084	12	glPolygonStipple	dwarf+dynsym	697c89c01629		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9090	12	glScissor	dwarf+dynsym	721619f8418c		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd909c	12	glShadeModel	dwarf+dynsym	d7948fc7b8a8		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd90a8	12	glTexParameterf	dwarf+dynsym	b925158c7510		in	named-only	libglcore/include/gl_1_1.h:368	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd90b4	12	glTexParameterfv	dwarf+dynsym	1e3db489fa7e		in	named-only	libglcore/include/gl_1_1.h:369	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd90c0	12	glTexParameteri	dwarf+dynsym	aee5bf3ad2da		in	named-only	libglcore/include/gl_1_1.h:370	
@@ -9205,20 +9205,20 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91b0	12	glPopName	dw
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91bc	12	glPushName	dwarf+dynsym	583db4a6a51e		in	named-only	libglcore/include/gl_1_1.h:271	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91c8	12	glDrawBuffer	dwarf+dynsym	5b249b83329b		in	named-only	irisgl/include/igloo_prots.h:58	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91d4	12	glClear	dwarf+dynsym	42e30589e2bc		in	named-only	HQ3.h:1026	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91e0	12	glClearAccum	dwarf+dynsym	25f1281a84bd		in	named-only	libglcore/include/gl_1_1.h:27	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91ec	12	glClearIndex	dwarf+dynsym	c69e6cb01ca9		in	named-only	irisgl/include/igloo_prots.h:35	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91f8	12	glClearColor	dwarf+dynsym	1753593df535		in	named-only	irisgl/include/igloo_prots.h:34	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9204	12	glClearStencil	dwarf+dynsym	848abece7ea0		in	named-only	irisgl/include/igloo_prots.h:53	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9210	12	glClearDepth	dwarf+dynsym	69d3d8ea069d		in	named-only	irisgl/include/igloo_prots.h:36	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd921c	12	glStencilMask	dwarf+dynsym	9b0fe51c8c0b		in	named-only	libglcore/include/gl_1_1.h:318	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9228	12	glColorMask	dwarf+dynsym	084ff954213c		in	named-only	libglcore/include/gl_1_1.h:65	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9234	12	glDepthMask	dwarf+dynsym	62ec30ab534e		in	named-only	libglcore/include/gl_1_1.h:96	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9240	12	glIndexMask	dwarf+dynsym	b86c1549ec92		in	named-only	libglcore/include/gl_1_1.h:183	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91e0	12	glClearAccum	dwarf+dynsym	25f1281a84bd		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91ec	12	glClearIndex	dwarf+dynsym	c69e6cb01ca9		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91f8	12	glClearColor	dwarf+dynsym	1753593df535		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9204	12	glClearStencil	dwarf+dynsym	848abece7ea0		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9210	12	glClearDepth	dwarf+dynsym	69d3d8ea069d		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd921c	12	glStencilMask	dwarf+dynsym	9b0fe51c8c0b		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9228	12	glColorMask	dwarf+dynsym	084ff954213c		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9234	12	glDepthMask	dwarf+dynsym	62ec30ab534e		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9240	12	glIndexMask	dwarf+dynsym	b86c1549ec92		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd924c	12	glAccum	dwarf+dynsym	539d0596f59e		in	named-only	libglcore/include/gl_1_1.h:11	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9258	12	glDisable	dwarf+dynsym	0420a403823c		in	named-only	HQ3.h:993	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9264	12	glEnable	dwarf+dynsym	938ab780af25		in	named-only	HQ3.h:993	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9270	12	glFinish	dwarf+dynsym	ceaa3192a540		in	named-only	HQ3.h:207	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd927c	12	glFlush	dwarf+dynsym	9d7c75a01100		in	named-only	irisgl/include/igloo_prots.h:39	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9270	12	glFinish	dwarf+dynsym	ceaa3192a540		in	named-only	docs/mgras-hq4.md#status-bits-and-waits	Status bits and waits
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd927c	12	glFlush	dwarf+dynsym	9d7c75a01100		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9288	12	glPopAttrib	dwarf+dynsym	a57311008f8e		in	named-only	libglcore/include/gl_1_1.h:262	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9294	12	glPushAttrib	dwarf+dynsym	8baeda61b9d1		in	named-only	GE11.h:673	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92a0	12	glMap1d	dwarf+dynsym	505bef217ac6		in	named-only	libglcore/include/gl_1_1.h:218	
@@ -9226,9 +9226,9 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92ac	12	glMap1f	dwar
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92b8	12	glMap2d	dwarf+dynsym	1b8c77b9173c		in	named-only	libglcore/include/gl_1_1.h:220	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92c4	12	glMap2f	dwarf+dynsym	276835356cf9		in	named-only	libglcore/include/gl_1_1.h:221	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92d0	12	glMapGrid1d	dwarf+dynsym	86dc4fea9c11		in	named-only	libglcore/include/gl_1_1.h:222	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92dc	12	glMapGrid1f	dwarf+dynsym	dd53dadce119		in	named-only	libglcore/include/gl_1_1.h:223	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92dc	12	glMapGrid1f	dwarf+dynsym	dd53dadce119		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92e8	12	glMapGrid2d	dwarf+dynsym	8eef7e2665a3		in	named-only	libglcore/include/gl_1_1.h:224	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92f4	12	glMapGrid2f	dwarf+dynsym	ddd734553233		in	named-only	libglcore/include/gl_1_1.h:225	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92f4	12	glMapGrid2f	dwarf+dynsym	ddd734553233		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9300	12	glEvalCoord1d	dwarf+dynsym	d618950f19fa		in	named-only	libglcore/include/gl_1_1.h:113	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd930c	12	glEvalCoord1dv	dwarf+dynsym	f94c99cb2549		in	named-only	libglcore/include/gl_1_1.h:114	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9318	12	glEvalCoord1f	dwarf+dynsym	96bf801c0f3a		in	named-only	libglcore/include/gl_1_1.h:115	
@@ -9241,12 +9241,12 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9360	12	glEvalMesh1	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd936c	12	glEvalPoint1	dwarf+dynsym	b274ad80a319		in	named-only	libglcore/include/gl_1_1.h:123	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9378	12	glEvalMesh2	dwarf+dynsym	2ccc995ddcbe		in	named-only	libglcore/include/gl_1_1.h:122	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9384	12	glEvalPoint2	dwarf+dynsym	721bc12d880e		in	named-only	libglcore/include/gl_1_1.h:124	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9390	12	glAlphaFunc	dwarf+dynsym	6bd4955f0fbf		in	named-only	libglcore/include/gl_1_1.h:12	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd939c	12	glBlendFunc	dwarf+dynsym	7dfd215eaeff		in	named-only	irisgl/include/igloo_prots.h:48	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93a8	12	glLogicOp	dwarf+dynsym	e772e08c0681		in	named-only	libglcore/include/gl_1_1.h:217	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93b4	12	glStencilFunc	dwarf+dynsym	8274f27ea722		in	named-only	libglcore/include/gl_1_1.h:317	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93c0	12	glStencilOp	dwarf+dynsym	5cddcbe42277		in	named-only	libglcore/include/gl_1_1.h:319	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93cc	12	glDepthFunc	dwarf+dynsym	f940a9008c63		in	named-only	irisgl/include/igloo_prots.h:49	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9390	12	glAlphaFunc	dwarf+dynsym	6bd4955f0fbf		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd939c	12	glBlendFunc	dwarf+dynsym	7dfd215eaeff		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93a8	12	glLogicOp	dwarf+dynsym	e772e08c0681		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93b4	12	glStencilFunc	dwarf+dynsym	8274f27ea722		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93c0	12	glStencilOp	dwarf+dynsym	5cddcbe42277		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93cc	12	glDepthFunc	dwarf+dynsym	f940a9008c63		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93d8	12	glPixelZoom	dwarf+dynsym	c0f6b4355e99		in	named-only	HQ3.h:640	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93e4	12	glPixelTransferf	dwarf+dynsym	30ddf95b039f		in	named-only	libglcore/include/gl_1_1.h:254	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93f0	12	glPixelTransferi	dwarf+dynsym	049c4900e971		in	named-only	libglcore/include/gl_1_1.h:255	
@@ -9258,7 +9258,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd942c	12	glPixelMapus
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9438	12	glReadBuffer	dwarf+dynsym	cea45e9aea66		in	named-only	irisgl/include/igloo_prots.h:59	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9444	12	glCopyPixels	dwarf+dynsym	7ca9c88f1d6b		in	named-only	docs/OPEN_QUESTIONS.md#11-command-stream-tokens-0x096-0x097-0x0da-and-0x05f	11. Command-stream tokens 0x096, 0x097, 0x0DA and 0x05F
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9450	12	glReadPixels	dwarf+dynsym	ecd13f6e31c4		in	named-only	docs/OPEN_QUESTIONS.md#11-command-stream-tokens-0x096-0x097-0x0da-and-0x05f	11. Command-stream tokens 0x096, 0x097, 0x0DA and 0x05F
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd945c	12	glDrawPixels	dwarf+dynsym	05e4a83d751f		in	named-only	GE11.h:504	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd945c	12	glDrawPixels	dwarf+dynsym	05e4a83d751f		in	named-only	docs/mgras-gl-commands.md#pixel-images	Pixel images
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9468	12	glGetBooleanv	dwarf+dynsym	66c04f96219a		in	named-only	GE11.h:737	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9474	12	glGetClipPlane	dwarf+dynsym	439fee3d4638		in	named-only	libglcore/include/gl_1_1.h:138	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9480	12	glGetDoublev	dwarf+dynsym	ebc4c6c2e097		in	named-only	libglcore/include/gl_1_1.h:145	
@@ -9289,29 +9289,29 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95a0	12	glGetTexLeve
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95ac	12	glGetTexLevelParameteriv	dwarf+dynsym	67bd6d76b1a9		in	named-only	libglcore/include/gl_1_1.h:178	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95b8	12	glIsEnabled	dwarf+dynsym	e3e466e66894		in	named-only	HQ3.h:654	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95c4	12	glIsList	dwarf+dynsym	d7080c7ed76b		in	named-only	libglcore/include/gl_1_1.h:199	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95d0	12	glDepthRange	dwarf+dynsym	7acbee7a3fab		in	named-only	libglcore/include/gl_1_1.h:97	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95d0	12	glDepthRange	dwarf+dynsym	7acbee7a3fab		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95dc	12	glFrustum	dwarf+dynsym	aef9bbf6c0d1		in	named-only	libglcore/include/gl_1_1.h:133	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95e8	12	glLoadIdentity	dwarf+dynsym	116a1a95a2ec		in	named-only	docs/IMPACT_BOARD_FACTS.md#software-limits	Software limits
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95f4	12	glLoadMatrixf	dwarf+dynsym	c98ed8eb9ae4		in	named-only	irisgl/include/igloo_prots.h:44	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95f4	12	glLoadMatrixf	dwarf+dynsym	c98ed8eb9ae4		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9600	12	glLoadMatrixd	dwarf+dynsym	a9fdd594fe7d		in	named-only	libglcore/include/gl_1_1.h:214	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd960c	12	glMatrixMode	dwarf+dynsym	0f11e26a7f6f		in	named-only	irisgl/include/igloo_prots.h:46	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9618	12	glMultMatrixf	dwarf+dynsym	d8a007de19d3		in	named-only	irisgl/include/igloo_prots.h:45	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd960c	12	glMatrixMode	dwarf+dynsym	0f11e26a7f6f		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9618	12	glMultMatrixf	dwarf+dynsym	d8a007de19d3		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9624	12	glMultMatrixd	dwarf+dynsym	3e8fc56c9b10		in	named-only	libglcore/include/gl_1_1.h:232	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9630	12	glOrtho	dwarf+dynsym	b222c5313d39		in	named-only	libglcore/include/gl_1_1.h:247	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd963c	12	glPopMatrix	dwarf+dynsym	c956ed0082c9		in	named-only	irisgl/include/igloo_prots.h:42	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9648	12	glPushMatrix	dwarf+dynsym	5c0843a6268c		in	named-only	irisgl/include/igloo_prots.h:41	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9654	12	glRotated	dwarf+dynsym	7f3b0a959861		in	named-only	libglcore/include/gl_1_1.h:309	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9660	12	glRotatef	dwarf+dynsym	b6ab68b1356d		in	named-only	libglcore/include/gl_1_1.h:310	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9660	12	glRotatef	dwarf+dynsym	b6ab68b1356d		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd966c	12	glScaled	dwarf+dynsym	aff26972ce73		in	named-only	libglcore/include/gl_1_1.h:311	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9678	12	glScalef	dwarf+dynsym	bc1969c19370		in	named-only	libglcore/include/gl_1_1.h:312	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9678	12	glScalef	dwarf+dynsym	bc1969c19370		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9684	12	glTranslated	dwarf+dynsym	9881b393c029		in	named-only	libglcore/include/gl_1_1.h:377	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9690	12	glTranslatef	dwarf+dynsym	4557c8309dc7		in	named-only	libglcore/include/gl_1_1.h:378	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd969c	12	glViewport	dwarf+dynsym	80a058ed70fd		in	named-only	irisgl/include/igloo_prots.h:47	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9690	12	glTranslatef	dwarf+dynsym	4557c8309dc7		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd969c	12	glViewport	dwarf+dynsym	80a058ed70fd		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd96a8	12	glBlendColor	dynsym	32ba3e980674	shared-address	in	named-only		
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd96a8	12	glBlendColorEXT	dwarf+dynsym	32ba3e980674	shared-address	in	named-only		
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd96b4	12	glBlendEquation	dynsym	06b683b7a377	shared-address	in	named-only		
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd96b4	12	glBlendEquationEXT	dwarf+dynsym	06b683b7a377	shared-address	in	named-only		
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd96c0	12	glPolygonOffsetEXT	dwarf+dynsym	89d01d7b9711		in	named-only	libglcore/include/gl_1_1.h:260	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd96c0	12	glPolygonOffsetEXT	dwarf+dynsym	89d01d7b9711		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd96cc	12	glTexSubImage1D	dynsym	d5c4f2164b75	shared-address	in	named-only		
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd96cc	12	glTexSubImage1DEXT	dwarf+dynsym	d5c4f2164b75	shared-address	in	named-only		
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd96d8	12	glTexSubImage2D	dynsym	8b9d244f0479	shared-address	in	named-only		
@@ -9410,7 +9410,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9948	12	glInterleave
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9954	12	glNormalPointer	dwarf+dynsym	ce65ea26579d		in	named-only	libglcore/include/gl_1_1.h:245	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9960	12	glTexCoordPointer	dwarf+dynsym	490630363665		in	named-only	libglcore/include/gl_1_1.h:352	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd996c	12	glVertexPointer	dwarf+dynsym	baab093c62d5		in	named-only	libglcore/include/gl_1_1.h:403	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9978	12	glPolygonOffset	dwarf+dynsym	98bd9c9c419e		in	named-only	libglcore/include/gl_1_1.h:259	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9978	12	glPolygonOffset	dwarf+dynsym	98bd9c9c419e		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9984	12	glIndexub	dwarf+dynsym	92e442ea73e0		in	named-only	libglcore/include/gl_1_1.h:194	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9990	12	glIndexubv	dwarf+dynsym	9b37cf7b02cd		in	named-only	libglcore/include/gl_1_1.h:195	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd999c	12	glPopClientAttrib	dwarf+dynsym	0ca16c27818a		in	named-only	libglcore/include/gl_1_1.h:263	
@@ -9457,7 +9457,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9b28	12	glStopInstru
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9b34	12	glFlushRasterSGIX	dwarf+dynsym	c2cd267ea735		in	named-only	libglcore/include/glcore_prots.h:4563	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9b40	12	glReferencePlaneSGIX	dwarf+dynsym	8a2093ffc14e		in	named-only	libglcore/include/glcore_prots.h:4564	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9b4c	12	glFrameZoomSGIX	dwarf+dynsym	efe759910d43		in	named-only	libglcore/include/glcore_prots.h:4565	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9b58	12	glIglooInterfaceSGIX	dwarf+dynsym	f5647ccf311b		in	named-only	irisgl/include/igloo_prots.h:61	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9b58	12	glIglooInterfaceSGIX	dwarf+dynsym	f5647ccf311b		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9b64	12	glDeformationMap3dSGIX	dwarf+dynsym	e54ba23ee511		in	named-only	libglcore/include/glcore_prots.h:4567	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9b70	12	glDeformationMap3fSGIX	dwarf+dynsym	f5ab7f1fec7e		in	named-only	libglcore/include/glcore_prots.h:4568	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9b7c	12	glDeformSGIX	dwarf+dynsym	fb14f31aa341		in	named-only	libglcore/include/glcore_prots.h:4569	

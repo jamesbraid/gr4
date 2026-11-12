@@ -1,17 +1,17 @@
 table	rows	out_of_scope	understood	understood_with_open	understood_distinct	templated	located	named_only	undocumented	no_software_dependency	pct_understood	pct_located_or_better	pct_mentioned	pct_done	unresolved_sites	truncated	audited_real_pct	audited_sample	audited_date	computes	reused	multi_unit	shared_address	address_unknown	input
 binaries	59	0	0	0	0	0	0	31	28	0	0.0	0.0	52.5	0.0							0				
-functions	11974	0	143	4	139	0	236	11587	8	0	1.2	3.2	99.9	1.2							0	24	1224	0	
-functions (distinct names)	11963	0	143	4	139	0	236	11576	8	0	1.2	3.2	99.9	1.2							0				
+functions	11974	0	213	5	207	0	166	11587	8	0	1.8	3.2	99.9	1.8							0	24	1224	0	
+functions (distinct names)	11963	0	213	5	207	0	166	11576	8	0	1.8	3.2	99.9	1.8							0				
 mmio	10	0	0	0	0	0	0	7	3	0	0.0	0.0	70.0	0.0	0						0				
 tokens	6	0	3	0	3	0	3	0	0	0	50.0	100.0	100.0	50.0							0				
 ioctls	27	0	25	13	25	0	1	1	0	0	92.6	96.3	100.0	92.6							0				
 ucode	0	0	0	0	0	0	0	0	0	0	0.0	0.0	0.0	0.0						0	0				
 spec-registers	0	0	0	0	0	0	0	0	0	0	0.0	0.0	0.0	0.0							0				
 input root manifest	46																								bb008cba96809cbdce5071e840fe791884f8c0eff8e82e1cdf6d36f9d08a8a51
-functions in usr/cpu/sysgen/IP28boot/gfx.o	59	0	36	2	35	0	23	0	0	0	61.0	100.0	100.0	61.0							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	76	0	28	0	27	0	48	0	0	0	36.8	100.0	100.0	36.8							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	10	0	0	0	0	0	10	0	0	0	0.0	100.0	100.0	0.0							0	0	0	0	
-functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	28	0	7	0	7	0	21	0	0	0	25.0	100.0	100.0	25.0							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/gfx.o	59	0	51	2	48	0	8	0	0	0	86.4	100.0	100.0	86.4							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	76	0	73	0	72	0	3	0	0	0	96.1	100.0	100.0	96.1							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	10	0	6	1	6	0	4	0	0	0	60.0	100.0	100.0	60.0							0	0	0	0	
+functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	28	0	11	0	11	0	17	0	0	0	39.3	100.0	100.0	39.3							0	0	0	0	
 functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	43	0	11	0	11	0	32	0	0	0	25.6	100.0	100.0	25.6							0	0	0	0	
 functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	20	0	7	0	7	0	13	0	0	0	35.0	100.0	100.0	35.0							0	0	0	0	
 functions in usr/cpu/sysgen/IP28boot/mgras.a(mgras_timing.o)	1	0	0	0	0	0	1	0	0	0	0.0	100.0	100.0	0.0							0	0	0	0	
