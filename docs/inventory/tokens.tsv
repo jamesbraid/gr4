@@ -1,7 +1,7 @@
 kind	value	name	register	detail	sources	sites	binaries	example	status	doc	section
-geometry token	0x00e4	GE11_TOKEN_ENDTRIS			GE11.h	0	0		named-only	GE11.h:322	
-geometry token	0x00e5	GE11_TOKEN_TRISVERTEX			GE11.h	0	0		named-only	GE11.h:321	
-geometry token	0x00e6	GE11_TOKEN_BGNTRIS			GE11.h	0	0		named-only	GE11.h:320	
-geometry token	0x00e7	GE11_TOKEN_ENDLINE			GE11.h	0	0		named-only	GE11.h:319	
-geometry token	0x00e8	GE11_TOKEN_LINEVERTEX			GE11.h	0	0		named-only	GE11.h:318	
-geometry token	0x00e9	GE11_TOKEN_BGNLINE			GE11.h	0	0		named-only	GE11.h:317	
+geometry token	0x00e4	GE11_TOKEN_ENDTRIS			GE11.h	0	0		understood	docs/geometry-tokens.md#gr4-geometry-command-token-statements	gr4 geometry command token statements
+geometry token	0x00e5	GE11_TOKEN_TRISVERTEX			GE11.h	0	0		understood	docs/geometry-tokens.md#gr4-geometry-command-token-statements	gr4 geometry command token statements
+geometry token	0x00e6	GE11_TOKEN_BGNTRIS			GE11.h	0	0		understood	docs/geometry-tokens.md#gr4-geometry-command-token-statements	gr4 geometry command token statements
+geometry token	0x00e7	GE11_TOKEN_ENDLINE			GE11.h	0	0		located	docs/geometry-tokens.md#gr4-geometry-command-token-statements	gr4 geometry command token statements
+geometry token	0x00e8	GE11_TOKEN_LINEVERTEX			GE11.h	0	0		located	docs/geometry-tokens.md#gr4-geometry-command-token-statements	gr4 geometry command token statements
+geometry token	0x00e9	GE11_TOKEN_BGNLINE			GE11.h	0	0		located	docs/geometry-tokens.md#gr4-geometry-command-token-statements	gr4 geometry command token statements

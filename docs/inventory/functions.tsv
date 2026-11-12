@@ -435,7 +435,7 @@ usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tool	o32		0x407b2c	1016	ge_save	dynsym	fb80
 usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tool	o32		0x407f30	452	hq3_diag_begin	dynsym	b20259239912		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tool	o32		0x4080f4	232	hq3_diag_end	dynsym	5fd374a2187c		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tool	o32		0x4081dc	1032	ge11_diag_begin	dynsym	97292e5ea716		in	named-only	docs/inventory/functions.tsv	
-usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tool	o32		0x4085e4	1020	ge11_diag_end	dynsym	4ea9b8c38ecd		in	named-only	docs/routines/t1-gr4-b000.md#hw_release_pipe-in-usrgfxmgrashq3ge11dumphq3-at-0x409114	`hw_release_pipe` in `usr/gfx/MGRAS/HQ3/ge11dump.HQ3` at 0x409114
+usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tool	o32		0x4085e4	1020	ge11_diag_end	dynsym	4ea9b8c38ecd		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tool	o32		0x4089e0	628	ge11_exec	dynsym	b0fecb91ecc5		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tool	o32		0x408c54	108	ge11_poll_brkpt	dynsym	632e8c28cdf9		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tool	o32		0x408cc0	376	ge11_get_data	dynsym	47f0e051b3a6		in	named-only	docs/inventory/functions.tsv	
@@ -5159,7 +5159,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e060	52	__glMgrSPBfr
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e094	8	__glMgrSPMoreBlocks	dwarf+dynsym	87506497337c		in	named-only	libglcore/include/glcore_prots.h:315	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e09c	56	__glMgrDLIoctl	dwarf+dynsym	53aefc82cecc		in	named-only	libglcore/include/glcore_prots.h:316	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda8e0d4	136	__glMgrDLDMASync	dwarf+funcnames	b1b40182c839		in	named-only	HQ3.h:816	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e15c	396	__glMgrInitDLDMA	dwarf+dynsym	db798be47838		in	named-only	libglcore/include/glcore_prots.h:318	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e15c	396	__glMgrInitDLDMA	dwarf+dynsym	db798be47838		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e2e8	136	__glMgrDlistNewArray	dwarf+dynsym	7bc02039ea9c		in	named-only	libglcore/include/glcore_prots.h:319	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e370	140	__glMgrTermDLPool	dwarf+dynsym	28d9cd5cb529		in	named-only	libglcore/include/glcore_prots.h:320	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e3fc	200	__glMgrDlistFreeArray	dwarf+dynsym	4ffd99fe2fd2		in	named-only	libglcore/include/glcore_prots.h:321	
@@ -5355,7 +5355,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac5b4	64	__glMgrEvalC
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac5f4	48	__glMgrEvalCoord2DGe11	dwarf+dynsym	093e2717e579		in	named-only	HQ3.h:1188	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac624	508	__glMgrEvalMesh1DGe11	dwarf+dynsym	7dc6197d6deb		in	named-only	HQ3.h:1185	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac820	992	__glMgrEvalMesh2DGe11	dwarf+dynsym	6d9abcf0efe9		in	named-only	HQ3.h:1186	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaacc00	572	__glMgrInitEvaluators	dwarf+dynsym	9fca85123e00		in	named-only	libglcore/include/glcore_prots.h:514	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaacc00	572	__glMgrInitEvaluators	dwarf+dynsym	9fca85123e00		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaace3c	156	__glMgrFreeEvaluators	dwarf+dynsym	248c6fe9bc46		in	named-only	libglcore/include/glcore_prots.h:515	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaaced8	360	__glMgSetUpMap1	dwarf+dynsym	0071545b9587		in	named-only	libglcore/include/glcore_prots.h:516	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaad040	476	__glMgSetUpMap2	dwarf+dynsym	2438ff85efd6		in	named-only	libglcore/include/glcore_prots.h:517	
@@ -5471,7 +5471,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdabebe8	308	mgrTM_
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdabed1c	652	mgrTM_InitDMAPool	dwarf+funcnames	7325ccb45cb4		in	located	docs/routines/t1-gr4-b000.md#mgrtm_initdmapool-in-usrgfxarchip28gr432libglcoreso-at-0xdabed1c	`mgrTM_InitDMAPool` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdabed1c
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabefa8	592	mgrTM_FreeDMAPool	dwarf+dynsym	742d4829cecb		in	understood	docs/routines/t1-gr4-b000.md#mgrtm_freedmapool-in-usrgfxarchip28gr432libglcoreso-at-0xdabefa8	`mgrTM_FreeDMAPool` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdabefa8
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdabf1f8	164	flushRegs	dwarf+funcnames	239c5bba742e		in	named-only	docs/routines/t2-gr4-r4-b003.md#routine-roles-tier-2-reading-batch-3	Routine roles, tier-2 reading batch 3
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf29c	228	__glMgrasWrite	dwarf+dynsym	6c94ee09c2f6		in	named-only	docs/routines/t1-gr4-b000.md#__glmgrasinitdefaultvalues-in-usrgfxarchip28gr432libglcoreso-at-0xda719b8	`__glMgrasInitDefaultValues` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xda719b8
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf29c	228	__glMgrasWrite	dwarf+dynsym	6c94ee09c2f6		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf380	172	__glMgrasSet	dwarf+dynsym	53e1ef78d9cb		in	named-only	docs/routines/t2-gr4-r4-b002.md#routine-roles-tier-2-reading-batch-2-of-gr4	Routine roles, tier-2 reading batch 2 of gr4
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf42c	36	__glMgrSaveTexmode	dwarf+dynsym	0f3ffdf265fb		in	named-only	HQ3.h:1221	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf450	20	__glMgrRestoreTexmode	dwarf+dynsym	b2a94311343e		in	named-only	HQ3.h:1222	
@@ -5481,7 +5481,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac1544	2148	mgrTM_DoCo
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac1da8	452	__glMgrInitHostToTE	dwarf+dynsym	6ca1fcce2701		in	named-only	libglcore/include/glcore_prots.h:637	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac1f6c	1260	mgrTM_SR_TexLoad	dwarf+dynsym	cd5b94039144		in	named-only	docs/routines/t1-gr4-b000.md#restoredata-in-usrgfxarchip28gr432libglcoreso-at-0xdabda38	`RestoreData` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdabda38
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac2458	1148	mgrTM_SR_TexRead	dwarf+dynsym	0ca3fd0ce89a		in	located	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac28d8	948	__glMgrInitColorTableState	dwarf+dynsym	2b99c7aa2ef9		in	named-only	libglcore/include/glcore_prots.h:640	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac28d8	948	__glMgrInitColorTableState	dwarf+dynsym	2b99c7aa2ef9		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac2c8c	184	__glMgrFreeColorTableState	dwarf+dynsym	065a2bea4353		in	named-only	libglcore/include/glcore_prots.h:641	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac2d44	164	__glMgrGetTable	dwarf+dynsym	7277670893cf		in	named-only	libglcore/include/glcore_prots.h:642	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdac2de8	364	__glMgrScaleBiasClampTable	dwarf+funcnames	06d8ef5006ab		in	named-only	libglcore/include/glcore_prots.h:643	
@@ -5551,7 +5551,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdada880	60	__glMgrGetVi
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdada8bc	60	__glMgrGetDrawVisualInfo	dwarf+dynsym	834b3d04f468		in	named-only	libglcore/include/glcore_prots.h:707	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdada8f8	464	__glMgrInitPixelStateCRAM	dwarf+dynsym	425e11a7e0d0		in	named-only	libglcore/include/glcore_prots.h:708	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadaac8	480	__glMgrInitPixelStateERAM	dwarf+dynsym	828474316e03		in	named-only	docs/TRAM_CORRUPTION_ANALYSIS.md#bug-4-blind-dma-streaming-in-mgrtm_dotexload	Bug 4: Blind DMA Streaming in `mgrTM_DoTexLoad`
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadaca8	628	__glMgrInitConvolutionState	dwarf+dynsym	3289f71f847d		in	named-only	libglcore/include/glcore_prots.h:710	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadaca8	628	__glMgrInitConvolutionState	dwarf+dynsym	3289f71f847d		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadaf1c	156	__glMgrFreeConvolutionState	dwarf+dynsym	03b44dc762d0		in	named-only	libglcore/include/glcore_prots.h:711	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdadafb8	76	__glMgrGetFilter	dwarf+funcnames	21317e4cfeb5		in	named-only	libglcore/include/glcore_prots.h:712	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdadb004	524	__glMgrScaleBiasFilter	dwarf+funcnames	8a41068e52e5		in	named-only	libglcore/include/glcore_prots.h:713	
@@ -5582,7 +5582,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade4d0	48	__glMgrWaitF
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade500	376	__glMgr_WriteDMAHQSetup	dwarf+dynsym	6f4047460b39		in	named-only	docs/routines/t2-gr4-r4-b003.md#routine-roles-tier-2-reading-batch-3	Routine roles, tier-2 reading batch 3
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade678	612	__glMgr_WriteMultiDMAHQSetup	dwarf+dynsym	9493d7378786		in	named-only	libglcore/include/glcore_prots.h:739	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade8dc	108	__glMgr_WriteDMAGESetup	dwarf+dynsym	62b3330ba227		in	named-only	docs/routines/t2-gr4-r4-b003.md#routine-roles-tier-2-reading-batch-3	Routine roles, tier-2 reading batch 3
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade948	80	__glMgrWaitForDMARead	dwarf+dynsym	dd276e11aca2		in	named-only	docs/routines/t1-gr4-b000.md#mgrtm_dotexread-in-usrgfxarchip28gr432libglcoreso-at-0xdac0444	`mgrTM_DoTexRead` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdac0444
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade948	80	__glMgrWaitForDMARead	dwarf+dynsym	dd276e11aca2		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade998	580	__glMgr_ReadDMAHQSetup	dwarf+dynsym	df0d65723183		in	named-only	docs/routines/t2-gr4-r4-b003.md#routine-roles-tier-2-reading-batch-3	Routine roles, tier-2 reading batch 3
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadebdc	4112	PackLuminanceData	dwarf+dynsym	c536e5a41c51		in	named-only	libglcore/include/glcore_prots.h:743	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadfbec	828	PackFloatData	dwarf+dynsym	c606ddd42739		in	named-only	libglcore/include/glcore_prots.h:744	
@@ -5602,8 +5602,8 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae32a8	1524	GetPi
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae389c	680	__glMgrRE4DMARd	dwarf+dynsym	f57f8594ac3c		in	named-only	libglcore/include/glcore_prots.h:758	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae3b44	968	__glMgrRE4PIORd	dwarf+dynsym	9781d17bc337		in	named-only	libglcore/include/glcore_prots.h:759	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae3f0c	540	__glMgr_AltWriteDMAHQSetup	dwarf+dynsym	6f9a14e368ba		in	named-only	HQ3.h:1267	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae4134	40	__glMgrSaveRSS	dwarf+dynsym	92d65392d231		in	named-only	docs/routines/t1-gr4-b000.md#mgrtm_dotexread-in-usrgfxarchip28gr432libglcoreso-at-0xdac0444	`mgrTM_DoTexRead` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdac0444
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae415c	20	__glMgrRestoreRSS	dwarf+dynsym	70a6f3a0b3e2		in	named-only	docs/routines/t1-gr4-b000.md#mgrtm_dotexread-in-usrgfxarchip28gr432libglcoreso-at-0xdac0444	`mgrTM_DoTexRead` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdac0444
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae4134	40	__glMgrSaveRSS	dwarf+dynsym	92d65392d231		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae415c	20	__glMgrRestoreRSS	dwarf+dynsym	70a6f3a0b3e2		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae4170	164	__glMgrFlushImageRegs	dwarf+dynsym	239c5bba742e		in	named-only	HQ3.h:1080	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae4214	224	__glMgrRSSRegShadow	dwarf+dynsym	e332274505b7		in	named-only	HQ3.h:1083	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae42f4	168	__glMgrRSSRegSet	dwarf+dynsym	f0ba0f951db8		in	named-only	libglcore/include/glcore_prots.h:765	
@@ -5717,7 +5717,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf24f4	280	__glMgrim_S
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf260c	264	__glMgrim_SoftRasterPos4fv	dwarf+dynsym	06dd9fd91727		in	named-only	libglcore/include/glcore_prots.h:873	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf2714	308	__glMgrim_SoftRasterPos4iv	dwarf+dynsym	c99b1488c640		in	named-only	libglcore/include/glcore_prots.h:874	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf2848	308	__glMgrim_SoftRasterPos4sv	dwarf+dynsym	a240004ba61b		in	named-only	libglcore/include/glcore_prots.h:875	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf297c	392	__glMgrInitPixels	dwarf+dynsym	93e40a51b626		in	named-only	libglcore/include/glcore_prots.h:876	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf297c	392	__glMgrInitPixels	dwarf+dynsym	93e40a51b626		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf2b04	124	__glMgrFreePixelState	dwarf+dynsym	cb60f371bb52		in	named-only	libglcore/include/glcore_prots.h:877	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf2b80	508	__glMgrMakePages	dwarf+dynsym	808d97822405		in	named-only	libglcore/include/glcore_prots.h:878	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf2d7c	264	__glMgrMakeFastPathTiles	dwarf+dynsym	4fd7bc1bf7aa		in	named-only	libglcore/include/glcore_prots.h:879	
@@ -10602,7 +10602,7 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3669dc	68	miRegionUninit	d
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e366a20	88	miRegionDestroy	dynsym	90abf3733752		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e366a78	76	nfbCursorLimits	dynsym	00ae1c0b52eb		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e366ac4	556	nfbPaintWindowBackground	dynsym	af566bd9a440		in	named-only	docs/inventory/functions.tsv	
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e366cf8	296	vc3LoadSRAM	dynsym	02259faa7964		in	named-only	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e366cf8	296	vc3LoadSRAM	dynsym	02259faa7964		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e366e20	1936	vc3Init	dynsym	f7901b090ab7		in	located	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e36772c	5524	vc3LoadDIDTable	dynsym	be1227721e87		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e368cc0	2452	cfb8SegmentSS1RectCopy	dynsym	9aed4b39f956		in	named-only	docs/inventory/functions.tsv	
@@ -10820,7 +10820,7 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3de520	184	mgrasLstVideoFm
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3de5d8	784	mgrasLstFmtInComb	dynsym	b5df400d0434		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3de8e8	4768	mgrasLdComb	dynsym	660e8a7309ea		in	understood	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3dfb88	8	mgrasDisableChannelProc	dynsym	ed574f828284		in	named-only	docs/inventory/functions.tsv	
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3dfb90	1604	mgrasLoadAndInitICO	dynsym	77dbf44d9082		in	named-only	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3dfb90	1604	mgrasLoadAndInitICO	dynsym	77dbf44d9082		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e0f44	7172	mgrasAttachXvc	dynsym	b55f81352a79		in	located	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e2b48	408	mgrasInitRootWindow	dynsym	f06e450fac89		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e2ce0	476	mgrasCheckCorona	dynsym	fdfd064eaa41		in	named-only	docs/inventory/functions.tsv	
@@ -10833,8 +10833,8 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e47e8	2220	nfbInitRootWin
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e5240	112	SDBgetSymbolDataAddress	dynsym	9419009682ba		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e52b0	76	SDBgetSymbolDatatype	dynsym	e8ca9d3fda90		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e52fc	76	SDBgetSymbolElementCount	dynsym	133b1f1a10fb		in	named-only	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e5348	56	SDBgetSymbolValueArray	dynsym	32bb046342fc		in	named-only	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e5380	56	SDBgetSymbolValueScalar	dynsym	3d175c7379fc		in	named-only	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e5348	56	SDBgetSymbolValueArray	dynsym	32bb046342fc		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e5380	56	SDBgetSymbolValueScalar	dynsym	3d175c7379fc		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e53b8	208	SDBcloseReadDatabase	dynsym	0adbf143af1c		in	named-only	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e5488	516	SDBreadOpenDatabase	dynsym	72dc8f08290b		in	named-only	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3e56e0	428	SDBprocessOneUserMethod	dynsym	47c57c3d97d4		in	named-only	docs/inventory/functions.tsv	
