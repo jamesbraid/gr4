@@ -98,14 +98,40 @@
 /* line_error_octant: w32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_LINE_ERROR_OCTANT_OFFSET                  0xe044u /* inferred */
 
-/* instr_alias: w32, space re4_regs, reset unknown; driver and traffic readings */
+/*
+ * The public driver writes 0x18 here with the execute mark to start a rectangle
+ * fill or to arm a glyph rectangle, which is the block primitive above. Software
+ * expectation; what the board does with the alias is not decoded here.
+ */
+/* instr_alias: w32, space re4_regs, reset unknown; OpenBSD impact(4) driver register header */
 #define RE_INSTR_ALIAS_OFFSET                        0xe045u /* established */
 
-/* block_xy_start: w32, space re4_regs, reset unknown; driver and traffic readings */
+/*
+ * Start corner of a 2D block as the public driver packs it: x in bits 31:16 and
+ * y in bits 15:0. Software expectation.
+ */
+/* block_xy_start: w32, space re4_regs, reset unknown; OpenBSD impact(4) driver register header */
 #define RE_BLOCK_XY_START_OFFSET                     0xe046u /* inferred */
+#define RE_BLOCK_XY_START_X_SHIFT                    16 /* inferred */
+#define RE_BLOCK_XY_START_X_MASK                     0xffffu
+#define RE_BLOCK_XY_START_X_INPLACE                  (RE_BLOCK_XY_START_X_MASK << RE_BLOCK_XY_START_X_SHIFT)
+#define RE_BLOCK_XY_START_Y_SHIFT                    0 /* inferred */
+#define RE_BLOCK_XY_START_Y_MASK                     0xffffu
+#define RE_BLOCK_XY_START_Y_INPLACE                  (RE_BLOCK_XY_START_Y_MASK << RE_BLOCK_XY_START_Y_SHIFT)
 
-/* block_xy_end: w32, space re4_regs, reset unknown; driver and traffic readings */
+/*
+ * Inclusive end corner of a 2D block, x in bits 31:16 and y in bits 15:0. The
+ * public driver sends the last column and row the block covers, so a block of
+ * width w ends at x + w - 1. Software expectation.
+ */
+/* block_xy_end: w32, space re4_regs, reset unknown; OpenBSD impact(4) driver register header */
 #define RE_BLOCK_XY_END_OFFSET                       0xe047u /* inferred */
+#define RE_BLOCK_XY_END_X_SHIFT                      16 /* inferred */
+#define RE_BLOCK_XY_END_X_MASK                       0xffffu
+#define RE_BLOCK_XY_END_X_INPLACE                    (RE_BLOCK_XY_END_X_MASK << RE_BLOCK_XY_END_X_SHIFT)
+#define RE_BLOCK_XY_END_Y_SHIFT                      0 /* inferred */
+#define RE_BLOCK_XY_END_Y_MASK                       0xffffu
+#define RE_BLOCK_XY_END_Y_INPLACE                    (RE_BLOCK_XY_END_Y_MASK << RE_BLOCK_XY_END_Y_SHIFT)
 
 /* block_xy_move: w32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_BLOCK_XY_MOVE_OFFSET                      0xe048u /* inferred */
@@ -113,8 +139,21 @@
 /* block_saved_octant: w32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_BLOCK_SAVED_OCTANT_OFFSET                 0xe049u /* inferred */
 
-/* color_packed: w32, space re4_regs, reset unknown; driver and traffic readings */
+/*
+ * Packed colour the public driver uses for rectangle fills and glyph foreground.
+ * Software expectation.
+ */
+/* color_packed: w32, space re4_regs, reset unknown; OpenBSD impact(4) driver register header */
 #define RE_COLOR_PACKED_OFFSET                       0xe05bu /* inferred */
+#define RE_COLOR_PACKED_BLUE_SHIFT                   16 /* inferred */
+#define RE_COLOR_PACKED_BLUE_MASK                    0xffu
+#define RE_COLOR_PACKED_BLUE_INPLACE                 (RE_COLOR_PACKED_BLUE_MASK << RE_COLOR_PACKED_BLUE_SHIFT)
+#define RE_COLOR_PACKED_GREEN_SHIFT                  8 /* inferred */
+#define RE_COLOR_PACKED_GREEN_MASK                   0xffu
+#define RE_COLOR_PACKED_GREEN_INPLACE                (RE_COLOR_PACKED_GREEN_MASK << RE_COLOR_PACKED_GREEN_SHIFT)
+#define RE_COLOR_PACKED_RED_SHIFT                    0 /* inferred */
+#define RE_COLOR_PACKED_RED_MASK                     0xffu
+#define RE_COLOR_PACKED_RED_INPLACE                  (RE_COLOR_PACKED_RED_MASK << RE_COLOR_PACKED_RED_SHIFT)
 
 /* color_red: w32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_COLOR_RED_OFFSET                          0xe05cu /* inferred */
@@ -170,10 +209,24 @@
 /* depth_edge_lo: w32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_DEPTH_EDGE_LO_OFFSET                      0xe06du /* inferred */
 
-/* glyph_hi: w32, space re4_regs, reset unknown; driver and traffic readings */
+/*
+ * Glyph row data for console bitmaps. For widths one through eight the driver
+ * arms one rectangle and executes this register once per row, with the row byte
+ * in bits 31:24. For widths nine through sixteen it stages the 16-bit row shifted
+ * left 16 bits without executing, so the row's leftmost eight columns sit in bits
+ * 31:24. Software expectation; the column order and the one-row advance per
+ * execute are inferred from the driver loop.
+ */
+/* glyph_hi: w32, space re4_regs, reset unknown; OpenBSD impact(4) driver register header */
 #define RE_GLYPH_HI_OFFSET                           0xe070u /* inferred */
 
-/* glyph_lo: w32, space re4_regs, reset unknown; driver and traffic readings */
+/*
+ * Second glyph word. For widths nine through sixteen the driver writes the row
+ * shifted left 24 bits here and executes it to draw that one row, so the top byte
+ * carries columns eight through fifteen. Software expectation; the column mapping
+ * is inferred from the driver's packing.
+ */
+/* glyph_lo: w32, space re4_regs, reset unknown; OpenBSD impact(4) driver register header */
 #define RE_GLYPH_LO_OFFSET                           0xe071u /* inferred */
 
 /* xfer_abort: w32, space re4_regs, reset unknown; driver and traffic readings */
@@ -476,7 +529,7 @@
 
 /*
  * Pixel-processor fill mode, written through the normal command FIFO under its own
- * selector. The public driver writes one value for a copy fill and another for an
+ * selector. The public driver writes 0x0c006300 for a copy fill and 0x18006304 for an
  * XOR fill, each before the fill's execute. The bits those values set are not
  * decoded here.
  */

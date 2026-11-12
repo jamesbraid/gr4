@@ -17,6 +17,7 @@ opening heading or first sentence.
 - [docs/mgras-hq4.md](docs/mgras-hq4.md): The HQ4 host interface as the IRIX software drives it: the interrupt block and sources, the context-switch handshake, the swap command, the status waits, the FIFO thresholds and the Octane page-list layout, with grades and open questions.
 - [docs/mgras-two-re.md](docs/mgras-two-re.md): How the two-raster-engine boards split the screen, select a pixel processor and reach their two geometry engines, with grades and open questions.
 - [docs/mgras-visual-buffers.md](docs/mgras-visual-buffers.md): The published Octane frame buffer building blocks, the 1280 by 1024 visuals per model and the stereo modes.
+- [docs/re4-2d-transactions.md](docs/re4-2d-transactions.md): The write sequences the public OpenBSD driver uses for RE4 rectangle fills and console glyph rows, with grades and open questions.
 - [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md): Ledger of header unknowns and what shipped software settles.
 - [docs/ge11-program-format.md](docs/ge11-program-format.md): What the shipped GE11 microcode images show about the 72-bit instruction word, with grades and the conflicts with GE11.h.
 - [docs/TRAM_CORRUPTION_ANALYSIS.md](docs/TRAM_CORRUPTION_ANALYSIS.md): TRAM page desynchronization and texture corruption analysis for libGLcore.

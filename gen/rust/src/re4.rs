@@ -187,20 +187,60 @@ pub mod line_error_octant {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe044;
 }
-/// (established)
+/// The public driver writes 0x18 here with the execute mark to start a rectangle fill or to arm a glyph rectangle, which is the block primitive above. So (established)
 pub mod instr_alias {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe045;
 }
-/// (inferred)
+/// Start corner of a 2D block as the public driver packs it: x in bits 31:16 and y in bits 15:0. Software expectation. (inferred)
 pub mod block_xy_start {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe046;
+    pub mod x { // bits 31:16, inferred
+        pub const SHIFT: u32 = 16;
+        pub const MASK: u32 = 0xffff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod y { // bits 15:0, inferred
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0xffff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
 }
-/// (inferred)
+/// Inclusive end corner of a 2D block, x in bits 31:16 and y in bits 15:0. The public driver sends the last column and row the block covers, so a block o (inferred)
 pub mod block_xy_end {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe047;
+    pub mod x { // bits 31:16, inferred
+        pub const SHIFT: u32 = 16;
+        pub const MASK: u32 = 0xffff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod y { // bits 15:0, inferred
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0xffff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
 }
 /// (inferred)
 pub mod block_xy_move {
@@ -212,10 +252,40 @@ pub mod block_saved_octant {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe049;
 }
-/// (inferred)
+/// Packed colour the public driver uses for rectangle fills and glyph foreground. Software expectation. (inferred)
 pub mod color_packed {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe05b;
+    pub mod blue { // bits 23:16, inferred
+        pub const SHIFT: u32 = 16;
+        pub const MASK: u32 = 0xff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod green { // bits 15:8, inferred
+        pub const SHIFT: u32 = 8;
+        pub const MASK: u32 = 0xff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod red { // bits 7:0, inferred
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0xff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
 }
 /// (inferred)
 pub mod color_red {
@@ -307,12 +377,12 @@ pub mod depth_edge_lo {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe06d;
 }
-/// (inferred)
+/// Glyph row data for console bitmaps. For widths one through eight the driver arms one rectangle and executes this register once per row, with the row b (inferred)
 pub mod glyph_hi {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe070;
 }
-/// (inferred)
+/// Second glyph word. For widths nine through sixteen the driver writes the row shifted left 24 bits here and executes it to draw that one row, so the to (inferred)
 pub mod glyph_lo {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe071;
@@ -1062,7 +1132,7 @@ pub mod toggle_context {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe15f;
 }
-/// Pixel-processor fill mode, written through the normal command FIFO under its own selector. The public driver writes one value for a copy fill and anot (inferred)
+/// Pixel-processor fill mode, written through the normal command FIFO under its own selector. The public driver writes 0x0c006300 for a copy fill and 0x1 (inferred)
 pub mod pp1_fill_mode {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe161;

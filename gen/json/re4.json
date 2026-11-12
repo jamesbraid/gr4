@@ -431,7 +431,7 @@
    "space": "re4_regs",
    "reset": "unknown",
    "grade": "established",
-   "from": "driver and traffic readings"
+   "from": "OpenBSD impact(4) driver register header"
   },
   {
    "unit": "re4",
@@ -445,7 +445,25 @@
    "space": "re4_regs",
    "reset": "unknown",
    "grade": "inferred",
-   "from": "driver and traffic readings"
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "re4",
+   "kind": "field",
+   "name": "block_xy_start.x",
+   "hi": 31,
+   "lo": 16,
+   "grade": "inferred",
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "re4",
+   "kind": "field",
+   "name": "block_xy_start.y",
+   "hi": 15,
+   "lo": 0,
+   "grade": "inferred",
+   "from": "OpenBSD impact(4) driver register header"
   },
   {
    "unit": "re4",
@@ -459,7 +477,25 @@
    "space": "re4_regs",
    "reset": "unknown",
    "grade": "inferred",
-   "from": "driver and traffic readings"
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "re4",
+   "kind": "field",
+   "name": "block_xy_end.x",
+   "hi": 31,
+   "lo": 16,
+   "grade": "inferred",
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "re4",
+   "kind": "field",
+   "name": "block_xy_end.y",
+   "hi": 15,
+   "lo": 0,
+   "grade": "inferred",
+   "from": "OpenBSD impact(4) driver register header"
   },
   {
    "unit": "re4",
@@ -501,7 +537,34 @@
    "space": "re4_regs",
    "reset": "unknown",
    "grade": "inferred",
-   "from": "driver and traffic readings"
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "re4",
+   "kind": "field",
+   "name": "color_packed.blue",
+   "hi": 23,
+   "lo": 16,
+   "grade": "inferred",
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "re4",
+   "kind": "field",
+   "name": "color_packed.green",
+   "hi": 15,
+   "lo": 8,
+   "grade": "inferred",
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "re4",
+   "kind": "field",
+   "name": "color_packed.red",
+   "hi": 7,
+   "lo": 0,
+   "grade": "inferred",
+   "from": "OpenBSD impact(4) driver register header"
   },
   {
    "unit": "re4",
@@ -767,7 +830,7 @@
    "space": "re4_regs",
    "reset": "unknown",
    "grade": "inferred",
-   "from": "driver and traffic readings"
+   "from": "OpenBSD impact(4) driver register header"
   },
   {
    "unit": "re4",
@@ -781,7 +844,7 @@
    "space": "re4_regs",
    "reset": "unknown",
    "grade": "inferred",
-   "from": "driver and traffic readings"
+   "from": "OpenBSD impact(4) driver register header"
   },
   {
    "unit": "re4",

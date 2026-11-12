@@ -44,12 +44,12 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | `line_step_a` | 0xe042 | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `line_step_b` | 0xe043 | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `line_error_octant` | 0xe044 | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
-| `instr_alias` | 0xe045 | w | 32 |  | re4_regs | unknown | established | driver and traffic readings |
-| `block_xy_start` | 0xe046 | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
-| `block_xy_end` | 0xe047 | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
+| `instr_alias` | 0xe045 | w | 32 |  | re4_regs | unknown | established | OpenBSD impact(4) driver register header |
+| `block_xy_start` | 0xe046 | w | 32 |  | re4_regs | unknown | inferred | OpenBSD impact(4) driver register header |
+| `block_xy_end` | 0xe047 | w | 32 |  | re4_regs | unknown | inferred | OpenBSD impact(4) driver register header |
 | `block_xy_move` | 0xe048 | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `block_saved_octant` | 0xe049 | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
-| `color_packed` | 0xe05b | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
+| `color_packed` | 0xe05b | w | 32 |  | re4_regs | unknown | inferred | OpenBSD impact(4) driver register header |
 | `color_red` | 0xe05c | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `color_green` | 0xe05d | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `color_blue` | 0xe05e | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
@@ -68,8 +68,8 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | `depth_span_lo` | 0xe06b | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `depth_edge_hi` | 0xe06c | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `depth_edge_lo` | 0xe06d | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
-| `glyph_hi` | 0xe070 | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
-| `glyph_lo` | 0xe071 | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
+| `glyph_hi` | 0xe070 | w | 32 |  | re4_regs | unknown | inferred | OpenBSD impact(4) driver register header |
+| `glyph_lo` | 0xe071 | w | 32 |  | re4_regs | unknown | inferred | OpenBSD impact(4) driver register header |
 | `xfer_abort` | 0xe100 | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `xfer_control` | 0xe102 | rw | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `fill_mode` | 0xe110 | rw | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
@@ -170,15 +170,45 @@ register for the 2D primitives.
 
 ### Register `instr_alias`
 
+The public driver writes 0x18 here with the execute mark to start a rectangle
+fill or to arm a glyph rectangle, which is the block primitive above. Software
+expectation; what the board does with the alias is not decoded here.
+
 ### Register `block_xy_start`
 
+Start corner of a 2D block as the public driver packs it: x in bits 31:16 and
+y in bits 15:0. Software expectation.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 31:16 | `x` | inferred |  | OpenBSD impact(4) driver register header |  |
+| 15:0 | `y` | inferred |  | OpenBSD impact(4) driver register header |  |
+
 ### Register `block_xy_end`
+
+Inclusive end corner of a 2D block, x in bits 31:16 and y in bits 15:0. The
+public driver sends the last column and row the block covers, so a block of
+width w ends at x + w - 1. Software expectation.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 31:16 | `x` | inferred |  | OpenBSD impact(4) driver register header |  |
+| 15:0 | `y` | inferred |  | OpenBSD impact(4) driver register header |  |
 
 ### Register `block_xy_move`
 
 ### Register `block_saved_octant`
 
 ### Register `color_packed`
+
+Packed colour the public driver uses for rectangle fills and glyph foreground.
+Software expectation.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 23:16 | `blue` | inferred |  | OpenBSD impact(4) driver register header |  |
+| 15:8 | `green` | inferred |  | OpenBSD impact(4) driver register header |  |
+| 7:0 | `red` | inferred |  | OpenBSD impact(4) driver register header |  |
 
 ### Register `color_red`
 
@@ -218,7 +248,19 @@ register for the 2D primitives.
 
 ### Register `glyph_hi`
 
+Glyph row data for console bitmaps. For widths one through eight the driver
+arms one rectangle and executes this register once per row, with the row byte
+in bits 31:24. For widths nine through sixteen it stages the 16-bit row shifted
+left 16 bits without executing, so the row's leftmost eight columns sit in bits
+31:24. Software expectation; the column order and the one-row advance per
+execute are inferred from the driver loop.
+
 ### Register `glyph_lo`
+
+Second glyph word. For widths nine through sixteen the driver writes the row
+shifted left 24 bits here and executes it to draw that one row, so the top byte
+carries columns eight through fifteen. Software expectation; the column mapping
+is inferred from the driver's packing.
 
 ### Register `xfer_abort`
 
@@ -398,7 +440,7 @@ bits 17, 18 and 21. Bit 21 is never written by software examined.
 ### Register `pp1_fill_mode`
 
 Pixel-processor fill mode, written through the normal command FIFO under its own
-selector. The public driver writes one value for a copy fill and another for an
+selector. The public driver writes 0x0c006300 for a copy fill and 0x18006304 for an
 XOR fill, each before the fill's execute. The bits those values set are not
 decoded here.
 
@@ -416,6 +458,7 @@ A vector is a value recorded from a source. An example only shows the layout.
 |---|---|---|---|
 | `instr` | 0x15 | vector | opcode=5, setup=1 |
 | `instr` | 0x18 | vector | opcode=8, setup=1 |
+| `fill_mode` | 0x400018 | example | glyph_opaque=1, glyph_stipple=1, block_type=1 |
 | `fill_mode` | 0x418008 | vector | glyph_stipple=1, block_type=1 |
 | `xfer_mode` | 0x40080 | vector | comp_type=0, format=8, flag18=1, stride_skip_bytes=0 |
 | `xfer_mode` | 0xc00080 | vector | comp_type=0, format=8, begin_skip_bytes=0, stride_skip_bytes=0, flag18=0, rgb_order=1, opaque=1 |
