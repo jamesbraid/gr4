@@ -994,6 +994,7 @@ pub const INIT_INTR_ENABLE: u32 = 0x4400e200; // established
 pub const TLB_ENTRIES: u32 = 0x20; // established
 pub const TLB_PAGE_SHIFT: u32 = 0xc; // established
 pub const TOKEN_CLIENT_GE_DMA_SETUP: u32 = 0x9d; // established
+pub const TOKEN_CLIENT_POLYGON_STIPPLE_LOAD: u32 = 0x4e; // inferred
 pub const TOKEN_READBACK_BEGIN: u32 = 0x96; // established
 pub const TOKEN_READBACK_END: u32 = 0x97; // established
 pub const TOKEN_SECOND_TEXMODE: u32 = 0x5f; // established

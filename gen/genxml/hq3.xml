@@ -313,6 +313,7 @@ own context at creation).</doc>
   <constant name="TLB_ENTRIES" value="0x20" grade="established"/>
   <constant name="TLB_PAGE_SHIFT" value="0xc" grade="established"/>
   <constant name="TOKEN_CLIENT_GE_DMA_SETUP" value="0x9d" grade="established"/>
+  <constant name="TOKEN_CLIENT_POLYGON_STIPPLE_LOAD" value="0x4e" grade="inferred"/>
   <constant name="TOKEN_READBACK_BEGIN" value="0x96" grade="established"/>
   <constant name="TOKEN_READBACK_END" value="0x97" grade="established"/>
   <constant name="TOKEN_SECOND_TEXMODE" value="0x5f" grade="established"/>

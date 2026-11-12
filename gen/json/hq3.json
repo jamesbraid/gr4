@@ -1819,6 +1819,15 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "TOKEN_CLIENT_POLYGON_STIPPLE_LOAD",
+   "value": 78,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "TOKEN_READBACK_BEGIN",
    "value": 150,
    "count": 1,

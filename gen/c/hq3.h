@@ -441,6 +441,7 @@
 #define HQ_TLB_ENTRIES                               0x20u /* established */
 #define HQ_TLB_PAGE_SHIFT                            0xcu /* established */
 #define HQ_TOKEN_CLIENT_GE_DMA_SETUP                 0x9du /* established */
+#define HQ_TOKEN_CLIENT_POLYGON_STIPPLE_LOAD         0x4eu /* inferred */
 #define HQ_TOKEN_READBACK_BEGIN                      0x96u /* established */
 #define HQ_TOKEN_READBACK_END                        0x97u /* established */
 #define HQ_TOKEN_SECOND_TEXMODE                      0x5fu /* established */

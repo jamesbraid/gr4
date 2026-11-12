@@ -170,6 +170,7 @@ the row says otherwise.
 | clip plane enable, disable | `0x0000a604`, `0x0000a704` with the enumerant |
 | `glLineWidth`, `glPointSize` | `0x00004504`, `0x00004d04`, then a float |
 | `glLineStipple` | `0x00004608`, factor less one, and the 16-bit pattern reversed |
+| `glPolygonStipple` upload | `0x00004e80` and 32 words, one per row of the pattern (128 bytes); the client's `__glMgrLoadPolygonStippleRAM`, sent at instruction addresses `0xd96d9b0` to `0xd96d9ec` of the client library listed above |
 | `glPolygonMode` | `0x0000a808` and the two enumerants |
 | `glMapGrid1f`, `glMapGrid2f`, `glClearAccum` | `0x0000ae10`, `0x0000af20`, `0x0000bb10` |
 | `glClearColor` | `0x0000ba10` and four floats |
@@ -426,3 +427,6 @@ Facts below come from the kernel listing.
   source.
 - The third word of the polygon-offset header (1.0 or 1.1): its effect on the
   board's bias or units.
+- Whether client revisions other than the IP27GR532 build listed above send the
+  same `0x4e80` polygon-stipple upload. The listing shows what that build sends,
+  not what the board does with the 32 words.

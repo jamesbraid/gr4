@@ -559,6 +559,7 @@ INIT_INTR_ENABLE = { value = 0x4400e200, grade = "established" }
 TLB_ENTRIES = { value = 0x20, grade = "established" }
 TLB_PAGE_SHIFT = { value = 0xc, grade = "established" }
 TOKEN_CLIENT_GE_DMA_SETUP = { value = 0x9d, grade = "established", doc = "client's geometry-engine DMA set-up: header 0x00009d10 followed by four payload words; see docs/mgras-gl-commands.md" }
+TOKEN_CLIENT_POLYGON_STIPPLE_LOAD = { value = 0x4e, grade = "inferred", doc = "client's polygon stipple upload: header 0x00004e80 followed by 32 words, 128 bytes; see docs/mgras-gl-commands.md" }
 TOKEN_READBACK_BEGIN = { value = 0x96, grade = "established" }
 TOKEN_READBACK_END = { value = 0x97, grade = "established" }
 TOKEN_SECOND_TEXMODE = { value = 0x5f, grade = "established", doc = "operand, meaning inferred" }

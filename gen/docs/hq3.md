@@ -360,6 +360,7 @@ own context at creation).
 | `TLB_ENTRIES` | 0x20 | established | driver and diagnostic readings |  |
 | `TLB_PAGE_SHIFT` | 0xc | established | driver and diagnostic readings |  |
 | `TOKEN_CLIENT_GE_DMA_SETUP` | 0x9d | established | driver and diagnostic readings | client's geometry-engine DMA set-up: header 0x00009d10 followed by four payload words; see docs/mgras-gl-commands.md |
+| `TOKEN_CLIENT_POLYGON_STIPPLE_LOAD` | 0x4e | inferred | driver and diagnostic readings | client's polygon stipple upload: header 0x00004e80 followed by 32 words, 128 bytes; see docs/mgras-gl-commands.md |
 | `TOKEN_READBACK_BEGIN` | 0x96 | established | driver and diagnostic readings |  |
 | `TOKEN_READBACK_END` | 0x97 | established | driver and diagnostic readings |  |
 | `TOKEN_SECOND_TEXMODE` | 0x5f | established | driver and diagnostic readings | operand, meaning inferred |
