@@ -610,6 +610,16 @@ pub mod fill_mode {
 pub mod texmode1 {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe111;
+    pub mod depth_term { // bits 18:16, established
+        pub const SHIFT: u32 = 16;
+        pub const MASK: u32 = 0x7;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
     pub mod colour_table { // bits 15:12, inferred
         pub const SHIFT: u32 = 12;
         pub const MASK: u32 = 0xf;
@@ -619,25 +629,193 @@ pub mod texmode1 {
         pub const fn set(v: u32, x: u32) -> u32 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
+        pub const NONE: u32 = 0; // established
+        pub const ALPHA: u32 = 1; // established
+        pub const INTENSITY_OR_LUMINANCE_ALPHA: u32 = 9; // established
         pub const RGB_LOOKUP: u32 = 14; // inferred
         #[derive(Debug, Clone, Copy, PartialEq, Eq)]
         pub enum Value {
+            None,
+            Alpha,
+            IntensityOrLuminanceAlpha,
             RgbLookup,
             Other(u32),
         }
         impl Value {
             pub const fn from_raw(v: u32) -> Self {
                 match v {
+                    0 => Self::None,
+                    1 => Self::Alpha,
+                    9 => Self::IntensityOrLuminanceAlpha,
                     14 => Self::RgbLookup,
                     _ => Self::Other(v),
                 }
             }
             pub const fn raw(self) -> u32 {
                 match self {
+                    Self::None => 0,
+                    Self::Alpha => 1,
+                    Self::IntensityOrLuminanceAlpha => 9,
                     Self::RgbLookup => 14,
                     Self::Other(v) => v,
                 }
             }
+        }
+    }
+    pub mod texel_class { // bits 11:9, established
+        pub const SHIFT: u32 = 9;
+        pub const MASK: u32 = 0x7;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+        pub const ALPHA: u32 = 1; // established
+        pub const LUMINANCE: u32 = 2; // established
+        pub const INTENSITY: u32 = 3; // established
+        pub const COLOUR: u32 = 4; // established
+        #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+        pub enum Value {
+            Alpha,
+            Luminance,
+            Intensity,
+            Colour,
+            Other(u32),
+        }
+        impl Value {
+            pub const fn from_raw(v: u32) -> Self {
+                match v {
+                    1 => Self::Alpha,
+                    2 => Self::Luminance,
+                    3 => Self::Intensity,
+                    4 => Self::Colour,
+                    _ => Self::Other(v),
+                }
+            }
+            pub const fn raw(self) -> u32 {
+                match self {
+                    Self::Alpha => 1,
+                    Self::Luminance => 2,
+                    Self::Intensity => 3,
+                    Self::Colour => 4,
+                    Self::Other(v) => v,
+                }
+            }
+        }
+    }
+    pub mod tram_select { // bits 8:7, inferred
+        pub const SHIFT: u32 = 7;
+        pub const MASK: u32 = 0x3;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod tram_size_code { // bits 6:5, established
+        pub const SHIFT: u32 = 5;
+        pub const MASK: u32 = 0x3;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod layout { // bits 4:3, established
+        pub const SHIFT: u32 = 3;
+        pub const MASK: u32 = 0x3;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+        pub const ONE_COMPONENT: u32 = 0; // established
+        pub const TWO_COMPONENT: u32 = 1; // established
+        pub const RGB: u32 = 2; // established
+        pub const RGBA: u32 = 3; // established
+        #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+        pub enum Value {
+            OneComponent,
+            TwoComponent,
+            Rgb,
+            Rgba,
+            Other(u32),
+        }
+        impl Value {
+            pub const fn from_raw(v: u32) -> Self {
+                match v {
+                    0 => Self::OneComponent,
+                    1 => Self::TwoComponent,
+                    2 => Self::Rgb,
+                    3 => Self::Rgba,
+                    _ => Self::Other(v),
+                }
+            }
+            pub const fn raw(self) -> u32 {
+                match self {
+                    Self::OneComponent => 0,
+                    Self::TwoComponent => 1,
+                    Self::Rgb => 2,
+                    Self::Rgba => 3,
+                    Self::Other(v) => v,
+                }
+            }
+        }
+    }
+    pub mod environment { // bits 2:1, established
+        pub const SHIFT: u32 = 1;
+        pub const MASK: u32 = 0x3;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+        pub const MODULATE: u32 = 0; // established
+        pub const DECAL: u32 = 1; // established
+        pub const BLEND: u32 = 2; // established
+        pub const ALPHA_ONLY: u32 = 3; // inferred
+        #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+        pub enum Value {
+            Modulate,
+            Decal,
+            Blend,
+            AlphaOnly,
+            Other(u32),
+        }
+        impl Value {
+            pub const fn from_raw(v: u32) -> Self {
+                match v {
+                    0 => Self::Modulate,
+                    1 => Self::Decal,
+                    2 => Self::Blend,
+                    3 => Self::AlphaOnly,
+                    _ => Self::Other(v),
+                }
+            }
+            pub const fn raw(self) -> u32 {
+                match self {
+                    Self::Modulate => 0,
+                    Self::Decal => 1,
+                    Self::Blend => 2,
+                    Self::AlphaOnly => 3,
+                    Self::Other(v) => v,
+                }
+            }
+        }
+    }
+    pub mod texture_enable { // bits 0:0, established
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0x1;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
 }

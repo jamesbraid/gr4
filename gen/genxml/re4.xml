@@ -24,7 +24,28 @@
     <value name="dma_write" value="5" grade="inferred"/>
   </enum>
   <enum name="texmode1_colour_table">
+    <value name="none" value="0" grade="established"/>
+    <value name="alpha" value="1" grade="established"/>
+    <value name="intensity_or_luminance_alpha" value="9" grade="established"/>
     <value name="rgb_lookup" value="14" grade="inferred"/>
+  </enum>
+  <enum name="texmode1_texel_class">
+    <value name="alpha" value="1" grade="established"/>
+    <value name="luminance" value="2" grade="established"/>
+    <value name="intensity" value="3" grade="established"/>
+    <value name="colour" value="4" grade="established"/>
+  </enum>
+  <enum name="texmode1_layout">
+    <value name="one_component" value="0" grade="established"/>
+    <value name="two_component" value="1" grade="established"/>
+    <value name="rgb" value="2" grade="established"/>
+    <value name="rgba" value="3" grade="established"/>
+  </enum>
+  <enum name="texmode1_environment">
+    <value name="modulate" value="0" grade="established"/>
+    <value name="decal" value="1" grade="established"/>
+    <value name="blend" value="2" grade="established"/>
+    <value name="alpha_only" value="3" grade="inferred"/>
   </enum>
   <enum name="xfer_mode_format">
     <value name="color_index" value="0" grade="inferred"/>
@@ -212,7 +233,14 @@ antialiasing of lines and points exist but are not placed.</doc>
 colour table format. Its RGB-compatible table path then writes 0xe in that field.
 Only that value is read from the client's code; the other values of the field
 are not known.</doc>
+    <field name="depth_term" start="16" size="3" type="uint" grade="established"/>
     <field name="colour_table" start="12" size="4" type="texmode1_colour_table" grade="inferred"/>
+    <field name="texel_class" start="9" size="3" type="texmode1_texel_class" grade="established"/>
+    <field name="tram_select" start="7" size="2" type="uint" grade="inferred"/>
+    <field name="tram_size_code" start="5" size="2" type="uint" grade="established"/>
+    <field name="layout" start="3" size="2" type="texmode1_layout" grade="established"/>
+    <field name="environment" start="1" size="2" type="texmode1_environment" grade="established"/>
+    <field name="texture_enable" start="0" size="1" type="uint" grade="established"/>
   </struct>
   <struct name="CONFIG" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe112" access="rw" space="re4_regs" reset="unknown">
     <field name="line_round" start="4" size="1" type="uint" grade="inferred"/>

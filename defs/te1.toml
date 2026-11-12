@@ -1,7 +1,7 @@
 unit = "te1"
 prefix = "TE"
-title = "texture RAM revision words of the Impact graphics subsystem"
-doc = "Texture RAM revision words and loader registers of the Impact graphics subsystem."
+title = "texture engine and texture RAM registers of the Impact graphics subsystem"
+doc = "Texture engine and texture RAM registers and loader registers of the Impact graphics subsystem."
 from = "driver readings"
 public_from = ["driver readings", "diagnostic transcript"]
 
@@ -12,16 +12,284 @@ legacy_guard = "TE1_DECODE_H"
 [spaces.te1_regs]
 unit = "reg"
 
-[registers.tx_mipmap]
-offset = 0xf191
-access = "w"
+[registers.texmode2]
+offset = 0xf180
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Texture mode for the drawn texture: component depth, filters, wrap and the
+no-border flag. The diagnostic's mask is 25 bits. The field positions are the
+client's encodings, graded per field; what the board does with each field is
+inferred. Bit 16 is set on every texture the client has been seen to draw with,
+and its meaning is unknown."""
+
+[registers.texmode2.fields]
+depth_code = { bits = [3, 2], grade = "established" }
+multibuffer_hint = { bits = [4, 4], grade = "established" }
+mipmap_active = { bits = [5, 5], grade = "established" }
+min_between_levels = { bits = [6, 6], grade = "established" }
+mag_linear = { bits = [7, 7], grade = "established" }
+min_within_level = { bits = [8, 8], grade = "established" }
+s_clamp = { bits = [11, 11], grade = "established" }
+t_clamp = { bits = [12, 12], grade = "established" }
+r_clamp = { bits = [13, 13], grade = "established" }
+clamp_is_gl_clamp = { bits = [14, 14], grade = "established" }
+no_border = { bits = [16, 16], grade = "unknown" }
+mipmap_active_copy = { bits = [19, 19], grade = "established" }
+
+[registers.txsize]
+offset = 0xf181
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Log2 sizes of the base level and the detail level code. The diagnostic's mask
+is 23 bits. The client writes the width and height fields twice, in the low and
+high nibbles of each pair, with the same value."""
+
+[registers.txsize.fields]
+width_log2 = { bits = [3, 0], grade = "established" }
+height_log2 = { bits = [7, 4], grade = "established" }
+width_log2_copy = { bits = [11, 8], grade = "established" }
+height_log2_copy = { bits = [15, 12], grade = "established" }
+detail_level_code = { bits = [18, 16], grade = "established" }
+depth_log2 = { bits = [22, 19], grade = "established" }
+
+[registers.txtile]
+offset = 0xf182
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Written only by the client's texture-manager initialisation. The diagnostic's
+mask is 26 bits. Its meaning is unknown."""
+
+[registers.txlod]
+offset = 0xf183
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Level-of-detail clamp. The minimum level is sent as the level times 64, with six
+fraction bits. The diagnostic's mask is 21 bits, so bits 25 to 21 of the client's
+word are outside the mask and their meaning is unknown."""
+
+[registers.txlod.fields]
+min_lod_64ths = { bits = [25, 16], grade = "established" }
+context_bits = { bits = [15, 10], grade = "unknown" }
+last_level = { bits = [3, 0], grade = "established" }
+
+[registers.txbcolor_rg]
+offset = 0xf184
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Texture border colour, red and green, 12 bits a component, laid out like the
+environment colour."""
+
+[registers.txbcolor_rg.fields]
+red = { bits = [11, 0], grade = "established" }
+green = { bits = [23, 12], grade = "established" }
+
+[registers.txbcolor_ba]
+offset = 0xf185
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Texture border colour, blue and alpha, 12 bits a component, laid out like the
+environment colour."""
+
+[registers.txbcolor_ba.fields]
+blue = { bits = [11, 0], grade = "established" }
+alpha = { bits = [23, 12], grade = "established" }
+
+[registers.txbase]
+offset = 0xf186
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Per-context base block in texture RAM. The client does not write it. The
+kernel's base write is inferred to land here."""
+
+[registers.txbase.fields]
+base_block = { bits = [7, 0], grade = "inferred" }
+
+[registers.tram_cntrl]
+offset = 0xf187
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Texture RAM control, 20 bits in the diagnostic's mask. Its meaning is unknown."""
+
+[registers.max_pixel_rg]
+offset = 0xf188
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Maximum pixel clamp, red and green, 24 bits in the diagnostic's mask. The
+client writes it once in its texture-manager initialisation. Its meaning is
+unknown."""
+
+[registers.max_pixel_ba]
+offset = 0xf189
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Maximum pixel clamp, blue and alpha, 24 bits in the diagnostic's mask. Its
+meaning is unknown."""
+
+[registers.mddma_cntrl]
+offset = 0xf18a
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Multi-dimensional texture addressing, 29 bits in the diagnostic's mask. Used
+for volume and four-dimensional textures only. The field layout is fitted to a
+single volume load and is inferred."""
+
+[registers.mddma_cntrl.fields]
+size0_log2 = { bits = [5, 2], grade = "inferred" }
+size1_log2 = { bits = [9, 6], grade = "inferred" }
+size2_log2 = { bits = [13, 10], grade = "inferred" }
+size3_log2 = { bits = [17, 14], grade = "inferred" }
+block_pair_log2 = { bits = [25, 23], grade = "inferred" }
+depth_term = { bits = [29, 26], grade = "inferred" }
+
+[registers.texrbuffer]
+offset = 0xf18b
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Texture read buffer select, one bit. The client writes it together with the
+complement in the loader's write-buffer register. The board's use is inferred
+from the register name."""
+
+[registers.texrbuffer.fields]
+buffer = { bits = [0, 0], grade = "inferred" }
+
+[registers.txclampsize]
+offset = 0xf18c
+access = "rw"
 width = 32
 grade = "established"
 space = "te1_regs"
+doc = """
+Clamp limits in texels: the base level's width and height without a border,
+shifted left by the first level. The client computes the word as the width
+shifted left 13 bits, OR'd with the height. The height field is 13 bits wide,
+so a height of 8192 reads back as zero."""
 
-[registers.tx_mipmap.fields]
-bank = { bits = [15, 8], grade = "inferred" }
-page = { bits = [7, 0], grade = "inferred" }
+[registers.txclampsize.fields]
+clamp_height = { bits = [12, 0], grade = "established" }
+clamp_width = { bits = [25, 13], grade = "established" }
+
+[registers.te_reset]
+offset = 0xf18e
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Texture engine soft-reset strobe, 3 bits in the diagnostic's mask. The client
+does not write it."""
+
+[registers.txaddr]
+offset = 0xf190
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Index into the level tables. The client writes zero before it streams a table
+through the indexed-write token, and advances one entry per table write. The
+diagnostic's mask is 5 bits."""
+
+[registers.txaddr.fields]
+index = { bits = [4, 0], grade = "inferred" }
+
+[registers.txdetail]
+offset = 0xf192
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+First block of the detail texture, 9 bits in the diagnostic's mask."""
+
+[registers.txdetail.fields]
+block = { bits = [8, 0], grade = "inferred" }
+
+[registers.txborder]
+offset = 0xf193
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Border block of each level, streamed through the level table with the index
+register. The diagnostic's mask is 9 bits."""
+
+[registers.txborder.fields]
+block = { bits = [7, 0], grade = "inferred" }
+
+[registers.detailscale]
+offset = 0xf194
+access = "rw"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Detail weight by level of detail: a 32-entry table of 6-bit values, filled
+through the indexed-write token. The client's default fills the table with 31,
+31, 31, 29, 28 down to 1. The diagnostic's mask is 6 bits."""
+
+[registers.detailscale.fields]
+value = { bits = [5, 0], grade = "inferred" }
+
+[registers.tevers]
+offset = 0xf196
+access = "r"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Texture engine revision, 29 bits in the diagnostic's mask. The client does not
+write it. The diagnostic identifies revisions by a render checksum instead, see
+the checksum constants below."""
+
+[registers.tl_wbuffer]
+offset = 0xf1a0
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Texture loader write-buffer select, one bit. The client writes it with the
+complement of the read-buffer bit."""
+
+[registers.tl_wbuffer.fields]
+buffer = { bits = [0, 0], grade = "inferred" }
 
 [registers.tl_mode]
 offset = 0xf1a1
@@ -53,6 +321,14 @@ access = "w"
 width = 32
 grade = "established"
 space = "te1_regs"
+doc = """
+Level being loaded: its number and its log2 width and height. The client sends
+the level's own size here, not the destination corners of the transfer."""
+
+[registers.tl_spec.fields]
+level = { bits = [3, 0], grade = "established" }
+log2_width = { bits = [7, 4], grade = "established" }
+log2_height = { bits = [11, 8], grade = "established" }
 
 [registers.tl_addr]
 offset = 0xf1a3
@@ -61,12 +337,22 @@ width = 32
 grade = "inferred"
 space = "te1_regs"
 
+[registers.tl_addr.fields]
+index = { bits = [3, 0], grade = "inferred" }
+
 [registers.tl_mipmap]
 offset = 0xf1a4
 access = "w"
 width = 32
 grade = "inferred"
 space = "te1_regs"
+doc = """
+First block of a level, with a per-image flag bit. The diagnostic's mask is 9
+bits. The client's copy path sends it; an ordinary load does not."""
+
+[registers.tl_mipmap.fields]
+block = { bits = [7, 0], grade = "inferred" }
+flag = { bits = [8, 8], grade = "inferred" }
 
 [registers.tl_border]
 offset = 0xf1a5
@@ -74,6 +360,69 @@ access = "w"
 width = 32
 grade = "inferred"
 space = "te1_regs"
+doc = """
+Border block of a level, 9 bits in the diagnostic's mask."""
+
+[registers.tl_border.fields]
+block = { bits = [7, 0], grade = "inferred" }
+
+[registers.tl_vidcntrl]
+offset = 0xf1a6
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Video-to-texture capture start, one bit. The client does not write it; the
+kernel's video path does."""
+
+[registers.tl_base]
+offset = 0xf1a7
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Base block of the texture being loaded, 8 bits in the diagnostic's mask."""
+
+[registers.tl_base.fields]
+base_block = { bits = [7, 0], grade = "inferred" }
+
+[registers.tl_s_size]
+offset = 0xf1a9
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Copy rectangle width for a framebuffer copy, 14 bits in the diagnostic's mask."""
+
+[registers.tl_t_size]
+offset = 0xf1aa
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Copy rectangle height for a framebuffer copy, 14 bits in the diagnostic's mask."""
+
+[registers.tl_s_left]
+offset = 0xf1ab
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Copy rectangle left edge for a framebuffer copy, 14 bits in the diagnostic's mask."""
+
+[registers.tl_t_bottom]
+offset = 0xf1ac
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = """
+Copy rectangle bottom edge for a framebuffer copy, 14 bits in the diagnostic's mask."""
 
 [constants]
 TRAM_REV_WORD0 = { value = 0x1c011401, grade = "established", doc = "diagnostic", from = "diagnostic transcript" }
@@ -81,3 +430,8 @@ TRAM_REV_WORD0_HIGH_HALF = { value = 0x1c01, grade = "established", doc = "diagn
 TRAM_REV_WORD0_LOW_HALF = { value = 0x1401, grade = "established", doc = "diagnostic", from = "diagnostic transcript" }
 TRAM_REV_WORD1 = { value = 0xc000400, grade = "established", doc = "diagnostic", from = "diagnostic transcript" }
 TRAM_TEXTURE_BYTES = { value = 0x400000, grade = "established", doc = "texture memory of one TRAM ASIC, one per texture engine; OCTANE Technical Report section 4.2.5", from = "published report" }
+TRAM_BLOCKS_PER_PATH = { value = 256, grade = "established", doc = "texture blocks each raster path's texture RAM is divided into; the kernel's block table has 256 entries", from = "driver readings" }
+TRAM_BLOCK_SIZE_SHIFT = { value = 12, grade = "established", doc = "a block is the unit count shifted left by this many bits, so four units give 16 KiB blocks", from = "driver readings" }
+TE_REV_D_CHECKSUM = { value = 0x2aa70d210, grade = "inferred", doc = "render checksum the diagnostic expects from texture engine revision D", from = "diagnostic program data" }
+TE_REV_B_1TRAM_CHECKSUM = { value = 0x0bdf48fc, grade = "inferred", doc = "render checksum the diagnostic expects from texture engine revision B with one texture RAM unit", from = "diagnostic program data" }
+TE_REV_B_4TRAM_CHECKSUM = { value = 0x236379000, grade = "inferred", doc = "render checksum the diagnostic expects from texture engine revision B with four texture RAM units", from = "diagnostic program data" }

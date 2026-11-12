@@ -301,7 +301,14 @@ are not known.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 15:12 | `colour_table` | inferred | rgb_lookup=14 | driver and traffic readings |  |
+| 18:16 | `depth_term` | established |  | driver and traffic readings | One for a texture with 12-bit components and four for any other depth. Reading the field as the count of blend units in use is inferred. |
+| 15:12 | `colour_table` | inferred | none=0, alpha=1, intensity_or_luminance_alpha=9, rgb_lookup=14 | driver and traffic readings |  |
+| 11:9 | `texel_class` | established | alpha=1, luminance=2, intensity=3, colour=4 | driver and traffic readings |  |
+| 8:7 | `tram_select` | inferred |  | driver and traffic readings | The client sends an undefined value here for RGB and RGBA textures, and a select for one- and two-component textures. What each select names is unknown. |
+| 6:5 | `tram_size_code` | established |  | driver and traffic readings |  |
+| 4:3 | `layout` | established | one_component=0, two_component=1, rgb=2, rgba=3 | driver and traffic readings |  |
+| 2:1 | `environment` | established | modulate=0, decal=1, blend=2, alpha_only=3 | driver and traffic readings |  |
+| 0 | `texture_enable` | established |  | driver and traffic readings |  |
 
 ### Register `config`
 
