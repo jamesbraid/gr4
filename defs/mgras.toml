@@ -54,9 +54,8 @@ of that byte, are the product field. The value 1 takes the path with one
 engine and no second board, which is how a Solid Impact board is told from
 the others. Established from the routine's machine words, in the kernel
 object of the base distribution's graphics module; not a bus measurement.
-The byte's other bits (1:0 and 4:2) are split off and kept as well; their
-roles are not placed here. How board revision numbers map to products is
-inferred."""
+Bits 1:0 and 4:2 of the byte are the GE count and the MGRAS revision (fields
+below). How board revision numbers map to products is inferred."""
 grade = "established"
 
 [words.BDVERS2.fields.product]
@@ -64,7 +63,18 @@ bits = [30, 29]
 grade = "established"
 
 [words.BDVERS2.fields.product.enums]
+indigo2_gio = { value = 0, grade = "inferred" }
 solid_impact = { value = 1, grade = "established" }
+single_ge_textured = { value = 2, grade = "inferred" }
+two_ge = { value = 3, grade = "inferred" }
+
+[words.BDVERS2.fields.ge_count]
+bits = [25, 24]
+grade = "inferred"
+
+[words.BDVERS2.fields.mgras_revision]
+bits = [28, 26]
+grade = "inferred"
 
 [[words.BDVERS2.tests]]
 value = 0x20000000
@@ -142,6 +152,139 @@ revision = { bits = [7, 4], grade = "inferred" }
 [[words.GIO_ID.tests]]
 value = 0x50190
 expect = { revision = 9, product = 1281 }
+
+[words.HQ_REVISION]
+width = 32
+grade = "inferred"
+doc = """
+Board word at address 0x000000, the first identity read IRIX makes.
+Bits 31:28 are the HQ revision: 1 is rev A, 2 is rev B. Read by the
+IRIX kernel's board-information routine; the other bits are not read.
+Inferred from the kernel object, not a bus measurement."""
+
+[words.HQ_REVISION.fields.hq_revision]
+bits = [31, 28]
+grade = "inferred"
+
+[words.BDVERS1]
+width = 32
+grade = "inferred"
+doc = """
+Second board-version word at address 0x072408, of which the kernel
+reads only the top byte (bits 31:24). Bits 1:0 and 3:2 of that byte are
+the two TRAM fields, bits 6:4 the RB revision on product 0. The RE count
+and the meaning of the TRAM fields depend on the product field of the word at
+0x072488 (BDVERS2): product 0 has two RE unless bits 6:4 are 3 or 7; product 1
+has one RE and no TRAM; products 2 and 3 have one RE per GE, with 0 or 4 TRAMs
+per path. Bit 7 of the byte is not read. Inferred from the kernel object."""
+
+[words.BDVERS1.fields.tram_field_0]
+bits = [25, 24]
+grade = "inferred"
+
+[words.BDVERS1.fields.tram_field_1]
+bits = [27, 26]
+grade = "inferred"
+
+[words.BDVERS1.fields.rb_revision]
+bits = [30, 28]
+grade = "inferred"
+
+[words.MONITOR_ID]
+width = 8
+grade = "inferred"
+doc = """
+Byte at address 0x071308. Bits 7:4 are the monitor ID, which depends
+on the attached monitor, not on the board. Bits 3:0 are not read. The value
+0 means no monitor identified; 0xf is the value every captured Origin and
+Octane board reported, which the IRIX graphics tools print as an unknown
+monitor assumed to be 19 inches. Whether 0xf is what a board reports with no
+monitor attached is unknown. Inferred from the kernel object and owner captures."""
+
+[words.MONITOR_ID.fields.monitor]
+bits = [7, 4]
+grade = "inferred"
+
+[words.MONITOR_ID.fields.monitor.enums]
+unidentified = { value = 0, grade = "inferred" }
+assumed_19_inch = { value = 15, grade = "inferred" }
+
+[words.CMAP_RA_STATUS]
+width = 8
+grade = "inferred"
+doc = """
+Byte at address 0x071708: bits 2:0 the CMAP revision (0 is rev A,
+other values are rev value + 2, so 1 is rev C and 3 is rev E), bits 6:4 the
+RA revision, bit 7 clear when a video option board is present. Bit 3 is
+not read. Inferred from the kernel object and owner captures."""
+
+[words.CMAP_RA_STATUS.fields.cmap_revision]
+bits = [2, 0]
+grade = "inferred"
+
+[words.CMAP_RA_STATUS.fields.ra_revision]
+bits = [6, 4]
+grade = "inferred"
+
+[words.CMAP_RA_STATUS.fields.video_option]
+bits = [7, 7]
+grade = "inferred"
+
+[words.CMAP_RA_STATUS.fields.video_option.enums]
+present = { value = 0, grade = "inferred" }
+absent = { value = 1, grade = "inferred" }
+
+[words.PP1_REVISION]
+width = 32
+grade = "inferred"
+doc = """
+Index write of 4 to the byte at address 0x071c88, then a 32-bit read of
+0x071d00. Bits 2:0 are the PP1 revision (XMAP index 4). Owner captures
+of E-series boards read 4 here, while a reading of the IRIX Octane diagnostic's
+XMAP test accepts only 0 or 1; that conflict is open. Inferred from the kernel
+object and owner captures."""
+
+[words.PP1_REVISION.fields.pp1_revision]
+bits = [2, 0]
+grade = "inferred"
+
+[words.RE4_REVISION]
+width = 32
+grade = "inferred"
+doc = """
+One 64-bit write to address 0x120400, then a 32-bit read of 0x02c578.
+Bits 7:4 are the RE4 revision. The value written is not recorded in the
+source this was taken from. Inferred from the kernel object."""
+
+[words.RE4_REVISION.fields.re4_revision]
+bits = [7, 4]
+grade = "inferred"
+
+[words.GE_REVISION]
+width = 32
+grade = "inferred"
+doc = """
+Read after the GE program download verifies: a 32-bit read of 0x028000, a
+13 microsecond wait, then a 32-bit read of 0x028004. The kernel keeps only the
+low byte of the second read. A GE revision of 2 is the GE11 rev B; 3 or more
+is the GE12 line, with 3 as rev A. Inferred from the kernel object and owner
+captures."""
+
+[words.GE_REVISION.fields.ge_revision]
+bits = [7, 0]
+grade = "inferred"
+
+[words.VC3_REVISION]
+width = 16
+grade = "inferred"
+doc = """
+Byte write of 0x1f to address 0x072008, then a 16-bit read of
+0x0720b0 (read only when the RE count is nonzero). Bits 7:6 are the VC3
+revision. Inferred from the kernel object."""
+
+[words.VC3_REVISION.fields.vc3_revision]
+bits = [7, 6]
+grade = "inferred"
 
 [words.HQ4_NUMERIC_PACKET]
 width = 64

@@ -59,6 +59,40 @@ pub mod dcb_ctrl {
         }
     }
 }
+/// Second board-version word at address 0x072408, of which the kernel reads only the top byte (bits 31:24). Bits 1:0 and 3:2 of that byte are the two TRA (inferred)
+pub mod bdvers1 {
+    pub const WIDTH: u32 = 32;
+    pub mod rb_revision { // bits 30:28, inferred
+        pub const SHIFT: u32 = 28;
+        pub const MASK: u32 = 0x7;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod tram_field_1 { // bits 27:26, inferred
+        pub const SHIFT: u32 = 26;
+        pub const MASK: u32 = 0x3;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod tram_field_0 { // bits 25:24, inferred
+        pub const SHIFT: u32 = 24;
+        pub const MASK: u32 = 0x3;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
 /// Second board-version word, read 0x62488 above the board register base: the start of device 9's window, register select 1, one-byte width. The kernel's (established)
 pub mod bdvers2 {
     pub const WIDTH: u32 = 32;
@@ -71,25 +105,115 @@ pub mod bdvers2 {
         pub const fn set(v: u32, x: u32) -> u32 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
+        pub const INDIGO2_GIO: u32 = 0; // inferred
         pub const SOLID_IMPACT: u32 = 1; // established
+        pub const SINGLE_GE_TEXTURED: u32 = 2; // inferred
+        pub const TWO_GE: u32 = 3; // inferred
         #[derive(Debug, Clone, Copy, PartialEq, Eq)]
         pub enum Value {
+            Indigo2Gio,
             SolidImpact,
+            SingleGeTextured,
+            TwoGe,
             Other(u32),
         }
         impl Value {
             pub const fn from_raw(v: u32) -> Self {
                 match v {
+                    0 => Self::Indigo2Gio,
                     1 => Self::SolidImpact,
+                    2 => Self::SingleGeTextured,
+                    3 => Self::TwoGe,
                     _ => Self::Other(v),
                 }
             }
             pub const fn raw(self) -> u32 {
                 match self {
+                    Self::Indigo2Gio => 0,
                     Self::SolidImpact => 1,
+                    Self::SingleGeTextured => 2,
+                    Self::TwoGe => 3,
                     Self::Other(v) => v,
                 }
             }
+        }
+    }
+    pub mod mgras_revision { // bits 28:26, inferred
+        pub const SHIFT: u32 = 26;
+        pub const MASK: u32 = 0x7;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod ge_count { // bits 25:24, inferred
+        pub const SHIFT: u32 = 24;
+        pub const MASK: u32 = 0x3;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
+/// Byte at address 0x071708: bits 2:0 the CMAP revision (0 is rev A, other values are rev value + 2, so 1 is rev C and 3 is rev E), bits 6:4 the RA revis (inferred)
+pub mod cmap_ra_status {
+    pub const WIDTH: u32 = 8;
+    pub mod video_option { // bits 7:7, inferred
+        pub const SHIFT: u32 = 7;
+        pub const MASK: u32 = 0x1;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+        pub const PRESENT: u32 = 0; // inferred
+        pub const ABSENT: u32 = 1; // inferred
+        #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+        pub enum Value {
+            Present,
+            Absent,
+            Other(u32),
+        }
+        impl Value {
+            pub const fn from_raw(v: u32) -> Self {
+                match v {
+                    0 => Self::Present,
+                    1 => Self::Absent,
+                    _ => Self::Other(v),
+                }
+            }
+            pub const fn raw(self) -> u32 {
+                match self {
+                    Self::Present => 0,
+                    Self::Absent => 1,
+                    Self::Other(v) => v,
+                }
+            }
+        }
+    }
+    pub mod ra_revision { // bits 6:4, inferred
+        pub const SHIFT: u32 = 4;
+        pub const MASK: u32 = 0x7;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod cmap_revision { // bits 2:0, inferred
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0x7;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
 }
@@ -179,6 +303,20 @@ pub mod dcb_addr {
         }
     }
 }
+/// Read after the GE program download verifies: a 32-bit read of 0x028000, a 13 microsecond wait, then a 32-bit read of 0x028004. The kernel keeps only t (inferred)
+pub mod ge_revision {
+    pub const WIDTH: u32 = 32;
+    pub mod ge_revision { // bits 7:0, inferred
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0xff;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
 /// Identification word read at the start of the board's window. The kernel's probe compares only bits 6:0 (must be 0x10), bit 16 (set), bit 17 (clear) an (inferred)
 pub mod gio_id {
     pub const WIDTH: u32 = 32;
@@ -233,6 +371,20 @@ pub mod hq4_numeric_packet {
             (v >> SHIFT) & MASK
         }
         pub const fn set(v: u64, x: u64) -> u64 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
+/// Board word at address 0x000000, the first identity read IRIX makes. Bits 31:28 are the HQ revision: 1 is rev A, 2 is rev B. Read by the IRIX kernel's  (inferred)
+pub mod hq_revision {
+    pub const WIDTH: u32 = 32;
+    pub mod hq_revision { // bits 31:28, inferred
+        pub const SHIFT: u32 = 28;
+        pub const MASK: u32 = 0xf;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
@@ -345,6 +497,86 @@ pub mod mco_index {
     pub mod port { // bits 3:0, established
         pub const SHIFT: u32 = 0;
         pub const MASK: u32 = 0xf;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
+/// Byte at address 0x071308. Bits 7:4 are the monitor ID, which depends on the attached monitor, not on the board. Bits 3:0 are not read. The value 0 mea (inferred)
+pub mod monitor_id {
+    pub const WIDTH: u32 = 8;
+    pub mod monitor { // bits 7:4, inferred
+        pub const SHIFT: u32 = 4;
+        pub const MASK: u32 = 0xf;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+        pub const UNIDENTIFIED: u32 = 0; // inferred
+        pub const ASSUMED_19_INCH: u32 = 15; // inferred
+        #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+        pub enum Value {
+            Unidentified,
+            Assumed19Inch,
+            Other(u32),
+        }
+        impl Value {
+            pub const fn from_raw(v: u32) -> Self {
+                match v {
+                    0 => Self::Unidentified,
+                    15 => Self::Assumed19Inch,
+                    _ => Self::Other(v),
+                }
+            }
+            pub const fn raw(self) -> u32 {
+                match self {
+                    Self::Unidentified => 0,
+                    Self::Assumed19Inch => 15,
+                    Self::Other(v) => v,
+                }
+            }
+        }
+    }
+}
+/// Index write of 4 to the byte at address 0x071c88, then a 32-bit read of 0x071d00. Bits 2:0 are the PP1 revision (XMAP index 4). Owner captures of E-se (inferred)
+pub mod pp1_revision {
+    pub const WIDTH: u32 = 32;
+    pub mod pp1_revision { // bits 2:0, inferred
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0x7;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
+/// One 64-bit write to address 0x120400, then a 32-bit read of 0x02c578. Bits 7:4 are the RE4 revision. The value written is not recorded in the source t (inferred)
+pub mod re4_revision {
+    pub const WIDTH: u32 = 32;
+    pub mod re4_revision { // bits 7:4, inferred
+        pub const SHIFT: u32 = 4;
+        pub const MASK: u32 = 0xf;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
+/// Byte write of 0x1f to address 0x072008, then a 16-bit read of 0x0720b0 (read only when the RE count is nonzero). Bits 7:6 are the VC3 revision. Inferr (inferred)
+pub mod vc3_revision {
+    pub const WIDTH: u32 = 16;
+    pub mod vc3_revision { // bits 7:6, inferred
+        pub const SHIFT: u32 = 6;
+        pub const MASK: u32 = 0x3;
         pub const fn get(v: u32) -> u32 {
             (v >> SHIFT) & MASK
         }

@@ -31,12 +31,36 @@ Array of 12 registers, stride 4.
 
 | Word | Width | Grade | Source |
 |---|---|---|---|
+| `BDVERS1` | 32 | inferred | driver and firmware readings |
 | `BDVERS2` | 32 | established | driver and firmware readings |
+| `CMAP_RA_STATUS` | 8 | inferred | driver and firmware readings |
 | `DCB_ADDR` | 32 | inferred | driver and firmware readings |
+| `GE_REVISION` | 32 | inferred | driver and firmware readings |
 | `GIO_ID` | 32 | inferred | driver and firmware readings |
 | `HQ4_NUMERIC_PACKET` | 64 | established | OpenBSD impact(4) driver register header |
+| `HQ_REVISION` | 32 | inferred | driver and firmware readings |
 | `MCO_ID` | 32 | established | driver and firmware readings |
 | `MCO_INDEX` | 32 | established | driver and firmware readings |
+| `MONITOR_ID` | 8 | inferred | driver and firmware readings |
+| `PP1_REVISION` | 32 | inferred | driver and firmware readings |
+| `RE4_REVISION` | 32 | inferred | driver and firmware readings |
+| `VC3_REVISION` | 16 | inferred | driver and firmware readings |
+
+### Word `BDVERS1`
+
+Second board-version word at address 0x072408, of which the kernel
+reads only the top byte (bits 31:24). Bits 1:0 and 3:2 of that byte are
+the two TRAM fields, bits 6:4 the RB revision on product 0. The RE count
+and the meaning of the TRAM fields depend on the product field of the word at
+0x072488 (BDVERS2): product 0 has two RE unless bits 6:4 are 3 or 7; product 1
+has one RE and no TRAM; products 2 and 3 have one RE per GE, with 0 or 4 TRAMs
+per path. Bit 7 of the byte is not read. Inferred from the kernel object.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 30:28 | `rb_revision` | inferred |  | driver and firmware readings |  |
+| 27:26 | `tram_field_1` | inferred |  | driver and firmware readings |  |
+| 25:24 | `tram_field_0` | inferred |  | driver and firmware readings |  |
 
 ### Word `BDVERS2`
 
@@ -48,13 +72,27 @@ of that byte, are the product field. The value 1 takes the path with one
 engine and no second board, which is how a Solid Impact board is told from
 the others. Established from the routine's machine words, in the kernel
 object of the base distribution's graphics module; not a bus measurement.
-The byte's other bits (1:0 and 4:2) are split off and kept as well; their
-roles are not placed here. How board revision numbers map to products is
-inferred.
+Bits 1:0 and 4:2 of the byte are the GE count and the MGRAS revision (fields
+below). How board revision numbers map to products is inferred.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 30:29 | `product` | established | solid_impact=1 | driver and firmware readings |  |
+| 30:29 | `product` | established | indigo2_gio=0, solid_impact=1, single_ge_textured=2, two_ge=3 | driver and firmware readings |  |
+| 28:26 | `mgras_revision` | inferred |  | driver and firmware readings |  |
+| 25:24 | `ge_count` | inferred |  | driver and firmware readings |  |
+
+### Word `CMAP_RA_STATUS`
+
+Byte at address 0x071708: bits 2:0 the CMAP revision (0 is rev A,
+other values are rev value + 2, so 1 is rev C and 3 is rev E), bits 6:4 the
+RA revision, bit 7 clear when a video option board is present. Bit 3 is
+not read. Inferred from the kernel object and owner captures.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 7 | `video_option` | inferred | present=0, absent=1 | driver and firmware readings |  |
+| 6:4 | `ra_revision` | inferred |  | driver and firmware readings |  |
+| 2:0 | `cmap_revision` | inferred |  | driver and firmware readings |  |
 
 ### Word `DCB_ADDR`
 
@@ -65,6 +103,18 @@ inferred.
 | 6 | `endata_pack` | inferred |  | driver and firmware readings |  |
 | 5 | `encrs_inc` | inferred |  | driver and firmware readings |  |
 | 4:3 | `data_width` | inferred | four_bytes=0, one_byte=1, two_bytes=2, three_bytes=3 | driver and firmware readings |  |
+
+### Word `GE_REVISION`
+
+Read after the GE program download verifies: a 32-bit read of 0x028000, a
+13 microsecond wait, then a 32-bit read of 0x028004. The kernel keeps only the
+low byte of the second read. A GE revision of 2 is the GE11 rev B; 3 or more
+is the GE12 line, with 3 as rev A. Inferred from the kernel object and owner
+captures.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 7:0 | `ge_revision` | inferred |  | driver and firmware readings |  |
 
 ### Word `GIO_ID`
 
@@ -91,6 +141,17 @@ software expectation; what the board does with each field is not established.
 | 50 | `execute` | inferred |  | OpenBSD impact(4) driver register header |  |
 | 47:40 | `selector` | established |  | OpenBSD impact(4) driver register header |  |
 | 31:0 | `payload` | established |  | OpenBSD impact(4) driver register header |  |
+
+### Word `HQ_REVISION`
+
+Board word at address 0x000000, the first identity read IRIX makes.
+Bits 31:28 are the HQ revision: 1 is rev A, 2 is rev B. Read by the
+IRIX kernel's board-information routine; the other bits are not read.
+Inferred from the kernel object, not a bus measurement.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 31:28 | `hq_revision` | inferred |  | driver and firmware readings |  |
 
 ### Word `MCO_ID`
 
@@ -130,6 +191,51 @@ offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.
 |---|---|---|---|---|---|
 | 7:4 | `bank` | established | overlay_dac_a=0, overlay_dac_b=1, true_colour_dac_a=2, true_colour_dac_b=3, control_1=8, control_2=9, control_3=10 | driver and firmware readings |  |
 | 3:0 | `port` | established |  | driver and firmware readings |  |
+
+### Word `MONITOR_ID`
+
+Byte at address 0x071308. Bits 7:4 are the monitor ID, which depends
+on the attached monitor, not on the board. Bits 3:0 are not read. The value
+0 means no monitor identified; 0xf is the value every captured Origin and
+Octane board reported, which the IRIX graphics tools print as an unknown
+monitor assumed to be 19 inches. Whether 0xf is what a board reports with no
+monitor attached is unknown. Inferred from the kernel object and owner captures.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 7:4 | `monitor` | inferred | unidentified=0, assumed_19_inch=15 | driver and firmware readings |  |
+
+### Word `PP1_REVISION`
+
+Index write of 4 to the byte at address 0x071c88, then a 32-bit read of
+0x071d00. Bits 2:0 are the PP1 revision (XMAP index 4). Owner captures
+of E-series boards read 4 here, while a reading of the IRIX Octane diagnostic's
+XMAP test accepts only 0 or 1; that conflict is open. Inferred from the kernel
+object and owner captures.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 2:0 | `pp1_revision` | inferred |  | driver and firmware readings |  |
+
+### Word `RE4_REVISION`
+
+One 64-bit write to address 0x120400, then a 32-bit read of 0x02c578.
+Bits 7:4 are the RE4 revision. The value written is not recorded in the
+source this was taken from. Inferred from the kernel object.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 7:4 | `re4_revision` | inferred |  | driver and firmware readings |  |
+
+### Word `VC3_REVISION`
+
+Byte write of 0x1f to address 0x072008, then a 16-bit read of
+0x0720b0 (read only when the RE count is nonzero). Bits 7:6 are the VC3
+revision. Inferred from the kernel object.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 7:6 | `vc3_revision` | inferred |  | driver and firmware readings |  |
 
 ## Constants
 

@@ -27,6 +27,27 @@
 #define MGRAS_DCB_CTRL_SYNC_ACK_INPLACE              (MGRAS_DCB_CTRL_SYNC_ACK_MASK << MGRAS_DCB_CTRL_SYNC_ACK_SHIFT)
 
 /*
+ * Second board-version word at address 0x072408, of which the kernel
+ * reads only the top byte (bits 31:24). Bits 1:0 and 3:2 of that byte are
+ * the two TRAM fields, bits 6:4 the RB revision on product 0. The RE count
+ * and the meaning of the TRAM fields depend on the product field of the word at
+ * 0x072488 (BDVERS2): product 0 has two RE unless bits 6:4 are 3 or 7; product 1
+ * has one RE and no TRAM; products 2 and 3 have one RE per GE, with 0 or 4 TRAMs
+ * per path. Bit 7 of the byte is not read. Inferred from the kernel object.
+ */
+/* word BDVERS1: 32 bits; driver and firmware readings */
+#define MGRAS_BDVERS1_WIDTH                          32 /* inferred */
+#define MGRAS_BDVERS1_RB_REVISION_SHIFT              28 /* inferred */
+#define MGRAS_BDVERS1_RB_REVISION_MASK               0x7u
+#define MGRAS_BDVERS1_RB_REVISION_INPLACE            (MGRAS_BDVERS1_RB_REVISION_MASK << MGRAS_BDVERS1_RB_REVISION_SHIFT)
+#define MGRAS_BDVERS1_TRAM_FIELD_1_SHIFT             26 /* inferred */
+#define MGRAS_BDVERS1_TRAM_FIELD_1_MASK              0x3u
+#define MGRAS_BDVERS1_TRAM_FIELD_1_INPLACE           (MGRAS_BDVERS1_TRAM_FIELD_1_MASK << MGRAS_BDVERS1_TRAM_FIELD_1_SHIFT)
+#define MGRAS_BDVERS1_TRAM_FIELD_0_SHIFT             24 /* inferred */
+#define MGRAS_BDVERS1_TRAM_FIELD_0_MASK              0x3u
+#define MGRAS_BDVERS1_TRAM_FIELD_0_INPLACE           (MGRAS_BDVERS1_TRAM_FIELD_0_MASK << MGRAS_BDVERS1_TRAM_FIELD_0_SHIFT)
+
+/*
  * Second board-version word, read 0x62488 above the board register
  * base: the start of device 9's window, register select 1, one-byte width. The
  * kernel's board-information routine loads it as a word and works only on its
@@ -35,16 +56,44 @@
  * engine and no second board, which is how a Solid Impact board is told from
  * the others. Established from the routine's machine words, in the kernel
  * object of the base distribution's graphics module; not a bus measurement.
- * The byte's other bits (1:0 and 4:2) are split off and kept as well; their
- * roles are not placed here. How board revision numbers map to products is
- * inferred.
+ * Bits 1:0 and 4:2 of the byte are the GE count and the MGRAS revision (fields
+ * below). How board revision numbers map to products is inferred.
  */
 /* word BDVERS2: 32 bits; driver and firmware readings */
 #define MGRAS_BDVERS2_WIDTH                          32 /* established */
 #define MGRAS_BDVERS2_PRODUCT_SHIFT                  29 /* established */
 #define MGRAS_BDVERS2_PRODUCT_MASK                   0x3u
 #define MGRAS_BDVERS2_PRODUCT_INPLACE                (MGRAS_BDVERS2_PRODUCT_MASK << MGRAS_BDVERS2_PRODUCT_SHIFT)
+#define MGRAS_BDVERS2_PRODUCT_INDIGO2_GIO            0 /* inferred */
 #define MGRAS_BDVERS2_PRODUCT_SOLID_IMPACT           1 /* established */
+#define MGRAS_BDVERS2_PRODUCT_SINGLE_GE_TEXTURED     2 /* inferred */
+#define MGRAS_BDVERS2_PRODUCT_TWO_GE                 3 /* inferred */
+#define MGRAS_BDVERS2_MGRAS_REVISION_SHIFT           26 /* inferred */
+#define MGRAS_BDVERS2_MGRAS_REVISION_MASK            0x7u
+#define MGRAS_BDVERS2_MGRAS_REVISION_INPLACE         (MGRAS_BDVERS2_MGRAS_REVISION_MASK << MGRAS_BDVERS2_MGRAS_REVISION_SHIFT)
+#define MGRAS_BDVERS2_GE_COUNT_SHIFT                 24 /* inferred */
+#define MGRAS_BDVERS2_GE_COUNT_MASK                  0x3u
+#define MGRAS_BDVERS2_GE_COUNT_INPLACE               (MGRAS_BDVERS2_GE_COUNT_MASK << MGRAS_BDVERS2_GE_COUNT_SHIFT)
+
+/*
+ * Byte at address 0x071708: bits 2:0 the CMAP revision (0 is rev A,
+ * other values are rev value + 2, so 1 is rev C and 3 is rev E), bits 6:4 the
+ * RA revision, bit 7 clear when a video option board is present. Bit 3 is
+ * not read. Inferred from the kernel object and owner captures.
+ */
+/* word CMAP_RA_STATUS: 8 bits; driver and firmware readings */
+#define MGRAS_CMAP_RA_STATUS_WIDTH                   8 /* inferred */
+#define MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_SHIFT      7 /* inferred */
+#define MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_MASK       0x1u
+#define MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_INPLACE    (MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_MASK << MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_SHIFT)
+#define MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_PRESENT    0 /* inferred */
+#define MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_ABSENT     1 /* inferred */
+#define MGRAS_CMAP_RA_STATUS_RA_REVISION_SHIFT       4 /* inferred */
+#define MGRAS_CMAP_RA_STATUS_RA_REVISION_MASK        0x7u
+#define MGRAS_CMAP_RA_STATUS_RA_REVISION_INPLACE     (MGRAS_CMAP_RA_STATUS_RA_REVISION_MASK << MGRAS_CMAP_RA_STATUS_RA_REVISION_SHIFT)
+#define MGRAS_CMAP_RA_STATUS_CMAP_REVISION_SHIFT     0 /* inferred */
+#define MGRAS_CMAP_RA_STATUS_CMAP_REVISION_MASK      0x7u
+#define MGRAS_CMAP_RA_STATUS_CMAP_REVISION_INPLACE   (MGRAS_CMAP_RA_STATUS_CMAP_REVISION_MASK << MGRAS_CMAP_RA_STATUS_CMAP_REVISION_SHIFT)
 
 /* word DCB_ADDR: 32 bits; driver and firmware readings */
 #define MGRAS_DCB_ADDR_WIDTH                         32 /* inferred */
@@ -67,6 +116,19 @@
 #define MGRAS_DCB_ADDR_DATA_WIDTH_ONE_BYTE           1 /* inferred */
 #define MGRAS_DCB_ADDR_DATA_WIDTH_TWO_BYTES          2 /* inferred */
 #define MGRAS_DCB_ADDR_DATA_WIDTH_THREE_BYTES        3 /* inferred */
+
+/*
+ * Read after the GE program download verifies: a 32-bit read of 0x028000, a
+ * 13 microsecond wait, then a 32-bit read of 0x028004. The kernel keeps only the
+ * low byte of the second read. A GE revision of 2 is the GE11 rev B; 3 or more
+ * is the GE12 line, with 3 as rev A. Inferred from the kernel object and owner
+ * captures.
+ */
+/* word GE_REVISION: 32 bits; driver and firmware readings */
+#define MGRAS_GE_REVISION_WIDTH                      32 /* inferred */
+#define MGRAS_GE_REVISION_GE_REVISION_SHIFT          0 /* inferred */
+#define MGRAS_GE_REVISION_GE_REVISION_MASK           0xffu
+#define MGRAS_GE_REVISION_GE_REVISION_INPLACE        (MGRAS_GE_REVISION_GE_REVISION_MASK << MGRAS_GE_REVISION_GE_REVISION_SHIFT)
 
 /*
  * Identification word read at the start of the board's window. The kernel's
@@ -101,6 +163,18 @@
 #define MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_SHIFT       0 /* established */
 #define MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_MASK        0xffffffffull
 #define MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_INPLACE     (MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_MASK << MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_SHIFT)
+
+/*
+ * Board word at address 0x000000, the first identity read IRIX makes.
+ * Bits 31:28 are the HQ revision: 1 is rev A, 2 is rev B. Read by the
+ * IRIX kernel's board-information routine; the other bits are not read.
+ * Inferred from the kernel object, not a bus measurement.
+ */
+/* word HQ_REVISION: 32 bits; driver and firmware readings */
+#define MGRAS_HQ_REVISION_WIDTH                      32 /* inferred */
+#define MGRAS_HQ_REVISION_HQ_REVISION_SHIFT          28 /* inferred */
+#define MGRAS_HQ_REVISION_HQ_REVISION_MASK           0xfu
+#define MGRAS_HQ_REVISION_HQ_REVISION_INPLACE        (MGRAS_HQ_REVISION_HQ_REVISION_MASK << MGRAS_HQ_REVISION_HQ_REVISION_SHIFT)
 
 /*
  * Identification byte of the multi-channel option board (the byte at the
@@ -155,6 +229,57 @@
 #define MGRAS_MCO_INDEX_PORT_SHIFT                   0 /* established */
 #define MGRAS_MCO_INDEX_PORT_MASK                    0xfu
 #define MGRAS_MCO_INDEX_PORT_INPLACE                 (MGRAS_MCO_INDEX_PORT_MASK << MGRAS_MCO_INDEX_PORT_SHIFT)
+
+/*
+ * Byte at address 0x071308. Bits 7:4 are the monitor ID, which depends
+ * on the attached monitor, not on the board. Bits 3:0 are not read. The value
+ * 0 means no monitor identified; 0xf is the value every captured Origin and
+ * Octane board reported, which the IRIX graphics tools print as an unknown
+ * monitor assumed to be 19 inches. Whether 0xf is what a board reports with no
+ * monitor attached is unknown. Inferred from the kernel object and owner captures.
+ */
+/* word MONITOR_ID: 8 bits; driver and firmware readings */
+#define MGRAS_MONITOR_ID_WIDTH                       8 /* inferred */
+#define MGRAS_MONITOR_ID_MONITOR_SHIFT               4 /* inferred */
+#define MGRAS_MONITOR_ID_MONITOR_MASK                0xfu
+#define MGRAS_MONITOR_ID_MONITOR_INPLACE             (MGRAS_MONITOR_ID_MONITOR_MASK << MGRAS_MONITOR_ID_MONITOR_SHIFT)
+#define MGRAS_MONITOR_ID_MONITOR_UNIDENTIFIED        0 /* inferred */
+#define MGRAS_MONITOR_ID_MONITOR_ASSUMED_19_INCH     15 /* inferred */
+
+/*
+ * Index write of 4 to the byte at address 0x071c88, then a 32-bit read of
+ * 0x071d00. Bits 2:0 are the PP1 revision (XMAP index 4). Owner captures
+ * of E-series boards read 4 here, while a reading of the IRIX Octane diagnostic's
+ * XMAP test accepts only 0 or 1; that conflict is open. Inferred from the kernel
+ * object and owner captures.
+ */
+/* word PP1_REVISION: 32 bits; driver and firmware readings */
+#define MGRAS_PP1_REVISION_WIDTH                     32 /* inferred */
+#define MGRAS_PP1_REVISION_PP1_REVISION_SHIFT        0 /* inferred */
+#define MGRAS_PP1_REVISION_PP1_REVISION_MASK         0x7u
+#define MGRAS_PP1_REVISION_PP1_REVISION_INPLACE      (MGRAS_PP1_REVISION_PP1_REVISION_MASK << MGRAS_PP1_REVISION_PP1_REVISION_SHIFT)
+
+/*
+ * One 64-bit write to address 0x120400, then a 32-bit read of 0x02c578.
+ * Bits 7:4 are the RE4 revision. The value written is not recorded in the
+ * source this was taken from. Inferred from the kernel object.
+ */
+/* word RE4_REVISION: 32 bits; driver and firmware readings */
+#define MGRAS_RE4_REVISION_WIDTH                     32 /* inferred */
+#define MGRAS_RE4_REVISION_RE4_REVISION_SHIFT        4 /* inferred */
+#define MGRAS_RE4_REVISION_RE4_REVISION_MASK         0xfu
+#define MGRAS_RE4_REVISION_RE4_REVISION_INPLACE      (MGRAS_RE4_REVISION_RE4_REVISION_MASK << MGRAS_RE4_REVISION_RE4_REVISION_SHIFT)
+
+/*
+ * Byte write of 0x1f to address 0x072008, then a 16-bit read of
+ * 0x0720b0 (read only when the RE count is nonzero). Bits 7:6 are the VC3
+ * revision. Inferred from the kernel object.
+ */
+/* word VC3_REVISION: 16 bits; driver and firmware readings */
+#define MGRAS_VC3_REVISION_WIDTH                     16 /* inferred */
+#define MGRAS_VC3_REVISION_VC3_REVISION_SHIFT        6 /* inferred */
+#define MGRAS_VC3_REVISION_VC3_REVISION_MASK         0x3u
+#define MGRAS_VC3_REVISION_VC3_REVISION_INPLACE      (MGRAS_VC3_REVISION_VC3_REVISION_MASK << MGRAS_VC3_REVISION_VC3_REVISION_SHIFT)
 
 #define MGRAS_ADV473_PORT_ADDR                       0x0u /* established */
 #define MGRAS_ADV473_PORT_COMMAND                    0x6u /* established */

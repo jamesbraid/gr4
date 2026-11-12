@@ -65,6 +65,41 @@
   {
    "unit": "mgras",
    "kind": "word",
+   "name": "BDVERS1",
+   "width": 32,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "BDVERS1.rb_revision",
+   "hi": 30,
+   "lo": 28,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "BDVERS1.tram_field_1",
+   "hi": 27,
+   "lo": 26,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "BDVERS1.tram_field_0",
+   "hi": 25,
+   "lo": 24,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
    "name": "BDVERS2",
    "width": 32,
    "grade": "established",
@@ -82,9 +117,102 @@
   {
    "unit": "mgras",
    "kind": "enum_value",
+   "name": "BDVERS2.product.indigo2_gio",
+   "value": 0,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
    "name": "BDVERS2.product.solid_impact",
    "value": 1,
    "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "BDVERS2.product.single_ge_textured",
+   "value": 2,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "BDVERS2.product.two_ge",
+   "value": 3,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "BDVERS2.mgras_revision",
+   "hi": 28,
+   "lo": 26,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "BDVERS2.ge_count",
+   "hi": 25,
+   "lo": 24,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "CMAP_RA_STATUS",
+   "width": 8,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "CMAP_RA_STATUS.video_option",
+   "hi": 7,
+   "lo": 7,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "CMAP_RA_STATUS.video_option.present",
+   "value": 0,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "CMAP_RA_STATUS.video_option.absent",
+   "value": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "CMAP_RA_STATUS.ra_revision",
+   "hi": 6,
+   "lo": 4,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "CMAP_RA_STATUS.cmap_revision",
+   "hi": 2,
+   "lo": 0,
+   "grade": "inferred",
    "from": "driver and firmware readings"
   },
   {
@@ -175,6 +303,23 @@
   {
    "unit": "mgras",
    "kind": "word",
+   "name": "GE_REVISION",
+   "width": 32,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "GE_REVISION.ge_revision",
+   "hi": 7,
+   "lo": 0,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
    "name": "GIO_ID",
    "width": 32,
    "grade": "inferred",
@@ -232,6 +377,23 @@
    "lo": 0,
    "grade": "established",
    "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "HQ_REVISION",
+   "width": 32,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "HQ_REVISION.hq_revision",
+   "hi": 31,
+   "lo": 28,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
   },
   {
    "unit": "mgras",
@@ -355,6 +517,90 @@
    "hi": 3,
    "lo": 0,
    "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "MONITOR_ID",
+   "width": 8,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "MONITOR_ID.monitor",
+   "hi": 7,
+   "lo": 4,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "MONITOR_ID.monitor.unidentified",
+   "value": 0,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "MONITOR_ID.monitor.assumed_19_inch",
+   "value": 15,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "PP1_REVISION",
+   "width": 32,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "PP1_REVISION.pp1_revision",
+   "hi": 2,
+   "lo": 0,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "RE4_REVISION",
+   "width": 32,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "RE4_REVISION.re4_revision",
+   "hi": 7,
+   "lo": 4,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "VC3_REVISION",
+   "width": 16,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "VC3_REVISION.vc3_revision",
+   "hi": 7,
+   "lo": 6,
+   "grade": "inferred",
    "from": "driver and firmware readings"
   },
   {
