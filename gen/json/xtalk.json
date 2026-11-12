@@ -1,0 +1,132 @@
+{
+ "schema": "defs-flat/1",
+ "source": "defs/xtalk.toml",
+ "profile": "public",
+ "rows": [
+  {
+   "unit": "xtalk",
+   "kind": "word",
+   "name": "LLP_CONFIG",
+   "width": 32,
+   "grade": "inferred",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "field",
+   "name": "LLP_CONFIG.retry_limit",
+   "hi": 25,
+   "lo": 16,
+   "grade": "inferred",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "field",
+   "name": "LLP_CONFIG.null_timeout",
+   "hi": 15,
+   "lo": 10,
+   "grade": "inferred",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "constant",
+   "name": "CONTROL_EXPECT",
+   "value": 815,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "constant",
+   "name": "ERR_ADDR_HI_EXPECT",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "constant",
+   "name": "ERR_ADDR_LO_EXPECT",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "constant",
+   "name": "ERR_CMD_EXPECT",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "constant",
+   "name": "ID_EXPECT",
+   "value": 234888533,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "constant",
+   "name": "INTR_DEST_HI_EXPECT",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "constant",
+   "name": "INTR_DEST_LO_EXPECT",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "constant",
+   "name": "LLP_CONFIG_EXPECT",
+   "value": 67049488,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "constant",
+   "name": "REQ_TIMEOUT_EXPECT",
+   "value": 1048575,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "constant",
+   "name": "STATUS_EXPECT",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic program data"
+  },
+  {
+   "unit": "xtalk",
+   "kind": "constant",
+   "name": "TARGET_FLUSH_EXPECT",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic program data"
+  }
+ ]
+}

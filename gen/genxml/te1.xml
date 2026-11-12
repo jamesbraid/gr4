@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!-- generated from defs/te1.toml by defs-gen - do not edit, change the source -->
+<genxml unit="te1" prefix="TE" title="texture RAM revision words of the Impact graphics subsystem" from="driver readings">
+  <doc>Texture RAM revision words and loader registers of the Impact graphics subsystem.</doc>
+  <space name="te1_regs" unit="reg"/>
+  <struct name="TX_MIPMAP" size="4" grade="established" from="driver readings" register="yes" offset="0xf191" access="w" space="te1_regs" reset="unknown">
+    <field name="bank" start="8" size="8" type="uint" grade="inferred"/>
+    <field name="page" start="0" size="8" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="TL_MODE" size="4" grade="established" from="driver readings" register="yes" offset="0xf1a1" access="w" space="te1_regs" reset="unknown">
+    <field name="fixed" start="16" size="3" type="uint" grade="established"/>
+    <field name="bit14" start="14" size="1" type="uint" grade="inferred"/>
+    <field name="enables" start="9" size="4" type="uint" grade="inferred"/>
+    <field name="flag8" start="8" size="1" type="uint" grade="inferred"/>
+    <field name="component_depth" start="5" size="2" type="uint" grade="inferred"/>
+    <field name="cell_slot" start="3" size="2" type="uint" grade="inferred"/>
+    <field name="components_minus_1" start="1" size="2" type="uint" grade="inferred"/>
+    <test value="0x34e26" kind="vector">
+      <expect field="components_minus_1" value="3"/>
+      <expect field="cell_slot" value="0"/>
+      <expect field="component_depth" value="1"/>
+      <expect field="flag8" value="0"/>
+      <expect field="enables" value="7"/>
+      <expect field="bit14" value="1"/>
+      <expect field="fixed" value="3"/>
+    </test>
+    <test value="0x35a26" kind="vector">
+      <expect field="components_minus_1" value="3"/>
+      <expect field="cell_slot" value="0"/>
+      <expect field="component_depth" value="1"/>
+      <expect field="flag8" value="0"/>
+      <expect field="enables" value="13"/>
+      <expect field="bit14" value="1"/>
+      <expect field="fixed" value="3"/>
+    </test>
+  </struct>
+  <struct name="TL_SPEC" size="4" grade="established" from="driver readings" register="yes" offset="0xf1a2" access="w" space="te1_regs" reset="unknown">
+  </struct>
+  <struct name="TL_ADDR" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf1a3" access="w" space="te1_regs" reset="unknown">
+  </struct>
+  <struct name="TL_MIPMAP" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf1a4" access="w" space="te1_regs" reset="unknown">
+  </struct>
+  <struct name="TL_BORDER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf1a5" access="w" space="te1_regs" reset="unknown">
+  </struct>
+  <constant name="TRAM_REV_WORD0" value="0x1c011401" grade="established" from="diagnostic transcript"/>
+  <constant name="TRAM_REV_WORD0_HIGH_HALF" value="0x1c01" grade="established" from="diagnostic transcript"/>
+  <constant name="TRAM_REV_WORD0_LOW_HALF" value="0x1401" grade="established" from="diagnostic transcript"/>
+  <constant name="TRAM_REV_WORD1" value="0xc000400" grade="established" from="diagnostic transcript"/>
+</genxml>

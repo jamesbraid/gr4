@@ -1,0 +1,66 @@
+unit = "pp1"
+prefix = "PP"
+title = "display read buffer registers of the Impact graphics"
+doc = "Display read buffer registers of the Impact graphics subsystem."
+from = "driver readings"
+public_from = ["driver readings"]
+
+[c]
+legacy_header = "PP1_DECODE.h"
+legacy_guard = "PP1_DECODE_H"
+
+[spaces.pp1_regs]
+unit = "reg"
+
+[registers.drb_pointers]
+offset = 0xf16d
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+
+[registers.drb_pointers.fields]
+page_b = { bits = [19, 10], grade = "established" }
+page_a = { bits = [9, 0], grade = "established" }
+
+[[registers.drb_pointers.tests]]
+value = 0x101c0
+expect = { page_a = 448, page_b = 64 }
+
+[[registers.drb_pointers.tests]]
+value = 0x380e0
+expect = { page_a = 224, page_b = 224 }
+
+[[registers.drb_pointers.tests]]
+value = 0x90240
+expect = { page_a = 576, page_b = 576 }
+
+[[registers.drb_pointers.tests]]
+value = 0xc8240
+expect = { page_a = 576, page_b = 800 }
+
+[registers.drb_size]
+offset = 0xf16e
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+
+[registers.drb_size.fields]
+auto_flush_off = { bits = [10, 10], grade = "inferred" }
+dma_line_count_mask = { bits = [9, 8], grade = "inferred" }
+raster_engines_minus_1 = { bits = [7, 6], grade = "established" }
+xtiles36 = { bits = [5, 2], grade = "established" }
+xtiles9 = { bits = [1, 0], grade = "established" }
+
+[[registers.drb_size.tests]]
+value = 0x25a
+expect = { xtiles9 = 2, xtiles36 = 6, raster_engines_minus_1 = 1, dma_line_count_mask = 2, auto_flush_off = 0 }
+
+[[registers.drb_size.tests]]
+value = 0x31a
+expect = { xtiles9 = 2, xtiles36 = 6, raster_engines_minus_1 = 0, dma_line_count_mask = 3, auto_flush_off = 0 }
+
+[constants]
+DRB_POINTERS_COMMAND_WORD = { value = 0x196d04, grade = "established", doc = "kernel constant table" }
+DRB_SIZE_COMMAND_WORD = { value = 0x196e04, grade = "established", doc = "kernel constant table" }

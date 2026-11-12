@@ -1,0 +1,116 @@
+{
+ "schema": "defs-flat/1",
+ "source": "defs/pp1.toml",
+ "profile": "public",
+ "rows": [
+  {
+   "unit": "pp1",
+   "kind": "register",
+   "name": "drb_pointers",
+   "offset": 61805,
+   "access": "w",
+   "width": 32,
+   "count": 1,
+   "stride": 1,
+   "space": "pp1_regs",
+   "reset": "unknown",
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "pp1",
+   "kind": "field",
+   "name": "drb_pointers.page_b",
+   "hi": 19,
+   "lo": 10,
+   "grade": "established",
+   "from": "driver readings"
+  },
+  {
+   "unit": "pp1",
+   "kind": "field",
+   "name": "drb_pointers.page_a",
+   "hi": 9,
+   "lo": 0,
+   "grade": "established",
+   "from": "driver readings"
+  },
+  {
+   "unit": "pp1",
+   "kind": "register",
+   "name": "drb_size",
+   "offset": 61806,
+   "access": "w",
+   "width": 32,
+   "count": 1,
+   "stride": 1,
+   "space": "pp1_regs",
+   "reset": "unknown",
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "pp1",
+   "kind": "field",
+   "name": "drb_size.auto_flush_off",
+   "hi": 10,
+   "lo": 10,
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "pp1",
+   "kind": "field",
+   "name": "drb_size.dma_line_count_mask",
+   "hi": 9,
+   "lo": 8,
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "pp1",
+   "kind": "field",
+   "name": "drb_size.raster_engines_minus_1",
+   "hi": 7,
+   "lo": 6,
+   "grade": "established",
+   "from": "driver readings"
+  },
+  {
+   "unit": "pp1",
+   "kind": "field",
+   "name": "drb_size.xtiles36",
+   "hi": 5,
+   "lo": 2,
+   "grade": "established",
+   "from": "driver readings"
+  },
+  {
+   "unit": "pp1",
+   "kind": "field",
+   "name": "drb_size.xtiles9",
+   "hi": 1,
+   "lo": 0,
+   "grade": "established",
+   "from": "driver readings"
+  },
+  {
+   "unit": "pp1",
+   "kind": "constant",
+   "name": "DRB_POINTERS_COMMAND_WORD",
+   "value": 1666308,
+   "count": 1,
+   "grade": "established",
+   "from": "driver readings"
+  },
+  {
+   "unit": "pp1",
+   "kind": "constant",
+   "name": "DRB_SIZE_COMMAND_WORD",
+   "value": 1666564,
+   "count": 1,
+   "grade": "established",
+   "from": "driver readings"
+  }
+ ]
+}

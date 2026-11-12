@@ -1,0 +1,224 @@
+<?xml version="1.0" ?>
+<!-- generated from defs/mgras.toml by defs-gen - do not edit, change the source -->
+<genxml unit="mgras" prefix="MGRAS" title="board-level words of the Impact graphics subsystem" from="driver and firmware readings">
+  <doc>Board-level words of the Impact graphics subsystem.</doc>
+  <enum name="bdvers2_product">
+    <value name="solid_impact" value="1" grade="established"/>
+  </enum>
+  <enum name="dcb_addr_data_width">
+    <value name="four_bytes" value="0" grade="inferred"/>
+    <value name="one_byte" value="1" grade="inferred"/>
+    <value name="two_bytes" value="2" grade="inferred"/>
+    <value name="three_bytes" value="3" grade="inferred"/>
+  </enum>
+  <enum name="mco_id_board">
+    <value name="present_single_read" value="4" grade="established"/>
+    <value name="present" value="10" grade="established"/>
+  </enum>
+  <enum name="mco_index_bank">
+    <value name="overlay_dac_a" value="0" grade="established"/>
+    <value name="overlay_dac_b" value="1" grade="established"/>
+    <value name="true_colour_dac_a" value="2" grade="established"/>
+    <value name="true_colour_dac_b" value="3" grade="established"/>
+    <value name="control_1" value="8" grade="established"/>
+    <value name="control_2" value="9" grade="established"/>
+    <value name="control_3" value="10" grade="established"/>
+  </enum>
+  <struct name="DCB_CTRL" size="4" grade="inferred" from="driver and firmware readings" register="yes" offset="0xa000" access="rw" count="12" stride="4" reset="unknown">
+    <field name="cs_setup" start="10" size="3" type="uint" grade="inferred"/>
+    <field name="cs_hold" start="6" size="3" type="uint" grade="inferred"/>
+    <field name="cs_width" start="2" size="3" type="uint" grade="inferred"/>
+    <field name="async_ack" start="1" size="1" type="uint" grade="inferred"/>
+    <field name="sync_ack" start="0" size="1" type="uint" grade="inferred"/>
+    <test value="0x318" kind="vector">
+      <expect field="sync_ack" value="0"/>
+      <expect field="async_ack" value="0"/>
+      <expect field="cs_width" value="6"/>
+      <expect field="cs_hold" value="4"/>
+      <expect field="cs_setup" value="0"/>
+    </test>
+    <test value="0x108c" kind="vector">
+      <expect field="sync_ack" value="0"/>
+      <expect field="async_ack" value="0"/>
+      <expect field="cs_width" value="3"/>
+      <expect field="cs_hold" value="2"/>
+      <expect field="cs_setup" value="4"/>
+    </test>
+    <test value="0x318c" kind="vector">
+      <expect field="cs_width" value="3"/>
+      <expect field="cs_hold" value="6"/>
+      <expect field="cs_setup" value="4"/>
+    </test>
+    <test value="0x6319" kind="vector">
+      <expect field="sync_ack" value="1"/>
+      <expect field="async_ack" value="0"/>
+      <expect field="cs_width" value="6"/>
+      <expect field="cs_hold" value="4"/>
+      <expect field="cs_setup" value="0"/>
+    </test>
+    <test value="0x631a" kind="vector">
+      <expect field="sync_ack" value="0"/>
+      <expect field="async_ack" value="1"/>
+      <expect field="cs_width" value="6"/>
+      <expect field="cs_hold" value="4"/>
+      <expect field="cs_setup" value="0"/>
+    </test>
+  </struct>
+  <struct name="BDVERS2" size="4" grade="established" from="driver and firmware readings">
+    <doc>Second board-version word, read 0x62488 above the board register
+base: the start of device 9's window, register select 1, one-byte width. The
+kernel's board-information routine loads it as a word and works only on its
+top byte (the first byte at that address). Bits 30:29 of the word, bits 6:5
+of that byte, are the product field. The value 1 takes the path with one
+engine and no second board, which is how a Solid Impact board is told from
+the others. Established from the routine's machine words, in the kernel
+object of the base distribution's graphics module; not a bus measurement.
+The byte's other bits (1:0 and 4:2) are split off and kept as well; their
+roles are not placed here. How board revision numbers map to products is
+inferred.</doc>
+    <field name="product" start="29" size="2" type="bdvers2_product" grade="established"/>
+    <test value="0x20000000" kind="example">
+      <expect field="product" value="1"/>
+    </test>
+  </struct>
+  <struct name="DCB_ADDR" size="4" grade="inferred" from="driver and firmware readings">
+    <field name="device" start="10" size="5" type="uint" grade="inferred"/>
+    <field name="crs" start="7" size="3" type="uint" grade="inferred"/>
+    <field name="endata_pack" start="6" size="1" type="uint" grade="inferred"/>
+    <field name="encrs_inc" start="5" size="1" type="uint" grade="inferred"/>
+    <field name="data_width" start="3" size="2" type="dcb_addr_data_width" grade="inferred"/>
+    <test value="0x8" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="0"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="0"/>
+    </test>
+    <test value="0x388" kind="example">
+      <expect field="data_width" value="1"/>
+      <expect field="crs" value="7"/>
+    </test>
+    <test value="0x2488" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="1"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="9"/>
+    </test>
+    <test value="0x2c08" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="0"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="11"/>
+    </test>
+    <test value="0x2c08" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="0"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="11"/>
+    </test>
+    <test value="0x2d08" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="2"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="11"/>
+    </test>
+    <test value="0x2d88" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="3"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="11"/>
+    </test>
+  </struct>
+  <struct name="GIO_ID" size="4" grade="inferred" from="driver and firmware readings">
+    <doc>Identification word read at the start of the board's window. The kernel's
+probe compares only bits 6:0 (must be 0x10), bit 16 (set), bit 17 (clear)
+and bits 31:18 (must be 1); bits 15:7 are not examined, so the split into
+revision and product below is a reading, not what the probe tests.</doc>
+    <field name="product" start="8" size="24" type="uint" grade="inferred"/>
+    <field name="revision" start="4" size="4" type="uint" grade="inferred"/>
+    <test value="0x50190" kind="vector">
+      <expect field="revision" value="9"/>
+      <expect field="product" value="1281"/>
+    </test>
+  </struct>
+  <struct name="MCO_ID" size="4" grade="established" from="driver and firmware readings">
+    <doc>Identification byte of the multi-channel option board (the byte at the
+index port's register select 0). The kernel's probe has two shapes,
+split by the host machine family and not by software release; both give
+the low nibble as the revision and report 0xff for no board. They are
+not interchangeable.
+ - Indigo2-class host kernels (the double-read shape): write 0xff and
+   read, write 0 and read again; the reads must match; present when the
+   value is 1 or its high nibble is 0xa.
+ - Octane and Origin host kernels (the single-read shape), identical in
+   both releases held: write 0xff, read one byte; present when its high
+   nibble is 4. No second write, no match test, and the byte read is at
+   a different offset from the byte written; whether those name one
+   register is unknown.
+Established from the probe routine's machine words in each held build,
+not a bus measurement. Not held: an Indigo2-class kernel from the later
+of the two releases, so its shape there is unknown. The build-by-build
+table is in docs/OPEN_QUESTIONS.md.</doc>
+    <field name="board" start="4" size="4" type="mco_id_board" grade="established"/>
+    <field name="revision" start="0" size="4" type="uint" grade="established"/>
+  </struct>
+  <struct name="MCO_INDEX" size="4" grade="established" from="driver and firmware readings">
+    <doc>Index byte of the multi-channel option board, written to the board's
+index port before each access to its data port. The high nibble picks a
+device, the low nibble a port on it. Banks 2 and 3 are the two
+true-colour DACs of the option, banks 0 and 1 its two overlay-palette
+DACs, and banks 8 to 10 its three control registers. Ports on a DAC are
+offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.</doc>
+    <field name="bank" start="4" size="4" type="mco_index_bank" grade="established"/>
+    <field name="port" start="0" size="4" type="uint" grade="established"/>
+    <test value="0x90" kind="vector">
+      <expect field="port" value="0"/>
+      <expect field="bank" value="9"/>
+    </test>
+  </struct>
+  <constant name="ADV473_PORT_ADDR" value="0x0" grade="established"/>
+  <constant name="ADV473_PORT_COMMAND" value="0x6" grade="established"/>
+  <constant name="ADV473_PORT_MASK" value="0x2" grade="inferred"/>
+  <constant name="ADV473_PORT_PALETTE" value="0x1" grade="established"/>
+  <constant name="ADV7162_BLANK_VALUE" value="0x0" grade="established"/>
+  <constant name="ADV7162_ID_VALUE" value="0x79" grade="established"/>
+  <constant name="ADV7162_PORT_DATA" value="0x2" grade="established"/>
+  <constant name="ADV7162_PORT_PALETTE" value="0x1" grade="established"/>
+  <constant name="ADV7162_PORT_POINTER" value="0x0" grade="established"/>
+  <constant name="ADV7162_PORT_PROBE" value="0x3" grade="unknown"/>
+  <constant name="ADV7162_REG_BLANK" value="0x4" grade="established"/>
+  <constant name="ADV7162_REG_ID" value="0x3" grade="established"/>
+  <constant name="ADV7162_RESTORE_VALUE" value="0xffff" grade="established"/>
+  <constant name="CMAP_ENTRIES" value="0x2000" grade="established"/>
+  <constant name="MCO_BANK_BASE_CH0" value="0x0" grade="established"/>
+  <constant name="MCO_BANK_BASE_CH1" value="0x20" grade="established"/>
+  <constant name="MCO_BANK_BASE_CH2" value="0x30" grade="established"/>
+  <constant name="MCO_BANK_BASE_CH3" value="0x0" grade="established"/>
+  <constant name="MCO_BANK_BASE_CH4" value="0x10" grade="established"/>
+  <constant name="MCO_DAC_LUT_ENTRIES" value="0x100" grade="established"/>
+  <constant name="MCO_DAC_LUT_ENTRY_BITS" value="0xa" grade="established"/>
+  <constant name="MCO_ID_ABSENT" value="0xff" grade="established"/>
+  <constant name="MCO_ID_PROBE_SINGLE_READ_OFFSET" value="0x70008" grade="established"/>
+  <constant name="MCO_ID_PROBE_SINGLE_TIMING_SELECT_FIRST" value="0x14" grade="established"/>
+  <constant name="MCO_ID_PROBE_SINGLE_TIMING_SELECT_SECOND" value="0x0" grade="established"/>
+  <constant name="MCO_ID_PROBE_SINGLE_WRITE_OFFSET" value="0x72c08" grade="established"/>
+  <constant name="MCO_ID_PROBE_WRITE_FIRST" value="0xff" grade="established"/>
+  <constant name="MCO_ID_PROBE_WRITE_SECOND" value="0x0" grade="established"/>
+  <constant name="MCO_ID_SPECIAL_PRESENT" value="0x1" grade="established"/>
+  <constant name="MCO_LOAD_CTRL_FIRST" value="0xfe" grade="established"/>
+  <constant name="MCO_LOAD_CTRL_SECOND" value="0x1" grade="established"/>
+  <constant name="MCO_LOAD_IMAGE_BYTES" value="0xf688" grade="established"/>
+  <constant name="MCO_LOAD_PAD_BYTES" value="0x14" grade="established"/>
+  <constant name="MCO_LOAD_STATUS_AFTER_SECOND" value="0x6" grade="established"/>
+  <constant name="MCO_LOAD_STATUS_FIRST" value="0x0" grade="established"/>
+  <constant name="MCO_SEL_FPGA_CTRL" value="0x1" grade="established"/>
+  <constant name="MCO_SEL_FPGA_DATA" value="0x0" grade="established"/>
+  <constant name="MCO_SEL_TIMING_DATA" value="0x5" grade="established"/>
+  <constant name="MCO_SEL_TIMING_RAM" value="0x7" grade="established"/>
+  <constant name="MCO_SEL_TIMING_REG" value="0x4" grade="established"/>
+</genxml>

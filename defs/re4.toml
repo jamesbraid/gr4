@@ -1,0 +1,800 @@
+unit = "re4"
+prefix = "RE"
+title = "raster engine register contract for the Impact graphics"
+doc = "Raster engine registers of the Impact graphics subsystem."
+from = "driver and traffic readings"
+public_from = ["driver and traffic readings"]
+
+[c]
+legacy_header = "RE4_DECODE.h"
+legacy_guard = "RE4_DECODE_H"
+
+[spaces.re4_regs]
+unit = "reg"
+
+[registers.tri_x_major]
+offset = 0xe000
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.tri_x_upper]
+offset = 0xe001
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.tri_x_lower]
+offset = 0xe002
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.tri_y_top]
+offset = 0xe003
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.tri_y_mid]
+offset = 0xe004
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.tri_y_bottom]
+offset = 0xe005
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.tri_slope_major_hi]
+offset = 0xe006
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.tri_slope_major_lo]
+offset = 0xe007
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.tri_slope_upper_hi]
+offset = 0xe008
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.tri_slope_upper_lo]
+offset = 0xe009
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.tri_slope_lower_hi]
+offset = 0xe00a
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.tri_slope_lower_lo]
+offset = 0xe00b
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.aaline_x_start]
+offset = 0xe00c
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.aaline_y_start]
+offset = 0xe00d
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.aaline_x_end]
+offset = 0xe00e
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.aaline_y_end]
+offset = 0xe00f
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.aaline_dx]
+offset = 0xe010
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.aaline_dy]
+offset = 0xe011
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.aaline_adjust]
+offset = 0xe012
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.instr]
+offset = 0xe013
+access = "w"
+width = 32
+grade = "established"
+doc = """
+Instruction register. A write that asks for execution runs the primitive
+it selects after the value lands. A second number reaches the same
+register for the 2D primitives."""
+space = "re4_regs"
+
+[registers.instr.fields]
+setup = { bits = [4, 4], grade = "established" }
+
+[registers.instr.fields.opcode]
+bits = [3, 0]
+grade = "established"
+
+[registers.instr.fields.opcode.enums]
+area_left_to_right = { value = 0, grade = "established" }
+area_right_to_left = { value = 1, grade = "established" }
+aaline = { value = 2, grade = "established" }
+point = { value = 4, grade = "established" }
+line = { value = 5, grade = "established" }
+block = { value = 8, grade = "established" }
+
+[[registers.instr.tests]]
+value = 0x15
+expect = { opcode = 5, setup = 1 }
+
+[[registers.instr.tests]]
+value = 0x18
+expect = { opcode = 8, setup = 1 }
+
+[registers.line_xy_start]
+offset = 0xe040
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.line_xy_end]
+offset = 0xe041
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.line_step_a]
+offset = 0xe042
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.line_step_b]
+offset = 0xe043
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.line_error_octant]
+offset = 0xe044
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.instr_alias]
+offset = 0xe045
+access = "w"
+width = 32
+grade = "established"
+space = "re4_regs"
+
+[registers.block_xy_start]
+offset = 0xe046
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.block_xy_end]
+offset = 0xe047
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.block_xy_move]
+offset = 0xe048
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.block_saved_octant]
+offset = 0xe049
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_packed]
+offset = 0xe05b
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_red]
+offset = 0xe05c
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_green]
+offset = 0xe05d
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_blue]
+offset = 0xe05e
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_alpha]
+offset = 0xe05f
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_red_edge]
+offset = 0xe060
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_red_span]
+offset = 0xe061
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_green_edge]
+offset = 0xe062
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_green_span]
+offset = 0xe063
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_blue_edge]
+offset = 0xe064
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_blue_span]
+offset = 0xe065
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_alpha_edge]
+offset = 0xe066
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.color_alpha_span]
+offset = 0xe067
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.depth_hi]
+offset = 0xe068
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.depth_lo]
+offset = 0xe069
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.depth_span_hi]
+offset = 0xe06a
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.depth_span_lo]
+offset = 0xe06b
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.depth_edge_hi]
+offset = 0xe06c
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.depth_edge_lo]
+offset = 0xe06d
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.glyph_hi]
+offset = 0xe070
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.glyph_lo]
+offset = 0xe071
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.xfer_abort]
+offset = 0xe100
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.xfer_control]
+offset = 0xe102
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.xfer_control.fields]
+busy = { bits = [4, 4], grade = "inferred" }
+read = { bits = [3, 3], grade = "inferred" }
+pio_start = { bits = [1, 1], grade = "inferred" }
+dma_start = { bits = [0, 0], grade = "inferred" }
+
+[registers.xfer_control.fields.device]
+bits = [2, 2]
+grade = "inferred"
+
+[registers.xfer_control.fields.device.enums]
+framebuffer = { value = 0, grade = "inferred" }
+texture_memory = { value = 1, grade = "inferred" }
+
+[registers.fill_mode]
+offset = 0xe110
+access = "rw"
+width = 32
+grade = "inferred"
+doc = """
+Fill mode. Bits 3, 4, 5, 6, 7 and 10 and the block type are placed from
+the drivers; the enables for shading, rounding, depth iteration and the
+antialiasing of lines and points exist but are not placed."""
+space = "re4_regs"
+
+[registers.fill_mode.fields]
+fast_fill = { bits = [20, 20], grade = "inferred" }
+skip_last_pixel = { bits = [10, 10], grade = "inferred" }
+line_advance = { bits = [7, 7], grade = "inferred" }
+line_opaque = { bits = [6, 6], grade = "inferred" }
+line_stipple = { bits = [5, 5], grade = "inferred" }
+glyph_opaque = { bits = [4, 4], grade = "inferred" }
+glyph_stipple = { bits = [3, 3], grade = "inferred" }
+poly_stipple = { bits = [0, 0], grade = "inferred" }
+
+[registers.fill_mode.fields.block_type]
+bits = [24, 22]
+grade = "inferred"
+
+[registers.fill_mode.fields.block_type.enums]
+glyph_data = { value = 0, grade = "inferred" }
+stippled_block = { value = 1, grade = "inferred" }
+pio_read = { value = 2, grade = "inferred" }
+pio_write = { value = 3, grade = "inferred" }
+dma_read = { value = 4, grade = "inferred" }
+dma_write = { value = 5, grade = "inferred" }
+
+[[registers.fill_mode.tests]]
+value = 0x418008
+expect = { glyph_stipple = 1, block_type = 1 }
+
+[registers.texmode1]
+offset = 0xe111
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.config]
+offset = 0xe112
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.config.fields]
+line_round = { bits = [4, 4], grade = "inferred" }
+y_flip = { bits = [3, 3], grade = "inferred" }
+target_raster = { bits = [0, 0], grade = "inferred" }
+
+[registers.scissor_x]
+offset = 0xe113
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.scissor_y]
+offset = 0xe114
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.window_origin]
+offset = 0xe115
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.background_rg]
+offset = 0xe140
+access = "rw"
+width = 32
+grade = "inferred"
+doc = """
+Colours shared with the texture engine and double buffered. Opaque
+stipples draw their zero bits in the background colour: in RGB modes it is
+twelve bits per component, red lowest like the packed colour, green and
+red in the first register and blue in the second; in colour-index modes
+the index sits in the low twelve bits of the first."""
+space = "re4_regs"
+
+[registers.background_ba]
+offset = 0xe141
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.texenv_rg]
+offset = 0xe142
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.texenv_b]
+offset = 0xe143
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.fog_rg]
+offset = 0xe144
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.fog_b]
+offset = 0xe145
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.aaline_config]
+offset = 0xe146
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.aaline_config.fields]
+width = { bits = [7, 1], grade = "inferred" }
+smooth = { bits = [0, 0], grade = "inferred" }
+
+[registers.screen_mask1_x]
+offset = 0xe147
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.screen_mask1_y]
+offset = 0xe148
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.screen_mask2_x]
+offset = 0xe149
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.screen_mask2_y]
+offset = 0xe14a
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.screen_mask3_x]
+offset = 0xe14b
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.screen_mask3_y]
+offset = 0xe14c
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.screen_mask4_x]
+offset = 0xe14d
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.screen_mask4_y]
+offset = 0xe14e
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.window_mode]
+offset = 0xe14f
+access = "rw"
+width = 32
+grade = "inferred"
+doc = """
+Window mode: per mask n (1 to 4) an enable at bit n-1 and an inside/outside
+select at bit n+3. Only mask 1 has been seen used (value 0x11: enabled, keep
+pixels inside); the positions for masks 2 to 4 follow by pattern."""
+space = "re4_regs"
+
+[registers.window_mode.fields]
+inside4 = { bits = [7, 7], grade = "inferred" }
+inside3 = { bits = [6, 6], grade = "inferred" }
+inside2 = { bits = [5, 5], grade = "inferred" }
+inside1 = { bits = [4, 4], grade = "inferred" }
+enable4 = { bits = [3, 3], grade = "inferred" }
+enable3 = { bits = [2, 2], grade = "inferred" }
+enable2 = { bits = [1, 1], grade = "inferred" }
+enable1 = { bits = [0, 0], grade = "inferred" }
+
+[registers.xfer_size]
+offset = 0xe153
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.xfer_size.fields]
+lines = { bits = [31, 16], grade = "inferred" }
+width = { bits = [15, 0], grade = "inferred" }
+
+[registers.xfer_zoom_init]
+offset = 0xe154
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.xfer_zoom_step]
+offset = 0xe155
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.xfer_mask_lo]
+offset = 0xe156
+access = "rw"
+width = 32
+grade = "inferred"
+doc = """
+Zoom encoding: both registers hold 8.8 fixed point, 0x100 meaning a factor of
+1.0 (no zoom). Established: the library's host-to-raster setup routines write
+the pair this way, and the no-zoom path stores 0x100 in both. The magnifying
+and shrinking arithmetic that derives other values is inferred and not
+stated here.
+
+#define RE_XFER_ZOOM_UNITY 0x100 /* established"""
+space = "re4_regs"
+
+[registers.xfer_mask_hi]
+offset = 0xe157
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.xfer_counters]
+offset = 0xe158
+access = "r"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.xfer_mode]
+offset = 0xe159
+access = "rw"
+width = 32
+grade = "inferred"
+doc = """
+Transfer mode. Placed from what the drivers write: component type in 3:0,
+pixel format in 7:4, begin skip bytes in 10:8, begin skip bits in 13:11,
+stride skip bytes in 16:14 (three bits in every writer read), zoom in 19,
+decimate in 20, RGB order in 22, and bit 23 set for every pixel draw.
+Bits 17 and 18 are one-bit flags the shipped library sets or clears (it
+sets 18 in its default state and clears 17 to 20 in the copy paths); what
+they do is not known, and the unpack-order and read-mask flags are among
+bits 17, 18 and 21. Bit 21 is never written by software examined."""
+space = "re4_regs"
+
+[registers.xfer_mode.fields]
+opaque = { bits = [23, 23], grade = "inferred" }
+rgb_order = { bits = [22, 22], grade = "inferred" }
+decimate = { bits = [20, 20], grade = "inferred" }
+zoom = { bits = [19, 19], grade = "inferred" }
+flag18 = { bits = [18, 18], grade = "inferred" }
+flag17 = { bits = [17, 17], grade = "inferred" }
+stride_skip_bytes = { bits = [16, 14], grade = "inferred" }
+begin_skip_bits = { bits = [13, 11], grade = "inferred" }
+begin_skip_bytes = { bits = [10, 8], grade = "inferred" }
+comp_type = { bits = [3, 0], grade = "inferred" }
+
+[registers.xfer_mode.fields.format]
+bits = [7, 4]
+grade = "inferred"
+
+[registers.xfer_mode.fields.format.enums]
+color_index = { value = 0, grade = "inferred" }
+stencil = { value = 1, grade = "inferred" }
+depth = { value = 2, grade = "inferred" }
+rgb = { value = 7, grade = "inferred" }
+rgba = { value = 8, grade = "inferred" }
+
+[[registers.xfer_mode.tests]]
+value = 0x40080
+expect = { comp_type = 0, format = 8, flag18 = 1, stride_skip_bytes = 0 }
+
+[[registers.xfer_mode.tests]]
+value = 0xc00080
+expect = { comp_type = 0, format = 8, begin_skip_bytes = 0, stride_skip_bytes = 0, flag18 = 0, rgb_order = 1, opaque = 1 }
+
+[[registers.xfer_mode.tests]]
+value = 0xc10080
+expect = { comp_type = 0, format = 8, begin_skip_bytes = 0, stride_skip_bytes = 4, flag18 = 0, rgb_order = 1, opaque = 1 }
+
+[[registers.xfer_mode.tests]]
+value = 0xc10480
+expect = { comp_type = 0, format = 8, begin_skip_bytes = 4, stride_skip_bytes = 4, flag18 = 0, rgb_order = 1, opaque = 1 }
+
+[registers.line_stipple_pattern]
+offset = 0xe15a
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.line_stipple_repeat]
+offset = 0xe15b
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.device_addr]
+offset = 0xe15c
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.device_data]
+offset = 0xe15d
+access = "rw"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.status]
+offset = 0xe15e
+access = "r"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[registers.status.fields]
+pixel_busy = { bits = [10, 10], grade = "inferred" }
+raster_busy = { bits = [9, 9], grade = "inferred" }
+fifo_empty = { bits = [8, 8], grade = "inferred" }
+revision = { bits = [7, 4], grade = "inferred" }
+board_index = { bits = [3, 2], grade = "inferred" }
+chip_count = { bits = [1, 0], grade = "inferred" }
+
+[registers.toggle_context]
+offset = 0xe15f
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+
+[constants]
+XFER_ZOOM_UNITY = { value = 0x100, grade = "established" }

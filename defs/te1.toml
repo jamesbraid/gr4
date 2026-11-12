@@ -1,0 +1,82 @@
+unit = "te1"
+prefix = "TE"
+title = "texture RAM revision words of the Impact graphics subsystem"
+doc = "Texture RAM revision words and loader registers of the Impact graphics subsystem."
+from = "driver readings"
+public_from = ["driver readings", "diagnostic transcript"]
+
+[c]
+legacy_header = "TE1_DECODE.h"
+legacy_guard = "TE1_DECODE_H"
+
+[spaces.te1_regs]
+unit = "reg"
+
+[registers.tx_mipmap]
+offset = 0xf191
+access = "w"
+width = 32
+grade = "established"
+space = "te1_regs"
+
+[registers.tx_mipmap.fields]
+bank = { bits = [15, 8], grade = "inferred" }
+page = { bits = [7, 0], grade = "inferred" }
+
+[registers.tl_mode]
+offset = 0xf1a1
+access = "w"
+width = 32
+grade = "established"
+space = "te1_regs"
+
+[registers.tl_mode.fields]
+fixed = { bits = [18, 16], grade = "established" }
+bit14 = { bits = [14, 14], grade = "inferred" }
+enables = { bits = [12, 9], grade = "inferred" }
+flag8 = { bits = [8, 8], grade = "inferred" }
+component_depth = { bits = [6, 5], grade = "inferred" }
+cell_slot = { bits = [4, 3], grade = "inferred" }
+components_minus_1 = { bits = [2, 1], grade = "inferred" }
+
+[[registers.tl_mode.tests]]
+value = 0x34e26
+expect = { components_minus_1 = 3, cell_slot = 0, component_depth = 1, flag8 = 0, enables = 7, bit14 = 1, fixed = 3 }
+
+[[registers.tl_mode.tests]]
+value = 0x35a26
+expect = { components_minus_1 = 3, cell_slot = 0, component_depth = 1, flag8 = 0, enables = 13, bit14 = 1, fixed = 3 }
+
+[registers.tl_spec]
+offset = 0xf1a2
+access = "w"
+width = 32
+grade = "established"
+space = "te1_regs"
+
+[registers.tl_addr]
+offset = 0xf1a3
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+
+[registers.tl_mipmap]
+offset = 0xf1a4
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+
+[registers.tl_border]
+offset = 0xf1a5
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+
+[constants]
+TRAM_REV_WORD0 = { value = 0x1c011401, grade = "established", doc = "diagnostic", from = "diagnostic transcript" }
+TRAM_REV_WORD0_HIGH_HALF = { value = 0x1c01, grade = "established", doc = "diagnostic", from = "diagnostic transcript" }
+TRAM_REV_WORD0_LOW_HALF = { value = 0x1401, grade = "established", doc = "diagnostic", from = "diagnostic transcript" }
+TRAM_REV_WORD1 = { value = 0xc000400, grade = "established", doc = "diagnostic", from = "diagnostic transcript" }

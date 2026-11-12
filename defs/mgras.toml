@@ -1,0 +1,250 @@
+unit = "mgras"
+prefix = "MGRAS"
+title = "board-level words of the Impact graphics subsystem"
+doc = "Board-level words of the Impact graphics subsystem."
+from = "driver and firmware readings"
+public_from = ["driver and firmware readings"]
+
+[c]
+legacy_header = "MGRAS_DECODE.h"
+legacy_guard = "MGRAS_DECODE_H"
+
+[registers.dcb_ctrl]
+offset = 0xa000
+access = "rw"
+width = 32
+grade = "inferred"
+count = 12
+
+[registers.dcb_ctrl.fields]
+cs_setup = { bits = [12, 10], grade = "inferred" }
+cs_hold = { bits = [8, 6], grade = "inferred" }
+cs_width = { bits = [4, 2], grade = "inferred" }
+async_ack = { bits = [1, 1], grade = "inferred" }
+sync_ack = { bits = [0, 0], grade = "inferred" }
+
+[[registers.dcb_ctrl.tests]]
+value = 0x318
+expect = { sync_ack = 0, async_ack = 0, cs_width = 6, cs_hold = 4, cs_setup = 0 }
+
+[[registers.dcb_ctrl.tests]]
+value = 0x108c
+expect = { sync_ack = 0, async_ack = 0, cs_width = 3, cs_hold = 2, cs_setup = 4 }
+
+[[registers.dcb_ctrl.tests]]
+value = 0x318c
+expect = { cs_width = 3, cs_hold = 6, cs_setup = 4 }
+
+[[registers.dcb_ctrl.tests]]
+value = 0x6319
+expect = { sync_ack = 1, async_ack = 0, cs_width = 6, cs_hold = 4, cs_setup = 0 }
+
+[[registers.dcb_ctrl.tests]]
+value = 0x631a
+expect = { sync_ack = 0, async_ack = 1, cs_width = 6, cs_hold = 4, cs_setup = 0 }
+
+[words.BDVERS2]
+width = 32
+doc = """
+Second board-version word, read 0x62488 above the board register
+base: the start of device 9's window, register select 1, one-byte width. The
+kernel's board-information routine loads it as a word and works only on its
+top byte (the first byte at that address). Bits 30:29 of the word, bits 6:5
+of that byte, are the product field. The value 1 takes the path with one
+engine and no second board, which is how a Solid Impact board is told from
+the others. Established from the routine's machine words, in the kernel
+object of the base distribution's graphics module; not a bus measurement.
+The byte's other bits (1:0 and 4:2) are split off and kept as well; their
+roles are not placed here. How board revision numbers map to products is
+inferred."""
+grade = "established"
+
+[words.BDVERS2.fields.product]
+bits = [30, 29]
+grade = "established"
+
+[words.BDVERS2.fields.product.enums]
+solid_impact = { value = 1, grade = "established" }
+
+[[words.BDVERS2.tests]]
+value = 0x20000000
+kind = "example"
+expect = { product = 1 }
+
+[words.DCB_ADDR]
+width = 32
+grade = "inferred"
+
+[words.DCB_ADDR.fields]
+device = { bits = [14, 10], grade = "inferred" }
+crs = { bits = [9, 7], grade = "inferred" }
+endata_pack = { bits = [6, 6], grade = "inferred" }
+encrs_inc = { bits = [5, 5], grade = "inferred" }
+
+[words.DCB_ADDR.fields.data_width]
+bits = [4, 3]
+grade = "inferred"
+
+[words.DCB_ADDR.fields.data_width.enums]
+four_bytes = { value = 0, grade = "inferred" }
+one_byte = { value = 1, grade = "inferred" }
+two_bytes = { value = 2, grade = "inferred" }
+three_bytes = { value = 3, grade = "inferred" }
+
+[[words.DCB_ADDR.tests]]
+value = 0x8
+kind = "example"
+expect = { encrs_inc = 0, endata_pack = 0, crs = 0, data_width = 1, device = 0 }
+
+[[words.DCB_ADDR.tests]]
+value = 0x388
+kind = "example"
+expect = { data_width = 1, crs = 7 }
+
+[[words.DCB_ADDR.tests]]
+value = 0x2488
+kind = "example"
+expect = { encrs_inc = 0, endata_pack = 0, crs = 1, data_width = 1, device = 9 }
+
+[[words.DCB_ADDR.tests]]
+value = 0x2c08
+kind = "example"
+expect = { encrs_inc = 0, endata_pack = 0, crs = 0, data_width = 1, device = 11 }
+
+[[words.DCB_ADDR.tests]]
+value = 0x2c08
+kind = "example"
+expect = { encrs_inc = 0, endata_pack = 0, crs = 0, data_width = 1, device = 11 }
+
+[[words.DCB_ADDR.tests]]
+value = 0x2d08
+kind = "example"
+expect = { encrs_inc = 0, endata_pack = 0, crs = 2, data_width = 1, device = 11 }
+
+[[words.DCB_ADDR.tests]]
+value = 0x2d88
+kind = "example"
+expect = { encrs_inc = 0, endata_pack = 0, crs = 3, data_width = 1, device = 11 }
+
+[words.GIO_ID]
+width = 32
+doc = """
+Identification word read at the start of the board's window. The kernel's
+probe compares only bits 6:0 (must be 0x10), bit 16 (set), bit 17 (clear)
+and bits 31:18 (must be 1); bits 15:7 are not examined, so the split into
+revision and product below is a reading, not what the probe tests."""
+grade = "inferred"
+
+[words.GIO_ID.fields]
+product = { bits = [31, 8], grade = "inferred" }
+revision = { bits = [7, 4], grade = "inferred" }
+
+[[words.GIO_ID.tests]]
+value = 0x50190
+expect = { revision = 9, product = 1281 }
+
+[words.MCO_ID]
+width = 32
+doc = """
+Identification byte of the multi-channel option board (the byte at the
+index port's register select 0). The kernel's probe has two shapes,
+split by the host machine family and not by software release; both give
+the low nibble as the revision and report 0xff for no board. They are
+not interchangeable.
+ - Indigo2-class host kernels (the double-read shape): write 0xff and
+   read, write 0 and read again; the reads must match; present when the
+   value is 1 or its high nibble is 0xa.
+ - Octane and Origin host kernels (the single-read shape), identical in
+   both releases held: write 0xff, read one byte; present when its high
+   nibble is 4. No second write, no match test, and the byte read is at
+   a different offset from the byte written; whether those name one
+   register is unknown.
+Established from the probe routine's machine words in each held build,
+not a bus measurement. Not held: an Indigo2-class kernel from the later
+of the two releases, so its shape there is unknown. The build-by-build
+table is in docs/OPEN_QUESTIONS.md."""
+grade = "established"
+
+[words.MCO_ID.fields]
+revision = { bits = [3, 0], grade = "established" }
+
+[words.MCO_ID.fields.board]
+bits = [7, 4]
+grade = "established"
+
+[words.MCO_ID.fields.board.enums]
+present_single_read = { value = 4, grade = "established" }
+present = { value = 10, grade = "established" }
+
+[words.MCO_INDEX]
+width = 32
+doc = """
+Index byte of the multi-channel option board, written to the board's
+index port before each access to its data port. The high nibble picks a
+device, the low nibble a port on it. Banks 2 and 3 are the two
+true-colour DACs of the option, banks 0 and 1 its two overlay-palette
+DACs, and banks 8 to 10 its three control registers. Ports on a DAC are
+offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md."""
+grade = "established"
+
+[words.MCO_INDEX.fields]
+port = { bits = [3, 0], grade = "established" }
+
+[words.MCO_INDEX.fields.bank]
+bits = [7, 4]
+grade = "established"
+
+[words.MCO_INDEX.fields.bank.enums]
+overlay_dac_a = { value = 0, grade = "established" }
+overlay_dac_b = { value = 1, grade = "established" }
+true_colour_dac_a = { value = 2, grade = "established" }
+true_colour_dac_b = { value = 3, grade = "established" }
+control_1 = { value = 8, grade = "established" }
+control_2 = { value = 9, grade = "established" }
+control_3 = { value = 10, grade = "established" }
+
+[[words.MCO_INDEX.tests]]
+value = 0x90
+expect = { port = 0, bank = 9 }
+
+[constants]
+ADV473_PORT_ADDR = { value = 0x0, grade = "established" }
+ADV473_PORT_COMMAND = { value = 0x6, grade = "established", doc = "as a write, role inferred" }
+ADV473_PORT_MASK = { value = 0x2, grade = "inferred" }
+ADV473_PORT_PALETTE = { value = 0x1, grade = "established" }
+ADV7162_BLANK_VALUE = { value = 0x0, grade = "established" }
+ADV7162_ID_VALUE = { value = 0x79, grade = "established" }
+ADV7162_PORT_DATA = { value = 0x2, grade = "established" }
+ADV7162_PORT_PALETTE = { value = 0x1, grade = "established" }
+ADV7162_PORT_POINTER = { value = 0x0, grade = "established" }
+ADV7162_PORT_PROBE = { value = 0x3, grade = "unknown" }
+ADV7162_REG_BLANK = { value = 0x4, grade = "established" }
+ADV7162_REG_ID = { value = 0x3, grade = "established" }
+ADV7162_RESTORE_VALUE = { value = 0xffff, grade = "established" }
+CMAP_ENTRIES = { value = 0x2000, grade = "established", doc = "per map; 24-bit width inferred" }
+MCO_BANK_BASE_CH0 = { value = 0x0, grade = "established" }
+MCO_BANK_BASE_CH1 = { value = 0x20, grade = "established" }
+MCO_BANK_BASE_CH2 = { value = 0x30, grade = "established" }
+MCO_BANK_BASE_CH3 = { value = 0x0, grade = "established" }
+MCO_BANK_BASE_CH4 = { value = 0x10, grade = "established" }
+MCO_DAC_LUT_ENTRIES = { value = 0x100, grade = "established", doc = "option channels, per colour" }
+MCO_DAC_LUT_ENTRY_BITS = { value = 0xa, grade = "established", doc = "ADV7162 channels only" }
+MCO_ID_ABSENT = { value = 0xff, grade = "established", doc = "probe result for no board, both shapes" }
+MCO_ID_PROBE_SINGLE_READ_OFFSET = { value = 0x70008, grade = "established", doc = "single-read shape only" }
+MCO_ID_PROBE_SINGLE_TIMING_SELECT_FIRST = { value = 0x14, grade = "established", doc = "single-read shape only" }
+MCO_ID_PROBE_SINGLE_TIMING_SELECT_SECOND = { value = 0x0, grade = "established", doc = "single-read shape only" }
+MCO_ID_PROBE_SINGLE_WRITE_OFFSET = { value = 0x72c08, grade = "established", doc = "single-read shape only" }
+MCO_ID_PROBE_WRITE_FIRST = { value = 0xff, grade = "established", doc = "both shapes" }
+MCO_ID_PROBE_WRITE_SECOND = { value = 0x0, grade = "established", doc = "double-read shape only" }
+MCO_ID_SPECIAL_PRESENT = { value = 0x1, grade = "established", doc = "a whole-byte value also accepted, double-read shape only" }
+MCO_LOAD_CTRL_FIRST = { value = 0xfe, grade = "established" }
+MCO_LOAD_CTRL_SECOND = { value = 0x1, grade = "established" }
+MCO_LOAD_IMAGE_BYTES = { value = 0xf688, grade = "established" }
+MCO_LOAD_PAD_BYTES = { value = 0x14, grade = "established" }
+MCO_LOAD_STATUS_AFTER_SECOND = { value = 0x6, grade = "established" }
+MCO_LOAD_STATUS_FIRST = { value = 0x0, grade = "established" }
+MCO_SEL_FPGA_CTRL = { value = 0x1, grade = "established" }
+MCO_SEL_FPGA_DATA = { value = 0x0, grade = "established" }
+MCO_SEL_TIMING_DATA = { value = 0x5, grade = "established" }
+MCO_SEL_TIMING_RAM = { value = 0x7, grade = "established" }
+MCO_SEL_TIMING_REG = { value = 0x4, grade = "established" }

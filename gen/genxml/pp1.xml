@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<!-- generated from defs/pp1.toml by defs-gen - do not edit, change the source -->
+<genxml unit="pp1" prefix="PP" title="display read buffer registers of the Impact graphics" from="driver readings">
+  <doc>Display read buffer registers of the Impact graphics subsystem.</doc>
+  <space name="pp1_regs" unit="reg"/>
+  <struct name="DRB_POINTERS" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf16d" access="w" space="pp1_regs" reset="unknown">
+    <field name="page_b" start="10" size="10" type="uint" grade="established"/>
+    <field name="page_a" start="0" size="10" type="uint" grade="established"/>
+    <test value="0x101c0" kind="vector">
+      <expect field="page_a" value="448"/>
+      <expect field="page_b" value="64"/>
+    </test>
+    <test value="0x380e0" kind="vector">
+      <expect field="page_a" value="224"/>
+      <expect field="page_b" value="224"/>
+    </test>
+    <test value="0x90240" kind="vector">
+      <expect field="page_a" value="576"/>
+      <expect field="page_b" value="576"/>
+    </test>
+    <test value="0xc8240" kind="vector">
+      <expect field="page_a" value="576"/>
+      <expect field="page_b" value="800"/>
+    </test>
+  </struct>
+  <struct name="DRB_SIZE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf16e" access="w" space="pp1_regs" reset="unknown">
+    <field name="auto_flush_off" start="10" size="1" type="uint" grade="inferred"/>
+    <field name="dma_line_count_mask" start="8" size="2" type="uint" grade="inferred"/>
+    <field name="raster_engines_minus_1" start="6" size="2" type="uint" grade="established"/>
+    <field name="xtiles36" start="2" size="4" type="uint" grade="established"/>
+    <field name="xtiles9" start="0" size="2" type="uint" grade="established"/>
+    <test value="0x25a" kind="vector">
+      <expect field="xtiles9" value="2"/>
+      <expect field="xtiles36" value="6"/>
+      <expect field="raster_engines_minus_1" value="1"/>
+      <expect field="dma_line_count_mask" value="2"/>
+      <expect field="auto_flush_off" value="0"/>
+    </test>
+    <test value="0x31a" kind="vector">
+      <expect field="xtiles9" value="2"/>
+      <expect field="xtiles36" value="6"/>
+      <expect field="raster_engines_minus_1" value="0"/>
+      <expect field="dma_line_count_mask" value="3"/>
+      <expect field="auto_flush_off" value="0"/>
+    </test>
+  </struct>
+  <constant name="DRB_POINTERS_COMMAND_WORD" value="0x196d04" grade="established"/>
+  <constant name="DRB_SIZE_COMMAND_WORD" value="0x196e04" grade="established"/>
+</genxml>

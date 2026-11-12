@@ -1,0 +1,161 @@
+unit = "ge11"
+prefix = "GE"
+title = "geometry engine control registers for the Impact graphics subsystem"
+doc = "Geometry engine control registers of the Impact graphics subsystem."
+from = "driver and diagnostic readings"
+public_from = ["driver and diagnostic readings"]
+
+[c]
+legacy_header = "GE11_DECODE.h"
+legacy_guard = "GE11_DECODE_H"
+
+[spaces.ge11_regs]
+unit = "reg"
+
+[registers.exec_control]
+offset = 0xd000
+access = "rw"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.exec_control.fields]
+reset = { bits = [7, 7], grade = "inferred" }
+single_step = { bits = [6, 6], grade = "inferred" }
+breakpoint_enable = { bits = [5, 5], grade = "inferred" }
+latency3 = { bits = [4, 4], grade = "inferred" }
+go = { bits = [0, 0], grade = "inferred" }
+
+[[registers.exec_control.tests]]
+value = 0x71
+kind = "example"
+expect = { go = 1, latency3 = 1, breakpoint_enable = 1, single_step = 1, reset = 0x0 }
+
+[[registers.exec_control.tests]]
+value = 0xc1
+kind = "example"
+expect = { go = 1, latency3 = 0, breakpoint_enable = 0, single_step = 1, reset = 0x1 }
+
+[registers.breakpoint_pc]
+offset = 0xd001
+access = "rw"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ramscan_control]
+offset = 0xd002
+access = "rw"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ramscan_control.fields]
+scan_mode = { bits = [18, 18], grade = "inferred" }
+fast_mode = { bits = [17, 17], grade = "inferred" }
+
+[registers.wsync_fifo_control]
+offset = 0xd003
+access = "rw"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.wsync_fifo_control.fields]
+watermark = { bits = [7, 4], grade = "inferred" }
+disable = { bits = [0, 0], grade = "inferred" }
+
+[registers.diag_select]
+offset = 0xd004
+access = "rw"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.diag_select.fields]
+read_enable = { bits = [18, 18], grade = "inferred" }
+input_select = { bits = [8, 8], grade = "inferred" }
+breakpoint_stall = { bits = [5, 5], grade = "inferred" }
+
+[registers.enable_mask]
+offset = 0xd005
+access = "rw"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ofifo_tag_config]
+offset = 0xd006
+access = "rw"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ucode_error]
+offset = 0xd007
+access = "rw"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ofifo0_a_status]
+offset = 0xd008
+access = "r"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ofifo0_b_status]
+offset = 0xd009
+access = "r"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ofifo1_a_status]
+offset = 0xd00a
+access = "r"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ofifo1_b_status]
+offset = 0xd00b
+access = "r"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ofifo2_a_status]
+offset = 0xd00c
+access = "r"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ofifo2_b_status]
+offset = 0xd00d
+access = "r"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ofifo_control]
+offset = 0xd00e
+access = "rw"
+width = 32
+grade = "inferred"
+space = "ge11_regs"
+
+[registers.ofifo_control.fields]
+route_to_host_if = { bits = [8, 8], grade = "inferred" }
+watermark = { bits = [7, 1], grade = "inferred" }
+diag_mode = { bits = [0, 0], grade = "inferred" }
+
+[[registers.ofifo_control.tests]]
+value = 0x70
+kind = "example"
+expect = { diag_mode = 0, watermark = 56 }
+
+[constants]
+OFIFO_WATERMARK_DEFAULT = { value = 0x38, grade = "inferred" }

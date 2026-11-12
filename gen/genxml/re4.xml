@@ -1,0 +1,332 @@
+<?xml version="1.0" ?>
+<!-- generated from defs/re4.toml by defs-gen - do not edit, change the source -->
+<genxml unit="re4" prefix="RE" title="raster engine register contract for the Impact graphics" from="driver and traffic readings">
+  <doc>Raster engine registers of the Impact graphics subsystem.</doc>
+  <space name="re4_regs" unit="reg"/>
+  <enum name="instr_opcode">
+    <value name="area_left_to_right" value="0" grade="established"/>
+    <value name="area_right_to_left" value="1" grade="established"/>
+    <value name="aaline" value="2" grade="established"/>
+    <value name="point" value="4" grade="established"/>
+    <value name="line" value="5" grade="established"/>
+    <value name="block" value="8" grade="established"/>
+  </enum>
+  <enum name="xfer_control_device">
+    <value name="framebuffer" value="0" grade="inferred"/>
+    <value name="texture_memory" value="1" grade="inferred"/>
+  </enum>
+  <enum name="fill_mode_block_type">
+    <value name="glyph_data" value="0" grade="inferred"/>
+    <value name="stippled_block" value="1" grade="inferred"/>
+    <value name="pio_read" value="2" grade="inferred"/>
+    <value name="pio_write" value="3" grade="inferred"/>
+    <value name="dma_read" value="4" grade="inferred"/>
+    <value name="dma_write" value="5" grade="inferred"/>
+  </enum>
+  <enum name="xfer_mode_format">
+    <value name="color_index" value="0" grade="inferred"/>
+    <value name="stencil" value="1" grade="inferred"/>
+    <value name="depth" value="2" grade="inferred"/>
+    <value name="rgb" value="7" grade="inferred"/>
+    <value name="rgba" value="8" grade="inferred"/>
+  </enum>
+  <struct name="TRI_X_MAJOR" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe000" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TRI_X_UPPER" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe001" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TRI_X_LOWER" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe002" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TRI_Y_TOP" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe003" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TRI_Y_MID" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe004" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TRI_Y_BOTTOM" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe005" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TRI_SLOPE_MAJOR_HI" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe006" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TRI_SLOPE_MAJOR_LO" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe007" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TRI_SLOPE_UPPER_HI" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe008" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TRI_SLOPE_UPPER_LO" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe009" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TRI_SLOPE_LOWER_HI" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe00a" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TRI_SLOPE_LOWER_LO" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe00b" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="AALINE_X_START" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe00c" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="AALINE_Y_START" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe00d" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="AALINE_X_END" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe00e" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="AALINE_Y_END" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe00f" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="AALINE_DX" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe010" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="AALINE_DY" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe011" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="AALINE_ADJUST" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe012" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="INSTR" size="4" grade="established" from="driver and traffic readings" register="yes" offset="0xe013" access="w" space="re4_regs" reset="unknown">
+    <doc>Instruction register. A write that asks for execution runs the primitive
+it selects after the value lands. A second number reaches the same
+register for the 2D primitives.</doc>
+    <field name="setup" start="4" size="1" type="uint" grade="established"/>
+    <field name="opcode" start="0" size="4" type="instr_opcode" grade="established"/>
+    <test value="0x15" kind="vector">
+      <expect field="opcode" value="5"/>
+      <expect field="setup" value="1"/>
+    </test>
+    <test value="0x18" kind="vector">
+      <expect field="opcode" value="8"/>
+      <expect field="setup" value="1"/>
+    </test>
+  </struct>
+  <struct name="LINE_XY_START" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe040" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="LINE_XY_END" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe041" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="LINE_STEP_A" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe042" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="LINE_STEP_B" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe043" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="LINE_ERROR_OCTANT" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe044" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="INSTR_ALIAS" size="4" grade="established" from="driver and traffic readings" register="yes" offset="0xe045" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="BLOCK_XY_START" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe046" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="BLOCK_XY_END" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe047" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="BLOCK_XY_MOVE" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe048" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="BLOCK_SAVED_OCTANT" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe049" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_PACKED" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe05b" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_RED" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe05c" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_GREEN" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe05d" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_BLUE" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe05e" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_ALPHA" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe05f" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_RED_EDGE" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe060" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_RED_SPAN" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe061" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_GREEN_EDGE" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe062" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_GREEN_SPAN" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe063" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_BLUE_EDGE" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe064" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_BLUE_SPAN" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe065" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_ALPHA_EDGE" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe066" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="COLOR_ALPHA_SPAN" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe067" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="DEPTH_HI" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe068" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="DEPTH_LO" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe069" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="DEPTH_SPAN_HI" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe06a" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="DEPTH_SPAN_LO" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe06b" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="DEPTH_EDGE_HI" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe06c" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="DEPTH_EDGE_LO" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe06d" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="GLYPH_HI" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe070" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="GLYPH_LO" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe071" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="XFER_ABORT" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe100" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="XFER_CONTROL" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe102" access="rw" space="re4_regs" reset="unknown">
+    <field name="busy" start="4" size="1" type="uint" grade="inferred"/>
+    <field name="read" start="3" size="1" type="uint" grade="inferred"/>
+    <field name="device" start="2" size="1" type="xfer_control_device" grade="inferred"/>
+    <field name="pio_start" start="1" size="1" type="uint" grade="inferred"/>
+    <field name="dma_start" start="0" size="1" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="FILL_MODE" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe110" access="rw" space="re4_regs" reset="unknown">
+    <doc>Fill mode. Bits 3, 4, 5, 6, 7 and 10 and the block type are placed from
+the drivers; the enables for shading, rounding, depth iteration and the
+antialiasing of lines and points exist but are not placed.</doc>
+    <field name="block_type" start="22" size="3" type="fill_mode_block_type" grade="inferred"/>
+    <field name="fast_fill" start="20" size="1" type="uint" grade="inferred"/>
+    <field name="skip_last_pixel" start="10" size="1" type="uint" grade="inferred"/>
+    <field name="line_advance" start="7" size="1" type="uint" grade="inferred"/>
+    <field name="line_opaque" start="6" size="1" type="uint" grade="inferred"/>
+    <field name="line_stipple" start="5" size="1" type="uint" grade="inferred"/>
+    <field name="glyph_opaque" start="4" size="1" type="uint" grade="inferred"/>
+    <field name="glyph_stipple" start="3" size="1" type="uint" grade="inferred"/>
+    <field name="poly_stipple" start="0" size="1" type="uint" grade="inferred"/>
+    <test value="0x418008" kind="vector">
+      <expect field="glyph_stipple" value="1"/>
+      <expect field="block_type" value="1"/>
+    </test>
+  </struct>
+  <struct name="TEXMODE1" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe111" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="CONFIG" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe112" access="rw" space="re4_regs" reset="unknown">
+    <field name="line_round" start="4" size="1" type="uint" grade="inferred"/>
+    <field name="y_flip" start="3" size="1" type="uint" grade="inferred"/>
+    <field name="target_raster" start="0" size="1" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="SCISSOR_X" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe113" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="SCISSOR_Y" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe114" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="WINDOW_ORIGIN" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe115" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="BACKGROUND_RG" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe140" access="rw" space="re4_regs" reset="unknown">
+    <doc>Colours shared with the texture engine and double buffered. Opaque
+stipples draw their zero bits in the background colour: in RGB modes it is
+twelve bits per component, red lowest like the packed colour, green and
+red in the first register and blue in the second; in colour-index modes
+the index sits in the low twelve bits of the first.</doc>
+  </struct>
+  <struct name="BACKGROUND_BA" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe141" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TEXENV_RG" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe142" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="TEXENV_B" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe143" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="FOG_RG" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe144" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="FOG_B" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe145" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="AALINE_CONFIG" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe146" access="rw" space="re4_regs" reset="unknown">
+    <field name="width" start="1" size="7" type="uint" grade="inferred"/>
+    <field name="smooth" start="0" size="1" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="SCREEN_MASK1_X" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe147" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="SCREEN_MASK1_Y" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe148" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="SCREEN_MASK2_X" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe149" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="SCREEN_MASK2_Y" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe14a" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="SCREEN_MASK3_X" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe14b" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="SCREEN_MASK3_Y" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe14c" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="SCREEN_MASK4_X" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe14d" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="SCREEN_MASK4_Y" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe14e" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="WINDOW_MODE" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe14f" access="rw" space="re4_regs" reset="unknown">
+    <doc>Window mode: per mask n (1 to 4) an enable at bit n-1 and an inside/outside
+select at bit n+3. Only mask 1 has been seen used (value 0x11: enabled, keep
+pixels inside); the positions for masks 2 to 4 follow by pattern.</doc>
+    <field name="inside4" start="7" size="1" type="uint" grade="inferred"/>
+    <field name="inside3" start="6" size="1" type="uint" grade="inferred"/>
+    <field name="inside2" start="5" size="1" type="uint" grade="inferred"/>
+    <field name="inside1" start="4" size="1" type="uint" grade="inferred"/>
+    <field name="enable4" start="3" size="1" type="uint" grade="inferred"/>
+    <field name="enable3" start="2" size="1" type="uint" grade="inferred"/>
+    <field name="enable2" start="1" size="1" type="uint" grade="inferred"/>
+    <field name="enable1" start="0" size="1" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="XFER_SIZE" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe153" access="rw" space="re4_regs" reset="unknown">
+    <field name="lines" start="16" size="16" type="uint" grade="inferred"/>
+    <field name="width" start="0" size="16" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="XFER_ZOOM_INIT" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe154" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="XFER_ZOOM_STEP" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe155" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="XFER_MASK_LO" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe156" access="rw" space="re4_regs" reset="unknown">
+    <doc>Zoom encoding: both registers hold 8.8 fixed point, 0x100 meaning a factor of
+1.0 (no zoom). Established: the library's host-to-raster setup routines write
+the pair this way, and the no-zoom path stores 0x100 in both. The magnifying
+and shrinking arithmetic that derives other values is inferred and not
+stated here.
+
+#define RE_XFER_ZOOM_UNITY 0x100 /* established</doc>
+  </struct>
+  <struct name="XFER_MASK_HI" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe157" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="XFER_COUNTERS" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe158" access="r" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="XFER_MODE" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe159" access="rw" space="re4_regs" reset="unknown">
+    <doc>Transfer mode. Placed from what the drivers write: component type in 3:0,
+pixel format in 7:4, begin skip bytes in 10:8, begin skip bits in 13:11,
+stride skip bytes in 16:14 (three bits in every writer read), zoom in 19,
+decimate in 20, RGB order in 22, and bit 23 set for every pixel draw.
+Bits 17 and 18 are one-bit flags the shipped library sets or clears (it
+sets 18 in its default state and clears 17 to 20 in the copy paths); what
+they do is not known, and the unpack-order and read-mask flags are among
+bits 17, 18 and 21. Bit 21 is never written by software examined.</doc>
+    <field name="opaque" start="23" size="1" type="uint" grade="inferred"/>
+    <field name="rgb_order" start="22" size="1" type="uint" grade="inferred"/>
+    <field name="decimate" start="20" size="1" type="uint" grade="inferred"/>
+    <field name="zoom" start="19" size="1" type="uint" grade="inferred"/>
+    <field name="flag18" start="18" size="1" type="uint" grade="inferred"/>
+    <field name="flag17" start="17" size="1" type="uint" grade="inferred"/>
+    <field name="stride_skip_bytes" start="14" size="3" type="uint" grade="inferred"/>
+    <field name="begin_skip_bits" start="11" size="3" type="uint" grade="inferred"/>
+    <field name="begin_skip_bytes" start="8" size="3" type="uint" grade="inferred"/>
+    <field name="format" start="4" size="4" type="xfer_mode_format" grade="inferred"/>
+    <field name="comp_type" start="0" size="4" type="uint" grade="inferred"/>
+    <test value="0x40080" kind="vector">
+      <expect field="comp_type" value="0"/>
+      <expect field="format" value="8"/>
+      <expect field="flag18" value="1"/>
+      <expect field="stride_skip_bytes" value="0"/>
+    </test>
+    <test value="0xc00080" kind="vector">
+      <expect field="comp_type" value="0"/>
+      <expect field="format" value="8"/>
+      <expect field="begin_skip_bytes" value="0"/>
+      <expect field="stride_skip_bytes" value="0"/>
+      <expect field="flag18" value="0"/>
+      <expect field="rgb_order" value="1"/>
+      <expect field="opaque" value="1"/>
+    </test>
+    <test value="0xc10080" kind="vector">
+      <expect field="comp_type" value="0"/>
+      <expect field="format" value="8"/>
+      <expect field="begin_skip_bytes" value="0"/>
+      <expect field="stride_skip_bytes" value="4"/>
+      <expect field="flag18" value="0"/>
+      <expect field="rgb_order" value="1"/>
+      <expect field="opaque" value="1"/>
+    </test>
+    <test value="0xc10480" kind="vector">
+      <expect field="comp_type" value="0"/>
+      <expect field="format" value="8"/>
+      <expect field="begin_skip_bytes" value="4"/>
+      <expect field="stride_skip_bytes" value="4"/>
+      <expect field="flag18" value="0"/>
+      <expect field="rgb_order" value="1"/>
+      <expect field="opaque" value="1"/>
+    </test>
+  </struct>
+  <struct name="LINE_STIPPLE_PATTERN" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe15a" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="LINE_STIPPLE_REPEAT" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe15b" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="DEVICE_ADDR" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe15c" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="DEVICE_DATA" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe15d" access="rw" space="re4_regs" reset="unknown">
+  </struct>
+  <struct name="STATUS" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe15e" access="r" space="re4_regs" reset="unknown">
+    <field name="pixel_busy" start="10" size="1" type="uint" grade="inferred"/>
+    <field name="raster_busy" start="9" size="1" type="uint" grade="inferred"/>
+    <field name="fifo_empty" start="8" size="1" type="uint" grade="inferred"/>
+    <field name="revision" start="4" size="4" type="uint" grade="inferred"/>
+    <field name="board_index" start="2" size="2" type="uint" grade="inferred"/>
+    <field name="chip_count" start="0" size="2" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="TOGGLE_CONTEXT" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe15f" access="w" space="re4_regs" reset="unknown">
+  </struct>
+  <constant name="XFER_ZOOM_UNITY" value="0x100" grade="established"/>
+</genxml>

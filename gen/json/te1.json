@@ -1,0 +1,208 @@
+{
+ "schema": "defs-flat/1",
+ "source": "defs/te1.toml",
+ "profile": "public",
+ "rows": [
+  {
+   "unit": "te1",
+   "kind": "register",
+   "name": "tx_mipmap",
+   "offset": 61841,
+   "access": "w",
+   "width": 32,
+   "count": 1,
+   "stride": 1,
+   "space": "te1_regs",
+   "reset": "unknown",
+   "grade": "established",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "field",
+   "name": "tx_mipmap.bank",
+   "hi": 15,
+   "lo": 8,
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "field",
+   "name": "tx_mipmap.page",
+   "hi": 7,
+   "lo": 0,
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "register",
+   "name": "tl_mode",
+   "offset": 61857,
+   "access": "w",
+   "width": 32,
+   "count": 1,
+   "stride": 1,
+   "space": "te1_regs",
+   "reset": "unknown",
+   "grade": "established",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "field",
+   "name": "tl_mode.fixed",
+   "hi": 18,
+   "lo": 16,
+   "grade": "established",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "field",
+   "name": "tl_mode.bit14",
+   "hi": 14,
+   "lo": 14,
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "field",
+   "name": "tl_mode.enables",
+   "hi": 12,
+   "lo": 9,
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "field",
+   "name": "tl_mode.flag8",
+   "hi": 8,
+   "lo": 8,
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "field",
+   "name": "tl_mode.component_depth",
+   "hi": 6,
+   "lo": 5,
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "field",
+   "name": "tl_mode.cell_slot",
+   "hi": 4,
+   "lo": 3,
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "field",
+   "name": "tl_mode.components_minus_1",
+   "hi": 2,
+   "lo": 1,
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "register",
+   "name": "tl_spec",
+   "offset": 61858,
+   "access": "w",
+   "width": 32,
+   "count": 1,
+   "stride": 1,
+   "space": "te1_regs",
+   "reset": "unknown",
+   "grade": "established",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "register",
+   "name": "tl_addr",
+   "offset": 61859,
+   "access": "w",
+   "width": 32,
+   "count": 1,
+   "stride": 1,
+   "space": "te1_regs",
+   "reset": "unknown",
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "register",
+   "name": "tl_mipmap",
+   "offset": 61860,
+   "access": "w",
+   "width": 32,
+   "count": 1,
+   "stride": 1,
+   "space": "te1_regs",
+   "reset": "unknown",
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "register",
+   "name": "tl_border",
+   "offset": 61861,
+   "access": "w",
+   "width": 32,
+   "count": 1,
+   "stride": 1,
+   "space": "te1_regs",
+   "reset": "unknown",
+   "grade": "inferred",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "constant",
+   "name": "TRAM_REV_WORD0",
+   "value": 469832705,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic transcript"
+  },
+  {
+   "unit": "te1",
+   "kind": "constant",
+   "name": "TRAM_REV_WORD0_HIGH_HALF",
+   "value": 7169,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic transcript"
+  },
+  {
+   "unit": "te1",
+   "kind": "constant",
+   "name": "TRAM_REV_WORD0_LOW_HALF",
+   "value": 5121,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic transcript"
+  },
+  {
+   "unit": "te1",
+   "kind": "constant",
+   "name": "TRAM_REV_WORD1",
+   "value": 201327616,
+   "count": 1,
+   "grade": "established",
+   "from": "diagnostic transcript"
+  }
+ ]
+}

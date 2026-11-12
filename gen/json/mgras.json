@@ -1,0 +1,686 @@
+{
+ "schema": "defs-flat/1",
+ "source": "defs/mgras.toml",
+ "profile": "public",
+ "rows": [
+  {
+   "unit": "mgras",
+   "kind": "register",
+   "name": "dcb_ctrl",
+   "offset": 40960,
+   "access": "rw",
+   "width": 32,
+   "count": 12,
+   "stride": 4,
+   "space": null,
+   "reset": "unknown",
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "dcb_ctrl.cs_setup",
+   "hi": 12,
+   "lo": 10,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "dcb_ctrl.cs_hold",
+   "hi": 8,
+   "lo": 6,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "dcb_ctrl.cs_width",
+   "hi": 4,
+   "lo": 2,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "dcb_ctrl.async_ack",
+   "hi": 1,
+   "lo": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "dcb_ctrl.sync_ack",
+   "hi": 0,
+   "lo": 0,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "BDVERS2",
+   "width": 32,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "BDVERS2.product",
+   "hi": 30,
+   "lo": 29,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "BDVERS2.product.solid_impact",
+   "value": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "DCB_ADDR",
+   "width": 32,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "DCB_ADDR.device",
+   "hi": 14,
+   "lo": 10,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "DCB_ADDR.crs",
+   "hi": 9,
+   "lo": 7,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "DCB_ADDR.endata_pack",
+   "hi": 6,
+   "lo": 6,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "DCB_ADDR.encrs_inc",
+   "hi": 5,
+   "lo": 5,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "DCB_ADDR.data_width",
+   "hi": 4,
+   "lo": 3,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "DCB_ADDR.data_width.four_bytes",
+   "value": 0,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "DCB_ADDR.data_width.one_byte",
+   "value": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "DCB_ADDR.data_width.two_bytes",
+   "value": 2,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "DCB_ADDR.data_width.three_bytes",
+   "value": 3,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "GIO_ID",
+   "width": 32,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "GIO_ID.product",
+   "hi": 31,
+   "lo": 8,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "GIO_ID.revision",
+   "hi": 7,
+   "lo": 4,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "MCO_ID",
+   "width": 32,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "MCO_ID.board",
+   "hi": 7,
+   "lo": 4,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "MCO_ID.board.present_single_read",
+   "value": 4,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "MCO_ID.board.present",
+   "value": 10,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "MCO_ID.revision",
+   "hi": 3,
+   "lo": 0,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
+   "name": "MCO_INDEX",
+   "width": 32,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "MCO_INDEX.bank",
+   "hi": 7,
+   "lo": 4,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "MCO_INDEX.bank.overlay_dac_a",
+   "value": 0,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "MCO_INDEX.bank.overlay_dac_b",
+   "value": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "MCO_INDEX.bank.true_colour_dac_a",
+   "value": 2,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "MCO_INDEX.bank.true_colour_dac_b",
+   "value": 3,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "MCO_INDEX.bank.control_1",
+   "value": 8,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "MCO_INDEX.bank.control_2",
+   "value": 9,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "enum_value",
+   "name": "MCO_INDEX.bank.control_3",
+   "value": 10,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "MCO_INDEX.port",
+   "hi": 3,
+   "lo": 0,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV473_PORT_ADDR",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV473_PORT_COMMAND",
+   "value": 6,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV473_PORT_MASK",
+   "value": 2,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV473_PORT_PALETTE",
+   "value": 1,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV7162_BLANK_VALUE",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV7162_ID_VALUE",
+   "value": 121,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV7162_PORT_DATA",
+   "value": 2,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV7162_PORT_PALETTE",
+   "value": 1,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV7162_PORT_POINTER",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV7162_PORT_PROBE",
+   "value": 3,
+   "count": 1,
+   "grade": "unknown",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV7162_REG_BLANK",
+   "value": 4,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV7162_REG_ID",
+   "value": 3,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "ADV7162_RESTORE_VALUE",
+   "value": 65535,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "CMAP_ENTRIES",
+   "value": 8192,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_BANK_BASE_CH0",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_BANK_BASE_CH1",
+   "value": 32,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_BANK_BASE_CH2",
+   "value": 48,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_BANK_BASE_CH3",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_BANK_BASE_CH4",
+   "value": 16,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_DAC_LUT_ENTRIES",
+   "value": 256,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_DAC_LUT_ENTRY_BITS",
+   "value": 10,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_ID_ABSENT",
+   "value": 255,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_ID_PROBE_SINGLE_READ_OFFSET",
+   "value": 458760,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_ID_PROBE_SINGLE_TIMING_SELECT_FIRST",
+   "value": 20,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_ID_PROBE_SINGLE_TIMING_SELECT_SECOND",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_ID_PROBE_SINGLE_WRITE_OFFSET",
+   "value": 470024,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_ID_PROBE_WRITE_FIRST",
+   "value": 255,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_ID_PROBE_WRITE_SECOND",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_ID_SPECIAL_PRESENT",
+   "value": 1,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_LOAD_CTRL_FIRST",
+   "value": 254,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_LOAD_CTRL_SECOND",
+   "value": 1,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_LOAD_IMAGE_BYTES",
+   "value": 63112,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_LOAD_PAD_BYTES",
+   "value": 20,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_LOAD_STATUS_AFTER_SECOND",
+   "value": 6,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_LOAD_STATUS_FIRST",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_SEL_FPGA_CTRL",
+   "value": 1,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_SEL_FPGA_DATA",
+   "value": 0,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_SEL_TIMING_DATA",
+   "value": 5,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_SEL_TIMING_RAM",
+   "value": 7,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MCO_SEL_TIMING_REG",
+   "value": 4,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  }
+ ]
+}

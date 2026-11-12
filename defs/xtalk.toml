@@ -1,0 +1,39 @@
+unit = "xtalk"
+prefix = "XTALK"
+title = "expected power-up values of the host interface's crosstalk"
+doc = "Expected power-up values of the crosstalk widget block on the Octane host interface."
+from = "diagnostic program data"
+public_from = ["diagnostic program data"]
+
+[c]
+legacy_header = "XTALK_DECODE.h"
+legacy_guard = "XTALK_DECODE_H"
+
+[words.LLP_CONFIG]
+width = 32
+doc = """
+Link-layer configuration. The diagnostic describes the expected value as a
+null timeout of 6 in bits 15:10 and a retry limit of 0x3ff in bits 25:16
+(maximum burst 16 is also stated; its bit position is not)."""
+grade = "inferred"
+
+[words.LLP_CONFIG.fields]
+retry_limit = { bits = [25, 16], grade = "inferred" }
+null_timeout = { bits = [15, 10], grade = "inferred" }
+
+[[words.LLP_CONFIG.tests]]
+value = 0x3ff1810
+expect = { null_timeout = 6, retry_limit = 1023 }
+
+[constants]
+CONTROL_EXPECT = { value = 0x32f, grade = "established", doc = "diagnostic" }
+ERR_ADDR_HI_EXPECT = { value = 0x0, grade = "established", doc = "diagnostic" }
+ERR_ADDR_LO_EXPECT = { value = 0x0, grade = "established", doc = "diagnostic" }
+ERR_CMD_EXPECT = { value = 0x0, grade = "established", doc = "diagnostic" }
+ID_EXPECT = { value = 0xe001d55, grade = "established", doc = "diagnostic" }
+INTR_DEST_HI_EXPECT = { value = 0x0, grade = "established", doc = "diagnostic" }
+INTR_DEST_LO_EXPECT = { value = 0x0, grade = "established", doc = "diagnostic" }
+LLP_CONFIG_EXPECT = { value = 0x3ff1810, grade = "established", doc = "diagnostic" }
+REQ_TIMEOUT_EXPECT = { value = 0xfffff, grade = "established", doc = "diagnostic" }
+STATUS_EXPECT = { value = 0x0, grade = "established", doc = "diagnostic" }
+TARGET_FLUSH_EXPECT = { value = 0x0, grade = "established", doc = "diagnostic" }
