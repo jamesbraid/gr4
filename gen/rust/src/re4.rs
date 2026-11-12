@@ -1062,6 +1062,11 @@ pub mod toggle_context {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe15f;
 }
+/// Pixel-processor fill mode, written through the normal command FIFO under its own selector. The public driver writes one value for a copy fill and anot (inferred)
+pub mod pp1_fill_mode {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe161;
+}
 pub const XFER_ZOOM_UNITY: u32 = 0x100; // established
 
 #[cfg(test)]

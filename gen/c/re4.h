@@ -474,6 +474,15 @@
 /* toggle_context: w32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_TOGGLE_CONTEXT_OFFSET                     0xe15fu /* inferred */
 
+/*
+ * Pixel-processor fill mode, written through the normal command FIFO under its own
+ * selector. The public driver writes one value for a copy fill and another for an
+ * XOR fill, each before the fill's execute. The bits those values set are not
+ * decoded here.
+ */
+/* pp1_fill_mode: w32, space re4_regs, reset unknown; OpenBSD impact(4) driver register header */
+#define RE_PP1_FILL_MODE_OFFSET                      0xe161u /* inferred */
+
 #define RE_XFER_ZOOM_UNITY                           0x100u /* established */
 
 #endif /* RE_GEN_H */

@@ -328,5 +328,11 @@ bits 17, 18 and 21. Bit 21 is never written by software examined.</doc>
   </struct>
   <struct name="TOGGLE_CONTEXT" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe15f" access="w" space="re4_regs" reset="unknown">
   </struct>
+  <struct name="PP1_FILL_MODE" size="4" grade="inferred" from="OpenBSD impact(4) driver register header" register="yes" offset="0xe161" access="w" space="re4_regs" reset="unknown">
+    <doc>Pixel-processor fill mode, written through the normal command FIFO under its own
+selector. The public driver writes one value for a copy fill and another for an
+XOR fill, each before the fill's execute. The bits those values set are not
+decoded here.</doc>
+  </struct>
   <constant name="XFER_ZOOM_UNITY" value="0x100" grade="established"/>
 </genxml>

@@ -34,6 +34,7 @@ Array of 12 registers, stride 4.
 | `BDVERS2` | 32 | established | driver and firmware readings |
 | `DCB_ADDR` | 32 | inferred | driver and firmware readings |
 | `GIO_ID` | 32 | inferred | driver and firmware readings |
+| `HQ4_NUMERIC_PACKET` | 64 | established | OpenBSD impact(4) driver register header |
 | `MCO_ID` | 32 | established | driver and firmware readings |
 | `MCO_INDEX` | 32 | established | driver and firmware readings |
 
@@ -76,6 +77,20 @@ revision and product below is a reading, not what the probe tests.
 |---|---|---|---|---|---|
 | 31:8 | `product` | inferred |  | driver and firmware readings |  |
 | 7:4 | `revision` | inferred |  | driver and firmware readings |  |
+
+### Word `HQ4_NUMERIC_PACKET`
+
+One command written to the normal command FIFO, as the public driver packs it:
+the constant framing 0x0018000400000000, the register selector shifted left 40
+bits, and the 32-bit payload. The execute mark adds 0x0004000000000000 and is
+set on the write that starts a drawing operation. The layout is the driver's
+software expectation; what the board does with each field is not established.
+
+| Bits | Field | Grade | Values | Source | Description |
+|---|---|---|---|---|---|
+| 50 | `execute` | inferred |  | OpenBSD impact(4) driver register header |  |
+| 47:40 | `selector` | established |  | OpenBSD impact(4) driver register header |  |
+| 31:0 | `payload` | established |  | OpenBSD impact(4) driver register header |  |
 
 ### Word `MCO_ID`
 
@@ -134,6 +149,7 @@ offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.
 | `ADV7162_REG_ID` | 0x3 | established | driver and firmware readings |  |
 | `ADV7162_RESTORE_VALUE` | 0xffff | established | driver and firmware readings |  |
 | `CMAP_ENTRIES` | 0x2000 | established | driver and firmware readings | per map; 24-bit width inferred |
+| `HQ4_NORMAL_FIFO_OFFSET` | 0x20400 | established | OpenBSD impact(4) driver register header | normal command FIFO in the board's register window; the driver writes aligned 64-bit packets here |
 | `MCO_BANK_BASE_CH0` | 0x0 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH1` | 0x20 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH2` | 0x30 | established | driver and firmware readings |  |
@@ -181,4 +197,5 @@ A vector is a value recorded from a source. An example only shows the layout.
 | `DCB_ADDR` | 0x2d08 | example | encrs_inc=0, endata_pack=0, crs=2, data_width=1, device=11 |
 | `DCB_ADDR` | 0x2d88 | example | encrs_inc=0, endata_pack=0, crs=3, data_width=1, device=11 |
 | `GIO_ID` | 0x50190 | vector | revision=9, product=1281 |
+| `HQ4_NUMERIC_PACKET` | 0x1c450400000018 | example | execute=1, selector=69, payload=24 |
 | `MCO_INDEX` | 0x90 | vector | port=0, bank=9 |

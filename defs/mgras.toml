@@ -3,7 +3,7 @@ prefix = "MGRAS"
 title = "board-level words of the Impact graphics subsystem"
 doc = "Board-level words of the Impact graphics subsystem."
 from = "driver and firmware readings"
-public_from = ["driver and firmware readings"]
+public_from = ["driver and firmware readings", "OpenBSD impact(4) driver"]
 
 [c]
 legacy_header = "MGRAS_DECODE.h"
@@ -143,6 +143,27 @@ revision = { bits = [7, 4], grade = "inferred" }
 value = 0x50190
 expect = { revision = 9, product = 1281 }
 
+[words.HQ4_NUMERIC_PACKET]
+width = 64
+grade = "established"
+from = "OpenBSD impact(4) driver register header"
+doc = """
+One command written to the normal command FIFO, as the public driver packs it:
+the constant framing 0x0018000400000000, the register selector shifted left 40
+bits, and the 32-bit payload. The execute mark adds 0x0004000000000000 and is
+set on the write that starts a drawing operation. The layout is the driver's
+software expectation; what the board does with each field is not established."""
+
+[words.HQ4_NUMERIC_PACKET.fields]
+selector = { bits = [47, 40], grade = "established" }
+payload = { bits = [31, 0], grade = "established" }
+execute = { bits = [50, 50], grade = "inferred" }
+
+[[words.HQ4_NUMERIC_PACKET.tests]]
+value = 0x001c450400000018
+kind = "example"
+expect = { execute = 1, selector = 0x45, payload = 0x18 }
+
 [words.MCO_ID]
 width = 32
 doc = """
@@ -222,6 +243,7 @@ ADV7162_REG_BLANK = { value = 0x4, grade = "established", doc = "the pixel mask 
 ADV7162_REG_ID = { value = 0x3, grade = "established" }
 ADV7162_RESTORE_VALUE = { value = 0xffff, grade = "established" }
 CMAP_ENTRIES = { value = 0x2000, grade = "established", doc = "per map; 24-bit width inferred" }
+HQ4_NORMAL_FIFO_OFFSET = { value = 0x020400, grade = "established", from = "OpenBSD impact(4) driver register header", doc = "normal command FIFO in the board's register window; the driver writes aligned 64-bit packets here" }
 MCO_BANK_BASE_CH0 = { value = 0x0, grade = "established" }
 MCO_BANK_BASE_CH1 = { value = 0x20, grade = "established" }
 MCO_BANK_BASE_CH2 = { value = 0x30, grade = "established" }

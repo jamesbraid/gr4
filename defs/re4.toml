@@ -3,7 +3,7 @@ prefix = "RE"
 title = "raster engine register contract for the Impact graphics"
 doc = "Raster engine registers of the Impact graphics subsystem."
 from = "driver and traffic readings"
-public_from = ["driver and traffic readings"]
+public_from = ["driver and traffic readings", "OpenBSD impact(4) driver"]
 
 [c]
 legacy_header = "RE4_DECODE.h"
@@ -460,6 +460,19 @@ dma_write = { value = 5, grade = "inferred" }
 [[registers.fill_mode.tests]]
 value = 0x418008
 expect = { glyph_stipple = 1, block_type = 1 }
+
+[registers.pp1_fill_mode]
+offset = 0xe161
+access = "w"
+width = 32
+grade = "inferred"
+space = "re4_regs"
+from = "OpenBSD impact(4) driver register header"
+doc = """
+Pixel-processor fill mode, written through the normal command FIFO under its own
+selector. The public driver writes one value for a copy fill and another for an
+XOR fill, each before the fill's execute. The bits those values set are not
+decoded here."""
 
 [registers.texmode1]
 offset = 0xe111

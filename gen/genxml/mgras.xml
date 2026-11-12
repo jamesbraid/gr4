@@ -146,6 +146,21 @@ revision and product below is a reading, not what the probe tests.</doc>
       <expect field="product" value="1281"/>
     </test>
   </struct>
+  <struct name="HQ4_NUMERIC_PACKET" size="8" grade="established" from="OpenBSD impact(4) driver register header">
+    <doc>One command written to the normal command FIFO, as the public driver packs it:
+the constant framing 0x0018000400000000, the register selector shifted left 40
+bits, and the 32-bit payload. The execute mark adds 0x0004000000000000 and is
+set on the write that starts a drawing operation. The layout is the driver's
+software expectation; what the board does with each field is not established.</doc>
+    <field name="execute" start="50" size="1" type="uint" grade="inferred"/>
+    <field name="selector" start="40" size="8" type="uint" grade="established"/>
+    <field name="payload" start="0" size="32" type="uint" grade="established"/>
+    <test value="0x1c450400000018" kind="example">
+      <expect field="execute" value="1"/>
+      <expect field="selector" value="69"/>
+      <expect field="payload" value="24"/>
+    </test>
+  </struct>
   <struct name="MCO_ID" size="4" grade="established" from="driver and firmware readings">
     <doc>Identification byte of the multi-channel option board (the byte at the
 index port's register select 0). The kernel's probe has two shapes,
@@ -195,6 +210,7 @@ offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.</doc>
   <constant name="ADV7162_REG_ID" value="0x3" grade="established"/>
   <constant name="ADV7162_RESTORE_VALUE" value="0xffff" grade="established"/>
   <constant name="CMAP_ENTRIES" value="0x2000" grade="established"/>
+  <constant name="HQ4_NORMAL_FIFO_OFFSET" value="0x20400" grade="established" from="OpenBSD impact(4) driver register header"/>
   <constant name="MCO_BANK_BASE_CH0" value="0x0" grade="established"/>
   <constant name="MCO_BANK_BASE_CH1" value="0x20" grade="established"/>
   <constant name="MCO_BANK_BASE_CH2" value="0x30" grade="established"/>

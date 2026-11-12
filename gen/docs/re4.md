@@ -107,6 +107,7 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | `device_data` | 0xe15d | rw | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `status` | 0xe15e | r | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `toggle_context` | 0xe15f | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
+| `pp1_fill_mode` | 0xe161 | w | 32 |  | re4_regs | unknown | inferred | OpenBSD impact(4) driver register header |
 
 ### Register `tri_x_major`
 
@@ -393,6 +394,13 @@ bits 17, 18 and 21. Bit 21 is never written by software examined.
 | 1:0 | `chip_count` | inferred |  | driver and traffic readings |  |
 
 ### Register `toggle_context`
+
+### Register `pp1_fill_mode`
+
+Pixel-processor fill mode, written through the normal command FIFO under its own
+selector. The public driver writes one value for a copy fill and another for an
+XOR fill, each before the fill's execute. The bits those values set are not
+decoded here.
 
 ## Constants
 

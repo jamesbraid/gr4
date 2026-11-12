@@ -203,6 +203,40 @@ pub mod gio_id {
         }
     }
 }
+/// One command written to the normal command FIFO, as the public driver packs it: the constant framing 0x0018000400000000, the register selector shifted  (established)
+pub mod hq4_numeric_packet {
+    pub const WIDTH: u32 = 64;
+    pub mod execute { // bits 50:50, inferred
+        pub const SHIFT: u32 = 50;
+        pub const MASK: u64 = 0x1;
+        pub const fn get(v: u64) -> u64 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u64, x: u64) -> u64 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod selector { // bits 47:40, established
+        pub const SHIFT: u32 = 40;
+        pub const MASK: u64 = 0xff;
+        pub const fn get(v: u64) -> u64 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u64, x: u64) -> u64 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+    pub mod payload { // bits 31:0, established
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u64 = 0xffffffff;
+        pub const fn get(v: u64) -> u64 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u64, x: u64) -> u64 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
+}
 /// Identification byte of the multi-channel option board (the byte at the index port's register select 0). The kernel's probe has two shapes, split by th (established)
 pub mod mco_id {
     pub const WIDTH: u32 = 32;
@@ -333,6 +367,7 @@ pub const ADV7162_REG_BLANK: u32 = 0x4; // established
 pub const ADV7162_REG_ID: u32 = 0x3; // established
 pub const ADV7162_RESTORE_VALUE: u32 = 0xffff; // established
 pub const CMAP_ENTRIES: u32 = 0x2000; // established
+pub const HQ4_NORMAL_FIFO_OFFSET: u32 = 0x20400; // established
 pub const MCO_BANK_BASE_CH0: u32 = 0x0; // established
 pub const MCO_BANK_BASE_CH1: u32 = 0x20; // established
 pub const MCO_BANK_BASE_CH2: u32 = 0x30; // established

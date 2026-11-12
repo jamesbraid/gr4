@@ -201,6 +201,41 @@
   {
    "unit": "mgras",
    "kind": "word",
+   "name": "HQ4_NUMERIC_PACKET",
+   "width": 64,
+   "grade": "established",
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "HQ4_NUMERIC_PACKET.execute",
+   "hi": 50,
+   "lo": 50,
+   "grade": "inferred",
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "HQ4_NUMERIC_PACKET.selector",
+   "hi": 47,
+   "lo": 40,
+   "grade": "established",
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "mgras",
+   "kind": "field",
+   "name": "HQ4_NUMERIC_PACKET.payload",
+   "hi": 31,
+   "lo": 0,
+   "grade": "established",
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "mgras",
+   "kind": "word",
    "name": "MCO_ID",
    "width": 32,
    "grade": "established",
@@ -447,6 +482,15 @@
    "count": 1,
    "grade": "established",
    "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ4_NORMAL_FIFO_OFFSET",
+   "value": 132096,
+   "count": 1,
+   "grade": "established",
+   "from": "OpenBSD impact(4) driver register header"
   },
   {
    "unit": "mgras",

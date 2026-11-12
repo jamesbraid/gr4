@@ -1821,6 +1821,20 @@
   },
   {
    "unit": "re4",
+   "kind": "register",
+   "name": "pp1_fill_mode",
+   "offset": 57697,
+   "access": "w",
+   "width": 32,
+   "count": 1,
+   "stride": 1,
+   "space": "re4_regs",
+   "reset": "unknown",
+   "grade": "inferred",
+   "from": "OpenBSD impact(4) driver register header"
+  },
+  {
+   "unit": "re4",
    "kind": "constant",
    "name": "XFER_ZOOM_UNITY",
    "value": 256,
