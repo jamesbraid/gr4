@@ -364,7 +364,7 @@
    "unit": "mgras",
    "kind": "field",
    "name": "HQ4_NUMERIC_PACKET.selector",
-   "hi": 47,
+   "hi": 48,
    "lo": 40,
    "grade": "established",
    "from": "OpenBSD impact(4) driver register header"
@@ -433,7 +433,7 @@
    "kind": "word",
    "name": "HQ_SERIAL_SLOT",
    "width": 32,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and firmware readings"
   },
   {
@@ -442,7 +442,7 @@
    "name": "HQ_SERIAL_SLOT.drive_time",
    "hi": 19,
    "lo": 10,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and firmware readings"
   },
   {
@@ -451,7 +451,7 @@
    "name": "HQ_SERIAL_SLOT.sample_offset",
    "hi": 9,
    "lo": 2,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and firmware readings"
   },
   {
@@ -460,7 +460,7 @@
    "name": "HQ_SERIAL_SLOT.done",
    "hi": 1,
    "lo": 1,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and firmware readings"
   },
   {
@@ -469,7 +469,7 @@
    "name": "HQ_SERIAL_SLOT.level",
    "hi": 0,
    "lo": 0,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and firmware readings"
   },
   {
@@ -1368,7 +1368,7 @@
    "name": "HQ_SERIAL_MASTER_OFFSET",
    "value": 69784,
    "count": 1,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and firmware readings"
   },
   {

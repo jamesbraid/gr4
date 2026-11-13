@@ -13,16 +13,20 @@ open questions.
   `248e73ee94f53c7e49e548503180b4f361d3ed19c4183cfcaa42edddc812aff0`). Cited by
   its section number and printed page.
 - The IRIX 6.5.30 IP27 kernel graphics archive `mgras.a` (SHA-256
-  `c3b1faac9a98280b117cd9f054c4c737d1f9844d697b8ed17bfd7e70b8e7134f`), its
-  initialisation, retrace and colour-control members, read as disassembly.
+  `c3b1faac9a98280b117cd9f054c4c737d1f9844d697b8ed17bfd7e70b8e7134f`, checked
+  against the copy in the 6.5.30 tree), its initialisation, retrace and
+  colour-control members, read as disassembly.
 - The graphics module of the IRIX 6.5.30 X server, `impactsr.so` (SHA-256
   `726dc1e25b711df84ff67ee9139dc4269551ec41bfe5191e34e2626882602d29`), read as
-  disassembly, for which registers it writes.
+  disassembly, for which registers it writes. Not in this checkout, so the
+  statements that rest on it were not re-read.
 - The Octane IDE graphics diagnostic, `ide.IP30` 6.5.30 (SHA-256
   `19d7a194cb417330475df9a187379404d413c72433cfc97fc9e238f0fe170d69`), read as
-  disassembly.
-- Register names from the public OpenBSD `impact(4)` driver. Not checked against
-  that file when this page was written.
+  disassembly. Not in this checkout, so the diagnostic statements below were not
+  re-read.
+- Register names from the public OpenBSD `impact(4)` driver, checked against
+  `sys/arch/sgi/dev/impactreg.h` at revision `2df91d80c104` of
+  `the-machine-hall/openbsd-sgi` (see [the 2D transactions page](../re4/2d-transactions.md)).
 
 Grades used here:
 

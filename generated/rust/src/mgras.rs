@@ -354,9 +354,9 @@ pub mod hq4_numeric_packet {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod selector { // bits 47:40, established
+    pub mod selector { // bits 48:40, established
         pub const SHIFT: u32 = 40;
-        pub const MASK: u64 = 0xff;
+        pub const MASK: u64 = 0x1ff;
         pub const fn get(v: u64) -> u64 {
             (v >> SHIFT) & MASK
         }
@@ -427,10 +427,10 @@ pub mod hq_revision {
         }
     }
 }
-/// One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET, written as one 32-bit store. The low-drive time sits in bits 19:10 and t (established)
+/// One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET, written as one 32-bit store. The low-drive time sits in bits 19:10 and t (inferred)
 pub mod hq_serial_slot {
     pub const WIDTH: u32 = 32;
-    pub mod drive_time { // bits 19:10, established
+    pub mod drive_time { // bits 19:10, inferred
         pub const SHIFT: u32 = 10;
         pub const MASK: u32 = 0x3ff;
         pub const fn get(v: u32) -> u32 {
@@ -440,7 +440,7 @@ pub mod hq_serial_slot {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod sample_offset { // bits 9:2, established
+    pub mod sample_offset { // bits 9:2, inferred
         pub const SHIFT: u32 = 2;
         pub const MASK: u32 = 0xff;
         pub const fn get(v: u32) -> u32 {
@@ -450,7 +450,7 @@ pub mod hq_serial_slot {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod done { // bits 1:1, established
+    pub mod done { // bits 1:1, inferred
         pub const SHIFT: u32 = 1;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -460,7 +460,7 @@ pub mod hq_serial_slot {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod level { // bits 0:0, established
+    pub mod level { // bits 0:0, inferred
         pub const SHIFT: u32 = 0;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -776,7 +776,7 @@ pub const HQ_INTR_SRC_RELEASE: u32 = 0x10000; // established
 pub const HQ_INTR_SRC_SWAP: u32 = 0x400; // established
 pub const HQ_INTR_STATUS_OFFSET: u32 = 0x11020; // established
 pub const HQ_INTR_VECTOR_OFFSET: u32 = 0x11070; // established
-pub const HQ_SERIAL_MASTER_OFFSET: u32 = 0x11098; // established
+pub const HQ_SERIAL_MASTER_OFFSET: u32 = 0x11098; // inferred
 pub const HQ_SWAP_ACK_VALUE: u32 = 0x401; // established
 pub const HQ_SWAP_CMD: u32 = 0x3700; // established
 pub const HQ_VC3_RETRACE_OFFSET: u32 = 0x72038; // established

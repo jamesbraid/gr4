@@ -71,8 +71,8 @@ Two footnotes qualify rows (p. 4-22 [PDF 89] and p. 4-23 [PDF 90]):
 
 ## Stereo
 
-- Window stereo at 1024 by 768 and 96 Hz, on the CI 12 double-buffer row and the
-  4/4/4/4 double-buffer row for SI/SSI (p. 4-22 [PDF 89]). **Established.**
+- Window stereo at 1024 by 768 and 96 Hz, on the CI 12, 4/4/4/4 and 5/5/5/1
+  double-buffer rows for SI/SSI (p. 4-22 [PDF 89]). **Established.**
 - Full-screen stereo at 1280 by 492 and 120 Hz. The RGBA rows at that size list
   it, including single-buffered ones. Which colour formats fit depends on the
   frame buffer storage left (p. 4-23 [PDF 90]). The CI 12 rows at that size

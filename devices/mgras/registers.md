@@ -40,7 +40,7 @@ Array of 12 registers, stride 4.
 | `HQ4_NUMERIC_PACKET` | 64 | established | OpenBSD impact(4) driver register header |
 | `HQ_GE_SELECT` | 32 | established | driver and firmware readings |
 | `HQ_REVISION` | 32 | inferred | driver and firmware readings |
-| `HQ_SERIAL_SLOT` | 32 | established | driver and firmware readings |
+| `HQ_SERIAL_SLOT` | 32 | inferred | driver and firmware readings |
 | `MCO_ID` | 32 | established | driver and firmware readings |
 | `MCO_INDEX` | 32 | established | driver and firmware readings |
 | `MONITOR_ID` | 8 | inferred | driver and firmware readings |
@@ -143,7 +143,7 @@ software expectation; what the board does with each field is not established.
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
 | 50 | `execute` | inferred |  | OpenBSD impact(4) driver register header |  |
-| 47:40 | `selector` | established |  | OpenBSD impact(4) driver register header |  |
+| 48:40 | `selector` | established |  | OpenBSD impact(4) driver register header |  |
 | 31:0 | `payload` | established |  | OpenBSD impact(4) driver register header |  |
 
 ### Word `HQ_GE_SELECT`
@@ -174,14 +174,15 @@ One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET,
 written as one 32-bit store. The low-drive time sits in bits 19:10 and the
 sample offset in bits 9:2. The reader waits for bit 1 (done) and takes the
 wire level from bit 0. Read by the stock Octane PROM and by the Octane IDE
-diagnostic. The chip family on IMPACT boards is unknown.
+diagnostic. Neither image is in this checkout, so the field layout was not
+re-read. The chip family on IMPACT boards is unknown.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 19:10 | `drive_time` | established |  | driver and firmware readings |  |
-| 9:2 | `sample_offset` | established |  | driver and firmware readings |  |
-| 1 | `done` | established |  | driver and firmware readings |  |
-| 0 | `level` | established |  | driver and firmware readings |  |
+| 19:10 | `drive_time` | inferred |  | driver and firmware readings |  |
+| 9:2 | `sample_offset` | inferred |  | driver and firmware readings |  |
+| 1 | `done` | inferred |  | driver and firmware readings |  |
+| 0 | `level` | inferred |  | driver and firmware readings |  |
 
 ### Word `MCO_ID`
 
@@ -369,7 +370,7 @@ revision. Inferred from the kernel object.
 | `HQ_INTR_SRC_SWAP` | 0x400 | established | driver and firmware readings | status bit 10; enabled only around a buffer swap |
 | `HQ_INTR_STATUS_OFFSET` | 0x11020 | established | driver and firmware readings | interrupt status word; the general handler reads it masked by the enable word. The switch tail writes 0x80 to it and reads bit 5 back; what the write does is unknown |
 | `HQ_INTR_VECTOR_OFFSET` | 0x11070 | established | driver and firmware readings | packs three interrupt vectors the attach routine connects: low-water in bits 7:0, general in bits 15:8, retrace in bits 23:16 |
-| `HQ_SERIAL_MASTER_OFFSET` | 0x11098 | established | driver and firmware readings | one-wire master for the board's serial-number record; each bit slot is one 32-bit store, see HQ_SERIAL_SLOT |
+| `HQ_SERIAL_MASTER_OFFSET` | 0x11098 | inferred | driver and firmware readings | one-wire master for the board's serial-number record; each bit slot is one 32-bit store, see HQ_SERIAL_SLOT |
 | `HQ_SWAP_ACK_VALUE` | 0x401 | established | driver and firmware readings | acknowledge the swap path writes to the pending-clear word, covering status bit 10 and the flag at bit 0. The bit-0 mirror is inferred |
 | `HQ_SWAP_CMD` | 0x3700 | established | driver and firmware readings | class 0, opcode 0x37, no payload. Written to the command port after source 10 is enabled. That the board raises source 10 once the queue ahead of it drains is inferred |
 | `HQ_VC3_RETRACE_OFFSET` | 0x72038 | established | driver and firmware readings | VC3 register 0x1e, written by the kernel's retrace enable. The kernel sets bit 0; that bit gates the board's retrace message is inferred |
@@ -405,25 +406,25 @@ revision. Inferred from the kernel object.
 | `RDRAM_DATA_PORT_ADDR` | 0x2c574 | established | driver and firmware readings | RDRAM data port; the kernel reads it with each raster engine selected in turn |
 | `RSS_RE_SELECT_PIO_ADDR` | 0x2c448 | inferred | driver and firmware readings | the same raster register as the diagnostic reaches it through the programmed I/O window |
 | `RSS_RE_SELECT_REG` | 0x112 | established | driver and firmware readings | raster register that selects one raster engine; the kernel writes the engine number as its value |
-| `VC3_REG_CURS_EP` | 0x1 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
-| `VC3_REG_CURS_TBL_PTR` | 0xc | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
-| `VC3_REG_CURS_X_LOC` | 0x2 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Hardware cursor X |
-| `VC3_REG_CURS_Y_LOC` | 0x3 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Hardware cursor Y |
-| `VC3_REG_CUR_CURSOR_X` | 0xe | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
-| `VC3_REG_DID_EP1` | 0x4 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. First display-ID entry point, with its own frame and line tables |
-| `VC3_REG_DID_EP2` | 0x5 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Second display-ID entry point |
-| `VC3_REG_DID_FRAMETAB1` | 0x10 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Frame table of the first display-ID entry point |
-| `VC3_REG_DID_FRAMETAB2` | 0x12 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Frame table of the second display-ID entry point |
-| `VC3_REG_DID_LINETAB1` | 0x11 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Line table of the first display-ID entry point |
-| `VC3_REG_DID_LINETAB2` | 0x13 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Line table of the second display-ID entry point |
-| `VC3_REG_RAM_ADDR` | 0x7 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Reads back the SRAM address it was loaded with |
-| `VC3_REG_SCAN_LENGTH` | 0x6 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
-| `VC3_REG_VERT_LINE_COUNT` | 0xb | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
-| `VC3_REG_VID_EP` | 0x0 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Main display frame table pointer; see software/kernel/display-timing.md |
-| `VC3_REG_VT_FRAME_TBL_PTR` | 0x8 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
-| `VC3_REG_VT_LINES_RUN` | 0xa | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
-| `VC3_REG_VT_LINE_SEQ_PTR` | 0x9 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
-| `VC3_REG_WORKING_CURS_Y` | 0xd | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
+| `VC3_REG_CURS_EP` | 0x1 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_CURS_TBL_PTR` | 0xc | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_CURS_X_LOC` | 0x2 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Hardware cursor X |
+| `VC3_REG_CURS_Y_LOC` | 0x3 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Hardware cursor Y |
+| `VC3_REG_CUR_CURSOR_X` | 0xe | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_DID_EP1` | 0x4 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. First display-ID entry point, with its own frame and line tables |
+| `VC3_REG_DID_EP2` | 0x5 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Second display-ID entry point |
+| `VC3_REG_DID_FRAMETAB1` | 0x10 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Frame table of the first display-ID entry point |
+| `VC3_REG_DID_FRAMETAB2` | 0x12 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Frame table of the second display-ID entry point |
+| `VC3_REG_DID_LINETAB1` | 0x11 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Line table of the first display-ID entry point |
+| `VC3_REG_DID_LINETAB2` | 0x13 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Line table of the second display-ID entry point |
+| `VC3_REG_RAM_ADDR` | 0x7 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Reads back the SRAM address it was loaded with |
+| `VC3_REG_SCAN_LENGTH` | 0x6 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_VERT_LINE_COUNT` | 0xb | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_VID_EP` | 0x0 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Main display frame table pointer; see software/kernel/display-timing.md |
+| `VC3_REG_VT_FRAME_TBL_PTR` | 0x8 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_VT_LINES_RUN` | 0xa | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_VT_LINE_SEQ_PTR` | 0x9 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_WORKING_CURS_Y` | 0xd | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
 | `WINDOW_MODE_MAIN_ADDR` | 0x71e00 | established | driver and firmware readings | display mode words for window IDs 0 to 31, under XMAP index (ID & 0x1f) << 2 |
 | `WINDOW_MODE_OVERLAY_ADDR` | 0x71e80 | established | driver and firmware readings | display mode words for overlay window IDs 32 to 39 |
 | `WINDOW_SELECT_ADDR` | 0x71d80 | established | driver and firmware readings | one bit per window ID, written at each buffer swap; overlay IDs use XMAP index 4. What a set bit shows is inferred |

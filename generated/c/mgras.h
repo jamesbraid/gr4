@@ -158,7 +158,7 @@
 #define MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_MASK        0x1ull
 #define MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_INPLACE     (MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_MASK << MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_SHIFT)
 #define MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_SHIFT      40 /* established */
-#define MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_MASK       0xffull
+#define MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_MASK       0x1ffull
 #define MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_INPLACE    (MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_MASK << MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_SHIFT)
 #define MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_SHIFT       0 /* established */
 #define MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_MASK        0xffffffffull
@@ -195,20 +195,21 @@
  * written as one 32-bit store. The low-drive time sits in bits 19:10 and the
  * sample offset in bits 9:2. The reader waits for bit 1 (done) and takes the
  * wire level from bit 0. Read by the stock Octane PROM and by the Octane IDE
- * diagnostic. The chip family on IMPACT boards is unknown.
+ * diagnostic. Neither image is in this checkout, so the field layout was not
+ * re-read. The chip family on IMPACT boards is unknown.
  */
 /* word HQ_SERIAL_SLOT: 32 bits; driver and firmware readings */
-#define MGRAS_HQ_SERIAL_SLOT_WIDTH                   32 /* established */
-#define MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_SHIFT        10 /* established */
+#define MGRAS_HQ_SERIAL_SLOT_WIDTH                   32 /* inferred */
+#define MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_SHIFT        10 /* inferred */
 #define MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_MASK         0x3ffu
 #define MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_INPLACE      (MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_MASK << MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_SHIFT)
-#define MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_SHIFT     2 /* established */
+#define MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_SHIFT     2 /* inferred */
 #define MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_MASK      0xffu
 #define MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_INPLACE   (MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_MASK << MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_SHIFT)
-#define MGRAS_HQ_SERIAL_SLOT_DONE_SHIFT              1 /* established */
+#define MGRAS_HQ_SERIAL_SLOT_DONE_SHIFT              1 /* inferred */
 #define MGRAS_HQ_SERIAL_SLOT_DONE_MASK               0x1u
 #define MGRAS_HQ_SERIAL_SLOT_DONE_INPLACE            (MGRAS_HQ_SERIAL_SLOT_DONE_MASK << MGRAS_HQ_SERIAL_SLOT_DONE_SHIFT)
-#define MGRAS_HQ_SERIAL_SLOT_LEVEL_SHIFT             0 /* established */
+#define MGRAS_HQ_SERIAL_SLOT_LEVEL_SHIFT             0 /* inferred */
 #define MGRAS_HQ_SERIAL_SLOT_LEVEL_MASK              0x1u
 #define MGRAS_HQ_SERIAL_SLOT_LEVEL_INPLACE           (MGRAS_HQ_SERIAL_SLOT_LEVEL_MASK << MGRAS_HQ_SERIAL_SLOT_LEVEL_SHIFT)
 
@@ -419,7 +420,7 @@
 #define MGRAS_HQ_INTR_SRC_SWAP                       0x400u /* established */
 #define MGRAS_HQ_INTR_STATUS_OFFSET                  0x11020u /* established */
 #define MGRAS_HQ_INTR_VECTOR_OFFSET                  0x11070u /* established */
-#define MGRAS_HQ_SERIAL_MASTER_OFFSET                0x11098u /* established */
+#define MGRAS_HQ_SERIAL_MASTER_OFFSET                0x11098u /* inferred */
 #define MGRAS_HQ_SWAP_ACK_VALUE                      0x401u /* established */
 #define MGRAS_HQ_SWAP_CMD                            0x3700u /* established */
 #define MGRAS_HQ_VC3_RETRACE_OFFSET                  0x72038u /* established */

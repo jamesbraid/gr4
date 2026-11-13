@@ -296,7 +296,7 @@ set on the write that starts a drawing operation. The layout is the driver's
 software expectation; what the board does with each field is not established."""
 
 [words.HQ4_NUMERIC_PACKET.fields]
-selector = { bits = [47, 40], grade = "established" }
+selector = { bits = [48, 40], grade = "established" }
 payload = { bits = [31, 0], grade = "established" }
 execute = { bits = [50, 50], grade = "inferred" }
 
@@ -415,19 +415,20 @@ ge1 = { value = 3, grade = "established" }
 
 [words.HQ_SERIAL_SLOT]
 width = 32
-grade = "established"
+grade = "inferred"
 doc = """
 One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET,
 written as one 32-bit store. The low-drive time sits in bits 19:10 and the
 sample offset in bits 9:2. The reader waits for bit 1 (done) and takes the
 wire level from bit 0. Read by the stock Octane PROM and by the Octane IDE
-diagnostic. The chip family on IMPACT boards is unknown."""
+diagnostic. Neither image is in this checkout, so the field layout was not
+re-read. The chip family on IMPACT boards is unknown."""
 
 [words.HQ_SERIAL_SLOT.fields]
-drive_time = { bits = [19, 10], grade = "established" }
-sample_offset = { bits = [9, 2], grade = "established" }
-done = { bits = [1, 1], grade = "established" }
-level = { bits = [0, 0], grade = "established" }
+drive_time = { bits = [19, 10], grade = "inferred" }
+sample_offset = { bits = [9, 2], grade = "inferred" }
+done = { bits = [1, 1], grade = "inferred" }
+level = { bits = [0, 0], grade = "inferred" }
 
 [constants]
 ADV473_PORT_ADDR = { value = 0x0, grade = "established" }
@@ -540,23 +541,23 @@ HQ_BUS_STATUS_OFFSET = { value = 0x020100, grade = "established", from = "IRIX 6
 HQ_VC3_RETRACE_OFFSET = { value = 0x072038, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "VC3 register 0x1e, written by the kernel's retrace enable. The kernel sets bit 0; that bit gates the board's retrace message is inferred" }
 HQ_ID_PART_EXPECTED = { value = 0xc003, grade = "inferred", from = "Octane IDE diagnostic", doc = "part number the diagnostic's HQ4 probe accepts, at bits 27:12 of the identity word, the first board word" }
 HQ_ID_MANUFACTURER_EXPECTED = { value = 0x2aa, grade = "inferred", from = "Octane IDE diagnostic", doc = "manufacturer code the diagnostic's HQ4 probe accepts, at bits 11:1 of the identity word, the first board word" }
-HQ_SERIAL_MASTER_OFFSET = { value = 0x011098, grade = "established", from = "stock Octane PROM and Octane IDE diagnostic", doc = "one-wire master for the board's serial-number record; each bit slot is one 32-bit store, see HQ_SERIAL_SLOT" }
-VC3_REG_VID_EP = { value = 0x0, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Main display frame table pointer; see software/kernel/display-timing.md" }
-VC3_REG_CURS_EP = { value = 0x1, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test" }
-VC3_REG_CURS_X_LOC = { value = 0x2, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Hardware cursor X" }
-VC3_REG_CURS_Y_LOC = { value = 0x3, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Hardware cursor Y" }
-VC3_REG_DID_EP1 = { value = 0x4, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. First display-ID entry point, with its own frame and line tables" }
-VC3_REG_DID_EP2 = { value = 0x5, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Second display-ID entry point" }
-VC3_REG_SCAN_LENGTH = { value = 0x6, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test" }
-VC3_REG_RAM_ADDR = { value = 0x7, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Reads back the SRAM address it was loaded with" }
-VC3_REG_VT_FRAME_TBL_PTR = { value = 0x8, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test" }
-VC3_REG_VT_LINE_SEQ_PTR = { value = 0x9, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test" }
-VC3_REG_VT_LINES_RUN = { value = 0xa, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test" }
-VC3_REG_VERT_LINE_COUNT = { value = 0xb, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test" }
-VC3_REG_CURS_TBL_PTR = { value = 0xc, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test" }
-VC3_REG_WORKING_CURS_Y = { value = 0xd, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test" }
-VC3_REG_CUR_CURSOR_X = { value = 0xe, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test" }
-VC3_REG_DID_FRAMETAB1 = { value = 0x10, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Frame table of the first display-ID entry point" }
-VC3_REG_DID_LINETAB1 = { value = 0x11, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Line table of the first display-ID entry point" }
-VC3_REG_DID_FRAMETAB2 = { value = 0x12, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Frame table of the second display-ID entry point" }
-VC3_REG_DID_LINETAB2 = { value = 0x13, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Line table of the second display-ID entry point" }
+HQ_SERIAL_MASTER_OFFSET = { value = 0x011098, grade = "inferred", from = "stock Octane PROM and Octane IDE diagnostic", doc = "one-wire master for the board's serial-number record; each bit slot is one 32-bit store, see HQ_SERIAL_SLOT" }
+VC3_REG_VID_EP = { value = 0x0, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Main display frame table pointer; see software/kernel/display-timing.md" }
+VC3_REG_CURS_EP = { value = 0x1, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index" }
+VC3_REG_CURS_X_LOC = { value = 0x2, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Hardware cursor X" }
+VC3_REG_CURS_Y_LOC = { value = 0x3, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Hardware cursor Y" }
+VC3_REG_DID_EP1 = { value = 0x4, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. First display-ID entry point, with its own frame and line tables" }
+VC3_REG_DID_EP2 = { value = 0x5, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Second display-ID entry point" }
+VC3_REG_SCAN_LENGTH = { value = 0x6, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index" }
+VC3_REG_RAM_ADDR = { value = 0x7, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Reads back the SRAM address it was loaded with" }
+VC3_REG_VT_FRAME_TBL_PTR = { value = 0x8, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index" }
+VC3_REG_VT_LINE_SEQ_PTR = { value = 0x9, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index" }
+VC3_REG_VT_LINES_RUN = { value = 0xa, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index" }
+VC3_REG_VERT_LINE_COUNT = { value = 0xb, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index" }
+VC3_REG_CURS_TBL_PTR = { value = 0xc, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index" }
+VC3_REG_WORKING_CURS_Y = { value = 0xd, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index" }
+VC3_REG_CUR_CURSOR_X = { value = 0xe, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index" }
+VC3_REG_DID_FRAMETAB1 = { value = 0x10, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Frame table of the first display-ID entry point" }
+VC3_REG_DID_LINETAB1 = { value = 0x11, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Line table of the first display-ID entry point" }
+VC3_REG_DID_FRAMETAB2 = { value = 0x12, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Frame table of the second display-ID entry point" }
+VC3_REG_DID_LINETAB2 = { value = 0x13, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Line table of the second display-ID entry point" }

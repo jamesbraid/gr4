@@ -198,7 +198,7 @@ bits, and the 32-bit payload. The execute mark adds 0x0004000000000000 and is
 set on the write that starts a drawing operation. The layout is the driver's
 software expectation; what the board does with each field is not established.</doc>
     <field name="execute" start="50" size="1" type="uint" grade="inferred"/>
-    <field name="selector" start="40" size="8" type="uint" grade="established"/>
+    <field name="selector" start="40" size="9" type="uint" grade="established"/>
     <field name="payload" start="0" size="32" type="uint" grade="established"/>
     <test value="0x1c450400000018" kind="example">
       <expect field="execute" value="1"/>
@@ -220,16 +220,17 @@ IRIX kernel's board-information routine; the other bits are not read.
 Inferred from the kernel object, not a bus measurement.</doc>
     <field name="hq_revision" start="28" size="4" type="uint" grade="inferred"/>
   </struct>
-  <struct name="HQ_SERIAL_SLOT" size="4" grade="established" from="driver and firmware readings">
+  <struct name="HQ_SERIAL_SLOT" size="4" grade="inferred" from="driver and firmware readings">
     <doc>One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET,
 written as one 32-bit store. The low-drive time sits in bits 19:10 and the
 sample offset in bits 9:2. The reader waits for bit 1 (done) and takes the
 wire level from bit 0. Read by the stock Octane PROM and by the Octane IDE
-diagnostic. The chip family on IMPACT boards is unknown.</doc>
-    <field name="drive_time" start="10" size="10" type="uint" grade="established"/>
-    <field name="sample_offset" start="2" size="8" type="uint" grade="established"/>
-    <field name="done" start="1" size="1" type="uint" grade="established"/>
-    <field name="level" start="0" size="1" type="uint" grade="established"/>
+diagnostic. Neither image is in this checkout, so the field layout was not
+re-read. The chip family on IMPACT boards is unknown.</doc>
+    <field name="drive_time" start="10" size="10" type="uint" grade="inferred"/>
+    <field name="sample_offset" start="2" size="8" type="uint" grade="inferred"/>
+    <field name="done" start="1" size="1" type="uint" grade="inferred"/>
+    <field name="level" start="0" size="1" type="uint" grade="inferred"/>
   </struct>
   <struct name="MCO_ID" size="4" grade="established" from="driver and firmware readings">
     <doc>Identification byte of the multi-channel option board (the byte at the
@@ -385,7 +386,7 @@ revision. Inferred from the kernel object.</doc>
   <constant name="HQ_INTR_SRC_SWAP" value="0x400" grade="established"/>
   <constant name="HQ_INTR_STATUS_OFFSET" value="0x11020" grade="established"/>
   <constant name="HQ_INTR_VECTOR_OFFSET" value="0x11070" grade="established"/>
-  <constant name="HQ_SERIAL_MASTER_OFFSET" value="0x11098" grade="established"/>
+  <constant name="HQ_SERIAL_MASTER_OFFSET" value="0x11098" grade="inferred"/>
   <constant name="HQ_SWAP_ACK_VALUE" value="0x401" grade="established"/>
   <constant name="HQ_SWAP_CMD" value="0x3700" grade="established"/>
   <constant name="HQ_VC3_RETRACE_OFFSET" value="0x72038" grade="established"/>

@@ -86,7 +86,7 @@ These are Octane boards. The Indigo2 rows in fact 4 and in `AGENTS.md` are a dif
 
 ## Pixel texture extensions
 
-**29. RGBA pixel texture needs two passes for Q interpolation.** Established. The SGI text `sources/opengl-extensions/SGIX_impact_pixel_texture.txt` (Overview, and the Rasterization section): when the pixel texgen mode is RGBA, IMPACT cannot interpolate the fourth coordinate, Q, in one pass. The correct result comes from two passes, one with a Q ceiling filter and one with a Q floor filter, combined by framebuffer blending. Each filter is chosen through the texture's minimum and maximum filter parameters. Q round turns both off and is the default.
+**29. RGBA pixel texture needs two passes for Q interpolation.** Established. The SGI text `references/documents/opengl-extensions/SGIX_impact_pixel_texture.txt` (Overview, and the Rasterization section): when the pixel texgen mode is RGBA, IMPACT cannot interpolate the fourth coordinate, Q, in one pass. The correct result comes from two passes, one with a Q ceiling filter and one with a Q floor filter, combined by framebuffer blending. Each filter is chosen through the texture's minimum and maximum filter parameters. Q round turns both off and is the default.
 
 **30. The alpha for the blend goes through the texture colour table.** Established. Same text, Rasterization section: the pass replaces the texture alpha with the pixel group's alpha, then scales that alpha by a factor set by the texture's Q size, and the text says the texture colour table does the scaling. Fact 18 limits the colour table to High and Maximum IMPACT, so this path is limited to those boards too (that last step is inferred).
 
