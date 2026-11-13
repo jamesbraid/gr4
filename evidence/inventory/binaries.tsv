@@ -1,6 +1,6 @@
 binary	group	role	kind	abi	bytes	sha256	copies	functions	address_source	access_sites	unresolved_sites	status	doc	section
 usr/cpu/sysgen/IP28boot/gfx.o	kernel-shared	shared-kernel	object	n64	51840	ab0d2dee5e02c578		59	symtab	0	0	named-only	questions/README.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
-usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	kernel	board-kernel	object	n64	97060	f298c8e2e1fb9913		76	symtab	0	0	named-only	software/kernel/hq4-host-interface.md#sources-and-grades	Sources and grades
+usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	kernel	board-kernel	object	n64	97060	f298c8e2e1fb9913		76	symtab	0	0	named-only	software/opengl/gl-commands.md#kernel-context-image-and-eviction	Kernel context image and eviction
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	kernel	board-kernel	object	n64	11684	267749da7176ee06		10	symtab	1	0	named-only	evidence/routines/t1-gr4-b000.md#mgrasinitccr-in-usrcpusysgenip28bootmgrasamgras_ccvo-at-0x54c	`MgrasInitCCR` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)` at 0x54c
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	kernel	board-kernel	object	n64	33412	3775fa54d203caaf		28	symtab	0	0	named-only	questions/README.md#16-host-transfer-table-slots	16. Host transfer table slots
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	kernel	board-kernel	object	n64	56148	8369b6d4a250d395		43	symtab	49	0	named-only	devices/mgras/board-facts.md#contradictions-found	Contradictions found
@@ -19,7 +19,7 @@ usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tools	board-tool	executable	o32	54180	4cb94
 usr/gfx/arch/IGLOO32/libgl.so	shared-libraries	shared-library	shared-object	n32	1682688	0158dfea8d6ce229		3810	dynsym+dwarf	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
 usr/gfx/arch/IP28GR432/libGL.so	libraries	board-library	shared-object	n32	407256	b2d3590e0b7de408		607	dynsym+dwarf (dwarf addresses translated through .MIPS.Xlate)	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
 usr/gfx/arch/IP28GR432/libGLcore.so	libraries	board-library	shared-object	n32	3254556	eca0027567a5ae88		4833	dynsym+dwarf	0	0	named-only	devices/mgras/two-re.md#texture-memory-on-two-engine-boards	Texture memory on two-engine boards
-usr/gfx/ucode/MG/mgras_ge.hex	microcode	board-microcode	data	-	1365875	d0f2a8c13ae8c67a		0		0	0	named-only	AGENTS.md#major-asic-roles	Major ASIC Roles:
+usr/gfx/ucode/MG/mgras_ge.hex	microcode	board-microcode	data	-	1365875	d0f2a8c13ae8c67a		0		0	0	named-only	devices/ge11/program-format.md#ge11-microcode-word-what-the-shipped-images-show	GE11 microcode word: what the shipped images show
 usr/gfx/ucode/MG/mgras_ge.u	microcode	board-microcode	data	-	2157802	a7782ccf26794c54		0		0	0	named-only	evidence/irix-files.md#1-directory-structure-overview	1. Directory Structure Overview
 usr/gfx/ucode/MG/mgras_ge_DB.hex	microcode	board-microcode	data	-	1369750	c6ed3e2e500c6c79		0		0	0	undocumented		
 usr/gfx/ucode/MG/mgras_ge_DB.u	microcode	board-microcode	data	-	2164148	0117ecb2315ccdc0		0		0	0	undocumented		

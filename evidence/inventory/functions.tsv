@@ -9436,7 +9436,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9a44	12	glGetColorTa
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9a44	12	glGetColorTableParameterfvSGI	dwarf+dynsym	c0d0d6c2be9e	shared-address	in	named-only		
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9a50	12	glGetColorTableParameteriv	dynsym	2c085867a35f	shared-address	in	named-only		
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9a50	12	glGetColorTableParameterivSGI	dwarf+dynsym	2c085867a35f	shared-address	in	named-only		
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9a5c	12	glTexImage4DSGIS	dwarf+dynsym	3f11cc785c89		in	named-only	evidence/inventory/functions.tsv	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9a5c	12	glTexImage4DSGIS	dwarf+dynsym	3f11cc785c89		in	named-only	software/opengl/pixel-texture.md#four-dimensional-images	Four-dimensional images
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9a68	12	glTexSubImage4DSGIS	dwarf+dynsym	6158f4fb1cd2		in	named-only	evidence/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9a74	12	glPixelTexGenSGIX	dwarf+dynsym	d4d4c8331f33		in	named-only	evidence/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9a80	12	glSpriteParameterfSGIX	dwarf+dynsym	a07229e8a154		in	named-only	evidence/inventory/functions.tsv	
