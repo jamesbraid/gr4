@@ -5,10 +5,6 @@ doc = "Geometry engine control registers of the Impact graphics subsystem."
 from = "driver and diagnostic readings"
 public_from = ["driver and diagnostic readings"]
 
-[c]
-legacy_header = "GE11_DECODE.h"
-legacy_guard = "GE11_DECODE_H"
-
 [spaces.ge11_regs]
 unit = "reg"
 

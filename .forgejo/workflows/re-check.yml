@@ -1,5 +1,5 @@
-# Copy to .forgejo/workflows/re-check.yml in a workspace that has a defs/
-# directory (or, until it migrates, a defs.toml).
+# Copy to .forgejo/workflows/re-check.yml in a workspace that keeps its register
+# maps under devices/ or formats/.
 # Fetches only the retools submodule: some workspaces carry vendor-source
 # submodules that must never be cloned, so never use --recursive.
 # The job needs python3 and gcc for the checks and builds, and rustc for the Rust

@@ -5,10 +5,6 @@ doc = "Texture engine and texture RAM registers and loader registers of the Impa
 from = "driver readings"
 public_from = ["driver readings", "diagnostic transcript"]
 
-[c]
-legacy_header = "TE1_DECODE.h"
-legacy_guard = "TE1_DECODE_H"
-
 [spaces.te1_regs]
 unit = "reg"
 

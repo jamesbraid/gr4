@@ -5,10 +5,6 @@ doc = "Raster engine registers of the Impact graphics subsystem."
 from = "driver and traffic readings"
 public_from = ["driver and traffic readings", "OpenBSD impact(4) driver"]
 
-[c]
-legacy_header = "RE4_DECODE.h"
-legacy_guard = "RE4_DECODE_H"
-
 [spaces.re4_regs]
 unit = "reg"
 

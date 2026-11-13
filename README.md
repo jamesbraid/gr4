@@ -57,7 +57,6 @@ Not listed one by one:
 
 - [devices/](devices/): the hardware facts, one `registers.toml` per unit. Each register, field, word and constant has a grade and a source. Edit facts here.
 - [generated/](generated/): generated from the `registers.toml` files and committed; never edit by hand. Each unit's reference page, `registers.md`, sits next to its source in [devices/](devices/).
-- `*_DECODE.h` at the top level: forwarding headers that include `generated/c/`.
 
 ## Other
 

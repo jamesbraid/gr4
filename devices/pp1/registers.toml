@@ -5,10 +5,6 @@ doc = "Display read buffer registers of the Impact graphics subsystem."
 from = "driver readings"
 public_from = ["driver readings"]
 
-[c]
-legacy_header = "PP1_DECODE.h"
-legacy_guard = "PP1_DECODE_H"
-
 [spaces.pp1_regs]
 unit = "reg"
 

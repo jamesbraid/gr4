@@ -5,10 +5,6 @@ doc = "Expected power-up values of the crosstalk widget block on the Octane host
 from = "diagnostic program data"
 public_from = ["diagnostic program data"]
 
-[c]
-legacy_header = "XTALK_DECODE.h"
-legacy_guard = "XTALK_DECODE_H"
-
 [words.LLP_CONFIG]
 width = 32
 doc = """

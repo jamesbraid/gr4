@@ -5,10 +5,6 @@ doc = "Board-level words of the Impact graphics subsystem."
 from = "driver and firmware readings"
 public_from = ["driver and firmware readings", "OpenBSD impact(4) driver"]
 
-[c]
-legacy_header = "MGRAS_DECODE.h"
-legacy_guard = "MGRAS_DECODE_H"
-
 [registers.dcb_ctrl]
 offset = 0xa000
 access = "rw"

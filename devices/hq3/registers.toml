@@ -5,10 +5,6 @@ doc = "Host interface and command processor registers of the Impact graphics sub
 from = "driver and diagnostic readings"
 public_from = ["driver and diagnostic readings"]
 
-[c]
-legacy_header = "HQ3_DECODE.h"
-legacy_guard = "HQ3_DECODE_H"
-
 [spaces.hq3_regs]
 unit = "reg"
 

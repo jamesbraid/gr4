@@ -8,33 +8,22 @@ address_bits = 16
 leak = "tools/config/leak-allow.txt"
 
 [units.re4]
-group = "RE4_DECODE.h"
 notes_corpus = ["devices/re4/RE4.h"]
 
-[units.ge11]
-group = "GE11_DECODE.h"
-
 [units.hq3]
-group = "HQ3_DECODE.h"
 notes_corpus = ["devices/hq3/HQ3.h"]
 
 [units.mgras]
-group = "MGRAS_DECODE.h"
 notes_corpus = ["devices/mgras/MGRAS.h"]
 
 [units.xtalk]
-group = "XTALK_DECODE.h"
 prose_offsets = false
 
 [units.pp1]
-group = "PP1_DECODE.h"
 notes_corpus = ["devices/pp1/PP1.h", "questions/README.md"]
 
-[units.te1]
-group = "TE1_DECODE.h"
-
 [[claims]]
-group = "RE4_DECODE.h"
+group = "re4"
 label = "config y flip bit"
 doc = "devices/re4/RE4.h"
 regex = 'RE4_CFG_YFLIP\s+BIT\((\d+)\)'
@@ -43,7 +32,7 @@ binds = [
 ]
 
 [[claims]]
-group = "RE4_DECODE.h"
+group = "re4"
 label = "fill mode block type position"
 doc = "devices/re4/RE4.h"
 regex = 'RE4_FM_BLOCK_TYPE_MASK\s+\(0x7 << (\d+)\)'
@@ -52,7 +41,7 @@ binds = [
 ]
 
 [[claims]]
-group = "RE4_DECODE.h"
+group = "re4"
 label = "instruction setup bit"
 doc = "devices/re4/RE4.h"
 regex = 'RE4_IR_SETUP\s+BIT\((\d+)\)'
@@ -61,7 +50,7 @@ binds = [
 ]
 
 [[claims]]
-group = "HQ3_DECODE.h"
+group = "hq3"
 label = "bus config tlb update bit"
 doc = "devices/hq3/HQ3.h"
 regex = 'HQ3_GIOCFG_TLB_UPDATE\s+BIT\((\d+)\)'
@@ -70,7 +59,7 @@ binds = [
 ]
 
 [[claims]]
-group = "GE11_DECODE.h"
+group = "ge11"
 label = "exec breakpoint enable bit"
 doc = "devices/ge11/GE11.h"
 regex = 'GE11_EXEC_BREAKPOINT_EN\s+BIT\((\d+)\)'
@@ -79,7 +68,7 @@ binds = [
 ]
 
 [[claims]]
-group = "MGRAS_DECODE.h"
+group = "mgras"
 label = "board id revision nibble"
 doc = "devices/mgras/MGRAS.h"
 regex = 'MGRAS_REV_MASK\s+0x0000000?(F)0'
