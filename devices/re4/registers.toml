@@ -538,37 +538,37 @@ grade = "inferred"
 
 [registers.texmode1.fields.colour_table.enums]
 rgb_lookup = { value = 0xe, grade = "inferred" }
-none = { value = 0, grade = "established" }
-alpha = { value = 0x1, grade = "established" }
-intensity_or_luminance_alpha = { value = 0x9, grade = "established" }
+none = { value = 0, grade = "inferred" }
+alpha = { value = 0x1, grade = "inferred" }
+intensity_or_luminance_alpha = { value = 0x9, grade = "inferred" }
 
 [registers.texmode1.fields.texture_enable]
 bits = [0, 0]
-grade = "established"
+grade = "inferred"
 
 [registers.texmode1.fields.environment]
 bits = [2, 1]
-grade = "established"
+grade = "inferred"
 
 [registers.texmode1.fields.environment.enums]
-modulate = { value = 0, grade = "established" }
-decal = { value = 1, grade = "established" }
-blend = { value = 2, grade = "established" }
+modulate = { value = 0, grade = "inferred" }
+decal = { value = 1, grade = "inferred" }
+blend = { value = 2, grade = "inferred" }
 alpha_only = { value = 3, grade = "inferred" }
 
 [registers.texmode1.fields.layout]
 bits = [4, 3]
-grade = "established"
+grade = "inferred"
 
 [registers.texmode1.fields.layout.enums]
-one_component = { value = 0, grade = "established" }
-two_component = { value = 1, grade = "established" }
-rgb = { value = 2, grade = "established" }
-rgba = { value = 3, grade = "established" }
+one_component = { value = 0, grade = "inferred" }
+two_component = { value = 1, grade = "inferred" }
+rgb = { value = 2, grade = "inferred" }
+rgba = { value = 3, grade = "inferred" }
 
 [registers.texmode1.fields.tram_size_code]
 bits = [6, 5]
-grade = "established"
+grade = "inferred"
 
 [registers.texmode1.fields.tram_select]
 bits = [8, 7]
@@ -579,17 +579,17 @@ select for one- and two-component textures. What each select names is unknown.""
 
 [registers.texmode1.fields.texel_class]
 bits = [11, 9]
-grade = "established"
+grade = "inferred"
 
 [registers.texmode1.fields.texel_class.enums]
-alpha = { value = 1, grade = "established" }
-luminance = { value = 2, grade = "established" }
-intensity = { value = 3, grade = "established" }
-colour = { value = 4, grade = "established" }
+alpha = { value = 1, grade = "inferred" }
+luminance = { value = 2, grade = "inferred" }
+intensity = { value = 3, grade = "inferred" }
+colour = { value = 4, grade = "inferred" }
 
 [registers.texmode1.fields.depth_term]
 bits = [18, 16]
-grade = "established"
+grade = "inferred"
 doc = """
 One for a texture with 12-bit components and four for any other depth. Reading
 the field as the count of blend units in use is inferred."""

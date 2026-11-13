@@ -610,7 +610,7 @@ pub mod fill_mode {
 pub mod texmode1 {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe111;
-    pub mod depth_term { // bits 18:16, established
+    pub mod depth_term { // bits 18:16, inferred
         pub const SHIFT: u32 = 16;
         pub const MASK: u32 = 0x7;
         pub const fn get(v: u32) -> u32 {
@@ -629,9 +629,9 @@ pub mod texmode1 {
         pub const fn set(v: u32, x: u32) -> u32 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
-        pub const NONE: u32 = 0; // established
-        pub const ALPHA: u32 = 1; // established
-        pub const INTENSITY_OR_LUMINANCE_ALPHA: u32 = 9; // established
+        pub const NONE: u32 = 0; // inferred
+        pub const ALPHA: u32 = 1; // inferred
+        pub const INTENSITY_OR_LUMINANCE_ALPHA: u32 = 9; // inferred
         pub const RGB_LOOKUP: u32 = 14; // inferred
         #[derive(Debug, Clone, Copy, PartialEq, Eq)]
         pub enum Value {
@@ -662,7 +662,7 @@ pub mod texmode1 {
             }
         }
     }
-    pub mod texel_class { // bits 11:9, established
+    pub mod texel_class { // bits 11:9, inferred
         pub const SHIFT: u32 = 9;
         pub const MASK: u32 = 0x7;
         pub const fn get(v: u32) -> u32 {
@@ -671,10 +671,10 @@ pub mod texmode1 {
         pub const fn set(v: u32, x: u32) -> u32 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
-        pub const ALPHA: u32 = 1; // established
-        pub const LUMINANCE: u32 = 2; // established
-        pub const INTENSITY: u32 = 3; // established
-        pub const COLOUR: u32 = 4; // established
+        pub const ALPHA: u32 = 1; // inferred
+        pub const LUMINANCE: u32 = 2; // inferred
+        pub const INTENSITY: u32 = 3; // inferred
+        pub const COLOUR: u32 = 4; // inferred
         #[derive(Debug, Clone, Copy, PartialEq, Eq)]
         pub enum Value {
             Alpha,
@@ -714,7 +714,7 @@ pub mod texmode1 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod tram_size_code { // bits 6:5, established
+    pub mod tram_size_code { // bits 6:5, inferred
         pub const SHIFT: u32 = 5;
         pub const MASK: u32 = 0x3;
         pub const fn get(v: u32) -> u32 {
@@ -724,7 +724,7 @@ pub mod texmode1 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod layout { // bits 4:3, established
+    pub mod layout { // bits 4:3, inferred
         pub const SHIFT: u32 = 3;
         pub const MASK: u32 = 0x3;
         pub const fn get(v: u32) -> u32 {
@@ -733,10 +733,10 @@ pub mod texmode1 {
         pub const fn set(v: u32, x: u32) -> u32 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
-        pub const ONE_COMPONENT: u32 = 0; // established
-        pub const TWO_COMPONENT: u32 = 1; // established
-        pub const RGB: u32 = 2; // established
-        pub const RGBA: u32 = 3; // established
+        pub const ONE_COMPONENT: u32 = 0; // inferred
+        pub const TWO_COMPONENT: u32 = 1; // inferred
+        pub const RGB: u32 = 2; // inferred
+        pub const RGBA: u32 = 3; // inferred
         #[derive(Debug, Clone, Copy, PartialEq, Eq)]
         pub enum Value {
             OneComponent,
@@ -766,7 +766,7 @@ pub mod texmode1 {
             }
         }
     }
-    pub mod environment { // bits 2:1, established
+    pub mod environment { // bits 2:1, inferred
         pub const SHIFT: u32 = 1;
         pub const MASK: u32 = 0x3;
         pub const fn get(v: u32) -> u32 {
@@ -775,9 +775,9 @@ pub mod texmode1 {
         pub const fn set(v: u32, x: u32) -> u32 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
-        pub const MODULATE: u32 = 0; // established
-        pub const DECAL: u32 = 1; // established
-        pub const BLEND: u32 = 2; // established
+        pub const MODULATE: u32 = 0; // inferred
+        pub const DECAL: u32 = 1; // inferred
+        pub const BLEND: u32 = 2; // inferred
         pub const ALPHA_ONLY: u32 = 3; // inferred
         #[derive(Debug, Clone, Copy, PartialEq, Eq)]
         pub enum Value {
@@ -808,7 +808,7 @@ pub mod texmode1 {
             }
         }
     }
-    pub mod texture_enable { // bits 0:0, established
+    pub mod texture_enable { // bits 0:0, inferred
         pub const SHIFT: u32 = 0;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {

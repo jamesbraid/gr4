@@ -25,8 +25,10 @@ here is a register manual or a bus measurement.
 ## Numeric FIFO packets
 
 Each command is one 64-bit write to the normal command FIFO at offset
-`0x020400`. The payload is the low 32 bits. The register selector sits in
-bits 47:40, and bit 50 is the execute mark. The framing constant and selector
+`0x020400`. The payload is the low 32 bits. The register selector is shifted
+left 40 bits, so it occupies bits 48:40 for the nine-bit selectors the driver uses
+(`impactreg.h` gives `IMPACTSR_CFIFO_REG_SHIFT` as 40 and the largest selector it
+writes is `0x161`), and bit 50 is the execute mark. The framing constant and selector
 values are recorded in `HQ4_NUMERIC_PACKET` and the RE4 register table. The
 execute mark records the driver's request to run the primitive. It does not
 say when the operation finishes.
@@ -56,7 +58,9 @@ For a console glyph the driver writes PP1FILLMODE `0x0c006300`, FILLMODE
 `0x00400018` (glyph opaque and glyph stipple, block type 1), PACKEDCOLOR for
 the foreground, and BKGRD_RG and BKGRD_BA for the background. Each rectangle
 uses the same inclusive coordinates as a fill. The alias write `0x18` with
-execute arms the rectangle without painting it.
+execute is the same write the fill uses; that it arms the rectangle without
+painting it is **inferred** from the driver's later CHAR_H and CHAR_L executes,
+which supply the row bits.
 
 Glyph rows then depend on the width:
 
@@ -71,13 +75,16 @@ Glyph rows then depend on the width:
   row. It writes CHAR_H with the 16-bit row shifted left 16 bits, without
   executing. It then executes CHAR_L with the row shifted left 24 bits, which
   draws the row once. The top byte of CHAR_H covers columns zero through
-  seven, and the top byte of CHAR_L covers columns eight through fifteen.
-  Padding past the width is clipped. The driver then moves to the next row and
+  seven, and the top byte of CHAR_L covers columns eight through fifteen
+  (**inferred** from the shifts; the driver does not say). Padding past the
+  width is clipped, also inferred. The driver then moves to the next row and
   arms again.
 - Underline. The driver substitutes an all-ones row (`0xff` or `0xffff`) for
   the glyph row.
 
-The background is packed as 12-bit components with the low four bits zero.
+The driver's own comment calls this a 4:8:4 background: red and blue keep only
+their high nibble and green keeps all eight bits, each placed in a 12-bit
+component with the low four bits zero.
 For the colour word `0x00d0b0a0`, the driver sends BKGRD_RG `0x00b00a00`
 (green in bits 23:12, red in bits 11:0) and BKGRD_BA `0x00000d00` (blue in
 bits 11:0). Whether the board expands each component from those 12 bits

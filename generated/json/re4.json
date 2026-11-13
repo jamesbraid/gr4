@@ -1098,7 +1098,7 @@
    "name": "texmode1.depth_term",
    "hi": 18,
    "lo": 16,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1115,7 +1115,7 @@
    "kind": "enum_value",
    "name": "texmode1.colour_table.none",
    "value": 0,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1123,7 +1123,7 @@
    "kind": "enum_value",
    "name": "texmode1.colour_table.alpha",
    "value": 1,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1131,7 +1131,7 @@
    "kind": "enum_value",
    "name": "texmode1.colour_table.intensity_or_luminance_alpha",
    "value": 9,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1148,7 +1148,7 @@
    "name": "texmode1.texel_class",
    "hi": 11,
    "lo": 9,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1156,7 +1156,7 @@
    "kind": "enum_value",
    "name": "texmode1.texel_class.alpha",
    "value": 1,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1164,7 +1164,7 @@
    "kind": "enum_value",
    "name": "texmode1.texel_class.luminance",
    "value": 2,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1172,7 +1172,7 @@
    "kind": "enum_value",
    "name": "texmode1.texel_class.intensity",
    "value": 3,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1180,7 +1180,7 @@
    "kind": "enum_value",
    "name": "texmode1.texel_class.colour",
    "value": 4,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1198,7 +1198,7 @@
    "name": "texmode1.tram_size_code",
    "hi": 6,
    "lo": 5,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1207,7 +1207,7 @@
    "name": "texmode1.layout",
    "hi": 4,
    "lo": 3,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1215,7 +1215,7 @@
    "kind": "enum_value",
    "name": "texmode1.layout.one_component",
    "value": 0,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1223,7 +1223,7 @@
    "kind": "enum_value",
    "name": "texmode1.layout.two_component",
    "value": 1,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1231,7 +1231,7 @@
    "kind": "enum_value",
    "name": "texmode1.layout.rgb",
    "value": 2,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1239,7 +1239,7 @@
    "kind": "enum_value",
    "name": "texmode1.layout.rgba",
    "value": 3,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1248,7 +1248,7 @@
    "name": "texmode1.environment",
    "hi": 2,
    "lo": 1,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1256,7 +1256,7 @@
    "kind": "enum_value",
    "name": "texmode1.environment.modulate",
    "value": 0,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1264,7 +1264,7 @@
    "kind": "enum_value",
    "name": "texmode1.environment.decal",
    "value": 1,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1272,7 +1272,7 @@
    "kind": "enum_value",
    "name": "texmode1.environment.blend",
    "value": 2,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
@@ -1289,7 +1289,7 @@
    "name": "texmode1.texture_enable",
    "hi": 0,
    "lo": 0,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver and traffic readings"
   },
   {
