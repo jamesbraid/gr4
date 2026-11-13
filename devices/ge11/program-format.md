@@ -2,7 +2,10 @@
 
 This page records what the shipped GE11 microcode images show about the
 72-bit instruction word. The images are the InfiniteReality and MGRAS geometry
-programs that IRIX 6.5.30 loads into the engine. Every fact here is a
+programs that IRIX loads into the engine: `usr/gfx/ucode/MG/mgras_ge.hex` for MGRAS
+and `usr/gfx/ucode/KONA/ge.hex` with its `ge_symbols` table for InfiniteReality
+(the second file is in the InfiniteReality workspace's tree, not this one).
+The figures below were recomputed from those two files. Every fact here is a
 measurement about those files, or a reading of one, unless it says otherwise.
 Nothing here says what an instruction computes.
 
@@ -20,12 +23,12 @@ not decide.
 ## Shared word across the two families
 
 - **Established.** The InfiniteReality and MGRAS programs use one instruction
-  word. The two diagnostic programs hold 931 identical words. Across the 72
+  word. Across the 72
   word bits, the per-bit set frequency agrees between the families at r = 0.988,
-  with a largest single-bit difference of 0.066. The adjacent-bit coupling
+  with a largest single-bit difference of 0.080. The adjacent-bit coupling
   agrees at r = 0.83, and 7 of the 10 strongest couplings are shared.
 - **Established.** The opcode-like values in use match closely: 167 values on
-  InfiniteReality, 168 on MGRAS, 157 of them common to both.
+  InfiniteReality, 169 on MGRAS, 158 of them common to both.
 
 ## Field map
 
@@ -67,10 +70,10 @@ not decide.
   labeled entries. The roles as stated do not reproduce the routine structure.
   The sequencer reading that `GE11.h` gives (transfers take effect after four
   delay words, returns after eight) is not tested by this run.
-- **Inferred.** All-zero words do not end sequencing. Of 60899 words inside
-  labeled routine extents, 15258 are all zero, and 749 of the 1025 extents hold
-  at least one. This depends on the symbol table's labels marking routine
-  starts.
+- **Inferred.** All-zero words do not end sequencing. Taking an extent as a symbol address up
+  to the next one, 17332 of the 62973 words are all zero, and 836 of the 1025
+  extents hold at least one. This depends on the symbol table's labels marking
+  routine starts.
 - **Unknown.** What a zero word does. Before a labeled entry, the number of zero
   words is 0 (518 entries), 1 (139), 2 (31), 3 (196), 4 (59), 5 (6), 6 (4), 7 (25)
   and 8 (46). The reason runs of three and eight are common is not known.
