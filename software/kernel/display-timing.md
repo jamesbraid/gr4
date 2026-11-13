@@ -8,21 +8,24 @@ mode. The VC3 register indexes are the `VC3_REG_*` constants in
 
 ## Sources and grades
 
-- **Kernel.** The IRIX 6.5.30 kernel routines `MgrasSetTiming`,
+- **Kernel.** The IRIX 6.5.30 IP27 kernel routines `MgrasSetTiming`,
   `MgrasSetDacTiming`, `MgrasSetVC3Timing` and `MgrasEnableVideoTiming`, read
-  from the graphics object. The write sequence below is **established** as
+  from the `mgras_init.o` member of `usr/cpu/sysgen/IP27boot/mgras.a`
+  (SHA-256 `c3b1faac9a98280b117cd9f054c4c737d1f9844d697b8ed17bfd7e70b8e7134f`). The write sequence below is **established** as
   those routines' words.
-- **Timing files.** The shipped `vof/*.sdb` files, including
-  `vof/1280x1024_60.sdb`. Their field values are **established** as file
-  contents.
+- **Timing files.** The shipped `usr/gfx/ucode/MGRAS/vof/*.sdb` files, including
+  `1280x1024_60.sdb`, whose `DacPll_cntl`, `DacPll_r`, `DacPll_v` and
+  `AchievedFrequency` fields were read directly (`0x91`, 2, 4 and 107.25). Their
+  field values are **established** as file contents.
 - **Clock model.** The PLL and frame-walk formulas below are **inferred**. The
-  timing compiler's own model reproduces the achieved frequencies and line
-  totals recorded in the files.
+  PLL formula reproduces the achieved frequency of `1280x1024_60.sdb`. An earlier
+  version of this page counted agreement over 109 files and 2,709 lines in 139
+  timing files; this checkout holds 64 timing files and those counts were not
+  reproduced, so they are not claimed.
 - **Arithmetic.** The worked numbers in the last sections were computed here
   from the stock values. They are not measurements.
 
-The binaries and timing files are not stored in this repository. Their readings
-were carried from the analysis that identified them.
+The binaries and timing files are not stored in this repository.
 
 ## Write sequence
 
@@ -44,8 +47,8 @@ Nothing in this sequence stops timing before the tables load.
 
 ## Clocks
 
-**Inferred**, from the PLL model that reproduces the achieved frequency in the
-109 files that carry PLL fields:
+**Inferred**, from the PLL model that reproduces the achieved frequency of the
+stock 1280 by 1024 at 60 Hz file:
 
 - Reference clock: 33 MHz.
 - Pixel clock:
@@ -66,9 +69,9 @@ Nothing in this sequence stops timing before the tables load.
   line ends at an entry whose halfwords all have bit 15 set.
 - The frame length N is the sum, over the table, of repeat count times line
   length, in VC3 clocks.
-- The walk reproduces each line's total for all 2,709 reachable lines in the
-  139 MGRAS timing files. That is a check against the files' own totals, not
-  against a board.
+- Whether the walk reproduces each line's total across the timing files was not
+  re-run; the line and frame totals used below are taken as the compiler
+  recorded them.
 
 ## Stock 1280 by 1024 at 60 Hz
 
@@ -76,9 +79,12 @@ Field values as recorded for `vof/1280x1024_60.sdb`:
 
 - r = 2, v = 4, cntl = `0x91`.
 - f_pix = 33 * (4 * 6 + 2) / (4 * 2 * 1) = 107.25 MHz. The compiler records
-  107.25 MHz as the achieved rate. The file's nominal 107.352 MHz would give
-  exactly 60 Hz, but the PLL cannot produce it.
-- The frame table has 1,065 lines of 840 VC3 clocks, so N = 894,600 VC3 clocks.
+  107.25 MHz as the achieved rate. Exactly 60 Hz would need 107.352 MHz (894,600 clocks times 60, doubled), which the
+  PLL cannot produce.
+- The file records 1,065 lines per frame. The page's earlier figure of 840 VC3
+  clocks a line, which gives N = 894,600 VC3 clocks, was not found in the file by
+  re-reading (the frame table is not decoded here), so the line length, N and the
+  retrace figure below are **inferred** from that unrechecked figure.
 - The VC3 clock is 53.625 MHz. The frame period is 16.6825 ms, which gives a
   retrace rate of 59.943 Hz.
 

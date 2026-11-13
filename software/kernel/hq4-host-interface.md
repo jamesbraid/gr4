@@ -12,22 +12,30 @@ in [two-re.md](../../devices/mgras/two-re.md).
 ## Sources and grades
 
 - The IRIX 6.5.30 IP27 kernel `unix.IP27` (SHA-256
-  `cbdb02ea5d334ecac949a6524a363e6c945f94baf438d41e8d9248eda0377bdf`), read as
-  disassembly with names from its symbol table. Routine names below come from
-  that table.
-- The IRIX 6.5.30 kernel `/unix`, another link of the same release (SHA-256
-  `99040083dd5e6073d2b4a951ac72be130a1dd3dc624d9c9e6477f9b181c96c3f`), read for the
-  retrace attach path.
-- The graphics object `mgras.o` in the IRIX 6.5.30 `mgras.a` archive (member SHA-256
-  begins `6a65e70d3cdc`), read as disassembly.
+  `567474674eaa83d3...`, the copy in the 6.5.30 tree; an earlier version of this page
+  cited a kernel with SHA-256 `cbdb02ea5d33...` that is not held, and the routines
+  were re-read in this one), read as disassembly with names from its symbol
+  table. Routine names below come from that table. Re-read here: the interrupt
+  dispatch bit masks, the 63-word loop and `0x4fc` write of the context switch,
+  and the `0xc8000000`/`0xe8000000` timing writes. The remaining sequences on this
+  page were not re-derived.
+- The IRIX 6.5.30 kernel `/unix` that an earlier version of this page cited by
+  SHA-256 `99040083dd5e...` is not held; the retrace attach path was read in the
+  `unix.IP27` above.
+- The graphics members of the IRIX 6.5.30 IP27 `mgras.a` archive (SHA-256
+  `c3b1faac9a98280b117cd9f054c4c737d1f9844d697b8ed17bfd7e70b8e7134f`), read as
+  disassembly.
 - The Octane IDE graphics diagnostic `ide.IP30` (SHA-256
   `19d7a194cb417330475df9a187379404d413c72433cfc97fc9e238f0fe170d69`), read as
   disassembly. Its register tests and start-up writes are software expectations.
-- The stock Octane PROM, read for the serial-number record routine.
-- The Linux IMPACTSR framebuffer driver for Octane, posted to the linux-mips list
-  by Stanislaw Skowronek in 2008 under "SGI Octane (IP30) Patches, Part two,
-  Octane core", and Peter Fürst's 2011 Indigo2 adaptation. That driver was
-  reverse-engineered against IRIX's X server, so it is not an independent source.
+- The stock Octane PROM, read for the serial-number record routine. Not re-read:
+  the PROM image is not in this checkout.
+- The Linux IMPACTSR framebuffer driver for Octane, carried in Joshua Kinard's
+  2008 IP30 patch posts to the linux-mips list (a forward port of Stanislaw
+  Skowronek's Octane work; the mail archive here exposes only the start of the
+  attachment, so the driver text was not re-read), and Peter Fürst's 2011 Indigo2
+  adaptation. That driver was reverse-engineered against IRIX's X server, so it is
+  not an independent source.
 - The public X.Org Impact driver, read for its wait on bit 0 after a DMA.
 
 Grades follow the legend in [AGENTS.md](../../AGENTS.md#7-published-documents),
@@ -242,7 +250,7 @@ IRIX. The layout is a software expectation, so it is inferred for the board.
 
 Which field the board keys the entry size on is unknown. IRIX writes `0x00290000`
 to register `0x040918` in its IP27 build and `0x00680000` in its IP30 build. The
-Linux driver writes the second value too. Bit 22 of that word, set only in the
+Linux driver is reported to write the second value too (not re-read). Bit 22 of that word, set only in the
 IP30 build, is one candidate selector. The widget number, which differs between
 the two builds, is another. Neither is proven. A
 published HQ4 description of the DMA engine, or a measurement that varies one of

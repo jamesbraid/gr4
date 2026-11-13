@@ -15,6 +15,13 @@ fact is graded **inferred**. Nothing here is checked against a register manual,
 a board capture or a measurement of the hardware. Addresses below are in that
 client binary, where the matching ELF resolves the indirect calls.
 
+That `IP27GR532` library is not in this checkout, so its addresses were not
+rechecked. The six command forms in the table below were found in the 6.5.0
+`IP28GR432` library (`mgras_select.s` for `0xc400`, `0xc504`, `0xc600`, `0xc704`
+and the `0x6100` and `0x6200` brackets, `mgras_context.s` for `0xcb04` and
+`0xc900`), which confirms the forms but not the 6.5.30 addresses, the hit record
+layout or the zero-result query.
+
 ## Mode entry and the command forms
 
 The mode handling starts at `0xd94f130`. The client's API handlers write

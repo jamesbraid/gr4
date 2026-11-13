@@ -16,10 +16,19 @@ the second engine). The register and word facts are in
   bytes, SHA-256 `626d6d94fb5ee207139a1dc234bfc0b94e9c9d0d6d0441b43e4c1c9df2fc9d0d`.
   Read as machine code. It has no symbol table, only dynamic symbols, so the
   routine names below are dynamic-symbol names or the listing's own labels.
-- **Kernel.** The graphics object `mgras.o` in the IRIX 6.5.30 IP27boot
-  `mgras.a` archive (member SHA-256 begins `6a65e70d3cdc`), and the `unix.IP27`
-  kernel (SHA-256 begins `cbdb02ea5d33`). Read as machine code at the addresses
-  named below. The archive digests are given as recorded, not in full.
+- **Kernel.** The graphics members of the IRIX 6.5.30 IP27boot `mgras.a`
+  archive (SHA-256 `c3b1faac9a98280b117cd9f054c4c737d1f9844d697b8ed17bfd7e70b8e7134f`)
+  and the 6.5.30 `unix.IP27` kernel (SHA-256 `567474674eaa83d3...`; an earlier
+  version of this page cited a `unix.IP27` with digest `cbdb02ea5d33...` that is
+  not held). Read as machine code at the addresses named below.
+- **Re-read status.** The `IP27GR532` client is not in this checkout, so its
+  addresses were not rechecked. The header words in this page's tables were
+  compared with the 6.5.0 `IP28GR432` client listing (`software/opengl/asm/MGRAS/`):
+  138 of the 154 eight-digit words appear as immediates there. The 16 that do not
+  are the kernel's `0x9808`, `0xf400`, texture and eviction tokens, which the kernel
+  builds from a base and a size, and a few client words (`0x0000df00` among them)
+  that the 6.5.0 client does not contain as literals. Those are taken from the
+  6.5.30 listing as recorded and were not independently confirmed.
 - **Grades.** Everything here shows what software sends, or what the kernel
   expects the board to accept. A listing is a software expectation, so every
   fact is graded **inferred**, even where the listing is unambiguous. It says
@@ -180,7 +189,7 @@ the row says otherwise.
 | clip plane enable, disable | `0x0000a604`, `0x0000a704` with the enumerant |
 | `glLineWidth`, `glPointSize` | `0x00004504`, `0x00004d04`, then a float |
 | `glLineStipple` | `0x00004608`, factor less one, and the 16-bit pattern reversed |
-| `glPolygonStipple` upload | `0x00004e80` and 32 words, one per row of the pattern (128 bytes); the client's `__glMgrLoadPolygonStippleRAM`, sent at instruction addresses `0xd96d9b0` to `0xd96d9ec` of the client library listed above |
+| `glPolygonStipple` upload | `0x00004e80` and 32 words, one per row of the pattern (128 bytes); the client's `__glMgrLoadPolygonStippleRAM`; re-read in the 6.5.0 `IP28GR432` client at `0x0da8bab0` to `0x0da8baf4`, which stores `0x4e80` then 32 words in eight groups of four; the 6.5.30 addresses `0xd96d9b0` to `0xd96d9ec` were not rechecked |
 | `glPolygonMode` | `0x0000a808` and the two enumerants |
 | `glMapGrid1f`, `glMapGrid2f`, `glClearAccum` | `0x0000ae10`, `0x0000af20`, `0x0000bb10` |
 | `glClearColor` | `0x0000ba10` and four floats |
