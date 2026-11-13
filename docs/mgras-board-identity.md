@@ -4,7 +4,7 @@ Every IMPACT (MGRAS) board presents one HQ4 host widget. IRIX tells the
 variants apart by reading a few identity and revision words in the board's
 2 MiB aperture, then naming the board from their values. This page records
 how those reads work and what the captured boards read back. The register
-words are in [defs/mgras.toml](../defs/mgras.toml); the prose is here.
+words are in [devices/mgras/registers.toml](../devices/mgras/registers.toml); the prose is here.
 
 ## Grades and sources
 
@@ -16,7 +16,7 @@ output, also inferred. The Octane technical report and the SGI installation
 guides are published documents and carry their own grades as cited.
 
 Addresses are from the start of the board's 2 MiB aperture. The word at
-0x072488 is the same read as `BDVERS2` in `defs/mgras.toml`, which is
+0x072488 is the same read as `BDVERS2` in `devices/mgras/registers.toml`, which is
 0x62488 from the board base. That places the board base 0x10000 into the
 aperture (inferred from the kernel's window arithmetic, not measured).
 

@@ -3,7 +3,7 @@
 What the published Octane graphics report says about the frame buffer building
 blocks, the visuals built from them, and the stereo modes. These are the
 report's tables, not measurements of a board. The page has no register facts,
-so nothing in [defs/](../defs/) changes for it.
+so nothing in [devices/](../devices/) changes for it.
 
 ## Sources and grades
 

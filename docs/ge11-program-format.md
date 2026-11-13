@@ -7,8 +7,8 @@ measurement about those files, or a reading of one, unless it says otherwise.
 Nothing here says what an instruction computes.
 
 This page holds no register facts. Register offsets and fields are in
-[defs/ge11.toml](../defs/ge11.toml). The 12-byte file record and the listing
-format are described in [GE11.h](../GE11.h), and this page does not repeat them.
+[devices/ge11/registers.toml](../devices/ge11/registers.toml). The 12-byte file record and the listing
+format are described in [GE11.h](../devices/ge11/GE11.h), and this page does not repeat them.
 The shipped routine symbol table was used for its addresses only. No symbol
 name is reproduced here.
 

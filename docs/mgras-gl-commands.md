@@ -8,7 +8,7 @@ the board's own microcode does with the words; those programs are not read here.
 Related pages: [client selection mode](mgras-client-selection-feedback.md) (the
 selection words), [two-engine boards](mgras-two-re.md) (the command window and
 the second engine). The register and word facts are in
-[defs/hq3.toml](../defs/hq3.toml) and [defs/mgras.toml](../defs/mgras.toml).
+[devices/hq3/registers.toml](../devices/hq3/registers.toml) and [devices/mgras/registers.toml](../devices/mgras/registers.toml).
 
 ## Sources and grades
 
@@ -69,7 +69,7 @@ Three header forms, all read from the client's emitters:
 - Nothing closes a stream. The kernel's context switch ends with `0x0000f400`
   only when it switches to the default context.
 
-Reconciling with `CFIFO_CTL` in [defs/hq3.toml](../defs/hq3.toml): that word
+Reconciling with `CFIFO_CTL` in [devices/hq3/registers.toml](../devices/hq3/registers.toml): that word
 reads the command field as bits 20:8. The client's headers put a class in bits
 31:16. For class-zero headers the two readings agree. For the classes below with
 bits 19:16 set, they do not. `0x00080404` reads as command `0x804` under
@@ -231,7 +231,7 @@ board does with the token is unknown.
   is zero.
 - **Readback bracket.** `0x00009600` opens a pixel read and `0x00009700` closes it
   (inferred from their position). These are the readback tokens `TOKEN_READBACK_BEGIN` and `TOKEN_READBACK_END`
-  in [defs/hq3.toml](../defs/hq3.toml). `0x0000da00` (`TOKEN_TRANSFER_DONE`)
+  in [devices/hq3/registers.toml](../devices/hq3/registers.toml). `0x0000da00` (`TOKEN_TRANSFER_DONE`)
   follows a DMA read's kick.
 - **Flush.** After `0x00003600`, the client sets flags bit 20 itself. See the
   open questions below.
@@ -395,7 +395,7 @@ Facts below come from the kernel listing.
 - **Allocation.** For a new context the kernel zeroes the entry, sets word 0 to
   `-1` (no slot in the geometry engine's memory), and ORs `0xc0000000` into word
   1 (`unix.IP27` at `0xc0000000003f38c8` to `0xc0000000003f395c`). `CTX_W1` in
-  [defs/hq3.toml](../defs/hq3.toml) names bits 31 and 30 as first load and
+  [devices/hq3/registers.toml](../devices/hq3/registers.toml) names bits 31 and 30 as first load and
   nothing saved, both inferred. This listing shows the allocator sets both bits
   for a new context.
 - **Switch.** `MgrasCtxsw` writes exactly 63 words. After writing, it clears bit
@@ -445,7 +445,7 @@ Facts below come from the kernel listing.
   sets it itself after `glFlush`. Both can be true; the client's write does not
   show what else raises it.
 - **Address `0x028004`.** It is the query answer here and the GE revision read
-  after a download in [defs/mgras.toml](../defs/mgras.toml). Software reads it
+  after a download in [devices/mgras/registers.toml](../devices/mgras/registers.toml). Software reads it
   for two purposes; which answer the board gives for each index is unknown.
 - **Bank words.** `CTX_BANK_WORD_FIRST` and `CTX_BANK_WORD_SECOND` (`0x10`,
   `0x11`) name the image words the kernel reloads at each switch. This page does

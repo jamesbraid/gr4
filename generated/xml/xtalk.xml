@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<!-- generated from devices/xtalk/registers.toml by defs-gen - do not edit, change the source -->
+<genxml unit="xtalk" prefix="XTALK" title="expected power-up values of the host interface's crosstalk" from="diagnostic program data">
+  <doc>Expected power-up values of the crosstalk widget block on the Octane host interface.</doc>
+  <struct name="LLP_CONFIG" size="4" grade="inferred" from="diagnostic program data">
+    <doc>Link-layer configuration. The diagnostic describes the expected value as a
+null timeout of 6 in bits 15:10 and a retry limit of 0x3ff in bits 25:16
+(maximum burst 16 is also stated; its bit position is not).</doc>
+    <field name="retry_limit" start="16" size="10" type="uint" grade="inferred"/>
+    <field name="null_timeout" start="10" size="6" type="uint" grade="inferred"/>
+    <test value="0x3ff1810" kind="vector">
+      <expect field="null_timeout" value="6"/>
+      <expect field="retry_limit" value="1023"/>
+    </test>
+  </struct>
+  <constant name="CONTROL_EXPECT" value="0x32f" grade="established"/>
+  <constant name="ERR_ADDR_HI_EXPECT" value="0x0" grade="established"/>
+  <constant name="ERR_ADDR_LO_EXPECT" value="0x0" grade="established"/>
+  <constant name="ERR_CMD_EXPECT" value="0x0" grade="established"/>
+  <constant name="ID_EXPECT" value="0xe001d55" grade="established"/>
+  <constant name="INTR_DEST_HI_EXPECT" value="0x0" grade="established"/>
+  <constant name="INTR_DEST_LO_EXPECT" value="0x0" grade="established"/>
+  <constant name="LLP_CONFIG_EXPECT" value="0x3ff1810" grade="established"/>
+  <constant name="REQ_TIMEOUT_EXPECT" value="0xfffff" grade="established"/>
+  <constant name="STATUS_EXPECT" value="0x0" grade="established"/>
+  <constant name="TARGET_FLUSH_EXPECT" value="0x0" grade="established"/>
+</genxml>

@@ -3,7 +3,7 @@
 How the IRIX kernel programs the video timing of an MGRAS board, the clock
 arithmetic those settings imply, and the retrace rate of the stock 1280 by 1024
 mode. The VC3 register indexes are the `VC3_REG_*` constants in
-[defs/mgras.toml](../defs/mgras.toml). The retrace interrupt is in
+[devices/mgras/registers.toml](../devices/mgras/registers.toml). The retrace interrupt is in
 [the HQ4 host interface](mgras-hq4.md#retrace-interrupt).
 
 ## Sources and grades

@@ -8,7 +8,7 @@ done yet.
 
 Related pages: [GL command stream](mgras-gl-commands.md) (word framing and texture
 transfers), [IMPACT board facts](IMPACT_BOARD_FACTS.md), facts 29 to 32 (the
-published pixel texture text), and [defs/re4.toml](../defs/re4.toml) (the
+published pixel texture text), and [devices/re4/registers.toml](../devices/re4/registers.toml) (the
 `texmode1` field).
 
 ## Sources and grades
@@ -34,7 +34,7 @@ control word. Each record carries a register number, a value and a third word.
 The third word comes from a client lookup table. Its values are not decoded here.
 The record is framed by the client's existing `0x7c08` header and an inline data
 block. Whether `0x7c` is the raster triple command that
-[defs/hq3.toml](../defs/hq3.toml) names is not shown.
+[devices/hq3/registers.toml](../devices/hq3/registers.toml) names is not shown.
 
 The control word is the object flag word at offset `0x58` of the bound texture
 object. The client changes it in these places:
@@ -92,7 +92,7 @@ works like this:
 The sender clears `texmode1` bits 15 to 12 before it chooses the table format
 (code at `0xd99ef00`). Its RGB-compatible path then writes `0xe` in that field
 (code at `0xd99ef6c` and the send at `0xd99efbc`). That is the only field value
-read from the client. The field is in [defs/re4.toml](../defs/re4.toml). Its
+read from the client. The field is in [devices/re4/registers.toml](../devices/re4/registers.toml). Its
 other values are **unknown**.
 
 ## Four-dimensional images

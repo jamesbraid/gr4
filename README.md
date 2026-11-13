@@ -35,9 +35,9 @@ Not listed one by one:
 
 ## Hardware definitions
 
-- [defs/](defs/): the hardware facts, one TOML file per unit. Each register, field, word and constant has a grade and a source. Edit facts here.
-- [gen/](gen/): generated from `defs/` and committed; never edit by hand. [gen/docs/](gen/docs/) has the reference page for each unit.
-- `*_DECODE.h` at the top level: forwarding headers that include `gen/c/`.
+- [devices/](devices/): the hardware facts, one `registers.toml` per unit. Each register, field, word and constant has a grade and a source. Edit facts here.
+- [generated/](generated/): generated from the `registers.toml` files and committed; never edit by hand. Each unit's reference page, `registers.md`, sits next to its source in [devices/](devices/).
+- `*_DECODE.h` at the top level: forwarding headers that include `generated/c/`.
 
 ## Other
 

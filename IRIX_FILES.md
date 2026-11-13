@@ -8,7 +8,7 @@ Top-level subdirectories (`ddx/`, `libglcore/`, `irisgl/`, `mgras_kernel/`, `ge1
 
 ### 0. What `root/` holds now
 
-`root/` is an extraction from the June 1998 IRIX 6.5 base CDs. Its files are listed in the extraction index kept beside it, and the 46 files the inventory reads are pinned in `scripts/inventory-root.sha256`.
+`root/` is an extraction from the June 1998 IRIX 6.5 base CDs. Its files are listed in the extraction index kept beside it, and the 46 files the inventory reads are pinned in `tools/config/inventory-root.sha256`.
 
 - `unix` is a candidate only. It is the miniroot `unix.IP28`, not confirmed to be the running kernel. The inventory does not read it.
 - `unix.map` is not held.

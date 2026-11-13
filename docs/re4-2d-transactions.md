@@ -4,8 +4,8 @@ The public OpenBSD driver drives the RE4 raster engine for rectangle fills
 and console glyph rows through a fixed set of numeric FIFO writes. This page
 gives those write sequences, what each one is for, and what is still open.
 The register offsets, widths and fields are in
-[defs/re4.toml](../defs/re4.toml), and the FIFO packet framing is in
-[defs/mgras.toml](../defs/mgras.toml). Nothing here was measured on a board.
+[devices/re4/registers.toml](../devices/re4/registers.toml), and the FIFO packet framing is in
+[devices/mgras/registers.toml](../devices/mgras/registers.toml). Nothing here was measured on a board.
 
 ## Sources and grades
 

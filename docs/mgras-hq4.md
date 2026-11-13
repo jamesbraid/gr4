@@ -4,7 +4,7 @@ How the host interface chip on an IMPACT board works as the IRIX software
 drives it: the interrupt block, the context-switch handshake, the buffer swap
 command, the status waits the kernel and client make, the FIFO thresholds, the
 Octane page-list layout and the identity and serial reads. The register and
-word facts are in [defs/mgras.toml](../defs/mgras.toml). This page gives the
+word facts are in [devices/mgras/registers.toml](../devices/mgras/registers.toml). This page gives the
 sequences and says what is still open. The command word framing is in
 [mgras-gl-commands.md](mgras-gl-commands.md). The two raster engine boards are
 in [mgras-two-re.md](mgras-two-re.md).

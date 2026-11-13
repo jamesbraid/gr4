@@ -1,0 +1,284 @@
+{
+  "family": "Impact (GR4 / MGRAS)",
+  "review_required": [
+    "docs/routines/t1-*.md",
+    "docs/routines/t2-*.md"
+  ],
+  "docs": {
+    "prose": [
+      "docs/*.md",
+      "docs/routines/*.md",
+      "README.md"
+    ],
+    "headers": [
+      "devices/*/*.h",
+      "*/include/*.h"
+    ],
+    "tables": [
+      "docs/*/*.tsv"
+    ],
+    "index": [
+      "AGENTS.md",
+      "IRIX_FILES.md"
+    ],
+    "skip": []
+  },
+  "binaries": [
+    {
+      "group": "kernel",
+      "role": "board-kernel",
+      "paths": [
+        "usr/cpu/sysgen/IP28boot/mgras.a"
+      ]
+    },
+    {
+      "group": "kernel-shared",
+      "role": "shared-kernel",
+      "paths": [
+        "usr/cpu/sysgen/IP28boot/gfx.o",
+        "usr/cpu/sysgen/IP28boot/rrm.o"
+      ]
+    },
+    {
+      "group": "libraries",
+      "role": "board-library",
+      "paths": [
+        "usr/gfx/arch/IP28GR432/libGL.so",
+        "usr/gfx/arch/IP28GR432/libGLcore.so"
+      ]
+    },
+    {
+      "group": "shared-libraries",
+      "role": "shared-library",
+      "paths": [
+        "usr/gfx/arch/IGLOO32/libgl.so",
+        "usr/lib32/libfm.so"
+      ]
+    },
+    {
+      "group": "x-module",
+      "role": "board-x-module",
+      "paths": [
+        "usr/lib/X11/dyDDX/impactpc.so"
+      ]
+    },
+    {
+      "group": "x-shared",
+      "role": "shared-x-server",
+      "paths": [
+        "usr/lib/X11/dyDDX/glx.so"
+      ]
+    },
+    {
+      "group": "board-tools",
+      "role": "board-tool",
+      "paths": [
+        "usr/gfx/MGRAS/HQ3/ge11dump.HQ3"
+      ]
+    },
+    {
+      "group": "microcode",
+      "role": "board-microcode",
+      "paths": [
+        "usr/gfx/ucode/ge11*.bin",
+        "usr/gfx/ucode/hq3*.bin",
+        "usr/gfx/ucode/MGRAS/hq3*.u",
+        "usr/gfx/ucode/MG/mgras_ge*.hex",
+        "usr/gfx/ucode/MG/mgras_ge*.u",
+        "usr/gfx/ucode/MG/mgras_geif*.u"
+      ]
+    }
+  ],
+  "windows": [
+    {
+      "name": "mmio",
+      "size": "0x100000",
+      "docs": [
+        "devices/mgras/MGRAS.h",
+        "devices/hq3/HQ3.h"
+      ],
+      "regions": [
+        {
+          "name": "gio-id",
+          "lo": "0x0",
+          "hi": "0x40000",
+          "docs": [
+            "devices/mgras/MGRAS.h"
+          ]
+        },
+        {
+          "name": "hq3-ucode",
+          "lo": "0x40000",
+          "hi": "0x46000",
+          "docs": [
+            "devices/mgras/MGRAS.h",
+            "devices/hq3/HQ3.h"
+          ]
+        },
+        {
+          "name": "hq3-pc",
+          "lo": "0x46000",
+          "hi": "0x47000",
+          "docs": [
+            "devices/mgras/MGRAS.h",
+            "devices/hq3/HQ3.h"
+          ]
+        },
+        {
+          "name": "cp-data",
+          "lo": "0x47000",
+          "hi": "0x4c000",
+          "docs": [
+            "devices/mgras/MGRAS.h",
+            "devices/hq3/HQ3.h"
+          ]
+        },
+        {
+          "name": "rss-diag",
+          "lo": "0x4c000",
+          "hi": "0x50000",
+          "docs": [
+            "devices/mgras/MGRAS.h",
+            "devices/hq3/HQ3.h"
+          ]
+        },
+        {
+          "name": "priv-regs",
+          "lo": "0x50000",
+          "hi": "0x60000",
+          "docs": [
+            "devices/mgras/MGRAS.h",
+            "devices/hq3/HQ3.h"
+          ]
+        },
+        {
+          "name": "dcb",
+          "lo": "0x60000",
+          "hi": "0x68000",
+          "docs": [
+            "devices/mgras/MGRAS.h"
+          ]
+        },
+        {
+          "name": "dcb-ctrl",
+          "lo": "0x68000",
+          "hi": "0x70000",
+          "docs": [
+            "devices/mgras/MGRAS.h"
+          ]
+        },
+        {
+          "name": "user-regs",
+          "lo": "0x70000",
+          "hi": "0x7c000",
+          "docs": [
+            "devices/mgras/MGRAS.h",
+            "devices/hq3/HQ3.h"
+          ]
+        },
+        {
+          "name": "rss-reg",
+          "lo": "0x7c000",
+          "hi": "0x7d000",
+          "docs": [
+            "devices/mgras/MGRAS.h"
+          ]
+        },
+        {
+          "name": "rss-exec",
+          "lo": "0x7d000",
+          "hi": "0x80000",
+          "docs": [
+            "devices/mgras/MGRAS.h"
+          ]
+        },
+        {
+          "name": "cfifo-cmd",
+          "lo": "0x80000",
+          "hi": "0x100000",
+          "docs": [
+            "devices/mgras/MGRAS.h",
+            "devices/hq3/HQ3.h"
+          ]
+        }
+      ]
+    }
+  ],
+  "bases": [
+    {
+      "type": "argument",
+      "function": "MgrasInitBoardGfx|MgrasProbe|MgrasReset|MgrasBlankScreen|MgrasDownloadUcode|MgrasInitCCR|CCInit|PhaseOne|PhaseTwo|MgrasStartDMA|MgrasWaitDMA|MgrasEnableRetraceInterrupts|MgrasEnableVideoTiming|MgrasLoadVC3SRAM|MgrasInitCursor|MgrasClearCursor",
+      "reg": 4,
+      "window": "mmio",
+      "label": "register base argument",
+      "binaries": [
+        "usr/cpu/sysgen/IP28boot/*"
+      ],
+      "why": "mgras_kern.h declares each of these with mgras_hw *base as its first argument, the mapped register aperture"
+    },
+    {
+      "type": "field",
+      "disp": 38544,
+      "loads": [
+        "ld"
+      ],
+      "window": "mmio",
+      "label": "context +0x9690",
+      "binaries": [
+        "*libGLcore.so"
+      ],
+      "why": "glcore_mgras.h puts the mgras_hw pointer at context offset 0x9690, and libGLcore stores register writes through it"
+    }
+  ],
+  "tokens": {
+    "value_width": 4,
+    "docs": [
+      "devices/hq3/HQ3.h",
+      "devices/ge11/GE11.h"
+    ],
+    "sources": [
+      {
+        "type": "header",
+        "label": "GE11.h",
+        "kind": "geometry token",
+        "file": "devices/ge11/GE11.h",
+        "pattern": "^#define\\s+(GE11_TOKEN_\\w+)\\s+(0x[0-9A-Fa-f]+)\\b"
+      },
+      {
+        "type": "stores",
+        "label": "command FIFO",
+        "kind": "command word",
+        "window": "mmio",
+        "lo": "0x80000",
+        "hi": "0x100000",
+        "known_only": true,
+        "binaries": [
+          "usr/cpu/sysgen/IP28boot/*",
+          "*libGLcore.so"
+        ]
+      }
+    ]
+  },
+  "ioctls": {
+    "send_functions": [
+      "ioctl"
+    ],
+    "ranges": [
+      [
+        "0x6D670000",
+        "0x6D67FFFF"
+      ]
+    ],
+    "classes": [
+      {
+        "lo": "0x6D670000",
+        "hi": "0x6D67FFFF",
+        "name": "mgras"
+      }
+    ],
+    "docs": [
+      "docs/*.md",
+      "README.md"
+    ]
+  }
+}

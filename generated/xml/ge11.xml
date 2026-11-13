@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<!-- generated from devices/ge11/registers.toml by defs-gen - do not edit, change the source -->
+<genxml unit="ge11" prefix="GE" title="geometry engine control registers for the Impact graphics subsystem" from="driver and diagnostic readings">
+  <doc>Geometry engine control registers of the Impact graphics subsystem.</doc>
+  <space name="ge11_regs" unit="reg"/>
+  <struct name="EXEC_CONTROL" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd000" access="rw" space="ge11_regs" reset="unknown">
+    <field name="reset" start="7" size="1" type="uint" grade="inferred"/>
+    <field name="single_step" start="6" size="1" type="uint" grade="inferred"/>
+    <field name="breakpoint_enable" start="5" size="1" type="uint" grade="inferred"/>
+    <field name="latency3" start="4" size="1" type="uint" grade="inferred"/>
+    <field name="go" start="0" size="1" type="uint" grade="inferred"/>
+    <test value="0x71" kind="example">
+      <expect field="go" value="1"/>
+      <expect field="latency3" value="1"/>
+      <expect field="breakpoint_enable" value="1"/>
+      <expect field="single_step" value="1"/>
+      <expect field="reset" value="0"/>
+    </test>
+    <test value="0xc1" kind="example">
+      <expect field="go" value="1"/>
+      <expect field="latency3" value="0"/>
+      <expect field="breakpoint_enable" value="0"/>
+      <expect field="single_step" value="1"/>
+      <expect field="reset" value="1"/>
+    </test>
+  </struct>
+  <struct name="BREAKPOINT_PC" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd001" access="rw" space="ge11_regs" reset="unknown">
+  </struct>
+  <struct name="RAMSCAN_CONTROL" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd002" access="rw" space="ge11_regs" reset="unknown">
+    <field name="scan_mode" start="18" size="1" type="uint" grade="inferred"/>
+    <field name="fast_mode" start="17" size="1" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="WSYNC_FIFO_CONTROL" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd003" access="rw" space="ge11_regs" reset="unknown">
+    <field name="watermark" start="4" size="4" type="uint" grade="inferred"/>
+    <field name="disable" start="0" size="1" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="DIAG_SELECT" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd004" access="rw" space="ge11_regs" reset="unknown">
+    <field name="read_enable" start="18" size="1" type="uint" grade="inferred"/>
+    <field name="input_select" start="8" size="1" type="uint" grade="inferred"/>
+    <field name="breakpoint_stall" start="5" size="1" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="ENABLE_MASK" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd005" access="rw" space="ge11_regs" reset="unknown">
+  </struct>
+  <struct name="OFIFO_TAG_CONFIG" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd006" access="rw" space="ge11_regs" reset="unknown">
+  </struct>
+  <struct name="UCODE_ERROR" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd007" access="rw" space="ge11_regs" reset="unknown">
+  </struct>
+  <struct name="OFIFO0_A_STATUS" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd008" access="r" space="ge11_regs" reset="unknown">
+  </struct>
+  <struct name="OFIFO0_B_STATUS" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd009" access="r" space="ge11_regs" reset="unknown">
+  </struct>
+  <struct name="OFIFO1_A_STATUS" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd00a" access="r" space="ge11_regs" reset="unknown">
+  </struct>
+  <struct name="OFIFO1_B_STATUS" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd00b" access="r" space="ge11_regs" reset="unknown">
+  </struct>
+  <struct name="OFIFO2_A_STATUS" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd00c" access="r" space="ge11_regs" reset="unknown">
+  </struct>
+  <struct name="OFIFO2_B_STATUS" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd00d" access="r" space="ge11_regs" reset="unknown">
+  </struct>
+  <struct name="OFIFO_CONTROL" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd00e" access="rw" space="ge11_regs" reset="unknown">
+    <field name="route_to_host_if" start="8" size="1" type="uint" grade="inferred"/>
+    <field name="watermark" start="1" size="7" type="uint" grade="inferred"/>
+    <field name="diag_mode" start="0" size="1" type="uint" grade="inferred"/>
+    <test value="0x70" kind="example">
+      <expect field="diag_mode" value="0"/>
+      <expect field="watermark" value="56"/>
+    </test>
+  </struct>
+  <constant name="OFIFO_WATERMARK_DEFAULT" value="0x38" grade="inferred"/>
+</genxml>

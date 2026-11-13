@@ -1,0 +1,325 @@
+<?xml version="1.0" ?>
+<!-- generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source -->
+<genxml unit="hq3" prefix="HQ" title="host interface and command processor registers for the Impact graphics subsystem" from="driver and diagnostic readings">
+  <doc>Host interface and command processor registers of the Impact graphics subsystem.</doc>
+  <space name="hq3_regs" unit="reg"/>
+  <enum name="config_diag_route">
+    <value name="ge0" value="2" grade="inferred"/>
+    <value name="ge1" value="3" grade="inferred"/>
+  </enum>
+  <struct name="PC" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x1800" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="CP_DATA" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x1c00" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="RSS_DIAG" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x3000" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="CONFIG" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4000" access="rw" space="hq3_regs" reset="unknown">
+    <field name="diag_loopback" start="7" size="1" type="uint" grade="inferred"/>
+    <field name="diag_route" start="4" size="2" type="config_diag_route" grade="inferred"/>
+    <field name="ucode_stall" start="3" size="1" type="uint" grade="inferred"/>
+    <field name="big_endian" start="2" size="1" type="uint" grade="inferred"/>
+    <test value="0x8e" kind="vector">
+      <expect field="big_endian" value="1"/>
+      <expect field="ucode_stall" value="1"/>
+      <expect field="diag_route" value="0"/>
+      <expect field="diag_loopback" value="1"/>
+    </test>
+    <test value="0x7e8c" kind="vector">
+      <expect field="big_endian" value="1"/>
+      <expect field="ucode_stall" value="1"/>
+      <expect field="diag_route" value="0"/>
+      <expect field="diag_loopback" value="1"/>
+    </test>
+  </struct>
+  <struct name="FLAG_CTX" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4001" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="FLAG_SET_PRIV" size="4" grade="established" from="driver and diagnostic readings" register="yes" offset="0x4002" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="FLAG_CLR_PRIV" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4003" access="w" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="FLAG_ENAB_SET" size="4" grade="established" from="driver and diagnostic readings" register="yes" offset="0x4004" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="FLAG_ENAB_CLR" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4005" access="w" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="INTR_ENAB_SET" size="4" grade="established" from="driver and diagnostic readings" register="yes" offset="0x4006" access="rw" space="hq3_regs" reset="unknown">
+    <field name="dfifo_below_low" start="31" size="1" type="uint" grade="established"/>
+    <field name="dfifo_above_high" start="30" size="1" type="uint" grade="established"/>
+    <field name="cfifo_below_low" start="27" size="1" type="uint" grade="established"/>
+    <field name="cfifo_above_high" start="26" size="1" type="uint" grade="established"/>
+    <test value="0x4400e200" kind="vector">
+      <expect field="cfifo_above_high" value="1"/>
+      <expect field="cfifo_below_low" value="0"/>
+      <expect field="dfifo_above_high" value="1"/>
+      <expect field="dfifo_below_low" value="0"/>
+    </test>
+  </struct>
+  <struct name="INTR_ENAB_CLR" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4007" access="w" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="CFIFO_HIWATER" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4008" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="CFIFO_LOWATER" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4009" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="CFIFO_DELAY" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x400a" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="DFIFO_HIWATER" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x400b" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="DFIFO_LOWATER" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x400c" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="DFIFO_DELAY" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x400d" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="GE0_DIAG_DATA" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4010" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="GE0_DIAG_INDEX" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4011" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="GE1_DIAG_DATA" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4012" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="GE1_DIAG_INDEX" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4013" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="CTX_SWITCH" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4014" access="w" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="CFIFO_PRIV" size="8" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4020" access="w" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="CTX_DATA" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4040" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="BFIFO_HIWATER" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4042" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="BFIFO_LOWATER" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4043" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="BFIFO_DELAY" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4044" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="GIO_CONFIG" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4045" access="rw" space="hq3_regs" reset="unknown">
+    <field name="fifo_high_water" start="12" size="1" type="uint" grade="inferred"/>
+    <field name="bus_bypass" start="6" size="1" type="uint" grade="inferred"/>
+    <field name="tlb_update" start="3" size="1" type="uint" grade="inferred"/>
+    <field name="ext_pipe_register" start="2" size="1" type="uint" grade="inferred"/>
+    <field name="display_bus_big_endian" start="1" size="1" type="uint" grade="inferred"/>
+    <field name="host_big_endian" start="0" size="1" type="uint" grade="inferred"/>
+    <test value="0xf" kind="vector">
+      <expect field="host_big_endian" value="1"/>
+      <expect field="display_bus_big_endian" value="1"/>
+      <expect field="ext_pipe_register" value="1"/>
+      <expect field="tlb_update" value="1"/>
+      <expect field="bus_bypass" value="0"/>
+      <expect field="fifo_high_water" value="0"/>
+    </test>
+    <test value="0x765b900f" kind="vector">
+      <expect field="host_big_endian" value="1"/>
+      <expect field="display_bus_big_endian" value="1"/>
+      <expect field="ext_pipe_register" value="1"/>
+      <expect field="tlb_update" value="1"/>
+      <expect field="bus_bypass" value="0"/>
+      <expect field="fifo_high_water" value="1"/>
+    </test>
+  </struct>
+  <struct name="REIF_CTX" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4080" access="rw" count="64" stride="1" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="HAG_CTX" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x40c0" access="rw" count="128" stride="1" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="HIF_CTX" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4140" access="rw" count="64" stride="1" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="GIO_CTX" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4180" access="rw" count="64" stride="1" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="TLB_ENTRIES" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4200" access="rw" count="32" stride="1" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="TLB_FAULT_PAGE" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4220" access="r" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="TLB_VALID" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4240" access="rw" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="STATUS" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xc000" access="r" space="hq3_regs" reset="unknown">
+    <field name="dfifo_below_low" start="8" size="1" type="uint" grade="inferred"/>
+    <field name="dfifo_above_high" start="7" size="1" type="uint" grade="inferred"/>
+    <field name="cfifo_below_low" start="4" size="1" type="uint" grade="inferred"/>
+    <field name="cfifo_above_high" start="3" size="1" type="uint" grade="inferred"/>
+    <field name="pipe_idle" start="1" size="1" type="uint" grade="inferred"/>
+    <field name="commands_done" start="0" size="1" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="FIFO_STATUS" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xc001" access="r" space="hq3_regs" reset="unknown">
+    <field name="cfifo_hiwater_mark" start="22" size="7" type="uint" grade="inferred"/>
+    <field name="dfifo_depth" start="15" size="7" type="uint" grade="inferred"/>
+    <field name="cfifo_valid" start="7" size="8" type="uint" grade="inferred"/>
+    <field name="cfifo_depth" start="0" size="7" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="FLAG_SET" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xc002" access="w" space="hq3_regs" reset="unknown">
+    <field name="context_saved" start="19" size="1" type="uint" grade="inferred"/>
+    <field name="ge_diag" start="18" size="1" type="uint" grade="inferred"/>
+    <field name="ge_data" start="17" size="1" type="uint" grade="inferred"/>
+    <field name="done" start="16" size="1" type="uint" grade="inferred"/>
+    <field name="dma_access_or_stack_overflow" start="15" size="1" type="uint" grade="established"/>
+    <field name="cfifo_privilege_violation" start="14" size="1" type="uint" grade="established"/>
+    <field name="dma_address_error" start="13" size="1" type="uint" grade="established"/>
+    <field name="buffer_swap" start="10" size="1" type="uint" grade="inferred"/>
+    <field name="ucode_error" start="9" size="1" type="uint" grade="established"/>
+    <field name="tlb_miss" start="7" size="1" type="uint" grade="inferred"/>
+    <field name="context_loaded" start="6" size="1" type="uint" grade="inferred"/>
+    <field name="dma_done" start="4" size="1" type="uint" grade="inferred"/>
+    <field name="dfifo_lowater" start="3" size="1" type="uint" grade="inferred"/>
+    <field name="cfifo_hiwater" start="2" size="1" type="uint" grade="inferred"/>
+    <field name="cfifo_lowater" start="1" size="1" type="uint" grade="inferred"/>
+    <field name="retrace" start="0" size="1" type="uint" grade="inferred"/>
+    <test value="0xe200" kind="vector">
+      <expect field="ucode_error" value="1"/>
+      <expect field="dma_address_error" value="1"/>
+      <expect field="cfifo_privilege_violation" value="1"/>
+      <expect field="dma_access_or_stack_overflow" value="1"/>
+    </test>
+  </struct>
+  <struct name="FLAG_CLR" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xc003" access="w" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="REBUS_READ_HI" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xc004" access="r" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="REBUS_READ_LO" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xc005" access="r" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="CFIFO_USER" size="8" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xc020" access="w" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="GIO_STATUS" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xc040" access="r" space="hq3_regs" reset="unknown">
+    <field name="display_bus_busy" start="5" size="1" type="uint" grade="inferred"/>
+    <field name="bfifo_depth" start="0" size="5" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="DMA_BUSY" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xc041" access="r" space="hq3_regs" reset="unknown">
+    <field name="address_gen_dma" start="12" size="1" type="uint" grade="inferred"/>
+    <field name="raster_dma" start="11" size="1" type="uint" grade="inferred"/>
+    <field name="master_dma" start="9" size="1" type="uint" grade="inferred"/>
+    <field name="raster_if" start="4" size="1" type="uint" grade="inferred"/>
+    <field name="cd" start="3" size="1" type="uint" grade="inferred"/>
+    <field name="cfifo" start="2" size="1" type="uint" grade="inferred"/>
+    <field name="host_if" start="1" size="1" type="uint" grade="inferred"/>
+    <field name="sync" start="0" size="1" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="CFIFO_GL" size="8" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xd020" access="w" space="hq3_regs" reset="unknown">
+  </struct>
+  <struct name="CFIFO_CTL" size="4" grade="inferred" from="driver and diagnostic readings">
+    <doc>Command-FIFO control word (bit 31 clear). The word every OpenGL library
+entry point stores first; the data words follow.</doc>
+    <field name="pixel" start="31" size="1" type="uint" grade="established"/>
+    <field name="pad_flag" start="30" size="1" type="uint" grade="inferred"/>
+    <field name="convert" start="23" size="7" type="uint" grade="established"/>
+    <field name="kernel" start="22" size="1" type="uint" grade="established"/>
+    <field name="sync" start="21" size="1" type="uint" grade="established"/>
+    <field name="command" start="8" size="13" type="uint" grade="established"/>
+    <field name="bytes" start="0" size="8" type="uint" grade="established"/>
+    <test value="0x39000006" kind="vector">
+      <expect field="bytes" value="6"/>
+      <expect field="command" value="0"/>
+      <expect field="sync" value="0"/>
+      <expect field="kernel" value="0"/>
+      <expect field="convert" value="114"/>
+      <expect field="pad_flag" value="0"/>
+      <expect field="pixel" value="0"/>
+    </test>
+    <test value="0x59000004" kind="vector">
+      <expect field="bytes" value="4"/>
+      <expect field="command" value="0"/>
+      <expect field="sync" value="0"/>
+      <expect field="kernel" value="0"/>
+      <expect field="convert" value="50"/>
+      <expect field="pad_flag" value="1"/>
+      <expect field="pixel" value="0"/>
+    </test>
+  </struct>
+  <struct name="CFIFO_INLINE" size="4" grade="inferred" from="driver and diagnostic readings">
+    <doc>Command-FIFO header of an inline data block (bit 31 set). The GL client sends
+pixel rows, bitmap images and geometry-engine tables this way. The byte length
+is in bits 19:0, and bits 23:22 give the offset of the first payload byte in
+its word. The block then takes (offset + length + 3) / 4 words. The length
+field is 20 bits wide; a reader that uses the 8-bit length of CFIFO_CTL
+consumes the wrong number of words. Read from the GL client's emitters and the
+kernel's table loader: a software expectation, not a board measurement.</doc>
+    <field name="inline_" start="31" size="1" type="uint" grade="inferred"/>
+    <field name="first_offset" start="22" size="2" type="uint" grade="inferred"/>
+    <field name="length" start="0" size="20" type="uint" grade="inferred"/>
+    <test value="0x80000214" kind="example">
+      <expect field="inline" value="1"/>
+      <expect field="first_offset" value="0"/>
+      <expect field="length" value="532"/>
+    </test>
+  </struct>
+  <struct name="CTX_W1" size="4" grade="unknown" from="driver and diagnostic readings">
+    <doc>Context image, word 1 (the flags word of the host-memory image the kernel
+keeps per context). Bits 26 and 27 are read from the kernel's code that
+writes them; 29 to 31 come from traced values and the kernel clearing them
+after a load; the reader of bit 28 is not found (set only on the kernel's
+own context at creation).</doc>
+    <field name="first_load" start="31" size="1" type="uint" grade="inferred"/>
+    <field name="nothing_saved" start="30" size="1" type="uint" grade="inferred"/>
+    <field name="window_changed" start="29" size="1" type="uint" grade="inferred"/>
+    <field name="bit28" start="28" size="1" type="uint" grade="unknown"/>
+    <field name="xserver_shadow" start="27" size="1" type="uint" grade="established"/>
+    <field name="banks_changed" start="26" size="1" type="uint" grade="established"/>
+    <test value="0xc000000" kind="vector">
+      <expect field="banks_changed" value="1"/>
+      <expect field="xserver_shadow" value="1"/>
+      <expect field="bit28" value="0"/>
+      <expect field="first_load" value="0"/>
+    </test>
+  </struct>
+  <constant name="BFIFO_DELAY_DEFAULT" value="0x64" grade="established"/>
+  <constant name="BFIFO_HIWATER_DEFAULT" value="0x8" grade="established"/>
+  <constant name="BFIFO_LOWATER_DEFAULT" value="0x2" grade="established"/>
+  <constant name="BFIFO_MAX" value="0x10" grade="inferred"/>
+  <constant name="CFIFO_CLASS_DMA_BANK_0A" value="0xa" grade="inferred"/>
+  <constant name="CFIFO_CLASS_DMA_BANK_HOST" value="0x8" grade="inferred"/>
+  <constant name="CFIFO_CLASS_SYNC" value="0xe" grade="inferred"/>
+  <constant name="CFIFO_CMD_BITMAP" value="0x94" grade="inferred"/>
+  <constant name="CFIFO_CMD_CLEAR_COLOUR" value="0x15" grade="inferred"/>
+  <constant name="CFIFO_CMD_CLEAR_DEPTH" value="0x4a" grade="inferred"/>
+  <constant name="CFIFO_CMD_CLEAR_STENCIL" value="0x4c" grade="inferred"/>
+  <constant name="CFIFO_CMD_CLIP_BIND" value="0xe4" grade="inferred"/>
+  <constant name="CFIFO_CMD_CONTEXT_CONFIG" value="0x8c" grade="inferred"/>
+  <constant name="CFIFO_CMD_CONTEXT_OPEN" value="0x6" grade="inferred"/>
+  <constant name="CFIFO_CMD_ERAM_READ" value="0xfc" grade="inferred"/>
+  <constant name="CFIFO_CMD_ERAM_WRITE_ADDR" value="0xfb" grade="inferred"/>
+  <constant name="CFIFO_CMD_ERAM_WRITE_CHUNK" value="0xfd" grade="inferred"/>
+  <constant name="CFIFO_CMD_ERAM_WRITE_END" value="0xfa" grade="inferred"/>
+  <constant name="CFIFO_CMD_FILLER" value="0xe1" grade="inferred"/>
+  <constant name="CFIFO_CMD_FLUSH" value="0x36" grade="inferred"/>
+  <constant name="CFIFO_CMD_GE_TABLE_LOAD" value="0x82" grade="inferred"/>
+  <constant name="CFIFO_CMD_NAME_POP" value="0xc6" grade="inferred"/>
+  <constant name="CFIFO_CMD_NAME_PUSH" value="0xc7" grade="inferred"/>
+  <constant name="CFIFO_CMD_NAME_REPLACE" value="0xc5" grade="inferred"/>
+  <constant name="CFIFO_CMD_NAME_STACK_INIT" value="0xc4" grade="inferred"/>
+  <constant name="CFIFO_CMD_QUERY" value="0xa2" grade="inferred"/>
+  <constant name="CFIFO_CMD_RASTER_PAIRS" value="0x7f" grade="inferred"/>
+  <constant name="CFIFO_CMD_RASTER_TRIPLES" value="0x7c" grade="inferred"/>
+  <constant name="CFIFO_CMD_RESULT_BEGIN" value="0x61" grade="inferred"/>
+  <constant name="CFIFO_CMD_RESULT_END" value="0x62" grade="inferred"/>
+  <constant name="CFIFO_CMD_SCISSOR" value="0x39" grade="inferred"/>
+  <constant name="CFIFO_CMD_SELECT_ENTER" value="0xcb" grade="inferred"/>
+  <constant name="CFIFO_CMD_SELECT_EXIT" value="0xc9" grade="inferred"/>
+  <constant name="CFIFO_CMD_SWAP_TMESH" value="0xdc" grade="inferred"/>
+  <constant name="CFIFO_CMD_VIEWPORT" value="0x33" grade="inferred"/>
+  <constant name="CFIFO_DELAY_DEFAULT" value="0x64" grade="established"/>
+  <constant name="CFIFO_HIWATER_DEFAULT" value="0x28" grade="established"/>
+  <constant name="CFIFO_LOWATER_DEFAULT" value="0x14" grade="established"/>
+  <constant name="CTX_BANK_WORD_FIRST" value="0x10" grade="established"/>
+  <constant name="CTX_BANK_WORD_SECOND" value="0x11" grade="established"/>
+  <constant name="CTX_XSERVER_WORD_FIRST" value="0x12" grade="inferred"/>
+  <constant name="CTX_XSERVER_WORD_LAST" value="0x27" grade="inferred"/>
+  <constant name="DFIFO_DELAY_DEFAULT" value="0x64" grade="established"/>
+  <constant name="DFIFO_HIWATER_DEFAULT" value="0x28" grade="established"/>
+  <constant name="DFIFO_LOWATER_DEFAULT" value="0x14" grade="established"/>
+  <constant name="INIT_BFIFO_DELAY" value="0x8c" grade="established"/>
+  <constant name="INIT_BFIFO_HIWATER" value="0x6" grade="established"/>
+  <constant name="INIT_BFIFO_LOWATER" value="0x2" grade="established"/>
+  <constant name="INIT_CFIFO_DELAY" value="0x64" grade="established"/>
+  <constant name="INIT_CFIFO_HIWATER" value="0x20" grade="established"/>
+  <constant name="INIT_CFIFO_LOWATER" value="0x14" grade="established"/>
+  <constant name="INIT_CONFIG" value="0x7e8c" grade="established"/>
+  <constant name="INIT_DFIFO_DELAY" value="0xfff" grade="established"/>
+  <constant name="INIT_DFIFO_HIWATER" value="0x28" grade="established"/>
+  <constant name="INIT_DFIFO_LOWATER" value="0x14" grade="established"/>
+  <constant name="INIT_FLAG_ENABLE" value="0x11000f" grade="established"/>
+  <constant name="INIT_GIO_CONFIG" value="0x765b900f" grade="established"/>
+  <constant name="INIT_INTR_ENABLE" value="0x4400e200" grade="established"/>
+  <constant name="TLB_ENTRIES" value="0x20" grade="established"/>
+  <constant name="TLB_PAGE_SHIFT" value="0xc" grade="established"/>
+  <constant name="TOKEN_CLIENT_GE_DMA_SETUP" value="0x9d" grade="established"/>
+  <constant name="TOKEN_CLIENT_POLYGON_STIPPLE_LOAD" value="0x4e" grade="inferred"/>
+  <constant name="TOKEN_READBACK_BEGIN" value="0x96" grade="established"/>
+  <constant name="TOKEN_READBACK_END" value="0x97" grade="established"/>
+  <constant name="TOKEN_SECOND_TEXMODE" value="0x5f" grade="established"/>
+  <constant name="TOKEN_TEX_BASE_WRITE" value="0xeb" grade="established"/>
+  <constant name="TOKEN_TEX_READ_SETUP" value="0xe5" grade="established"/>
+  <constant name="TOKEN_TEX_RESTORE_PREP" value="0xe3" grade="established"/>
+  <constant name="TOKEN_TEX_WRITE_SETUP" value="0xd8" grade="established"/>
+  <constant name="TOKEN_TRANSFER_DONE" value="0xda" grade="established"/>
+</genxml>

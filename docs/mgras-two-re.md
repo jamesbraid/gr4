@@ -3,7 +3,7 @@
 How the two-raster-engine boards (SSI and MXI) split the screen between their
 engines, how software picks one pixel processor or one engine, and how the two
 geometry engines are loaded and checked. The register addresses and fields are
-in [defs/mgras.toml](../defs/mgras.toml); this page holds the reasoning and the
+in [devices/mgras/registers.toml](../devices/mgras/registers.toml); this page holds the reasoning and the
 open questions.
 
 ## Sources and grades
@@ -227,7 +227,7 @@ virtual addresses.
   **Established** as the report's statement. The balancing rule, the ordering
   and the completion behaviour are unknown.
 - Which engine answers the revision read at the GE revision words in
-  [defs/mgras.toml](../defs/mgras.toml) is unknown.
+  [devices/mgras/registers.toml](../devices/mgras/registers.toml) is unknown.
 
 ## Unknowns
 
@@ -244,7 +244,7 @@ virtual addresses.
 | How the two engines' rows are assembled on read-back | A read-back from a real board |
 | The load-balancing rule and completion order of the two geometry engines | A bus trace of a real board |
 | Which geometry engine answers the revision read | A real board |
-| Whether the command FIFO is at the address the kernel's packet writes use (0x120400) or at the normal FIFO address of the public driver (0x020400, in [defs/mgras.toml](../defs/mgras.toml)) | Which address the kernel's command writes reach on a board, checked against the driver's packet layout |
+| Whether the command FIFO is at the address the kernel's packet writes use (0x120400) or at the normal FIFO address of the public driver (0x020400, in [devices/mgras/registers.toml](../devices/mgras/registers.toml)) | Which address the kernel's command writes reach on a board, checked against the driver's packet layout |
 | Whether a texture read returns one path's copy or both, and which path the kernel's block save reads | A trace of a real MXI texture load, or the diagnostic's TRAM transfer branches read to the end |
 | Whether the two TRAM copies are filled by the hardware from one stream or by a loop in the board | The same trace. The texture download path reads no engine count, so a loop is not in the software |
 | Whether the kernel's restore reaches both copies | The same trace |

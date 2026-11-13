@@ -1,11 +1,11 @@
 window	offset	name	access	sites	binaries	functions	evidence	example	status	doc	section
 dcb	0x60d88		w1	2	1	MgrasBlankScreen	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasBlankScreen	undocumented		
-dcb	0x61811		w1	2	1	MgrasBlankScreen	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasBlankScreen	named-only	MGRAS.h:552	listvisuals, 2026-10-10; not yet compared with a real board):
-dcb	0x61910		w1	2	1	MgrasBlankScreen	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasBlankScreen	named-only	MGRAS.h:553	listvisuals, 2026-10-10; not yet compared with a real board):
+dcb	0x61811		w1	2	1	MgrasBlankScreen	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasBlankScreen	named-only	devices/mgras/MGRAS.h:552	listvisuals, 2026-10-10; not yet compared with a real board):
+dcb	0x61910		w1	2	1	MgrasBlankScreen	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasBlankScreen	named-only	devices/mgras/MGRAS.h:553	listvisuals, 2026-10-10; not yet compared with a real board):
 dcb	0x62038		w4	10	1	MgrasClearCursor;MgrasEnableRetraceInterrupts;MgrasEnableVideoTiming;MgrasLoadVC3SRAM;MgrasVerifyVC3SRAM	caller argument;register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasClearCursor	undocumented		
 dcb	0x62190		r2,w2	4	1	MgrasLoadVC3SRAM;MgrasVerifyVC3SRAM	caller argument;register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasLoadVC3SRAM	undocumented		
-gio-id	0x0		r4	1	1	MgrasProbe	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasProbe	named-only	MGRAS.h:120	
-priv-regs	0x50000		w4	1	1	MgrasReset	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasReset	named-only	HQ3.h:42	
-priv-regs	0x50114		w4	1	1	MgrasReset	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasReset	named-only	HQ3.h:126	
-user-regs	0x70080		w8	1	1	MgrasInitCCR	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o):MgrasInitCCR	named-only	HQ3.h:146	
-user-regs	0x70100		r4	26	1	MgrasBlankScreen;MgrasClearCursor;MgrasEnableRetraceInterrupts;MgrasEnableVideoTiming;MgrasLoadVC3SRAM;MgrasVerifyVC3SRAM	caller argument;register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasBlankScreen	named-only	HQ3.h:148	
+gio-id	0x0		r4	1	1	MgrasProbe	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasProbe	named-only	devices/mgras/MGRAS.h:120	
+priv-regs	0x50000		w4	1	1	MgrasReset	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasReset	named-only	devices/hq3/HQ3.h:42	
+priv-regs	0x50114		w4	1	1	MgrasReset	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasReset	named-only	devices/hq3/HQ3.h:126	
+user-regs	0x70080		w8	1	1	MgrasInitCCR	register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o):MgrasInitCCR	named-only	devices/hq3/HQ3.h:146	
+user-regs	0x70100		r4	26	1	MgrasBlankScreen;MgrasClearCursor;MgrasEnableRetraceInterrupts;MgrasEnableVideoTiming;MgrasLoadVC3SRAM;MgrasVerifyVC3SRAM	caller argument;register base argument	usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o):MgrasBlankScreen	named-only	devices/hq3/HQ3.h:148	

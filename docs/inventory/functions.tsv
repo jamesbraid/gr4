@@ -339,7 +339,7 @@ usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0xe28	216	init_panes	dwarf
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0xf00	208	RRM_init_panes	dwarf+symtab	d8ee1533b742		in	understood	docs/routines/t2-gr4-r4-b005.md#routine-readings-gr4-tier-2-batch-5	Routine readings: gr4 tier-2 batch 5
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0xfd0	180	RRM_init	dwarf+symtab	4754d7746719		in	understood	docs/routines/t2-gr4-r4-b005.md#routine-readings-gr4-tier-2-batch-5	Routine readings: gr4 tier-2 batch 5
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1084	68	RRM_Init	dwarf+symtab	e0832cd1c06a		in	named-only	docs/routines/t2-gr4-b000.md#routine-readings-gr4-tier-2-batch-0	Routine readings: gr4 tier-2 batch 0
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x10c8	96	rrmDoUnMapGfx	dwarf+symtab	2fff38eec59d		in	named-only	HQ3.h:313	
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x10c8	96	rrmDoUnMapGfx	dwarf+symtab	2fff38eec59d		in	named-only	devices/hq3/HQ3.h:313	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1128	140	rrmUnMapGfx	dwarf+symtab	0bae5961623a		in	named-only	docs/routines/t2-gr4-b002.md#routine-roles-tier-2-reading-batch-2	Routine roles, tier-2 reading batch 2
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x11b4	188	rrmInvalidateRN	dwarf+symtab	6af11fa2a4de		in	named-only	docs/routines/t2-gr4-b003.md#gr4-routine-role-statements-tier-2-batch-3	gr4 routine role statements, tier-2 batch 3
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1270	468	RRM_InvalidateRN	dwarf+symtab	40cbfaddc7b1		in	named-only	docs/inventory/functions.tsv	
@@ -353,8 +353,8 @@ usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x1da4	916	rrmCloseRN	dwar
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x2138	32	RRM_CloseRN	dwarf+symtab	5b470dcf9414		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x2158	640	RRM_Exit	dwarf+symtab	62560ba5cbdc		in	named-only	docs/routines/t2-gr4-b001.md#gr4-routine-role-statements-tier-2-batch-1	gr4 routine role statements, tier-2 batch 1
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x23d8	8	rrmGetResourceMask	dwarf+symtab	0d94b77e1c7c		in	named-only	docs/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x23e0	1012	rrmSuspend	dwarf+symtab	0abd22639225		in	named-only	HQ3.h:311	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x27d4	1200	rrmResume	dwarf+symtab	09ccdb303551		in	named-only	HQ3.h:313	
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x23e0	1012	rrmSuspend	dwarf+symtab	0abd22639225		in	named-only	devices/hq3/HQ3.h:311	
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x27d4	1200	rrmResume	dwarf+symtab	09ccdb303551		in	named-only	devices/hq3/HQ3.h:313	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x2c84	172	rrmSetResourceMask	dwarf+symtab	bd2dbd04a3c1		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x2d30	68	RRM_ValidateSwapBuf	dwarf+symtab	a6f09619b324		in	named-only	docs/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x2d74	76	rrmValidateBuffer	dwarf+symtab	098f99178d8e		in	named-only	docs/routines/t2-gr4-r4-b001.md#gr4-routine-role-statements-tier-2-round-4-batch-1	gr4 routine role statements, tier-2 round 4 batch 1
@@ -4591,7 +4591,7 @@ usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9cfdd8	364	glXQueryGLXPbuf
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9cff44	1032	__glXGetDrawableAttributes	dwarf+dynsym	e57b8cde4c87		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d034c	352	glXDestroyGLXPbufferSGIX	dwarf+dynsym	75654b062ddd		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d04ac	1660	__glx_PixelStoref	dwarf+dynsym	7953c8d98e51		in	named-only	docs/inventory/functions.tsv	
-usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d0b28	916	glXCreateGLXPbufferSGIX	dwarf+dynsym	2c1ab19cb0fa		in	named-only	MGRAS.h:185	listvisuals, 2026-10-10; not yet compared with a real board):
+usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d0b28	916	glXCreateGLXPbufferSGIX	dwarf+dynsym	2c1ab19cb0fa		in	named-only	devices/mgras/MGRAS.h:185	listvisuals, 2026-10-10; not yet compared with a real board):
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d0ebc	140	glXGetVideoSyncSGI	dwarf+dynsym	9bae0197143e		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d0f48	196	glXWaitVideoSyncSGI	dwarf+dynsym	eec2f59abada		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d100c	340	glXDestroyGLXVideoSourceSGIX	dwarf+dynsym	7a0d13645bd9		in	named-only	docs/inventory/functions.tsv	
@@ -4773,18 +4773,18 @@ usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9df324	136	glXQueryVersion
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9df3ac	148	glXQueryExtension	dwarf+dynsym	d2283354eec2		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9df440	336	glXWaitGL	dwarf+dynsym	2793bbc33de8		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9df590	340	glXWaitX	dwarf+dynsym	f38df1759210		in	named-only	docs/inventory/functions.tsv	
-usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9df6e4	412	glXUseXFont	dwarf+dynsym	e73f0492fe1f		in	named-only	HQ3.h:1075	
+usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9df6e4	412	glXUseXFont	dwarf+dynsym	e73f0492fe1f		in	named-only	devices/hq3/HQ3.h:1075	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9df880	608	glXCopyContext	dwarf+dynsym	392aa3bd6af9		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9dfae0	320	__glXIsDirect	dwarf+dynsym	fefc91065df9		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9dfc20	76	glXIsDirect	dwarf+dynsym	9e61976f6148		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9dfc6c	328	glXCreateGLXPixmap	dwarf+dynsym	e693ba7dfa53		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9dfdb4	272	glXDestroyGLXPixmap	dwarf+dynsym	c844b67cd014		in	named-only	docs/inventory/functions.tsv	
-usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9dfec4	408	glXSwapBuffers	dwarf+dynsym	26ab2d39a65e		in	named-only	MGRAS.h:195	listvisuals, 2026-10-10; not yet compared with a real board):
+usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9dfec4	408	glXSwapBuffers	dwarf+dynsym	26ab2d39a65e		in	named-only	devices/mgras/MGRAS.h:195	listvisuals, 2026-10-10; not yet compared with a real board):
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9e005c	196	__glXGetModes	dwarf+dynsym	01e331198507		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9e0120	276	__glXFindVisualConfig	dwarf+dynsym	209afe62b806		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32	.text	0xd9e0234	240	__glXFindFBConfigFromVid	dwarf+funcnames	0c15ca640cac		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32	.text	0xd9e0324	240	__glXFindFBConfig	dwarf+funcnames	c9b0e4e085ab		in	named-only	docs/inventory/functions.tsv	
-usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9e0414	1992	glXGetConfig	dwarf+dynsym	cb8634f6e3d9		in	named-only	MGRAS.h:170	
+usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9e0414	1992	glXGetConfig	dwarf+dynsym	cb8634f6e3d9		in	named-only	devices/mgras/MGRAS.h:170	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32	.text	0xd9e0bdc	8	AuxScore	dwarf+funcnames	c748c35b2239		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32	.text	0xd9e0be4	8	sampleBuffersScore	dwarf+funcnames	c748c35b2239		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32	.text	0xd9e0bec	28	ColorScore	dwarf+funcnames	0919e2ce7421		in	named-only	docs/inventory/functions.tsv	
@@ -4806,7 +4806,7 @@ usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9e2508	216	glXQueryContext
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9e25e0	8	glXGetContextIDEXT	dwarf+dynsym	036d45786ba3		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9e25e8	208	glXImportContextEXT	dwarf+dynsym	b7be781b4bb4		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9e26b8	56	glXFreeContextEXT	dwarf+dynsym	6f1485bfc9a6		in	named-only	docs/inventory/functions.tsv	
-usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9e26f0	1112	glXGetFBConfigAttribSGIX	dwarf+dynsym	ce2a622c30c5		in	named-only	MGRAS.h:170	
+usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9e26f0	1112	glXGetFBConfigAttribSGIX	dwarf+dynsym	ce2a622c30c5		in	named-only	devices/mgras/MGRAS.h:170	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32	.text	0xd9e2b48	8	orderSmaller	dwarf+funcnames	c748c35b2239		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32	.text	0xd9e2b50	60	orderLarger	dwarf+funcnames	c6a9a24f3f5e		in	named-only	docs/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32	.text	0xd9e2b8c	872	orderFBConfigs	dwarf+funcnames	b718eda92931		in	named-only	docs/inventory/functions.tsv	
@@ -4876,7 +4876,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6deb0	76	ReadCol
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda6defc	240	__glMgrInitCI	dwarf+dynsym	4e1b48fdf398		in	named-only	libglcore/include/glcore_prots.h:32	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda6dfec	52	__glMgrIoctl	dwarf+dynsym	b5209c781523		in	named-only	libglcore/include/glcore_prots.h:33	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6e020	1128	GetBoardInfo	dwarf+funcnames	fae8cc8ca963		in	named-only	libglcore/include/glcore_prots.h:34	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6e488	608	InitTables	dwarf+funcnames	816268e32d87		in	named-only	HQ3.h:967	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6e488	608	InitTables	dwarf+funcnames	816268e32d87		in	named-only	devices/hq3/HQ3.h:967	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda6e6e8	64	__glMgrAllocAccum	dwarf+dynsym	831c93afa3e4		in	named-only	libglcore/include/glcore_prots.h:36	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6e728	188	SwapBuffers	dwarf+funcnames	90476a14caf8	multi-unit	in	named-only		
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda6e7e4	1648	__glMgrim_RenderMode	dwarf+dynsym	8536d1c94d8a		in	located	docs/routines/t1-gr4-b000.md#__glmgrim_rendermode-in-usrgfxarchip28gr432libglcoreso-at-0xda6e7e4	`__glMgrim_RenderMode` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xda6e7e4
@@ -4891,7 +4891,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6f6b0	92	ApplyVi
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6f70c	128	ApplyScissor	dwarf+funcnames	e68dfb1e1e64	multi-unit	in	named-only		
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6f78c	700	InitFnPtrs	dwarf+funcnames	045169c79010	multi-unit	in	named-only		
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6fa48	468	InitBuffers	dwarf+funcnames	0e1935f0e7ea	multi-unit	in	named-only		
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6fc1c	924	InitFormatValues	dwarf+funcnames	bb5ff9c5088e		in	named-only	HQ3.h:978	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6fc1c	924	InitFormatValues	dwarf+funcnames	bb5ff9c5088e		in	named-only	devices/hq3/HQ3.h:978	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6ffb8	144	InitTexmode1	dwarf+funcnames	b801a7e45301		in	named-only	libglcore/include/glcore_prots.h:51	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda70048	4504	MakeCurrentRead	dwarf+funcnames	b4397f7b6460		in	located	docs/routines/t1-gr4-b000.md#makecurrentread-in-usrgfxarchip28gr432libglcoreso-at-0xda70048	`MakeCurrentRead` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xda70048
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda711e0	108	MakeCurrent	dwarf+funcnames	4386ca9b9a32	multi-unit	in	named-only		
@@ -4900,21 +4900,21 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda71298	1132	__glMgrCre
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda71704	692	__glMgrasInitOpenGLDefaultValues	dwarf+dynsym	bb73b4103c7a		in	named-only	docs/routines/t1-gr4-b000.md#__glmgrasinitdefaultvalues-in-usrgfxarchip28gr432libglcoreso-at-0xda719b8	`__glMgrasInitDefaultValues` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xda719b8
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda719b8	2068	__glMgrasInitDefaultValues	dwarf+dynsym	a28249e7b352		in	located	docs/routines/t1-gr4-b000.md#__glmgrasinitdefaultvalues-in-usrgfxarchip28gr432libglcoreso-at-0xda719b8	`__glMgrasInitDefaultValues` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xda719b8
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda721e8	124	__glMgrInitDepth	dwarf+dynsym	c9ae8263bb11		in	named-only	libglcore/include/glcore_prots.h:58	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72264	36	__glMgrEnableLighting	dwarf+dynsym	cba4252a663d		in	named-only	HQ3.h:893	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72288	20	__glMgrDisableLighting	dwarf+dynsym	0909afcaaedc		in	named-only	HQ3.h:894	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72264	36	__glMgrEnableLighting	dwarf+dynsym	cba4252a663d		in	named-only	devices/hq3/HQ3.h:893	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72288	20	__glMgrDisableLighting	dwarf+dynsym	0909afcaaedc		in	named-only	devices/hq3/HQ3.h:894	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7229c	224	__glMgrClampColor	dwarf+dynsym	951c54862405		in	named-only	libglcore/include/glcore_prots.h:61	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7237c	144	__glMgrim_FrontFace	dwarf+dynsym	f295774a4b62		in	named-only	HQ3.h:955	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7240c	304	__glMgrim_Lightf	dwarf+dynsym	ee7a46e35d61		in	named-only	HQ3.h:954	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7253c	660	__glMgrim_Lightfv	dwarf+dynsym	d8dfd617ebc2		in	named-only	HQ3.h:897	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda727d0	316	__glMgrim_Lighti	dwarf+dynsym	aed3ad3a1b29		in	named-only	HQ3.h:954	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7290c	1112	__glMgrim_Lightiv	dwarf+dynsym	9dd3840558f6		in	named-only	HQ3.h:897	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72d64	184	__glMgrim_LightModelf	dwarf+dynsym	0c5a71eec89a		in	named-only	HQ3.h:957	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72e1c	244	__glMgrim_LightModelfv	dwarf+dynsym	34f55b6bc458		in	named-only	HQ3.h:957	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72f10	168	__glMgrim_LightModeli	dwarf+dynsym	a0e0b2c40a86		in	named-only	HQ3.h:957	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72fb8	316	__glMgrim_LightModeliv	dwarf+dynsym	5ced11234f40		in	named-only	HQ3.h:956	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda730f4	176	__glMgrim_Materialf	dwarf+dynsym	295e161b90c1		in	named-only	HQ3.h:896	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda731a4	288	__glMgrim_Materialfv	dwarf+dynsym	ffa6af605b09		in	named-only	HQ3.h:896	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda732c4	184	__glMgrim_Materiali	dwarf+dynsym	339b2e73a5e6		in	named-only	HQ3.h:896	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7237c	144	__glMgrim_FrontFace	dwarf+dynsym	f295774a4b62		in	named-only	devices/hq3/HQ3.h:955	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7240c	304	__glMgrim_Lightf	dwarf+dynsym	ee7a46e35d61		in	named-only	devices/hq3/HQ3.h:954	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7253c	660	__glMgrim_Lightfv	dwarf+dynsym	d8dfd617ebc2		in	named-only	devices/hq3/HQ3.h:897	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda727d0	316	__glMgrim_Lighti	dwarf+dynsym	aed3ad3a1b29		in	named-only	devices/hq3/HQ3.h:954	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7290c	1112	__glMgrim_Lightiv	dwarf+dynsym	9dd3840558f6		in	named-only	devices/hq3/HQ3.h:897	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72d64	184	__glMgrim_LightModelf	dwarf+dynsym	0c5a71eec89a		in	named-only	devices/hq3/HQ3.h:957	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72e1c	244	__glMgrim_LightModelfv	dwarf+dynsym	34f55b6bc458		in	named-only	devices/hq3/HQ3.h:957	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72f10	168	__glMgrim_LightModeli	dwarf+dynsym	a0e0b2c40a86		in	named-only	devices/hq3/HQ3.h:957	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda72fb8	316	__glMgrim_LightModeliv	dwarf+dynsym	5ced11234f40		in	named-only	devices/hq3/HQ3.h:956	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda730f4	176	__glMgrim_Materialf	dwarf+dynsym	295e161b90c1		in	named-only	devices/hq3/HQ3.h:896	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda731a4	288	__glMgrim_Materialfv	dwarf+dynsym	ffa6af605b09		in	named-only	devices/hq3/HQ3.h:896	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda732c4	184	__glMgrim_Materiali	dwarf+dynsym	339b2e73a5e6		in	named-only	devices/hq3/HQ3.h:896	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7337c	508	__glMgrim_Materialiv	dwarf+dynsym	e33ec4a65776		in	named-only	libglcore/include/glcore_prots.h:74	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda73578	384	__glMgrlc_CallList	dwarf+dynsym	90a466f8bbd9		in	named-only	libglcore/include/glcore_prots.h:75	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda736f8	604	__glMgrlc_BindTextureEXT	dwarf+dynsym	fe2f52918089		in	named-only	libglcore/include/glcore_prots.h:76	
@@ -5014,52 +5014,52 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7b98c	264	__glMgrle_S
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ba94	240	__glMgrle_ColorTableSGI	dwarf+dynsym	e5abcbe840a8		in	named-only	libglcore/include/glcore_prots.h:170	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7bb84	352	__glMgrStoreLine	dwarf+dynsym	7c99832828e4		in	named-only	libglcore/include/glcore_prots.h:171	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7bce4	456	__glMgrStoreStippledLine	dwarf+dynsym	3428272835fb		in	named-only	libglcore/include/glcore_prots.h:172	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7beb0	128	__glMgrim_Flush	dwarf+dynsym	94c8c4effc0a		in	named-only	HQ3.h:931	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7bf30	120	__glMgrim_Finish	dwarf+dynsym	f6f53388ca11		in	named-only	HQ3.h:208	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7bfa8	96	__glMgrim_StencilMask	dwarf+dynsym	7b0f4e589a9f		in	named-only	HQ3.h:934	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c008	168	__glMgrim_ColorMask	dwarf+dynsym	b32d66630961		in	named-only	HQ3.h:935	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c0b0	96	__glMgrim_DepthMask	dwarf+dynsym	e9d6d16b79d2		in	named-only	HQ3.h:936	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c110	108	__glMgrim_IndexMask	dwarf+dynsym	e8f8ca540198		in	named-only	HQ3.h:937	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c17c	240	__glMgrim_AlphaFunc	dwarf+dynsym	9243dd43a212		in	named-only	HQ3.h:938	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c26c	176	__glMgrim_BlendEquationEXT	dwarf+dynsym	1f2d45274ae1		in	named-only	HQ3.h:961	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c31c	612	__glMgrim_BlendFunc	dwarf+dynsym	9c2ec6aa3b46		in	named-only	HQ3.h:939	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c580	148	__glMgrim_LogicOp	dwarf+dynsym	5dea484b7062		in	named-only	HQ3.h:940	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c614	180	__glMgrim_StencilFunc	dwarf+dynsym	04c8b4949b19		in	named-only	HQ3.h:941	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c6c8	680	__glMgrim_StencilOp	dwarf+dynsym	19e81af118ce		in	named-only	HQ3.h:942	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c970	148	__glMgrim_DepthFunc	dwarf+dynsym	11827a6aba36		in	named-only	HQ3.h:943	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ca04	144	__glMgrim_CullFace	dwarf+dynsym	6104f8829b85		in	named-only	HQ3.h:966	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ca94	172	__glMgrim_PolygonMode	dwarf+dynsym	3c6b3f1c645a		in	named-only	HQ3.h:1183	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7beb0	128	__glMgrim_Flush	dwarf+dynsym	94c8c4effc0a		in	named-only	devices/hq3/HQ3.h:931	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7bf30	120	__glMgrim_Finish	dwarf+dynsym	f6f53388ca11		in	named-only	devices/hq3/HQ3.h:208	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7bfa8	96	__glMgrim_StencilMask	dwarf+dynsym	7b0f4e589a9f		in	named-only	devices/hq3/HQ3.h:934	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c008	168	__glMgrim_ColorMask	dwarf+dynsym	b32d66630961		in	named-only	devices/hq3/HQ3.h:935	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c0b0	96	__glMgrim_DepthMask	dwarf+dynsym	e9d6d16b79d2		in	named-only	devices/hq3/HQ3.h:936	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c110	108	__glMgrim_IndexMask	dwarf+dynsym	e8f8ca540198		in	named-only	devices/hq3/HQ3.h:937	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c17c	240	__glMgrim_AlphaFunc	dwarf+dynsym	9243dd43a212		in	named-only	devices/hq3/HQ3.h:938	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c26c	176	__glMgrim_BlendEquationEXT	dwarf+dynsym	1f2d45274ae1		in	named-only	devices/hq3/HQ3.h:961	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c31c	612	__glMgrim_BlendFunc	dwarf+dynsym	9c2ec6aa3b46		in	named-only	devices/hq3/HQ3.h:939	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c580	148	__glMgrim_LogicOp	dwarf+dynsym	5dea484b7062		in	named-only	devices/hq3/HQ3.h:940	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c614	180	__glMgrim_StencilFunc	dwarf+dynsym	04c8b4949b19		in	named-only	devices/hq3/HQ3.h:941	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c6c8	680	__glMgrim_StencilOp	dwarf+dynsym	19e81af118ce		in	named-only	devices/hq3/HQ3.h:942	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7c970	148	__glMgrim_DepthFunc	dwarf+dynsym	11827a6aba36		in	named-only	devices/hq3/HQ3.h:943	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ca04	144	__glMgrim_CullFace	dwarf+dynsym	6104f8829b85		in	named-only	devices/hq3/HQ3.h:966	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ca94	172	__glMgrim_PolygonMode	dwarf+dynsym	3c6b3f1c645a		in	named-only	devices/hq3/HQ3.h:1183	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7cb40	492	__glMgrasReadBuffer	dwarf+dynsym	c739fde7b093		in	named-only	docs/OPEN_QUESTIONS.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7cd2c	28	__glMgrasSetData	dwarf+dynsym	398836cadfe8		in	named-only	HQ3.h:1263	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7cd2c	28	__glMgrasSetData	dwarf+dynsym	398836cadfe8		in	named-only	devices/hq3/HQ3.h:1263	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7cd48	728	__glMgrim_ReadBuffer	dwarf+dynsym	3af3f8eb16d9		in	named-only	docs/OPEN_QUESTIONS.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7d020	872	__glMgrasDrawBuffer	dwarf+dynsym	e595e5a4193e		in	named-only	docs/OPEN_QUESTIONS.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7d388	1324	__glMgrim_DrawBuffer	dwarf+dynsym	ada73f4de39f		in	named-only	docs/OPEN_QUESTIONS.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7d8b4	232	__glMgrim_LineStipple	dwarf+dynsym	5e4cafde7fe6		in	named-only	HQ3.h:946	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7d8b4	232	__glMgrim_LineStipple	dwarf+dynsym	5e4cafde7fe6		in	named-only	devices/hq3/HQ3.h:946	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7d99c	232	__glMgrim_SoftLineWidth	dwarf+dynsym	0b641f0dbab7		in	named-only	libglcore/include/glcore_prots.h:194	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7da84	316	__glMgrim_LineWidth	dwarf+dynsym	0597debc5031		in	named-only	HQ3.h:945	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7dbc0	144	__glMgrim_PointSize	dwarf+dynsym	f353b5f0a64c		in	named-only	HQ3.h:952	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7dc50	144	__glMgrim_ShadeModel	dwarf+dynsym	08b975360b7c		in	named-only	HQ3.h:947	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7dce0	108	__glMgrim_DepthRange	dwarf+dynsym	30b61bd7cf0e		in	named-only	HQ3.h:948	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7dd4c	108	__glMgrim_BlendColorEXT	dwarf+dynsym	b5e94a089242		in	named-only	HQ3.h:1214	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7da84	316	__glMgrim_LineWidth	dwarf+dynsym	0597debc5031		in	named-only	devices/hq3/HQ3.h:945	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7dbc0	144	__glMgrim_PointSize	dwarf+dynsym	f353b5f0a64c		in	named-only	devices/hq3/HQ3.h:952	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7dc50	144	__glMgrim_ShadeModel	dwarf+dynsym	08b975360b7c		in	named-only	devices/hq3/HQ3.h:947	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7dce0	108	__glMgrim_DepthRange	dwarf+dynsym	30b61bd7cf0e		in	named-only	devices/hq3/HQ3.h:948	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7dd4c	108	__glMgrim_BlendColorEXT	dwarf+dynsym	b5e94a089242		in	named-only	devices/hq3/HQ3.h:1214	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ddb8	548	__glMgrim_TexGenfv	dwarf+dynsym	662142953b68		in	named-only	libglcore/include/glcore_prots.h:200	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7dfdc	92	__glMgrim_TexGenf	dwarf+dynsym	38b1e49bfc0c		in	named-only	libglcore/include/glcore_prots.h:201	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7e038	612	__glMgrim_TexGendv	dwarf+dynsym	a33d9ce06f11		in	named-only	libglcore/include/glcore_prots.h:202	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7e29c	92	__glMgrim_TexGend	dwarf+dynsym	9b4ca286174f		in	named-only	libglcore/include/glcore_prots.h:203	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7e2f8	624	__glMgrim_TexGeniv	dwarf+dynsym	47f836b4f0be		in	named-only	HQ3.h:958	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7e2f8	624	__glMgrim_TexGeniv	dwarf+dynsym	47f836b4f0be		in	named-only	devices/hq3/HQ3.h:958	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7e568	92	__glMgrim_TexGeni	dwarf+dynsym	6fa379532f63		in	named-only	libglcore/include/glcore_prots.h:205	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7e5c4	592	__glMgrim_SoftTexGenfv	dwarf+dynsym	2332f7f0f56f		in	named-only	libglcore/include/glcore_prots.h:206	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7e814	624	__glMgrim_SoftTexGendv	dwarf+dynsym	eda324411e59		in	named-only	libglcore/include/glcore_prots.h:207	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ea84	676	__glMgrim_SoftTexGeniv	dwarf+dynsym	a902a93b8a6a		in	named-only	libglcore/include/glcore_prots.h:208	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ed28	500	__glMgrim_Fogfv	dwarf+dynsym	6a8e43cc5c21		in	named-only	HQ3.h:1195	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ed28	500	__glMgrim_Fogfv	dwarf+dynsym	6a8e43cc5c21		in	named-only	devices/hq3/HQ3.h:1195	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ef1c	128	__glMgrim_Fogf	dwarf+dynsym	2ed7682888a7		in	named-only	libglcore/include/glcore_prots.h:210	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ef9c	596	__glMgrim_Fogiv	dwarf+dynsym	d1b230abc93e		in	named-only	HQ3.h:1194	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7ef9c	596	__glMgrim_Fogiv	dwarf+dynsym	d1b230abc93e		in	named-only	devices/hq3/HQ3.h:1194	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7f1f0	128	__glMgrim_Fogi	dwarf+dynsym	510966a1194d		in	named-only	libglcore/include/glcore_prots.h:212	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7f270	108	__glMgrim_PolygonOffsetEXT	dwarf+dynsym	cd78e7f21d6e		in	named-only	HQ3.h:1219	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7f2dc	108	__glMgrim_PolygonOffset	dwarf+dynsym	fa2a4965f28b		in	named-only	HQ3.h:1219	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7f270	108	__glMgrim_PolygonOffsetEXT	dwarf+dynsym	cd78e7f21d6e		in	named-only	devices/hq3/HQ3.h:1219	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7f2dc	108	__glMgrim_PolygonOffset	dwarf+dynsym	fa2a4965f28b		in	named-only	devices/hq3/HQ3.h:1219	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7f348	164	__glMgrGetColorMatrixState	dwarf+dynsym	e105bc1bd5eb		in	named-only	libglcore/include/glcore_prots.h:215	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7f3ec	76	__glMgrResetBitmapState	dwarf+dynsym	6e9f76e61ff1		in	named-only	libglcore/include/glcore_prots.h:216	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7f438	452	__glMgrInitFastPath	dwarf+dynsym	ccd99fed94b8		in	named-only	libglcore/include/glcore_prots.h:217	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7f5fc	672	__glMgrNewInitFastPath	dwarf+dynsym	72f63d485627		in	named-only	HQ3.h:971	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7f5fc	672	__glMgrNewInitFastPath	dwarf+dynsym	72f63d485627		in	named-only	devices/hq3/HQ3.h:971	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7f89c	624	__glMgrInitRGBTransfer	dwarf+dynsym	7df2c638a9f5		in	named-only	libglcore/include/glcore_prots.h:219	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda7fb0c	1640	__glMgrInitCITransfer	dwarf+dynsym	3461f9d337f8		in	named-only	libglcore/include/glcore_prots.h:220	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda80174	808	__glMgrInitRGBMap	dwarf+dynsym	5a4c799f29e1		in	named-only	libglcore/include/glcore_prots.h:221	
@@ -5073,14 +5073,14 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda81b7c	2584	__glMgrIni
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda82594	2668	__glMgrInitPixelTexture	dwarf+dynsym	e0d878c35834		in	named-only	libglcore/include/glcore_prots.h:229	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda83000	324	__glMgrInitRSSToRSS	dwarf+dynsym	e90e75c07c8e		in	named-only	docs/OPEN_QUESTIONS.md#12-transfer-mode-register-bits-17-to-21	12. Transfer mode register, bits 17 to 21
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda83144	248	__glMgrInitRSSToTE	dwarf+dynsym	c1306f1b8294		in	named-only	docs/OPEN_QUESTIONS.md#12-transfer-mode-register-bits-17-to-21	12. Transfer mode register, bits 17 to 21
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8323c	196	__glMgrSendHistogramFills	dwarf+dynsym	29072792211a		in	named-only	HQ3.h:1210	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda83300	216	__glMgrSendMinmaxFills	dwarf+dynsym	0d96254444af		in	named-only	HQ3.h:1211	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8323c	196	__glMgrSendHistogramFills	dwarf+dynsym	29072792211a		in	named-only	devices/hq3/HQ3.h:1210	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda83300	216	__glMgrSendMinmaxFills	dwarf+dynsym	0d96254444af		in	named-only	devices/hq3/HQ3.h:1211	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda833d8	80	__glMgrPixelTilesAddr	dwarf+dynsym	f4318252fb08		in	named-only	libglcore/include/glcore_prots.h:234	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda83428	2416	__glMgrSendPagedRows	dwarf+dynsym	8d0a4e554931		in	named-only	libglcore/include/glcore_prots.h:235	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda83d98	1244	__glMgrFastSendPixels	dwarf+dynsym	e0b33cfbbd09		in	named-only	libglcore/include/glcore_prots.h:236	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda84274	4464	__glMgrSendPixels	dwarf+dynsym	9e537f42b0cc		in	understood	docs/routines/oq-gr4-b000.md#routine-readings-open-question-pass	Routine readings: open-question pass
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda853e4	1180	__glMgrCopyTile	dwarf+dynsym	deff37475677		in	named-only	HQ3.h:974	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda85880	1296	__glMgrFastCopyPixels	dwarf+dynsym	4a6903aa3ffe		in	named-only	GE11.h:546	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda853e4	1180	__glMgrCopyTile	dwarf+dynsym	deff37475677		in	named-only	devices/hq3/HQ3.h:974	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda85880	1296	__glMgrFastCopyPixels	dwarf+dynsym	4a6903aa3ffe		in	named-only	devices/ge11/GE11.h:546	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda85d90	1676	__glMgrSlowCopyPixels	dwarf+dynsym	a47159edd43c		in	understood	docs/routines/oq-gr4-b000.md#routine-readings-open-question-pass	Routine readings: open-question pass
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8641c	256	__glMgrCopyPixels	dwarf+dynsym	73fef3bf016b		in	named-only	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8651c	64	__glMgrInitColorMatrix	dwarf+dynsym	f4948799717a		in	named-only	libglcore/include/glcore_prots.h:242	
@@ -5158,7 +5158,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8dfe0	128	__glMgrSPBa
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e060	52	__glMgrSPBfree	dwarf+dynsym	81322e59e8e0		in	named-only	libglcore/include/glcore_prots.h:314	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e094	8	__glMgrSPMoreBlocks	dwarf+dynsym	87506497337c		in	named-only	libglcore/include/glcore_prots.h:315	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e09c	56	__glMgrDLIoctl	dwarf+dynsym	53aefc82cecc		in	named-only	libglcore/include/glcore_prots.h:316	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda8e0d4	136	__glMgrDLDMASync	dwarf+funcnames	b1b40182c839		in	named-only	HQ3.h:815	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda8e0d4	136	__glMgrDLDMASync	dwarf+funcnames	b1b40182c839		in	named-only	devices/hq3/HQ3.h:815	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e15c	396	__glMgrInitDLDMA	dwarf+dynsym	db798be47838		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e2e8	136	__glMgrDlistNewArray	dwarf+dynsym	7bc02039ea9c		in	named-only	libglcore/include/glcore_prots.h:319	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8e370	140	__glMgrTermDLPool	dwarf+dynsym	28d9cd5cb529		in	named-only	libglcore/include/glcore_prots.h:320	
@@ -5187,39 +5187,39 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda8ff74	76	implici
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda8ffc0	88	__glMgrDLFlushDefer	dwarf+dynsym	53d967e34614		in	named-only	libglcore/include/glcore_prots.h:343	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90018	188	__glMgrDLFlushSeg	dwarf+dynsym	8625bb0d72ab		in	named-only	libglcore/include/glcore_prots.h:344	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda900d4	56	__glMgrDLFlushPool	dwarf+dynsym	1466fe6d8eed		in	named-only	libglcore/include/glcore_prots.h:345	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9010c	40	__glMgrBeginPoints	dwarf+dynsym	3662ef55e463		in	named-only	HQ3.h:899	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90134	40	__glMgrBeginLines	dwarf+dynsym	c46360544990		in	named-only	HQ3.h:900	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9015c	40	__glMgrBeginLStrip	dwarf+dynsym	8d4b41d01eee		in	named-only	HQ3.h:901	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90184	40	__glMgrBeginLLoop	dwarf+dynsym	01c4e0cd717f		in	named-only	HQ3.h:902	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda901ac	40	__glMgrBeginTriangles	dwarf+dynsym	6a64d771f2e0		in	named-only	HQ3.h:903	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda901d4	40	__glMgrBeginTStrip	dwarf+dynsym	9541ec9b1434		in	named-only	HQ3.h:904	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda901fc	40	__glMgrBeginTFan	dwarf+dynsym	99edad9224c8		in	named-only	HQ3.h:905	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90224	40	__glMgrBeginQuads	dwarf+dynsym	c0661daefc76		in	named-only	HQ3.h:906	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9024c	40	__glMgrBeginQStrip	dwarf+dynsym	de06ef7c73b4		in	named-only	HQ3.h:907	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90274	40	__glMgrBeginPolygon	dwarf+dynsym	767af07b4be1		in	named-only	HQ3.h:908	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9029c	40	__glMgrEndPoints	dwarf+dynsym	d8b6739bb0e1		in	named-only	HQ3.h:909	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda902c4	40	__glMgrEndLines	dwarf+dynsym	65903dc9359a		in	named-only	HQ3.h:910	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda902ec	40	__glMgrEndLStrip	dwarf+dynsym	6ee1540c3746		in	named-only	HQ3.h:911	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90314	40	__glMgrEndLLoop	dwarf+dynsym	b75cdb19aca9		in	named-only	HQ3.h:912	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9033c	40	__glMgrEndTriangles	dwarf+dynsym	15dbbff34ef8		in	named-only	HQ3.h:913	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90364	40	__glMgrEndTStrip	dwarf+dynsym	87a611942fa6		in	named-only	HQ3.h:914	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9038c	40	__glMgrEndTFan	dwarf+dynsym	efa8ff80e09c		in	named-only	HQ3.h:915	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda903b4	40	__glMgrEndQuads	dwarf+dynsym	a684560d6d63		in	named-only	HQ3.h:916	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda903dc	40	__glMgrEndQStrip	dwarf+dynsym	6d6bd7ae1bd3		in	named-only	HQ3.h:917	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90404	40	__glMgrEndPolygon	dwarf+dynsym	c4fc9834bb0c		in	named-only	HQ3.h:918	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9042c	40	__glMgrEndGeneric	dwarf+dynsym	3cbbf0d21867		in	named-only	HQ3.h:1207	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9010c	40	__glMgrBeginPoints	dwarf+dynsym	3662ef55e463		in	named-only	devices/hq3/HQ3.h:899	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90134	40	__glMgrBeginLines	dwarf+dynsym	c46360544990		in	named-only	devices/hq3/HQ3.h:900	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9015c	40	__glMgrBeginLStrip	dwarf+dynsym	8d4b41d01eee		in	named-only	devices/hq3/HQ3.h:901	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90184	40	__glMgrBeginLLoop	dwarf+dynsym	01c4e0cd717f		in	named-only	devices/hq3/HQ3.h:902	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda901ac	40	__glMgrBeginTriangles	dwarf+dynsym	6a64d771f2e0		in	named-only	devices/hq3/HQ3.h:903	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda901d4	40	__glMgrBeginTStrip	dwarf+dynsym	9541ec9b1434		in	named-only	devices/hq3/HQ3.h:904	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda901fc	40	__glMgrBeginTFan	dwarf+dynsym	99edad9224c8		in	named-only	devices/hq3/HQ3.h:905	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90224	40	__glMgrBeginQuads	dwarf+dynsym	c0661daefc76		in	named-only	devices/hq3/HQ3.h:906	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9024c	40	__glMgrBeginQStrip	dwarf+dynsym	de06ef7c73b4		in	named-only	devices/hq3/HQ3.h:907	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90274	40	__glMgrBeginPolygon	dwarf+dynsym	767af07b4be1		in	named-only	devices/hq3/HQ3.h:908	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9029c	40	__glMgrEndPoints	dwarf+dynsym	d8b6739bb0e1		in	named-only	devices/hq3/HQ3.h:909	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda902c4	40	__glMgrEndLines	dwarf+dynsym	65903dc9359a		in	named-only	devices/hq3/HQ3.h:910	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda902ec	40	__glMgrEndLStrip	dwarf+dynsym	6ee1540c3746		in	named-only	devices/hq3/HQ3.h:911	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90314	40	__glMgrEndLLoop	dwarf+dynsym	b75cdb19aca9		in	named-only	devices/hq3/HQ3.h:912	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9033c	40	__glMgrEndTriangles	dwarf+dynsym	15dbbff34ef8		in	named-only	devices/hq3/HQ3.h:913	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90364	40	__glMgrEndTStrip	dwarf+dynsym	87a611942fa6		in	named-only	devices/hq3/HQ3.h:914	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9038c	40	__glMgrEndTFan	dwarf+dynsym	efa8ff80e09c		in	named-only	devices/hq3/HQ3.h:915	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda903b4	40	__glMgrEndQuads	dwarf+dynsym	a684560d6d63		in	named-only	devices/hq3/HQ3.h:916	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda903dc	40	__glMgrEndQStrip	dwarf+dynsym	6d6bd7ae1bd3		in	named-only	devices/hq3/HQ3.h:917	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90404	40	__glMgrEndPolygon	dwarf+dynsym	c4fc9834bb0c		in	named-only	devices/hq3/HQ3.h:918	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9042c	40	__glMgrEndGeneric	dwarf+dynsym	3cbbf0d21867		in	named-only	devices/hq3/HQ3.h:1207	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90454	344	__glMgrim_Begin	dwarf+dynsym	f58a1c009054		in	named-only	libglcore/include/glcore_prots.h:367	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda905ac	96	__glMgrim_End	dwarf+dynsym	a537bca5d570		in	named-only	libglcore/include/glcore_prots.h:368	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90708	996	__glMgrReadSpan	dwarf+dynsym	e451129c39d6		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda90aec	1160	__glMgrReturnSpan	dwarf+dynsym	1ee7b0159da0		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda913d8	556	__glMgrInitRGB	dwarf+dynsym	c9978c7050bd		in	named-only	HQ3.h:892	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda913d8	556	__glMgrInitRGB	dwarf+dynsym	c9978c7050bd		in	named-only	devices/hq3/HQ3.h:892	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda91604	296	simCatch	dwarf+funcnames	d073c2c39e52		in	named-only	libglcore/include/glcore_prots.h:372	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda9172c	1208	branchdelay	dwarf+funcnames	8e24968ea1e2		in	named-only	libglcore/include/glcore_prots.h:373	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda91be4	1244	disass	dwarf+funcnames	4db596993f03		in	named-only	libglcore/include/glcore_prots.h:374	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda920c0	216	simIoctl	dwarf+funcnames	d197bda977d2		in	named-only	libglcore/include/glcore_prots.h:375	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda92198	184	__glMgrSimIoctl	dwarf+dynsym	ad86f1c9a524		in	named-only	libglcore/include/glcore_prots.h:376	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda92250	544	simOpenGraphics	dwarf+funcnames	1479c17a69cd		in	named-only	HQ3.h:889	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda92470	24	simAllocHWContext	dwarf+funcnames	d31fd86c558e		in	named-only	HQ3.h:890	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda92250	544	simOpenGraphics	dwarf+funcnames	1479c17a69cd		in	named-only	devices/hq3/HQ3.h:889	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda92470	24	simAllocHWContext	dwarf+funcnames	d31fd86c558e		in	named-only	devices/hq3/HQ3.h:890	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda92488	8	simFreeHWContext	dwarf+funcnames	78aa5094d5ec		in	named-only	libglcore/include/glcore_prots.h:379	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda92490	8	simBindHWContextToWindow	dwarf+funcnames	78aa5094d5ec		in	named-only	libglcore/include/glcore_prots.h:380	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda92498	8	simPixmapMemory	dwarf+funcnames	87506497337c		in	named-only	libglcore/include/glcore_prots.h:381	
@@ -5233,7 +5233,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda92864	392	init_e
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda929ec	328	force_externalcontextswitch	dwarf+funcnames	be71b1ab08ca		in	named-only	libglcore/include/glcore_prots.h:389	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda92b58	116	__glMgrInitStencil	dwarf+dynsym	885116ec9a64		in	named-only	libglcore/include/glcore_prots.h:390	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda92bcc	532	__glMgrLookUpTexture	dwarf+dynsym	e460ecdffed8		in	named-only	libglcore/include/glcore_prots.h:391	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda92de0	284	__glMgrNeedSoftFilter4	dwarf+dynsym	8f060328a92a		in	named-only	TE1.h:361	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda92de0	284	__glMgrNeedSoftFilter4	dwarf+dynsym	8f060328a92a		in	named-only	devices/te1/TE1.h:361	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda92efc	176	__glMgrim_SoftTexParameterfv	dwarf+dynsym	592ee89b7a25		in	named-only	libglcore/include/glcore_prots.h:393	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda92fac	3448	__glMgrim_TexParameterfv	dwarf+dynsym	add81b07320c		in	named-only	libglcore/include/glcore_prots.h:394	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda93d24	268	__glMgrim_SoftTexParameterf	dwarf+dynsym	89f3d0b48dd4		in	named-only	libglcore/include/glcore_prots.h:395	
@@ -5242,11 +5242,11 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda94004	176	__glMgrim_S
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda940b4	3260	__glMgrim_TexParameteriv	dwarf+dynsym	9de89a4db19c		in	named-only	libglcore/include/glcore_prots.h:398	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda94d70	268	__glMgrim_SoftTexParameteri	dwarf+dynsym	4edadb4937f8		in	named-only	libglcore/include/glcore_prots.h:399	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda94e7c	436	__glMgrim_TexParameteri	dwarf+dynsym	3ad9c0083dc9		in	named-only	libglcore/include/glcore_prots.h:400	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda95030	172	send_only_texmode2	dwarf+funcnames	4f1d0e3d5055		in	named-only	HQ3.h:960	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda95030	172	send_only_texmode2	dwarf+funcnames	4f1d0e3d5055		in	named-only	devices/hq3/HQ3.h:960	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda950dc	488	__glMgrim_TexEnvfv	dwarf+dynsym	a062d8074f83		in	named-only	libglcore/include/glcore_prots.h:402	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda952c4	92	__glMgrim_TexEnvf	dwarf+dynsym	0ca75e4badac		in	named-only	libglcore/include/glcore_prots.h:403	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda95320	488	__glMgrim_TexEnviv	dwarf+dynsym	224971c2a0a6		in	named-only	HQ3.h:726	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda95508	92	__glMgrim_TexEnvi	dwarf+dynsym	7988b98b51a7		in	named-only	TE1.h:209	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda95320	488	__glMgrim_TexEnviv	dwarf+dynsym	224971c2a0a6		in	named-only	devices/hq3/HQ3.h:726	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda95508	92	__glMgrim_TexEnvi	dwarf+dynsym	7988b98b51a7		in	named-only	devices/te1/TE1.h:209	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda95564	344	__glMgrim_TexImage1D	dwarf+dynsym	8c8ccffa9aac		in	named-only	libglcore/include/glcore_prots.h:406	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda956bc	208	__glMgrim_CopyTexImage1DEXT	dwarf+dynsym	086162ab395e		in	named-only	libglcore/include/glcore_prots.h:407	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda9578c	1544	mgrTM_TexImage1D_setup	dwarf+funcnames	5874b6d3dfd1		in	named-only	libglcore/include/glcore_prots.h:408	
@@ -5255,7 +5255,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda96110	764	__glMgrim_C
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9640c	540	__glMgrim_TexImage2D	dwarf+dynsym	975d6ce525e3		in	named-only	docs/TRAM_CORRUPTION_ANALYSIS.md#bug-4-blind-dma-streaming-in-mgrtm_dotexload	Bug 4: Blind DMA Streaming in `mgrTM_DoTexLoad`
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda96628	248	__glMgrim_CopyTexImage2DEXT	dwarf+dynsym	92eabe36f7b7		in	named-only	libglcore/include/glcore_prots.h:412	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda96720	2232	mgrTM_TexImage2D_setup	dwarf+funcnames	91f5e53d6766		in	named-only	docs/TRAM_CORRUPTION_ANALYSIS.md#key-findings	Key Findings
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda96fd8	196	__glMgrim_TexSubImage2DEXT	dwarf+dynsym	b0968fa68a3a		in	named-only	TE1.h:374	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda96fd8	196	__glMgrim_TexSubImage2DEXT	dwarf+dynsym	b0968fa68a3a		in	named-only	devices/te1/TE1.h:374	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9709c	172	__glMgrIsCurrentGLXReadVideo	dwarf+dynsym	5fe3b55ca773		in	named-only	libglcore/include/glcore_prots.h:415	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda97148	272	__glMgrim_CopyTexSubImage2DEXT	dwarf+dynsym	c04870cb502b		in	named-only	libglcore/include/glcore_prots.h:416	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda97258	1024	mgrTM_TexSubImage2D_setup	dwarf+funcnames	66b3c9feefe6		in	named-only	docs/TRAM_CORRUPTION_ANALYSIS.md#key-findings	Key Findings
@@ -5265,7 +5265,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda98068	1012	__glMgrim_
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9845c	1472	__glMgrim_TexImage4DSGIS	dwarf+dynsym	cbaa5e96edf5		in	named-only	libglcore/include/glcore_prots.h:421	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda98a1c	1028	__glMgrim_TexSubImage4DSGIS	dwarf+dynsym	61da197ae596		in	named-only	libglcore/include/glcore_prots.h:422	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda98e20	408	mgrTM_compute_log_sizes	dwarf+funcnames	4dfa61280812		in	named-only	libglcore/include/glcore_prots.h:423	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda98fb8	1484	__glMgrim_DetailTexFuncSGIS	dwarf+dynsym	0321ac364688		in	named-only	HQ3.h:1262	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda98fb8	1484	__glMgrim_DetailTexFuncSGIS	dwarf+dynsym	0321ac364688		in	named-only	devices/hq3/HQ3.h:1262	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda99584	268	__glMgrim_PixelTexGenSGIX	dwarf+dynsym	226c6c137241		in	named-only	libglcore/include/glcore_prots.h:425	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda99690	168	FreeTextureInfo	dwarf+funcnames	ebd23afa5a49		in	named-only	libglcore/include/glcore_prots.h:426	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda99738	196	__glMgr_NewTexObj	dwarf+dynsym	7edfac9409e7		in	named-only	libglcore/include/glcore_prots.h:427	
@@ -5276,44 +5276,44 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda99f28	208	__glMgrim_I
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda99ff8	188	__glMgrim_GenTexturesEXT	dwarf+dynsym	60608dadb7e1		in	named-only	libglcore/include/glcore_prots.h:432	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a0b4	512	__glMgrim_DeleteTexturesEXT	dwarf+dynsym	ea44d4abfd32		in	named-only	libglcore/include/glcore_prots.h:433	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda9a2b4	56	Clampf	dwarf+funcnames	70e5c41f629a	multi-unit	in	named-only		
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a2ec	44	__glMgrim_EdgeFlag	dwarf+dynsym	d76bfd4c8679		in	named-only	HQ3.h:895	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a318	48	__glMgrim_EdgeFlagv	dwarf+dynsym	1732a27bee31		in	named-only	HQ3.h:895	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a2ec	44	__glMgrim_EdgeFlag	dwarf+dynsym	d76bfd4c8679		in	named-only	devices/hq3/HQ3.h:895	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a318	48	__glMgrim_EdgeFlagv	dwarf+dynsym	1732a27bee31		in	named-only	devices/hq3/HQ3.h:895	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a348	168	__glMgrasEatData	dwarf+dynsym	d5c63832e41b		in	named-only	libglcore/include/glcore_prots.h:437	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a3f0	48	__glMgrim_DrawDumbPoint	dwarf+dynsym	9908f8d43454		in	named-only	HQ3.h:1218	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a420	180	__glMgrim_Scissor	dwarf+dynsym	51a976f9033f		in	named-only	HQ3.h:933	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a4d4	208	__glMgrim_ClipPlane	dwarf+dynsym	79c872409eda		in	named-only	HQ3.h:1182	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a5a4	72	__glMgrim_PassClipPlane	dwarf+dynsym	705bf6b3794f		in	named-only	HQ3.h:1182	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a5ec	220	__glMgrim_MultMatrixf	dwarf+dynsym	c5df74ce4389		in	named-only	HQ3.h:922	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a6c8	284	__glMgrim_MultMatrixd	dwarf+dynsym	e104f89ccbfb		in	named-only	HQ3.h:922	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a7e4	220	__glMgrim_LoadMatrixf	dwarf+dynsym	ab9c7b0a9322		in	named-only	HQ3.h:920	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a8c0	284	__glMgrim_LoadMatrixd	dwarf+dynsym	f06d95023528		in	named-only	HQ3.h:920	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a9dc	92	__glMgrim_LoadIdentity	dwarf+dynsym	713640e62b1c		in	named-only	HQ3.h:921	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9aa38	244	__glMgrim_Frustum	dwarf+dynsym	646cf50bceab		in	named-only	HQ3.h:929	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ab2c	232	__glMgrim_Ortho	dwarf+dynsym	2be420a3abd1		in	named-only	HQ3.h:930	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ac14	92	__glMgrim_PopMatrix	dwarf+dynsym	b7eb4db34386		in	named-only	HQ3.h:923	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ac70	92	__glMgrim_PushMatrix	dwarf+dynsym	e818540f8367		in	named-only	HQ3.h:924	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9accc	124	__glMgrim_Rotated	dwarf+dynsym	36d87ba52411		in	named-only	HQ3.h:925	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ad48	108	__glMgrim_Rotatef	dwarf+dynsym	7c116afd76d1		in	named-only	HQ3.h:925	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9adb4	116	__glMgrim_Scaled	dwarf+dynsym	36de5adfc7f0		in	named-only	HQ3.h:926	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ae28	104	__glMgrim_Scalef	dwarf+dynsym	11bcc0ea1b09		in	named-only	HQ3.h:926	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ae90	116	__glMgrim_Translated	dwarf+dynsym	66570312c98c		in	named-only	HQ3.h:927	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9af04	104	__glMgrim_Translatef	dwarf+dynsym	28eea9c0ec9e		in	named-only	HQ3.h:927	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9af6c	216	__glMgrim_Viewport	dwarf+dynsym	f0879f713c7f		in	named-only	HQ3.h:928	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9b044	152	__glMgrim_MatrixMode	dwarf+dynsym	36e8704ec7b8		in	named-only	HQ3.h:919	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9b104	1028	__glMgrim_SoftEnable	dwarf+dynsym	f94b0ec9159d		in	named-only	HQ3.h:964	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a3f0	48	__glMgrim_DrawDumbPoint	dwarf+dynsym	9908f8d43454		in	named-only	devices/hq3/HQ3.h:1218	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a420	180	__glMgrim_Scissor	dwarf+dynsym	51a976f9033f		in	named-only	devices/hq3/HQ3.h:933	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a4d4	208	__glMgrim_ClipPlane	dwarf+dynsym	79c872409eda		in	named-only	devices/hq3/HQ3.h:1182	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a5a4	72	__glMgrim_PassClipPlane	dwarf+dynsym	705bf6b3794f		in	named-only	devices/hq3/HQ3.h:1182	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a5ec	220	__glMgrim_MultMatrixf	dwarf+dynsym	c5df74ce4389		in	named-only	devices/hq3/HQ3.h:922	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a6c8	284	__glMgrim_MultMatrixd	dwarf+dynsym	e104f89ccbfb		in	named-only	devices/hq3/HQ3.h:922	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a7e4	220	__glMgrim_LoadMatrixf	dwarf+dynsym	ab9c7b0a9322		in	named-only	devices/hq3/HQ3.h:920	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a8c0	284	__glMgrim_LoadMatrixd	dwarf+dynsym	f06d95023528		in	named-only	devices/hq3/HQ3.h:920	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9a9dc	92	__glMgrim_LoadIdentity	dwarf+dynsym	713640e62b1c		in	named-only	devices/hq3/HQ3.h:921	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9aa38	244	__glMgrim_Frustum	dwarf+dynsym	646cf50bceab		in	named-only	devices/hq3/HQ3.h:929	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ab2c	232	__glMgrim_Ortho	dwarf+dynsym	2be420a3abd1		in	named-only	devices/hq3/HQ3.h:930	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ac14	92	__glMgrim_PopMatrix	dwarf+dynsym	b7eb4db34386		in	named-only	devices/hq3/HQ3.h:923	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ac70	92	__glMgrim_PushMatrix	dwarf+dynsym	e818540f8367		in	named-only	devices/hq3/HQ3.h:924	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9accc	124	__glMgrim_Rotated	dwarf+dynsym	36d87ba52411		in	named-only	devices/hq3/HQ3.h:925	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ad48	108	__glMgrim_Rotatef	dwarf+dynsym	7c116afd76d1		in	named-only	devices/hq3/HQ3.h:925	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9adb4	116	__glMgrim_Scaled	dwarf+dynsym	36de5adfc7f0		in	named-only	devices/hq3/HQ3.h:926	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ae28	104	__glMgrim_Scalef	dwarf+dynsym	11bcc0ea1b09		in	named-only	devices/hq3/HQ3.h:926	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ae90	116	__glMgrim_Translated	dwarf+dynsym	66570312c98c		in	named-only	devices/hq3/HQ3.h:927	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9af04	104	__glMgrim_Translatef	dwarf+dynsym	28eea9c0ec9e		in	named-only	devices/hq3/HQ3.h:927	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9af6c	216	__glMgrim_Viewport	dwarf+dynsym	f0879f713c7f		in	named-only	devices/hq3/HQ3.h:928	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9b044	152	__glMgrim_MatrixMode	dwarf+dynsym	36e8704ec7b8		in	named-only	devices/hq3/HQ3.h:919	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9b104	1028	__glMgrim_SoftEnable	dwarf+dynsym	f94b0ec9159d		in	named-only	devices/hq3/HQ3.h:964	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9b508	876	__glMgrEvalEnable	dwarf+dynsym	5567d2867236		in	named-only	libglcore/include/glcore_prots.h:460	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9b874	24	__glMgrEnableLightSource	dwarf+dynsym	d0186e0fca10		in	named-only	HQ3.h:965	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9b88c	5156	__glMgrim_Enable	dwarf+dynsym	b447ce7468b9		in	named-only	HQ3.h:960	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ccb0	1408	__glMgrim_SoftDisable	dwarf+dynsym	60ed6457bca4		in	named-only	HQ3.h:964	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9b874	24	__glMgrEnableLightSource	dwarf+dynsym	d0186e0fca10		in	named-only	devices/hq3/HQ3.h:965	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9b88c	5156	__glMgrim_Enable	dwarf+dynsym	b447ce7468b9		in	named-only	devices/hq3/HQ3.h:960	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ccb0	1408	__glMgrim_SoftDisable	dwarf+dynsym	60ed6457bca4		in	named-only	devices/hq3/HQ3.h:964	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9d230	1044	__glMgrEvalDisable	dwarf+dynsym	d28faff208d2		in	named-only	libglcore/include/glcore_prots.h:464	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9d644	24	__glMgrDisableLightSource	dwarf+dynsym	a42e722b6758		in	named-only	HQ3.h:981	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9d65c	4716	__glMgrim_Disable	dwarf+dynsym	9e0c1d99c4fd		in	named-only	HQ3.h:960	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9e8c8	264	__glMgrim_ClearColor	dwarf+dynsym	5f0273f797d3		in	named-only	HQ3.h:1196	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9e9d0	264	__glMgrim_ClearAccum	dwarf+dynsym	bcfaee748e2c		in	named-only	HQ3.h:1197	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ead8	148	__glMgrim_ClearDepth	dwarf+dynsym	d0b007a2787c		in	named-only	HQ3.h:1198	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9eb6c	152	__glMgrim_ClearIndex	dwarf+dynsym	9b570acfdfcb		in	named-only	HQ3.h:1199	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ec04	116	__glMgrim_ClearStencil	dwarf+dynsym	b7ec8f4e5738		in	named-only	HQ3.h:1200	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ec78	276	__glMgrim_ColorMaterial	dwarf+dynsym	163931c0a37f		in	named-only	HQ3.h:1201	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9d644	24	__glMgrDisableLightSource	dwarf+dynsym	a42e722b6758		in	named-only	devices/hq3/HQ3.h:981	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9d65c	4716	__glMgrim_Disable	dwarf+dynsym	9e0c1d99c4fd		in	named-only	devices/hq3/HQ3.h:960	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9e8c8	264	__glMgrim_ClearColor	dwarf+dynsym	5f0273f797d3		in	named-only	devices/hq3/HQ3.h:1196	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9e9d0	264	__glMgrim_ClearAccum	dwarf+dynsym	bcfaee748e2c		in	named-only	devices/hq3/HQ3.h:1197	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ead8	148	__glMgrim_ClearDepth	dwarf+dynsym	d0b007a2787c		in	named-only	devices/hq3/HQ3.h:1198	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9eb6c	152	__glMgrim_ClearIndex	dwarf+dynsym	9b570acfdfcb		in	named-only	devices/hq3/HQ3.h:1199	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ec04	116	__glMgrim_ClearStencil	dwarf+dynsym	b7ec8f4e5738		in	named-only	devices/hq3/HQ3.h:1200	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ec78	276	__glMgrim_ColorMaterial	dwarf+dynsym	163931c0a37f		in	named-only	devices/hq3/HQ3.h:1201	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9ed8c	328	__glMgrim_Hint	dwarf+dynsym	92db87a67f62		in	named-only	libglcore/include/glcore_prots.h:473	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9eed4	4136	__glMgrim_SoftPushAttrib	dwarf+dynsym	db3cf5930f17		in	named-only	libglcore/include/glcore_prots.h:474	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9fefc	8772	__glMgrim_PushAttrib	dwarf+dynsym	2d3c19cf6e69		in	named-only	libglcore/include/glcore_prots.h:475	
@@ -5332,14 +5332,14 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa7418	200	__glMgrim_R
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa74e0	232	__glMgrim_Rects	dwarf+dynsym	2f12b1a66721		in	named-only	libglcore/include/glcore_prots.h:488	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa75c8	200	__glMgrim_Rectsv	dwarf+dynsym	ff92e6f6e85f		in	named-only	libglcore/include/glcore_prots.h:489	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa7698	64	__glMgrSendMapSpec1D	dwarf+dynsym	3c987a40884d		in	named-only	libglcore/include/glcore_prots.h:490	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa76d8	168	__glMgrSendMapData1D	dwarf+dynsym	c776ce87dff4		in	named-only	HQ3.h:1192	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa76d8	168	__glMgrSendMapData1D	dwarf+dynsym	c776ce87dff4		in	named-only	devices/hq3/HQ3.h:1192	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdaa7780	8960	changebasis	dwarf+funcnames	512a8ebec8e5		in	named-only	libglcore/include/glcore_prots.h:492	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa9a80	192	__glMgrHostMapData1D	dwarf+dynsym	dbcba57a909d		in	named-only	libglcore/include/glcore_prots.h:493	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa9b40	1028	__glMgrCleanUp1D	dwarf+dynsym	ddbb3ec7325d		in	named-only	HQ3.h:1190	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa9b40	1028	__glMgrCleanUp1D	dwarf+dynsym	ddbb3ec7325d		in	named-only	devices/hq3/HQ3.h:1190	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa9f44	76	__glMgrSendMapSpec2D	dwarf+dynsym	787ef2cd94af		in	named-only	libglcore/include/glcore_prots.h:495	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa9f90	192	__glMgrSendMapData2D	dwarf+dynsym	3a44f03374ce		in	named-only	HQ3.h:1193	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaa9f90	192	__glMgrSendMapData2D	dwarf+dynsym	3a44f03374ce		in	named-only	devices/hq3/HQ3.h:1193	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaaa050	448	__glMgrHostMapData2D	dwarf+dynsym	f7ecf6c78da7		in	named-only	libglcore/include/glcore_prots.h:497	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaaa210	1124	__glMgrCleanUp2D	dwarf+dynsym	1f48d0f82af4		in	named-only	HQ3.h:1191	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaaa210	1124	__glMgrCleanUp2D	dwarf+dynsym	1f48d0f82af4		in	named-only	devices/hq3/HQ3.h:1191	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdaaa674	484	EvalV	dwarf+funcnames	836784fb28b2		in	named-only	libglcore/include/glcore_prots.h:499	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdaaa858	468	EvalU	dwarf+funcnames	801abdbb3112		in	named-only	libglcore/include/glcore_prots.h:500	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdaaaa2c	444	EvalVdV	dwarf+funcnames	e6e4a644fe96		in	named-only	libglcore/include/glcore_prots.h:501	
@@ -5351,10 +5351,10 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaab924	76	__glMgrEvalC
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaab970	580	__glMgrEvalMesh1DHost	dwarf+dynsym	381ca04ac2d8		in	named-only	libglcore/include/glcore_prots.h:507	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaabbb4	88	__glMgrEvalCoord2DHost	dwarf+dynsym	659228318b5d		in	named-only	libglcore/include/glcore_prots.h:508	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaabc0c	2472	__glMgrEvalMesh2DHost	dwarf+dynsym	7e046e80bc95		in	named-only	libglcore/include/glcore_prots.h:509	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac5b4	64	__glMgrEvalCoord1DGe11	dwarf+dynsym	21d8ac12f53f		in	named-only	HQ3.h:1186	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac5f4	48	__glMgrEvalCoord2DGe11	dwarf+dynsym	093e2717e579		in	named-only	HQ3.h:1187	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac624	508	__glMgrEvalMesh1DGe11	dwarf+dynsym	7dc6197d6deb		in	named-only	HQ3.h:1184	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac820	992	__glMgrEvalMesh2DGe11	dwarf+dynsym	6d9abcf0efe9		in	named-only	HQ3.h:1185	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac5b4	64	__glMgrEvalCoord1DGe11	dwarf+dynsym	21d8ac12f53f		in	named-only	devices/hq3/HQ3.h:1186	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac5f4	48	__glMgrEvalCoord2DGe11	dwarf+dynsym	093e2717e579		in	named-only	devices/hq3/HQ3.h:1187	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac624	508	__glMgrEvalMesh1DGe11	dwarf+dynsym	7dc6197d6deb		in	named-only	devices/hq3/HQ3.h:1184	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaac820	992	__glMgrEvalMesh2DGe11	dwarf+dynsym	6d9abcf0efe9		in	named-only	devices/hq3/HQ3.h:1185	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaacc00	572	__glMgrInitEvaluators	dwarf+dynsym	9fca85123e00		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaace3c	156	__glMgrFreeEvaluators	dwarf+dynsym	248c6fe9bc46		in	named-only	libglcore/include/glcore_prots.h:515	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaaced8	360	__glMgSetUpMap1	dwarf+dynsym	0071545b9587		in	named-only	libglcore/include/glcore_prots.h:516	
@@ -5375,31 +5375,31 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaadd68	96	__glMgrim_Ev
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaaddc8	96	__glMgrim_EvalCoord2dv	dwarf+dynsym	b86cdb326cbe		in	named-only	libglcore/include/glcore_prots.h:531	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaade28	84	__glMgrim_EvalCoord2f	dwarf+dynsym	4fe229dd75cf		in	named-only	libglcore/include/glcore_prots.h:532	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaade7c	88	__glMgrim_EvalCoord2fv	dwarf+dynsym	63e1e7ed7f0e		in	named-only	libglcore/include/glcore_prots.h:533	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaaded4	180	__glMgrim_MapGrid1d	dwarf+dynsym	9ce6e11a9427		in	named-only	HQ3.h:1188	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaadf88	164	__glMgrim_MapGrid1f	dwarf+dynsym	4fb58e2656c2		in	named-only	HQ3.h:1188	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae02c	264	__glMgrim_MapGrid2d	dwarf+dynsym	48e7279e6ae3		in	named-only	HQ3.h:1189	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae134	232	__glMgrim_MapGrid2f	dwarf+dynsym	128a0eeaa0da		in	named-only	HQ3.h:1189	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaaded4	180	__glMgrim_MapGrid1d	dwarf+dynsym	9ce6e11a9427		in	named-only	devices/hq3/HQ3.h:1188	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaadf88	164	__glMgrim_MapGrid1f	dwarf+dynsym	4fb58e2656c2		in	named-only	devices/hq3/HQ3.h:1188	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae02c	264	__glMgrim_MapGrid2d	dwarf+dynsym	48e7279e6ae3		in	named-only	devices/hq3/HQ3.h:1189	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae134	232	__glMgrim_MapGrid2f	dwarf+dynsym	128a0eeaa0da		in	named-only	devices/hq3/HQ3.h:1189	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae21c	180	__glMgrim_EvalMesh1	dwarf+dynsym	fb05601b552c		in	named-only	libglcore/include/glcore_prots.h:538	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae2d0	136	__glMgrim_EvalPoint1	dwarf+dynsym	ed9ca128b1fb		in	named-only	libglcore/include/glcore_prots.h:539	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae358	188	__glMgrim_EvalMesh2	dwarf+dynsym	c5a6885c27db		in	named-only	libglcore/include/glcore_prots.h:540	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae414	184	__glMgrim_EvalPoint2	dwarf+dynsym	96f31ad0e913		in	named-only	libglcore/include/glcore_prots.h:541	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae4cc	952	__glMgrUpdateEvalAttributes	dwarf+dynsym	3d71903eae7c		in	named-only	HQ3.h:1188	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae4cc	952	__glMgrUpdateEvalAttributes	dwarf+dynsym	3d71903eae7c		in	named-only	devices/hq3/HQ3.h:1188	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae884	124	__Mgr_ReturnMode	dwarf+dynsym	159b6b8d89a7		in	named-only	docs/routines/t2-gr4-r4-b003.md#routine-roles-tier-2-reading-batch-3	Routine roles, tier-2 reading batch 3
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae900	2652	__glMgrim_IsEnabled	dwarf+dynsym	9d3333fb925c		in	named-only	HQ3.h:1063	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdaaf35c	92	spin_and_return	dwarf+funcnames	b605878119d9		in	named-only	HQ3.h:982	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaae900	2652	__glMgrim_IsEnabled	dwarf+dynsym	9d3333fb925c		in	named-only	devices/hq3/HQ3.h:1063	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdaaf35c	92	spin_and_return	dwarf+funcnames	b605878119d9		in	named-only	devices/hq3/HQ3.h:982	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdaaf3b8	172	spin_and_return_inner	dwarf+funcnames	56b0411c1d81		in	named-only	libglcore/include/glcore_prots.h:546	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaaf464	724	__Mgr_GetCurrentAttrState	dwarf+dynsym	3d75f8ca7a59		in	named-only	libglcore/include/glcore_prots.h:547	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaaf738	16312	__glMgrDoGet	dwarf+dynsym	74cc7420dcc1		in	named-only	libglcore/include/glcore_prots.h:548	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab36f0	60	__glMgrim_GetDoublev	dwarf+dynsym	f7b19594aede		in	named-only	libglcore/include/glcore_prots.h:549	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab372c	168	__glMgrim_GetError	dwarf+dynsym	87e6233cdde6		in	named-only	HQ3.h:963	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab372c	168	__glMgrim_GetError	dwarf+dynsym	87e6233cdde6		in	named-only	devices/hq3/HQ3.h:963	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab37d4	60	__glMgrim_GetFloatv	dwarf+dynsym	4359e3bf714c		in	named-only	libglcore/include/glcore_prots.h:551	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab3810	60	__glMgrim_GetIntegerv	dwarf+dynsym	66f6200ffa30		in	named-only	libglcore/include/glcore_prots.h:552	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab384c	60	__glMgrim_GetBooleanv	dwarf+dynsym	a1384e3fe145		in	named-only	libglcore/include/glcore_prots.h:553	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab3888	288	__glMgrim_GetClipPlane	dwarf+dynsym	e3dc5e8f8dd5		in	named-only	libglcore/include/glcore_prots.h:554	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab39a8	600	__glMgrim_GetLightfv	dwarf+dynsym	c540f472baa0		in	named-only	HQ3.h:1265	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab3c00	944	__glMgrim_GetLightiv	dwarf+dynsym	01e9a8aeac4c		in	named-only	HQ3.h:1265	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab3fb0	616	__glMgrim_GetMaterialfv	dwarf+dynsym	71771d8560ed		in	named-only	HQ3.h:1264	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab4218	800	__glMgrim_GetMaterialiv	dwarf+dynsym	9a924bef60fe		in	named-only	HQ3.h:1264	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab39a8	600	__glMgrim_GetLightfv	dwarf+dynsym	c540f472baa0		in	named-only	devices/hq3/HQ3.h:1265	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab3c00	944	__glMgrim_GetLightiv	dwarf+dynsym	01e9a8aeac4c		in	named-only	devices/hq3/HQ3.h:1265	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab3fb0	616	__glMgrim_GetMaterialfv	dwarf+dynsym	71771d8560ed		in	named-only	devices/hq3/HQ3.h:1264	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab4218	800	__glMgrim_GetMaterialiv	dwarf+dynsym	9a924bef60fe		in	named-only	devices/hq3/HQ3.h:1264	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab4538	704	__glMgrim_GetMapfv	dwarf+dynsym	af639a86f752		in	named-only	libglcore/include/glcore_prots.h:559	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab47f8	736	__glMgrim_GetMapdv	dwarf+dynsym	78800969b4a7		in	named-only	libglcore/include/glcore_prots.h:560	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdab4ad8	652	__glMgrim_GetMapiv	dwarf+dynsym	f7b3d0ee3004		in	named-only	libglcore/include/glcore_prots.h:561	
@@ -5451,7 +5451,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabc4c8	124	mgrTM_tram_
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabc544	772	mgrTM_TexValidate	dwarf+dynsym	44360c7348ce		in	named-only	libglcore/include/glcore_prots.h:607	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdabc848	428	MakeTextureResident	dwarf+funcnames	20c9e375acfb		in	named-only	libglcore/include/glcore_prots.h:608	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabc9f4	576	mgrTM_SendTlMode	dwarf+dynsym	da4b169085e3		in	named-only	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabcc34	1336	mgrTM_SendTexmode1	dwarf+dynsym	df3909e9b9bf		in	named-only	TE1.h:197	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabcc34	1336	mgrTM_SendTexmode1	dwarf+dynsym	df3909e9b9bf		in	named-only	devices/te1/TE1.h:197	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabd16c	476	mgrTM_SendTlTable	dwarf+dynsym	38adf7d034c6		in	named-only	libglcore/include/glcore_prots.h:611	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabd348	160	mgrTM_RemoveTex	dwarf+dynsym	3ea600f1ab6e		in	named-only	libglcore/include/glcore_prots.h:612	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabd3e8	756	mgrTM_RemoveLev	dwarf+dynsym	758b8a014561		in	named-only	libglcore/include/glcore_prots.h:613	
@@ -5473,8 +5473,8 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabefa8	592	mgrTM_FreeD
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdabf1f8	164	flushRegs	dwarf+funcnames	239c5bba742e		in	named-only	docs/routines/t2-gr4-r4-b003.md#routine-roles-tier-2-reading-batch-3	Routine roles, tier-2 reading batch 3
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf29c	228	__glMgrasWrite	dwarf+dynsym	6c94ee09c2f6		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf380	172	__glMgrasSet	dwarf+dynsym	53e1ef78d9cb		in	named-only	docs/routines/t1-gr4-b000.md#__glmgrasinitdefaultvalues-in-usrgfxarchip28gr432libglcoreso-at-0xda719b8	`__glMgrasInitDefaultValues` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xda719b8
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf42c	36	__glMgrSaveTexmode	dwarf+dynsym	0f3ffdf265fb		in	named-only	HQ3.h:1220	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf450	20	__glMgrRestoreTexmode	dwarf+dynsym	b2a94311343e		in	named-only	HQ3.h:1221	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf42c	36	__glMgrSaveTexmode	dwarf+dynsym	0f3ffdf265fb		in	named-only	devices/hq3/HQ3.h:1220	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf450	20	__glMgrRestoreTexmode	dwarf+dynsym	b2a94311343e		in	named-only	devices/hq3/HQ3.h:1221	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf464	4064	mgrTM_DoTexLoad	dwarf+dynsym	81eb4e5a103c		in	named-only	docs/OPEN_QUESTIONS.md#9-pixel-transfer-zoom-registers	9. Pixel transfer zoom registers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac0444	4352	mgrTM_DoTexRead	dwarf+dynsym	88a883e4efd2		in	located	docs/routines/t1-gr4-b000.md#mgrtm_dotexread-in-usrgfxarchip28gr432libglcoreso-at-0xdac0444	`mgrTM_DoTexRead` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdac0444
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac1544	2148	mgrTM_DoCopyTex	dwarf+dynsym	2329962f6005		in	located	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
@@ -5491,7 +5491,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac33f4	636	__glMgrColo
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac3670	872	__glMgrim_ColorTableSGI	dwarf+dynsym	5f76f3fd7225		in	named-only	libglcore/include/glcore_prots.h:647	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac39d8	292	__glMgrim_ColorTableParameterfvSGI	dwarf+dynsym	dafb4f6f133e		in	named-only	libglcore/include/glcore_prots.h:648	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac3afc	160	__glMgrim_ColorTableParameterivSGI	dwarf+dynsym	aed32973ec1e		in	named-only	libglcore/include/glcore_prots.h:649	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac3b9c	336	__glMgrim_CopyColorTableSGI	dwarf+dynsym	9c729da32508		in	named-only	HQ3.h:977	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac3b9c	336	__glMgrim_CopyColorTableSGI	dwarf+dynsym	9c729da32508		in	named-only	devices/hq3/HQ3.h:977	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac3cec	820	__glMgrim_GetColorTableSGI	dwarf+dynsym	732443fb1ff6		in	named-only	libglcore/include/glcore_prots.h:651	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac4020	1144	__glMgrim_GetColorTableParameterfvSGI	dwarf+dynsym	2ac807bc88af		in	named-only	libglcore/include/glcore_prots.h:652	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac4498	444	__glMgrim_GetColorTableParameterivSGI	dwarf+dynsym	21dd8726605c		in	named-only	libglcore/include/glcore_prots.h:653	
@@ -5501,12 +5501,12 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdac9584	84	__glMgr
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdac95d8	428	allocHistogramMemory	dwarf+funcnames	a97e76f48380		in	named-only	libglcore/include/glcore_prots.h:657	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac9784	72	__glMgr_InitPixelStatState	dwarf+dynsym	97f46cc4f0dc		in	named-only	libglcore/include/glcore_prots.h:658	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac97cc	108	__glMgrFreePixelStatState	dwarf+dynsym	ebd87a30436c		in	named-only	libglcore/include/glcore_prots.h:659	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac9838	96	__glMgrResetHistogramMemory	dwarf+dynsym	308fedd1dd1a		in	named-only	HQ3.h:968	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac9838	96	__glMgrResetHistogramMemory	dwarf+dynsym	308fedd1dd1a		in	named-only	devices/hq3/HQ3.h:968	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac9898	664	__glMgrim_HistogramEXT	dwarf+dynsym	ccc95e79a98e		in	named-only	libglcore/include/glcore_prots.h:661	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdac9b30	392	byteSwapMaybe	dwarf+funcnames	0343a3769e5b		in	named-only	libglcore/include/glcore_prots.h:662	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdac9cb8	336	skipPixelsMaybe	dwarf+funcnames	378ee1dceb4f		in	named-only	libglcore/include/glcore_prots.h:663	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdac9e08	1284	__glMgr_FormatHistogram	dwarf+dynsym	6660bdce77a6		in	named-only	libglcore/include/glcore_prots.h:664	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdaca30c	124	__Mgr_ReturnHistPIO	dwarf+funcnames	c68ccdb026e6		in	named-only	HQ3.h:973	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdaca30c	124	__Mgr_ReturnHistPIO	dwarf+funcnames	c68ccdb026e6		in	named-only	devices/hq3/HQ3.h:973	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaca388	444	__glMgr_ReadEramDMAHQSetup	dwarf+dynsym	76b6bb66b5ed		in	named-only	libglcore/include/glcore_prots.h:666	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaca544	3604	__glMgr_PackHistogram	dwarf+dynsym	97939429fad9		in	named-only	libglcore/include/glcore_prots.h:667	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacb358	1884	__glMgrim_GetHistogramEXT	dwarf+dynsym	7d2fe4c6e1d4		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
@@ -5527,12 +5527,12 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacdb70	968	__glMgrGetS
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacdf38	312	writehit	dwarf+dynsym	254d43435b01		in	named-only	libglcore/include/glcore_prots.h:683	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace070	464	writemergehit	dwarf+dynsym	b2df0e23a46e		in	named-only	libglcore/include/glcore_prots.h:684	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace240	180	__glMgrim_SelectBuffer	dwarf+dynsym	52921f1b6c36		in	named-only	libglcore/include/glcore_prots.h:685	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace2f4	184	__glMgrim_InitNames	dwarf+dynsym	9ca48b1de78e		in	named-only	HQ3.h:1202	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace3ac	172	__glMgrim_LoadName	dwarf+dynsym	88861c4b65d3		in	named-only	HQ3.h:1203	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace458	208	__glMgrim_PopName	dwarf+dynsym	e6b6f1c96e3c		in	named-only	HQ3.h:1204	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace528	212	__glMgrim_PushName	dwarf+dynsym	a8cd54a4840c		in	named-only	HQ3.h:1205	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace2f4	184	__glMgrim_InitNames	dwarf+dynsym	9ca48b1de78e		in	named-only	devices/hq3/HQ3.h:1202	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace3ac	172	__glMgrim_LoadName	dwarf+dynsym	88861c4b65d3		in	named-only	devices/hq3/HQ3.h:1203	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace458	208	__glMgrim_PopName	dwarf+dynsym	e6b6f1c96e3c		in	named-only	devices/hq3/HQ3.h:1204	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace528	212	__glMgrim_PushName	dwarf+dynsym	a8cd54a4840c		in	named-only	devices/hq3/HQ3.h:1205	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace5fc	104	__glMgrim_FeedbackBuffer	dwarf+dynsym	1a12ce015c56		in	named-only	libglcore/include/glcore_prots.h:690	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace664	152	__glMgrim_PassThrough	dwarf+dynsym	bfca0cfeaea6		in	named-only	HQ3.h:959	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace664	152	__glMgrim_PassThrough	dwarf+dynsym	bfca0cfeaea6		in	named-only	devices/hq3/HQ3.h:959	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdace6fc	68	__glMgrWriteFeedbackBuf	dwarf+funcnames	1a9b5e7ab1af		in	named-only	libglcore/include/glcore_prots.h:692	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdace740	1012	__glMgrGetFeedbackData	dwarf+dynsym	9e7ac872f902		in	named-only	docs/routines/t1-gr4-b000.md#__glmgrim_rendermode-in-usrgfxarchip28gr432libglcoreso-at-0xda6e7e4	`__glMgrim_RenderMode` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xda6e7e4
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaceb38	988	getchannels	dwarf+dynsym	2845280d85fb		in	named-only	libglcore/include/glcore_prots.h:694	
@@ -5543,7 +5543,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacf750	1368	__glMgrCvt
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacfca8	236	__glMgrCvtScaleBias	dwarf+dynsym	31029b7b70e6		in	named-only	libglcore/include/glcore_prots.h:699	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdacfd94	1856	__glMgrCvtToRGBA	dwarf+dynsym	1db03c871af1		in	named-only	libglcore/include/glcore_prots.h:700	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdad04d4	740	__glMgrCvtToInternalFmt	dwarf+dynsym	c5fbc89618a7		in	named-only	libglcore/include/glcore_prots.h:701	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdad07b8	1728	__glMgr_PackPixels	dwarf+dynsym	221215b04c47		in	named-only	HQ3.h:696	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdad07b8	1728	__glMgr_PackPixels	dwarf+dynsym	221215b04c47		in	named-only	devices/hq3/HQ3.h:696	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdad0e78	1492	__glMgr_PackBitmap	dwarf+dynsym	70546a4740ba		in	named-only	libglcore/include/glcore_prots.h:703	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdad144c	37692	__glMgr_FormatTexels	dwarf+dynsym	78f44029c7a5		in	named-only	docs/routines/t1-gr4-b000.md#mgrtm_dotexread-in-usrgfxarchip28gr432libglcoreso-at-0xdac0444	`mgrTM_DoTexRead` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdac0444
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdada788	248	__glMgrGetRawVisualInfo	dwarf+funcnames	7740d4d8ff67		in	named-only	libglcore/include/glcore_prots.h:705	
@@ -5568,9 +5568,9 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadc77c	576	__glMgrim_G
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadc9bc	1068	__glMgrim_GetSeparableFilterEXT	dwarf+dynsym	c18ec040eb70		in	named-only	libglcore/include/glcore_prots.h:724	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadcde8	272	__glMgrim_CopyConvolutionFilter1DEXT	dwarf+dynsym	e6b843781c92		in	named-only	libglcore/include/glcore_prots.h:725	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadcef8	300	__glMgrim_CopyConvolutionFilter2DEXT	dwarf+dynsym	4efe69300dc5		in	named-only	libglcore/include/glcore_prots.h:726	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdadd024	1736	__glMgrGeneralBitmap	dwarf+funcnames	1fda0a302aad		in	named-only	HQ3.h:975	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadd6ec	860	__glMgrim_Bitmap	dwarf+dynsym	0f5a580eb5f9		in	named-only	HQ3.h:976	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadda48	924	__glMgrRenderBitmap	dwarf+dynsym	99e2405c7236		in	named-only	HQ3.h:976	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdadd024	1736	__glMgrGeneralBitmap	dwarf+funcnames	1fda0a302aad		in	named-only	devices/hq3/HQ3.h:975	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadd6ec	860	__glMgrim_Bitmap	dwarf+dynsym	0f5a580eb5f9		in	named-only	devices/hq3/HQ3.h:976	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadda48	924	__glMgrRenderBitmap	dwarf+dynsym	99e2405c7236		in	named-only	devices/hq3/HQ3.h:976	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaddde4	404	__glMgr_UseDMAForWrite	dwarf+dynsym	3797faf6e7a2		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaddf78	160	__glMgr_UseDMAForRead	dwarf+dynsym	0d02f336fd18		in	named-only	docs/OPEN_QUESTIONS.md#20-who-programs-the-display-servers-table-slot-and-whether-it-ever-restores-it	20. Who programs the display server's table slot, and whether it ever restores it
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade018	300	__glMgr_LockSingleDMAPool	dwarf+dynsym	5df9a21e9b85		in	understood	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
@@ -5586,8 +5586,8 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade948	80	__glMgrWaitF
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdade998	580	__glMgr_ReadDMAHQSetup	dwarf+dynsym	df0d65723183		in	named-only	docs/routines/t2-gr4-r4-b003.md#routine-roles-tier-2-reading-batch-3	Routine roles, tier-2 reading batch 3
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadebdc	4112	PackLuminanceData	dwarf+dynsym	c536e5a41c51		in	named-only	libglcore/include/glcore_prots.h:743	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdadfbec	828	PackFloatData	dwarf+dynsym	c606ddd42739		in	named-only	libglcore/include/glcore_prots.h:744	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdadff28	688	GetPixelsDMA	dwarf+funcnames	4fbd5953b864		in	named-only	HQ3.h:1215	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae01d8	596	GetPixelsFloatDMA	dwarf+funcnames	b0bf5746ff61		in	named-only	HQ3.h:1215	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdadff28	688	GetPixelsDMA	dwarf+funcnames	4fbd5953b864		in	named-only	devices/hq3/HQ3.h:1215	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae01d8	596	GetPixelsFloatDMA	dwarf+funcnames	b0bf5746ff61		in	named-only	devices/hq3/HQ3.h:1215	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae042c	8	GetPixelsPackedDMA	dwarf+funcnames	78aa5094d5ec		in	named-only	libglcore/include/glcore_prots.h:747	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae0434	8	GetPixelsBitmapDMA	dwarf+funcnames	78aa5094d5ec		in	named-only	libglcore/include/glcore_prots.h:748	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae043c	588	GetPixelsLuminanceDMA	dwarf+funcnames	7f3782343c0c		in	named-only	libglcore/include/glcore_prots.h:749	
@@ -5596,19 +5596,19 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae0c80	1740	GetPi
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae134c	1716	GetPixelsSwapIntPIO	dwarf+funcnames	47a329365a34		in	named-only	libglcore/include/glcore_prots.h:752	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae1a00	2012	GetPixelsSwapFloatPIO	dwarf+funcnames	d52b28b2eed7		in	named-only	libglcore/include/glcore_prots.h:753	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae21dc	1980	GetPixelsFloatPIO	dwarf+funcnames	c6ee8c27291f		in	named-only	libglcore/include/glcore_prots.h:754	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae2998	1260	GetPixelsPackedPIO	dwarf+funcnames	51be6805e746		in	named-only	HQ3.h:692	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae2e84	1060	GetPixelsBitmapPIO	dwarf+funcnames	98e06ef95346		in	named-only	HQ3.h:1215	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae2998	1260	GetPixelsPackedPIO	dwarf+funcnames	51be6805e746		in	named-only	devices/hq3/HQ3.h:692	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae2e84	1060	GetPixelsBitmapPIO	dwarf+funcnames	98e06ef95346		in	named-only	devices/hq3/HQ3.h:1215	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdae32a8	1524	GetPixelsLuminancePIO	dwarf+funcnames	d2d82ad723f9		in	named-only	libglcore/include/glcore_prots.h:757	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae389c	680	__glMgrRE4DMARd	dwarf+dynsym	f57f8594ac3c		in	named-only	libglcore/include/glcore_prots.h:758	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae3b44	968	__glMgrRE4PIORd	dwarf+dynsym	9781d17bc337		in	named-only	libglcore/include/glcore_prots.h:759	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae3f0c	540	__glMgr_AltWriteDMAHQSetup	dwarf+dynsym	6f9a14e368ba		in	named-only	HQ3.h:1266	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae3f0c	540	__glMgr_AltWriteDMAHQSetup	dwarf+dynsym	6f9a14e368ba		in	named-only	devices/hq3/HQ3.h:1266	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae4134	40	__glMgrSaveRSS	dwarf+dynsym	92d65392d231		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae415c	20	__glMgrRestoreRSS	dwarf+dynsym	70a6f3a0b3e2		in	named-only	docs/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae4170	164	__glMgrFlushImageRegs	dwarf+dynsym	239c5bba742e		in	named-only	HQ3.h:1079	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae4214	224	__glMgrRSSRegShadow	dwarf+dynsym	e332274505b7		in	named-only	HQ3.h:1082	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae4170	164	__glMgrFlushImageRegs	dwarf+dynsym	239c5bba742e		in	named-only	devices/hq3/HQ3.h:1079	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae4214	224	__glMgrRSSRegShadow	dwarf+dynsym	e332274505b7		in	named-only	devices/hq3/HQ3.h:1082	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae42f4	168	__glMgrRSSRegSet	dwarf+dynsym	f0ba0f951db8		in	named-only	libglcore/include/glcore_prots.h:765	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae439c	20	__glMgrLoadRasterPosInfo	dwarf+dynsym	dcf90c77dae9		in	named-only	HQ3.h:1213	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae43b0	28	__glMgrUpdateRasterPos	dwarf+dynsym	5a4646b5f8d5		in	named-only	HQ3.h:1212	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae439c	20	__glMgrLoadRasterPosInfo	dwarf+dynsym	dcf90c77dae9		in	named-only	devices/hq3/HQ3.h:1213	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae43b0	28	__glMgrUpdateRasterPos	dwarf+dynsym	5a4646b5f8d5		in	named-only	devices/hq3/HQ3.h:1212	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae43cc	400	__glMgrInitPixelPath	dwarf+dynsym	11dff30685b8		in	named-only	libglcore/include/glcore_prots.h:768	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae455c	2200	__glMgrAllocERAM	dwarf+dynsym	8e757079b9d6		in	located	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae4df4	2060	__glMgrInitUnpackState	dwarf+dynsym	b54b4b5ca6cd		in	named-only	libglcore/include/glcore_prots.h:770	
@@ -5621,12 +5621,12 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae5de8	628	__glMgrInit
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae605c	2876	__glMgrInitExpandState	dwarf+dynsym	feb5364161b1		in	named-only	libglcore/include/glcore_prots.h:777	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae6b98	1376	__glMgrInitClampState	dwarf+dynsym	a805f0e77133		in	named-only	libglcore/include/glcore_prots.h:778	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae70f8	1588	__glMgrInitLUTState	dwarf+dynsym	6789d8644ac3		in	named-only	libglcore/include/glcore_prots.h:779	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae772c	1748	__glMgrInitLUTRGB	dwarf+dynsym	d646edf30ef3		in	named-only	HQ3.h:972	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae7e00	2284	__glMgrInitColorTable	dwarf+dynsym	983a10d8e5c4		in	named-only	HQ3.h:972	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae86ec	964	__glMgrInitLUTCIST	dwarf+dynsym	9f02332efcae		in	named-only	HQ3.h:972	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae8ab0	3168	__glMgrInitConvolve2DState	dwarf+dynsym	90626da5b572		in	named-only	HQ3.h:969	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae772c	1748	__glMgrInitLUTRGB	dwarf+dynsym	d646edf30ef3		in	named-only	devices/hq3/HQ3.h:972	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae7e00	2284	__glMgrInitColorTable	dwarf+dynsym	983a10d8e5c4		in	named-only	devices/hq3/HQ3.h:972	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae86ec	964	__glMgrInitLUTCIST	dwarf+dynsym	9f02332efcae		in	named-only	devices/hq3/HQ3.h:972	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae8ab0	3168	__glMgrInitConvolve2DState	dwarf+dynsym	90626da5b572		in	named-only	devices/hq3/HQ3.h:969	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae9710	240	__glMgrInitConvolve1DState	dwarf+dynsym	7a0a2c171bef		in	named-only	libglcore/include/glcore_prots.h:784	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae9800	3616	__glMgrInitSeparable2DState	dwarf+dynsym	47ed83180019		in	named-only	HQ3.h:969	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdae9800	3616	__glMgrInitSeparable2DState	dwarf+dynsym	47ed83180019		in	named-only	devices/hq3/HQ3.h:969	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaea620	328	__glMgrInitColorMatrixState	dwarf+dynsym	e271a1a6b6fc		in	named-only	libglcore/include/glcore_prots.h:786	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaea768	980	__glMgrInitHistogramState	dwarf+dynsym	056a58cfc808		in	named-only	libglcore/include/glcore_prots.h:787	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaeab3c	744	__glMgrInitMinMaxState	dwarf+dynsym	d66d0b7f1383		in	named-only	libglcore/include/glcore_prots.h:788	
@@ -5668,7 +5668,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaef52c	1908	__glMgrOpt
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaefca0	236	__glMgrOptimizeCIMask	dwarf+dynsym	ad97d0512ff9		in	named-only	libglcore/include/glcore_prots.h:824	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaefd8c	336	__glMgrOptimizeChain	dwarf+dynsym	0390717dadb6		in	named-only	libglcore/include/glcore_prots.h:825	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaefedc	968	__glMgrBuildChain	dwarf+dynsym	d65f9079bc45		in	named-only	libglcore/include/glcore_prots.h:826	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf02a4	776	__glMgrInitPixelPipe	dwarf+dynsym	f064844d815a		in	named-only	GE11.h:548	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf02a4	776	__glMgrInitPixelPipe	dwarf+dynsym	f064844d815a		in	named-only	devices/ge11/GE11.h:548	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf05ac	92	__glMgrim_RasterPos2dWrapper	dwarf+dynsym	702f4bad3033		in	named-only	libglcore/include/glcore_prots.h:828	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf0608	92	__glMgrim_RasterPos2fWrapper	dwarf+dynsym	6f2633d11b38		in	named-only	libglcore/include/glcore_prots.h:829	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf0664	92	__glMgrim_RasterPos2iWrapper	dwarf+dynsym	0cc4cd391b84		in	named-only	libglcore/include/glcore_prots.h:830	
@@ -5729,7 +5729,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf406c	672	__glMgrUnfo
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf430c	548	__glMgrPrintTileInfo	dwarf+dynsym	43aabe3af0f4		in	named-only	libglcore/include/glcore_prots.h:885	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf4530	412	__glMgrPrintTilingInfo	dwarf+dynsym	00a99a5f855a		in	named-only	libglcore/include/glcore_prots.h:886	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf46cc	2100	__glMgrMakeTiles	dwarf+dynsym	ef3f1ce088cb		in	named-only	libglcore/include/glcore_prots.h:887	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf4f00	1792	__glMgrExtractTypeInfo	dwarf+dynsym	cb49dbbc4f83		in	named-only	TE1.h:154	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf4f00	1792	__glMgrExtractTypeInfo	dwarf+dynsym	cb49dbbc4f83		in	named-only	devices/te1/TE1.h:154	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf5600	388	__glMgrExtractInternalTypeInfo	dwarf+dynsym	d8d1e325f600		in	named-only	libglcore/include/glcore_prots.h:889	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf5784	2064	__glMgrExtractFormatInfo	dwarf+dynsym	79659b3ca939		in	named-only	libglcore/include/glcore_prots.h:890	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf5f94	120	__glMgrGetCurrentConvFilter	dwarf+dynsym	ea325cf9ccd6		in	named-only	libglcore/include/glcore_prots.h:891	
@@ -5760,7 +5760,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdaf9e60	872	__glMgrPick
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdafa1c8	136	__glMgrPickSoftProcs	dwarf+funcnames	9f50db1169b3		in	named-only	libglcore/include/glcore_prots.h:916	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafa250	208	__glMgrPickStoreProcs	dwarf+dynsym	3f14b6d0bc88		in	named-only	libglcore/include/glcore_prots.h:917	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdafa320	424	LoadSoftDispatchVectors	dwarf+funcnames	84c26d17d057		in	named-only	libglcore/include/glcore_prots.h:918	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafa4c8	276	__glMgrSetSoftHardwareState	dwarf+dynsym	be9db7cd5b85		in	named-only	HQ3.h:928	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafa4c8	276	__glMgrSetSoftHardwareState	dwarf+dynsym	be9db7cd5b85		in	named-only	devices/hq3/HQ3.h:928	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafa5dc	256	__glMgrEnterSoftPath	dwarf+dynsym	bb00e577e0b2		in	named-only	libglcore/include/glcore_prots.h:920	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdafa6dc	1148	LoadHardDispatchVectors	dwarf+funcnames	8291a334e879		in	named-only	libglcore/include/glcore_prots.h:921	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafab58	68	__glMgrPassAccum	dwarf+dynsym	637982e35172		in	named-only	libglcore/include/glcore_prots.h:922	
@@ -5783,9 +5783,9 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdafcc98	236	__glMg
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafcd84	492	__glMgrExitSoftPath	dwarf+dynsym	e663246e6dbf		in	named-only	libglcore/include/glcore_prots.h:939	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafcf70	572	__glMgrGetTexture	dwarf+dynsym	d78cbbe56f25		in	named-only	libglcore/include/glcore_prots.h:940	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafd1ac	784	__glMgrPassTexture	dwarf+dynsym	03c70efa4eb9		in	named-only	libglcore/include/glcore_prots.h:941	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafd4bc	396	__glMgrim_Clear	dwarf+dynsym	2eb3eb5c5a6d		in	named-only	HQ3.h:898	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdafd648	104	__glMgrim_Swaptmesh	dwarf+funcnames	58068677b5f7		in	named-only	HQ3.h:1216	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdafd6b0	132	__glMgrim_lmcolor	dwarf+funcnames	2a9ef339933f		in	named-only	HQ3.h:1217	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafd4bc	396	__glMgrim_Clear	dwarf+dynsym	2eb3eb5c5a6d		in	named-only	devices/hq3/HQ3.h:898	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdafd648	104	__glMgrim_Swaptmesh	dwarf+funcnames	58068677b5f7		in	named-only	devices/hq3/HQ3.h:1216	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdafd6b0	132	__glMgrim_lmcolor	dwarf+funcnames	2a9ef339933f		in	named-only	devices/hq3/HQ3.h:1217	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdafd734	92	__glMgrim_FullScreen	dwarf+funcnames	b16816caa27c		in	named-only	libglcore/include/glcore_prots.h:945	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafd790	120	__glMgrim_n3f	dwarf+dynsym	92aced1be5b9		in	named-only	libglcore/include/glcore_prots.h:946	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdafd808	280	__glMgrim_IglooInterfaceSGIX	dwarf+dynsym	0b7e86933124		in	named-only	libglcore/include/glcore_prots.h:947	
@@ -9003,7 +9003,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8790	168	__glSPInter
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8838	20	__glsple_Sentinel	dwarf+dynsym	2b8979be3cf9		in	named-only	libglcore/include/glcore_prots.h:4159	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8850	12	glNewList	dwarf+dynsym	e21992438886		in	named-only	libglcore/include/gl_1_1.h:234	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd885c	12	glEndList	dwarf+dynsym	49b1d37ddc01		in	named-only	libglcore/include/gl_1_1.h:112	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8868	12	glCallList	dwarf+dynsym	b114468d8519		in	named-only	HQ3.h:491	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8868	12	glCallList	dwarf+dynsym	b114468d8519		in	named-only	devices/hq3/HQ3.h:491	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8874	12	glCallLists	dwarf+dynsym	52740b0d9f0e		in	named-only	docs/IMPACT_BOARD_FACTS.md#software-limits	Software limits
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8880	12	glDeleteLists	dwarf+dynsym	1b0fb2e6dafb		in	named-only	libglcore/include/gl_1_1.h:92	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd888c	12	glGenLists	dwarf+dynsym	37bc441e61a3		in	named-only	libglcore/include/gl_1_1.h:134	
@@ -9036,7 +9036,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd89c4	12	glColor4i	dw
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd89d0	12	glColor4iv	dwarf+dynsym	7ce4e95f12a9		in	named-only	libglcore/include/gl_1_1.h:56	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd89dc	12	glColor4s	dwarf+dynsym	da879a7c2e65		in	named-only	libglcore/include/gl_1_1.h:57	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd89e8	12	glColor4sv	dwarf+dynsym	8970e5fc65af		in	named-only	libglcore/include/gl_1_1.h:58	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd89f4	12	glColor4ub	dwarf+dynsym	e3f114cdfc28		in	named-only	HQ3.h:1157	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd89f4	12	glColor4ub	dwarf+dynsym	e3f114cdfc28		in	named-only	devices/hq3/HQ3.h:1157	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a00	12	glColor4ubv	dwarf+dynsym	548e0e49212a		in	named-only	libglcore/include/gl_1_1.h:60	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a0c	12	glColor4ui	dwarf+dynsym	a2693942163a		in	named-only	libglcore/include/gl_1_1.h:61	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a18	12	glColor4uiv	dwarf+dynsym	0b8a7fedc7f5		in	named-only	libglcore/include/gl_1_1.h:62	
@@ -9053,7 +9053,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a90	12	glIndexi	dwa
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8a9c	12	glIndexiv	dwarf+dynsym	efe181072b7c		in	named-only	libglcore/include/gl_1_1.h:191	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8aa8	12	glIndexs	dwarf+dynsym	f49183f72e77		in	named-only	docs/mgras-gl-commands.md#attribute-headers	Attribute headers
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ab4	12	glIndexsv	dwarf+dynsym	11f159317664		in	named-only	libglcore/include/gl_1_1.h:193	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ac0	12	glNormal3b	dwarf+dynsym	23b65814b881		in	named-only	HQ3.h:1157	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ac0	12	glNormal3b	dwarf+dynsym	23b65814b881		in	named-only	devices/hq3/HQ3.h:1157	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8acc	12	glNormal3bv	dwarf+dynsym	b86b35ca6ed9		in	named-only	libglcore/include/gl_1_1.h:236	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ad8	12	glNormal3d	dwarf+dynsym	38b6fb71d579		in	named-only	libglcore/include/gl_1_1.h:237	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ae4	12	glNormal3dv	dwarf+dynsym	7af1decd3631		in	named-only	libglcore/include/gl_1_1.h:238	
@@ -9141,9 +9141,9 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8eb0	12	glVertex3f	d
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ebc	12	glVertex3fv	dwarf+dynsym	9e36ed7a3572		in	named-only	libglcore/include/gl_1_1.h:390	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ec8	12	glVertex3i	dwarf+dynsym	153c0f89af65		in	named-only	libglcore/include/gl_1_1.h:391	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ed4	12	glVertex3iv	dwarf+dynsym	decf57e2013d		in	named-only	libglcore/include/gl_1_1.h:392	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ee0	12	glVertex3s	dwarf+dynsym	c02275f06da5		in	named-only	HQ3.h:1157	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ee0	12	glVertex3s	dwarf+dynsym	c02275f06da5		in	named-only	devices/hq3/HQ3.h:1157	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8eec	12	glVertex3sv	dwarf+dynsym	be5b04067656		in	named-only	libglcore/include/gl_1_1.h:394	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ef8	12	glVertex4d	dwarf+dynsym	6689a278da3a		in	named-only	HQ3.h:1158	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8ef8	12	glVertex4d	dwarf+dynsym	6689a278da3a		in	named-only	devices/hq3/HQ3.h:1158	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f04	12	glVertex4dv	dwarf+dynsym	9f62eb8c4db5		in	named-only	libglcore/include/gl_1_1.h:396	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f10	12	glVertex4f	dwarf+dynsym	360c751f40d8		in	named-only	irisgl/include/igloo_prots.h:27	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f1c	12	glVertex4fv	dwarf+dynsym	43fdabed272b		in	named-only	libglcore/include/gl_1_1.h:398	
@@ -9152,7 +9152,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f34	12	glVertex4iv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f40	12	glVertex4s	dwarf+dynsym	326bef2a389c		in	named-only	libglcore/include/gl_1_1.h:401	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f4c	12	glVertex4sv	dwarf+dynsym	74bcb08bc21e		in	named-only	libglcore/include/gl_1_1.h:402	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f58	12	glClipPlane	dwarf+dynsym	58a611cd8aa7		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f64	12	glColorMaterial	dwarf+dynsym	33cbb2dbb23f		in	named-only	HQ3.h:1048	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f64	12	glColorMaterial	dwarf+dynsym	33cbb2dbb23f		in	named-only	devices/hq3/HQ3.h:1048	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f70	12	glCullFace	dwarf+dynsym	8eec72191491		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f7c	12	glFogf	dwarf+dynsym	71b4ee9f6a59		in	named-only	libglcore/include/gl_1_1.h:128	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd8f88	12	glFogfv	dwarf+dynsym	f270b9303580		in	named-only	libglcore/include/gl_1_1.h:129	
@@ -9204,7 +9204,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91a4	12	glPassThroug
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91b0	12	glPopName	dwarf+dynsym	ea566e40a994		in	named-only	libglcore/include/gl_1_1.h:265	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91bc	12	glPushName	dwarf+dynsym	583db4a6a51e		in	named-only	libglcore/include/gl_1_1.h:271	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91c8	12	glDrawBuffer	dwarf+dynsym	5b249b83329b		in	named-only	irisgl/include/igloo_prots.h:58	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91d4	12	glClear	dwarf+dynsym	42e30589e2bc		in	named-only	HQ3.h:1026	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91d4	12	glClear	dwarf+dynsym	42e30589e2bc		in	named-only	devices/hq3/HQ3.h:1026	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91e0	12	glClearAccum	dwarf+dynsym	25f1281a84bd		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91ec	12	glClearIndex	dwarf+dynsym	c69e6cb01ca9		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd91f8	12	glClearColor	dwarf+dynsym	1753593df535		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
@@ -9215,12 +9215,12 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9228	12	glColorMask	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9234	12	glDepthMask	dwarf+dynsym	62ec30ab534e		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9240	12	glIndexMask	dwarf+dynsym	b86c1549ec92		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd924c	12	glAccum	dwarf+dynsym	539d0596f59e		in	named-only	libglcore/include/gl_1_1.h:11	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9258	12	glDisable	dwarf+dynsym	0420a403823c		in	named-only	HQ3.h:993	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9264	12	glEnable	dwarf+dynsym	938ab780af25		in	named-only	HQ3.h:993	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9258	12	glDisable	dwarf+dynsym	0420a403823c		in	named-only	devices/hq3/HQ3.h:993	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9264	12	glEnable	dwarf+dynsym	938ab780af25		in	named-only	devices/hq3/HQ3.h:993	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9270	12	glFinish	dwarf+dynsym	ceaa3192a540		in	named-only	docs/mgras-hq4.md#status-bits-and-waits	Status bits and waits
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd927c	12	glFlush	dwarf+dynsym	9d7c75a01100		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9288	12	glPopAttrib	dwarf+dynsym	a57311008f8e		in	named-only	libglcore/include/gl_1_1.h:262	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9294	12	glPushAttrib	dwarf+dynsym	8baeda61b9d1		in	named-only	GE11.h:673	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9294	12	glPushAttrib	dwarf+dynsym	8baeda61b9d1		in	named-only	devices/ge11/GE11.h:673	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92a0	12	glMap1d	dwarf+dynsym	505bef217ac6		in	named-only	libglcore/include/gl_1_1.h:218	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92ac	12	glMap1f	dwarf+dynsym	a3e88dcd3e4f		in	named-only	libglcore/include/gl_1_1.h:219	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd92b8	12	glMap2d	dwarf+dynsym	1b8c77b9173c		in	named-only	libglcore/include/gl_1_1.h:220	
@@ -9247,7 +9247,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93a8	12	glLogicOp	dw
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93b4	12	glStencilFunc	dwarf+dynsym	8274f27ea722		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93c0	12	glStencilOp	dwarf+dynsym	5cddcbe42277		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93cc	12	glDepthFunc	dwarf+dynsym	f940a9008c63		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93d8	12	glPixelZoom	dwarf+dynsym	c0f6b4355e99		in	named-only	HQ3.h:640	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93d8	12	glPixelZoom	dwarf+dynsym	c0f6b4355e99		in	named-only	devices/hq3/HQ3.h:640	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93e4	12	glPixelTransferf	dwarf+dynsym	30ddf95b039f		in	named-only	libglcore/include/gl_1_1.h:254	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93f0	12	glPixelTransferi	dwarf+dynsym	049c4900e971		in	named-only	libglcore/include/gl_1_1.h:255	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd93fc	12	glPixelStoref	dwarf+dynsym	0c6a1289b03b		in	named-only	libglcore/include/gl_1_1.h:252	
@@ -9259,10 +9259,10 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9438	12	glReadBuffer
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9444	12	glCopyPixels	dwarf+dynsym	7ca9c88f1d6b		in	named-only	docs/OPEN_QUESTIONS.md#11-command-stream-tokens-0x096-0x097-0x0da-and-0x05f	11. Command-stream tokens 0x096, 0x097, 0x0DA and 0x05F
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9450	12	glReadPixels	dwarf+dynsym	ecd13f6e31c4		in	named-only	docs/OPEN_QUESTIONS.md#11-command-stream-tokens-0x096-0x097-0x0da-and-0x05f	11. Command-stream tokens 0x096, 0x097, 0x0DA and 0x05F
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd945c	12	glDrawPixels	dwarf+dynsym	05e4a83d751f		in	named-only	docs/mgras-gl-commands.md#pixel-images	Pixel images
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9468	12	glGetBooleanv	dwarf+dynsym	66c04f96219a		in	named-only	GE11.h:737	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9468	12	glGetBooleanv	dwarf+dynsym	66c04f96219a		in	named-only	devices/ge11/GE11.h:737	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9474	12	glGetClipPlane	dwarf+dynsym	439fee3d4638		in	named-only	libglcore/include/gl_1_1.h:138	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9480	12	glGetDoublev	dwarf+dynsym	ebc4c6c2e097		in	named-only	libglcore/include/gl_1_1.h:145	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd948c	12	glGetError	dwarf+dynsym	81a85f1a2a50		in	named-only	GE11.h:671	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd948c	12	glGetError	dwarf+dynsym	81a85f1a2a50		in	named-only	devices/ge11/GE11.h:671	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9498	12	glGetFloatv	dwarf+dynsym	9abc440b1d75		in	named-only	libglcore/include/gl_1_1.h:147	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd94a4	12	glGetIntegerv	dwarf+dynsym	87f2826b4dc0		in	named-only	libglcore/include/gl_1_1.h:151	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd94b0	12	glGetLightfv	dwarf+dynsym	90676f103554		in	named-only	libglcore/include/gl_1_1.h:152	
@@ -9282,12 +9282,12 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd954c	12	glGetTexEnvi
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9558	12	glGetTexGendv	dwarf+dynsym	455a85d1e6e3		in	named-only	libglcore/include/gl_1_1.h:173	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9564	12	glGetTexGenfv	dwarf+dynsym	fcd9605fc7b3		in	named-only	libglcore/include/gl_1_1.h:174	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9570	12	glGetTexGeniv	dwarf+dynsym	a51f9ddaf3a0		in	named-only	libglcore/include/gl_1_1.h:175	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd957c	12	glGetTexImage	dwarf+dynsym	2d1571915ee2		in	named-only	GE11.h:510	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd957c	12	glGetTexImage	dwarf+dynsym	2d1571915ee2		in	named-only	devices/ge11/GE11.h:510	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9588	12	glGetTexParameterfv	dwarf+dynsym	2ea9199a604e		in	named-only	libglcore/include/gl_1_1.h:179	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9594	12	glGetTexParameteriv	dwarf+dynsym	d0f88eb3f4d6		in	named-only	libglcore/include/gl_1_1.h:180	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95a0	12	glGetTexLevelParameterfv	dwarf+dynsym	0560dea149d6		in	named-only	libglcore/include/gl_1_1.h:177	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95ac	12	glGetTexLevelParameteriv	dwarf+dynsym	67bd6d76b1a9		in	named-only	libglcore/include/gl_1_1.h:178	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95b8	12	glIsEnabled	dwarf+dynsym	e3e466e66894		in	named-only	HQ3.h:654	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95b8	12	glIsEnabled	dwarf+dynsym	e3e466e66894		in	named-only	devices/hq3/HQ3.h:654	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95c4	12	glIsList	dwarf+dynsym	d7080c7ed76b		in	named-only	libglcore/include/gl_1_1.h:199	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95d0	12	glDepthRange	dwarf+dynsym	7acbee7a3fab		in	named-only	docs/mgras-gl-commands.md#context-setup-and-state	Context setup and state
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd95dc	12	glFrustum	dwarf+dynsym	aef9bbf6c0d1		in	named-only	libglcore/include/gl_1_1.h:133	
@@ -9582,8 +9582,8 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbda388	68	__glMgrim_Co
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbda3cc	44	__glMgrim_Color4bv	dwarf+dynsym	d6c386fb67f0		in	named-only	libglcore/include/glcore_prots.h:4688	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbda3f8	36	__glMgrim_Color4d	dwarf+dynsym	dd5f6383a1dd		in	named-only	libglcore/include/glcore_prots.h:4689	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbda41c	52	__glMgrim_Color4dv	dwarf+dynsym	951da2663ae8		in	named-only	libglcore/include/glcore_prots.h:4690	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbda450	72	__glMgrim_Color4f	dwarf+dynsym	f30017eded2a		in	named-only	HQ3.h:888	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbda498	40	__glMgrim_Color4fv	dwarf+dynsym	bf5fa5902824		in	named-only	HQ3.h:888	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbda450	72	__glMgrim_Color4f	dwarf+dynsym	f30017eded2a		in	named-only	devices/hq3/HQ3.h:888	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbda498	40	__glMgrim_Color4fv	dwarf+dynsym	bf5fa5902824		in	named-only	devices/hq3/HQ3.h:888	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbda4c0	60	__glMgrim_Color4i	dwarf+dynsym	2927411a2855		in	named-only	libglcore/include/glcore_prots.h:4693	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbda4fc	44	__glMgrim_Color4iv	dwarf+dynsym	c479b9e16e6b		in	named-only	libglcore/include/glcore_prots.h:4694	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbda528	64	__glMgrim_Color4s	dwarf+dynsym	868f12be5483		in	named-only	libglcore/include/glcore_prots.h:4695	
@@ -9630,8 +9630,8 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdac08	56	__glMgrim_Ra
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdac40	48	__glMgrim_RasterPos3sv	dwarf+dynsym	d29a857eb4c7		in	named-only	libglcore/include/glcore_prots.h:4736	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdac70	36	__glMgrim_RasterPos4d	dwarf+dynsym	3c27ba0abffe		in	named-only	libglcore/include/glcore_prots.h:4737	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdac94	52	__glMgrim_RasterPos4dv	dwarf+dynsym	738fca091ba2		in	named-only	libglcore/include/glcore_prots.h:4738	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdacc8	72	__glMgrim_RasterPos4f	dwarf+dynsym	740211a2bfbe		in	named-only	HQ3.h:932	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdad10	40	__glMgrim_RasterPos4fv	dwarf+dynsym	29242c5efff7		in	named-only	HQ3.h:932	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdacc8	72	__glMgrim_RasterPos4f	dwarf+dynsym	740211a2bfbe		in	named-only	devices/hq3/HQ3.h:932	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdad10	40	__glMgrim_RasterPos4fv	dwarf+dynsym	29242c5efff7		in	named-only	devices/hq3/HQ3.h:932	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdad38	60	__glMgrim_RasterPos4i	dwarf+dynsym	5a109c3a8877		in	named-only	libglcore/include/glcore_prots.h:4741	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdad74	44	__glMgrim_RasterPos4iv	dwarf+dynsym	0c7838bb389e		in	named-only	libglcore/include/glcore_prots.h:4742	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdada0	64	__glMgrim_RasterPos4s	dwarf+dynsym	a78f613c80ab		in	named-only	libglcore/include/glcore_prots.h:4743	
@@ -9662,8 +9662,8 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb158	56	__glMgrim_Te
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb190	48	__glMgrim_TexCoord3sv	dwarf+dynsym	075165b62164		in	named-only	libglcore/include/glcore_prots.h:4768	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb1c0	36	__glMgrim_TexCoord4d	dwarf+dynsym	82cf8942b33c		in	named-only	libglcore/include/glcore_prots.h:4769	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb1e4	52	__glMgrim_TexCoord4dv	dwarf+dynsym	65f22a3bdef8		in	named-only	libglcore/include/glcore_prots.h:4770	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb218	72	__glMgrim_TexCoord4f	dwarf+dynsym	46bf0d19c1d5		in	named-only	HQ3.h:891	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb260	40	__glMgrim_TexCoord4fv	dwarf+dynsym	f8f5e1069c6f		in	named-only	HQ3.h:891	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb218	72	__glMgrim_TexCoord4f	dwarf+dynsym	46bf0d19c1d5		in	named-only	devices/hq3/HQ3.h:891	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb260	40	__glMgrim_TexCoord4fv	dwarf+dynsym	f8f5e1069c6f		in	named-only	devices/hq3/HQ3.h:891	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb288	60	__glMgrim_TexCoord4i	dwarf+dynsym	de21774d6c3b		in	named-only	libglcore/include/glcore_prots.h:4773	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb2c4	44	__glMgrim_TexCoord4iv	dwarf+dynsym	6a6ec580cf70		in	named-only	libglcore/include/glcore_prots.h:4774	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb2f0	64	__glMgrim_TexCoord4s	dwarf+dynsym	cf6e87dc2f33		in	named-only	libglcore/include/glcore_prots.h:4775	
@@ -9686,8 +9686,8 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb5a0	56	__glMgrim_Ve
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb5d8	48	__glMgrim_Vertex3sv	dwarf+dynsym	3032f5582cb1		in	named-only	libglcore/include/glcore_prots.h:4792	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb608	36	__glMgrim_Vertex4d	dwarf+dynsym	aec83f9c4e8a		in	named-only	libglcore/include/glcore_prots.h:4793	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb62c	52	__glMgrim_Vertex4dv	dwarf+dynsym	bbbb7f7b88c3		in	named-only	libglcore/include/glcore_prots.h:4794	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb660	72	__glMgrim_Vertex4f	dwarf+dynsym	4cac359a0038		in	named-only	HQ3.h:887	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb6a8	40	__glMgrim_Vertex4fv	dwarf+dynsym	5bb171aa1440		in	named-only	HQ3.h:887	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb660	72	__glMgrim_Vertex4f	dwarf+dynsym	4cac359a0038		in	named-only	devices/hq3/HQ3.h:887	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb6a8	40	__glMgrim_Vertex4fv	dwarf+dynsym	5bb171aa1440		in	named-only	devices/hq3/HQ3.h:887	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb6d0	60	__glMgrim_Vertex4i	dwarf+dynsym	0ced4f431ccf		in	named-only	libglcore/include/glcore_prots.h:4797	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb70c	44	__glMgrim_Vertex4iv	dwarf+dynsym	0e6fe9f72892		in	named-only	libglcore/include/glcore_prots.h:4798	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbdb738	64	__glMgrim_Vertex4s	dwarf+dynsym	23964e5735b6		in	named-only	libglcore/include/glcore_prots.h:4799	
@@ -10680,7 +10680,7 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e38e4e0	996	rrmOGLBindRNToC
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e38e8c4	1320	rrmOGLUnbindRNFromClip	dynsym	0ac7e12edf71		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e38edec	116	rrmDisposeClip	dynsym	7328f5026fc4		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e38ee60	352	rrmDestroyDrawable	dynsym	71f4de460134		in	named-only	docs/inventory/functions.tsv	
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e38efc0	2708	FindFreeCID	dynsym	00534f5633af		in	named-only	PP1.h:105	
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e38efc0	2708	FindFreeCID	dynsym	00534f5633af		in	named-only	devices/pp1/PP1.h:105	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e38fa54	1156	rrmValidateCID	dynsym	6c40ec901d25		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e38fed8	348	cmapDID	dynsym	18f015eedc4a		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e390034	524	rrmProcessRequestQueue	dynsym	5d0a2ef1614f		in	named-only	docs/inventory/functions.tsv	
@@ -11058,7 +11058,7 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4668	268	mgrasValidateSw
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4774	236	mgrasValidateReservedMode	dynsym	a5d8d0e781a7		in	understood	docs/routines/t1-gr4-b001.md#gr4-routine-role-statements-set-1	gr4 routine role statements, set 1
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4860	860	mgrasValidateMode	dynsym	706601f1b418		in	understood	docs/routines/oq-gr4-b000.md#routine-readings-open-question-pass	Routine readings: open-question pass
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4bbc	896	mgrasChangeDIDCmap	dynsym	387388ce9116		in	named-only	ddx/include/impact_ddx.h:139	
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4f3c	416	mgrasNeedCID	dynsym	003c9688a86b		in	named-only	PP1.h:106	
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4f3c	416	mgrasNeedCID	dynsym	003c9688a86b		in	named-only	devices/pp1/PP1.h:106	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a50dc	3148	mgrasReadConvertPixels	dynsym	d1696ad30e60		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a5d28	664	mgrasDrawCID	dynsym	53a2ced619ac		in	named-only	docs/OPEN_QUESTIONS.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a63f0	436	mgrasReloadDummyDID	dynsym	611a568b5f69		in	named-only	docs/inventory/functions.tsv	
@@ -11148,7 +11148,7 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4cd620	576	nfbChangeSaveUn
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4cd860	392	nfbPostChangeSaveUnder	dynsym	7aa8c8a672cf		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4cdabc	72	*clone*1*mgrasCursorOn	dynsym	7ec3bbc73165		in	undocumented		
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4cdb04	1616	mgrasClearPlanes	dynsym	a3ecb6577a51		in	named-only	docs/OPEN_QUESTIONS.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4ce154	500	mgrasBlankScreen	dynsym	be501cc0ec05		in	named-only	MGRAS.h:291	listvisuals, 2026-10-10; not yet compared with a real board):
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4ce154	500	mgrasBlankScreen	dynsym	be501cc0ec05		in	named-only	devices/mgras/MGRAS.h:291	listvisuals, 2026-10-10; not yet compared with a real board):
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4ce348	176	nfbMarkWindow	dynsym	9e5725c8efd1		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4ce6fc	6768	mfbBresS	dynsym	682ff5108b65		in	named-only	docs/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4d016c	276	miRectAlloc	dynsym	a9e287eeeae2		in	named-only	docs/inventory/functions.tsv	

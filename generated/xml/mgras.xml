@@ -1,0 +1,447 @@
+<?xml version="1.0" ?>
+<!-- generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source -->
+<genxml unit="mgras" prefix="MGRAS" title="board-level words of the Impact graphics subsystem" from="driver and firmware readings">
+  <doc>Board-level words of the Impact graphics subsystem.</doc>
+  <enum name="bdvers2_product">
+    <value name="indigo2_gio" value="0" grade="inferred"/>
+    <value name="solid_impact" value="1" grade="established"/>
+    <value name="single_ge_textured" value="2" grade="inferred"/>
+    <value name="two_ge" value="3" grade="inferred"/>
+  </enum>
+  <enum name="cmap_ra_status_video_option">
+    <value name="present" value="0" grade="inferred"/>
+    <value name="absent" value="1" grade="inferred"/>
+  </enum>
+  <enum name="dcb_addr_data_width">
+    <value name="four_bytes" value="0" grade="inferred"/>
+    <value name="one_byte" value="1" grade="inferred"/>
+    <value name="two_bytes" value="2" grade="inferred"/>
+    <value name="three_bytes" value="3" grade="inferred"/>
+  </enum>
+  <enum name="hq_ge_select_ge_select">
+    <value name="ge0" value="2" grade="established"/>
+    <value name="ge1" value="3" grade="established"/>
+  </enum>
+  <enum name="mco_id_board">
+    <value name="present_single_read" value="4" grade="established"/>
+    <value name="present" value="10" grade="established"/>
+  </enum>
+  <enum name="mco_index_bank">
+    <value name="overlay_dac_a" value="0" grade="established"/>
+    <value name="overlay_dac_b" value="1" grade="established"/>
+    <value name="true_colour_dac_a" value="2" grade="established"/>
+    <value name="true_colour_dac_b" value="3" grade="established"/>
+    <value name="control_1" value="8" grade="established"/>
+    <value name="control_2" value="9" grade="established"/>
+    <value name="control_3" value="10" grade="established"/>
+  </enum>
+  <enum name="monitor_id_monitor">
+    <value name="unidentified" value="0" grade="inferred"/>
+    <value name="assumed_19_inch" value="15" grade="inferred"/>
+  </enum>
+  <struct name="DCB_CTRL" size="4" grade="inferred" from="driver and firmware readings" register="yes" offset="0xa000" access="rw" count="12" stride="4" reset="unknown">
+    <field name="cs_setup" start="10" size="3" type="uint" grade="inferred"/>
+    <field name="cs_hold" start="6" size="3" type="uint" grade="inferred"/>
+    <field name="cs_width" start="2" size="3" type="uint" grade="inferred"/>
+    <field name="async_ack" start="1" size="1" type="uint" grade="inferred"/>
+    <field name="sync_ack" start="0" size="1" type="uint" grade="inferred"/>
+    <test value="0x318" kind="vector">
+      <expect field="sync_ack" value="0"/>
+      <expect field="async_ack" value="0"/>
+      <expect field="cs_width" value="6"/>
+      <expect field="cs_hold" value="4"/>
+      <expect field="cs_setup" value="0"/>
+    </test>
+    <test value="0x108c" kind="vector">
+      <expect field="sync_ack" value="0"/>
+      <expect field="async_ack" value="0"/>
+      <expect field="cs_width" value="3"/>
+      <expect field="cs_hold" value="2"/>
+      <expect field="cs_setup" value="4"/>
+    </test>
+    <test value="0x318c" kind="vector">
+      <expect field="cs_width" value="3"/>
+      <expect field="cs_hold" value="6"/>
+      <expect field="cs_setup" value="4"/>
+    </test>
+    <test value="0x6319" kind="vector">
+      <expect field="sync_ack" value="1"/>
+      <expect field="async_ack" value="0"/>
+      <expect field="cs_width" value="6"/>
+      <expect field="cs_hold" value="4"/>
+      <expect field="cs_setup" value="0"/>
+    </test>
+    <test value="0x631a" kind="vector">
+      <expect field="sync_ack" value="0"/>
+      <expect field="async_ack" value="1"/>
+      <expect field="cs_width" value="6"/>
+      <expect field="cs_hold" value="4"/>
+      <expect field="cs_setup" value="0"/>
+    </test>
+  </struct>
+  <struct name="BDVERS1" size="4" grade="inferred" from="driver and firmware readings">
+    <doc>Second board-version word at address 0x072408, of which the kernel
+reads only the top byte (bits 31:24). Bits 1:0 and 3:2 of that byte are
+the two TRAM fields, bits 6:4 the RB revision on product 0. The RE count
+and the meaning of the TRAM fields depend on the product field of the word at
+0x072488 (BDVERS2): product 0 has two RE unless bits 6:4 are 3 or 7; product 1
+has one RE and no TRAM; products 2 and 3 have one RE per GE, with 0 or 4 TRAMs
+per path. Bit 7 of the byte is not read. Inferred from the kernel object.</doc>
+    <field name="rb_revision" start="28" size="3" type="uint" grade="inferred"/>
+    <field name="tram_field_1" start="26" size="2" type="uint" grade="inferred"/>
+    <field name="tram_field_0" start="24" size="2" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="BDVERS2" size="4" grade="established" from="driver and firmware readings">
+    <doc>Second board-version word, read 0x62488 above the board register
+base: the start of device 9's window, register select 1, one-byte width. The
+kernel's board-information routine loads it as a word and works only on its
+top byte (the first byte at that address). Bits 30:29 of the word, bits 6:5
+of that byte, are the product field. The value 1 takes the path with one
+engine and no second board, which is how a Solid Impact board is told from
+the others. Established from the routine's machine words, in the kernel
+object of the base distribution's graphics module; not a bus measurement.
+Bits 1:0 and 4:2 of the byte are the GE count and the MGRAS revision (fields
+below). How board revision numbers map to products is inferred.</doc>
+    <field name="product" start="29" size="2" type="bdvers2_product" grade="established"/>
+    <field name="mgras_revision" start="26" size="3" type="uint" grade="inferred"/>
+    <field name="ge_count" start="24" size="2" type="uint" grade="inferred"/>
+    <test value="0x20000000" kind="example">
+      <expect field="product" value="1"/>
+    </test>
+  </struct>
+  <struct name="CMAP_RA_STATUS" size="1" grade="inferred" from="driver and firmware readings">
+    <doc>Byte at address 0x071708: bits 2:0 the CMAP revision (0 is rev A,
+other values are rev value + 2, so 1 is rev C and 3 is rev E), bits 6:4 the
+RA revision, bit 7 clear when a video option board is present. Bit 3 is
+not read. Inferred from the kernel object and owner captures.</doc>
+    <field name="video_option" start="7" size="1" type="cmap_ra_status_video_option" grade="inferred"/>
+    <field name="ra_revision" start="4" size="3" type="uint" grade="inferred"/>
+    <field name="cmap_revision" start="0" size="3" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="DCB_ADDR" size="4" grade="inferred" from="driver and firmware readings">
+    <field name="device" start="10" size="5" type="uint" grade="inferred"/>
+    <field name="crs" start="7" size="3" type="uint" grade="inferred"/>
+    <field name="endata_pack" start="6" size="1" type="uint" grade="inferred"/>
+    <field name="encrs_inc" start="5" size="1" type="uint" grade="inferred"/>
+    <field name="data_width" start="3" size="2" type="dcb_addr_data_width" grade="inferred"/>
+    <test value="0x8" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="0"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="0"/>
+    </test>
+    <test value="0x388" kind="example">
+      <expect field="data_width" value="1"/>
+      <expect field="crs" value="7"/>
+    </test>
+    <test value="0x2488" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="1"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="9"/>
+    </test>
+    <test value="0x2c08" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="0"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="11"/>
+    </test>
+    <test value="0x2c08" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="0"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="11"/>
+    </test>
+    <test value="0x2d08" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="2"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="11"/>
+    </test>
+    <test value="0x2d88" kind="example">
+      <expect field="encrs_inc" value="0"/>
+      <expect field="endata_pack" value="0"/>
+      <expect field="crs" value="3"/>
+      <expect field="data_width" value="1"/>
+      <expect field="device" value="11"/>
+    </test>
+  </struct>
+  <struct name="GE_REVISION" size="4" grade="inferred" from="driver and firmware readings">
+    <doc>Read after the GE program download verifies: a 32-bit read of 0x028000, a
+13 microsecond wait, then a 32-bit read of 0x028004. The kernel keeps only the
+low byte of the second read. A GE revision of 2 is the GE11 rev B; 3 or more
+is the GE12 line, with 3 as rev A. Inferred from the kernel object and owner
+captures.</doc>
+    <field name="ge_revision" start="0" size="8" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="GIO_ID" size="4" grade="inferred" from="driver and firmware readings">
+    <doc>Identification word read at the start of the board's window. The kernel's
+probe compares only bits 6:0 (must be 0x10), bit 16 (set), bit 17 (clear)
+and bits 31:18 (must be 1); bits 15:7 are not examined, so the split into
+revision and product below is a reading, not what the probe tests.</doc>
+    <field name="product" start="8" size="24" type="uint" grade="inferred"/>
+    <field name="revision" start="4" size="4" type="uint" grade="inferred"/>
+    <test value="0x50190" kind="vector">
+      <expect field="revision" value="9"/>
+      <expect field="product" value="1281"/>
+    </test>
+  </struct>
+  <struct name="HQ4_NUMERIC_PACKET" size="8" grade="established" from="OpenBSD impact(4) driver register header">
+    <doc>One command written to the normal command FIFO, as the public driver packs it:
+the constant framing 0x0018000400000000, the register selector shifted left 40
+bits, and the 32-bit payload. The execute mark adds 0x0004000000000000 and is
+set on the write that starts a drawing operation. The layout is the driver's
+software expectation; what the board does with each field is not established.</doc>
+    <field name="execute" start="50" size="1" type="uint" grade="inferred"/>
+    <field name="selector" start="40" size="8" type="uint" grade="established"/>
+    <field name="payload" start="0" size="32" type="uint" grade="established"/>
+    <test value="0x1c450400000018" kind="example">
+      <expect field="execute" value="1"/>
+      <expect field="selector" value="69"/>
+      <expect field="payload" value="24"/>
+    </test>
+  </struct>
+  <struct name="HQ_GE_SELECT" size="4" grade="established" from="driver and firmware readings">
+    <doc>Host interface control word. Its geometry engine select field chooses which
+geometry engine the next program upload reaches. The kernel sets the field
+before it loads each engine and restores the old word afterwards. The bus
+meaning of each value is inferred.</doc>
+    <field name="ge_select" start="4" size="2" type="hq_ge_select_ge_select" grade="established"/>
+  </struct>
+  <struct name="HQ_REVISION" size="4" grade="inferred" from="driver and firmware readings">
+    <doc>Board word at address 0x000000, the first identity read IRIX makes.
+Bits 31:28 are the HQ revision: 1 is rev A, 2 is rev B. Read by the
+IRIX kernel's board-information routine; the other bits are not read.
+Inferred from the kernel object, not a bus measurement.</doc>
+    <field name="hq_revision" start="28" size="4" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="HQ_SERIAL_SLOT" size="4" grade="established" from="driver and firmware readings">
+    <doc>One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET,
+written as one 32-bit store. The low-drive time sits in bits 19:10 and the
+sample offset in bits 9:2. The reader waits for bit 1 (done) and takes the
+wire level from bit 0. Read by the stock Octane PROM and by the Octane IDE
+diagnostic. The chip family on IMPACT boards is unknown.</doc>
+    <field name="drive_time" start="10" size="10" type="uint" grade="established"/>
+    <field name="sample_offset" start="2" size="8" type="uint" grade="established"/>
+    <field name="done" start="1" size="1" type="uint" grade="established"/>
+    <field name="level" start="0" size="1" type="uint" grade="established"/>
+  </struct>
+  <struct name="MCO_ID" size="4" grade="established" from="driver and firmware readings">
+    <doc>Identification byte of the multi-channel option board (the byte at the
+index port's register select 0). The kernel's probe has two shapes,
+split by the host machine family and not by software release; both give
+the low nibble as the revision and report 0xff for no board. They are
+not interchangeable.
+ - Indigo2-class host kernels (the double-read shape): write 0xff and
+   read, write 0 and read again; the reads must match; present when the
+   value is 1 or its high nibble is 0xa.
+ - Octane and Origin host kernels (the single-read shape), identical in
+   both releases held: write 0xff, read one byte; present when its high
+   nibble is 4. No second write, no match test, and the byte read is at
+   a different offset from the byte written; whether those name one
+   register is unknown.
+Established from the probe routine's machine words in each held build,
+not a bus measurement. Not held: an Indigo2-class kernel from the later
+of the two releases, so its shape there is unknown. The build-by-build
+table is in docs/OPEN_QUESTIONS.md.</doc>
+    <field name="board" start="4" size="4" type="mco_id_board" grade="established"/>
+    <field name="revision" start="0" size="4" type="uint" grade="established"/>
+  </struct>
+  <struct name="MCO_INDEX" size="4" grade="established" from="driver and firmware readings">
+    <doc>Index byte of the multi-channel option board, written to the board's
+index port before each access to its data port. The high nibble picks a
+device, the low nibble a port on it. Banks 2 and 3 are the two
+true-colour DACs of the option, banks 0 and 1 its two overlay-palette
+DACs, and banks 8 to 10 its three control registers. Ports on a DAC are
+offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.</doc>
+    <field name="bank" start="4" size="4" type="mco_index_bank" grade="established"/>
+    <field name="port" start="0" size="4" type="uint" grade="established"/>
+    <test value="0x90" kind="vector">
+      <expect field="port" value="0"/>
+      <expect field="bank" value="9"/>
+    </test>
+  </struct>
+  <struct name="MONITOR_ID" size="1" grade="inferred" from="driver and firmware readings">
+    <doc>Byte at address 0x071308. Bits 7:4 are the monitor ID, which depends
+on the attached monitor, not on the board. The kernel does not read bits 3:0.
+The IDE diagnostic's CMAP check reads bits 2:0 as the first CMAP's revision
+(see CMAP_RA_STATUS). The value
+0 means no monitor identified; 0xf is the value every captured Origin and
+Octane board reported, which the IRIX graphics tools print as an unknown
+monitor assumed to be 19 inches. Whether 0xf is what a board reports with no
+monitor attached is unknown. Inferred from the kernel object and owner captures.</doc>
+    <field name="monitor" start="4" size="4" type="monitor_id_monitor" grade="inferred"/>
+  </struct>
+  <struct name="PP1_CONFIG" size="4" grade="inferred" from="driver and firmware readings">
+    <doc>Pixel processor word reached through the XMAP data port with XMAP index 0
+selected. Bits 21:20 hold the raster engine count less one. The kernel writes
+this field to every pixel processor when it initialises the board, so each
+pixel processor learns how many raster engines share the screen. The field
+being written is established; the pixel processor's use of it is inferred.</doc>
+    <field name="re_count_less_one" start="20" size="2" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="PP1_REVISION" size="4" grade="inferred" from="driver and firmware readings">
+    <doc>Index write of 4 to the byte at address 0x071c88, then a 32-bit read of
+0x071d00. Bits 2:0 are the PP1 revision (XMAP index 4). Owner captures
+of E-series boards read 4 here, while a reading of the IRIX Octane diagnostic's
+XMAP test accepts only 0 or 1; that conflict is open. Inferred from the kernel
+object and owner captures.</doc>
+    <field name="pp1_revision" start="0" size="3" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="RE4_REVISION" size="4" grade="inferred" from="driver and firmware readings">
+    <doc>One 64-bit write to address 0x120400, then a 32-bit read of 0x02c578.
+Bits 7:4 are the RE4 revision. The value written is not recorded in the
+source this was taken from. Inferred from the kernel object.</doc>
+    <field name="re4_revision" start="4" size="4" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="RE4_STATUS" size="4" grade="inferred" from="driver and firmware readings">
+    <doc>Raster engine status word, read after the raster engine select register has
+chosen one engine. The IDE diagnostic expects the selected engine's number in
+bits 3:2 and the engine count less one in bits 1:0, so the word differs from
+one engine to the next. Inferred from the diagnostic's checks, not from a bus
+measurement. The revision field is RE4_REVISION.</doc>
+    <field name="selected_re" start="2" size="2" type="uint" grade="inferred"/>
+    <field name="re_count_less_one" start="0" size="2" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="VC3_REVISION" size="2" grade="inferred" from="driver and firmware readings">
+    <doc>Byte write of 0x1f to address 0x072008, then a 16-bit read of
+0x0720b0 (read only when the RE count is nonzero). Bits 7:6 are the VC3
+revision. Inferred from the kernel object.</doc>
+    <field name="vc3_revision" start="6" size="2" type="uint" grade="inferred"/>
+  </struct>
+  <constant name="ADV473_PORT_ADDR" value="0x0" grade="established"/>
+  <constant name="ADV473_PORT_COMMAND" value="0x6" grade="established"/>
+  <constant name="ADV473_PORT_MASK" value="0x2" grade="inferred"/>
+  <constant name="ADV473_PORT_PALETTE" value="0x1" grade="established"/>
+  <constant name="ADV7162_BLANK_VALUE" value="0x0" grade="established"/>
+  <constant name="ADV7162_ID_VALUE" value="0x79" grade="established"/>
+  <constant name="ADV7162_PORT_DATA" value="0x2" grade="established"/>
+  <constant name="ADV7162_PORT_PALETTE" value="0x1" grade="established"/>
+  <constant name="ADV7162_PORT_POINTER" value="0x0" grade="established"/>
+  <constant name="ADV7162_PORT_PROBE" value="0x3" grade="inferred"/>
+  <constant name="ADV7162_REG_BLANK" value="0x4" grade="established"/>
+  <constant name="ADV7162_REG_ID" value="0x3" grade="established"/>
+  <constant name="ADV7162_RESTORE_VALUE" value="0xffff" grade="established"/>
+  <constant name="CMAP_ENTRIES" value="0x2000" grade="established"/>
+  <constant name="GE0_UPLOAD_PORT_A" value="0x58040" grade="established"/>
+  <constant name="GE0_UPLOAD_PORT_B" value="0x58044" grade="established"/>
+  <constant name="GE1_UPLOAD_PORT_A" value="0x58048" grade="established"/>
+  <constant name="GE1_UPLOAD_PORT_B" value="0x5804c" grade="established"/>
+  <constant name="GE_READBACK_PORT_A" value="0x5822c" grade="established"/>
+  <constant name="GE_READBACK_PORT_B" value="0x58230" grade="established"/>
+  <constant name="GL_CLIENT_FIFO_PROCESS_ADDR" value="0x124400" grade="inferred"/>
+  <constant name="HQ4_NORMAL_FIFO_OFFSET" value="0x20400" grade="established" from="OpenBSD impact(4) driver register header"/>
+  <constant name="HQ_BUS_STATUS_OFFSET" value="0x20100" grade="established"/>
+  <constant name="HQ_CTXSW_RETURN_CMD" value="0xf400" grade="established"/>
+  <constant name="HQ_CTXSW_START_OFFSET" value="0x130500" grade="established"/>
+  <constant name="HQ_CTXSW_START_VALUE" value="0x4fc" grade="established"/>
+  <constant name="HQ_CTXSW_TAIL_OFFSET" value="0x40088" grade="established"/>
+  <constant name="HQ_CTXSW_WAIT_MASK" value="0x1eff" grade="established"/>
+  <constant name="HQ_CTXSW_WAIT_OFFSET" value="0x8000" grade="established"/>
+  <constant name="HQ_CTX_ENAB_CLEAR_OFFSET" value="0x11038" grade="established"/>
+  <constant name="HQ_CTX_ENAB_OFFSET" value="0x11030" grade="established"/>
+  <constant name="HQ_CTX_WORD_OFFSET" value="0x11008" grade="established"/>
+  <constant name="HQ_FIFO_CTL0_OFFSET" value="0x40000" grade="inferred"/>
+  <constant name="HQ_FIFO_CTL2_OFFSET" value="0x40010" grade="inferred"/>
+  <constant name="HQ_FIFO_CTL3_OFFSET" value="0x40020" grade="inferred"/>
+  <constant name="HQ_FIFO_CTL4_OFFSET" value="0x40028" grade="inferred"/>
+  <constant name="HQ_FIFO_CTL5_OFFSET" value="0x40030" grade="inferred"/>
+  <constant name="HQ_FIFO_LOWATER_OFFSET" value="0x40008" grade="established"/>
+  <constant name="HQ_FIFO_STATUS_OFFSET" value="0x20008" grade="inferred"/>
+  <constant name="HQ_FLOW_TIMEOUT_OFFSET" value="0x40078" grade="inferred"/>
+  <constant name="HQ_GE_SELECT_ADDR" value="0x11000" grade="established"/>
+  <constant name="HQ_GL_DMA_STATUS_OFFSET" value="0x20200" grade="inferred"/>
+  <constant name="HQ_GL_DMA_STATUS_WAIT_MASK" value="0x1eff" grade="inferred"/>
+  <constant name="HQ_GL_FLAGS_OFFSET" value="0x20010" grade="inferred"/>
+  <constant name="HQ_GL_FLAG_CLEAR_OFFSET" value="0x20018" grade="inferred"/>
+  <constant name="HQ_GL_FLAG_FLUSH" value="0x100000" grade="inferred"/>
+  <constant name="HQ_GL_FLAG_QUERY_READY" value="0x20000" grade="inferred"/>
+  <constant name="HQ_GL_FLAG_SYNC_COMPLETE" value="0x10000" grade="inferred"/>
+  <constant name="HQ_GL_QUERY_ANSWER_OFFSET" value="0x28004" grade="inferred"/>
+  <constant name="HQ_GL_STATUS_OFFSET" value="0x20000" grade="inferred"/>
+  <constant name="HQ_GL_STATUS_PIPE_IDLE" value="0x2" grade="inferred"/>
+  <constant name="HQ_ID_MANUFACTURER_EXPECTED" value="0x2aa" grade="inferred"/>
+  <constant name="HQ_ID_PART_EXPECTED" value="0xc003" grade="inferred"/>
+  <constant name="HQ_INTR_ENAB_CLEAR_OFFSET" value="0x11048" grade="inferred"/>
+  <constant name="HQ_INTR_ENAB_DEFAULT" value="0x3008a200" grade="established"/>
+  <constant name="HQ_INTR_ENAB_SET_OFFSET" value="0x11040" grade="established"/>
+  <constant name="HQ_INTR_LEVEL2_CLEAR_OFFSET" value="0x11058" grade="inferred"/>
+  <constant name="HQ_INTR_LEVEL2_ENAB_OFFSET" value="0x11050" grade="established"/>
+  <constant name="HQ_INTR_LEVEL2_LOWATER" value="0x10" grade="established"/>
+  <constant name="HQ_INTR_PENDING_CLEAR_OFFSET" value="0x11028" grade="inferred"/>
+  <constant name="HQ_INTR_SRC_CTX_ACK1" value="0x80000" grade="established"/>
+  <constant name="HQ_INTR_SRC_CTX_ACK2" value="0x10000000" grade="established"/>
+  <constant name="HQ_INTR_SRC_DMA_OVERFLOW" value="0x8000" grade="established"/>
+  <constant name="HQ_INTR_SRC_DMA_RANGE" value="0x2000" grade="established"/>
+  <constant name="HQ_INTR_SRC_FIFO_OVERFLOW" value="0x20000000" grade="established"/>
+  <constant name="HQ_INTR_SRC_PRIV" value="0x4000" grade="established"/>
+  <constant name="HQ_INTR_SRC_PROGRAM_ERROR" value="0x200" grade="established"/>
+  <constant name="HQ_INTR_SRC_RELEASE" value="0x10000" grade="established"/>
+  <constant name="HQ_INTR_SRC_SWAP" value="0x400" grade="established"/>
+  <constant name="HQ_INTR_STATUS_OFFSET" value="0x11020" grade="established"/>
+  <constant name="HQ_INTR_VECTOR_OFFSET" value="0x11070" grade="established"/>
+  <constant name="HQ_SERIAL_MASTER_OFFSET" value="0x11098" grade="established"/>
+  <constant name="HQ_SWAP_ACK_VALUE" value="0x401" grade="established"/>
+  <constant name="HQ_SWAP_CMD" value="0x3700" grade="established"/>
+  <constant name="HQ_VC3_RETRACE_OFFSET" value="0x72038" grade="established"/>
+  <constant name="MCO_BANK_BASE_CH0" value="0x0" grade="established"/>
+  <constant name="MCO_BANK_BASE_CH1" value="0x20" grade="established"/>
+  <constant name="MCO_BANK_BASE_CH2" value="0x30" grade="established"/>
+  <constant name="MCO_BANK_BASE_CH3" value="0x0" grade="established"/>
+  <constant name="MCO_BANK_BASE_CH4" value="0x10" grade="established"/>
+  <constant name="MCO_DAC_LUT_ENTRIES" value="0x100" grade="established"/>
+  <constant name="MCO_DAC_LUT_ENTRY_BITS" value="0xa" grade="established"/>
+  <constant name="MCO_ID_ABSENT" value="0xff" grade="established"/>
+  <constant name="MCO_ID_PROBE_SINGLE_READ_OFFSET" value="0x70008" grade="established"/>
+  <constant name="MCO_ID_PROBE_SINGLE_TIMING_SELECT_FIRST" value="0x14" grade="established"/>
+  <constant name="MCO_ID_PROBE_SINGLE_TIMING_SELECT_SECOND" value="0x0" grade="established"/>
+  <constant name="MCO_ID_PROBE_SINGLE_WRITE_OFFSET" value="0x72c08" grade="established"/>
+  <constant name="MCO_ID_PROBE_WRITE_FIRST" value="0xff" grade="established"/>
+  <constant name="MCO_ID_PROBE_WRITE_SECOND" value="0x0" grade="established"/>
+  <constant name="MCO_ID_SPECIAL_PRESENT" value="0x1" grade="established"/>
+  <constant name="MCO_LOAD_CTRL_FIRST" value="0xfe" grade="established"/>
+  <constant name="MCO_LOAD_CTRL_SECOND" value="0x1" grade="established"/>
+  <constant name="MCO_LOAD_IMAGE_BYTES" value="0xf688" grade="established"/>
+  <constant name="MCO_LOAD_PAD_BYTES" value="0x14" grade="established"/>
+  <constant name="MCO_LOAD_STATUS_AFTER_SECOND" value="0x6" grade="established"/>
+  <constant name="MCO_LOAD_STATUS_FIRST" value="0x0" grade="established"/>
+  <constant name="MCO_SEL_FPGA_CTRL" value="0x1" grade="established"/>
+  <constant name="MCO_SEL_FPGA_DATA" value="0x0" grade="established"/>
+  <constant name="MCO_SEL_TIMING_DATA" value="0x5" grade="established"/>
+  <constant name="MCO_SEL_TIMING_RAM" value="0x7" grade="established"/>
+  <constant name="MCO_SEL_TIMING_REG" value="0x4" grade="established"/>
+  <constant name="PP1_SELECT_ADDR" value="0x71c08" grade="established"/>
+  <constant name="RDRAM_ADDR_PORT_ADDR" value="0x2c570" grade="inferred"/>
+  <constant name="RDRAM_BUFFER_PORT_ADDR" value="0x2c5b4" grade="inferred"/>
+  <constant name="RDRAM_DATA_PORT_ADDR" value="0x2c574" grade="established"/>
+  <constant name="RSS_RE_SELECT_PIO_ADDR" value="0x2c448" grade="inferred"/>
+  <constant name="RSS_RE_SELECT_REG" value="0x112" grade="established"/>
+  <constant name="VC3_REG_CURS_EP" value="0x1" grade="established"/>
+  <constant name="VC3_REG_CURS_TBL_PTR" value="0xc" grade="established"/>
+  <constant name="VC3_REG_CURS_X_LOC" value="0x2" grade="established"/>
+  <constant name="VC3_REG_CURS_Y_LOC" value="0x3" grade="established"/>
+  <constant name="VC3_REG_CUR_CURSOR_X" value="0xe" grade="established"/>
+  <constant name="VC3_REG_DID_EP1" value="0x4" grade="established"/>
+  <constant name="VC3_REG_DID_EP2" value="0x5" grade="established"/>
+  <constant name="VC3_REG_DID_FRAMETAB1" value="0x10" grade="established"/>
+  <constant name="VC3_REG_DID_FRAMETAB2" value="0x12" grade="established"/>
+  <constant name="VC3_REG_DID_LINETAB1" value="0x11" grade="established"/>
+  <constant name="VC3_REG_DID_LINETAB2" value="0x13" grade="established"/>
+  <constant name="VC3_REG_RAM_ADDR" value="0x7" grade="established"/>
+  <constant name="VC3_REG_SCAN_LENGTH" value="0x6" grade="established"/>
+  <constant name="VC3_REG_VERT_LINE_COUNT" value="0xb" grade="established"/>
+  <constant name="VC3_REG_VID_EP" value="0x0" grade="established"/>
+  <constant name="VC3_REG_VT_FRAME_TBL_PTR" value="0x8" grade="established"/>
+  <constant name="VC3_REG_VT_LINES_RUN" value="0xa" grade="established"/>
+  <constant name="VC3_REG_VT_LINE_SEQ_PTR" value="0x9" grade="established"/>
+  <constant name="VC3_REG_WORKING_CURS_Y" value="0xd" grade="established"/>
+  <constant name="WINDOW_MODE_MAIN_ADDR" value="0x71e00" grade="established"/>
+  <constant name="WINDOW_MODE_OVERLAY_ADDR" value="0x71e80" grade="established"/>
+  <constant name="WINDOW_SELECT_ADDR" value="0x71d80" grade="established"/>
+  <constant name="XMAP_INDEX_ADDR" value="0x71c88" grade="established"/>
+</genxml>

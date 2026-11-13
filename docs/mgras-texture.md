@@ -3,9 +3,9 @@
 The texture option on Impact boards: the texture engine (TE1), its texture RAM
 (TRAM), the words the IRIX software sends to drive them, and the encodings those
 words carry. Register offsets, widths and field positions are in
-[defs/te1.toml](../defs/te1.toml), with the TEXMODE1 fields in
-[defs/re4.toml](../defs/re4.toml). The generated reference is
-[gen/docs/te1.md](../gen/docs/te1.md). This page is the prose and the open
+[devices/te1/registers.toml](../devices/te1/registers.toml), with the TEXMODE1 fields in
+[devices/re4/registers.toml](../devices/re4/registers.toml). The generated reference is
+[devices/te1/registers.md](../devices/te1/registers.md). This page is the prose and the open
 questions.
 
 Each fact carries one of the grades in [AGENTS.md](../AGENTS.md). Established
@@ -307,7 +307,7 @@ Level of detail, approximated from OpenGL 1.2.1 section 3.8.5:
 
 ## Texture tokens
 
-The class-0 tokens are named in [defs/hq3.toml](../defs/hq3.toml) and HQ3.h.
+The class-0 tokens are named in [devices/hq3/registers.toml](../devices/hq3/registers.toml) and HQ3.h.
 Their texture meanings, from the client's and kernel's listings:
 
 | Token | Use | Grade |
@@ -367,6 +367,6 @@ the two disagree. The headers are not changed here.
   arithmetic is followed here.
 - TE1.h defines the TXSIZE repeat field 11:8 as log2 R. The client repeats the width
   there, so the field is a copy of the width, not a depth.
-- defs/te1.toml grades TXMIPMAP bits 15:8 as a bank. Its mask is 9 bits, and bit 8
+- devices/te1/registers.toml grades TXMIPMAP bits 15:8 as a bank. Its mask is 9 bits, and bit 8
   is a per-image flag whose placement is unknown. The bank field is left as it is.
   Correcting it would change an existing inferred field.

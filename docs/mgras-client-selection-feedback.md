@@ -1,7 +1,7 @@
 # MGRAS client selection and feedback
 
 How the IRIX GL client library runs selection mode on the IMPACT pipe and reads
-the hit records back. The command values are in [defs/hq3.toml](../defs/hq3.toml)
+the hit records back. The command values are in [devices/hq3/registers.toml](../devices/hq3/registers.toml)
 (the `CFIFO_CMD_*` constants); this page carries the rest.
 
 ## Sources and grades
@@ -30,10 +30,10 @@ these 16-bit command forms to the command FIFO:
 | `0xc900` | none | leaving selection mode; result handling begins |
 
 **Inferred.** Each form fits the layout of the command-FIFO control word
-(`CFIFO_CTL` in `defs/hq3.toml`): the high byte is the command field and the
+(`CFIFO_CTL` in `devices/hq3/registers.toml`): the high byte is the command field and the
 low byte is the payload size in bytes, so `0xcb04` is command `0xcb` with four
 bytes. That is a reading of the bit positions, not a documented opcode table.
-The constants are in `defs/hq3.toml`.
+The constants are in `devices/hq3/registers.toml`.
 
 ## Result fetch
 
@@ -47,7 +47,7 @@ as a bound comes from control flow only, and the device's answer for it is
 unknown.
 
 Whether `0x96` and `0x97` (`TOKEN_READBACK_BEGIN` and `TOKEN_READBACK_END` in
-`defs/hq3.toml`) are related to the `0x61` and `0x62` brackets is not
+`devices/hq3/registers.toml`) are related to the `0x61` and `0x62` brackets is not
 established. The encodings differ.
 
 ## Hit record layout

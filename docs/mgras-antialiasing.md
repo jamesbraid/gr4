@@ -3,7 +3,7 @@
 What the published Octane graphics description says the board does to draw
 antialiased points and lines, what it leaves open, and what would settle it.
 The smoothing enable bits sit in the RE4 `aaline_config` register in
-[defs/re4.toml](../defs/re4.toml), graded inferred. The GL enable tokens are in
+[devices/re4/registers.toml](../devices/re4/registers.toml), graded inferred. The GL enable tokens are in
 [mgras-gl-commands.md](mgras-gl-commands.md). This page is the prose and the open
 questions.
 
@@ -65,7 +65,7 @@ survives. Unknown means nothing held settles it.
   a different publication about IMPACT. Neither settles the width behaviour of MGRAS
   boards. Reconcile by product before relying on either for a width.
 - The RE4 fill-mode antialias enables are not placed. The
-  [defs/re4.toml](../defs/re4.toml) `fill_mode` entry says so, and this page adds no
+  [devices/re4/registers.toml](../devices/re4/registers.toml) `fill_mode` entry says so, and this page adds no
   register.
 
 ## Open questions
