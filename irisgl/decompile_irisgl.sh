@@ -4,7 +4,7 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-M2C="python3 ${ROOT_DIR}/m2c/m2c.py --target mips-ido-c --context ${SCRIPT_DIR}/ctx.c"
+M2C="python3 ${ROOT_DIR}/references/code/m2c/m2c.py --target mips-ido-c --context ${SCRIPT_DIR}/ctx.c"
 
 CATEGORIES=(
     "igloo"

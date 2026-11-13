@@ -16,7 +16,7 @@ set -eo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${SCRIPT_DIR}"
 
-M2C="${SCRIPT_DIR}/../m2c/m2c.py"
+M2C="${SCRIPT_DIR}/../references/code/m2c/m2c.py"
 CTX_SRC="${SCRIPT_DIR}/ctx_source.h"
 CTX_C="${SCRIPT_DIR}/ctx.c"
 CTX_CACHE="${SCRIPT_DIR}/ctx.c.m2c"
