@@ -248,7 +248,7 @@ not interchangeable.
 Established from the probe routine's machine words in each held build,
 not a bus measurement. Not held: an Indigo2-class kernel from the later
 of the two releases, so its shape there is unknown. The build-by-build
-table is in docs/OPEN_QUESTIONS.md.</doc>
+table is in questions/README.md.</doc>
     <field name="board" start="4" size="4" type="mco_id_board" grade="established"/>
     <field name="revision" start="0" size="4" type="uint" grade="established"/>
   </struct>
@@ -258,7 +258,7 @@ index port before each access to its data port. The high nibble picks a
 device, the low nibble a port on it. Banks 2 and 3 are the two
 true-colour DACs of the option, banks 0 and 1 its two overlay-palette
 DACs, and banks 8 to 10 its three control registers. Ports on a DAC are
-offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.</doc>
+offsets from its bank base; the full map is in questions/README.md.</doc>
     <field name="bank" start="4" size="4" type="mco_index_bank" grade="established"/>
     <field name="port" start="0" size="4" type="uint" grade="established"/>
     <test value="0x90" kind="vector">

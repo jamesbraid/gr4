@@ -1,0 +1,11 @@
+# vc3
+
+Video Controller 3 (VC3), Video Timing, Cursor, and DID Frame Composition for SGI Impact (GR4).
+
+[VC3.h](VC3.h) is the commented C description of the chip.
+
+## Used by
+
+- [MGRAS display timing](../../software/kernel/display-timing.md)
+- [MGRAS HQ4 host interface](../../software/kernel/hq4-host-interface.md)
+- [gr4 ioctl request statements](../../software/kernel/ioctl-requests.md)

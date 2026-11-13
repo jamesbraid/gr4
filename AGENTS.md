@@ -9,7 +9,7 @@ The goal is documenting the architecture for the vintage SGI enthusiast and FPGA
 
 Introduced in 1995 for the SGI Indigo2 (and later Octane), Impact Graphics was a landmark milestone in workstation 3D computer graphics:
 - **First Desktop Hardware Texture Mapping**: Provided real-time trilinear mipmapped 2D and 3D texture mapping via dedicated Texture Engine (TE1) and Rambus Texture RAM (TRAM).
-- **High-Performance Geometry Pipeline**: 1 or 2 Geometry Engine ASICs (GE11) delivering 480 MFLOPS per GE11, 960 for two (published peak, established: product guide, `docs/IMPACT_BOARD_FACTS.md` fact 1) of dedicated floating-point coordinate transformations, lighting, and clipping.
+- **High-Performance Geometry Pipeline**: 1 or 2 Geometry Engine ASICs (GE11) delivering 480 MFLOPS per GE11, 960 for two (published peak, established: product guide, `devices/mgras/board-facts.md` fact 1) of dedicated floating-point coordinate transformations, lighting, and clipping.
 - **Rambus RDRAM Framebuffer Architecture**: Interleaved Rambus DRAM accessed via two Pixel Processors (PP1) per Raster Engine: two on High IMPACT, four on Maximum IMPACT (established count, product guide; the per-RE split is inferred, fact 1 and the contradictions list), achieving unprecedented fill rates and bandwidth.
 - **Complete Native OpenGL 1.1 Implementation**: The flagship hardware target for Silicon Graphics' advanced OpenGL capabilities.
 - **Dual Display Subsystems**: High-resolution video timings driven by the VC3 Video Controller and true-color / multi-layer compositing via XMAP and CMAP RAMDACs.
@@ -21,7 +21,7 @@ Subsystem Configurations:
 | **High Impact (HI / HIO)** | GR4 | 1 GE11 | 1 RE4 | 1 MB or 4 MB | 24-bit RGB + Z + Tex | Indigo2 / Octane |
 | **Maximum Impact (MaxI / EMX)** | GR4 | 2 GE11 | 2 RE4 (dual RSS) | 1 TRAM; 4 with the option | 24-bit RGB + Z + Tex | Indigo2 / Octane |
 
-Board ID grades. Solid Impact is told from High and Maximum by the product field (bits 6:5 of the second board-version byte) reading 1: established, read in the board-information routine of the 6.5.0 graphics kernel object (sha256 `8369b6d4a250d395123793a8dd339bfa0f158caa32cbf218fdb76a904725c9d7`, `mgras_init.o`), which takes a one-engine, no-second-board path for that value (field position and value carried in `devices/mgras/registers.toml` as the second board-version word). An earlier label "GR4 rev <3" for Solid is withdrawn: `MGRAS.h` records the below-3 test as the colormap revision, a voltage-margin rule for early pixel processors, not a product split. How board revision numbers map to products stays inferred (`docs/OPEN_QUESTIONS.md`, entry 5).
+Board ID grades. Solid Impact is told from High and Maximum by the product field (bits 6:5 of the second board-version byte) reading 1: established, read in the board-information routine of the 6.5.0 graphics kernel object (sha256 `8369b6d4a250d395123793a8dd339bfa0f158caa32cbf218fdb76a904725c9d7`, `mgras_init.o`), which takes a one-engine, no-second-board path for that value (field position and value carried in `devices/mgras/registers.toml` as the second board-version word). An earlier label "GR4 rev <3" for Solid is withdrawn: `MGRAS.h` records the below-3 test as the colormap revision, a voltage-margin rule for early pixel processors, not a product split. How board revision numbers map to products stays inferred (`questions/README.md`, entry 5).
 
 ---
 
@@ -72,7 +72,7 @@ DCB window address. The display-bus windows start 0x60000 above the board base (
 
 ## 3. Project Binaries & Evidence
 
-For licensing and clean-room reasons, proprietary SGI binaries are **not checked into source control** (the local `root/` tree is gitignored). Instead, users copy them from an authentic IRIX 6.5.0 distribution into `root/` following the checklist in [IRIX_FILES.md](IRIX_FILES.md).
+For licensing and clean-room reasons, proprietary SGI binaries are **not checked into source control** (the local `root/` tree is gitignored). Instead, users copy them from an authentic IRIX 6.5.0 distribution into `root/` following the checklist in [evidence/irix-files.md](evidence/irix-files.md).
 
 The subdirectories below contain relative symbolic links resolving into `root/`:
 
@@ -133,6 +133,6 @@ In addition to hardware ASIC headers, we generate local headers capturing intern
 
 ## 7. Published Documents
 
-Grades in this project's documents use one legend. **Established**: read directly from a shipped binary, a published SGI document, or a diagnostic transcript or capture. **Secondary**: taken from a published secondary source, such as a third-party page quoting SGI text, not first-hand. **Inferred**: follows from established facts or from the binaries by stated reasoning. **Unknown**: not derived; [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md) says what would settle it.
+Grades in this project's documents use one legend. **Established**: read directly from a shipped binary, a published SGI document, or a diagnostic transcript or capture. **Secondary**: taken from a published secondary source, such as a third-party page quoting SGI text, not first-hand. **Inferred**: follows from established facts or from the binaries by stated reasoning. **Unknown**: not derived; [questions/README.md](questions/README.md) says what would settle it.
 
-Every published SGI document, white paper and public web page found that bears on IMPACT is stored in full under `docs/sources/`, with its SHA-256 and source URL in [docs/sources/INDEX.md](docs/sources/INDEX.md) (`sha256sum -c SHA256SUMS` verifies the set). Facts taken from them, each labelled with a grade from the legend above and cited by page, are in [docs/IMPACT_BOARD_FACTS.md](docs/IMPACT_BOARD_FACTS.md). Cite a document by its file name and printed page. What the headers still mark unknown, and what would settle each, is kept in [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md). No register-level manual for any IMPACT chip has been found; chip behaviour still comes from the binaries and source in sections 3 and 6.
+Every published SGI document, white paper and public web page found that bears on IMPACT is stored in full under `references/documents/`, with its SHA-256 and source URL in [references/documents/INDEX.md](references/documents/INDEX.md) (`sha256sum -c SHA256SUMS` verifies the set). Facts taken from them, each labelled with a grade from the legend above and cited by page, are in [devices/mgras/board-facts.md](devices/mgras/board-facts.md). Cite a document by its file name and printed page. What the headers still mark unknown, and what would settle each, is kept in [questions/README.md](questions/README.md). No register-level manual for any IMPACT chip has been found; chip behaviour still comes from the binaries and source in sections 3 and 6.

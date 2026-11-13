@@ -1,13 +1,15 @@
 {
   "family": "Impact (GR4 / MGRAS)",
   "review_required": [
-    "docs/routines/t1-*.md",
-    "docs/routines/t2-*.md"
+    "evidence/routines/t1-*.md",
+    "evidence/routines/t2-*.md"
   ],
   "docs": {
     "prose": [
-      "docs/*.md",
-      "docs/routines/*.md",
+      "devices/*/*.md",
+      "software/*/*.md",
+      "questions/*.md",
+      "evidence/routines/*.md",
       "README.md"
     ],
     "headers": [
@@ -15,13 +17,15 @@
       "*/include/*.h"
     ],
     "tables": [
-      "docs/*/*.tsv"
+      "evidence/inventory/*.tsv"
     ],
     "index": [
       "AGENTS.md",
-      "IRIX_FILES.md"
+      "evidence/irix-files.md"
     ],
-    "skip": []
+    "skip": [
+      "devices/*/registers.md"
+    ]
   },
   "binaries": [
     {
@@ -277,7 +281,9 @@
       }
     ],
     "docs": [
-      "docs/*.md",
+      "devices/*/*.md",
+      "software/*/*.md",
+      "questions/*.md",
       "README.md"
     ]
   }

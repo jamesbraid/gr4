@@ -28,7 +28,7 @@ prose_offsets = false
 
 [units.pp1]
 group = "PP1_DECODE.h"
-notes_corpus = ["devices/pp1/PP1.h", "docs/OPEN_QUESTIONS.md"]
+notes_corpus = ["devices/pp1/PP1.h", "questions/README.md"]
 
 [units.te1]
 group = "TE1_DECODE.h"

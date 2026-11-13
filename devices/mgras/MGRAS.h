@@ -301,7 +301,7 @@ typedef union {
  *       configuration data byte. Probe: ESTABLISHED per build from the
  *       routine's machine words, and the builds differ in shape by CPU
  *       board, not by release. Per-build table with hashes and routine
- *       addresses: docs/OPEN_QUESTIONS.md, "Board-ID probe, per build".
+ *       addresses: questions/README.md, "Board-ID probe, per build".
  *       Do not merge the two shapes; each is right for the builds named.
  *       - IP22 and IP28 kernels (6.5.22 IP22; one IP28 object): the ID
  *         byte is at register base + 0x62C08 for both the write and the

@@ -201,7 +201,7 @@ not interchangeable.
 Established from the probe routine's machine words in each held build,
 not a bus measurement. Not held: an Indigo2-class kernel from the later
 of the two releases, so its shape there is unknown. The build-by-build
-table is in docs/OPEN_QUESTIONS.md.
+table is in questions/README.md.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
@@ -215,7 +215,7 @@ index port before each access to its data port. The high nibble picks a
 device, the low nibble a port on it. Banks 2 and 3 are the two
 true-colour DACs of the option, banks 0 and 1 its two overlay-palette
 DACs, and banks 8 to 10 its three control registers. Ports on a DAC are
-offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.
+offsets from its bank base; the full map is in questions/README.md.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
@@ -318,7 +318,7 @@ revision. Inferred from the kernel object.
 | `GE1_UPLOAD_PORT_B` | 0x5804c | established | driver and firmware readings | second of the two program upload ports for geometry engine 1 |
 | `GE_READBACK_PORT_A` | 0x5822c | established | driver and firmware readings | read-back port shared by both geometry engines; the kernel reads it to verify a download |
 | `GE_READBACK_PORT_B` | 0x58230 | established | driver and firmware readings | second read-back port shared by both geometry engines |
-| `GL_CLIENT_FIFO_PROCESS_ADDR` | 0x124400 | inferred | driver and firmware readings | address the IRIX GL client stores its command words to, in its own process mapping; the board window offset it maps to is not established (see docs/mgras-gl-commands.md) |
+| `GL_CLIENT_FIFO_PROCESS_ADDR` | 0x124400 | inferred | driver and firmware readings | address the IRIX GL client stores its command words to, in its own process mapping; the board window offset it maps to is not established (see software/opengl/gl-commands.md) |
 | `HQ4_NORMAL_FIFO_OFFSET` | 0x20400 | established | OpenBSD impact(4) driver register header | normal command FIFO in the board's register window; the driver writes aligned 64-bit packets here |
 | `HQ_BUS_STATUS_OFFSET` | 0x20100 | established | driver and firmware readings | bus status. The kernel waits for bits 4:0 to show room before it writes display registers. What the other bits mean is unknown |
 | `HQ_CTXSW_RETURN_CMD` | 0xf400 | established | driver and firmware readings | word the switch tail writes to the command port only when the incoming context is the default context |
@@ -343,7 +343,7 @@ revision. Inferred from the kernel object.
 | `HQ_GL_DMA_STATUS_WAIT_MASK` | 0x1eff | inferred | driver and firmware readings | mask of DMA status bits the client waits to see clear after a DMA read; what each bit means is unknown |
 | `HQ_GL_FLAGS_OFFSET` | 0x20010 | inferred | driver and firmware readings | HQ flags word: sync complete (bit 16), query ready (bit 17) and flush (bit 20) |
 | `HQ_GL_FLAG_CLEAR_OFFSET` | 0x20018 | inferred | driver and firmware readings | the client writes a flag mask here to clear those flags in the flags word |
-| `HQ_GL_FLAG_FLUSH` | 0x100000 | inferred | driver and firmware readings | bit 20 of the flags word: the client sets it itself after glFlush; the kernel's buffer-swap path reads and clears it (docs/OPEN_QUESTIONS.md) |
+| `HQ_GL_FLAG_FLUSH` | 0x100000 | inferred | driver and firmware readings | bit 20 of the flags word: the client sets it itself after glFlush; the kernel's buffer-swap path reads and clears it (questions/README.md) |
 | `HQ_GL_FLAG_QUERY_READY` | 0x20000 | inferred | driver and firmware readings | bit 17 of the flags word: the client clears it before a query and polls until the board sets it |
 | `HQ_GL_FLAG_SYNC_COMPLETE` | 0x10000 | inferred | driver and firmware readings | bit 16 of the flags word: a write fence sets it when earlier writes finish; the client clears it before a DMA setup |
 | `HQ_GL_QUERY_ANSWER_OFFSET` | 0x28004 | inferred | driver and firmware readings | answer word read after a query flag is set; the kernel reads the same address after a geometry-engine download (GE_REVISION) |
@@ -419,7 +419,7 @@ revision. Inferred from the kernel object.
 | `VC3_REG_RAM_ADDR` | 0x7 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Reads back the SRAM address it was loaded with |
 | `VC3_REG_SCAN_LENGTH` | 0x6 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
 | `VC3_REG_VERT_LINE_COUNT` | 0xb | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
-| `VC3_REG_VID_EP` | 0x0 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Main display frame table pointer; see docs/mgras-display-timing.md |
+| `VC3_REG_VID_EP` | 0x0 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test. Main display frame table pointer; see software/kernel/display-timing.md |
 | `VC3_REG_VT_FRAME_TBL_PTR` | 0x8 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
 | `VC3_REG_VT_LINES_RUN` | 0xa | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |
 | `VC3_REG_VT_LINE_SEQ_PTR` | 0x9 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test |

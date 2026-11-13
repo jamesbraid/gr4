@@ -185,7 +185,7 @@ extern "C" {
  * pixel-descriptor builder stores its caller's constant, 0 draw, 1 copy,
  * 2 read, 3 and 4 texture load, 6 and 7 span return and read, 8 and 9 copy
  * to texture, and no site passes 5 (established for the constants, kind
- * names inferred from the routine names; docs/OPEN_QUESTIONS.md entry 9).
+ * names inferred from the routine names; questions/README.md entry 9).
  * The earlier pairs recorded here (0x101423AC / 0 and 0x3BFC00 /
  * 0x1010090) cannot be these registers' values by this routine: they
  * are not 8.8 numbers and the no-zoom path writes 0x100. They were most
@@ -374,7 +374,7 @@ extern "C" {
  * type (3:0), pixel format (7:4), begin skip bytes (10:8), begin skip bits
  * (13:11), stride skip bytes (16:14), bitmap-opaque (23). RGB order, zoom and
  * decimate are placed by the trace below (22, 19, 20); the unpack-order and
- * read-mask flags are among bits 17, 18 and 21 (see docs/OPEN_QUESTIONS.md,
+ * read-mask flags are among bits 17, 18 and 21 (see questions/README.md,
  * entry 12). Format/type pairs the X server and kernel use,
  * with the bytes per pixel inferred for them: (0,0) 1, (0,1) 2,
  * (8,8) 2 (4-4-4-4), (8,10) 2 (5-5-5), (8,0) 4, (7,1) 6.
@@ -407,7 +407,7 @@ extern "C" {
  * destination offset 0xD68 then 0xC10480 at 0x212C, and 0xC00080 then 0xC10480.
  * Bit 16 is bit 2 of the stride skip (4 bytes); the library clears 18 and 10:8
  * and sets 16:14 from a per-context byte; 10:8 matches the destination offset &
- * 7 (inferred). See docs/OPEN_QUESTIONS.md entry 17.
+ * 7 (inferred). See questions/README.md entry 17.
  *   23    always set for pixel draws (the bitmap-opaque bit)
  * Host components are the framebuffer's top bits (no rounding) when
  * reading wider than the framebuffer stores, and truncated when writing.

@@ -229,7 +229,7 @@
  * Established from the probe routine's machine words in each held build,
  * not a bus measurement. Not held: an Indigo2-class kernel from the later
  * of the two releases, so its shape there is unknown. The build-by-build
- * table is in docs/OPEN_QUESTIONS.md.
+ * table is in questions/README.md.
  */
 /* word MCO_ID: 32 bits; driver and firmware readings */
 #define MGRAS_MCO_ID_WIDTH                           32 /* established */
@@ -248,7 +248,7 @@
  * device, the low nibble a port on it. Banks 2 and 3 are the two
  * true-colour DACs of the option, banks 0 and 1 its two overlay-palette
  * DACs, and banks 8 to 10 its three control registers. Ports on a DAC are
- * offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md.
+ * offsets from its bank base; the full map is in questions/README.md.
  */
 /* word MCO_INDEX: 32 bits; driver and firmware readings */
 #define MGRAS_MCO_INDEX_WIDTH                        32 /* established */

@@ -388,7 +388,7 @@ extern "C" {
  * mode's video format file, so they depend on the raster engine count, not the
  * release (1280x1024 one engine 0x90240 main / 0x101C0 overlay; two engines
  * 0xC8240 / 0x380E0; 1024x768 one engine 0xB81C0 / 0x38120, two 0xDC2E0 /
- * 0x24090; see docs/OPEN_QUESTIONS.md entry 15); the fill mode DrawBuffer
+ * 0x24090; see questions/README.md entry 15); the fill mode DrawBuffer
  * field (diag names: DBUFA = 0x01, DOVERA_OR_B = 0x41; X uses 0x4F for the
  * overlay, 0x50 for window IDs) says how to read that buffer's words.
  *
@@ -404,7 +404,7 @@ extern "C" {
  *              page 0, where the plain file keeps its non-visible bank and
  *              aux pointer (established from the files). That the plain
  *              file's bank holds Z and stencil is inferred (entry 15 of
- *              docs/OPEN_QUESTIONS.md).
+ *              questions/README.md).
  * PP1_REG_DRB_POINTERS takes a buffer's page pointer: which buffer the
  * PP1 draws into / reads from (the diags write 10 bits, & 0x3FF). A
  * pbuffer or back buffer is another buffer's pages, on the same (x, y)

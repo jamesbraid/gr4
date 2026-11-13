@@ -328,7 +328,7 @@ not interchangeable.
 Established from the probe routine's machine words in each held build,
 not a bus measurement. Not held: an Indigo2-class kernel from the later
 of the two releases, so its shape there is unknown. The build-by-build
-table is in docs/OPEN_QUESTIONS.md."""
+table is in questions/README.md."""
 grade = "established"
 
 [words.MCO_ID.fields]
@@ -350,7 +350,7 @@ index port before each access to its data port. The high nibble picks a
 device, the low nibble a port on it. Banks 2 and 3 are the two
 true-colour DACs of the option, banks 0 and 1 its two overlay-palette
 DACs, and banks 8 to 10 its three control registers. Ports on a DAC are
-offsets from its bank base; the full map is in docs/OPEN_QUESTIONS.md."""
+offsets from its bank base; the full map is in questions/README.md."""
 grade = "established"
 
 [words.MCO_INDEX.fields]
@@ -492,7 +492,7 @@ RSS_RE_SELECT_PIO_ADDR = { value = 0x02c448, grade = "inferred", doc = "the same
 RDRAM_ADDR_PORT_ADDR = { value = 0x02c570, grade = "inferred", doc = "RDRAM address port in the raster window, as the diagnostic uses it" }
 RDRAM_DATA_PORT_ADDR = { value = 0x02c574, grade = "established", doc = "RDRAM data port; the kernel reads it with each raster engine selected in turn" }
 RDRAM_BUFFER_PORT_ADDR = { value = 0x02c5b4, grade = "inferred", doc = "buffer pointer for the RDRAM path, as the diagnostic uses it" }
-GL_CLIENT_FIFO_PROCESS_ADDR = { value = 0x124400, grade = "inferred", doc = "address the IRIX GL client stores its command words to, in its own process mapping; the board window offset it maps to is not established (see docs/mgras-gl-commands.md)" }
+GL_CLIENT_FIFO_PROCESS_ADDR = { value = 0x124400, grade = "inferred", doc = "address the IRIX GL client stores its command words to, in its own process mapping; the board window offset it maps to is not established (see software/opengl/gl-commands.md)" }
 HQ_GL_STATUS_OFFSET = { value = 0x020000, grade = "inferred", doc = "HQ status word the GL client polls; bit 1 is the pipe-idle sense, the bit number the hq3 status register calls pipe_idle" }
 HQ_GL_FLAGS_OFFSET = { value = 0x020010, grade = "inferred", doc = "HQ flags word: sync complete (bit 16), query ready (bit 17) and flush (bit 20)" }
 HQ_GL_FLAG_CLEAR_OFFSET = { value = 0x020018, grade = "inferred", doc = "the client writes a flag mask here to clear those flags in the flags word" }
@@ -500,7 +500,7 @@ HQ_GL_DMA_STATUS_OFFSET = { value = 0x020200, grade = "inferred", doc = "DMA sta
 HQ_GL_QUERY_ANSWER_OFFSET = { value = 0x028004, grade = "inferred", doc = "answer word read after a query flag is set; the kernel reads the same address after a geometry-engine download (GE_REVISION)" }
 HQ_GL_FLAG_SYNC_COMPLETE = { value = 0x10000, grade = "inferred", doc = "bit 16 of the flags word: a write fence sets it when earlier writes finish; the client clears it before a DMA setup" }
 HQ_GL_FLAG_QUERY_READY = { value = 0x20000, grade = "inferred", doc = "bit 17 of the flags word: the client clears it before a query and polls until the board sets it" }
-HQ_GL_FLAG_FLUSH = { value = 0x100000, grade = "inferred", doc = "bit 20 of the flags word: the client sets it itself after glFlush; the kernel's buffer-swap path reads and clears it (docs/OPEN_QUESTIONS.md)" }
+HQ_GL_FLAG_FLUSH = { value = 0x100000, grade = "inferred", doc = "bit 20 of the flags word: the client sets it itself after glFlush; the kernel's buffer-swap path reads and clears it (questions/README.md)" }
 HQ_GL_STATUS_PIPE_IDLE = { value = 0x2, grade = "inferred", doc = "bit 1 of HQ_GL_STATUS_OFFSET; the client's finish and the kernel's raster idle wait both poll it" }
 HQ_GL_DMA_STATUS_WAIT_MASK = { value = 0x1eff, grade = "inferred", doc = "mask of DMA status bits the client waits to see clear after a DMA read; what each bit means is unknown" }
 HQ_INTR_STATUS_OFFSET = { value = 0x011020, grade = "established", from = "IRIX 6.5.30 IP27 kernel", doc = "interrupt status word; the general handler reads it masked by the enable word. The switch tail writes 0x80 to it and reads bit 5 back; what the write does is unknown" }
@@ -545,7 +545,7 @@ HQ_VC3_RETRACE_OFFSET = { value = 0x072038, grade = "established", from = "IRIX 
 HQ_ID_PART_EXPECTED = { value = 0xc003, grade = "inferred", from = "Octane IDE diagnostic", doc = "part number the diagnostic's HQ4 probe accepts, at bits 27:12 of the identity word, the first board word" }
 HQ_ID_MANUFACTURER_EXPECTED = { value = 0x2aa, grade = "inferred", from = "Octane IDE diagnostic", doc = "manufacturer code the diagnostic's HQ4 probe accepts, at bits 11:1 of the identity word, the first board word" }
 HQ_SERIAL_MASTER_OFFSET = { value = 0x011098, grade = "established", from = "stock Octane PROM and Octane IDE diagnostic", doc = "one-wire master for the board's serial-number record; each bit slot is one 32-bit store, see HQ_SERIAL_SLOT" }
-VC3_REG_VID_EP = { value = 0x0, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Main display frame table pointer; see docs/mgras-display-timing.md" }
+VC3_REG_VID_EP = { value = 0x0, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Main display frame table pointer; see software/kernel/display-timing.md" }
 VC3_REG_CURS_EP = { value = 0x1, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test" }
 VC3_REG_CURS_X_LOC = { value = 0x2, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Hardware cursor X" }
 VC3_REG_CURS_Y_LOC = { value = 0x3, grade = "established", from = "Octane IDE diagnostic", doc = "VC3 register index, named in the diagnostic's VC3 register test. Hardware cursor Y" }

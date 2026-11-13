@@ -279,7 +279,7 @@ extern "C" {
 #define HQ3_FLAG_CONTEXT_LOADED     BIT(6)      /* Context loaded (phase 2 complete) */
 #define HQ3_FLAG_TLB_MISS           BIT(7)      /* Graphics TLB miss on virtual DMA */
 /* Bit 8: no shipped handler tests it; the old "bus or protocol error" reading
- * had no evidence and is withdrawn (docs/OPEN_QUESTIONS.md, entry 3). */
+ * had no evidence and is withdrawn (questions/README.md, entry 3). */
 #define HQ3_FLAG_CP0                BIT(10)     /* CP flag 0: buffer swap occurred */
 #define HQ3_FLAG_DONE               BIT(16)     /* Set by 0xE04 command (sync completion) */
 #define HQ3_FLAG_GE_DATA            BIT(17)     /* GE has data waiting for readback */
