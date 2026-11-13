@@ -4,7 +4,7 @@ This document lists the proprietary Silicon Graphics (SGI) binaries and files re
 
 For legal and clean-room licensing reasons, proprietary SGI binaries are **not tracked in source control**. Instead, users must copy them from an authentic **IRIX 6.5.0** installation, CD distribution, or sysgen tree into the local `root/` subdirectory.
 
-Top-level subdirectories (`ddx/`, `libglcore/`, `irisgl/`, `mgras_kernel/`, `ge11dump/`, `ucode/`) use relative symbolic links pointing to their respective targets under `root/`.
+The directories `software/xsgi/`, `software/opengl/`, `software/irisgl/`, `software/kernel/` and `software/ucode/`, and the file `tools/ge11dump`, use relative symbolic links pointing to their respective targets under `root/`.
 
 ### 0. What `root/` holds now
 
@@ -69,63 +69,63 @@ root/
 
 ## 2. File Checklist
 
-### A. Kernel Driver Modules (`mgras_kernel/`)
+### A. Kernel Driver Modules (`software/kernel/`)
 Extracted from `root/var/sysgen/boot/mgras.a` or installed in `root/var/sysgen/boot/`:
 
 | File | Source Path in IRIX | Symlink in Repository | DWARF Status |
 |---|---|---|---|
-| `gfx.o` | `/var/sysgen/boot/gfx.o` | `mgras_kernel/gfx.o` | Full DWARF-2 |
-| `rrm.o` | `/var/sysgen/boot/rrm.o` | `mgras_kernel/rrm.o` | Full DWARF-2 |
-| `mgras.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras.o` | Full DWARF-2 |
-| `mgras_init.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_init.o` | Full DWARF-2 |
-| `mgras_dma.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_dma.o` | Full DWARF-2 |
-| `mgras_ccv.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_ccv.o` | Full DWARF-2 |
-| `mgras_retrace.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_retrace.o` | Full DWARF-2 |
-| `mgras_timing.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_timing.o` | Full DWARF-2 |
-| `mgras_tport.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_tport.o` | Full DWARF-2 |
-| `mgras_tex.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_tex.o` | Full DWARF-2 |
-| `mgras_texsr.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_texsr.o` | Full DWARF-2 |
-| `mgras_tex_io.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_tex_io.o` | Full DWARF-2 |
-| `mgras_corona_i2c.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_corona_i2c.o` | Full DWARF-2 |
-| `mgras_mco.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_mco.o` | Full DWARF-2 |
-| `mgras_share.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_share.o` | Full DWARF-2 |
-| `mgras_pipeend.o` | inside `/var/sysgen/boot/mgras.a` | `mgras_kernel/mgras_pipeend.o` | Full DWARF-2 |
+| `gfx.o` | `/var/sysgen/boot/gfx.o` | `software/kernel/gfx.o` | Full DWARF-2 |
+| `rrm.o` | `/var/sysgen/boot/rrm.o` | `software/kernel/rrm.o` | Full DWARF-2 |
+| `mgras.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras.o` | Full DWARF-2 |
+| `mgras_init.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_init.o` | Full DWARF-2 |
+| `mgras_dma.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_dma.o` | Full DWARF-2 |
+| `mgras_ccv.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_ccv.o` | Full DWARF-2 |
+| `mgras_retrace.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_retrace.o` | Full DWARF-2 |
+| `mgras_timing.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_timing.o` | Full DWARF-2 |
+| `mgras_tport.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_tport.o` | Full DWARF-2 |
+| `mgras_tex.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_tex.o` | Full DWARF-2 |
+| `mgras_texsr.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_texsr.o` | Full DWARF-2 |
+| `mgras_tex_io.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_tex_io.o` | Full DWARF-2 |
+| `mgras_corona_i2c.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_corona_i2c.o` | Full DWARF-2 |
+| `mgras_mco.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_mco.o` | Full DWARF-2 |
+| `mgras_share.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_share.o` | Full DWARF-2 |
+| `mgras_pipeend.o` | inside `/var/sysgen/boot/mgras.a` | `software/kernel/mgras_pipeend.o` | Full DWARF-2 |
 
 *Note*: If you only have `mgras.a`, extract it into `root/var/sysgen/boot/`:
 ```bash
 cd root/var/sysgen/boot && ar x mgras.a
 ```
 
-### B. OpenGL Core Driver (`libglcore/`)
+### B. OpenGL Core Driver (`software/opengl/`)
 | File | Source Path in IRIX | Symlink in Repository | DWARF Status |
 |---|---|---|---|
-| `libGLcore.so` | `/usr/gfx/arch/IP28GR432/libGLcore.so` | `libglcore/libGLcore.so` | Full DWARF-2 (62 CUs) |
-| `libGL.so` | `/usr/gfx/arch/IP28GR432/libGL.so` | `libglcore/libGL.so` | Full DWARF-2 |
+| `libGLcore.so` | `/usr/gfx/arch/IP28GR432/libGLcore.so` | `software/opengl/libGLcore.so` | Full DWARF-2 (62 CUs) |
+| `libGL.so` | `/usr/gfx/arch/IP28GR432/libGL.so` | `software/opengl/libGL.so` | Full DWARF-2 |
 
-### C. IrisGL Compatibility Layer (`irisgl/`)
+### C. IrisGL Compatibility Layer (`software/irisgl/`)
 | File | Source Path in IRIX | Symlink in Repository | DWARF Status |
 |---|---|---|---|
-| `libgl.so` | `/usr/gfx/arch/IGLOO32/libgl.so` | `irisgl/libgl.so` | Full DWARF-2 (159 CUs) |
-| `libfm.so` | `/usr/lib32/libfm.so` | `irisgl/libfm.so` | Full DWARF-2 |
+| `libgl.so` | `/usr/gfx/arch/IGLOO32/libgl.so` | `software/irisgl/libgl.so` | Full DWARF-2 (159 CUs) |
+| `libfm.so` | `/usr/lib32/libfm.so` | `software/irisgl/libfm.so` | Full DWARF-2 |
 
-### D. X11 DDX Driver (`ddx/`)
+### D. X11 DDX Driver (`software/xsgi/`)
 | File | Source Path in IRIX | Symlink in Repository | Symbols |
 |---|---|---|---|
-| `impactpc.so` | `/usr/lib/X11/dyDDX/impactpc.so` | `ddx/impactpc.so` | Dynamic symbols & relocs |
-| `glx.so` | `/usr/lib/X11/dyDDX/glx.so` | `ddx/glx.so` | Dynamic symbols & relocs |
+| `impactpc.so` | `/usr/lib/X11/dyDDX/impactpc.so` | `software/xsgi/impactpc.so` | Dynamic symbols & relocs |
+| `glx.so` | `/usr/lib/X11/dyDDX/glx.so` | `software/xsgi/glx.so` | Dynamic symbols & relocs |
 
 ### E. Diagnostic & Microcode Binaries
 | File | Source Path in IRIX | Symlink in Repository |
 |---|---|---|
-| `ge11dump` | `/usr/gfx/MGRAS/ge11dump` | `ge11dump/ge11dump` |
-| `ge11.bin` | `/usr/gfx/ucode/ge11.bin` | `ucode/ge11.bin` |
-| `hq3.bin` | `/usr/gfx/ucode/hq3.bin` | `ucode/hq3.bin` |
-| `hq3.u` | `/usr/gfx/ucode/MGRAS/hq3.u` | `ucode/hq3.u` |
-| `mgras_ge.hex` | `/usr/gfx/ucode/MG/mgras_ge.hex` | `ucode/mgras_ge.hex` |
-| `mgras_ge.u` | `/usr/gfx/ucode/MG/mgras_ge.u` | `ucode/mgras_ge.u` |
-| `mgras_geif.u` | `/usr/gfx/ucode/MG/mgras_geif.u` | `ucode/mgras_geif.u` |
+| `ge11dump` | `/usr/gfx/MGRAS/ge11dump` | `tools/ge11dump` |
+| `ge11.bin` | `/usr/gfx/ucode/ge11.bin` | `software/ucode/ge11.bin` |
+| `hq3.bin` | `/usr/gfx/ucode/hq3.bin` | `software/ucode/hq3.bin` |
+| `hq3.u` | `/usr/gfx/ucode/MGRAS/hq3.u` | `software/ucode/hq3.u` |
+| `mgras_ge.hex` | `/usr/gfx/ucode/MG/mgras_ge.hex` | `software/ucode/mgras_ge.hex` |
+| `mgras_ge.u` | `/usr/gfx/ucode/MG/mgras_ge.u` | `software/ucode/mgras_ge.u` |
+| `mgras_geif.u` | `/usr/gfx/ucode/MG/mgras_geif.u` | `software/ucode/mgras_geif.u` |
 
-The decode table (`ghidra/processors/ge11/tools/ge11_decode.py`) is learnt from all six `mgras_ge*.hex` / `mgras_ge*.u` pairs in `/usr/gfx/ucode/MG`, so copy that directory whole.
+The decode table (`tools/ghidra/processors/ge11/tools/ge11_decode.py`) is learnt from all six `mgras_ge*.hex` / `mgras_ge*.u` pairs in `/usr/gfx/ucode/MG`, so copy that directory whole.
 
 ---
 

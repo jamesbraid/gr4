@@ -6,9 +6,9 @@
  * Reverse-engineered hardware documentation.
  * Derived from the shipped binaries:
  *   - SGI IRIX PROM graphics code
- *   - GE11 microcode binaries and symbols (ucode/ge11.bin, ucode/mgras_ge.hex,
- *     ucode/mgras_ge.u with its line table, ucode/mgras_geif.u), IRIX 6.5.0,
- *     decoded with ghidra/processors/ge11
+ *   - GE11 microcode binaries and symbols (software/ucode/ge11.bin, software/ucode/mgras_ge.hex,
+ *     software/ucode/mgras_ge.u with its line table, software/ucode/mgras_geif.u), IRIX 6.5.0,
+ *     decoded with tools/ghidra/processors/ge11
  *   - SGI OpenGL Core driver (libGLcore.so) DWARF metadata
  */
 
@@ -174,7 +174,7 @@ extern "C" {
  *                      0x45900003), plus a line table naming 142 modules;
  *                      the record is what the module reads, and the
  *                      decode from W to record is not known as logic
- *                      (ghidra/processors/ge11/data/ge11_decode.tsv learns
+ *                      (tools/ghidra/processors/ge11/data/ge11_decode.tsv learns
  *                      it from the six programs that ship both forms).
  *   ge11.bin           what gfxinit loads: 12-byte words, W bits 31-0,
  *                      63-32, then 71-64 in the low byte; 0xE800 words,
@@ -296,7 +296,7 @@ extern "C" {
  * These indices are not the HQ token numbers (HQ3.h HQ_TOK_*): token 0x002
  * is COLOR4F, index 0x002 a copy routine.
  *
- * trigeom (0x298F, decompiled with ghidra/processors/ge11): it reads
+ * trigeom (0x298F, decompiled with tools/ghidra/processors/ge11): it reads
  * vertex records through address registers, words 0x23 and 0x24 of each
  * (INFERRED x and y), forms differences of word 0x24 between records, and
  * takes the reciprocal of each as a seed refined by one Newton-Raphson step

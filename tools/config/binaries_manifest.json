@@ -1,7 +1,7 @@
 {
   "mgras_kernel": [
     {
-      "path": "mgras_kernel/gfx.o",
+      "path": "software/kernel/gfx.o",
       "filename": "gfx.o",
       "size": 51840,
       "sections": {
@@ -409,7 +409,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras.o",
+      "path": "software/kernel/mgras.o",
       "filename": "mgras.o",
       "size": 97060,
       "sections": {
@@ -924,7 +924,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_ccv.o",
+      "path": "software/kernel/mgras_ccv.o",
       "filename": "mgras_ccv.o",
       "size": 11684,
       "sections": {
@@ -1035,7 +1035,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_corona_i2c.o",
+      "path": "software/kernel/mgras_corona_i2c.o",
       "filename": "mgras_corona_i2c.o",
       "size": 19812,
       "sections": {
@@ -1225,7 +1225,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_dma.o",
+      "path": "software/kernel/mgras_dma.o",
       "filename": "mgras_dma.o",
       "size": 33412,
       "sections": {
@@ -1444,7 +1444,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_init.o",
+      "path": "software/kernel/mgras_init.o",
       "filename": "mgras_init.o",
       "size": 56148,
       "sections": {
@@ -1757,7 +1757,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_mco.o",
+      "path": "software/kernel/mgras_mco.o",
       "filename": "mgras_mco.o",
       "size": 18836,
       "sections": {
@@ -1914,7 +1914,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_pipeend.o",
+      "path": "software/kernel/mgras_pipeend.o",
       "filename": "mgras_pipeend.o",
       "size": 2596,
       "sections": {
@@ -1942,7 +1942,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_retrace.o",
+      "path": "software/kernel/mgras_retrace.o",
       "filename": "mgras_retrace.o",
       "size": 25476,
       "sections": {
@@ -2111,7 +2111,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_share.o",
+      "path": "software/kernel/mgras_share.o",
       "filename": "mgras_share.o",
       "size": 5908,
       "sections": {
@@ -2165,7 +2165,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_tex.o",
+      "path": "software/kernel/mgras_tex.o",
       "filename": "mgras_tex.o",
       "size": 12932,
       "sections": {
@@ -2275,7 +2275,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_tex_io.o",
+      "path": "software/kernel/mgras_tex_io.o",
       "filename": "mgras_tex_io.o",
       "size": 21044,
       "sections": {
@@ -2433,7 +2433,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_texsr.o",
+      "path": "software/kernel/mgras_texsr.o",
       "filename": "mgras_texsr.o",
       "size": 9748,
       "sections": {
@@ -2504,7 +2504,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_timing.o",
+      "path": "software/kernel/mgras_timing.o",
       "filename": "mgras_timing.o",
       "size": 14692,
       "sections": {
@@ -2554,7 +2554,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/mgras_tport.o",
+      "path": "software/kernel/mgras_tport.o",
       "filename": "mgras_tport.o",
       "size": 11988,
       "sections": {
@@ -2666,7 +2666,7 @@
       "type": "ET_REL"
     },
     {
-      "path": "mgras_kernel/rrm.o",
+      "path": "software/kernel/rrm.o",
       "filename": "rrm.o",
       "size": 64440,
       "sections": {
@@ -3155,7 +3155,7 @@
   ],
   "libglcore": [
     {
-      "path": "libglcore/libGL.so",
+      "path": "software/opengl/libGL.so",
       "filename": "libGL.so",
       "size": 407256,
       "sections": {
@@ -7473,7 +7473,7 @@
       "type": "ET_DYN"
     },
     {
-      "path": "libglcore/libGLcore.so",
+      "path": "software/opengl/libGLcore.so",
       "filename": "libGLcore.so",
       "size": 3254556,
       "sections": {
@@ -34976,7 +34976,7 @@
   ],
   "ddx": [
     {
-      "path": "ddx/glx.so",
+      "path": "software/xsgi/glx.so",
       "filename": "glx.so",
       "size": 491168,
       "sections": {
@@ -42166,7 +42166,7 @@
       "type": "ET_DYN"
     },
     {
-      "path": "ddx/impactpc.so",
+      "path": "software/xsgi/impactpc.so",
       "filename": "impactpc.so",
       "size": 1934372,
       "sections": {
@@ -46342,7 +46342,7 @@
   ],
   "irisgl": [
     {
-      "path": "irisgl/libfm.so",
+      "path": "software/irisgl/libfm.so",
       "filename": "libfm.so",
       "size": 743692,
       "sections": {
@@ -49749,7 +49749,7 @@
       "type": "ET_DYN"
     },
     {
-      "path": "irisgl/libgl.so",
+      "path": "software/irisgl/libgl.so",
       "filename": "libgl.so",
       "size": 1682688,
       "sections": {
@@ -70084,7 +70084,7 @@
   ],
   "ge11dump": [
     {
-      "path": "ge11dump/ge11dump",
+      "path": "tools/ge11dump",
       "filename": "ge11dump",
       "size": 54180,
       "sections": {

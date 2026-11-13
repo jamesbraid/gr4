@@ -74,16 +74,16 @@ DCB window address. The display-bus windows start 0x60000 above the board base (
 
 For licensing and clean-room reasons, proprietary SGI binaries are **not checked into source control** (the local `root/` tree is gitignored). Instead, users copy them from an authentic IRIX 6.5.0 distribution into `root/` following the checklist in [evidence/irix-files.md](evidence/irix-files.md).
 
-The subdirectories below contain relative symbolic links resolving into `root/`:
+The paths below are or contain relative symbolic links resolving into `root/`:
 
 | Directory | Symlinked Files | Target in `root/` | DWARF Status |
 |---|---|---|---|
-| `mgras_kernel/` | 16 `.o` files (`mgras.o`, `mgras_init.o`, `mgras_dma.o`, `rrm.o`, `gfx.o`, etc.) | `root/var/sysgen/boot/` | **Full DWARF-2 debug symbols & relocations** |
-| `libglcore/` | `libGLcore.so`, `libGL.so` | `root/usr/gfx/arch/IP28GR432/` | **Full DWARF debug symbols** (62 MGRAS CUs) |
-| `irisgl/` | `libgl.so`, `libfm.so` | `root/usr/gfx/arch/IGLOO32/`, `root/usr/lib32/` | **Full DWARF debug symbols** (159 CUs) |
-| `ddx/` | `impactpc.so`, `glx.so` | `root/usr/lib/X11/dyDDX/` | Stripped `.symtab`, **1,012 dynamic symbols** & internal clones |
-| `ge11dump/` | `ge11dump` | `root/usr/gfx/MGRAS/` | Diagnostic and register dump utility |
-| `ucode/` | `ge11.bin`, `hq3.bin`, `hq3.u`, `mgras_ge.hex`, etc. | `root/usr/gfx/ucode/` | ASIC Microcode binaries & listings |
+| `software/kernel/` | 16 `.o` files (`mgras.o`, `mgras_init.o`, `mgras_dma.o`, `rrm.o`, `gfx.o`, etc.) | `root/var/sysgen/boot/` | **Full DWARF-2 debug symbols & relocations** |
+| `software/opengl/` | `libGLcore.so`, `libGL.so` | `root/usr/gfx/arch/IP28GR432/` | **Full DWARF debug symbols** (62 MGRAS CUs) |
+| `software/irisgl/` | `libgl.so`, `libfm.so` | `root/usr/gfx/arch/IGLOO32/`, `root/usr/lib32/` | **Full DWARF debug symbols** (159 CUs) |
+| `software/xsgi/` | `impactpc.so`, `glx.so` | `root/usr/lib/X11/dyDDX/` | Stripped `.symtab`, **1,012 dynamic symbols** & internal clones |
+| `tools/ge11dump` | `ge11dump` | `root/usr/gfx/MGRAS/` | Diagnostic and register dump utility |
+| `software/ucode/` | `ge11.bin`, `hq3.bin`, `hq3.u`, `mgras_ge.hex`, etc. | `root/usr/gfx/ucode/` | ASIC Microcode binaries & listings |
 
 ---
 
@@ -107,10 +107,10 @@ Our primary documentation output is a set of authoritative C header files mirror
 ## 5. Software Driver Headers
 
 In addition to hardware ASIC headers, we generate local headers capturing internal driver structures:
-- `mgras_kernel/include/mgras_kern.h`: Kernel driver structs (`mgras_info_t`, `mgras_data_t`, DMA ring buffers, ioctls).
-- `libglcore/include/glcore_mgras.h`: OpenGL driver state (`__glMgrasContext`, hardware state shadowing, vertex array dispatch).
-- `ddx/include/impact_ddx.h`: X11 DDX private structures, visuals, colormap groups, RRM (Rendering Resource Manager) bindings.
-- `irisgl/include/igloo.h`: IrisGL emulation layer tokens, window state, and wrapper dispatch.
+- `software/kernel/include/mgras_kern.h`: Kernel driver structs (`mgras_info_t`, `mgras_data_t`, DMA ring buffers, ioctls).
+- `software/opengl/include/glcore_mgras.h`: OpenGL driver state (`__glMgrasContext`, hardware state shadowing, vertex array dispatch).
+- `software/xsgi/include/impact_ddx.h`: X11 DDX private structures, visuals, colormap groups, RRM (Rendering Resource Manager) bindings.
+- `software/irisgl/include/igloo.h`: IrisGL emulation layer tokens, window state, and wrapper dispatch.
 
 ---
 
@@ -124,10 +124,10 @@ In addition to hardware ASIC headers, we generate local headers capturing intern
   - `extract_impact_ddx.py`: Extracts X11 DDX symbols, GOT dispatch tables, and drawing operations.
   - `extract_irisgl.py`: Extracts "igloo" IrisGL layer types and translation calls.
   - `generate_gl_headers.py`: Generates the GL header set.
-- **Shared tooling (`retools/`)**: the container definitions, wrappers (`retools/tools/re-run`), Ghidra scripts and processors, and extractors are the `retools/` submodule (sgi-retools). Shared tools are `retools/tools/NAME`, gr4's own are `retools/tools/gr4/NAME`; nothing under `tools/` or `scripts/` here links into it. `scripts/` holds only this repository's own data and config (`inventory-config.json`, `inventory-root.sha256`, `leak-allow.txt`). `ghidra/processors/ge11` is a link into `retools/ghidra/processors/ge11` so the Ghidra tests run by that workspace path. The leak, claim and copy checks are no longer part of the shared tooling. `tools/setup-clone.sh` prepares a fresh clone.
-- **Ghidra (`ghidra/`, entry point [ghidra/README.md](ghidra/README.md))**:
+- **Shared tooling (`retools/`)**: the container definitions, wrappers (`retools/tools/re-run`), Ghidra scripts and processors, and extractors are the `retools/` submodule (sgi-retools). Shared tools are `retools/tools/NAME`, gr4's own are `retools/tools/gr4/NAME`; nothing else under `tools/` here links into it. `tools/config/` holds this repository's own data and config (`inventory-config.json`, `inventory-root.sha256`, `leak-allow.txt`, `defs-check.toml`, `binaries_manifest.json`). `tools/ghidra/processors/ge11` is a link into `retools/ghidra/processors/ge11` so the Ghidra tests run by that workspace path. The leak, claim and copy checks are no longer part of the shared tooling. `tools/setup-clone.sh` prepares a fresh clone.
+- **Ghidra (`tools/ghidra/`, entry point [tools/ghidra/README.md](tools/ghidra/README.md))**:
   - `retools/ghidra/scripts/`: the shared headless scripts for IRIX MIPS binaries (`IrixGp`, `IrixJumpTables`, `FindWindowStores`, `DumpCallEdges`, `ApplyStruct`, `DecompileFunctions`) and [their guide](retools/ghidra/scripts/README.md): when to use Ghidra rather than `m2c`, and what each tool gets wrong. Run `IrixGp.java` and `IrixJumpTables.java` before trusting any switch or global in Ghidra's output.
-  - `ghidra/processors/ge11/`: a processor module for GE11 microcode. It loads `mgras_ge*.u`, `mgras_ge*.hex`, `ge11*.bin` and the 6.5.7 diagnostic program, decompiles routines, and labels source modules, `mgras_geif.u` entries and diagnostic labels. Words that come without their decoded records go through `data/ge11_decode.tsv` (`tools/ge11_decode.py`). The instruction word itself is in `GE11.h`.
+  - `tools/ghidra/processors/ge11/`: a processor module for GE11 microcode. It loads `mgras_ge*.u`, `mgras_ge*.hex`, `ge11*.bin` and the 6.5.7 diagnostic program, decompiles routines, and labels source modules, `mgras_geif.u` entries and diagnostic labels. Words that come without their decoded records go through `data/ge11_decode.tsv` (`tools/ge11_decode.py`). The instruction word itself is in `GE11.h`.
 
 ---
 

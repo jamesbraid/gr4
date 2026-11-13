@@ -61,4 +61,4 @@ Not listed one by one:
 
 ## Other
 
-- [ghidra/README.md](ghidra/README.md): Ghidra tooling; everything that runs inside Ghidra lives here.
+- [tools/ghidra/README.md](tools/ghidra/README.md): Ghidra tooling; everything that runs inside Ghidra lives here.
