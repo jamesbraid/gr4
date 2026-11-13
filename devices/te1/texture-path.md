@@ -41,9 +41,13 @@ what would.
   environment arithmetic. Where this page gives that arithmetic, it is an
   approximation of what the board does. It is not a claim about the silicon.
 
-None of the above was re-read for this page. The client and kernel readings come
-from the IRIX binaries as recorded in the source notes, and the register table
-from the diagnostic.
+The client readings come from the 6.5.30 `IP27GR532` library, which is not in this
+checkout, and the register table comes from the diagnostic, which is not either.
+They were not re-read. The texture register field positions and enumerations that
+rest on them are graded inferred in the register tables. The kernel block table
+(256 entries per path, 4 KiB units shifted by the unit count) was seen in the
+6.5.30 `mgras_tex_io.o` member. Treat the format table, block arithmetic and
+host layout below as carried from earlier readings, not as rechecked facts.
 
 ## Where texture state lives
 

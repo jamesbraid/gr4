@@ -9,29 +9,29 @@ no-border flag. The diagnostic's mask is 25 bits. The field positions are the
 client's encodings, graded per field; what the board does with each field is
 inferred. Bit 16 is set on every texture the client has been seen to draw with,
 and its meaning is unknown.</doc>
-    <field name="mipmap_active_copy" start="19" size="1" type="uint" grade="established"/>
+    <field name="mipmap_active_copy" start="19" size="1" type="uint" grade="inferred"/>
     <field name="no_border" start="16" size="1" type="uint" grade="unknown"/>
-    <field name="clamp_is_gl_clamp" start="14" size="1" type="uint" grade="established"/>
-    <field name="r_clamp" start="13" size="1" type="uint" grade="established"/>
-    <field name="t_clamp" start="12" size="1" type="uint" grade="established"/>
-    <field name="s_clamp" start="11" size="1" type="uint" grade="established"/>
-    <field name="min_within_level" start="8" size="1" type="uint" grade="established"/>
-    <field name="mag_linear" start="7" size="1" type="uint" grade="established"/>
-    <field name="min_between_levels" start="6" size="1" type="uint" grade="established"/>
-    <field name="mipmap_active" start="5" size="1" type="uint" grade="established"/>
-    <field name="multibuffer_hint" start="4" size="1" type="uint" grade="established"/>
-    <field name="depth_code" start="2" size="2" type="uint" grade="established"/>
+    <field name="clamp_is_gl_clamp" start="14" size="1" type="uint" grade="inferred"/>
+    <field name="r_clamp" start="13" size="1" type="uint" grade="inferred"/>
+    <field name="t_clamp" start="12" size="1" type="uint" grade="inferred"/>
+    <field name="s_clamp" start="11" size="1" type="uint" grade="inferred"/>
+    <field name="min_within_level" start="8" size="1" type="uint" grade="inferred"/>
+    <field name="mag_linear" start="7" size="1" type="uint" grade="inferred"/>
+    <field name="min_between_levels" start="6" size="1" type="uint" grade="inferred"/>
+    <field name="mipmap_active" start="5" size="1" type="uint" grade="inferred"/>
+    <field name="multibuffer_hint" start="4" size="1" type="uint" grade="inferred"/>
+    <field name="depth_code" start="2" size="2" type="uint" grade="inferred"/>
   </struct>
   <struct name="TXSIZE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf181" access="rw" space="te1_regs" reset="unknown">
     <doc>Log2 sizes of the base level and the detail level code. The diagnostic's mask
 is 23 bits. The client writes the width and height fields twice, in the low and
 high nibbles of each pair, with the same value.</doc>
-    <field name="depth_log2" start="19" size="4" type="uint" grade="established"/>
-    <field name="detail_level_code" start="16" size="3" type="uint" grade="established"/>
-    <field name="height_log2_copy" start="12" size="4" type="uint" grade="established"/>
-    <field name="width_log2_copy" start="8" size="4" type="uint" grade="established"/>
-    <field name="height_log2" start="4" size="4" type="uint" grade="established"/>
-    <field name="width_log2" start="0" size="4" type="uint" grade="established"/>
+    <field name="depth_log2" start="19" size="4" type="uint" grade="inferred"/>
+    <field name="detail_level_code" start="16" size="3" type="uint" grade="inferred"/>
+    <field name="height_log2_copy" start="12" size="4" type="uint" grade="inferred"/>
+    <field name="width_log2_copy" start="8" size="4" type="uint" grade="inferred"/>
+    <field name="height_log2" start="4" size="4" type="uint" grade="inferred"/>
+    <field name="width_log2" start="0" size="4" type="uint" grade="inferred"/>
   </struct>
   <struct name="TXTILE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf182" access="rw" space="te1_regs" reset="unknown">
     <doc>Written only by the client's texture-manager initialisation. The diagnostic's
@@ -41,21 +41,21 @@ mask is 26 bits. Its meaning is unknown.</doc>
     <doc>Level-of-detail clamp. The minimum level is sent as the level times 64, with six
 fraction bits. The diagnostic's mask is 21 bits, so bits 25 to 21 of the client's
 word are outside the mask and their meaning is unknown.</doc>
-    <field name="min_lod_64ths" start="16" size="10" type="uint" grade="established"/>
+    <field name="min_lod_64ths" start="16" size="10" type="uint" grade="inferred"/>
     <field name="context_bits" start="10" size="6" type="uint" grade="unknown"/>
-    <field name="last_level" start="0" size="4" type="uint" grade="established"/>
+    <field name="last_level" start="0" size="4" type="uint" grade="inferred"/>
   </struct>
   <struct name="TXBCOLOR_RG" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf184" access="rw" space="te1_regs" reset="unknown">
     <doc>Texture border colour, red and green, 12 bits a component, laid out like the
 environment colour.</doc>
-    <field name="green" start="12" size="12" type="uint" grade="established"/>
-    <field name="red" start="0" size="12" type="uint" grade="established"/>
+    <field name="green" start="12" size="12" type="uint" grade="inferred"/>
+    <field name="red" start="0" size="12" type="uint" grade="inferred"/>
   </struct>
   <struct name="TXBCOLOR_BA" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf185" access="rw" space="te1_regs" reset="unknown">
     <doc>Texture border colour, blue and alpha, 12 bits a component, laid out like the
 environment colour.</doc>
-    <field name="alpha" start="12" size="12" type="uint" grade="established"/>
-    <field name="blue" start="0" size="12" type="uint" grade="established"/>
+    <field name="alpha" start="12" size="12" type="uint" grade="inferred"/>
+    <field name="blue" start="0" size="12" type="uint" grade="inferred"/>
   </struct>
   <struct name="TXBASE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf186" access="rw" space="te1_regs" reset="unknown">
     <doc>Per-context base block in texture RAM. The client does not write it. The
@@ -96,8 +96,8 @@ from the register name.</doc>
 shifted left by the first level. The client computes the word as the width
 shifted left 13 bits, OR'd with the height. The height field is 13 bits wide,
 so a height of 8192 reads back as zero.</doc>
-    <field name="clamp_width" start="13" size="13" type="uint" grade="established"/>
-    <field name="clamp_height" start="0" size="13" type="uint" grade="established"/>
+    <field name="clamp_width" start="13" size="13" type="uint" grade="inferred"/>
+    <field name="clamp_height" start="0" size="13" type="uint" grade="inferred"/>
   </struct>
   <struct name="TE_RESET" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf18e" access="w" space="te1_regs" reset="unknown">
     <doc>Texture engine soft-reset strobe, 3 bits in the diagnostic's mask. The client
@@ -164,9 +164,9 @@ complement of the read-buffer bit.</doc>
   <struct name="TL_SPEC" size="4" grade="established" from="driver readings" register="yes" offset="0xf1a2" access="w" space="te1_regs" reset="unknown">
     <doc>Level being loaded: its number and its log2 width and height. The client sends
 the level's own size here, not the destination corners of the transfer.</doc>
-    <field name="log2_height" start="8" size="4" type="uint" grade="established"/>
-    <field name="log2_width" start="4" size="4" type="uint" grade="established"/>
-    <field name="level" start="0" size="4" type="uint" grade="established"/>
+    <field name="log2_height" start="8" size="4" type="uint" grade="inferred"/>
+    <field name="log2_width" start="4" size="4" type="uint" grade="inferred"/>
+    <field name="level" start="0" size="4" type="uint" grade="inferred"/>
   </struct>
   <struct name="TL_ADDR" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf1a3" access="w" space="te1_regs" reset="unknown">
     <field name="index" start="0" size="4" type="uint" grade="inferred"/>

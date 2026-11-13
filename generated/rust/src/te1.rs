@@ -6,7 +6,7 @@
 pub mod texmode2 {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf180;
-    pub mod mipmap_active_copy { // bits 19:19, established
+    pub mod mipmap_active_copy { // bits 19:19, inferred
         pub const SHIFT: u32 = 19;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -26,7 +26,7 @@ pub mod texmode2 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod clamp_is_gl_clamp { // bits 14:14, established
+    pub mod clamp_is_gl_clamp { // bits 14:14, inferred
         pub const SHIFT: u32 = 14;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -36,7 +36,7 @@ pub mod texmode2 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod r_clamp { // bits 13:13, established
+    pub mod r_clamp { // bits 13:13, inferred
         pub const SHIFT: u32 = 13;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -46,7 +46,7 @@ pub mod texmode2 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod t_clamp { // bits 12:12, established
+    pub mod t_clamp { // bits 12:12, inferred
         pub const SHIFT: u32 = 12;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -56,7 +56,7 @@ pub mod texmode2 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod s_clamp { // bits 11:11, established
+    pub mod s_clamp { // bits 11:11, inferred
         pub const SHIFT: u32 = 11;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -66,7 +66,7 @@ pub mod texmode2 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod min_within_level { // bits 8:8, established
+    pub mod min_within_level { // bits 8:8, inferred
         pub const SHIFT: u32 = 8;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -76,7 +76,7 @@ pub mod texmode2 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod mag_linear { // bits 7:7, established
+    pub mod mag_linear { // bits 7:7, inferred
         pub const SHIFT: u32 = 7;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -86,7 +86,7 @@ pub mod texmode2 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod min_between_levels { // bits 6:6, established
+    pub mod min_between_levels { // bits 6:6, inferred
         pub const SHIFT: u32 = 6;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -96,7 +96,7 @@ pub mod texmode2 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod mipmap_active { // bits 5:5, established
+    pub mod mipmap_active { // bits 5:5, inferred
         pub const SHIFT: u32 = 5;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -106,7 +106,7 @@ pub mod texmode2 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod multibuffer_hint { // bits 4:4, established
+    pub mod multibuffer_hint { // bits 4:4, inferred
         pub const SHIFT: u32 = 4;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -116,7 +116,7 @@ pub mod texmode2 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod depth_code { // bits 3:2, established
+    pub mod depth_code { // bits 3:2, inferred
         pub const SHIFT: u32 = 2;
         pub const MASK: u32 = 0x3;
         pub const fn get(v: u32) -> u32 {
@@ -131,7 +131,7 @@ pub mod texmode2 {
 pub mod txsize {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf181;
-    pub mod depth_log2 { // bits 22:19, established
+    pub mod depth_log2 { // bits 22:19, inferred
         pub const SHIFT: u32 = 19;
         pub const MASK: u32 = 0xf;
         pub const fn get(v: u32) -> u32 {
@@ -141,7 +141,7 @@ pub mod txsize {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod detail_level_code { // bits 18:16, established
+    pub mod detail_level_code { // bits 18:16, inferred
         pub const SHIFT: u32 = 16;
         pub const MASK: u32 = 0x7;
         pub const fn get(v: u32) -> u32 {
@@ -151,7 +151,7 @@ pub mod txsize {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod height_log2_copy { // bits 15:12, established
+    pub mod height_log2_copy { // bits 15:12, inferred
         pub const SHIFT: u32 = 12;
         pub const MASK: u32 = 0xf;
         pub const fn get(v: u32) -> u32 {
@@ -161,7 +161,7 @@ pub mod txsize {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod width_log2_copy { // bits 11:8, established
+    pub mod width_log2_copy { // bits 11:8, inferred
         pub const SHIFT: u32 = 8;
         pub const MASK: u32 = 0xf;
         pub const fn get(v: u32) -> u32 {
@@ -171,7 +171,7 @@ pub mod txsize {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod height_log2 { // bits 7:4, established
+    pub mod height_log2 { // bits 7:4, inferred
         pub const SHIFT: u32 = 4;
         pub const MASK: u32 = 0xf;
         pub const fn get(v: u32) -> u32 {
@@ -181,7 +181,7 @@ pub mod txsize {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod width_log2 { // bits 3:0, established
+    pub mod width_log2 { // bits 3:0, inferred
         pub const SHIFT: u32 = 0;
         pub const MASK: u32 = 0xf;
         pub const fn get(v: u32) -> u32 {
@@ -201,7 +201,7 @@ pub mod txtile {
 pub mod txlod {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf183;
-    pub mod min_lod_64ths { // bits 25:16, established
+    pub mod min_lod_64ths { // bits 25:16, inferred
         pub const SHIFT: u32 = 16;
         pub const MASK: u32 = 0x3ff;
         pub const fn get(v: u32) -> u32 {
@@ -221,7 +221,7 @@ pub mod txlod {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod last_level { // bits 3:0, established
+    pub mod last_level { // bits 3:0, inferred
         pub const SHIFT: u32 = 0;
         pub const MASK: u32 = 0xf;
         pub const fn get(v: u32) -> u32 {
@@ -236,7 +236,7 @@ pub mod txlod {
 pub mod txbcolor_rg {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf184;
-    pub mod green { // bits 23:12, established
+    pub mod green { // bits 23:12, inferred
         pub const SHIFT: u32 = 12;
         pub const MASK: u32 = 0xfff;
         pub const fn get(v: u32) -> u32 {
@@ -246,7 +246,7 @@ pub mod txbcolor_rg {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod red { // bits 11:0, established
+    pub mod red { // bits 11:0, inferred
         pub const SHIFT: u32 = 0;
         pub const MASK: u32 = 0xfff;
         pub const fn get(v: u32) -> u32 {
@@ -261,7 +261,7 @@ pub mod txbcolor_rg {
 pub mod txbcolor_ba {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf185;
-    pub mod alpha { // bits 23:12, established
+    pub mod alpha { // bits 23:12, inferred
         pub const SHIFT: u32 = 12;
         pub const MASK: u32 = 0xfff;
         pub const fn get(v: u32) -> u32 {
@@ -271,7 +271,7 @@ pub mod txbcolor_ba {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod blue { // bits 11:0, established
+    pub mod blue { // bits 11:0, inferred
         pub const SHIFT: u32 = 0;
         pub const MASK: u32 = 0xfff;
         pub const fn get(v: u32) -> u32 {
@@ -396,7 +396,7 @@ pub mod texrbuffer {
 pub mod txclampsize {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf18c;
-    pub mod clamp_width { // bits 25:13, established
+    pub mod clamp_width { // bits 25:13, inferred
         pub const SHIFT: u32 = 13;
         pub const MASK: u32 = 0x1fff;
         pub const fn get(v: u32) -> u32 {
@@ -406,7 +406,7 @@ pub mod txclampsize {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod clamp_height { // bits 12:0, established
+    pub mod clamp_height { // bits 12:0, inferred
         pub const SHIFT: u32 = 0;
         pub const MASK: u32 = 0x1fff;
         pub const fn get(v: u32) -> u32 {
@@ -581,7 +581,7 @@ pub mod tl_mode {
 pub mod tl_spec {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1a2;
-    pub mod log2_height { // bits 11:8, established
+    pub mod log2_height { // bits 11:8, inferred
         pub const SHIFT: u32 = 8;
         pub const MASK: u32 = 0xf;
         pub const fn get(v: u32) -> u32 {
@@ -591,7 +591,7 @@ pub mod tl_spec {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod log2_width { // bits 7:4, established
+    pub mod log2_width { // bits 7:4, inferred
         pub const SHIFT: u32 = 4;
         pub const MASK: u32 = 0xf;
         pub const fn get(v: u32) -> u32 {
@@ -601,7 +601,7 @@ pub mod tl_spec {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod level { // bits 3:0, established
+    pub mod level { // bits 3:0, inferred
         pub const SHIFT: u32 = 0;
         pub const MASK: u32 = 0xf;
         pub const fn get(v: u32) -> u32 {

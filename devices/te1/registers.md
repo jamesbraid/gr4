@@ -61,18 +61,18 @@ and its meaning is unknown.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 19 | `mipmap_active_copy` | established |  | driver readings |  |
+| 19 | `mipmap_active_copy` | inferred |  | driver readings |  |
 | 16 | `no_border` | unknown |  | driver readings |  |
-| 14 | `clamp_is_gl_clamp` | established |  | driver readings |  |
-| 13 | `r_clamp` | established |  | driver readings |  |
-| 12 | `t_clamp` | established |  | driver readings |  |
-| 11 | `s_clamp` | established |  | driver readings |  |
-| 8 | `min_within_level` | established |  | driver readings |  |
-| 7 | `mag_linear` | established |  | driver readings |  |
-| 6 | `min_between_levels` | established |  | driver readings |  |
-| 5 | `mipmap_active` | established |  | driver readings |  |
-| 4 | `multibuffer_hint` | established |  | driver readings |  |
-| 3:2 | `depth_code` | established |  | driver readings |  |
+| 14 | `clamp_is_gl_clamp` | inferred |  | driver readings |  |
+| 13 | `r_clamp` | inferred |  | driver readings |  |
+| 12 | `t_clamp` | inferred |  | driver readings |  |
+| 11 | `s_clamp` | inferred |  | driver readings |  |
+| 8 | `min_within_level` | inferred |  | driver readings |  |
+| 7 | `mag_linear` | inferred |  | driver readings |  |
+| 6 | `min_between_levels` | inferred |  | driver readings |  |
+| 5 | `mipmap_active` | inferred |  | driver readings |  |
+| 4 | `multibuffer_hint` | inferred |  | driver readings |  |
+| 3:2 | `depth_code` | inferred |  | driver readings |  |
 
 ### Register `txsize`
 
@@ -82,12 +82,12 @@ high nibbles of each pair, with the same value.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 22:19 | `depth_log2` | established |  | driver readings |  |
-| 18:16 | `detail_level_code` | established |  | driver readings |  |
-| 15:12 | `height_log2_copy` | established |  | driver readings |  |
-| 11:8 | `width_log2_copy` | established |  | driver readings |  |
-| 7:4 | `height_log2` | established |  | driver readings |  |
-| 3:0 | `width_log2` | established |  | driver readings |  |
+| 22:19 | `depth_log2` | inferred |  | driver readings |  |
+| 18:16 | `detail_level_code` | inferred |  | driver readings |  |
+| 15:12 | `height_log2_copy` | inferred |  | driver readings |  |
+| 11:8 | `width_log2_copy` | inferred |  | driver readings |  |
+| 7:4 | `height_log2` | inferred |  | driver readings |  |
+| 3:0 | `width_log2` | inferred |  | driver readings |  |
 
 ### Register `txtile`
 
@@ -102,9 +102,9 @@ word are outside the mask and their meaning is unknown.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 25:16 | `min_lod_64ths` | established |  | driver readings |  |
+| 25:16 | `min_lod_64ths` | inferred |  | driver readings |  |
 | 15:10 | `context_bits` | unknown |  | driver readings |  |
-| 3:0 | `last_level` | established |  | driver readings |  |
+| 3:0 | `last_level` | inferred |  | driver readings |  |
 
 ### Register `txbcolor_rg`
 
@@ -113,8 +113,8 @@ environment colour.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 23:12 | `green` | established |  | driver readings |  |
-| 11:0 | `red` | established |  | driver readings |  |
+| 23:12 | `green` | inferred |  | driver readings |  |
+| 11:0 | `red` | inferred |  | driver readings |  |
 
 ### Register `txbcolor_ba`
 
@@ -123,8 +123,8 @@ environment colour.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 23:12 | `alpha` | established |  | driver readings |  |
-| 11:0 | `blue` | established |  | driver readings |  |
+| 23:12 | `alpha` | inferred |  | driver readings |  |
+| 11:0 | `blue` | inferred |  | driver readings |  |
 
 ### Register `txbase`
 
@@ -184,8 +184,8 @@ so a height of 8192 reads back as zero.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 25:13 | `clamp_width` | established |  | driver readings |  |
-| 12:0 | `clamp_height` | established |  | driver readings |  |
+| 25:13 | `clamp_width` | inferred |  | driver readings |  |
+| 12:0 | `clamp_height` | inferred |  | driver readings |  |
 
 ### Register `te_reset`
 
@@ -263,9 +263,9 @@ the level's own size here, not the destination corners of the transfer.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 11:8 | `log2_height` | established |  | driver readings |  |
-| 7:4 | `log2_width` | established |  | driver readings |  |
-| 3:0 | `level` | established |  | driver readings |  |
+| 11:8 | `log2_height` | inferred |  | driver readings |  |
+| 7:4 | `log2_width` | inferred |  | driver readings |  |
+| 3:0 | `level` | inferred |  | driver readings |  |
 
 ### Register `tl_addr`
 

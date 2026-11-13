@@ -22,18 +22,18 @@ inferred. Bit 16 is set on every texture the client has been seen to draw with,
 and its meaning is unknown."""
 
 [registers.texmode2.fields]
-depth_code = { bits = [3, 2], grade = "established" }
-multibuffer_hint = { bits = [4, 4], grade = "established" }
-mipmap_active = { bits = [5, 5], grade = "established" }
-min_between_levels = { bits = [6, 6], grade = "established" }
-mag_linear = { bits = [7, 7], grade = "established" }
-min_within_level = { bits = [8, 8], grade = "established" }
-s_clamp = { bits = [11, 11], grade = "established" }
-t_clamp = { bits = [12, 12], grade = "established" }
-r_clamp = { bits = [13, 13], grade = "established" }
-clamp_is_gl_clamp = { bits = [14, 14], grade = "established" }
+depth_code = { bits = [3, 2], grade = "inferred" }
+multibuffer_hint = { bits = [4, 4], grade = "inferred" }
+mipmap_active = { bits = [5, 5], grade = "inferred" }
+min_between_levels = { bits = [6, 6], grade = "inferred" }
+mag_linear = { bits = [7, 7], grade = "inferred" }
+min_within_level = { bits = [8, 8], grade = "inferred" }
+s_clamp = { bits = [11, 11], grade = "inferred" }
+t_clamp = { bits = [12, 12], grade = "inferred" }
+r_clamp = { bits = [13, 13], grade = "inferred" }
+clamp_is_gl_clamp = { bits = [14, 14], grade = "inferred" }
 no_border = { bits = [16, 16], grade = "unknown" }
-mipmap_active_copy = { bits = [19, 19], grade = "established" }
+mipmap_active_copy = { bits = [19, 19], grade = "inferred" }
 
 [registers.txsize]
 offset = 0xf181
@@ -47,12 +47,12 @@ is 23 bits. The client writes the width and height fields twice, in the low and
 high nibbles of each pair, with the same value."""
 
 [registers.txsize.fields]
-width_log2 = { bits = [3, 0], grade = "established" }
-height_log2 = { bits = [7, 4], grade = "established" }
-width_log2_copy = { bits = [11, 8], grade = "established" }
-height_log2_copy = { bits = [15, 12], grade = "established" }
-detail_level_code = { bits = [18, 16], grade = "established" }
-depth_log2 = { bits = [22, 19], grade = "established" }
+width_log2 = { bits = [3, 0], grade = "inferred" }
+height_log2 = { bits = [7, 4], grade = "inferred" }
+width_log2_copy = { bits = [11, 8], grade = "inferred" }
+height_log2_copy = { bits = [15, 12], grade = "inferred" }
+detail_level_code = { bits = [18, 16], grade = "inferred" }
+depth_log2 = { bits = [22, 19], grade = "inferred" }
 
 [registers.txtile]
 offset = 0xf182
@@ -76,9 +76,9 @@ fraction bits. The diagnostic's mask is 21 bits, so bits 25 to 21 of the client'
 word are outside the mask and their meaning is unknown."""
 
 [registers.txlod.fields]
-min_lod_64ths = { bits = [25, 16], grade = "established" }
+min_lod_64ths = { bits = [25, 16], grade = "inferred" }
 context_bits = { bits = [15, 10], grade = "unknown" }
-last_level = { bits = [3, 0], grade = "established" }
+last_level = { bits = [3, 0], grade = "inferred" }
 
 [registers.txbcolor_rg]
 offset = 0xf184
@@ -91,8 +91,8 @@ Texture border colour, red and green, 12 bits a component, laid out like the
 environment colour."""
 
 [registers.txbcolor_rg.fields]
-red = { bits = [11, 0], grade = "established" }
-green = { bits = [23, 12], grade = "established" }
+red = { bits = [11, 0], grade = "inferred" }
+green = { bits = [23, 12], grade = "inferred" }
 
 [registers.txbcolor_ba]
 offset = 0xf185
@@ -105,8 +105,8 @@ Texture border colour, blue and alpha, 12 bits a component, laid out like the
 environment colour."""
 
 [registers.txbcolor_ba.fields]
-blue = { bits = [11, 0], grade = "established" }
-alpha = { bits = [23, 12], grade = "established" }
+blue = { bits = [11, 0], grade = "inferred" }
+alpha = { bits = [23, 12], grade = "inferred" }
 
 [registers.txbase]
 offset = 0xf186
@@ -197,8 +197,8 @@ shifted left 13 bits, OR'd with the height. The height field is 13 bits wide,
 so a height of 8192 reads back as zero."""
 
 [registers.txclampsize.fields]
-clamp_height = { bits = [12, 0], grade = "established" }
-clamp_width = { bits = [25, 13], grade = "established" }
+clamp_height = { bits = [12, 0], grade = "inferred" }
+clamp_width = { bits = [25, 13], grade = "inferred" }
 
 [registers.te_reset]
 offset = 0xf18e
@@ -322,9 +322,9 @@ Level being loaded: its number and its log2 width and height. The client sends
 the level's own size here, not the destination corners of the transfer."""
 
 [registers.tl_spec.fields]
-level = { bits = [3, 0], grade = "established" }
-log2_width = { bits = [7, 4], grade = "established" }
-log2_height = { bits = [11, 8], grade = "established" }
+level = { bits = [3, 0], grade = "inferred" }
+log2_width = { bits = [7, 4], grade = "inferred" }
+log2_height = { bits = [11, 8], grade = "inferred" }
 
 [registers.tl_addr]
 offset = 0xf1a3

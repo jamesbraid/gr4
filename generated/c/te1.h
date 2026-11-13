@@ -15,40 +15,40 @@
  */
 /* texmode2: rw32, space te1_regs, reset unknown; driver readings */
 #define TE_TEXMODE2_OFFSET                           0xf180u /* inferred */
-#define TE_TEXMODE2_MIPMAP_ACTIVE_COPY_SHIFT         19 /* established */
+#define TE_TEXMODE2_MIPMAP_ACTIVE_COPY_SHIFT         19 /* inferred */
 #define TE_TEXMODE2_MIPMAP_ACTIVE_COPY_MASK          0x1u
 #define TE_TEXMODE2_MIPMAP_ACTIVE_COPY_INPLACE       (TE_TEXMODE2_MIPMAP_ACTIVE_COPY_MASK << TE_TEXMODE2_MIPMAP_ACTIVE_COPY_SHIFT)
 #define TE_TEXMODE2_NO_BORDER_SHIFT                  16 /* unknown */
 #define TE_TEXMODE2_NO_BORDER_MASK                   0x1u
 #define TE_TEXMODE2_NO_BORDER_INPLACE                (TE_TEXMODE2_NO_BORDER_MASK << TE_TEXMODE2_NO_BORDER_SHIFT)
-#define TE_TEXMODE2_CLAMP_IS_GL_CLAMP_SHIFT          14 /* established */
+#define TE_TEXMODE2_CLAMP_IS_GL_CLAMP_SHIFT          14 /* inferred */
 #define TE_TEXMODE2_CLAMP_IS_GL_CLAMP_MASK           0x1u
 #define TE_TEXMODE2_CLAMP_IS_GL_CLAMP_INPLACE        (TE_TEXMODE2_CLAMP_IS_GL_CLAMP_MASK << TE_TEXMODE2_CLAMP_IS_GL_CLAMP_SHIFT)
-#define TE_TEXMODE2_R_CLAMP_SHIFT                    13 /* established */
+#define TE_TEXMODE2_R_CLAMP_SHIFT                    13 /* inferred */
 #define TE_TEXMODE2_R_CLAMP_MASK                     0x1u
 #define TE_TEXMODE2_R_CLAMP_INPLACE                  (TE_TEXMODE2_R_CLAMP_MASK << TE_TEXMODE2_R_CLAMP_SHIFT)
-#define TE_TEXMODE2_T_CLAMP_SHIFT                    12 /* established */
+#define TE_TEXMODE2_T_CLAMP_SHIFT                    12 /* inferred */
 #define TE_TEXMODE2_T_CLAMP_MASK                     0x1u
 #define TE_TEXMODE2_T_CLAMP_INPLACE                  (TE_TEXMODE2_T_CLAMP_MASK << TE_TEXMODE2_T_CLAMP_SHIFT)
-#define TE_TEXMODE2_S_CLAMP_SHIFT                    11 /* established */
+#define TE_TEXMODE2_S_CLAMP_SHIFT                    11 /* inferred */
 #define TE_TEXMODE2_S_CLAMP_MASK                     0x1u
 #define TE_TEXMODE2_S_CLAMP_INPLACE                  (TE_TEXMODE2_S_CLAMP_MASK << TE_TEXMODE2_S_CLAMP_SHIFT)
-#define TE_TEXMODE2_MIN_WITHIN_LEVEL_SHIFT           8 /* established */
+#define TE_TEXMODE2_MIN_WITHIN_LEVEL_SHIFT           8 /* inferred */
 #define TE_TEXMODE2_MIN_WITHIN_LEVEL_MASK            0x1u
 #define TE_TEXMODE2_MIN_WITHIN_LEVEL_INPLACE         (TE_TEXMODE2_MIN_WITHIN_LEVEL_MASK << TE_TEXMODE2_MIN_WITHIN_LEVEL_SHIFT)
-#define TE_TEXMODE2_MAG_LINEAR_SHIFT                 7 /* established */
+#define TE_TEXMODE2_MAG_LINEAR_SHIFT                 7 /* inferred */
 #define TE_TEXMODE2_MAG_LINEAR_MASK                  0x1u
 #define TE_TEXMODE2_MAG_LINEAR_INPLACE               (TE_TEXMODE2_MAG_LINEAR_MASK << TE_TEXMODE2_MAG_LINEAR_SHIFT)
-#define TE_TEXMODE2_MIN_BETWEEN_LEVELS_SHIFT         6 /* established */
+#define TE_TEXMODE2_MIN_BETWEEN_LEVELS_SHIFT         6 /* inferred */
 #define TE_TEXMODE2_MIN_BETWEEN_LEVELS_MASK          0x1u
 #define TE_TEXMODE2_MIN_BETWEEN_LEVELS_INPLACE       (TE_TEXMODE2_MIN_BETWEEN_LEVELS_MASK << TE_TEXMODE2_MIN_BETWEEN_LEVELS_SHIFT)
-#define TE_TEXMODE2_MIPMAP_ACTIVE_SHIFT              5 /* established */
+#define TE_TEXMODE2_MIPMAP_ACTIVE_SHIFT              5 /* inferred */
 #define TE_TEXMODE2_MIPMAP_ACTIVE_MASK               0x1u
 #define TE_TEXMODE2_MIPMAP_ACTIVE_INPLACE            (TE_TEXMODE2_MIPMAP_ACTIVE_MASK << TE_TEXMODE2_MIPMAP_ACTIVE_SHIFT)
-#define TE_TEXMODE2_MULTIBUFFER_HINT_SHIFT           4 /* established */
+#define TE_TEXMODE2_MULTIBUFFER_HINT_SHIFT           4 /* inferred */
 #define TE_TEXMODE2_MULTIBUFFER_HINT_MASK            0x1u
 #define TE_TEXMODE2_MULTIBUFFER_HINT_INPLACE         (TE_TEXMODE2_MULTIBUFFER_HINT_MASK << TE_TEXMODE2_MULTIBUFFER_HINT_SHIFT)
-#define TE_TEXMODE2_DEPTH_CODE_SHIFT                 2 /* established */
+#define TE_TEXMODE2_DEPTH_CODE_SHIFT                 2 /* inferred */
 #define TE_TEXMODE2_DEPTH_CODE_MASK                  0x3u
 #define TE_TEXMODE2_DEPTH_CODE_INPLACE               (TE_TEXMODE2_DEPTH_CODE_MASK << TE_TEXMODE2_DEPTH_CODE_SHIFT)
 
@@ -59,22 +59,22 @@
  */
 /* txsize: rw32, space te1_regs, reset unknown; driver readings */
 #define TE_TXSIZE_OFFSET                             0xf181u /* inferred */
-#define TE_TXSIZE_DEPTH_LOG2_SHIFT                   19 /* established */
+#define TE_TXSIZE_DEPTH_LOG2_SHIFT                   19 /* inferred */
 #define TE_TXSIZE_DEPTH_LOG2_MASK                    0xfu
 #define TE_TXSIZE_DEPTH_LOG2_INPLACE                 (TE_TXSIZE_DEPTH_LOG2_MASK << TE_TXSIZE_DEPTH_LOG2_SHIFT)
-#define TE_TXSIZE_DETAIL_LEVEL_CODE_SHIFT            16 /* established */
+#define TE_TXSIZE_DETAIL_LEVEL_CODE_SHIFT            16 /* inferred */
 #define TE_TXSIZE_DETAIL_LEVEL_CODE_MASK             0x7u
 #define TE_TXSIZE_DETAIL_LEVEL_CODE_INPLACE          (TE_TXSIZE_DETAIL_LEVEL_CODE_MASK << TE_TXSIZE_DETAIL_LEVEL_CODE_SHIFT)
-#define TE_TXSIZE_HEIGHT_LOG2_COPY_SHIFT             12 /* established */
+#define TE_TXSIZE_HEIGHT_LOG2_COPY_SHIFT             12 /* inferred */
 #define TE_TXSIZE_HEIGHT_LOG2_COPY_MASK              0xfu
 #define TE_TXSIZE_HEIGHT_LOG2_COPY_INPLACE           (TE_TXSIZE_HEIGHT_LOG2_COPY_MASK << TE_TXSIZE_HEIGHT_LOG2_COPY_SHIFT)
-#define TE_TXSIZE_WIDTH_LOG2_COPY_SHIFT              8 /* established */
+#define TE_TXSIZE_WIDTH_LOG2_COPY_SHIFT              8 /* inferred */
 #define TE_TXSIZE_WIDTH_LOG2_COPY_MASK               0xfu
 #define TE_TXSIZE_WIDTH_LOG2_COPY_INPLACE            (TE_TXSIZE_WIDTH_LOG2_COPY_MASK << TE_TXSIZE_WIDTH_LOG2_COPY_SHIFT)
-#define TE_TXSIZE_HEIGHT_LOG2_SHIFT                  4 /* established */
+#define TE_TXSIZE_HEIGHT_LOG2_SHIFT                  4 /* inferred */
 #define TE_TXSIZE_HEIGHT_LOG2_MASK                   0xfu
 #define TE_TXSIZE_HEIGHT_LOG2_INPLACE                (TE_TXSIZE_HEIGHT_LOG2_MASK << TE_TXSIZE_HEIGHT_LOG2_SHIFT)
-#define TE_TXSIZE_WIDTH_LOG2_SHIFT                   0 /* established */
+#define TE_TXSIZE_WIDTH_LOG2_SHIFT                   0 /* inferred */
 #define TE_TXSIZE_WIDTH_LOG2_MASK                    0xfu
 #define TE_TXSIZE_WIDTH_LOG2_INPLACE                 (TE_TXSIZE_WIDTH_LOG2_MASK << TE_TXSIZE_WIDTH_LOG2_SHIFT)
 
@@ -92,13 +92,13 @@
  */
 /* txlod: rw32, space te1_regs, reset unknown; driver readings */
 #define TE_TXLOD_OFFSET                              0xf183u /* inferred */
-#define TE_TXLOD_MIN_LOD_64THS_SHIFT                 16 /* established */
+#define TE_TXLOD_MIN_LOD_64THS_SHIFT                 16 /* inferred */
 #define TE_TXLOD_MIN_LOD_64THS_MASK                  0x3ffu
 #define TE_TXLOD_MIN_LOD_64THS_INPLACE               (TE_TXLOD_MIN_LOD_64THS_MASK << TE_TXLOD_MIN_LOD_64THS_SHIFT)
 #define TE_TXLOD_CONTEXT_BITS_SHIFT                  10 /* unknown */
 #define TE_TXLOD_CONTEXT_BITS_MASK                   0x3fu
 #define TE_TXLOD_CONTEXT_BITS_INPLACE                (TE_TXLOD_CONTEXT_BITS_MASK << TE_TXLOD_CONTEXT_BITS_SHIFT)
-#define TE_TXLOD_LAST_LEVEL_SHIFT                    0 /* established */
+#define TE_TXLOD_LAST_LEVEL_SHIFT                    0 /* inferred */
 #define TE_TXLOD_LAST_LEVEL_MASK                     0xfu
 #define TE_TXLOD_LAST_LEVEL_INPLACE                  (TE_TXLOD_LAST_LEVEL_MASK << TE_TXLOD_LAST_LEVEL_SHIFT)
 
@@ -108,10 +108,10 @@
  */
 /* txbcolor_rg: rw32, space te1_regs, reset unknown; driver readings */
 #define TE_TXBCOLOR_RG_OFFSET                        0xf184u /* inferred */
-#define TE_TXBCOLOR_RG_GREEN_SHIFT                   12 /* established */
+#define TE_TXBCOLOR_RG_GREEN_SHIFT                   12 /* inferred */
 #define TE_TXBCOLOR_RG_GREEN_MASK                    0xfffu
 #define TE_TXBCOLOR_RG_GREEN_INPLACE                 (TE_TXBCOLOR_RG_GREEN_MASK << TE_TXBCOLOR_RG_GREEN_SHIFT)
-#define TE_TXBCOLOR_RG_RED_SHIFT                     0 /* established */
+#define TE_TXBCOLOR_RG_RED_SHIFT                     0 /* inferred */
 #define TE_TXBCOLOR_RG_RED_MASK                      0xfffu
 #define TE_TXBCOLOR_RG_RED_INPLACE                   (TE_TXBCOLOR_RG_RED_MASK << TE_TXBCOLOR_RG_RED_SHIFT)
 
@@ -121,10 +121,10 @@
  */
 /* txbcolor_ba: rw32, space te1_regs, reset unknown; driver readings */
 #define TE_TXBCOLOR_BA_OFFSET                        0xf185u /* inferred */
-#define TE_TXBCOLOR_BA_ALPHA_SHIFT                   12 /* established */
+#define TE_TXBCOLOR_BA_ALPHA_SHIFT                   12 /* inferred */
 #define TE_TXBCOLOR_BA_ALPHA_MASK                    0xfffu
 #define TE_TXBCOLOR_BA_ALPHA_INPLACE                 (TE_TXBCOLOR_BA_ALPHA_MASK << TE_TXBCOLOR_BA_ALPHA_SHIFT)
-#define TE_TXBCOLOR_BA_BLUE_SHIFT                    0 /* established */
+#define TE_TXBCOLOR_BA_BLUE_SHIFT                    0 /* inferred */
 #define TE_TXBCOLOR_BA_BLUE_MASK                     0xfffu
 #define TE_TXBCOLOR_BA_BLUE_INPLACE                  (TE_TXBCOLOR_BA_BLUE_MASK << TE_TXBCOLOR_BA_BLUE_SHIFT)
 
@@ -204,10 +204,10 @@
  */
 /* txclampsize: rw32, space te1_regs, reset unknown; driver readings */
 #define TE_TXCLAMPSIZE_OFFSET                        0xf18cu /* established */
-#define TE_TXCLAMPSIZE_CLAMP_WIDTH_SHIFT             13 /* established */
+#define TE_TXCLAMPSIZE_CLAMP_WIDTH_SHIFT             13 /* inferred */
 #define TE_TXCLAMPSIZE_CLAMP_WIDTH_MASK              0x1fffu
 #define TE_TXCLAMPSIZE_CLAMP_WIDTH_INPLACE           (TE_TXCLAMPSIZE_CLAMP_WIDTH_MASK << TE_TXCLAMPSIZE_CLAMP_WIDTH_SHIFT)
-#define TE_TXCLAMPSIZE_CLAMP_HEIGHT_SHIFT            0 /* established */
+#define TE_TXCLAMPSIZE_CLAMP_HEIGHT_SHIFT            0 /* inferred */
 #define TE_TXCLAMPSIZE_CLAMP_HEIGHT_MASK             0x1fffu
 #define TE_TXCLAMPSIZE_CLAMP_HEIGHT_INPLACE          (TE_TXCLAMPSIZE_CLAMP_HEIGHT_MASK << TE_TXCLAMPSIZE_CLAMP_HEIGHT_SHIFT)
 
@@ -307,13 +307,13 @@
  */
 /* tl_spec: w32, space te1_regs, reset unknown; driver readings */
 #define TE_TL_SPEC_OFFSET                            0xf1a2u /* established */
-#define TE_TL_SPEC_LOG2_HEIGHT_SHIFT                 8 /* established */
+#define TE_TL_SPEC_LOG2_HEIGHT_SHIFT                 8 /* inferred */
 #define TE_TL_SPEC_LOG2_HEIGHT_MASK                  0xfu
 #define TE_TL_SPEC_LOG2_HEIGHT_INPLACE               (TE_TL_SPEC_LOG2_HEIGHT_MASK << TE_TL_SPEC_LOG2_HEIGHT_SHIFT)
-#define TE_TL_SPEC_LOG2_WIDTH_SHIFT                  4 /* established */
+#define TE_TL_SPEC_LOG2_WIDTH_SHIFT                  4 /* inferred */
 #define TE_TL_SPEC_LOG2_WIDTH_MASK                   0xfu
 #define TE_TL_SPEC_LOG2_WIDTH_INPLACE                (TE_TL_SPEC_LOG2_WIDTH_MASK << TE_TL_SPEC_LOG2_WIDTH_SHIFT)
-#define TE_TL_SPEC_LEVEL_SHIFT                       0 /* established */
+#define TE_TL_SPEC_LEVEL_SHIFT                       0 /* inferred */
 #define TE_TL_SPEC_LEVEL_MASK                        0xfu
 #define TE_TL_SPEC_LEVEL_INPLACE                     (TE_TL_SPEC_LEVEL_MASK << TE_TL_SPEC_LEVEL_SHIFT)
 

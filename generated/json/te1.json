@@ -23,7 +23,7 @@
    "name": "texmode2.mipmap_active_copy",
    "hi": 19,
    "lo": 19,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -41,7 +41,7 @@
    "name": "texmode2.clamp_is_gl_clamp",
    "hi": 14,
    "lo": 14,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -50,7 +50,7 @@
    "name": "texmode2.r_clamp",
    "hi": 13,
    "lo": 13,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -59,7 +59,7 @@
    "name": "texmode2.t_clamp",
    "hi": 12,
    "lo": 12,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -68,7 +68,7 @@
    "name": "texmode2.s_clamp",
    "hi": 11,
    "lo": 11,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -77,7 +77,7 @@
    "name": "texmode2.min_within_level",
    "hi": 8,
    "lo": 8,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -86,7 +86,7 @@
    "name": "texmode2.mag_linear",
    "hi": 7,
    "lo": 7,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -95,7 +95,7 @@
    "name": "texmode2.min_between_levels",
    "hi": 6,
    "lo": 6,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -104,7 +104,7 @@
    "name": "texmode2.mipmap_active",
    "hi": 5,
    "lo": 5,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -113,7 +113,7 @@
    "name": "texmode2.multibuffer_hint",
    "hi": 4,
    "lo": 4,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -122,7 +122,7 @@
    "name": "texmode2.depth_code",
    "hi": 3,
    "lo": 2,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -145,7 +145,7 @@
    "name": "txsize.depth_log2",
    "hi": 22,
    "lo": 19,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -154,7 +154,7 @@
    "name": "txsize.detail_level_code",
    "hi": 18,
    "lo": 16,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -163,7 +163,7 @@
    "name": "txsize.height_log2_copy",
    "hi": 15,
    "lo": 12,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -172,7 +172,7 @@
    "name": "txsize.width_log2_copy",
    "hi": 11,
    "lo": 8,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -181,7 +181,7 @@
    "name": "txsize.height_log2",
    "hi": 7,
    "lo": 4,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -190,7 +190,7 @@
    "name": "txsize.width_log2",
    "hi": 3,
    "lo": 0,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -227,7 +227,7 @@
    "name": "txlod.min_lod_64ths",
    "hi": 25,
    "lo": 16,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -245,7 +245,7 @@
    "name": "txlod.last_level",
    "hi": 3,
    "lo": 0,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -268,7 +268,7 @@
    "name": "txbcolor_rg.green",
    "hi": 23,
    "lo": 12,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -277,7 +277,7 @@
    "name": "txbcolor_rg.red",
    "hi": 11,
    "lo": 0,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -300,7 +300,7 @@
    "name": "txbcolor_ba.alpha",
    "hi": 23,
    "lo": 12,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -309,7 +309,7 @@
    "name": "txbcolor_ba.blue",
    "hi": 11,
    "lo": 0,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -488,7 +488,7 @@
    "name": "txclampsize.clamp_width",
    "hi": 25,
    "lo": 13,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -497,7 +497,7 @@
    "name": "txclampsize.clamp_height",
    "hi": 12,
    "lo": 0,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -740,7 +740,7 @@
    "name": "tl_spec.log2_height",
    "hi": 11,
    "lo": 8,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -749,7 +749,7 @@
    "name": "tl_spec.log2_width",
    "hi": 7,
    "lo": 4,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
@@ -758,7 +758,7 @@
    "name": "tl_spec.level",
    "hi": 3,
    "lo": 0,
-   "grade": "established",
+   "grade": "inferred",
    "from": "driver readings"
   },
   {
