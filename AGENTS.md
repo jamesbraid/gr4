@@ -136,3 +136,19 @@ In addition to hardware ASIC headers, we generate local headers capturing intern
 Grades in this project's documents use one legend. **Established**: read directly from a shipped binary, a published SGI document, or a diagnostic transcript or capture. **Secondary**: taken from a published secondary source, such as a third-party page quoting SGI text, not first-hand. **Inferred**: follows from established facts or from the binaries by stated reasoning. **Unknown**: not derived; [questions/README.md](questions/README.md) says what would settle it.
 
 Every published SGI document, white paper and public web page found that bears on IMPACT is stored in full under `references/documents/`, with its SHA-256 and source URL in [references/documents/INDEX.md](references/documents/INDEX.md) (`sha256sum -c SHA256SUMS` verifies the set). Facts taken from them, each labelled with a grade from the legend above and cited by page, are in [devices/mgras/board-facts.md](devices/mgras/board-facts.md). Cite a document by its file name and printed page. What the headers still mark unknown, and what would settle each, is kept in [questions/README.md](questions/README.md). No register-level manual for any IMPACT chip has been found; chip behaviour still comes from the binaries and source in sections 3 and 6.
+
+---
+
+## Evidence order
+
+For a register or behaviour fact, take it from the highest source that states it and grade it by that source:
+
+1. IRIX source (public `irix-657m-src` tree): read it, write the fact in your own words, never copy source text, cite the path in the tree. A fact it defines is `established`.
+2. Shipped binaries (PROMs, kernels, libraries): confirm the source matches what shipped, and the release differences (6.5.7 source, 6.5.22 and 6.5.30 binaries).
+3. Public Linux, OpenBSD and NetBSD headers and drivers: `established` once the IRIX source confirms them.
+4. Published SGI and vendor manuals.
+5. Notes from other projects (Origami datasheets, QEMU manual pages, emulator code): may confirm or contradict, never supply a fact. A fact resting only on one stays `unknown`, with the note named.
+
+Reset values: `established` when the source states a power-on default or PROM code relies on a reset state; `inferred` when the PROM depends on a value before its first write (cite the PROM address); a read after firmware initialisation is not a reset value and can only rule values out; otherwise `unknown`. A physical hardware read is a last resort, needs the repository owner's approval, and counts as a reset value only for a register firmware provably never writes. Emulator runs are model behaviour, never hardware evidence.
+
+Full text and the checks that enforce it: `retools/tools/README-analysis.md#evidence-order`.
