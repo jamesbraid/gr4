@@ -1,5 +1,7 @@
 # Open questions and what the shipped software settles
 
+<!-- keep -->
+
 The hardware headers mark what they do not know with "not known", "unknown" or an `UNKNOWN` label. This page is the ledger for those marks. Each entry says whether the shipped software settled it, the evidence, and for what is still open, what would settle it.
 
 Grades are established, secondary, inferred or unknown; the legend is in [AGENTS.md section 7](../AGENTS.md#7-published-documents). None of these is a measurement of the silicon. Binary evidence is cited by object and text offset in the 6.5.22 kernel graphics objects (`mgras.o`, `mgras_init.o`, `mgras_mco.o`). The diagnostics are the 6.5.7 standalone graphics diagnostics and their option-board command registry.
