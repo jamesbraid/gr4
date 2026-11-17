@@ -17,11 +17,11 @@
       "*/include/*.h"
     ],
     "tables": [
-      "evidence/inventory/*.tsv"
+      "generated/inventory/*.tsv"
     ],
     "index": [
       "AGENTS.md",
-      "evidence/irix-files.md"
+      "references/irix-files.md"
     ],
     "skip": [
       "devices/*/registers.md"

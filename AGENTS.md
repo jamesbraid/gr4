@@ -72,7 +72,7 @@ DCB window address. The display-bus windows start 0x60000 above the board base (
 
 ## 3. Project Binaries & Evidence
 
-For licensing and clean-room reasons, proprietary SGI binaries are **not checked into source control** (the local `root/` tree is gitignored). Instead, users copy them from an authentic IRIX 6.5.0 distribution into `root/` following the checklist in [evidence/irix-files.md](evidence/irix-files.md).
+For licensing and clean-room reasons, proprietary SGI binaries are **not checked into source control** (the local `root/` tree is gitignored). Instead, users copy them from an authentic IRIX 6.5.0 distribution into `root/` following the checklist in [references/irix-files.md](references/irix-files.md).
 
 The paths below are or contain relative symbolic links resolving into `root/`:
 
