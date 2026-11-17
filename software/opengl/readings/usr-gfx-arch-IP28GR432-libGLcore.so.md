@@ -1,96 +1,6 @@
-# Routine roles, first reading batch
+# Readings: `usr/gfx/arch/IP28GR432/libGLcore.so`
 
-Role statements for the first 25 routines of the reading round on the graphics binaries. Each statement comes from the rendered facts for that routine: register use, calls, constants and branches. The grader accepted all 25 (1371 of 1371 sentences matched, no renderer conflicts), so none are rejected.
-
-Every grade here is inferred. The facts come from reading the shipped binaries, and none of these routines has a published register contract to check against. Where a meaning rests only on the routine's name, the entry says so. The grade legend is in [AGENTS.md section 7](../../AGENTS.md#7-published-documents).
-
-### `MgrasInitCCR` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)` at 0x54c
-
-Grade: inferred.
-
-Role (from name): `MgrasInitCCR` brings up a control block for a CC device. It raises the interrupt level with `splhi` and restores it with `splx` (calls 1 and 2, before the lock), checks a static flag (branch at 0x574) and calls `init_mutex` at 0x75c when the flag is zero, and takes a lock with `mutex_lock` (0x594) that `mutex_unlock` releases at 0x730. It calls `readData` with a buffer at `sp-128` and calls `CCInit(0x33)`. When `CCInit` returns a negative value (branch at 0x67c) it calls `writeCC(0x19, 1)` at 0x6f4. What "CC" stands for is not established by the facts.
-
-Reviewed: 2026-11-12
-
-### `MgrasProbe` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x770
-
-Grade: inferred.
-
-`MgrasProbe` checks whether the board's registers answer at a base address. It calls `badaddr` at `a0`, at `a0+0x50000` and at `a0+0x50114`, and compares a word read from `a0` against 0x10 and 1. It returns 0 or 1, and stores words at 0x890 and 0x8a4 whose addresses the facts do not show. The meaning of the 0x10 and 1 checks is not established.
-
-Reviewed: 2026-11-12
-
-### `MgrasReset` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0xee8
-
-Grade: inferred.
-
-Role (from name): `MgrasReset` resets the board's register block. It finds the base index with `mgras_baseindex`, calls `flushbus` on either side of a `us_delay(10)`, and writes two words at `a0+0x50000` and `a0+0x50114`. It also reads and writes one byte around the delay (loads at 0xf30 and 0xf5c, stores at 0xf48 and 0xf64); the facts do not show that byte's address. The byte's role and the values written are not decoded, and the routine returns `a0+0x50000`.
-
-Reviewed: 2026-11-12
-
-### `MgrasVerifyVC3SRAM` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x3c7c
-
-Grade: inferred.
-
-Role (from name): `MgrasVerifyVC3SRAM` reads back the VC3 SRAM after a load. It reads the word at `a0+0x70100` and compares a value against 6 before and between accesses, writes a word at `a0+0x62038`, and reads halfwords at `a0+0x62190`. It calls `us_delay` with 1000 as its first argument on one path and calls `cmn_err` with level 4 twice (calls 2 and 3). The second `cmn_err` call also passes the halfword read at `a0+401808` (the same offset as `a0+0x62190`) in a4 to a6. The "VC3 SRAM" label comes from the routine's name, and the offsets come from the binary rather than from a checked register map.
-
-Reviewed: 2026-11-12
-
-### `MgrasLoadVC3SRAM` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x3eb4
-
-Grade: inferred.
-
-Role (from name): `MgrasLoadVC3SRAM` writes a buffer into the VC3 SRAM through the same register pair as the verify routine: a word store at `a0+0x62038` and a halfword store at `a0+0x62190`, the halfword store guarded by a nonzero `a3`. It polls `a0+0x70100` against 6 before the writes. It then calls `MgrasVerifyVC3SRAM`, passing `a0+0x70000` and `a0+0x60000` in a6 and a7. `MgrasClearCursor` calls it with a zeroed 256-byte buffer, so that caller appears to load zeros, but the source data for other callers is not established.
-
-Reviewed: 2026-11-12
-
-### `MgrasClearCursor` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x3fa4
-
-Grade: inferred.
-
-Role (from name): `MgrasClearCursor` clears the cursor image. It zeroes a 256-byte stack buffer with `bzero`, passes it to `MgrasLoadVC3SRAM` with a2 = 0x400 and a3 = 0x80, and then writes three words at `a0+0x62038`. It returns the constant 0x2028000 on its exit path. The meaning of the two arguments and of the three control writes is not decoded, so the constant's meaning is open.
-
-Reviewed: 2026-11-12
-
-### `MgrasEnableRetraceInterrupts` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x4038
-
-Grade: inferred.
-
-`MgrasEnableRetraceInterrupts` appears to turn on the retrace interrupt. It finds the base index with `mgras_baseindex`, reads `a0+0x70100` twice, and compares a value against 6 in a loop. It stores a word at `a0+0x62038` at 0x40c8, after the return at 0x40c4 in address order. The bit it sets is not identified, and the name is the only evidence that the interrupt is the retrace one.
-
-Reviewed: 2026-11-12
-
-### `MgrasEnableVideoTiming` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x418c
-
-Grade: inferred.
-
-Role (from name): `MgrasEnableVideoTiming` programs video timing through the control word at `a0+0x62038`. It finds the base index with `mgras_baseindex`, reads `a0+0x70100` twice, and compares against 6. The routine has two stores to `a0+0x62038`, and a branch on the argument `a1` (zero or not, at 0x41e8) decides which one runs. On one path it returns the result of `mgras_baseindex`, and the timing values it writes are not decoded.
-
-Reviewed: 2026-11-12
-
-### `MgrasBlankScreen` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x4ee8
-
-Grade: inferred.
-
-`MgrasBlankScreen` blanks the display by switching the panel power through two helpers, `mgras_fpi2cPanelOff` and `mgras_fpi2cPanelOn`. A branch on the argument `a1` (zero or not, at 0x4f5c) chooses between two paths, and the call to `mgras_fpi2cPanelOn` passes 0xff in a4. Each path stores bytes at `a0+0x61811` and `a0+0x61910`, and a further byte at `a0+0x60d88` only when a later check of `a1` (at 0x4f74 or 0x4fcc) is nonzero. On one path it returns 3. The byte offsets are not identified, and "panel" and "I2C" come from the helper names.
-
-Reviewed: 2026-11-12
-
-### `hw_release_pipe` in `usr/gfx/MGRAS/HQ3/ge11dump.HQ3` at 0x409114
-
-Grade: inferred.
-
-Role (from name): `hw_release_pipe` ends the diagnostic's use of the hardware pipe. Unless the `simTest` flag is set, it issues ioctl request 0x6d670008 on the graphics device descriptor. On a negative return it prints a message, calls `ge11_diag_end` and exits. On a non-negative return it stores a word at 0x40919c, and the facts do not name the target. Whether the pipe is a kernel object or a bookkeeping handle is not established.
-
-Reviewed: 2026-11-12
-
-### `hw_acquire_pipe` in `usr/gfx/MGRAS/HQ3/ge11dump.HQ3` at 0x4091b0
-
-Grade: inferred.
-
-Role (from name): `hw_acquire_pipe` is the counterpart of `hw_release_pipe`. When `simTest` is set, it first writes two words relative to the base pointer, at +0x62408 and +0x50008. It then issues ioctl request 0x6d670007 on the device descriptor whether or not `simTest` is set, because the branch only skips the two writes. On a negative return it prints a message and calls `hw_release_pipe`, `ge11_diag_end` and `exit`. On success it stores a word at 0x40927c, and the facts do not name the target. The two base-relative writes are not explained by the facts.
-
-Reviewed: 2026-11-12
+One entry per routine, filed here from the reading batches by binary.
 
 ### `__glMgrim_RenderMode` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xda6e7e4
 
@@ -115,6 +25,15 @@ Grade: inferred.
 `__glMgrasInitDefaultValues` fills a context's default state (role from the name and from its call to `__glMgrasInitOpenGLDefaultValues`). It stores words into the context at offsets from 0x94b0 to 0x98a4 (the largest group at 0x96c0 through 0x98a4), and loads defaults from fixed data near 0xdbfb2c8. It sends fields to the device with `__glMgrasWrite`, keyed by token numbers 0x110 to 0x114, 0x116, 0x142 to 0x145, 0x156, 0x157, 0x182, 0x184, 0x185, 0x188, 0x189, 0x18b, 0x192, 0x8c and 0xc000160 to 0xc00016f, and with `__glMgrasSet` for 0x15a, 0x15b and 0x187. It also issues an ioctl with request 0x6d670017. The tokens are the routine's own values, and no register map is cited for them.
 
 Reviewed: 2026-11-12
+
+- `__glMgrSendPixels` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xda84274
+  **Inferred.** Sends pixels to the board and locks a pool slot first. It reads the byte at offset 0xc0 of its first argument (load at 0xda84334) and keeps slot 3 when that byte is zero and slot 0 otherwise in the stack word at offset 0xf0 (stores at 0xda84340 and 0xda84e0c). It then calls `__glMgr_LockSingleDMAPool` at 0xda84f98 and again at 0xda85048, loading the slot at 0xda84f64 and 0xda85040.
+
+- `__glMgrSlowCopyPixels` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xda85d90
+  **Inferred.** Copies pixels through the host path. It multiplies record words and stores the result of comparing the product with 0x8000 as a byte at offset 0xc0 (store at 0xda85e68), locks the transfer buffer with `__glMgr_LockSingleDMAPool` at 0xda85ea8 and again at 0xda85f50 with a pool index that is a register zeroed at 0xda85e7c, and calls `__glMgrMakePixelDesc` at 0xda86100 and at 0xda862cc, where it passes 2. It stores 2 at offset 0x8c (0xda85fbc). The name suggests a fallback copy; the code evidence is the locked buffer and the descriptor build.
+
+- `__glMgrDoReadPixels` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xda86564
+  **Inferred.** Reads pixels back from the board. It reads the byte at context offset 0x7c7c (load at 0xda865d4) and picks pool 3 when it is zero (set at 0xda869f8) and pool 0 otherwise (zeroed at 0xda865e0). It rewrites the transfer-mode shadow word at context offset 0x97e4 (the base plus 0x10000 less 0x681c) from the format enumerant (stores at 0xda8663c and 0xda866a0), and calls `__glMgr_LockSingleDMAPool` at 0xda866d0 and 0xda86768 with that pool index.
 
 ### `Global_TM_Interface` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdab6974
 
@@ -203,3 +122,41 @@ Grade: inferred.
 `mgrTM_DoTexRead` appears to read texture image data back from texture memory. It takes the texture record at index `a1` from the table at `a0`, sizes the transfer with `__glElementsPerGroup` and `__glBytesPerElement`, and locks and unlocks a DMA pool around it. It saves and restores render state with `__glMgrSaveRSS` and `__glMgrRestoreRSS`, converts texels with `__glMgr_FormatTexels`, and sends ioctl request 0x6d670015, then waits with `__glMgrWaitForDMARead`. The values 0x4 and 0x8000 that later branches compare against `a7` are not identified.
 
 Reviewed: 2026-11-12
+
+- `mgrTM_DoCopyTex` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdac1544.
+  Appears to be the copy-texture worker of the texture path. It reads state from the global at 0x1010, calls mgrTM_VidTexWait, mgrTM_SetLoadBuffer and mgrTM_SendTlMode (0xdac169c, 0xdac16cc, 0xdac16dc), then writes a series of register values through __glMgrasWrite (0xdac1788 to 0xdac18f0). It sends ioctl request 0x6d670016 at 0xdac1970 and calls __glMgrCopyPixels on its copy paths (0xdac1afc, 0xdac1d30, 0xdac1d7c). The error exits raise 0x501 and 0x502 through __glSetError, which suggests argument checks, but the meaning of register numbers 0x1a2 and 0x1a9 to 0x1ac is not established.
+  Grade: inferred.
+  Reviewed: 2026-11-12
+
+- `mgrTM_SR_TexRead` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdac2458.
+  Appears to read a texture back from the hardware, with a save and restore around the read. It takes a1 as a descriptor (fields at +0x0, +0x4, +0x26, +0x2c, +0x44 and +0x46) and locks a DMA pool slot through __glMgr_LockSingleDMAPool (0xdac24d4, 0xdac259c). It saves and restores pixel state through __glMgrSaveRSS (0xdac26fc) and __glMgrRestoreRSS (0xdac2810), sends ioctl request 0x6d670015 at 0xdac27a0, and waits for the DMA read in __glMgrWaitForDMARead (0xdac27b0). The descriptor field meanings are unconfirmed, and the name alone does not show whether this is the only read variant.
+  Grade: inferred.
+  Reviewed: 2026-11-12
+
+- `__glMgr_LockSingleDMAPool` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdade018.
+  Appears to lock one DMA pool slot. The slot table entries are 16 bytes apart (the index is shifted left by 4). The routine reads words at +0x7d04, +0x7d08 and +0x7d10 of the selected entry and writes words at +0x7d04, +0x7d08 and +0x7d0c (0xdade0d4 to 0xdade0dc, 0xdade11c, 0xdade120). It sends ioctl request 0x6d67000b at 0xdade0f0, and returns 1 on the exits at 0xdade0a8 and 0xdade10c and 0 at 0xdade128. The facts do not show whether 1 means the slot was taken or the pool was busy.
+  Grade: inferred.
+  Reviewed: 2026-11-12
+
+- `__glMgr_UnlockSingleDMAPool` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdade144.
+  Appears to release the slot that __glMgr_LockSingleDMAPool takes. It sends the same ioctl request 0x6d67000b (0xdade1b0). It stores words at +0x7d08 and +0x7d04 (0xdade1d8, 0xdade1e0); the stored values are not in the facts, so these may not be clears, and the facts show no slot index or stride in this routine. On the failure path (the ioctl result is negative) it calls perror (0xdade1ec) and then abort (0xdade1f8), so a failed release stops the process here.
+  Grade: inferred.
+  Reviewed: 2026-11-12
+
+- `__glMgr_LockMultiDMAPool` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdade2bc.
+  Role (from name): lock a set of DMA pool slots, the multi-slot counterpart of the single-slot lock. It makes a call to an unresolved callee at 0xdade308 with a1 scaled by 8, and sends ioctl request 0x6d67000d at 0xdade3dc. A second unresolved call at 0xdade404 and the 0 or 1 return at 0xdade420 are not explained by the facts, so the slot selection rule is unknown.
+  Grade: inferred.
+  Reviewed: 2026-11-12
+
+- `__glMgr_UnlockMultiDMAPool` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdade434.
+  Role (from name): release the set taken by __glMgr_LockMultiDMAPool. It sends ioctl request 0x6d67000d at 0xdade478, the same request the lock uses, and stores words at +0x7d08 and +0x7d04 (0xdade498, 0xdade49c); the stored values are not in the facts, so these may not be clears. Like the single-slot release, its failure path (the ioctl result is negative) calls perror (0xdade4b4) and abort (0xdade4c0).
+  Grade: inferred.
+  Reviewed: 2026-11-12
+
+- `__glMgrAllocERAM` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdae455c.
+  Role (from name): an allocation in the graphics engine's extended RAM. The facts show no size arithmetic, and the return value at 0xdae4634 is not resolved. The body is mostly ioctl calls: eight pairs, each a request 0x6d670013 followed by a request 0x6d670012, from 0xdae45d8 through 0xdae4b44. The first ioctl of a pair is skipped when a word of the structure behind the global at 0x1010 is zero (for example the beq at 0xdae45ac). The pairs sit in separate blocks reached through branches that compare a1 with constants (for example 0xdae4590, 0xdae4730 and 0xdae4740); which block a given size takes is not worked out here. Its error exits call perror and then abort in a long chain (0xdae4bb4 to 0xdae4de4), and the purpose of the two request codes is unknown.
+  Grade: inferred.
+  Reviewed: 2026-11-12
+
+- `__glMgrMakePixelDesc` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdaf600c
+  **Established.** Fills a pixel-transfer descriptor at its first argument. It stores the second argument, a transfer-kind selector, at offset 0x8c (store at 0xdaf619c) with the other arguments at offsets 0x10, 0x18, 0x20, 0x24, 0x28, 0x2c, 0x30 and 0x34 (stores at 0xdaf6184 to 0xdaf61a4). Selector values 3, 4, 8 and 9 branch past part of the work (beq at 0xdaf6060 to 0xdaf607c). It also marks the descriptor's cached state invalid by storing -1 at offset 0x1a4 (0xdaf617c) when any cached field differs from the new one.

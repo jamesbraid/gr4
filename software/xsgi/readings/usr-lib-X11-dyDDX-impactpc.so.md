@@ -1,44 +1,6 @@
-# gr4 routine role statements, set 1
+# Readings: `usr/lib/X11/dyDDX/impactpc.so`
 
-Each statement comes from the rendered facts for one routine: registers, calls and
-constants at the addresses cited. Addresses are virtual addresses in the named binary.
-Where the facts do not settle a meaning, the statement says so. Every grade here is
-inferred, because no entry is fully established by its facts alone.
-
-- `mgrTM_DoCopyTex` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdac1544.
-  Appears to be the copy-texture worker of the texture path. It reads state from the global at 0x1010, calls mgrTM_VidTexWait, mgrTM_SetLoadBuffer and mgrTM_SendTlMode (0xdac169c, 0xdac16cc, 0xdac16dc), then writes a series of register values through __glMgrasWrite (0xdac1788 to 0xdac18f0). It sends ioctl request 0x6d670016 at 0xdac1970 and calls __glMgrCopyPixels on its copy paths (0xdac1afc, 0xdac1d30, 0xdac1d7c). The error exits raise 0x501 and 0x502 through __glSetError, which suggests argument checks, but the meaning of register numbers 0x1a2 and 0x1a9 to 0x1ac is not established.
-  Grade: inferred.
-  Reviewed: 2026-11-12
-
-- `mgrTM_SR_TexRead` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdac2458.
-  Appears to read a texture back from the hardware, with a save and restore around the read. It takes a1 as a descriptor (fields at +0x0, +0x4, +0x26, +0x2c, +0x44 and +0x46) and locks a DMA pool slot through __glMgr_LockSingleDMAPool (0xdac24d4, 0xdac259c). It saves and restores pixel state through __glMgrSaveRSS (0xdac26fc) and __glMgrRestoreRSS (0xdac2810), sends ioctl request 0x6d670015 at 0xdac27a0, and waits for the DMA read in __glMgrWaitForDMARead (0xdac27b0). The descriptor field meanings are unconfirmed, and the name alone does not show whether this is the only read variant.
-  Grade: inferred.
-  Reviewed: 2026-11-12
-
-- `__glMgr_LockSingleDMAPool` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdade018.
-  Appears to lock one DMA pool slot. The slot table entries are 16 bytes apart (the index is shifted left by 4). The routine reads words at +0x7d04, +0x7d08 and +0x7d10 of the selected entry and writes words at +0x7d04, +0x7d08 and +0x7d0c (0xdade0d4 to 0xdade0dc, 0xdade11c, 0xdade120). It sends ioctl request 0x6d67000b at 0xdade0f0, and returns 1 on the exits at 0xdade0a8 and 0xdade10c and 0 at 0xdade128. The facts do not show whether 1 means the slot was taken or the pool was busy.
-  Grade: inferred.
-  Reviewed: 2026-11-12
-
-- `__glMgr_UnlockSingleDMAPool` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdade144.
-  Appears to release the slot that __glMgr_LockSingleDMAPool takes. It sends the same ioctl request 0x6d67000b (0xdade1b0). It stores words at +0x7d08 and +0x7d04 (0xdade1d8, 0xdade1e0); the stored values are not in the facts, so these may not be clears, and the facts show no slot index or stride in this routine. On the failure path (the ioctl result is negative) it calls perror (0xdade1ec) and then abort (0xdade1f8), so a failed release stops the process here.
-  Grade: inferred.
-  Reviewed: 2026-11-12
-
-- `__glMgr_LockMultiDMAPool` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdade2bc.
-  Role (from name): lock a set of DMA pool slots, the multi-slot counterpart of the single-slot lock. It makes a call to an unresolved callee at 0xdade308 with a1 scaled by 8, and sends ioctl request 0x6d67000d at 0xdade3dc. A second unresolved call at 0xdade404 and the 0 or 1 return at 0xdade420 are not explained by the facts, so the slot selection rule is unknown.
-  Grade: inferred.
-  Reviewed: 2026-11-12
-
-- `__glMgr_UnlockMultiDMAPool` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdade434.
-  Role (from name): release the set taken by __glMgr_LockMultiDMAPool. It sends ioctl request 0x6d67000d at 0xdade478, the same request the lock uses, and stores words at +0x7d08 and +0x7d04 (0xdade498, 0xdade49c); the stored values are not in the facts, so these may not be clears. Like the single-slot release, its failure path (the ioctl result is negative) calls perror (0xdade4b4) and abort (0xdade4c0).
-  Grade: inferred.
-  Reviewed: 2026-11-12
-
-- `__glMgrAllocERAM` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdae455c.
-  Role (from name): an allocation in the graphics engine's extended RAM. The facts show no size arithmetic, and the return value at 0xdae4634 is not resolved. The body is mostly ioctl calls: eight pairs, each a request 0x6d670013 followed by a request 0x6d670012, from 0xdae45d8 through 0xdae4b44. The first ioctl of a pair is skipped when a word of the structure behind the global at 0x1010 is zero (for example the beq at 0xdae45ac). The pairs sit in separate blocks reached through branches that compare a1 with constants (for example 0xdae4590, 0xdae4730 and 0xdae4740); which block a given size takes is not worked out here. Its error exits call perror and then abort in a long chain (0xdae4bb4 to 0xdae4de4), and the purpose of the two request codes is unknown.
-  Grade: inferred.
-  Reviewed: 2026-11-12
+One entry per routine, filed here from the reading batches by binary.
 
 - `mgrasDisplayCursor` in `usr/lib/X11/dyDDX/impactpc.so` at 0x5e363e34.
   Role (from name): update the displayed hardware cursor. The routine has two paths. When the word at +72 of the per-screen record equals a1 (the beq at 0x5e363e9c), it sends ioctl request 0x6d670002 at 0x5e3642d4 with a7 set to a per-screen field at +68 OR-ed with 0x4, continues at 0x5e363efc when the result is not -1, and calls ErrorF with errno at 0x5e3642f8 when it is -1. Otherwise, when a table entry at +20 is nonzero and its halfword at +12 is nonzero (the branches at 0x5e363ea4 and 0x5e363ec0), it makes an unresolved call at 0x5e363eec with that record and two halfword fields. The routine returns 1 at 0x5e364164 and 0x5e364288. The cursor record layout is not decoded, so the field meanings are unknown.
@@ -104,3 +66,6 @@ inferred, because no entry is fully established by its facts alone.
   Appears to check a reserved display mode, and also reserves an ID. It sends ioctl request 0x6d670001 at 0x5e4a47e8, the same request code vc3Init sends, then calls rrmSetReservedDID at 0x5e4a4808 with a field at +176 of a per-screen structure. It returns that call's result at 0x5e4a4820, and ErrorF reports the failure cases at 0x5e4a4830 and 0x5e4a4850. Whether the function validates, reserves, or both is not settled by the facts.
   Grade: inferred.
   Reviewed: 2026-11-12
+
+- `mgrasValidateMode` in `usr/lib/X11/dyDDX/impactpc.so` at 0x5e4a4860
+  **Established.** Builds the main-mode word for one window ID and sends it to the kernel. It reads the ID from the request record at +0x14 (load at 0x5e4a496c) and the incoming mode word at +0x24 (0x5e4a49b8), tests the ID against 0x20 (0x5e4a49a0), and replaces the colormap block field with a shifted per-visual word (0x5e4a49b4). When a flag halfword in the ID's record is set (0x5e4a49a8) it takes more bits from the record's word at +0xc (0x5e4a49d4). It then sets or clears bit 10, or bit 8 for IDs of 0x20 and above, by comparing a per-visual word with 7 (0x5e4a4a34), and sends ioctl request 0x3f9 at 0x5e4a4a6c. ErrorF reports failures at 0x5e4a4b70 and 0x5e4a4b90.

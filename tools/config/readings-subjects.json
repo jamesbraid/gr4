@@ -1,0 +1,11 @@
+{
+ "default": "software/kernel",
+ "rules": [
+  {"match": "mgras\\.a\\(", "dir": "devices/mgras"},
+  {"match": "/ge11dump", "dir": "devices/ge11"},
+  {"match": "/libGLcore\\.so$|/libGL\\.so$", "dir": "software/opengl"},
+  {"match": "/dyDDX/", "dir": "software/xsgi"},
+  {"match": "/(libgl|libfm)\\.so$", "dir": "software/irisgl"},
+  {"match": "^usr/cpu/sysgen/IP28boot/", "dir": "software/kernel"}
+ ]
+}

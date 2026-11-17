@@ -1,4 +1,18 @@
-# Routine roles, tier-2 reading batch 3
+# Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex_io.o)`
+
+One entry per routine, filed here from the reading batches by binary.
+
+- `WAIT_FOR_RE_SYNC` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex_io.o)` at 0x0
+  **Inferred.** Polls the word at a0+0x70000 (`lw` at 0x10 and 0x44) and tests bit 0 (`bne` at 0x24, `beq` at 0x4c), with `us_delay(1)` between polls (0x3c). The register s5 is tested against zero at 0x34 and 0x54, and the zero case reaches the `cmn_err` call (0x78); how s5 is set is not shown by the facts. It returns 0 or 1. Role (from name): a wait for a sync status bit.
+  Reviewed: 2026-11-12
+
+- `WAIT_FOR_READDMA` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex_io.o)` at 0x94
+  **Inferred.** Writes a word to a0+0x70080 (`sw` at 0xb0), then polls the word at a0+0x70104 (`lw` at 0xb4 and 0xe8) masked by 0x1eff until it clears (`beq` at 0xc8, `bne` at 0xf0). It delays with `us_delay(1)` (0xe0). The register s5 is tested against zero at 0xd8 and 0xf8, and the zero case reaches the `cmn_err` call (0x11c); how s5 is set is not shown by the facts. It returns 0 or 1. Role (from name): a wait for a read DMA to finish.
+  Reviewed: 2026-11-12
+
+- `flushRegs` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex_io.o)` at 0x138
+  **Inferred.** Writes a word to a4+0x70080 at seven sites (`sw` at 0x14c, 0x158 and 0x164, among others), with a loop bounded by a2 (`blez` at 0x184, `bne` at 0x1a4). It reads one word at 0x1a0 and returns either 0xffffffff80000000 or a value the facts do not show. The name suggests a register flush, and the loop bounds the writes.
+  Reviewed: 2026-11-12
 
 - `__glMgrasSet` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex_io.o)` at 0x1b4
   **Inferred.** Role (from name): queues one register write for the board. It loads the word at a4+0x8e0 (loads at 0x1bc, 0x1d4 and 0x1f8) and stores to it (0x1c8, 0x1e0 and 0x234), and stores at offset +0x7dc from a4 (0x1d0 and 0x1e8); the facts do not show how that second address is formed. The branch at 0x200 goes to the return at 0x23c when the word at a4+2272 is below 0x400 (signed). When it is 0x400 or more, the routine calls flushRegs at 0x224 with a4+2016 as its second argument first. The return at 0x23c gives either that word plus one or flushRegs's result. A branch on a3 being nonzero at 0x1f4 selects a separate path.
@@ -58,44 +72,4 @@
 
 - `MgrasInitGblTexMgr` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex_io.o)` at 0x16cc
   **Inferred.** Role (from name): initializes the global texture manager. When the state block pointer at a0+0x6d0 is already set, it calls mutex_destroy on a0+0x6c0 first (0x1710). Otherwise it allocates 0xd28 bytes with kern_malloc (0x16ec), zeroes them with bzero (0x1700), and stores the pointer at a0+0x6d0 (sd at 0x1704). On both paths it then calls init_mutex on a0+0x6c0 (0x1728), calls MgrasCleanTexBdata (0x1730), and returns its result.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cRead` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x0
-  **Inferred.** Role (from name): reads a byte from the I2C bus. It loads a byte from a0+0x62c08 (lbu at 0x70) or from a0+0x62c88 (0x94), reads the word at a0+0x70100 (lw at 0x2c and 0x40), stores the byte at a2+0 (stores at 0x74 and 0x9c), calls us_delay with 1 at 0x1c, and returns a2 on the path at 0x80.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cWrite` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0xa0
-  **Inferred.** Role (from name): writes a byte to the I2C bus, the counterpart of `mgras_fpi2cRead`. It stores bytes to a0+0x62c08 (sb at 0x110) and a0+0x62c88 (0x12c) and reads the word at a0+0x70100 (lw at 0xcc and 0xe0). It calls us_delay with 1 at 0xbc. The return at 0x118, after the store at 0x110, gives the result of that delay call.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cProbe` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x138
-  **Inferred.** Role (from name): probes for a device on the I2C bus. It compares the byte at a0+0x62c08 with 0x55 (0x1c4) and then 0xaa (0x224). It stores bytes to a0+0x62c08 and a0+0x62c88 and words to a0+0x6802c (0x15c and 0x24c) around those tests, and calls us_delay with 1 nine times (0x168 to 0x20c). It returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cSetup` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x250
-  **Inferred.** Role (from name): configures the I2C device. It calls mgras_fpi2cWrite five times (0x264 to 0x2a4), passing a1 and a2 as (1, 0x0), (0x0, 0x7f), (0x1, 0x20), (0x0, 0x1c) and (0x1, 0x40), and returns 1. The branches do not test the results of the writes.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cStart` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x2c0
-  **Inferred.** Role (from name): sends an I2C start sequence. It calls mgras_fpi2cWrite three times, passing the constant 0x40 as the third argument (0x2d8), its own a1 at entry (0x324) and the constant 0x44 (0x338). It calls mgras_fpi2cRead with a stack buffer at sp-64 (0x2e8, 0x34c and 0x3bc). It calls mgras_fpi2cStop at 0x300 when a value differs from 0x81 (0x2f8), at 0x370 when s3 is zero, and at 0x398 when bit 0x8 of a value is set (0x390). It also tests bit 0x80 of a value (0x35c) and bit 0x1 of its own a1 at entry (0x3ac). It returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cReceive` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x3cc
-  **Inferred.** Role (from name): receives bytes from the I2C bus. It calls mgras_fpi2cRead with a stack buffer at sp-64 (0x3f0) and calls it again with its second argument as the buffer at 0x464. It tests bit 0x80 (0x400) and bits 0x37 (0x440) of a value. It calls mgras_fpi2cStop at 0x414 when s1 is zero and at 0x448 when any of bits 0x37 is set. It returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cSend` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x478
-  **Inferred.** Role (from name): sends one byte on the I2C bus. It calls mgras_fpi2cWrite with its second argument (0x490), calls mgras_fpi2cRead with a stack buffer at sp-48 (0x4a4), and calls mgras_fpi2cStop at 0x4c8, 0x500 and 0x518. It tests bit 0x80 (0x4b4) and bits 0x37 (0x4f8) of a value, and returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cStop` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x530
-  **Inferred.** Role (from name): ends an I2C transfer. It calls mgras_fpi2cWrite with the constant 0xc2 (0x54c), calls mgras_fpi2cRead with a stack buffer at sp-64 (0x564), and compares a value with 0x81, which is held in s7 (0x570). It returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cPortRead` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x5b4
-  **Inferred.** Role (from name): reads from a port of the I2C device. It calls mgras_fpi2cStart with a1 or 0x1 (0x5c8), mgras_fpi2cReceive with its own a2 at entry as the second argument (0x5dc), and mgras_fpi2cStop (0x5ec). A call that returns 0 branches to the shared exit at 0x608, and the routine returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cPortWrite` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x618
-  **Inferred.** Role (from name): writes to a port of the I2C device. It calls mgras_fpi2cStart (0x628), mgras_fpi2cSend with its third argument as the second argument (0x63c), and mgras_fpi2cStop (0x64c). A call that returns 0 branches to the shared exit at 0x668, and the routine returns 0 or 1.
   Reviewed: 2026-11-12

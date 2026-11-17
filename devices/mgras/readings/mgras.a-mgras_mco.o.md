@@ -1,58 +1,6 @@
-# Routine roles, tier-2 reading batch 4
+# Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)`
 
-Role statements for 24 routines of the tier-2 reading round on the graphics binaries (targets 100 to 124 of the ranked list). Each statement comes from the rendered facts for that routine: calls, constants, branches and memory offsets. Every grade here is inferred. Where the rendered facts leave a return value or a table target open, the entry says so.
-
-- `mgras_fpi2cPanelID` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x678
-  **Inferred.** Calls `mgras_fpi2cPortRead` at 0x688 with a1 = 0x70 and passes its own a1 on as the third argument. When that call returns nonzero (the branch at 0x690 skips this on zero), it does an `lw` at 0x6a0 and an `sw` at 0x6b0, both at offset 0; the facts do not show the base register or what the word means. Returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cPanelOn` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x6c4
-  **Inferred.** Role (from name): turns a panel on. Calls `mgras_fpi2cPortWrite` with a1 = 0x70 and a2 = 0xe7 at 0x6f0, then calls in order `mgras_fpi2cAudioVolLeft`, `mgras_fpi2cAudioVolRight`, `mgras_fpi2cAudioBass` and `mgras_fpi2cAudioTreble` with values loaded from `.sdata` offsets 0, 4, 8 and 12, `mgras_fpi2cAudioSwitch` with 0xce, `mgras_fpi2cBlUp` with 0x64, `mgras_fpi2cBlDown` with 0xa, and `mgras_fpi2cSetBit` with 0x0. Each call returning zero branches to 0x7ac, skipping the rest. Returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_panels_off` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x7bc
-  **Inferred.** Loops while a counter is below 0x2 (branch at 0x804). The loop body has several guards: two compare a loaded word with zero (at 0x824 and 0x82c), one tests a byte loaded at 0x834 against 0 (at 0x838) and one against 0xff held in s7 (at 0x840); each of these branches back to the loop head at 0x800. `mgras_fpi2cPanelOff` is called at 0x7e8 with arguments the facts do not resolve. The table contents and the return value (`v0`, unset in the facts) are not shown.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cPanelOff` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x870
-  **Inferred.** Writes 0xff to port 0x70 through `mgras_fpi2cPortWrite` at 0x87c and returns that call's result unchanged. It is a single-command wrapper; the 0xff value as "off" is read from the name, not from a register contract.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cBlUp` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x890
-  **Inferred.** Role (from name): steps a backlight level up. Loops with a counter s2 that starts from a1 minus one and ends at -1 (branches at 0x8c8 and 0x8e4). Each pass makes up to four `mgras_fpi2cPortWrite` calls with a1 = 0x70 and data bytes 0xe6, 0xe4, 0xe6 and 0xe7, each ORed with 0x0 or 0x8 (calls at 0x8f4, 0x90c, 0x924 and 0x93c); a zero return branches to 0x968. A `.sbss` word is compared with 0x64 at 0x958, and when it is at or above 0x64 the branch goes back to 0x8e4. Returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cBlDown` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0x998
-  **Inferred.** Role (from name): steps a backlight level down. Has the same counter (s2 from a1 minus one, ending at -1) and four `mgras_fpi2cPortWrite` calls with a1 = 0x70 and data bytes 0xe2, 0xe0, 0xe2 and 0xe7, each ORed with 0x0 or 0x8, as `mgras_fpi2cBlUp` at 0x890. The `.sbss` test differs: `blez` at 0xa64 branches back to 0x9f4 when the word is at or below zero, where `mgras_fpi2cBlUp` compares against 0x64. Returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cAudioVolLeft` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0xaa4
-  **Inferred.** Writes one audio control value over I2C: `mgras_fpi2cStart` with address 0x82 at 0xac0, `mgras_fpi2cSend` of selector 0x0 at 0xad4, `mgras_fpi2cSend` of the value in a1 at 0xae8, then `mgras_fpi2cStop` at 0xaf8. A zero return from start or send branches to 0xb14 past the rest of the transaction. Returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cAudioVolRight` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0xb24
-  **Inferred.** Same transaction as `mgras_fpi2cAudioVolLeft` at 0xaa4 (start with 0x82, stop, failure exits at 0xb94), except the selector byte is 0x1 (at 0xb54) instead of 0x0. Returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cAudioBass` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0xba4
-  **Inferred.** Same I2C transaction shape as `mgras_fpi2cAudioVolLeft` at 0xaa4 (start with 0x82, selector, value from a1, stop, failure exits at 0xc14), with selector byte 0x2 at 0xbd4. Returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cAudioTreble` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0xc24
-  **Inferred.** Same I2C transaction shape as `mgras_fpi2cAudioVolLeft` at 0xaa4 (start with 0x82, selector, value from a1, stop, failure exits at 0xc94), with selector byte 0x3 at 0xc54. Returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cAudioSwitch` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0xca4
-  **Inferred.** Same I2C transaction shape as `mgras_fpi2cAudioVolLeft` at 0xaa4 (start with 0x82, selector, value from a1, stop, failure exits at 0xd1c), with selector byte 0x8 at 0xcdc. Returns 0 or 1.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2cSetBit` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0xd2c
-  **Inferred.** Writes one of two bit patterns to port 0x70: 0xef through `mgras_fpi2cPortWrite` at 0xd44 when a1 is nonzero, and 0xe7 at 0xd60 when a1 is zero (branch at 0xd30). The return value is the result of the last `mgras_fpi2cPortWrite` call. The facts do not show what the two patterns select on the device.
-  Reviewed: 2026-11-12
-
-- `mgras_fpi2c_command` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)` at 0xd70
-  **Inferred.** Dispatches one I2C command from a table. The command number is the word at a1 (`lw` at 0xd78), and numbers at or above 0x11 (unsigned compare at 0xd94) go to the error path, which calls `cmn_err` with level 0x4 at 0xdbc and returns 0x16 at 0xde0. Valid numbers index a `.rodata` table of 8-byte entries and jump indirectly through a register at 0xda8. The handler each valid number reaches is an unresolved table target, so the per-command behaviour is an open sub-fact.
-  Reviewed: 2026-11-12
+One entry per routine, filed here from the reading batches by binary.
 
 - `mgras_mco_probe` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x0
   **Inferred.** Calls `mgras_mco_set_dcbctrl` with a1 = 0x0 at 0x10, then stores and reads back a byte at offset 0x62c08 from a0 (`sb` at 0x28 and 0x30, `lbu` at 0x2c and 0x34). A branch at 0x54 tests a value that the facts leave unresolved, and branches at 0x60 and 0x68 compare registers a0 and a1 (reused after entry, so not the entry arguments) with 0x1 and 0xa0. The return is 0xff on one path; the value on the other path is unknown in the facts.
@@ -96,4 +44,28 @@ Role statements for 24 routines of the tier-2 reading round on the graphics bina
 
 - `mgras_mco_load_channel_gamma` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0xdd0
   **Inferred.** Loads a state word at a0+0x758; when it is zero (branch at 0xdec) it jumps to 0xe64. Otherwise it dispatches on a1: 0 goes to `MgrasSetGammaRamp` at 0xe7c with a1 = a2, a2 = a2+512, a3 = a2+1024 and a4 = 0x3; 1 and 2 go to `mgras_mco_config_7162_gamma` at 0xe34; 3 and 4 go to `mgras_mco_config_473_gamma` at 0xe50. Both gamma helpers are called with a0 = the pointer at a0+0xd0, a1 and a2 passed through, a3 = 0x2 and a4 = 0x3. The return at 0xe24 can be -5; the other value is not resolved in the facts.
+  Reviewed: 2026-11-12
+
+- `mgras_mco_config_473_gamma` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x1024
+  **Inferred.** Selects a register-write path from the value in a1: the beq tests at 0x1040 and 0x1048 compare it with 3 and 4. On the writing paths it stores bytes at a0+0x62d08 and a0+0x62d88 (sb at 0x10d0 and 0x10d4) and calls mgras_mco_set_dcbctrl at 0x10b8 with a1=2. Several loops mask the word at a0+459008 with 0x1f (bne at 0x10a0, beq at 0x10ec) before the return at 0x1068, which yields -0x16 or 0x0. Role (from name): a gamma setup for a 473 device; no constant in the rendered facts confirms it.
+  Reviewed: 2026-11-12
+
+- `mgras_mco_set_dcbctrl` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x11a0
+  **Inferred.** Reads the word at a0+0x70100 (lw at 0x11a8 and 0x11bc) and polls the word at a0+459008 under the mask 0x1f (beq at 0x11b4, bne at 0x11c4). When a3 is 0x18 or more (beq at 0x11e0) it returns -0xe from 0x120c. Below that it leaves through an indirect jump at 0x11ec whose target the rendered code does not resolve, so the handler it dispatches to is unknown.
+  Reviewed: 2026-11-12
+
+- `mgras_mco_startclock` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x1248
+  **Inferred.** Writes the word at a0+0x6802c (sw at 0x1264) and stores bytes at a0+0x62d08 and a0+0x62d88 (sb at 0x126c and 0x1278). Those two byte offsets are also written by mgras_mco_config_473_gamma and mgras_mco_7162_set_addr; the rendered facts do not show what the pair does. It returns a0+0x60000 at 0x1274.
+  Reviewed: 2026-11-12
+
+- `mgras_mco_set_control_reg` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x127c
+  **Inferred.** It calls mgras_mco_set_dcbctrl at 0x12a0 with a1=2, passing its own a2 and a3 through. Then it branches on a1 against 1, 2 and 3 (beq at 0x12b8, 0x12c0 and 0x12c8). Each of the three cases stores one byte at a0+0x62d08 (sb at 0x130c, 0x1318 and 0x1324) and rejoins at 0x12d0. From there it calls mgras_mco_set_dcbctrl again at 0x12d4 with a1=3, with a2 and a3 not resolved by the facts, then stores a byte at a0+0x62d88 (sb at 0x12ec) and returns the result of mgras_mco_set_dcbctrl at 0x12f8.
+  Reviewed: 2026-11-12
+
+- `mgras_mco_7162_set_addr` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x1328
+  **Inferred.** Reads the word at a0+0x70100 (lw at 0x1354 and 0x1368) and tests the word at a0+459008 under the mask 0x1f (beq at 0x1360, bne at 0x1370). It calls mgras_mco_set_dcbctrl at 0x1344 with a1=2, passes a2 and a3 through, stores bytes at a0+0x62d08 and a0+0x62d88 (sb at 0x1384, 0x1390 and 0x1398), and returns the callee's result at 0x13a0. Role (from name): sets an address on a 7162 part; no constant in the rendered facts confirms the part.
+  Reviewed: 2026-11-12
+
+- `mgras_mco_7162_set_cmd` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x13a8
+  **Inferred.** Polls the word at a0+459008 under the mask 0x1f (beq at 0x13d0, bne at 0x13e0) and reads a0+0x70100 (lw at 0x13b4 and 0x13d8). It calls mgras_mco_7162_set_addr at 0x13f4 with its own arguments and a5 set to a0+458752, then stores bytes at a0+0x62d08 and a0+0x62d88 (sb at 0x1418 and 0x141c) and returns a0+0x60000 at 0x1424.
   Reviewed: 2026-11-12

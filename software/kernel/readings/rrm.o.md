@@ -1,38 +1,6 @@
-# Routine readings: gr4 tier-2 batch 5
+# Readings: `usr/cpu/sysgen/IP28boot/rrm.o`
 
-Each entry is read from the rendered instructions of the named build. Every role is inferred, not settled, because the rendered facts show calls, branches and memory accesses but not the meaning of the values they move. Names are the binary's own symbols and callee names; the roles come from the code shape and constants cited.
-
-- `mgras_mco_config_473_gamma` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x1024
-  **Inferred.** Selects a register-write path from the value in a1: the beq tests at 0x1040 and 0x1048 compare it with 3 and 4. On the writing paths it stores bytes at a0+0x62d08 and a0+0x62d88 (sb at 0x10d0 and 0x10d4) and calls mgras_mco_set_dcbctrl at 0x10b8 with a1=2. Several loops mask the word at a0+459008 with 0x1f (bne at 0x10a0, beq at 0x10ec) before the return at 0x1068, which yields -0x16 or 0x0. Role (from name): a gamma setup for a 473 device; no constant in the rendered facts confirms it.
-  Reviewed: 2026-11-12
-
-- `mgras_mco_set_dcbctrl` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x11a0
-  **Inferred.** Reads the word at a0+0x70100 (lw at 0x11a8 and 0x11bc) and polls the word at a0+459008 under the mask 0x1f (beq at 0x11b4, bne at 0x11c4). When a3 is 0x18 or more (beq at 0x11e0) it returns -0xe from 0x120c. Below that it leaves through an indirect jump at 0x11ec whose target the rendered code does not resolve, so the handler it dispatches to is unknown.
-  Reviewed: 2026-11-12
-
-- `mgras_mco_startclock` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x1248
-  **Inferred.** Writes the word at a0+0x6802c (sw at 0x1264) and stores bytes at a0+0x62d08 and a0+0x62d88 (sb at 0x126c and 0x1278). Those two byte offsets are also written by mgras_mco_config_473_gamma and mgras_mco_7162_set_addr; the rendered facts do not show what the pair does. It returns a0+0x60000 at 0x1274.
-  Reviewed: 2026-11-12
-
-- `mgras_mco_set_control_reg` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x127c
-  **Inferred.** It calls mgras_mco_set_dcbctrl at 0x12a0 with a1=2, passing its own a2 and a3 through. Then it branches on a1 against 1, 2 and 3 (beq at 0x12b8, 0x12c0 and 0x12c8). Each of the three cases stores one byte at a0+0x62d08 (sb at 0x130c, 0x1318 and 0x1324) and rejoins at 0x12d0. From there it calls mgras_mco_set_dcbctrl again at 0x12d4 with a1=3, with a2 and a3 not resolved by the facts, then stores a byte at a0+0x62d88 (sb at 0x12ec) and returns the result of mgras_mco_set_dcbctrl at 0x12f8.
-  Reviewed: 2026-11-12
-
-- `mgras_mco_7162_set_addr` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x1328
-  **Inferred.** Reads the word at a0+0x70100 (lw at 0x1354 and 0x1368) and tests the word at a0+459008 under the mask 0x1f (beq at 0x1360, bne at 0x1370). It calls mgras_mco_set_dcbctrl at 0x1344 with a1=2, passes a2 and a3 through, stores bytes at a0+0x62d08 and a0+0x62d88 (sb at 0x1384, 0x1390 and 0x1398), and returns the callee's result at 0x13a0. Role (from name): sets an address on a 7162 part; no constant in the rendered facts confirms the part.
-  Reviewed: 2026-11-12
-
-- `mgras_mco_7162_set_cmd` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)` at 0x13a8
-  **Inferred.** Polls the word at a0+459008 under the mask 0x1f (beq at 0x13d0, bne at 0x13e0) and reads a0+0x70100 (lw at 0x13b4 and 0x13d8). It calls mgras_mco_7162_set_addr at 0x13f4 with its own arguments and a5 set to a0+458752, then stores bytes at a0+0x62d08 and a0+0x62d88 (sb at 0x1418 and 0x141c) and returns a0+0x60000 at 0x1424.
-  Reviewed: 2026-11-12
-
-- `MgrasShare` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_share.o)` at 0x0
-  **Inferred.** Reads a pointer from a1+0x70 and one from a0+0x20. Through the object that a0+0x20 points to, it adjusts a 4-byte count at offset 0x50 with load-linked and store-conditional loops (ll at 0x48 adds 1, ll at 0xb8 and 0x140 add -1; sc at 0x54, 0xc4 and 0x14c). When the word at offset 0x48 of that object is not a0 (bne at 0x34 taken) it takes a semaphore with psema at 0x178, then waits with us_delay at 0x19c while the word at offset 0x68 stays nonzero (bne at 0x1ac). It allocates a 0x68-byte block with kern_malloc at 0x90 when the doubleword loaded at 0x60 from a2 is zero (beq at 0x64) or matches no entry of the list headed at offset 0x6d8 (loop at 0x78 to 0x84), clears the block with bzero at 0xf8 and links it through sd at 0x110, 0x114 and 0x12c. The return at 0x16c yields 0x0 or 0xc. Its sibling MgrasUnshare calls MgrasDeleteTexSpace, which suggests this shares a texture-space record.
-  Reviewed: 2026-11-12
-
-- `MgrasUnshare` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_share.o)` at 0x1bc
-  **Inferred.** Reads the doubleword at +0x468 (1128) of the object that a1+112 points to and returns at once when it is zero (beq at 0x1cc). Otherwise it searches the list headed at +1752 of the object that a0+32 points to for that pointer (beq at 0x1e4, bne at 0x1f4), reads and rewrites the word at the block's offset 0 (lw at 0x200, sw at 0x208), and when a re-read of that word at 0x210 is zero (beq at 0x214) calls MgrasDeleteTexSpace at 0x23c and then kern_free at 0x250 on the block. It clears +0x468 (sd at 0x220) before returning. The facts show a read, a write and a free-when-zero test, which reads as releasing a reference; they show no ownership check.
-  Reviewed: 2026-11-12
+One entry per routine, filed here from the reading batches by binary.
 
 - `pane_gc` in `usr/cpu/sysgen/IP28boot/rrm.o` at 0x0
   **Inferred.** Compares a counter at sbss+8 against max_pane (beq at 0x1c) and runs two loops over rows: one tests an index against max_pane (beq at 0x34), the other tests the counter against zero (blez at 0x88) and an index against the counter (beq at 0xa4). The loops read a halfword (lh at 0x54 and 0xc4) and write a halfword (sh at 0x74 and 0xe4) at addresses the rendered facts do not resolve, and both loops stop when the value in a5 equals 8 (beq at 0x70 leaves, bne at 0xe0 repeats while it differs). Role (from name): garbage collection of pane rows; the loop shape is the only code evidence. The return at 0x104 yields a value the rendered facts leave unresolved.

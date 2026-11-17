@@ -1,16 +1,6 @@
-# gr4 routine role statements, tier-2 round 4 batch 1
+# Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)`
 
-Each statement comes from the rendered facts for one routine: registers, calls and constants at the
-addresses cited, in the binary named in its header. Addresses are virtual addresses in that binary.
-Where a statement is a guess from the routine's name or its call pattern, it says so.
-
-- `mgras_fp_reinit` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x4df4
-  **Inferred.** Role (from name): re-initialises the flat panel from the state block at a0. It reads the byte at [a0+200]+0x49 (lbu at 0x4df8) and calls mgras_fp_probe (0x4e14), mgras_fpi2cPanelID (0x4e34) and mgras_fpi2cPanelOn (0x4ea0). The beq at 0x4e08 skips the probe when that byte is zero. The beq at 0x4e28 tests the byte again after the probe and skips the mgras_fpi2cPanelID call when it is zero. The return at 0x4e78 gives -1 or 0.
-  Reviewed: 2026-11-12
-
-- `MgrasBlankScreen` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)` at 0x4ee8
-  **Inferred.** Appears to blank the screen by switching the flat panel off and on again. It calls mgras_baseindex (0x4efc), mgras_fpi2cPanelOff (0x4fa0, with a2 = 1 and a3 = 4) and mgras_fpi2cPanelOn (0x4ff4, with a2 = 1, a3 = 4 and a4 = 0xff), each behind several branches that can skip it. It stores bytes at offsets 0x61811, 0x61910 and 0x60d88 (sb at 0x4f6c, 0x4f70, 0x4f78 and again at 0x4fc0, 0x4fc8, 0x4fd0); the facts do not show the stored value. The return at 0x4fb0 gives 0x3, the mgras_fpi2cPanelOff result or the mgras_fpi2cPanelOn result.
-  Reviewed: 2026-11-12
+One entry per routine, filed here from the reading batches by binary.
 
 - `MgrasRetraceInit` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)` at 0x0
   **Inferred.** Role (from name): sets up the retrace state for one board. It calls sv_waitq (0x44), bzero (0x74, with a1 = 0x690) and init_sv (0xa4). When the word at a0+0xd8 is zero the beq at 0xc goes to 0x118, just before the kern_malloc call at 0x120 with a0 = 0x690. The sv_destroy call at 0x108 is reached when sv_waitq returns zero (beq at 0x4c taken). The facts show a doubleword store at a0+0xd8 (sd at 0xf4) but not what it stores. The return at 0x100 gives the result of mgras_baseindex (call at 0xc0).
@@ -90,16 +80,4 @@ Where a statement is a guess from the routine's name or its call pattern, it say
 
 - `MgrasCcvUpdate` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)` at 0x1c20
   **Inferred.** Appears to be the full CCV update for the device at a0, a longer sibling of mgras_update_pp1ccv at 0x1864. The bne at 0x1c38 (the word at the mgras_leave_ccv symbol is nonzero) and the beq at 0x1c44 (the word at [a0+1856] is zero) both jump to 0x1dac, skipping the mutex_lock at 0x1c5c (id 0x19, lock at a0+2280) and the mutex_unlock at 0x1da0. After the lock it stores bytes and words at +0x61c08, +0x61c88, +0x61d08, +0x61f80 and +0x61d00 (base register not shown). The unlock at 0x1da0 takes a2 = [a0+208]+0x70000 and a3 = [a0+208]+0x60000, the same two values MgrasPositionCursor passes at 0x1684 in a1 and a2. The return at 0x1db4 gives an unknown value, [a0+1856] or the mutex_unlock result.
-  Reviewed: 2026-11-12
-
-- `MgrasCalcScreenSize` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_timing.o)` at 0x0
-  **Inferred.** Copies two size fields out of the structure at a0 and returns one of them. It loads the word at a0+4 and stores its halfword at offset 0 of a register the facts do not show (lw at 0x4, sh at 0x8, presumably a1), loads the word at a0+8 and stores its halfword the same way (lw at 0xc, sh at 0x14, presumably a2), and returns the word at a0+4 (return at 0x10). The name suggests the screen width and height.
-  Reviewed: 2026-11-12
-
-- `MgrasTpInit` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_tport.o)` at 0x0
-  **Inferred.** Role (from name): initialises the transport state for a board. It calls mgras_baseindex (0x14), then mgrasInitBoard (0x140) with that result as a1 and the MgrasBoards table as a2; the bltz at 0xfc skips mgrasInitBoard when the index is negative (taken goes to the return at 0x128). Its stores include doublewords at +0x70080 (sd at 0x68, 0x90, 0x94, 0x98 and 0x9c) and words at +0x61e00 and +0x61f00 (sw at 0xe8 and 0xf4), base register not shown. The return at 0x128 gives a0+0x70000 or an unknown value.
-  Reviewed: 2026-11-12
-
-- `MgrasTpMapcolor` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_tport.o)` at 0x154
-  **Inferred.** Appears to map a colour index into the device colour tables. It tests bits 0x1f of the word at a0+0x70100 (beq at 0x164, bne at 0x174) and bit 0x8 of the byte at a0+0x61208 (bne at 0x1a4, beq at 0x1b4), then writes halfwords into the table at a0+0x60c30 (sh at 0x1cc, 0x1d0, 0x1e8) and bytes into a0+0x61c08 and 0x61c88. It returns the constant 0x3ff (return at 0x1f8), which fits a 10-bit colour index.
   Reviewed: 2026-11-12
