@@ -1,26 +1,26 @@
 binary	group	role	kind	abi	bytes	sha256	copies	functions	address_source	access_sites	unresolved_sites	status	doc	section
 usr/cpu/sysgen/IP28boot/gfx.o	kernel-shared	shared-kernel	object	n64	51840	ab0d2dee5e02c578		59	symtab	0	0	named-only	questions/README.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)	kernel	board-kernel	object	n64	97060	f298c8e2e1fb9913		76	symtab	0	0	named-only	software/opengl/gl-commands.md#kernel-context-image-and-eviction	Kernel context image and eviction
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	kernel	board-kernel	object	n64	11684	267749da7176ee06		10	symtab	1	0	named-only	evidence/routines/t1-gr4-b000.md#mgrasinitccr-in-usrcpusysgenip28bootmgrasamgras_ccvo-at-0x54c	`MgrasInitCCR` in `usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)` at 0x54c
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)	kernel	board-kernel	object	n64	11684	267749da7176ee06		10	symtab	1	0	named-only	devices/mgras/readings/mgras.a-mgras_ccv.o.md#readings-usrcpusysgenip28bootmgrasamgras_ccvo	Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras_ccv.o)`
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_dma.o)	kernel	board-kernel	object	n64	33412	3775fa54d203caaf		28	symtab	0	0	named-only	questions/README.md#16-host-transfer-table-slots	16. Host transfer table slots
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_init.o)	kernel	board-kernel	object	n64	56148	8369b6d4a250d395		43	symtab	49	0	named-only	devices/mgras/board-facts.md#contradictions-found	Contradictions found
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)	kernel	board-kernel	object	n64	25476	bfda418d7b0dd67c		20	symtab	0	0	named-only	questions/README.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_timing.o)	kernel	board-kernel	object	n64	14692	5cb83a5f82098279		1	symtab	0	0	named-only	evidence/routines/t2-gr4-r4-b001.md#gr4-routine-role-statements-tier-2-round-4-batch-1	gr4 routine role statements, tier-2 round 4 batch 1
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_tport.o)	kernel	board-kernel	object	n64	11988	cad639af6f2054d9		10	symtab	0	0	named-only	evidence/routines/t2-gr4-r4-b001.md#gr4-routine-role-statements-tier-2-round-4-batch-1	gr4 routine role statements, tier-2 round 4 batch 1
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_timing.o)	kernel	board-kernel	object	n64	14692	5cb83a5f82098279		1	symtab	0	0	named-only	devices/mgras/readings/mgras.a-mgras_timing.o.md#readings-usrcpusysgenip28bootmgrasamgras_timingo	Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras_timing.o)`
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_tport.o)	kernel	board-kernel	object	n64	11988	cad639af6f2054d9		10	symtab	0	0	named-only	devices/mgras/readings/mgras.a-mgras_tport.o.md#readings-usrcpusysgenip28bootmgrasamgras_tporto	Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras_tport.o)`
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex.o)	kernel	board-kernel	object	n64	12932	ecb051165217dd7b		10	symtab	0	0	named-only	devices/mgras/two-re.md#texture-memory-on-two-engine-boards	Texture memory on two-engine boards
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_texsr.o)	kernel	board-kernel	object	n64	9748	5f53be6157f480f9		4	symtab	0	0	named-only	devices/mgras/two-re.md#texture-memory-on-two-engine-boards	Texture memory on two-engine boards
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex_io.o)	kernel	board-kernel	object	n64	21044	b153568fbc47a71e		18	symtab	0	0	named-only	devices/mgras/two-re.md#texture-memory-on-two-engine-boards	Texture memory on two-engine boards
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)	kernel	board-kernel	object	n64	19812	206c2881535836d9		23	symtab	0	0	named-only	evidence/routines/t2-gr4-r4-b003.md#routine-roles-tier-2-reading-batch-3	Routine roles, tier-2 reading batch 3
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)	kernel	board-kernel	object	n64	19812	206c2881535836d9		23	symtab	0	0	named-only	devices/mgras/readings/mgras.a-mgras_corona_i2c.o.md#readings-usrcpusysgenip28bootmgrasamgras_corona_i2co	Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras_corona_i2c.o)`
 usr/cpu/sysgen/IP28boot/mgras.a(mgras_mco.o)	kernel	board-kernel	object	n64	18836	9ce7195504086119		18	symtab	0	0	named-only	questions/README.md#open-questions-and-what-the-shipped-software-settles	Open questions and what the shipped software settles
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_share.o)	kernel	board-kernel	object	n64	5908	0e6ba7f7aad08dd4		2	symtab	0	0	named-only	evidence/routines/t2-gr4-r4-b005.md#routine-readings-gr4-tier-2-batch-5	Routine readings: gr4 tier-2 batch 5
-usr/cpu/sysgen/IP28boot/mgras.a(mgras_pipeend.o)	kernel	board-kernel	object	n64	2596	1530554768cc4bc5		0	none	0	0	named-only	evidence/irix-files.md#a-kernel-driver-modules-softwarekernel	A. Kernel Driver Modules (`software/kernel/`)
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_share.o)	kernel	board-kernel	object	n64	5908	0e6ba7f7aad08dd4		2	symtab	0	0	named-only	devices/mgras/readings/mgras.a-mgras_share.o.md#readings-usrcpusysgenip28bootmgrasamgras_shareo	Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras_share.o)`
+usr/cpu/sysgen/IP28boot/mgras.a(mgras_pipeend.o)	kernel	board-kernel	object	n64	2596	1530554768cc4bc5		0	none	0	0	named-only	references/irix-files.md#a-kernel-driver-modules-softwarekernel	A. Kernel Driver Modules (`software/kernel/`)
 usr/cpu/sysgen/IP28boot/rrm.o	kernel-shared	shared-kernel	object	n64	64440	0833465ac68a6e87		72	symtab	0	0	named-only	questions/README.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/gfx/MGRAS/HQ3/ge11dump.HQ3	board-tools	board-tool	executable	o32	54180	4cb9468054d05b1f		51	dynsym	0	0	named-only	software/kernel/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
-usr/gfx/arch/IGLOO32/libgl.so	shared-libraries	shared-library	shared-object	n32	1682688	0158dfea8d6ce229		3810	dynsym+dwarf	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
-usr/gfx/arch/IP28GR432/libGL.so	libraries	board-library	shared-object	n32	407256	b2d3590e0b7de408		607	dynsym+dwarf (dwarf addresses translated through .MIPS.Xlate)	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
+usr/gfx/arch/IGLOO32/libgl.so	shared-libraries	shared-library	shared-object	n32	1682688	0158dfea8d6ce229		3810	dynsym+dwarf	0	0	named-only	references/irix-files.md#1-directory-structure-overview	1. Directory Structure Overview
+usr/gfx/arch/IP28GR432/libGL.so	libraries	board-library	shared-object	n32	407256	b2d3590e0b7de408		607	dynsym+dwarf (dwarf addresses translated through .MIPS.Xlate)	0	0	named-only	references/irix-files.md#1-directory-structure-overview	1. Directory Structure Overview
 usr/gfx/arch/IP28GR432/libGLcore.so	libraries	board-library	shared-object	n32	3254556	eca0027567a5ae88		4833	dynsym+dwarf	0	0	named-only	devices/mgras/two-re.md#texture-memory-on-two-engine-boards	Texture memory on two-engine boards
 usr/gfx/ucode/MG/mgras_ge.hex	microcode	board-microcode	data	-	1365875	d0f2a8c13ae8c67a		0		0	0	named-only	devices/ge11/program-format.md#ge11-microcode-word-what-the-shipped-images-show	GE11 microcode word: what the shipped images show
-usr/gfx/ucode/MG/mgras_ge.u	microcode	board-microcode	data	-	2157802	a7782ccf26794c54		0		0	0	named-only	evidence/irix-files.md#1-directory-structure-overview	1. Directory Structure Overview
+usr/gfx/ucode/MG/mgras_ge.u	microcode	board-microcode	data	-	2157802	a7782ccf26794c54		0		0	0	named-only	references/irix-files.md#1-directory-structure-overview	1. Directory Structure Overview
 usr/gfx/ucode/MG/mgras_ge_DB.hex	microcode	board-microcode	data	-	1369750	c6ed3e2e500c6c79		0		0	0	undocumented		
 usr/gfx/ucode/MG/mgras_ge_DB.u	microcode	board-microcode	data	-	2164148	0117ecb2315ccdc0		0		0	0	undocumented		
 usr/gfx/ucode/MG/mgras_ge_revB.hex	microcode	board-microcode	data	-	1355150	316840694d019734		0		0	0	undocumented		
@@ -31,7 +31,7 @@ usr/gfx/ucode/MG/mgras_ge_revB_HQ4.hex	microcode	board-microcode	data	-	1358375	
 usr/gfx/ucode/MG/mgras_ge_revB_HQ4.u	microcode	board-microcode	data	-	2148384	83d9bc68c0913463		0		0	0	undocumented		
 usr/gfx/ucode/MG/mgras_ge_revB_HQ4_DB.hex	microcode	board-microcode	data	-	1362250	8cd0a0be98f08c58		0		0	0	undocumented		
 usr/gfx/ucode/MG/mgras_ge_revB_HQ4_DB.u	microcode	board-microcode	data	-	2154730	fa379a53c1faf2aa		0		0	0	undocumented		
-usr/gfx/ucode/MG/mgras_geif.u	microcode	board-microcode	data	-	2048	b7a79c5025a9267c		0		0	0	named-only	AGENTS.md#6-reverse-engineering-toolchain--pipeline	6. Reverse Engineering Toolchain & Pipeline
+usr/gfx/ucode/MG/mgras_geif.u	microcode	board-microcode	data	-	2048	b7a79c5025a9267c		0		0	0	named-only	references/irix-files.md#1-directory-structure-overview	1. Directory Structure Overview
 usr/gfx/ucode/MG/mgras_geif_DB.u	microcode	board-microcode	data	-	2048	a30c3624e988f380		0		0	0	undocumented		
 usr/gfx/ucode/MG/mgras_geif_revB.u	microcode	board-microcode	data	-	2048	4b26971c92f411b9		0		0	0	undocumented		
 usr/gfx/ucode/MG/mgras_geif_revB_DB.u	microcode	board-microcode	data	-	2048	f5e199ebbe9d2e26		0		0	0	undocumented		
@@ -43,18 +43,18 @@ usr/gfx/ucode/MGRAS/hq3_revB.u	microcode	board-microcode	data	-	59154	752ecac9e9
 usr/gfx/ucode/MGRAS/hq3_revB_DB.u	microcode	board-microcode	data	-	59154	0d55997ec70c4b0c		0		0	0	undocumented		
 usr/gfx/ucode/MGRAS/hq3_revB_HQ4.u	microcode	board-microcode	data	-	59394	2d35e2ec932937e3		0		0	0	named-only	questions/README.md#18-two-component-vertex-control-word-hq-command-0x59000004	18. Two-component vertex control word (HQ command 0x59000004)
 usr/gfx/ucode/MGRAS/hq3_revB_HQ4_DB.u	microcode	board-microcode	data	-	59394	7ceb50b8891b334a		0		0	0	undocumented		
-usr/gfx/ucode/ge11.bin	microcode	board-microcode	data	-	712704	ee39f7147c4f4aff		0		0	0	named-only	AGENTS.md#major-asic-roles	Major ASIC Roles:
+usr/gfx/ucode/ge11.bin	microcode	board-microcode	data	-	712704	ee39f7147c4f4aff		0		0	0	named-only	references/irix-files.md#1-directory-structure-overview	1. Directory Structure Overview
 usr/gfx/ucode/ge11_DB.bin	microcode	board-microcode	data	-	712704	6cd8a74312fa4bf1		0		0	0	undocumented		
 usr/gfx/ucode/ge11_revB.bin	microcode	board-microcode	data	-	712704	b0fb0b6252f3f87b		0		0	0	undocumented		
 usr/gfx/ucode/ge11_revB_DB.bin	microcode	board-microcode	data	-	712704	6fee9e7287d70856		0		0	0	undocumented		
 usr/gfx/ucode/ge11_revB_HQ4.bin	microcode	board-microcode	data	-	712704	ff465fb459d477bc		0		0	0	undocumented		
 usr/gfx/ucode/ge11_revB_HQ4_DB.bin	microcode	board-microcode	data	-	712704	235b6c1b5a5d5a3b		0		0	0	undocumented		
-usr/gfx/ucode/hq3.bin	microcode	board-microcode	data	-	20480	08ea32fc53d27444		0		0	0	named-only	AGENTS.md#major-asic-roles	Major ASIC Roles:
+usr/gfx/ucode/hq3.bin	microcode	board-microcode	data	-	20480	08ea32fc53d27444		0		0	0	named-only	references/irix-files.md#1-directory-structure-overview	1. Directory Structure Overview
 usr/gfx/ucode/hq3_DB.bin	microcode	board-microcode	data	-	20480	e49658af694baeef		0		0	0	undocumented		
 usr/gfx/ucode/hq3_revB.bin	microcode	board-microcode	data	-	20480	9108669895aa8793		0		0	0	undocumented		
 usr/gfx/ucode/hq3_revB_DB.bin	microcode	board-microcode	data	-	20480	780dd065275f3766		0		0	0	undocumented		
 usr/gfx/ucode/hq3_revB_HQ4.bin	microcode	board-microcode	data	-	20480	2c73fecd8563fa31		0		0	0	named-only	questions/README.md#19-host-transfer-table-slots-across-context-switches-requests-and-exit	19. Host transfer table slots across context switches, requests and exit
 usr/gfx/ucode/hq3_revB_HQ4_DB.bin	microcode	board-microcode	data	-	20480	b2d7305d1e9ce75c		0		0	0	undocumented		
-usr/lib/X11/dyDDX/glx.so	x-shared	shared-x-server	shared-object	n32	491168	3182c3a71d10ddbd		875	dynsym	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
+usr/lib/X11/dyDDX/glx.so	x-shared	shared-x-server	shared-object	n32	491168	3182c3a71d10ddbd		875	dynsym	0	0	named-only	references/irix-files.md#1-directory-structure-overview	1. Directory Structure Overview
 usr/lib/X11/dyDDX/impactpc.so	x-module	board-x-module	shared-object	n32	1934372	e501c75dc120a7fe		616	dynsym	0	0	named-only	software/opengl/gl-commands.md#raster-dma-read-start	Raster DMA read start
-usr/lib32/libfm.so	shared-libraries	shared-library	shared-object	n32	743692	dec3125e63be4b4c		788	dynsym+dwarf	0	0	named-only	AGENTS.md#3-project-binaries--evidence	3. Project Binaries & Evidence
+usr/lib32/libfm.so	shared-libraries	shared-library	shared-object	n32	743692	dec3125e63be4b4c		788	dynsym+dwarf	0	0	named-only	references/irix-files.md#1-directory-structure-overview	1. Directory Structure Overview
