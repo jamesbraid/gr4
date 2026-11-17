@@ -1,15 +1,15 @@
 {
   "family": "Impact (GR4 / MGRAS)",
-  "review_required": [
-    "evidence/routines/t1-*.md",
-    "evidence/routines/t2-*.md"
-  ],
   "docs": {
     "prose": [
       "devices/*/*.md",
       "software/*/*.md",
       "questions/*.md",
-      "evidence/routines/*.md",
+      "devices/*/readings/*.md",
+      "platforms/*/readings/*.md",
+      "software/*/readings/*.md",
+      "software/*/*/readings/*.md",
+      "references/*.md",
       "README.md"
     ],
     "headers": [

@@ -4,7 +4,7 @@
 
 - To use the definitions in code, go to [generated/c](generated/c/) and [generated/rust](generated/rust/). Python, JSON and XML forms are in [generated/](generated/).
 - To understand one unit, open its directory under [devices/](devices/): a README on how the hardware works, the hand-edited `registers.toml`, the generated `registers.md` table and the commented C header for the chip.
-- How IRIX drives the hardware (kernel, OpenGL client, X driver, IrisGL, microcode) is under [software/](software/). The measured tables and the routine readings are in [evidence/](evidence/).
+- How IRIX drives the hardware (kernel, OpenGL client, X driver, IrisGL, microcode) is under [software/](software/). The routine readings are in the `readings/` directory of each subject.
 - What is covered, and how well, is the summary table [generated/inventory/summary.tsv](generated/inventory/summary.tsv). Open questions, each with what would settle it, are in [questions/](questions/README.md). The published documents the notes cite are indexed in [references/documents/](references/documents/INDEX.md).
 
 Reverse-engineering notes for the SGI Impact Graphics (GR4 / MGRAS) subsystem of the Indigo2 and Octane, read from the shipped IRIX binaries and the published documents. [AGENTS.md](AGENTS.md) has the scope, the evidence rules and the finish line. The IRIX files themselves are not tracked; [references/irix-files.md](references/irix-files.md) says which to copy into the ignored `root/` directory.
@@ -14,7 +14,7 @@ Reverse-engineering notes for the SGI Impact Graphics (GR4 / MGRAS) subsystem of
 One line per tracked document. Descriptions come from each document's own
 opening heading or first sentence.
 
-### Top level and evidence
+### Top level and references
 
 - [AGENTS.md](AGENTS.md): Reverse-engineering project to document the SGI Impact Graphics (GR4/MGRAS) subsystem.
 - [references/irix-files.md](references/irix-files.md): Checklist of proprietary IRIX 6.5.0 binaries needed for MGRAS reverse engineering.
@@ -51,7 +51,7 @@ Not listed one by one:
 
 - `references/documents/`: 73 more stored documents (44 PDF, 22 HTML, 7 other files) and their `SHA256SUMS`. Use [references/documents/INDEX.md](references/documents/INDEX.md).
 - `generated/inventory/*.tsv`: generated extraction tables, not documents.
-- `evidence/routines/`: the routine readings.
+- `*/readings/`: the routine readings, one page per binary.
 
 ## Hardware definitions
 
