@@ -1,4 +1,7 @@
 """generated from devices/pp1/registers.toml by defs-gen - do not edit, change the source
+SPDX-License-Identifier: BSD-3-Clause
+defs-gen 2
+input sha256 7740e32432c1d5eaacd28ec8c352e6e097293c4022bb488b99ba718ef273eeec
 display read buffer registers of the Impact graphics"""
 
 UNIT = 'pp1'

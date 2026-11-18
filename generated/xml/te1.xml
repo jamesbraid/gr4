@@ -1,5 +1,8 @@
 <?xml version="1.0" ?>
 <!-- generated from devices/te1/registers.toml by defs-gen - do not edit, change the source -->
+<!-- SPDX-License-Identifier: BSD-3-Clause -->
+<!-- defs-gen 2 -->
+<!-- input sha256 a9842ec1f6b06506b2107ec53cb941f3493ff2fb8ec249fe4ac5ddcd1d8488ef -->
 <genxml unit="te1" prefix="TE" title="texture engine and texture RAM registers of the Impact graphics subsystem" from="driver readings">
   <doc>Texture engine and texture RAM registers and loader registers of the Impact graphics subsystem.</doc>
   <space name="te1_regs" unit="reg"/>

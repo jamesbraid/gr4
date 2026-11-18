@@ -1,0 +1,258 @@
+/* generated from devices/re4/registers.toml by defs-gen - do not edit, change the source */
+/* SPDX-License-Identifier: BSD-3-Clause */
+/* defs-gen 2 */
+/* input sha256 97465e36c7dff4df3b16b93614fc27f6b6f5ea5cee6f9ae4ba6330eda7b4f083 */
+/* raster engine register contract for the Impact graphics */
+/* Names are MGRAS_RE_*; name source: imported-unchecked. */
+/* Offsets are bytes; registers of a register-indexed space are written as index * size. */
+#ifndef HW_SGI_GPU_MGRAS_RE_REGS_H
+#define HW_SGI_GPU_MGRAS_RE_REGS_H
+
+#include "hw/core/registerfields.h"
+
+REG32(MGRAS_RE_TRI_X_MAJOR, 0x38000) /* inferred */
+
+REG32(MGRAS_RE_TRI_X_UPPER, 0x38004) /* inferred */
+
+REG32(MGRAS_RE_TRI_X_LOWER, 0x38008) /* inferred */
+
+REG32(MGRAS_RE_TRI_Y_TOP, 0x3800c) /* inferred */
+
+REG32(MGRAS_RE_TRI_Y_MID, 0x38010) /* inferred */
+
+REG32(MGRAS_RE_TRI_Y_BOTTOM, 0x38014) /* inferred */
+
+REG32(MGRAS_RE_TRI_SLOPE_MAJOR_HI, 0x38018) /* inferred */
+
+REG32(MGRAS_RE_TRI_SLOPE_MAJOR_LO, 0x3801c) /* inferred */
+
+REG32(MGRAS_RE_TRI_SLOPE_UPPER_HI, 0x38020) /* inferred */
+
+REG32(MGRAS_RE_TRI_SLOPE_UPPER_LO, 0x38024) /* inferred */
+
+REG32(MGRAS_RE_TRI_SLOPE_LOWER_HI, 0x38028) /* inferred */
+
+REG32(MGRAS_RE_TRI_SLOPE_LOWER_LO, 0x3802c) /* inferred */
+
+REG32(MGRAS_RE_AALINE_X_START, 0x38030) /* inferred */
+
+REG32(MGRAS_RE_AALINE_Y_START, 0x38034) /* inferred */
+
+REG32(MGRAS_RE_AALINE_X_END, 0x38038) /* inferred */
+
+REG32(MGRAS_RE_AALINE_Y_END, 0x3803c) /* inferred */
+
+REG32(MGRAS_RE_AALINE_DX, 0x38040) /* inferred */
+
+REG32(MGRAS_RE_AALINE_DY, 0x38044) /* inferred */
+
+REG32(MGRAS_RE_AALINE_ADJUST, 0x38048) /* inferred */
+
+REG32(MGRAS_RE_INSTR, 0x3804c) /* established */
+FIELD(MGRAS_RE_INSTR, SETUP, 4, 1) /* established */
+FIELD(MGRAS_RE_INSTR, OPCODE, 0, 4) /* established */
+
+REG32(MGRAS_RE_LINE_XY_START, 0x38100) /* inferred */
+
+REG32(MGRAS_RE_LINE_XY_END, 0x38104) /* inferred */
+
+REG32(MGRAS_RE_LINE_STEP_A, 0x38108) /* inferred */
+
+REG32(MGRAS_RE_LINE_STEP_B, 0x3810c) /* inferred */
+
+REG32(MGRAS_RE_LINE_ERROR_OCTANT, 0x38110) /* inferred */
+
+REG32(MGRAS_RE_INSTR_ALIAS, 0x38114) /* established */
+
+REG32(MGRAS_RE_BLOCK_XY_START, 0x38118) /* inferred */
+FIELD(MGRAS_RE_BLOCK_XY_START, X, 16, 16) /* inferred */
+FIELD(MGRAS_RE_BLOCK_XY_START, Y, 0, 16) /* inferred */
+
+REG32(MGRAS_RE_BLOCK_XY_END, 0x3811c) /* inferred */
+FIELD(MGRAS_RE_BLOCK_XY_END, X, 16, 16) /* inferred */
+FIELD(MGRAS_RE_BLOCK_XY_END, Y, 0, 16) /* inferred */
+
+REG32(MGRAS_RE_BLOCK_XY_MOVE, 0x38120) /* inferred */
+
+REG32(MGRAS_RE_BLOCK_SAVED_OCTANT, 0x38124) /* inferred */
+
+REG32(MGRAS_RE_COLOR_PACKED, 0x3816c) /* inferred */
+FIELD(MGRAS_RE_COLOR_PACKED, BLUE, 16, 8) /* inferred */
+FIELD(MGRAS_RE_COLOR_PACKED, GREEN, 8, 8) /* inferred */
+FIELD(MGRAS_RE_COLOR_PACKED, RED, 0, 8) /* inferred */
+
+REG32(MGRAS_RE_COLOR_RED, 0x38170) /* inferred */
+
+REG32(MGRAS_RE_COLOR_GREEN, 0x38174) /* inferred */
+
+REG32(MGRAS_RE_COLOR_BLUE, 0x38178) /* inferred */
+
+REG32(MGRAS_RE_COLOR_ALPHA, 0x3817c) /* inferred */
+
+REG32(MGRAS_RE_COLOR_RED_EDGE, 0x38180) /* inferred */
+
+REG32(MGRAS_RE_COLOR_RED_SPAN, 0x38184) /* inferred */
+
+REG32(MGRAS_RE_COLOR_GREEN_EDGE, 0x38188) /* inferred */
+
+REG32(MGRAS_RE_COLOR_GREEN_SPAN, 0x3818c) /* inferred */
+
+REG32(MGRAS_RE_COLOR_BLUE_EDGE, 0x38190) /* inferred */
+
+REG32(MGRAS_RE_COLOR_BLUE_SPAN, 0x38194) /* inferred */
+
+REG32(MGRAS_RE_COLOR_ALPHA_EDGE, 0x38198) /* inferred */
+
+REG32(MGRAS_RE_COLOR_ALPHA_SPAN, 0x3819c) /* inferred */
+
+REG32(MGRAS_RE_DEPTH_HI, 0x381a0) /* inferred */
+
+REG32(MGRAS_RE_DEPTH_LO, 0x381a4) /* inferred */
+
+REG32(MGRAS_RE_DEPTH_SPAN_HI, 0x381a8) /* inferred */
+
+REG32(MGRAS_RE_DEPTH_SPAN_LO, 0x381ac) /* inferred */
+
+REG32(MGRAS_RE_DEPTH_EDGE_HI, 0x381b0) /* inferred */
+
+REG32(MGRAS_RE_DEPTH_EDGE_LO, 0x381b4) /* inferred */
+
+REG32(MGRAS_RE_GLYPH_HI, 0x381c0) /* inferred */
+
+REG32(MGRAS_RE_GLYPH_LO, 0x381c4) /* inferred */
+
+REG32(MGRAS_RE_XFER_ABORT, 0x38400) /* inferred */
+
+REG32(MGRAS_RE_XFER_CONTROL, 0x38408) /* inferred */
+FIELD(MGRAS_RE_XFER_CONTROL, BUSY, 4, 1) /* inferred */
+FIELD(MGRAS_RE_XFER_CONTROL, READ, 3, 1) /* inferred */
+FIELD(MGRAS_RE_XFER_CONTROL, DEVICE, 2, 1) /* inferred */
+FIELD(MGRAS_RE_XFER_CONTROL, PIO_START, 1, 1) /* inferred */
+FIELD(MGRAS_RE_XFER_CONTROL, DMA_START, 0, 1) /* inferred */
+
+REG32(MGRAS_RE_FILL_MODE, 0x38440) /* inferred */
+FIELD(MGRAS_RE_FILL_MODE, BLOCK_TYPE, 22, 3) /* inferred */
+FIELD(MGRAS_RE_FILL_MODE, FAST_FILL, 20, 1) /* inferred */
+FIELD(MGRAS_RE_FILL_MODE, SKIP_LAST_PIXEL, 10, 1) /* inferred */
+FIELD(MGRAS_RE_FILL_MODE, LINE_ADVANCE, 7, 1) /* inferred */
+FIELD(MGRAS_RE_FILL_MODE, LINE_OPAQUE, 6, 1) /* inferred */
+FIELD(MGRAS_RE_FILL_MODE, LINE_STIPPLE, 5, 1) /* inferred */
+FIELD(MGRAS_RE_FILL_MODE, GLYPH_OPAQUE, 4, 1) /* inferred */
+FIELD(MGRAS_RE_FILL_MODE, GLYPH_STIPPLE, 3, 1) /* inferred */
+FIELD(MGRAS_RE_FILL_MODE, POLY_STIPPLE, 0, 1) /* inferred */
+
+REG32(MGRAS_RE_TEXMODE1, 0x38444) /* inferred */
+FIELD(MGRAS_RE_TEXMODE1, DEPTH_TERM, 16, 3) /* inferred */
+FIELD(MGRAS_RE_TEXMODE1, COLOUR_TABLE, 12, 4) /* inferred */
+FIELD(MGRAS_RE_TEXMODE1, TEXEL_CLASS, 9, 3) /* inferred */
+FIELD(MGRAS_RE_TEXMODE1, TRAM_SELECT, 7, 2) /* inferred */
+FIELD(MGRAS_RE_TEXMODE1, TRAM_SIZE_CODE, 5, 2) /* inferred */
+FIELD(MGRAS_RE_TEXMODE1, LAYOUT, 3, 2) /* inferred */
+FIELD(MGRAS_RE_TEXMODE1, ENVIRONMENT, 1, 2) /* inferred */
+FIELD(MGRAS_RE_TEXMODE1, TEXTURE_ENABLE, 0, 1) /* inferred */
+
+REG32(MGRAS_RE_CONFIG, 0x38448) /* inferred */
+FIELD(MGRAS_RE_CONFIG, LINE_ROUND, 4, 1) /* inferred */
+FIELD(MGRAS_RE_CONFIG, Y_FLIP, 3, 1) /* inferred */
+FIELD(MGRAS_RE_CONFIG, TARGET_RASTER, 0, 1) /* inferred */
+
+REG32(MGRAS_RE_SCISSOR_X, 0x3844c) /* inferred */
+
+REG32(MGRAS_RE_SCISSOR_Y, 0x38450) /* inferred */
+
+REG32(MGRAS_RE_WINDOW_ORIGIN, 0x38454) /* inferred */
+FIELD(MGRAS_RE_WINDOW_ORIGIN, Y, 16, 16) /* inferred */
+FIELD(MGRAS_RE_WINDOW_ORIGIN, X, 0, 16) /* inferred */
+
+REG32(MGRAS_RE_BACKGROUND_RG, 0x38500) /* inferred */
+
+REG32(MGRAS_RE_BACKGROUND_BA, 0x38504) /* inferred */
+
+REG32(MGRAS_RE_TEXENV_RG, 0x38508) /* inferred */
+
+REG32(MGRAS_RE_TEXENV_B, 0x3850c) /* inferred */
+
+REG32(MGRAS_RE_FOG_RG, 0x38510) /* inferred */
+
+REG32(MGRAS_RE_FOG_B, 0x38514) /* inferred */
+
+REG32(MGRAS_RE_AALINE_CONFIG, 0x38518) /* inferred */
+FIELD(MGRAS_RE_AALINE_CONFIG, WIDTH, 1, 7) /* inferred */
+FIELD(MGRAS_RE_AALINE_CONFIG, SMOOTH, 0, 1) /* inferred */
+
+REG32(MGRAS_RE_SCREEN_MASK1_X, 0x3851c) /* inferred */
+
+REG32(MGRAS_RE_SCREEN_MASK1_Y, 0x38520) /* inferred */
+
+REG32(MGRAS_RE_SCREEN_MASK2_X, 0x38524) /* inferred */
+
+REG32(MGRAS_RE_SCREEN_MASK2_Y, 0x38528) /* inferred */
+
+REG32(MGRAS_RE_SCREEN_MASK3_X, 0x3852c) /* inferred */
+
+REG32(MGRAS_RE_SCREEN_MASK3_Y, 0x38530) /* inferred */
+
+REG32(MGRAS_RE_SCREEN_MASK4_X, 0x38534) /* inferred */
+
+REG32(MGRAS_RE_SCREEN_MASK4_Y, 0x38538) /* inferred */
+
+REG32(MGRAS_RE_WINDOW_MODE, 0x3853c) /* inferred */
+FIELD(MGRAS_RE_WINDOW_MODE, INSIDE4, 7, 1) /* inferred */
+FIELD(MGRAS_RE_WINDOW_MODE, INSIDE3, 6, 1) /* inferred */
+FIELD(MGRAS_RE_WINDOW_MODE, INSIDE2, 5, 1) /* inferred */
+FIELD(MGRAS_RE_WINDOW_MODE, INSIDE1, 4, 1) /* inferred */
+FIELD(MGRAS_RE_WINDOW_MODE, ENABLE4, 3, 1) /* inferred */
+FIELD(MGRAS_RE_WINDOW_MODE, ENABLE3, 2, 1) /* inferred */
+FIELD(MGRAS_RE_WINDOW_MODE, ENABLE2, 1, 1) /* inferred */
+FIELD(MGRAS_RE_WINDOW_MODE, ENABLE1, 0, 1) /* inferred */
+
+REG32(MGRAS_RE_XFER_SIZE, 0x3854c) /* inferred */
+FIELD(MGRAS_RE_XFER_SIZE, LINES, 16, 16) /* inferred */
+FIELD(MGRAS_RE_XFER_SIZE, WIDTH, 0, 16) /* inferred */
+
+REG32(MGRAS_RE_XFER_ZOOM_INIT, 0x38550) /* inferred */
+
+REG32(MGRAS_RE_XFER_ZOOM_STEP, 0x38554) /* inferred */
+
+REG32(MGRAS_RE_XFER_MASK_LO, 0x38558) /* inferred */
+
+REG32(MGRAS_RE_XFER_MASK_HI, 0x3855c) /* inferred */
+
+REG32(MGRAS_RE_XFER_COUNTERS, 0x38560) /* inferred */
+
+REG32(MGRAS_RE_XFER_MODE, 0x38564) /* inferred */
+FIELD(MGRAS_RE_XFER_MODE, OPAQUE, 23, 1) /* inferred */
+FIELD(MGRAS_RE_XFER_MODE, RGB_ORDER, 22, 1) /* inferred */
+FIELD(MGRAS_RE_XFER_MODE, DECIMATE, 20, 1) /* inferred */
+FIELD(MGRAS_RE_XFER_MODE, ZOOM, 19, 1) /* inferred */
+FIELD(MGRAS_RE_XFER_MODE, FLAG18, 18, 1) /* inferred */
+FIELD(MGRAS_RE_XFER_MODE, FLAG17, 17, 1) /* inferred */
+FIELD(MGRAS_RE_XFER_MODE, STRIDE_SKIP_BYTES, 14, 3) /* inferred */
+FIELD(MGRAS_RE_XFER_MODE, BEGIN_SKIP_BITS, 11, 3) /* inferred */
+FIELD(MGRAS_RE_XFER_MODE, BEGIN_SKIP_BYTES, 8, 3) /* inferred */
+FIELD(MGRAS_RE_XFER_MODE, FORMAT, 4, 4) /* inferred */
+FIELD(MGRAS_RE_XFER_MODE, COMP_TYPE, 0, 4) /* inferred */
+
+REG32(MGRAS_RE_LINE_STIPPLE_PATTERN, 0x38568) /* inferred */
+
+REG32(MGRAS_RE_LINE_STIPPLE_REPEAT, 0x3856c) /* inferred */
+
+REG32(MGRAS_RE_DEVICE_ADDR, 0x38570) /* inferred */
+
+REG32(MGRAS_RE_DEVICE_DATA, 0x38574) /* inferred */
+
+REG32(MGRAS_RE_STATUS, 0x38578) /* inferred */
+FIELD(MGRAS_RE_STATUS, PIXEL_BUSY, 10, 1) /* inferred */
+FIELD(MGRAS_RE_STATUS, RASTER_BUSY, 9, 1) /* inferred */
+FIELD(MGRAS_RE_STATUS, FIFO_EMPTY, 8, 1) /* inferred */
+FIELD(MGRAS_RE_STATUS, REVISION, 4, 4) /* inferred */
+FIELD(MGRAS_RE_STATUS, BOARD_INDEX, 2, 2) /* inferred */
+FIELD(MGRAS_RE_STATUS, CHIP_COUNT, 0, 2) /* inferred */
+
+REG32(MGRAS_RE_TOGGLE_CONTEXT, 0x3857c) /* inferred */
+
+REG32(MGRAS_RE_PP1_FILL_MODE, 0x38584) /* inferred */
+
+#define MGRAS_RE_XFER_ZOOM_UNITY 0x100u /* established */
+
+#endif /* HW_SGI_GPU_MGRAS_RE_REGS_H */

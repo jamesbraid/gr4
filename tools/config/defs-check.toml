@@ -1,4 +1,5 @@
 [project]
+license = "BSD-3-Clause"
 name = "gr4"
 
 [checks]
@@ -75,3 +76,15 @@ regex = 'MGRAS_REV_MASK\s+0x0000000?(F)0'
 binds = [
   ["WHEX", "GIO_ID.revision", 1],
 ]
+
+[gen.qemu]
+board = "MGRAS"
+
+[gen.qemu.units.re4]
+name = "RE"
+
+[gen.qemu.units.pp1]
+
+[gen.qemu.units.te1]
+
+[gen.qemu.units.hq3]

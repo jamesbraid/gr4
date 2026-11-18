@@ -1,4 +1,7 @@
 /* generated from devices/re4/registers.toml by defs-gen - do not edit, change the source */
+/* SPDX-License-Identifier: BSD-3-Clause */
+/* defs-gen 2 */
+/* input sha256 97465e36c7dff4df3b16b93614fc27f6b6f5ea5cee6f9ae4ba6330eda7b4f083 */
 /* raster engine register contract for the Impact graphics */
 #ifndef RE_GEN_H
 #define RE_GEN_H

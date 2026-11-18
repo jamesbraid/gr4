@@ -1,5 +1,8 @@
 <?xml version="1.0" ?>
 <!-- generated from devices/xtalk/registers.toml by defs-gen - do not edit, change the source -->
+<!-- SPDX-License-Identifier: BSD-3-Clause -->
+<!-- defs-gen 2 -->
+<!-- input sha256 ce0e140540547793352d0556e26f1a335fbff78213b02f86da324550bab1e3a8 -->
 <genxml unit="xtalk" prefix="XTALK" title="expected power-up values of the host interface's crosstalk" from="diagnostic program data">
   <doc>Expected power-up values of the crosstalk widget block on the Octane host interface.</doc>
   <struct name="LLP_CONFIG" size="4" grade="inferred" from="diagnostic program data">

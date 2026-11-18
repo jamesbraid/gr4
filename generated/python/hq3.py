@@ -1,4 +1,7 @@
 """generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source
+SPDX-License-Identifier: BSD-3-Clause
+defs-gen 2
+input sha256 2990898932b62921ac32666e4a149a54a1f713d8f3cb1c523469100391afbb8c
 host interface and command processor registers for the Impact graphics subsystem"""
 
 UNIT = 'hq3'
