@@ -323,15 +323,18 @@ Still open: which table each start word (0xB9, 0xB1) selects. Settling test: dec
 
 ### 21. Raster arithmetic
 
-Question: the rounding, tie and reduction rules of the raster path. [devices/mgras/raster-reference.md](../devices/mgras/raster-reference.md) tabulates what is known per stage; every rule below is unknown there. The cheapest source for most is the expected values and checksums inside the shipped standalone diagnostic (`ide`, IP30 build), which is not in `root/` yet: the routines `mg_color_tri`, `mg_z_tri`, `mg_points`, `mg_lines`, `mg_stip_tri`, `mg_logicop`, `mg_dither`, `mg_tex_poly` and the alpha-blend and scene tests (IDE guide pp. 7-12 to 7-14).
+Question: the rounding, tie and reduction rules of the raster path. [devices/mgras/raster-reference.md](../devices/mgras/raster-reference.md) tabulates what is known per stage.
 
-- Setup snap: whether the float add of the +49151.5 bias rounds to nearest or truncates, and what its 0.5 means. Settles with an operand-level trace of the `trigeom` microcode module, or a setup-write trace of a vertex at n + 1/512.
-- Edge and tie ownership of shared edges; span end exclusivity; the aliased line pixel rule. Settles with the diag triangle and line expected values, or a readback of two triangles sharing an edge through a pixel centre.
-- Reduction of the 12-bit colour and alpha iterators to the stored value; the 24-bit depth rounding; INCR and DECR saturation. Settles with the diag colour, depth and stencil expected values.
-- Blend multiply width and rounding, constant colour width, and whether the RE4 or the PP1 blends (the Octane report says both). Settles with the diag alpha-blend test setup and CRC.
-- Fog: whether the factor is per vertex or per pixel and how it is tabulated. Settles with a decode of the `fog` microcode module (index 0x043 of `mgras_geif.u`) with the GE11 Ghidra processor.
-- Texture: iterator widths, divide precision, LOD arithmetic and filter weight rounding. Settles with the three TE1 render checksums already in `devices/te1/registers.toml` replayed against a model, or a trilinear ramp readback.
-- Dither pattern and the pixel types it covers. Settles with `mg_dither` expected values.
+Read: the shipped standalone diagnostic (`ide`, IP30 build from the IRIX 6.4 disc, sha256 `43237354b4ad84ab9a8328d8b2109b1fccd115c9b00d8f6b5e0f8a10e747659e`), by static reading only. Results are on [devices/mgras/ide-raster-tests.md](../devices/mgras/ide-raster-tests.md). Established there: the tests compare a read-back image with stored expected tables (no model of the board is computed), and the stored "CRC" values are plain 32-bit sums of those tables (checked for the four colour triangles, the lines table and the stipple table). Settled from the stored colour-triangle images: an exact tie on a right edge is excluded; colour is stored as a dithered value with a fixed 4 by 4 threshold pattern and no bias (intervals tabulated, matrix not recovered); the setup bias 49151.5 and the colour start scale `0xFFF000` appear in the diagnostic's own host setup. The one-TRAM revision B render checksum is `0xbdfc48fc`, not the `0x0bdf48fc` recorded earlier.
+
+Still open, with what would settle each:
+
+- Setup snap in the geometry engine's ALU (host add is double then single in the FPU's mode). Operand trace of `trigeom`, or a vertex at n + 1/512.
+- Left, top and bottom edge ties; span end rules for points and aliased lines. Two triangles sharing an edge through a pixel centre; the `mg_lines` table needs its endpoints decoded (the 17 by 14 table at data offset `0x1800` is in hand).
+- Depth rounding, floating Z, stencil saturation, alpha-test width, blend arithmetic and which chip blends, logic-op width beyond the 24-bit compare mask. The expected arrays for `mg_points`, `mg_xblock`, `mg_logicop`, `mg_dither` and the polygon tests are passed from stack frames with no stored constants found, and the 15 Z-triangle records (`0x2081d530`) were not decoded: locate where those words come from, then replay.
+- Fog: decode the `fog` microcode module (index 0x043 of `mgras_geif.u`). The diagnostic has no fog scene that was found.
+- Texture: iterator widths, divide precision, LOD arithmetic, filter weights. Texture tests (`mg_tex_load`, `mg_tex_poly`) have stored tables from data offset `0x46d8` not yet decoded.
+- Which pixel types the dither applies to, and whether the test or the store enables it.
 
 ## Still open, with what would settle each
 

@@ -34,19 +34,20 @@ earlier pages and headers were taken as they stand, and their grades were not re
 Settling routes name what is cheapest first. "Diag" is the shipped Octane standalone diagnostic (`ide`, IP30 build), whose
 test routines are named in the IDE guide transcript (`mg_color_tri`, `mg_z_tri`, `mg_points`, `mg_lines`,
 `mg_stip_tri`, `mg_logicop`, `mg_dither`, `mg_tex_poly`, `mg_notex_poly`, the alpha-blend and scene tests with
-per-PP1 CRC checks). The diag binary is not held in this repository's `root/` extraction, so none of its expected values is
-tabulated here. The one set of diagnostic expected values already carried is the three TE1 render checksums
-(`TE_REV_B_1TRAM_CHECKSUM`, `TE_REV_B_4TRAM_CHECKSUM`, `TE_REV_D_CHECKSUM` in
-[te1/registers.toml](../te1/registers.toml), graded inferred there).
+per-PP1 CRC checks). The diagnostic (IRIX 6.4 disc, IP30 build, sha256 `43237354...`) has now been read: it compares
+read-back pixels with stored expected tables, and its "CRC" values are plain 32-bit sums of those tables. It holds no model
+of the board's arithmetic. What it settles is on [ide-raster-tests.md](ide-raster-tests.md); rows below cite it as "Diag".
+The three TE1 render checksums in [te1/registers.toml](../te1/registers.toml) are in the same program (the one-TRAM revision B
+value is `0xbdfc48fc`, corrected there from a digit transposition).
 
 ### 1. Vertex snap and setup
 
 | Fact | Grade | Source | Settle |
 |---|---|---|---|
 | RE4 computes X and Y with 8 bits of subpixel precision; vertices keep 8 fraction bits after projection | established | Octane report 4.2.3 p. 4-8, 4.4.1 p. 4-13; [board-facts.md](board-facts.md) fact 27 | n/a |
-| Window X, Y reach the RE4 as single-precision floats biased by +49151.5, so the 23-bit mantissa holds a 24.8 fixed-point position | inferred | [RE4.h:286-296](../re4/RE4.h), [GE11.h:459-462](../ge11/GE11.h); read from GE11 microcode only, the header says the bias itself is unknown as to evidence | Operand-level trace of the triangle setup module (`trigeom`, [GE11.h:299](../ge11/GE11.h)) with a known vertex; or the setup register writes for one triangle |
-| The add of the bias rounds to the 1/256 grid in the float ALU; the ALU rounding mode (nearest, truncate) | unknown | none held | Same trace, with a vertex at an exact half step (n + 1/512) |
-| What the +0.5 of the bias means (pixel centre convention, or a rounding offset) | unknown | none held | Same trace, plus a diag primitive at a known sub-pixel position |
+| Window X, Y reach the RE4 as single-precision floats biased by +49151.5, so the 23-bit mantissa holds a 24.8 fixed-point position | software expectation (was inferred) | Diag `0x208673a0` to `0x208673c8` (the host setup adds the double 49151.5, converts to single and sends the bit pattern); [RE4.h:286-296](../re4/RE4.h), [GE11.h:459-462](../ge11/GE11.h) agree. Second shipped program, independent of the microcode reading | n/a |
+| The add of the bias rounds to the 1/256 grid in the float ALU; the ALU rounding mode (nearest, truncate) | unknown for the GE ALU. The diag's host add is a double add then `cvt.s.d` in the FPU's current mode, which the routine does not change (nearest unless set elsewhere, not checked) | Diag `0x208673b0` | Operand-level trace of the triangle setup module (`trigeom`, [GE11.h:299](../ge11/GE11.h)) with a vertex at an exact half step (n + 1/512) |
+| What the +0.5 of the bias means (pixel centre convention, or a rounding offset) | inferred: the bias is 49152 - 0.5, so the stored position is the diag's input coordinate minus half a pixel. The stored triangle images cover a pixel when its centre `col + 0.5` is inside, consistent with a centre convention | Diag `0x2081c608` tables ([ide-raster-tests.md](ide-raster-tests.md)); the y origin of the tables is not pinned | A primitive at a known sub-pixel position read back |
 | Edge slopes are signed 64-bit s.24 values, computed by the GE as `(dx)/(dy)` with float division from a reciprocal seed | inferred | [RE4.h:296-299](../re4/RE4.h), [GE11.h:447, 455, 468](../ge11/GE11.h) | Microcode trace; reciprocal seed table accuracy needs the ROM, not held |
 | 2D integer lines and blocks take integer coordinates; a block's end register is the inclusive last column and row | software expectation | [2d-transactions.md:45](../re4/2d-transactions.md) (public OpenBSD driver) | n/a for the 2D path |
 
@@ -56,7 +57,8 @@ tabulated here. The one set of diagnostic expected values already carried is the
 |---|---|---|---|
 | Spans are walked down in -Y from the top vertex; the top scanline is `floor(cw.y)` and each edge starts at `x = cw.x + dxdy * (cw.y - floor(cw.y))` | inferred | [RE4.h:301-304](../re4/RE4.h) (microcode reading) | Setup-write trace plus one triangle readback |
 | First pixel of a span is `ceil(x0)` for left-to-right spans and `floor(x0)` for right-to-left | inferred | [RE4.h:310-311](../re4/RE4.h) | Same |
-| Which end of a span is exclusive, and which of a shared left, right, top or bottom edge owns an exact-centre sample | unknown | none held; no diag or manual statement | Two adjacent triangles sharing an edge through a pixel centre, read back (diag `mg_color_tri` / `mg_z_tri` expected checksums would also settle it once the scene is replayed) |
+| The right end of a span at an exact pixel-centre tie | software expectation: excluded (the stored table is the diag's expected image) | Diag `mg_color_tri` red table, row for y = 11 where the edge x = 11.5 gives 11 pixels, not 12; all 16 rows match the centre-strictly-inside rule | n/a |
+| Which of a shared left, top or bottom edge owns an exact-centre sample | unknown | no table row puts a centre exactly on a left, top or bottom edge (left edge at x = 0 against centres at 0.5; apex row empty) | Two adjacent triangles sharing an edge through a pixel centre, read back |
 | Each RE4 owns alternate scanlines (`y % numRE4s`) | software expectation | [PP1.h pixel memory layout](../pp1/PP1.h); [two-re.md](two-re.md) | n/a |
 
 ### 3. Colour and alpha interpolation
@@ -64,9 +66,10 @@ tabulated here. The one set of diagnostic expected values already carried is the
 | Fact | Grade | Source | Settle |
 |---|---|---|---|
 | R, G, B and A are iterated in 12 bits | established | Octane report 4.2.3 p. 4-8 | n/a |
-| Register format 12.12: start value is `c * 0xFFF000` (12-bit integer part, 12 fraction bits) | inferred | [RE4.h:309](../re4/RE4.h) (GE11 microcode reading) | Setup-write trace for a constant-colour triangle |
+| Register format 12.12: start value is `c * 0xFFF000` (12-bit integer part, 12 fraction bits) | software expectation (was inferred) | Diag host setup pool holds `16773120.0` (`0xFFF000`) and `2^24` at `0x209321b0`, `0x209321a0`; [RE4.h:309](../re4/RE4.h) (GE11 microcode reading) agrees | n/a |
 | Colour is a screen-space plane equation (`dre = dr/dy + trunc(dxdy0) * drx`, minus `drx` when direction and slope sign disagree); no per-pixel 1/w for colour | inferred | [RE4.h:309-314](../re4/RE4.h); [GE11.h:468](../ge11/GE11.h) | Setup trace of a triangle with unequal w; readback of a wide triangle |
-| Reduction of the 12-bit iterated value to an 8-bit store (truncate or round); clamp behaviour at the ends | unknown | none held. The 12-bit pair format used for 4-bit visuals stores `component >> 4` for X fills ([PP1.h](../pp1/PP1.h) comment, software expectation), which is the host-fill path, not the iterator | Diag `mg_color_tri` expected CRC against a replay with each reduction; or a ramp readback |
+| Reduction of the 12-bit iterated value to an 8-bit store (truncate or round); clamp behaviour at the ends | inferred (fit to the diag's stored tables): neither. The stored colour ramps are `floor(v + T)` with `T` a fixed 4 by 4 ordered threshold, zero mean, no pixel off by more than one level from the exact plane value (172 pixels per ramp, 0 contradictions); constants 0.5 and 0.75 alternate between the two neighbouring levels. Whether dither was enabled by the test's state, or is the store's behaviour, was not decoded | Diag `mg_color_tri` tables ([ide-raster-tests.md](ide-raster-tests.md)); the diag's constant-colour routine `0x20835714` is `trunc(c * 4095)`, `y = x - (x >> 8)`, fields `y >> 4`, `(y >> 4) + 1` and `y & 0xf` | End clamp: a ramp that reaches 1.0; the dither enable state |
+| Where the colour plane is sampled | inferred (fit to the diag's stored tables): the stored ramps fit the exact plane at `x = col`, `y = row + 1` with mean error under 0.05 level on all three channels | Diag `mg_color_tri` tables; slope quantisation not modelled | n/a |
 | Alpha is iterated like colour | inferred | [RE4.h:309-314](../re4/RE4.h) (`dae`, `dax` in the same list) | Same trace |
 
 ### 4. Depth interpolation, store, rounding
@@ -116,7 +119,7 @@ tabulated here. The one set of diagnostic expected values already carried is the
 |---|---|---|---|
 | Sixteen operations in fill-mode bits 29:26 with an enable at bit 2 (0 clear, 3 copy, 5 no-op, 6 xor, 0xA invert, 0xF set, and the rest of the standard set) | software expectation | [PP1.h:140, 241-257](../pp1/PP1.h); GL op is sent as `op - 0x1500` ([gl-commands.md](../../software/opengl/gl-commands.md)) | n/a |
 | Logic op is also a blend equation that applies a bitwise operation to each source and destination component | established | Octane report 4.4.2 p. 4-13 | n/a |
-| Whether the op acts on the 8-bit component, the 12-bit component or the stored bits, and how it interacts with blend and the write mask | unknown | none held | Diag `mg_logicop` (pass/fail only in the IDE guide transcript, p. 7-13); read its expected value in the shipped diag |
+| Whether the op acts on the 8-bit component, the 12-bit component or the stored bits, and how it interacts with blend and the write mask | software expectation (weak): `mg_logicop` loops 16 operations by 3 inputs, sets the operation in fill-mode bits 29:26 (mask `0xc3ffffff`) and compares 48 read-back words under `0x00ffffff`, so the check covers 24 colour bits and not alpha. The expected words are not in data and were not located | Diag `0x208694fc` | Locate the expected array; interaction with blend and write mask still unknown |
 
 ### 9. Fog
 
@@ -171,7 +174,8 @@ tabulated here. The one set of diagnostic expected values already carried is the
 | The pixel processor performs dithering | established | Octane report p. 4-12 | n/a |
 | GL dither enable is state 0x1FC bit 0 in the geometry engine; the enable token carries 3 to enable and 0 to disable | software expectation | [GE11.h:697](../ge11/GE11.h), [HQ3.h:996](../hq3/HQ3.h), [gl-commands.md](../../software/opengl/gl-commands.md) | n/a |
 | No pixel-processor fill-mode bit for dither has been found | inferred | [PP1.h:194-197](../pp1/PP1.h) (header) | Library token handler for 0x067 and the registers it writes |
-| The dither pattern, its size, and which pixel types (8-8-8-8, 12-bit, 4-4-4-4) it applies to | unknown. The header names a 4 by 4 matrix from another board family as the nearest analogy, which is not evidence | PP1.h:195-197 | Diag `mg_dither` ("RSS, PP1, DITHER Test passed", IDE guide p. 7-13): read its expected pixel values from the shipped `ide`; or a gradient readback |
+| The dither pattern and size | inferred (fit to the diag's stored tables): 4 by 4 ordered, with the threshold intervals tabulated in [ide-raster-tests.md](ide-raster-tests.md), fitted to the 8-bit-per-component colour triangles. No classic Bayer 4 by 4 matrix fits under any shift or transposition. The matrix itself is not recovered (intervals only) | Diag `mg_color_tri` tables; `mg_dither` (`0x2086a15c`) expected array not located (a stack array with no stored constants) | A gradient readback at known coordinates, or locating the `mg_dither` expected words |
+| Which pixel types the dither applies to (8-8-8-8, 12-bit, 4-4-4-4) | unknown. Only the 8-8-8-8 colour tables were fitted | Diag compare mask `0xfff0fff0` for a 4-4-4-4 style format gives no dither information | Same |
 
 ## What a model can and cannot take from this page
 
@@ -180,9 +184,11 @@ tabulated here. The one set of diagnostic expected values already carried is the
   TRAM, 2 by 2 antialiased points and 2-wide antialiased lines.
 - Software expectations: the register and token encodings, the ZST word, the alpha reference format, the 16
   logic ops, the 2D inclusive block end.
-- Every rounding, tie and reduction rule (setup snap, edge ownership, 12-to-8-bit store, blend multiply, LOD
-  and filter weights, fog, dither) is unknown. The held diagnostics are the cheapest source for most of them, but their
-  expected values are not extracted yet.
+- From the diagnostic's stored images ([ide-raster-tests.md](ide-raster-tests.md)): the right-edge tie is excluded, colour is
+  a dithered store with a fixed 4 by 4 threshold pattern and no bias, and the setup bias and colour start scale are what
+  the microcode reading said. Everything else (setup snap in the GE ALU, left, top and bottom ties, blend multiply, depth and
+  stencil rounding, LOD and filter weights, fog, point and line ownership) is still unknown: the diagnostic holds no board model, and
+  the expected arrays for points, logic op, dither and the block and polygon tests were not located.
 
 ## Open items
 
