@@ -4,11 +4,13 @@ title = "raster engine register contract for the Impact graphics"
 doc = "Raster engine registers of the Impact graphics subsystem."
 from = "driver and traffic readings"
 public_from = ["driver and traffic readings", "OpenBSD impact(4) driver"]
+name_source = "ours"
 
 [spaces.re4_regs]
 unit = "reg"
 
 [registers.tri_x_major]
+name_source = "ours"
 offset = 0xe000
 access = "w"
 width = 32
@@ -16,6 +18,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.tri_x_upper]
+name_source = "ours"
 offset = 0xe001
 access = "w"
 width = 32
@@ -23,6 +26,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.tri_x_lower]
+name_source = "ours"
 offset = 0xe002
 access = "w"
 width = 32
@@ -30,6 +34,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.tri_y_top]
+name_source = "ours"
 offset = 0xe003
 access = "w"
 width = 32
@@ -37,6 +42,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.tri_y_mid]
+name_source = "ours"
 offset = 0xe004
 access = "w"
 width = 32
@@ -44,6 +50,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.tri_y_bottom]
+name_source = "ours"
 offset = 0xe005
 access = "w"
 width = 32
@@ -51,6 +58,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.tri_slope_major_hi]
+name_source = "ours"
 offset = 0xe006
 access = "w"
 width = 32
@@ -58,6 +66,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.tri_slope_major_lo]
+name_source = "ours"
 offset = 0xe007
 access = "w"
 width = 32
@@ -65,6 +74,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.tri_slope_upper_hi]
+name_source = "ours"
 offset = 0xe008
 access = "w"
 width = 32
@@ -72,6 +82,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.tri_slope_upper_lo]
+name_source = "ours"
 offset = 0xe009
 access = "w"
 width = 32
@@ -79,6 +90,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.tri_slope_lower_hi]
+name_source = "ours"
 offset = 0xe00a
 access = "w"
 width = 32
@@ -86,6 +98,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.tri_slope_lower_lo]
+name_source = "ours"
 offset = 0xe00b
 access = "w"
 width = 32
@@ -93,6 +106,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.aaline_x_start]
+name_source = "ours"
 offset = 0xe00c
 access = "w"
 width = 32
@@ -100,6 +114,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.aaline_y_start]
+name_source = "ours"
 offset = 0xe00d
 access = "w"
 width = 32
@@ -107,6 +122,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.aaline_x_end]
+name_source = "ours"
 offset = 0xe00e
 access = "w"
 width = 32
@@ -114,6 +130,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.aaline_y_end]
+name_source = "ours"
 offset = 0xe00f
 access = "w"
 width = 32
@@ -121,6 +138,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.aaline_dx]
+name_source = "ours"
 offset = 0xe010
 access = "w"
 width = 32
@@ -128,6 +146,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.aaline_dy]
+name_source = "ours"
 offset = 0xe011
 access = "w"
 width = 32
@@ -135,6 +154,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.aaline_adjust]
+name_source = "ours"
 offset = 0xe012
 access = "w"
 width = 32
@@ -142,6 +162,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.instr]
+name_source = "ours"
 offset = 0xe013
 access = "w"
 width = 32
@@ -176,6 +197,7 @@ value = 0x18
 expect = { opcode = 8, setup = 1 }
 
 [registers.line_xy_start]
+name_source = "ours"
 offset = 0xe040
 access = "w"
 width = 32
@@ -183,6 +205,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.line_xy_end]
+name_source = "ours"
 offset = 0xe041
 access = "w"
 width = 32
@@ -190,6 +213,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.line_step_a]
+name_source = "ours"
 offset = 0xe042
 access = "w"
 width = 32
@@ -197,6 +221,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.line_step_b]
+name_source = "ours"
 offset = 0xe043
 access = "w"
 width = 32
@@ -204,6 +229,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.line_error_octant]
+name_source = "ours"
 offset = 0xe044
 access = "w"
 width = 32
@@ -211,6 +237,8 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.instr_alias]
+# UNSURE: header name is IR_ALIAS (impactreg.h:84), not an exact match
+name_source = "ours"
 offset = 0xe045
 access = "w"
 width = 32
@@ -223,6 +251,8 @@ fill or to arm a glyph rectangle, which is the block primitive above. Software
 expectation; what the board does with the alias is not decoded here."""
 
 [registers.block_xy_start]
+# UNSURE: header name is BLOCKXYSTARTI (impactreg.h:85)
+name_source = "ours"
 offset = 0xe046
 access = "w"
 width = 32
@@ -238,6 +268,8 @@ x = { bits = [31, 16], grade = "inferred" }
 y = { bits = [15, 0], grade = "inferred" }
 
 [registers.block_xy_end]
+# UNSURE: header name is BLOCKXYENDI (impactreg.h:86)
+name_source = "ours"
 offset = 0xe047
 access = "w"
 width = 32
@@ -254,6 +286,7 @@ x = { bits = [31, 16], grade = "inferred" }
 y = { bits = [15, 0], grade = "inferred" }
 
 [registers.block_xy_move]
+name_source = "ours"
 offset = 0xe048
 access = "w"
 width = 32
@@ -261,6 +294,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.block_saved_octant]
+name_source = "ours"
 offset = 0xe049
 access = "w"
 width = 32
@@ -268,6 +302,8 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_packed]
+# UNSURE: header name is PACKEDCOLOR (impactreg.h:87), words reversed
+name_source = "ours"
 offset = 0xe05b
 access = "w"
 width = 32
@@ -284,6 +320,7 @@ green = { bits = [15, 8], grade = "inferred" }
 blue = { bits = [23, 16], grade = "inferred" }
 
 [registers.color_red]
+name_source = "ours"
 offset = 0xe05c
 access = "w"
 width = 32
@@ -291,6 +328,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_green]
+name_source = "ours"
 offset = 0xe05d
 access = "w"
 width = 32
@@ -298,6 +336,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_blue]
+name_source = "ours"
 offset = 0xe05e
 access = "w"
 width = 32
@@ -305,6 +344,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_alpha]
+name_source = "ours"
 offset = 0xe05f
 access = "w"
 width = 32
@@ -312,6 +352,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_red_edge]
+name_source = "ours"
 offset = 0xe060
 access = "w"
 width = 32
@@ -319,6 +360,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_red_span]
+name_source = "ours"
 offset = 0xe061
 access = "w"
 width = 32
@@ -326,6 +368,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_green_edge]
+name_source = "ours"
 offset = 0xe062
 access = "w"
 width = 32
@@ -333,6 +376,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_green_span]
+name_source = "ours"
 offset = 0xe063
 access = "w"
 width = 32
@@ -340,6 +384,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_blue_edge]
+name_source = "ours"
 offset = 0xe064
 access = "w"
 width = 32
@@ -347,6 +392,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_blue_span]
+name_source = "ours"
 offset = 0xe065
 access = "w"
 width = 32
@@ -354,6 +400,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_alpha_edge]
+name_source = "ours"
 offset = 0xe066
 access = "w"
 width = 32
@@ -361,6 +408,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_alpha_span]
+name_source = "ours"
 offset = 0xe067
 access = "w"
 width = 32
@@ -368,6 +416,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.depth_hi]
+name_source = "ours"
 offset = 0xe068
 access = "w"
 width = 32
@@ -375,6 +424,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.depth_lo]
+name_source = "ours"
 offset = 0xe069
 access = "w"
 width = 32
@@ -382,6 +432,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.depth_span_hi]
+name_source = "ours"
 offset = 0xe06a
 access = "w"
 width = 32
@@ -389,6 +440,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.depth_span_lo]
+name_source = "ours"
 offset = 0xe06b
 access = "w"
 width = 32
@@ -396,6 +448,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.depth_edge_hi]
+name_source = "ours"
 offset = 0xe06c
 access = "w"
 width = 32
@@ -403,6 +456,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.depth_edge_lo]
+name_source = "ours"
 offset = 0xe06d
 access = "w"
 width = 32
@@ -410,6 +464,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.glyph_hi]
+name_source = "ours"
 offset = 0xe070
 access = "w"
 width = 32
@@ -425,6 +480,7 @@ execute are inferred from the driver loop."""
 space = "re4_regs"
 
 [registers.glyph_lo]
+name_source = "ours"
 offset = 0xe071
 access = "w"
 width = 32
@@ -438,6 +494,7 @@ is inferred from the driver's packing."""
 space = "re4_regs"
 
 [registers.xfer_abort]
+name_source = "ours"
 offset = 0xe100
 access = "w"
 width = 32
@@ -445,6 +502,8 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.xfer_control]
+# UNSURE: header name is XFRCONTROL (impactreg.h:91)
+name_source = "ours"
 offset = 0xe102
 access = "rw"
 width = 32
@@ -466,6 +525,8 @@ framebuffer = { value = 0, grade = "inferred" }
 texture_memory = { value = 1, grade = "inferred" }
 
 [registers.fill_mode]
+# header CMD_FILLMODE (impactreg.h:92) matches, but the fields have no public source
+name_source = "ours"
 offset = 0xe110
 access = "rw"
 width = 32
@@ -508,6 +569,9 @@ kind = "example"
 expect = { glyph_opaque = 1, glyph_stipple = 1, block_type = 1 }
 
 [registers.pp1_fill_mode]
+# sys/arch/sgi/dev/impactreg.h:103 IMPACTSR_CMD_PP1FILLMODE
+name_source = "public"
+name_cite = "OpenBSD impact(4) driver register header"
 offset = 0xe161
 access = "w"
 width = 32
@@ -520,7 +584,8 @@ selector. The public driver writes 0x0c006300 for a copy fill and 0x18006304 for
 XOR fill, each before the fill's execute. The bits those values set are not
 decoded here."""
 
-[registers.texmode1]
+[registers.texture_mode_first]
+name_source = "ours"
 offset = 0xe111
 access = "rw"
 width = 32
@@ -529,65 +594,66 @@ doc = """
 Texture mode, first word. The client clears bits 15 to 12 before it chooses the
 colour table format. Its RGB-compatible table path then writes 0xe in that field.
 Only that value is read from the client's code; the other values of the field
-are not known."""
+are not known. Formerly texmode1."""
 space = "re4_regs"
 
-[registers.texmode1.fields.colour_table]
+[registers.texture_mode_first.fields.colour_table]
 bits = [15, 12]
 grade = "inferred"
 
-[registers.texmode1.fields.colour_table.enums]
+[registers.texture_mode_first.fields.colour_table.enums]
 rgb_lookup = { value = 0xe, grade = "inferred" }
 none = { value = 0, grade = "inferred" }
 alpha = { value = 0x1, grade = "inferred" }
 intensity_or_luminance_alpha = { value = 0x9, grade = "inferred" }
 
-[registers.texmode1.fields.texture_enable]
+[registers.texture_mode_first.fields.texture_enable]
 bits = [0, 0]
 grade = "inferred"
 
-[registers.texmode1.fields.environment]
+[registers.texture_mode_first.fields.environment]
 bits = [2, 1]
 grade = "inferred"
 
-[registers.texmode1.fields.environment.enums]
+[registers.texture_mode_first.fields.environment.enums]
 modulate = { value = 0, grade = "inferred" }
 decal = { value = 1, grade = "inferred" }
 blend = { value = 2, grade = "inferred" }
 alpha_only = { value = 3, grade = "inferred" }
 
-[registers.texmode1.fields.layout]
+[registers.texture_mode_first.fields.layout]
 bits = [4, 3]
 grade = "inferred"
 
-[registers.texmode1.fields.layout.enums]
+[registers.texture_mode_first.fields.layout.enums]
 one_component = { value = 0, grade = "inferred" }
 two_component = { value = 1, grade = "inferred" }
 rgb = { value = 2, grade = "inferred" }
 rgba = { value = 3, grade = "inferred" }
 
-[registers.texmode1.fields.tram_size_code]
+[registers.texture_mode_first.fields.texture_ram_size_code]
+doc = "Formerly tram_size_code."
 bits = [6, 5]
 grade = "inferred"
 
-[registers.texmode1.fields.tram_select]
+[registers.texture_mode_first.fields.texture_ram_select]
 bits = [8, 7]
 grade = "inferred"
 doc = """
 The client sends an undefined value here for RGB and RGBA textures, and a
-select for one- and two-component textures. What each select names is unknown."""
+select for one- and two-component textures. What each select names is unknown. Formerly tram_select."""
 
-[registers.texmode1.fields.texel_class]
+[registers.texture_mode_first.fields.texel_class]
 bits = [11, 9]
 grade = "inferred"
 
-[registers.texmode1.fields.texel_class.enums]
+[registers.texture_mode_first.fields.texel_class.enums]
 alpha = { value = 1, grade = "inferred" }
 luminance = { value = 2, grade = "inferred" }
 intensity = { value = 3, grade = "inferred" }
 colour = { value = 4, grade = "inferred" }
 
-[registers.texmode1.fields.depth_term]
+[registers.texture_mode_first.fields.depth_term]
 bits = [18, 16]
 grade = "inferred"
 doc = """
@@ -595,6 +661,8 @@ One for a texture with 12-bit components and four for any other depth. Reading
 the field as the count of blend units in use is inferred."""
 
 [registers.config]
+# header CMD_CONFIG (impactreg.h:93) matches, but the fields have no public source
+name_source = "ours"
 offset = 0xe112
 access = "rw"
 width = 32
@@ -607,6 +675,7 @@ y_flip = { bits = [3, 3], grade = "inferred" }
 target_raster = { bits = [0, 0], grade = "inferred" }
 
 [registers.scissor_x]
+name_source = "ours"
 offset = 0xe113
 access = "rw"
 width = 32
@@ -614,6 +683,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.scissor_y]
+name_source = "ours"
 offset = 0xe114
 access = "rw"
 width = 32
@@ -621,6 +691,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.window_origin]
+name_source = "ours"
 offset = 0xe115
 access = "rw"
 width = 32
@@ -638,6 +709,8 @@ x = { bits = [15, 0], grade = "inferred" }
 y = { bits = [31, 16], grade = "inferred" }
 
 [registers.background_rg]
+# UNSURE: header name is BKGRD_RG (impactreg.h:95)
+name_source = "ours"
 offset = 0xe140
 access = "rw"
 width = 32
@@ -651,6 +724,8 @@ the index sits in the low twelve bits of the first."""
 space = "re4_regs"
 
 [registers.background_ba]
+# UNSURE: header name is BKGRD_BA (impactreg.h:96)
+name_source = "ours"
 offset = 0xe141
 access = "rw"
 width = 32
@@ -658,6 +733,8 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.texenv_rg]
+# UNSURE: may be the generic GL texture environment term
+name_source = "ours"
 offset = 0xe142
 access = "rw"
 width = 32
@@ -665,6 +742,8 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.texenv_b]
+# UNSURE: may be the generic GL texture environment term
+name_source = "ours"
 offset = 0xe143
 access = "rw"
 width = 32
@@ -672,6 +751,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.fog_rg]
+name_source = "ours"
 offset = 0xe144
 access = "rw"
 width = 32
@@ -679,6 +759,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.fog_b]
+name_source = "ours"
 offset = 0xe145
 access = "rw"
 width = 32
@@ -686,6 +767,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.aaline_config]
+name_source = "ours"
 offset = 0xe146
 access = "rw"
 width = 32
@@ -697,6 +779,7 @@ width = { bits = [7, 1], grade = "inferred" }
 smooth = { bits = [0, 0], grade = "inferred" }
 
 [registers.screen_mask1_x]
+name_source = "ours"
 offset = 0xe147
 access = "rw"
 width = 32
@@ -710,6 +793,7 @@ pixels outside the box is inferred."""
 space = "re4_regs"
 
 [registers.screen_mask1_y]
+name_source = "ours"
 offset = 0xe148
 access = "rw"
 width = 32
@@ -723,6 +807,7 @@ discards pixels outside the box is inferred."""
 space = "re4_regs"
 
 [registers.screen_mask2_x]
+name_source = "ours"
 offset = 0xe149
 access = "rw"
 width = 32
@@ -734,6 +819,7 @@ listing shows mask 1 only."""
 space = "re4_regs"
 
 [registers.screen_mask2_y]
+name_source = "ours"
 offset = 0xe14a
 access = "rw"
 width = 32
@@ -744,6 +830,7 @@ Screen mask 2, y range, same encoding as screen_mask1_y. Established for masks
 space = "re4_regs"
 
 [registers.screen_mask3_x]
+name_source = "ours"
 offset = 0xe14b
 access = "rw"
 width = 32
@@ -754,6 +841,7 @@ kernel's words for mask 3."""
 space = "re4_regs"
 
 [registers.screen_mask3_y]
+name_source = "ours"
 offset = 0xe14c
 access = "rw"
 width = 32
@@ -764,6 +852,7 @@ kernel's words for mask 3."""
 space = "re4_regs"
 
 [registers.screen_mask4_x]
+name_source = "ours"
 offset = 0xe14d
 access = "rw"
 width = 32
@@ -774,6 +863,7 @@ shadow holds mask 4 at 0x14d and 0x14e. Established as the kernel's words."""
 space = "re4_regs"
 
 [registers.screen_mask4_y]
+name_source = "ours"
 offset = 0xe14e
 access = "rw"
 width = 32
@@ -784,6 +874,7 @@ kernel's words for mask 4."""
 space = "re4_regs"
 
 [registers.window_mode]
+name_source = "ours"
 offset = 0xe14f
 access = "rw"
 width = 32
@@ -813,6 +904,8 @@ enable2 = { bits = [1, 1], grade = "inferred" }
 enable1 = { bits = [0, 0], grade = "inferred" }
 
 [registers.xfer_size]
+# UNSURE: header name is XFRSIZE (impactreg.h:97)
+name_source = "ours"
 offset = 0xe153
 access = "rw"
 width = 32
@@ -824,6 +917,7 @@ lines = { bits = [31, 16], grade = "inferred" }
 width = { bits = [15, 0], grade = "inferred" }
 
 [registers.xfer_zoom_init]
+name_source = "ours"
 offset = 0xe154
 access = "rw"
 width = 32
@@ -831,6 +925,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.xfer_zoom_step]
+name_source = "ours"
 offset = 0xe155
 access = "rw"
 width = 32
@@ -838,6 +933,8 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.xfer_mask_lo]
+# UNSURE: header name is XFRMASKLO (impactreg.h:98)
+name_source = "ours"
 offset = 0xe156
 access = "rw"
 width = 32
@@ -853,6 +950,8 @@ stated here.
 space = "re4_regs"
 
 [registers.xfer_mask_hi]
+# UNSURE: header name is XFRMASKHI (impactreg.h:99)
+name_source = "ours"
 offset = 0xe157
 access = "rw"
 width = 32
@@ -860,6 +959,8 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.xfer_counters]
+# UNSURE: header name is XFRCOUNTERS (impactreg.h:100)
+name_source = "ours"
 offset = 0xe158
 access = "r"
 width = 32
@@ -867,6 +968,8 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.xfer_mode]
+# UNSURE: header name is XFRMODE (impactreg.h:101)
+name_source = "ours"
 offset = 0xe159
 access = "rw"
 width = 32
@@ -887,8 +990,10 @@ opaque = { bits = [23, 23], grade = "inferred" }
 rgb_order = { bits = [22, 22], grade = "inferred" }
 decimate = { bits = [20, 20], grade = "inferred" }
 zoom = { bits = [19, 19], grade = "inferred" }
-flag18 = { bits = [18, 18], grade = "inferred" }
-flag17 = { bits = [17, 17], grade = "inferred" }
+# UNSURE: the description does not name this bit
+field_18 = { bits = [18, 18], grade = "inferred", doc = "Formerly flag18." }
+# UNSURE: the description does not name this bit
+field_17 = { bits = [17, 17], grade = "inferred", doc = "Formerly flag17." }
 stride_skip_bytes = { bits = [16, 14], grade = "inferred" }
 begin_skip_bits = { bits = [13, 11], grade = "inferred" }
 begin_skip_bytes = { bits = [10, 8], grade = "inferred" }
@@ -907,21 +1012,22 @@ rgba = { value = 8, grade = "inferred" }
 
 [[registers.xfer_mode.tests]]
 value = 0x40080
-expect = { comp_type = 0, format = 8, flag18 = 1, stride_skip_bytes = 0 }
+expect = { comp_type = 0, format = 8, field_18 = 1, stride_skip_bytes = 0 }
 
 [[registers.xfer_mode.tests]]
 value = 0xc00080
-expect = { comp_type = 0, format = 8, begin_skip_bytes = 0, stride_skip_bytes = 0, flag18 = 0, rgb_order = 1, opaque = 1 }
+expect = { comp_type = 0, format = 8, begin_skip_bytes = 0, stride_skip_bytes = 0, field_18 = 0, rgb_order = 1, opaque = 1 }
 
 [[registers.xfer_mode.tests]]
 value = 0xc10080
-expect = { comp_type = 0, format = 8, begin_skip_bytes = 0, stride_skip_bytes = 4, flag18 = 0, rgb_order = 1, opaque = 1 }
+expect = { comp_type = 0, format = 8, begin_skip_bytes = 0, stride_skip_bytes = 4, field_18 = 0, rgb_order = 1, opaque = 1 }
 
 [[registers.xfer_mode.tests]]
 value = 0xc10480
-expect = { comp_type = 0, format = 8, begin_skip_bytes = 4, stride_skip_bytes = 4, flag18 = 0, rgb_order = 1, opaque = 1 }
+expect = { comp_type = 0, format = 8, begin_skip_bytes = 4, stride_skip_bytes = 4, field_18 = 0, rgb_order = 1, opaque = 1 }
 
 [registers.line_stipple_pattern]
+name_source = "ours"
 offset = 0xe15a
 access = "rw"
 width = 32
@@ -929,6 +1035,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.line_stipple_repeat]
+name_source = "ours"
 offset = 0xe15b
 access = "rw"
 width = 32
@@ -936,6 +1043,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.device_addr]
+name_source = "ours"
 offset = 0xe15c
 access = "rw"
 width = 32
@@ -943,6 +1051,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.device_data]
+name_source = "ours"
 offset = 0xe15d
 access = "rw"
 width = 32
@@ -950,6 +1059,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.status]
+name_source = "ours"
 offset = 0xe15e
 access = "r"
 width = 32
@@ -965,6 +1075,8 @@ board_index = { bits = [3, 2], grade = "inferred" }
 chip_count = { bits = [1, 0], grade = "inferred" }
 
 [registers.toggle_context]
+# UNSURE: header name is RE_TOGGLECNTX (impactreg.h:102)
+name_source = "ours"
 offset = 0xe15f
 access = "w"
 width = 32

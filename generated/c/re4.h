@@ -1,7 +1,7 @@
 /* generated from devices/re4/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 97465e36c7dff4df3b16b93614fc27f6b6f5ea5cee6f9ae4ba6330eda7b4f083 */
+/* input sha256 148530b37108c0449b4724ea2cd79b2e4c42f590f02d799e53d67af100b8ea80 */
 /* raster engine register contract for the Impact graphics */
 #ifndef RE_GEN_H
 #define RE_GEN_H
@@ -300,50 +300,50 @@
  * Texture mode, first word. The client clears bits 15 to 12 before it chooses the
  * colour table format. Its RGB-compatible table path then writes 0xe in that field.
  * Only that value is read from the client's code; the other values of the field
- * are not known.
+ * are not known. Formerly texmode1.
  */
-/* texmode1: rw32, space re4_regs, reset unknown; driver and traffic readings */
-#define RE_TEXMODE1_OFFSET                           0xe111u /* inferred */
-#define RE_TEXMODE1_DEPTH_TERM_SHIFT                 16 /* inferred */
-#define RE_TEXMODE1_DEPTH_TERM_MASK                  0x7u
-#define RE_TEXMODE1_DEPTH_TERM_INPLACE               (RE_TEXMODE1_DEPTH_TERM_MASK << RE_TEXMODE1_DEPTH_TERM_SHIFT)
-#define RE_TEXMODE1_COLOUR_TABLE_SHIFT               12 /* inferred */
-#define RE_TEXMODE1_COLOUR_TABLE_MASK                0xfu
-#define RE_TEXMODE1_COLOUR_TABLE_INPLACE             (RE_TEXMODE1_COLOUR_TABLE_MASK << RE_TEXMODE1_COLOUR_TABLE_SHIFT)
-#define RE_TEXMODE1_COLOUR_TABLE_NONE                0 /* inferred */
-#define RE_TEXMODE1_COLOUR_TABLE_ALPHA               1 /* inferred */
-#define RE_TEXMODE1_COLOUR_TABLE_INTENSITY_OR_LUMINANCE_ALPHA 9 /* inferred */
-#define RE_TEXMODE1_COLOUR_TABLE_RGB_LOOKUP          14 /* inferred */
-#define RE_TEXMODE1_TEXEL_CLASS_SHIFT                9 /* inferred */
-#define RE_TEXMODE1_TEXEL_CLASS_MASK                 0x7u
-#define RE_TEXMODE1_TEXEL_CLASS_INPLACE              (RE_TEXMODE1_TEXEL_CLASS_MASK << RE_TEXMODE1_TEXEL_CLASS_SHIFT)
-#define RE_TEXMODE1_TEXEL_CLASS_ALPHA                1 /* inferred */
-#define RE_TEXMODE1_TEXEL_CLASS_LUMINANCE            2 /* inferred */
-#define RE_TEXMODE1_TEXEL_CLASS_INTENSITY            3 /* inferred */
-#define RE_TEXMODE1_TEXEL_CLASS_COLOUR               4 /* inferred */
-#define RE_TEXMODE1_TRAM_SELECT_SHIFT                7 /* inferred */
-#define RE_TEXMODE1_TRAM_SELECT_MASK                 0x3u
-#define RE_TEXMODE1_TRAM_SELECT_INPLACE              (RE_TEXMODE1_TRAM_SELECT_MASK << RE_TEXMODE1_TRAM_SELECT_SHIFT)
-#define RE_TEXMODE1_TRAM_SIZE_CODE_SHIFT             5 /* inferred */
-#define RE_TEXMODE1_TRAM_SIZE_CODE_MASK              0x3u
-#define RE_TEXMODE1_TRAM_SIZE_CODE_INPLACE           (RE_TEXMODE1_TRAM_SIZE_CODE_MASK << RE_TEXMODE1_TRAM_SIZE_CODE_SHIFT)
-#define RE_TEXMODE1_LAYOUT_SHIFT                     3 /* inferred */
-#define RE_TEXMODE1_LAYOUT_MASK                      0x3u
-#define RE_TEXMODE1_LAYOUT_INPLACE                   (RE_TEXMODE1_LAYOUT_MASK << RE_TEXMODE1_LAYOUT_SHIFT)
-#define RE_TEXMODE1_LAYOUT_ONE_COMPONENT             0 /* inferred */
-#define RE_TEXMODE1_LAYOUT_TWO_COMPONENT             1 /* inferred */
-#define RE_TEXMODE1_LAYOUT_RGB                       2 /* inferred */
-#define RE_TEXMODE1_LAYOUT_RGBA                      3 /* inferred */
-#define RE_TEXMODE1_ENVIRONMENT_SHIFT                1 /* inferred */
-#define RE_TEXMODE1_ENVIRONMENT_MASK                 0x3u
-#define RE_TEXMODE1_ENVIRONMENT_INPLACE              (RE_TEXMODE1_ENVIRONMENT_MASK << RE_TEXMODE1_ENVIRONMENT_SHIFT)
-#define RE_TEXMODE1_ENVIRONMENT_MODULATE             0 /* inferred */
-#define RE_TEXMODE1_ENVIRONMENT_DECAL                1 /* inferred */
-#define RE_TEXMODE1_ENVIRONMENT_BLEND                2 /* inferred */
-#define RE_TEXMODE1_ENVIRONMENT_ALPHA_ONLY           3 /* inferred */
-#define RE_TEXMODE1_TEXTURE_ENABLE_SHIFT             0 /* inferred */
-#define RE_TEXMODE1_TEXTURE_ENABLE_MASK              0x1u
-#define RE_TEXMODE1_TEXTURE_ENABLE_INPLACE           (RE_TEXMODE1_TEXTURE_ENABLE_MASK << RE_TEXMODE1_TEXTURE_ENABLE_SHIFT)
+/* texture_mode_first: rw32, space re4_regs, reset unknown; driver and traffic readings */
+#define RE_TEXTURE_MODE_FIRST_OFFSET                 0xe111u /* inferred */
+#define RE_TEXTURE_MODE_FIRST_DEPTH_TERM_SHIFT       16 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_DEPTH_TERM_MASK        0x7u
+#define RE_TEXTURE_MODE_FIRST_DEPTH_TERM_INPLACE     (RE_TEXTURE_MODE_FIRST_DEPTH_TERM_MASK << RE_TEXTURE_MODE_FIRST_DEPTH_TERM_SHIFT)
+#define RE_TEXTURE_MODE_FIRST_COLOUR_TABLE_SHIFT     12 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_COLOUR_TABLE_MASK      0xfu
+#define RE_TEXTURE_MODE_FIRST_COLOUR_TABLE_INPLACE   (RE_TEXTURE_MODE_FIRST_COLOUR_TABLE_MASK << RE_TEXTURE_MODE_FIRST_COLOUR_TABLE_SHIFT)
+#define RE_TEXTURE_MODE_FIRST_COLOUR_TABLE_NONE      0 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_COLOUR_TABLE_ALPHA     1 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_COLOUR_TABLE_INTENSITY_OR_LUMINANCE_ALPHA 9 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_COLOUR_TABLE_RGB_LOOKUP 14 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_TEXEL_CLASS_SHIFT      9 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_TEXEL_CLASS_MASK       0x7u
+#define RE_TEXTURE_MODE_FIRST_TEXEL_CLASS_INPLACE    (RE_TEXTURE_MODE_FIRST_TEXEL_CLASS_MASK << RE_TEXTURE_MODE_FIRST_TEXEL_CLASS_SHIFT)
+#define RE_TEXTURE_MODE_FIRST_TEXEL_CLASS_ALPHA      1 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_TEXEL_CLASS_LUMINANCE  2 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_TEXEL_CLASS_INTENSITY  3 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_TEXEL_CLASS_COLOUR     4 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_TEXTURE_RAM_SELECT_SHIFT 7 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_TEXTURE_RAM_SELECT_MASK 0x3u
+#define RE_TEXTURE_MODE_FIRST_TEXTURE_RAM_SELECT_INPLACE (RE_TEXTURE_MODE_FIRST_TEXTURE_RAM_SELECT_MASK << RE_TEXTURE_MODE_FIRST_TEXTURE_RAM_SELECT_SHIFT)
+#define RE_TEXTURE_MODE_FIRST_TEXTURE_RAM_SIZE_CODE_SHIFT 5 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_TEXTURE_RAM_SIZE_CODE_MASK 0x3u
+#define RE_TEXTURE_MODE_FIRST_TEXTURE_RAM_SIZE_CODE_INPLACE (RE_TEXTURE_MODE_FIRST_TEXTURE_RAM_SIZE_CODE_MASK << RE_TEXTURE_MODE_FIRST_TEXTURE_RAM_SIZE_CODE_SHIFT)
+#define RE_TEXTURE_MODE_FIRST_LAYOUT_SHIFT           3 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_LAYOUT_MASK            0x3u
+#define RE_TEXTURE_MODE_FIRST_LAYOUT_INPLACE         (RE_TEXTURE_MODE_FIRST_LAYOUT_MASK << RE_TEXTURE_MODE_FIRST_LAYOUT_SHIFT)
+#define RE_TEXTURE_MODE_FIRST_LAYOUT_ONE_COMPONENT   0 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_LAYOUT_TWO_COMPONENT   1 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_LAYOUT_RGB             2 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_LAYOUT_RGBA            3 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_ENVIRONMENT_SHIFT      1 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_ENVIRONMENT_MASK       0x3u
+#define RE_TEXTURE_MODE_FIRST_ENVIRONMENT_INPLACE    (RE_TEXTURE_MODE_FIRST_ENVIRONMENT_MASK << RE_TEXTURE_MODE_FIRST_ENVIRONMENT_SHIFT)
+#define RE_TEXTURE_MODE_FIRST_ENVIRONMENT_MODULATE   0 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_ENVIRONMENT_DECAL      1 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_ENVIRONMENT_BLEND      2 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_ENVIRONMENT_ALPHA_ONLY 3 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_TEXTURE_ENABLE_SHIFT   0 /* inferred */
+#define RE_TEXTURE_MODE_FIRST_TEXTURE_ENABLE_MASK    0x1u
+#define RE_TEXTURE_MODE_FIRST_TEXTURE_ENABLE_INPLACE (RE_TEXTURE_MODE_FIRST_TEXTURE_ENABLE_MASK << RE_TEXTURE_MODE_FIRST_TEXTURE_ENABLE_SHIFT)
 
 /* config: rw32, space re4_regs, reset unknown; driver and traffic readings */
 #define RE_CONFIG_OFFSET                             0xe112u /* inferred */
@@ -573,12 +573,12 @@
 #define RE_XFER_MODE_ZOOM_SHIFT                      19 /* inferred */
 #define RE_XFER_MODE_ZOOM_MASK                       0x1u
 #define RE_XFER_MODE_ZOOM_INPLACE                    (RE_XFER_MODE_ZOOM_MASK << RE_XFER_MODE_ZOOM_SHIFT)
-#define RE_XFER_MODE_FLAG18_SHIFT                    18 /* inferred */
-#define RE_XFER_MODE_FLAG18_MASK                     0x1u
-#define RE_XFER_MODE_FLAG18_INPLACE                  (RE_XFER_MODE_FLAG18_MASK << RE_XFER_MODE_FLAG18_SHIFT)
-#define RE_XFER_MODE_FLAG17_SHIFT                    17 /* inferred */
-#define RE_XFER_MODE_FLAG17_MASK                     0x1u
-#define RE_XFER_MODE_FLAG17_INPLACE                  (RE_XFER_MODE_FLAG17_MASK << RE_XFER_MODE_FLAG17_SHIFT)
+#define RE_XFER_MODE_FIELD_18_SHIFT                  18 /* inferred */
+#define RE_XFER_MODE_FIELD_18_MASK                   0x1u
+#define RE_XFER_MODE_FIELD_18_INPLACE                (RE_XFER_MODE_FIELD_18_MASK << RE_XFER_MODE_FIELD_18_SHIFT)
+#define RE_XFER_MODE_FIELD_17_SHIFT                  17 /* inferred */
+#define RE_XFER_MODE_FIELD_17_MASK                   0x1u
+#define RE_XFER_MODE_FIELD_17_INPLACE                (RE_XFER_MODE_FIELD_17_MASK << RE_XFER_MODE_FIELD_17_SHIFT)
 #define RE_XFER_MODE_STRIDE_SKIP_BYTES_SHIFT         14 /* inferred */
 #define RE_XFER_MODE_STRIDE_SKIP_BYTES_MASK          0x7u
 #define RE_XFER_MODE_STRIDE_SKIP_BYTES_INPLACE       (RE_XFER_MODE_STRIDE_SKIP_BYTES_MASK << RE_XFER_MODE_STRIDE_SKIP_BYTES_SHIFT)

@@ -1,9 +1,9 @@
 /* generated from devices/re4/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 97465e36c7dff4df3b16b93614fc27f6b6f5ea5cee6f9ae4ba6330eda7b4f083 */
+/* input sha256 148530b37108c0449b4724ea2cd79b2e4c42f590f02d799e53d67af100b8ea80 */
 /* raster engine register contract for the Impact graphics */
-/* Names are MGRAS_RE4_*; name source: imported-unchecked. */
+/* Names are MGRAS_RE4_*; name source: ours. */
 /* Offsets are bytes; registers of a register-indexed space are written as index * size. */
 #ifndef HW_SGI_GPU_MGRAS_RE4_REGS_H
 #define HW_SGI_GPU_MGRAS_RE4_REGS_H
@@ -141,15 +141,15 @@ FIELD(MGRAS_RE4_FILL_MODE, GLYPH_OPAQUE, 4, 1) /* inferred */
 FIELD(MGRAS_RE4_FILL_MODE, GLYPH_STIPPLE, 3, 1) /* inferred */
 FIELD(MGRAS_RE4_FILL_MODE, POLY_STIPPLE, 0, 1) /* inferred */
 
-REG32(MGRAS_RE4_TEXMODE1, 0x38444) /* inferred */
-FIELD(MGRAS_RE4_TEXMODE1, DEPTH_TERM, 16, 3) /* inferred */
-FIELD(MGRAS_RE4_TEXMODE1, COLOUR_TABLE, 12, 4) /* inferred */
-FIELD(MGRAS_RE4_TEXMODE1, TEXEL_CLASS, 9, 3) /* inferred */
-FIELD(MGRAS_RE4_TEXMODE1, TRAM_SELECT, 7, 2) /* inferred */
-FIELD(MGRAS_RE4_TEXMODE1, TRAM_SIZE_CODE, 5, 2) /* inferred */
-FIELD(MGRAS_RE4_TEXMODE1, LAYOUT, 3, 2) /* inferred */
-FIELD(MGRAS_RE4_TEXMODE1, ENVIRONMENT, 1, 2) /* inferred */
-FIELD(MGRAS_RE4_TEXMODE1, TEXTURE_ENABLE, 0, 1) /* inferred */
+REG32(MGRAS_RE4_TEXTURE_MODE_FIRST, 0x38444) /* inferred */
+FIELD(MGRAS_RE4_TEXTURE_MODE_FIRST, DEPTH_TERM, 16, 3) /* inferred */
+FIELD(MGRAS_RE4_TEXTURE_MODE_FIRST, COLOUR_TABLE, 12, 4) /* inferred */
+FIELD(MGRAS_RE4_TEXTURE_MODE_FIRST, TEXEL_CLASS, 9, 3) /* inferred */
+FIELD(MGRAS_RE4_TEXTURE_MODE_FIRST, TEXTURE_RAM_SELECT, 7, 2) /* inferred */
+FIELD(MGRAS_RE4_TEXTURE_MODE_FIRST, TEXTURE_RAM_SIZE_CODE, 5, 2) /* inferred */
+FIELD(MGRAS_RE4_TEXTURE_MODE_FIRST, LAYOUT, 3, 2) /* inferred */
+FIELD(MGRAS_RE4_TEXTURE_MODE_FIRST, ENVIRONMENT, 1, 2) /* inferred */
+FIELD(MGRAS_RE4_TEXTURE_MODE_FIRST, TEXTURE_ENABLE, 0, 1) /* inferred */
 
 REG32(MGRAS_RE4_CONFIG, 0x38448) /* inferred */
 FIELD(MGRAS_RE4_CONFIG, LINE_ROUND, 4, 1) /* inferred */
@@ -225,8 +225,8 @@ FIELD(MGRAS_RE4_XFER_MODE, OPAQUE, 23, 1) /* inferred */
 FIELD(MGRAS_RE4_XFER_MODE, RGB_ORDER, 22, 1) /* inferred */
 FIELD(MGRAS_RE4_XFER_MODE, DECIMATE, 20, 1) /* inferred */
 FIELD(MGRAS_RE4_XFER_MODE, ZOOM, 19, 1) /* inferred */
-FIELD(MGRAS_RE4_XFER_MODE, FLAG18, 18, 1) /* inferred */
-FIELD(MGRAS_RE4_XFER_MODE, FLAG17, 17, 1) /* inferred */
+FIELD(MGRAS_RE4_XFER_MODE, FIELD_18, 18, 1) /* inferred */
+FIELD(MGRAS_RE4_XFER_MODE, FIELD_17, 17, 1) /* inferred */
 FIELD(MGRAS_RE4_XFER_MODE, STRIDE_SKIP_BYTES, 14, 3) /* inferred */
 FIELD(MGRAS_RE4_XFER_MODE, BEGIN_SKIP_BITS, 11, 3) /* inferred */
 FIELD(MGRAS_RE4_XFER_MODE, BEGIN_SKIP_BYTES, 8, 3) /* inferred */
@@ -251,7 +251,7 @@ FIELD(MGRAS_RE4_STATUS, CHIP_COUNT, 0, 2) /* inferred */
 
 REG32(MGRAS_RE4_TOGGLE_CONTEXT, 0x3857c) /* inferred */
 
-REG32(MGRAS_RE4_PP1_FILL_MODE, 0x38584) /* inferred */
+REG32(MGRAS_RE4_PP1_FILL_MODE, 0x38584) /* inferred; name source: public (OpenBSD impact(4) driver register header) */
 
 #define MGRAS_RE4_XFER_ZOOM_UNITY 0x100u /* established */
 

@@ -1,7 +1,7 @@
 <!-- generated from devices/re4/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 97465e36c7dff4df3b16b93614fc27f6b6f5ea5cee6f9ae4ba6330eda7b4f083 -->
+<!-- input sha256 148530b37108c0449b4724ea2cd79b2e4c42f590f02d799e53d67af100b8ea80 -->
 
 # raster engine register contract for the Impact graphics
 
@@ -76,7 +76,7 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | `xfer_abort` | 0xe100 | w | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `xfer_control` | 0xe102 | rw | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `fill_mode` | 0xe110 | rw | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
-| `texmode1` | 0xe111 | rw | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
+| `texture_mode_first` | 0xe111 | rw | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `config` | 0xe112 | rw | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `scissor_x` | 0xe113 | rw | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
 | `scissor_y` | 0xe114 | rw | 32 |  | re4_regs | unknown | inferred | driver and traffic readings |
@@ -295,20 +295,20 @@ antialiasing of lines and points exist but are not placed.
 | 3 | `glyph_stipple` | inferred |  | driver and traffic readings |  |
 | 0 | `poly_stipple` | inferred |  | driver and traffic readings |  |
 
-### Register `texmode1`
+### Register `texture_mode_first`
 
 Texture mode, first word. The client clears bits 15 to 12 before it chooses the
 colour table format. Its RGB-compatible table path then writes 0xe in that field.
 Only that value is read from the client's code; the other values of the field
-are not known.
+are not known. Formerly texmode1.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
 | 18:16 | `depth_term` | inferred |  | driver and traffic readings | One for a texture with 12-bit components and four for any other depth. Reading the field as the count of blend units in use is inferred. |
 | 15:12 | `colour_table` | inferred | none=0, alpha=1, intensity_or_luminance_alpha=9, rgb_lookup=14 | driver and traffic readings |  |
 | 11:9 | `texel_class` | inferred | alpha=1, luminance=2, intensity=3, colour=4 | driver and traffic readings |  |
-| 8:7 | `tram_select` | inferred |  | driver and traffic readings | The client sends an undefined value here for RGB and RGBA textures, and a select for one- and two-component textures. What each select names is unknown. |
-| 6:5 | `tram_size_code` | inferred |  | driver and traffic readings |  |
+| 8:7 | `texture_ram_select` | inferred |  | driver and traffic readings | The client sends an undefined value here for RGB and RGBA textures, and a select for one- and two-component textures. What each select names is unknown. Formerly tram_select. |
+| 6:5 | `texture_ram_size_code` | inferred |  | driver and traffic readings | Formerly tram_size_code. |
 | 4:3 | `layout` | inferred | one_component=0, two_component=1, rgb=2, rgba=3 | driver and traffic readings |  |
 | 2:1 | `environment` | inferred | modulate=0, decal=1, blend=2, alpha_only=3 | driver and traffic readings |  |
 | 0 | `texture_enable` | inferred |  | driver and traffic readings |  |
@@ -477,8 +477,8 @@ bits 17, 18 and 21. Bit 21 is never written by software examined.
 | 22 | `rgb_order` | inferred |  | driver and traffic readings |  |
 | 20 | `decimate` | inferred |  | driver and traffic readings |  |
 | 19 | `zoom` | inferred |  | driver and traffic readings |  |
-| 18 | `flag18` | inferred |  | driver and traffic readings |  |
-| 17 | `flag17` | inferred |  | driver and traffic readings |  |
+| 18 | `field_18` | inferred |  | driver and traffic readings | Formerly flag18. |
+| 17 | `field_17` | inferred |  | driver and traffic readings | Formerly flag17. |
 | 16:14 | `stride_skip_bytes` | inferred |  | driver and traffic readings |  |
 | 13:11 | `begin_skip_bits` | inferred |  | driver and traffic readings |  |
 | 10:8 | `begin_skip_bytes` | inferred |  | driver and traffic readings |  |
@@ -529,7 +529,7 @@ A vector is a value recorded from a source. An example only shows the layout.
 | `instr` | 0x18 | vector | opcode=8, setup=1 |
 | `fill_mode` | 0x400018 | example | glyph_opaque=1, glyph_stipple=1, block_type=1 |
 | `fill_mode` | 0x418008 | vector | glyph_stipple=1, block_type=1 |
-| `xfer_mode` | 0x40080 | vector | comp_type=0, format=8, flag18=1, stride_skip_bytes=0 |
-| `xfer_mode` | 0xc00080 | vector | comp_type=0, format=8, begin_skip_bytes=0, stride_skip_bytes=0, flag18=0, rgb_order=1, opaque=1 |
-| `xfer_mode` | 0xc10080 | vector | comp_type=0, format=8, begin_skip_bytes=0, stride_skip_bytes=4, flag18=0, rgb_order=1, opaque=1 |
-| `xfer_mode` | 0xc10480 | vector | comp_type=0, format=8, begin_skip_bytes=4, stride_skip_bytes=4, flag18=0, rgb_order=1, opaque=1 |
+| `xfer_mode` | 0x40080 | vector | comp_type=0, format=8, field_18=1, stride_skip_bytes=0 |
+| `xfer_mode` | 0xc00080 | vector | comp_type=0, format=8, begin_skip_bytes=0, stride_skip_bytes=0, field_18=0, rgb_order=1, opaque=1 |
+| `xfer_mode` | 0xc10080 | vector | comp_type=0, format=8, begin_skip_bytes=0, stride_skip_bytes=4, field_18=0, rgb_order=1, opaque=1 |
+| `xfer_mode` | 0xc10480 | vector | comp_type=0, format=8, begin_skip_bytes=4, stride_skip_bytes=4, field_18=0, rgb_order=1, opaque=1 |

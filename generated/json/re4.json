@@ -1,7 +1,7 @@
 {
  "license": "BSD-3-Clause",
  "generator": "defs-gen 2",
- "input_sha256": "97465e36c7dff4df3b16b93614fc27f6b6f5ea5cee6f9ae4ba6330eda7b4f083",
+ "input_sha256": "148530b37108c0449b4724ea2cd79b2e4c42f590f02d799e53d67af100b8ea80",
  "schema": "defs-flat/1",
  "source": "devices/re4/registers.toml",
  "profile": "public",
@@ -1084,7 +1084,7 @@
   {
    "unit": "re4",
    "kind": "register",
-   "name": "texmode1",
+   "name": "texture_mode_first",
    "offset": 57617,
    "access": "rw",
    "width": 32,
@@ -1098,7 +1098,7 @@
   {
    "unit": "re4",
    "kind": "field",
-   "name": "texmode1.depth_term",
+   "name": "texture_mode_first.depth_term",
    "hi": 18,
    "lo": 16,
    "grade": "inferred",
@@ -1107,7 +1107,7 @@
   {
    "unit": "re4",
    "kind": "field",
-   "name": "texmode1.colour_table",
+   "name": "texture_mode_first.colour_table",
    "hi": 15,
    "lo": 12,
    "grade": "inferred",
@@ -1116,7 +1116,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.colour_table.none",
+   "name": "texture_mode_first.colour_table.none",
    "value": 0,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1124,7 +1124,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.colour_table.alpha",
+   "name": "texture_mode_first.colour_table.alpha",
    "value": 1,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1132,7 +1132,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.colour_table.intensity_or_luminance_alpha",
+   "name": "texture_mode_first.colour_table.intensity_or_luminance_alpha",
    "value": 9,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1140,7 +1140,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.colour_table.rgb_lookup",
+   "name": "texture_mode_first.colour_table.rgb_lookup",
    "value": 14,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1148,7 +1148,7 @@
   {
    "unit": "re4",
    "kind": "field",
-   "name": "texmode1.texel_class",
+   "name": "texture_mode_first.texel_class",
    "hi": 11,
    "lo": 9,
    "grade": "inferred",
@@ -1157,7 +1157,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.texel_class.alpha",
+   "name": "texture_mode_first.texel_class.alpha",
    "value": 1,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1165,7 +1165,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.texel_class.luminance",
+   "name": "texture_mode_first.texel_class.luminance",
    "value": 2,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1173,7 +1173,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.texel_class.intensity",
+   "name": "texture_mode_first.texel_class.intensity",
    "value": 3,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1181,7 +1181,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.texel_class.colour",
+   "name": "texture_mode_first.texel_class.colour",
    "value": 4,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1189,7 +1189,7 @@
   {
    "unit": "re4",
    "kind": "field",
-   "name": "texmode1.tram_select",
+   "name": "texture_mode_first.texture_ram_select",
    "hi": 8,
    "lo": 7,
    "grade": "inferred",
@@ -1198,7 +1198,7 @@
   {
    "unit": "re4",
    "kind": "field",
-   "name": "texmode1.tram_size_code",
+   "name": "texture_mode_first.texture_ram_size_code",
    "hi": 6,
    "lo": 5,
    "grade": "inferred",
@@ -1207,7 +1207,7 @@
   {
    "unit": "re4",
    "kind": "field",
-   "name": "texmode1.layout",
+   "name": "texture_mode_first.layout",
    "hi": 4,
    "lo": 3,
    "grade": "inferred",
@@ -1216,7 +1216,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.layout.one_component",
+   "name": "texture_mode_first.layout.one_component",
    "value": 0,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1224,7 +1224,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.layout.two_component",
+   "name": "texture_mode_first.layout.two_component",
    "value": 1,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1232,7 +1232,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.layout.rgb",
+   "name": "texture_mode_first.layout.rgb",
    "value": 2,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1240,7 +1240,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.layout.rgba",
+   "name": "texture_mode_first.layout.rgba",
    "value": 3,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1248,7 +1248,7 @@
   {
    "unit": "re4",
    "kind": "field",
-   "name": "texmode1.environment",
+   "name": "texture_mode_first.environment",
    "hi": 2,
    "lo": 1,
    "grade": "inferred",
@@ -1257,7 +1257,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.environment.modulate",
+   "name": "texture_mode_first.environment.modulate",
    "value": 0,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1265,7 +1265,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.environment.decal",
+   "name": "texture_mode_first.environment.decal",
    "value": 1,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1273,7 +1273,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.environment.blend",
+   "name": "texture_mode_first.environment.blend",
    "value": 2,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1281,7 +1281,7 @@
   {
    "unit": "re4",
    "kind": "enum_value",
-   "name": "texmode1.environment.alpha_only",
+   "name": "texture_mode_first.environment.alpha_only",
    "value": 3,
    "grade": "inferred",
    "from": "driver and traffic readings"
@@ -1289,7 +1289,7 @@
   {
    "unit": "re4",
    "kind": "field",
-   "name": "texmode1.texture_enable",
+   "name": "texture_mode_first.texture_enable",
    "hi": 0,
    "lo": 0,
    "grade": "inferred",
@@ -1865,7 +1865,7 @@
   {
    "unit": "re4",
    "kind": "field",
-   "name": "xfer_mode.flag18",
+   "name": "xfer_mode.field_18",
    "hi": 18,
    "lo": 18,
    "grade": "inferred",
@@ -1874,7 +1874,7 @@
   {
    "unit": "re4",
    "kind": "field",
-   "name": "xfer_mode.flag17",
+   "name": "xfer_mode.field_17",
    "hi": 17,
    "lo": 17,
    "grade": "inferred",

@@ -2,7 +2,7 @@
 <!-- generated from devices/re4/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 97465e36c7dff4df3b16b93614fc27f6b6f5ea5cee6f9ae4ba6330eda7b4f083 -->
+<!-- input sha256 148530b37108c0449b4724ea2cd79b2e4c42f590f02d799e53d67af100b8ea80 -->
 <genxml unit="re4" prefix="RE" title="raster engine register contract for the Impact graphics" from="driver and traffic readings">
   <doc>Raster engine registers of the Impact graphics subsystem.</doc>
   <space name="re4_regs" unit="reg"/>
@@ -26,25 +26,25 @@
     <value name="dma_read" value="4" grade="inferred"/>
     <value name="dma_write" value="5" grade="inferred"/>
   </enum>
-  <enum name="texmode1_colour_table">
+  <enum name="texture_mode_first_colour_table">
     <value name="none" value="0" grade="inferred"/>
     <value name="alpha" value="1" grade="inferred"/>
     <value name="intensity_or_luminance_alpha" value="9" grade="inferred"/>
     <value name="rgb_lookup" value="14" grade="inferred"/>
   </enum>
-  <enum name="texmode1_texel_class">
+  <enum name="texture_mode_first_texel_class">
     <value name="alpha" value="1" grade="inferred"/>
     <value name="luminance" value="2" grade="inferred"/>
     <value name="intensity" value="3" grade="inferred"/>
     <value name="colour" value="4" grade="inferred"/>
   </enum>
-  <enum name="texmode1_layout">
+  <enum name="texture_mode_first_layout">
     <value name="one_component" value="0" grade="inferred"/>
     <value name="two_component" value="1" grade="inferred"/>
     <value name="rgb" value="2" grade="inferred"/>
     <value name="rgba" value="3" grade="inferred"/>
   </enum>
-  <enum name="texmode1_environment">
+  <enum name="texture_mode_first_environment">
     <value name="modulate" value="0" grade="inferred"/>
     <value name="decal" value="1" grade="inferred"/>
     <value name="blend" value="2" grade="inferred"/>
@@ -231,18 +231,18 @@ antialiasing of lines and points exist but are not placed.</doc>
       <expect field="block_type" value="1"/>
     </test>
   </struct>
-  <struct name="TEXMODE1" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe111" access="rw" space="re4_regs" reset="unknown">
+  <struct name="TEXTURE_MODE_FIRST" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe111" access="rw" space="re4_regs" reset="unknown">
     <doc>Texture mode, first word. The client clears bits 15 to 12 before it chooses the
 colour table format. Its RGB-compatible table path then writes 0xe in that field.
 Only that value is read from the client's code; the other values of the field
-are not known.</doc>
+are not known. Formerly texmode1.</doc>
     <field name="depth_term" start="16" size="3" type="uint" grade="inferred"/>
-    <field name="colour_table" start="12" size="4" type="texmode1_colour_table" grade="inferred"/>
-    <field name="texel_class" start="9" size="3" type="texmode1_texel_class" grade="inferred"/>
-    <field name="tram_select" start="7" size="2" type="uint" grade="inferred"/>
-    <field name="tram_size_code" start="5" size="2" type="uint" grade="inferred"/>
-    <field name="layout" start="3" size="2" type="texmode1_layout" grade="inferred"/>
-    <field name="environment" start="1" size="2" type="texmode1_environment" grade="inferred"/>
+    <field name="colour_table" start="12" size="4" type="texture_mode_first_colour_table" grade="inferred"/>
+    <field name="texel_class" start="9" size="3" type="texture_mode_first_texel_class" grade="inferred"/>
+    <field name="texture_ram_select" start="7" size="2" type="uint" grade="inferred"/>
+    <field name="texture_ram_size_code" start="5" size="2" type="uint" grade="inferred"/>
+    <field name="layout" start="3" size="2" type="texture_mode_first_layout" grade="inferred"/>
+    <field name="environment" start="1" size="2" type="texture_mode_first_environment" grade="inferred"/>
     <field name="texture_enable" start="0" size="1" type="uint" grade="inferred"/>
   </struct>
   <struct name="CONFIG" size="4" grade="inferred" from="driver and traffic readings" register="yes" offset="0xe112" access="rw" space="re4_regs" reset="unknown">
@@ -378,8 +378,8 @@ bits 17, 18 and 21. Bit 21 is never written by software examined.</doc>
     <field name="rgb_order" start="22" size="1" type="uint" grade="inferred"/>
     <field name="decimate" start="20" size="1" type="uint" grade="inferred"/>
     <field name="zoom" start="19" size="1" type="uint" grade="inferred"/>
-    <field name="flag18" start="18" size="1" type="uint" grade="inferred"/>
-    <field name="flag17" start="17" size="1" type="uint" grade="inferred"/>
+    <field name="field_18" start="18" size="1" type="uint" grade="inferred"/>
+    <field name="field_17" start="17" size="1" type="uint" grade="inferred"/>
     <field name="stride_skip_bytes" start="14" size="3" type="uint" grade="inferred"/>
     <field name="begin_skip_bits" start="11" size="3" type="uint" grade="inferred"/>
     <field name="begin_skip_bytes" start="8" size="3" type="uint" grade="inferred"/>
@@ -388,7 +388,7 @@ bits 17, 18 and 21. Bit 21 is never written by software examined.</doc>
     <test value="0x40080" kind="vector">
       <expect field="comp_type" value="0"/>
       <expect field="format" value="8"/>
-      <expect field="flag18" value="1"/>
+      <expect field="field_18" value="1"/>
       <expect field="stride_skip_bytes" value="0"/>
     </test>
     <test value="0xc00080" kind="vector">
@@ -396,7 +396,7 @@ bits 17, 18 and 21. Bit 21 is never written by software examined.</doc>
       <expect field="format" value="8"/>
       <expect field="begin_skip_bytes" value="0"/>
       <expect field="stride_skip_bytes" value="0"/>
-      <expect field="flag18" value="0"/>
+      <expect field="field_18" value="0"/>
       <expect field="rgb_order" value="1"/>
       <expect field="opaque" value="1"/>
     </test>
@@ -405,7 +405,7 @@ bits 17, 18 and 21. Bit 21 is never written by software examined.</doc>
       <expect field="format" value="8"/>
       <expect field="begin_skip_bytes" value="0"/>
       <expect field="stride_skip_bytes" value="4"/>
-      <expect field="flag18" value="0"/>
+      <expect field="field_18" value="0"/>
       <expect field="rgb_order" value="1"/>
       <expect field="opaque" value="1"/>
     </test>
@@ -414,7 +414,7 @@ bits 17, 18 and 21. Bit 21 is never written by software examined.</doc>
       <expect field="format" value="8"/>
       <expect field="begin_skip_bytes" value="4"/>
       <expect field="stride_skip_bytes" value="4"/>
-      <expect field="flag18" value="0"/>
+      <expect field="field_18" value="0"/>
       <expect field="rgb_order" value="1"/>
       <expect field="opaque" value="1"/>
     </test>

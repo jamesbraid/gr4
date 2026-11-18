@@ -1,7 +1,7 @@
 // generated from devices/re4/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 2
-// input sha256 97465e36c7dff4df3b16b93614fc27f6b6f5ea5cee6f9ae4ba6330eda7b4f083
+// input sha256 148530b37108c0449b4724ea2cd79b2e4c42f590f02d799e53d67af100b8ea80
 // raster engine register contract for the Impact graphics
 #![allow(dead_code)]
 
@@ -610,7 +610,7 @@ pub mod fill_mode {
     }
 }
 /// Texture mode, first word. The client clears bits 15 to 12 before it chooses the colour table format. Its RGB-compatible table path then writes 0xe in  (inferred)
-pub mod texmode1 {
+pub mod texture_mode_first {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe111;
     pub mod depth_term { // bits 18:16, inferred
@@ -707,7 +707,7 @@ pub mod texmode1 {
             }
         }
     }
-    pub mod tram_select { // bits 8:7, inferred
+    pub mod texture_ram_select { // bits 8:7, inferred
         pub const SHIFT: u32 = 7;
         pub const MASK: u32 = 0x3;
         pub const fn get(v: u32) -> u32 {
@@ -717,7 +717,7 @@ pub mod texmode1 {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod tram_size_code { // bits 6:5, inferred
+    pub mod texture_ram_size_code { // bits 6:5, inferred
         pub const SHIFT: u32 = 5;
         pub const MASK: u32 = 0x3;
         pub const fn get(v: u32) -> u32 {
@@ -1166,7 +1166,7 @@ pub mod xfer_mode {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod flag18 { // bits 18:18, inferred
+    pub mod field_18 { // bits 18:18, inferred
         pub const SHIFT: u32 = 18;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -1176,7 +1176,7 @@ pub mod xfer_mode {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod flag17 { // bits 17:17, inferred
+    pub mod field_17 { // bits 17:17, inferred
         pub const SHIFT: u32 = 17;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -1396,7 +1396,7 @@ mod tests {
     fn xfer_mode_40080() {
         assert_eq!(xfer_mode::comp_type::get(0x40080), 0);
         assert_eq!(xfer_mode::format::get(0x40080), 8);
-        assert_eq!(xfer_mode::flag18::get(0x40080), 1);
+        assert_eq!(xfer_mode::field_18::get(0x40080), 1);
         assert_eq!(xfer_mode::stride_skip_bytes::get(0x40080), 0);
     }
 
@@ -1406,7 +1406,7 @@ mod tests {
         assert_eq!(xfer_mode::format::get(0xc00080), 8);
         assert_eq!(xfer_mode::begin_skip_bytes::get(0xc00080), 0);
         assert_eq!(xfer_mode::stride_skip_bytes::get(0xc00080), 0);
-        assert_eq!(xfer_mode::flag18::get(0xc00080), 0);
+        assert_eq!(xfer_mode::field_18::get(0xc00080), 0);
         assert_eq!(xfer_mode::rgb_order::get(0xc00080), 1);
         assert_eq!(xfer_mode::opaque::get(0xc00080), 1);
     }
@@ -1417,7 +1417,7 @@ mod tests {
         assert_eq!(xfer_mode::format::get(0xc10080), 8);
         assert_eq!(xfer_mode::begin_skip_bytes::get(0xc10080), 0);
         assert_eq!(xfer_mode::stride_skip_bytes::get(0xc10080), 4);
-        assert_eq!(xfer_mode::flag18::get(0xc10080), 0);
+        assert_eq!(xfer_mode::field_18::get(0xc10080), 0);
         assert_eq!(xfer_mode::rgb_order::get(0xc10080), 1);
         assert_eq!(xfer_mode::opaque::get(0xc10080), 1);
     }
@@ -1428,7 +1428,7 @@ mod tests {
         assert_eq!(xfer_mode::format::get(0xc10480), 8);
         assert_eq!(xfer_mode::begin_skip_bytes::get(0xc10480), 4);
         assert_eq!(xfer_mode::stride_skip_bytes::get(0xc10480), 4);
-        assert_eq!(xfer_mode::flag18::get(0xc10480), 0);
+        assert_eq!(xfer_mode::field_18::get(0xc10480), 0);
         assert_eq!(xfer_mode::rgb_order::get(0xc10480), 1);
         assert_eq!(xfer_mode::opaque::get(0xc10480), 1);
     }
