@@ -158,16 +158,118 @@ the images against candidate rules needs a small model (setup, edge walk, plane 
 vertices per test; the colour triangles are fully specified above. No model or replay tool for MGRAS, RE4 or PP1 exists in this
 repository or in `retools/`.
 
+## Register values the diagnostic writes (decoded by running its routines)
+
+Method, for all of this section: the three library routines were run on a host with an emulator (Unicorn, MIPS64) from the
+shipped binary, with board access stubbed to a log and status polls returning zero. Inputs were the vertices and colours the
+tests use. Formulas were then fitted to many probe triangles and checked against the logged values. Grade: **software
+expectation** (what the diagnostic writes), derived by execution, not by reading every instruction; where a formula was
+fitted it says so. Register numbers are the ones the diagnostic's write helper `0x2082ae2c` takes; the command header it sends
+is `((reg + 0x1800) & 0x1fff) << 8 | 0x400004`, then the 32-bit value. Values below are 32-bit words.
+
+### Triangle setup `0x208671f4` (arguments: three vertex records, a flag)
+
+A vertex record is 12 floats: x, y, z, w, then two RGBA sets (the tests give both sets the same colours). The routine does
+not sort the vertices: it expects them listed top (largest y), middle, bottom, with the middle vertex to the right of the long
+edge, which is how every test lists them. Other orders and windings take other branches (a swap of order changes the sign of the
+colour deltas and which slope registers hold which edge); those branches were not decoded. `B` is 49151.5.
+
+| Register | Value |
+|---|---|
+| 0x03, 0x04, 0x05 | `float32(y_top + B)`, `float32(y_mid + B)`, `float32(y_bottom + B)`, written as the float's bit pattern |
+| 0x06 (high), 0x07 (low) | slope of the long edge (top to bottom), a signed 64-bit s.24 value: `-(dx/dy) * 2^24` for that edge, split into high and low words |
+| 0x08, 0x09 | the same for the top-to-middle edge |
+| 0x0a, 0x0b | the same for the bottom-to-middle edge |
+| 0x00, 0x01 | `float32(B + x_top + s * frac(y_top))` with `s` the long-edge slope (register 0x00) and the top-to-middle slope (register 0x01), `frac` the fractional part of the top y |
+| 0x02 | `float32(B + x_mid + s * frac(y_mid))` with `s` the bottom-to-middle slope |
+| 0x5c to 0x5f | red, green, blue, alpha start: `trunc(C(ceil(x0'), floor(y_top)) * 0xFFF000)` where `C` is the plane through the three vertex colours and `x0'` is the value written to register 0x00 minus `B` (fitted; exact when the top vertex is on integer coordinates) |
+| 0x60/0x61, 0x62/0x63, 0x64/0x65, 0x66/0x67 | per colour, `-trunc(dC/dy * 0xFFF000)` then `trunc(dC/dx * 0xFFF000)` (fitted; the long-edge slope contributes only when its integer part is nonzero, not tested) |
+| 0x445 | the flag argument (0 for the triangles here) |
+
+Rounding. Slopes and deltas are computed in single precision and then scaled, so the low bits carry single-precision error:
+the bottom-to-middle slope of the red triangle is `-3.2857143879` (error 1e-7), not `-23/7`. The coordinate writes are
+`float32(double + 49151.5)`, i.e. nearest to 1/256. The order of the operations was not read instruction by instruction, so the
+low bits of slopes for other inputs cannot be derived from this formula; use the logged values or port the routine.
+
+**Worked example, red triangle** (vertices (0,15), (23,7), (0,0); colours red 1.0, 0.5, 0.0; alpha 1; writes in this order, 4
+to 0xb, then 0 to 3, then colours, then the flag):
+`0x4=0x47400680 0x5=0x473fff80 0x6=0 0x7=0 0x8=0 0x9=0x02e00000 0xa=0xffffffff 0xb=0xfcb6db6c 0x0=0x473fff80 0x1=0x473fff80
+0x2=0x47401680 0x3=0x47400e80`, then `0x5c=0x00fff000 0x5d=0 0x5e=0 0x5f=0x00fff000 0x60=0xffeef000 0x61=0x00005ef4`
+and `0x62` to `0x67` zero, then `0x445=0`. (Note the register order: 0x4 and 0x5 are the mid and bottom y here, as the table
+shows.) The full lists for the other draws:
+
+- green (V0 to V2 green 0, 0.5, 1): same 0x4 to 0x3; `0x5c..0x5f = 0 0 0 0x00fff000`, `0x62=0x00111000`, `0x63=0xffffa10c`, others zero.
+- blue (0.5, 1, 0): `0x5e=0x007ff800`, `0x5f=0x00fff000`, `0x64=0xfff77800`, `0x65=0x000887ff`, others zero.
+- alpha first draw (red 1, alpha 0.25 at all vertices): `0x5c=0x00fff000`, `0x5f=0x003ffc00`, deltas zero.
+- alpha second draw (green 1, alpha 0, 0.5, 1): `0x5d=0x00fff000`, `0x66=0x00111000`, `0x67=0xffffa10c`, others zero.
+
+For the first draw of the alpha block the vertex colours were read from a partial emulation of the block and the two colour
+sets differ at one vertex (second set alpha 0 at the top vertex); which set the routine uses was not isolated, so that draw is
+**not fully specified**.
+
+### Clear `0x20835714` (arguments: 1, red, green, blue, alpha floats, start x 0, start y 0, width 0x540, height 0x400)
+
+Per component: `x = trunc(min(c, 1) * 4095)`, `y = x - (x >> 8)`, with `hi = y >> 4`, `next = hi + 1`, `frac = y & 15`. The fast-fill
+registers 0x176 to 0x179 (red, green, blue, alpha) get one word each built from these three fields and 0x170 to 0x173 get the
+companion words; the logged values are below. Then 0x110 gets `0x100000`, 0x161 (fill mode) gets `0x4203` (read-modify-write
+starting from the image's initial shadow, zero), 0x46 gets the start (0), 0x47 gets `(width << 16) | height` = `0x5400400`,
+0x445 gets `0x18` (the trigger), 0x110 gets `0x5000` and 0x161 gets `0x4203` again.
+
+- Clear colour (0.2, 0.4, 0.8, 0.1): `0x176=0x03400330 0x177=0x00067660 0x178=0x000cdcc0 0x179=0x1991a198 0x170=0x3433 0x171=0x6766 0x172=0xcdcc 0x173=0x00081a19`.
+- Clear colour (0, 0, 0, 0): `0x176=0x00100000 0x177=0x1000 0x178=0x1000 0x179=0x1000 0x170=0x100 0x171=0x100 0x172=0x100 0x173=0x100`.
+- The two clears run before the green, blue and alpha triangles (not before the red one).
+
+### Line draw `0x20897638`
+
+Partially decoded; the routine faults in the emulator at a data pointer the board model does not supply, so the stream stops
+before the end. Seen: endpoints and slope in registers 0x0c to 0x12 (for the red line (4,16) to (0,0): `0xc=0x473fff80 0xd=0x473fff80
+0xe=0x47400380 0xf=0x47400f80 0x10=0x00400000 0x11=0x01000000 0x12=0`), colour starts in 0x5c to 0x5f, `0x116=0`, `0x445=3`; the stipple flag
+adds writes to 0x15a and 0x15b; the last flag loads register 0x15c with `0xb0000000` and then register 0x15d with a 64-entry
+table `0xff, 0xfb, 0xf7, ... ` falling by 4 (inferred: an antialias weight ramp). The meaning of the flags, line width, and the
+rest of the stream are **not decoded**.
+
+### The alpha triangle's state
+
+Read-modify-write start values are the image's initial words at `0x209585f8` and `0x209585f0` (both zero in the file; nothing was
+found that changes them before the block, not proven). With those: register 0x165 gets `0x80000074`, then `0x7880c8c4`; register
+0x161 gets `0x0c00420b`. Registers 0x16b and 0x16c are **never written** in the colour-triangle test or the clear. Bit 3:0 of
+0x165 = 4 selects source alpha; bits 7:4 of the second write = 0xc select one minus constant alpha. The stored alpha triangle
+(green falling linearly, red 0.75, alpha `a*a + 0.18`) is what a destination factor of 0.75 gives against the first draw's red
+of alpha 0.25 (so one-minus-destination-alpha) but the last write to 0x165 selects one-minus-constant-alpha with a constant
+that is never written. This conflict is unresolved, so the alpha triangle is **not replayable**. The blend-enable bit was not
+identified.
+
 ## Replay readiness for a model's acceptance tests
 
 Criterion for "runnable": every input decoded to values, namely vertices and attributes, every register and rendering state
-written, the region, the read-back format and mask, and the stored expected table with address and size. **No test meets it
-yet.** Every test reaches the board through diagnostic library routines whose register values are computed at run time from
-floats (clear `0x20835714`, triangle setup `0x208671f4`, line draw `0x20897638`). Their register numbers are decoded below;
-their value arithmetic was not. A harness can either port those routines or wait for the values. The tests below are
-ordered by how little is missing.
+written, the region, the read-back format and mask, and the stored expected table with address and size. **Two tests meet it**
+(the green and blue colour triangles), under the conditions listed. The register values come from the previous section, which were
+obtained by running the routines, not by reading every instruction; the formulas there are fitted for one vertex order. The
+remaining tests are ordered by how little is missing.
 
-### Closest to runnable
+### Runnable now
+
+Both: `mg_color_tri` green (check call `0x2081cdc8`) and blue (`0x2081cfe4`). Conditions, all assumptions about initial state: the
+image's initial words are the values in effect (shadows at `0x209585f0`, `0x209585f8` are zero; the page pointer global
+`0x2095869c` is 0x240), board status polls complete at once, and the clear covers the whole 0x540 by 0x400 area.
+
+Replay spec (software expectation):
+
+1. Clear (colour 0.2, 0.4, 0.8, 0.1, start (0,0), size 0x540 by 0x400): register writes 0x176=0x03400330, 0x177=0x00067660,
+   0x178=0x000cdcc0, 0x179=0x1991a198, 0x170=0x3433, 0x171=0x6766, 0x172=0xcdcc, 0x173=0x00081a19, 0x110=0x100000,
+   0x161=0x4203, 0x46=0, 0x47=0x05400400, 0x445=0x18, 0x110=0x5000, 0x161=0x4203.
+2. Clear (colour 0, 0, 0, 0): 0x176=0x100000, 0x177=0x1000, 0x178=0x1000, 0x179=0x1000, 0x170 to 0x173=0x100, 0x110=0x100000,
+   0x161=0x4203, 0x46=0, 0x47=0x05400400, 0x445=0x18, 0x110=0x5000, 0x161=0x4203.
+3. Triangle (vertices (0,15), (23,7), (0,0), z 0, w 1, alpha 1): the register list for the colour in the previous section (green:
+   colours 0, 0.5, 1; blue: 0.5, 1, 0), first 0x4 to 0xb and 0x0 to 0x3 (identical for both), then 0x5c to 0x67, then 0x445=0.
+4. Read back 16 rows by 24 columns from (0,0), draw page 0x240, mask `0xffffffff`; compare with the table at `0x20953980`
+   (green) or `0x20953f80` (blue), 1536 bytes, `0xAABBGGRR` words. Stored sum (for `-d`) `0x5455be00` (green), `0xa7180000` (blue).
+
+Not runnable and why, updated: the **red** triangle (no clear before it; the board state comes from the test's initialisation
+routine `0x20832308`, not decoded), the **alpha** triangle (both draws' colours not isolated, blend state conflict above,
+`0x16b`/`0x16c` never written), **`mg_lines`** (line routine stream incomplete, flag meanings unknown).
+
+### Closest to runnable (the rest)
 
 Common to all: region read back from `(0, 0)`, rows and columns as given, draw-buffer page pointer `0x240` (default of the
 `-b` option, global `0x2095869c`), read-back mode argument 1, compare mask `0xffffffff`, expected words `0xAABBGGRR` (software
@@ -175,8 +277,8 @@ expectation, all items below).
 
 | Test | Primitives (decoded) | Expected table | Still missing |
 |---|---|---|---|
-| `mg_color_tri` red, green, blue (check calls `0x2081cba8`, `0x2081cdc8`, `0x2081cfe4`) | Vertices V0 (0,15), V1 (23,7), V2 (0,0), z 0, w 1; colour of the swept channel 1.0/0.5/0.0 (red), 0/0.5/1 (green), 0.5/1/0 (blue) at V0/V1/V2, other channels 0, alpha 1 | `0x20953380`, `0x20953980`, `0x20953f80`; 16 rows by 24 columns, 1536 bytes each; stored sums `0x54005595`, `0x5455be00`, `0xa7180000` | Register values: the clear is two calls of `0x20835714` per triangle, first with a float colour argument (0.4 in the second component and 0.1 in the fourth in all three blocks, the first and third components 0.2/0.8 with the triangle's own channel zeroed, as read), then with (0, 0, 0, 0); this routine writes registers 0x110, 0x161, 0x167, 0x174, 0x176, 0x46, 0x47 and others, values not decoded. The setup routine writes registers 0x00 to 0x0b, 0x5c to 0x67, 0x68, 0x6a, 0x6c and 12 more through `0x2083609c` (offsets 0x80 to 0x8a, 0xc0 to 0xca), values not decoded. Fill mode and pixel format words not decoded |
-| `mg_lines` (check call `0x2081f244`) | Five lines through `0x20897638` (arguments: end vertex, start vertex, a flag, a pattern, two more flags; their meaning is unknown). Vertex layout x, y, z, w, then two RGBA sets. (1) (4,16) to (0,0) red 1,0,0,1, flag 0. (2) (9,16) to (5,0) green, third flag 1. (3) (5,5) to (0,5) blue, flag 1, pattern `0xa9876543`. (4) (10,5) to (5,5) blue, flag 1, same pattern. (5) (12,10) to (12,0) colour (0.5, 0, 0.5, 1), fourth flag 1. Inferred meaning: line 3 and 4 are stippled, 2 and 5 are antialiased or wide, and the table agrees (a dotted blue row at y = 5, a one-pixel vertical purple line, weighted green pixels) | `0x20954b80`, 17 rows by 14 columns, 952 bytes, sum `0xc584ed6b` | Meaning of the three flags, line register writes inside `0x20897638`, the line-width and stipple state words, clear state as above |
+| `mg_color_tri` red (check call `0x2081cba8`) | As in the previous section; table `0x20953380`, sum `0x54005595` | Initial board state: no clear precedes this triangle, so fill mode and the buffer state come from the test initialisation `0x20832308`, not decoded |
+| `mg_lines` (check call `0x2081f244`) | Five lines through `0x20897638` (arguments: end vertex, start vertex, a flag, a pattern, two more flags; their meaning is unknown). Vertex layout x, y, z, w, then two RGBA sets. (1) (4,16) to (0,0) red 1,0,0,1, flag 0. (2) (9,16) to (5,0) green, third flag 1. (3) (5,5) to (0,5) blue, flag 1, pattern `0xa9876543`. (4) (10,5) to (5,5) blue, flag 1, same pattern. (5) (12,10) to (12,0) colour (0.5, 0, 0.5, 1), fourth flag 1. Inferred meaning: line 3 and 4 are stippled, 2 and 5 are antialiased or wide, and the table agrees (a dotted blue row at y = 5, a one-pixel vertical purple line, weighted green pixels) | `0x20954b80`, 17 rows by 14 columns, 952 bytes, sum `0xc584ed6b` | Meaning of the three flags; the line routine's stream is incomplete (see above); line-width and stipple state words; clear state |
 | `mg_color_tri` alpha (check call `0x2081d448`) | Same vertices; the draw is followed by blend writes. Register 0x165 (blend factors, source bits 3:0, destination 7:4): first a read-modify-write that forces bits 7:0 to `0x74` (source alpha, one-minus-destination-alpha) and sets bit 31, then a write of `0x7880c8c4` (source alpha, one-minus-constant-alpha). Register 0x161 (fill mode) is modified: bits 10:8 set to 2 (8-8-8-8), bit 9 set, bits 18:14 cleared and `0x0c004008` ORed in (operation field 3, copy). A second draw follows | `0x20954580`, 16 by 24, 1536 bytes, sum `0xf1563e81` | Starting values for the read-modify-writes (shadow copies maintained by the library), per-vertex colours of both draws, the blend-enable bit, constant colour registers 0x16b and 0x16c (no write found in this block), and why the stored alpha falls non-linearly |
 | `mg_stip_tri` (check call `0x2081f99c`) | Not decoded (vertices, stipple pattern) | `0x20954f38`, 16 by 24, 1536 bytes, sum `0xaa0055aa` | Primitive, pattern, state |
 
