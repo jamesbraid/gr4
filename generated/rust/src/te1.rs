@@ -1,12 +1,12 @@
 // generated from devices/te1/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 2
-// input sha256 a9842ec1f6b06506b2107ec53cb941f3493ff2fb8ec249fe4ac5ddcd1d8488ef
+// input sha256 b675de79b42016475501c3985bba9f037caa1a89b8fb7bbdcaa8db5f050233dd
 // texture engine and texture RAM registers of the Impact graphics subsystem
 #![allow(dead_code)]
 
 /// Texture mode for the drawn texture: component depth, filters, wrap and the no-border flag. The diagnostic's mask is 25 bits. The field positions are t (inferred)
-pub mod texmode2 {
+pub mod texture_mode_drawn {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf180;
     pub mod mipmap_active_copy { // bits 19:19, inferred
@@ -131,7 +131,7 @@ pub mod texmode2 {
     }
 }
 /// Log2 sizes of the base level and the detail level code. The diagnostic's mask is 23 bits. The client writes the width and height fields twice, in the  (inferred)
-pub mod txsize {
+pub mod texture_size {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf181;
     pub mod depth_log2 { // bits 22:19, inferred
@@ -195,13 +195,13 @@ pub mod txsize {
         }
     }
 }
-/// Written only by the client's texture-manager initialisation. The diagnostic's mask is 26 bits. Its meaning is unknown. (inferred)
-pub mod txtile {
+/// Written only by the client's texture-manager initialisation. The diagnostic's mask is 26 bits. Its meaning is unknown. Formerly txtile. (inferred)
+pub mod texture_manager_init {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf182;
 }
 /// Level-of-detail clamp. The minimum level is sent as the level times 64, with six fraction bits. The diagnostic's mask is 21 bits, so bits 25 to 21 of  (inferred)
-pub mod txlod {
+pub mod texture_lod {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf183;
     pub mod min_lod_64ths { // bits 25:16, inferred
@@ -235,8 +235,8 @@ pub mod txlod {
         }
     }
 }
-/// Texture border colour, red and green, 12 bits a component, laid out like the environment colour. (inferred)
-pub mod txbcolor_rg {
+/// Texture border colour, red and green, 12 bits a component, laid out like the environment colour. Formerly txbcolor_rg. (inferred)
+pub mod texture_border_color_rg {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf184;
     pub mod green { // bits 23:12, inferred
@@ -260,8 +260,8 @@ pub mod txbcolor_rg {
         }
     }
 }
-/// Texture border colour, blue and alpha, 12 bits a component, laid out like the environment colour. (inferred)
-pub mod txbcolor_ba {
+/// Texture border colour, blue and alpha, 12 bits a component, laid out like the environment colour. Formerly txbcolor_ba. (inferred)
+pub mod texture_border_color_ba {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf185;
     pub mod alpha { // bits 23:12, inferred
@@ -285,8 +285,8 @@ pub mod txbcolor_ba {
         }
     }
 }
-/// Per-context base block in texture RAM. The client does not write it. The kernel's base write is inferred to land here. (inferred)
-pub mod txbase {
+/// Per-context base block in texture RAM. The client does not write it. The kernel's base write is inferred to land here. Formerly txbase. (inferred)
+pub mod texture_base {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf186;
     pub mod base_block { // bits 7:0, inferred
@@ -300,8 +300,8 @@ pub mod txbase {
         }
     }
 }
-/// Texture RAM control, 20 bits in the diagnostic's mask. Its meaning is unknown. (inferred)
-pub mod tram_cntrl {
+/// Texture RAM control, 20 bits in the diagnostic's mask. Its meaning is unknown. Formerly tram_cntrl. (inferred)
+pub mod texture_ram_control {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf187;
 }
@@ -316,7 +316,7 @@ pub mod max_pixel_ba {
     pub const OFFSET: u64 = 0xf189;
 }
 /// Multi-dimensional texture addressing, 29 bits in the diagnostic's mask. Used for volume and four-dimensional textures only. The field layout is fitted (inferred)
-pub mod mddma_cntrl {
+pub mod multi_dimensional_texture_addressing {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf18a;
     pub mod depth_term { // bits 29:26, inferred
@@ -381,7 +381,7 @@ pub mod mddma_cntrl {
     }
 }
 /// Texture read buffer select, one bit. The client writes it together with the complement in the loader's write-buffer register. The board's use is infer (inferred)
-pub mod texrbuffer {
+pub mod texture_read_buffer {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf18b;
     pub mod buffer { // bits 0:0, inferred
@@ -396,7 +396,7 @@ pub mod texrbuffer {
     }
 }
 /// Clamp limits in texels: the base level's width and height without a border, shifted left by the first level. The client computes the word as the width (established)
-pub mod txclampsize {
+pub mod texture_clamp_size {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf18c;
     pub mod clamp_width { // bits 25:13, inferred
@@ -420,13 +420,13 @@ pub mod txclampsize {
         }
     }
 }
-/// Texture engine soft-reset strobe, 3 bits in the diagnostic's mask. The client does not write it. (inferred)
-pub mod te_reset {
+/// Texture engine soft-reset strobe, 3 bits in the diagnostic's mask. The client does not write it. Formerly te_reset. (inferred)
+pub mod texture_engine_reset {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf18e;
 }
 /// Index into the level tables. The client writes zero before it streams a table through the indexed-write token, and advances one entry per table write. (inferred)
-pub mod txaddr {
+pub mod texture_level_table_index {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf190;
     pub mod index { // bits 4:0, inferred
@@ -440,8 +440,8 @@ pub mod txaddr {
         }
     }
 }
-/// First block of the detail texture, 9 bits in the diagnostic's mask. (inferred)
-pub mod txdetail {
+/// First block of the detail texture, 9 bits in the diagnostic's mask. Formerly txdetail. (inferred)
+pub mod texture_detail_block {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf192;
     pub mod block { // bits 8:0, inferred
@@ -455,8 +455,8 @@ pub mod txdetail {
         }
     }
 }
-/// Border block of each level, streamed through the level table with the index register. The diagnostic's mask is 9 bits. (inferred)
-pub mod txborder {
+/// Border block of each level, streamed through the level table with the index register. The diagnostic's mask is 9 bits. Formerly txborder. (inferred)
+pub mod texture_border_block {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf193;
     pub mod block { // bits 7:0, inferred
@@ -486,12 +486,12 @@ pub mod detailscale {
     }
 }
 /// Texture engine revision, 29 bits in the diagnostic's mask. The client does not write it. The diagnostic identifies revisions by a render checksum inst (inferred)
-pub mod tevers {
+pub mod texture_engine_revision {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf196;
 }
-/// Texture loader write-buffer select, one bit. The client writes it with the complement of the read-buffer bit. (inferred)
-pub mod tl_wbuffer {
+/// Texture loader write-buffer select, one bit. The client writes it with the complement of the read-buffer bit. Formerly tl_wbuffer. (inferred)
+pub mod texture_loader_write_buffer {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1a0;
     pub mod buffer { // bits 0:0, inferred
@@ -505,8 +505,8 @@ pub mod tl_wbuffer {
         }
     }
 }
-/// (established)
-pub mod tl_mode {
+/// Formerly tl_mode. (established)
+pub mod texture_loader_mode {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1a1;
     pub mod fixed { // bits 18:16, established
@@ -519,7 +519,7 @@ pub mod tl_mode {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod bit14 { // bits 14:14, inferred
+    pub mod field_14 { // bits 14:14, inferred
         pub const SHIFT: u32 = 14;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -539,7 +539,7 @@ pub mod tl_mode {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod flag8 { // bits 8:8, inferred
+    pub mod field_8 { // bits 8:8, inferred
         pub const SHIFT: u32 = 8;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -581,7 +581,7 @@ pub mod tl_mode {
     }
 }
 /// Level being loaded: its number and its log2 width and height. The client sends the level's own size here, not the destination corners of the transfer. (established)
-pub mod tl_spec {
+pub mod texture_loader_level_spec {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1a2;
     pub mod log2_height { // bits 11:8, inferred
@@ -615,8 +615,8 @@ pub mod tl_spec {
         }
     }
 }
-/// (inferred)
-pub mod tl_addr {
+/// Formerly tl_addr. (inferred)
+pub mod texture_loader_index {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1a3;
     pub mod index { // bits 3:0, inferred
@@ -630,8 +630,8 @@ pub mod tl_addr {
         }
     }
 }
-/// First block of a level, with a per-image flag bit. The diagnostic's mask is 9 bits. The client's copy path sends it; an ordinary load does not. (inferred)
-pub mod tl_mipmap {
+/// First block of a level, with a per-image flag bit. The diagnostic's mask is 9 bits. The client's copy path sends it; an ordinary load does not. Former (inferred)
+pub mod texture_loader_mipmap_block {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1a4;
     pub mod flag { // bits 8:8, inferred
@@ -655,8 +655,8 @@ pub mod tl_mipmap {
         }
     }
 }
-/// Border block of a level, 9 bits in the diagnostic's mask. (inferred)
-pub mod tl_border {
+/// Border block of a level, 9 bits in the diagnostic's mask. Formerly tl_border. (inferred)
+pub mod texture_loader_border_block {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1a5;
     pub mod block { // bits 7:0, inferred
@@ -670,13 +670,13 @@ pub mod tl_border {
         }
     }
 }
-/// Video-to-texture capture start, one bit. The client does not write it; the kernel's video path does. (inferred)
-pub mod tl_vidcntrl {
+/// Video-to-texture capture start, one bit. The client does not write it; the kernel's video path does. Formerly tl_vidcntrl. (inferred)
+pub mod texture_loader_video_capture_start {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1a6;
 }
-/// Base block of the texture being loaded, 8 bits in the diagnostic's mask. (inferred)
-pub mod tl_base {
+/// Base block of the texture being loaded, 8 bits in the diagnostic's mask. Formerly tl_base. (inferred)
+pub mod texture_loader_base_block {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1a7;
     pub mod base_block { // bits 7:0, inferred
@@ -690,23 +690,23 @@ pub mod tl_base {
         }
     }
 }
-/// Copy rectangle width for a framebuffer copy, 14 bits in the diagnostic's mask. (inferred)
-pub mod tl_s_size {
+/// Copy rectangle width for a framebuffer copy, 14 bits in the diagnostic's mask. Formerly tl_s_size. (inferred)
+pub mod texture_loader_copy_width {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1a9;
 }
-/// Copy rectangle height for a framebuffer copy, 14 bits in the diagnostic's mask. (inferred)
-pub mod tl_t_size {
+/// Copy rectangle height for a framebuffer copy, 14 bits in the diagnostic's mask. Formerly tl_t_size. (inferred)
+pub mod texture_loader_copy_height {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1aa;
 }
-/// Copy rectangle left edge for a framebuffer copy, 14 bits in the diagnostic's mask. (inferred)
-pub mod tl_s_left {
+/// Copy rectangle left edge for a framebuffer copy, 14 bits in the diagnostic's mask. Formerly tl_s_left. (inferred)
+pub mod texture_loader_copy_left {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1ab;
 }
-/// Copy rectangle bottom edge for a framebuffer copy, 14 bits in the diagnostic's mask. (inferred)
-pub mod tl_t_bottom {
+/// Copy rectangle bottom edge for a framebuffer copy, 14 bits in the diagnostic's mask. Formerly tl_t_bottom. (inferred)
+pub mod texture_loader_copy_bottom {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1ac;
 }
@@ -715,35 +715,35 @@ pub const TE_REV_B_4TRAM_CHECKSUM: u64 = 0x236379000; // inferred
 pub const TE_REV_D_CHECKSUM: u64 = 0x2aa70d210; // inferred
 pub const TRAM_BLOCKS_PER_PATH: u32 = 0x100; // established
 pub const TRAM_BLOCK_SIZE_SHIFT: u32 = 0xc; // established
-pub const TRAM_REV_WORD0: u32 = 0x1c011401; // established
-pub const TRAM_REV_WORD0_HIGH_HALF: u32 = 0x1c01; // established
-pub const TRAM_REV_WORD0_LOW_HALF: u32 = 0x1401; // established
-pub const TRAM_REV_WORD1: u32 = 0xc000400; // established
 pub const TRAM_TEXTURE_BYTES: u32 = 0x400000; // established
+pub const TRAM_WORD_0: u32 = 0x1c011401; // established
+pub const TRAM_WORD_0_HIGH_HALF: u32 = 0x1c01; // established
+pub const TRAM_WORD_0_LOW_HALF: u32 = 0x1401; // established
+pub const TRAM_WORD_1: u32 = 0xc000400; // established
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn tl_mode_34e26() {
-        assert_eq!(tl_mode::components_minus_1::get(0x34e26), 3);
-        assert_eq!(tl_mode::cell_slot::get(0x34e26), 0);
-        assert_eq!(tl_mode::component_depth::get(0x34e26), 1);
-        assert_eq!(tl_mode::flag8::get(0x34e26), 0);
-        assert_eq!(tl_mode::enables::get(0x34e26), 7);
-        assert_eq!(tl_mode::bit14::get(0x34e26), 1);
-        assert_eq!(tl_mode::fixed::get(0x34e26), 3);
+    fn texture_loader_mode_34e26() {
+        assert_eq!(texture_loader_mode::components_minus_1::get(0x34e26), 3);
+        assert_eq!(texture_loader_mode::cell_slot::get(0x34e26), 0);
+        assert_eq!(texture_loader_mode::component_depth::get(0x34e26), 1);
+        assert_eq!(texture_loader_mode::field_8::get(0x34e26), 0);
+        assert_eq!(texture_loader_mode::enables::get(0x34e26), 7);
+        assert_eq!(texture_loader_mode::field_14::get(0x34e26), 1);
+        assert_eq!(texture_loader_mode::fixed::get(0x34e26), 3);
     }
 
     #[test]
-    fn tl_mode_35a26() {
-        assert_eq!(tl_mode::components_minus_1::get(0x35a26), 3);
-        assert_eq!(tl_mode::cell_slot::get(0x35a26), 0);
-        assert_eq!(tl_mode::component_depth::get(0x35a26), 1);
-        assert_eq!(tl_mode::flag8::get(0x35a26), 0);
-        assert_eq!(tl_mode::enables::get(0x35a26), 13);
-        assert_eq!(tl_mode::bit14::get(0x35a26), 1);
-        assert_eq!(tl_mode::fixed::get(0x35a26), 3);
+    fn texture_loader_mode_35a26() {
+        assert_eq!(texture_loader_mode::components_minus_1::get(0x35a26), 3);
+        assert_eq!(texture_loader_mode::cell_slot::get(0x35a26), 0);
+        assert_eq!(texture_loader_mode::component_depth::get(0x35a26), 1);
+        assert_eq!(texture_loader_mode::field_8::get(0x35a26), 0);
+        assert_eq!(texture_loader_mode::enables::get(0x35a26), 13);
+        assert_eq!(texture_loader_mode::field_14::get(0x35a26), 1);
+        assert_eq!(texture_loader_mode::fixed::get(0x35a26), 3);
     }
 }

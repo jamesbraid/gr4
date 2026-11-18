@@ -1,7 +1,7 @@
 # generated from devices/ and formats/ by defs-gen - do not edit, change the source
 # SPDX-License-Identifier: BSD-3-Clause
 # defs-gen 2
-# input sha256 dbd3a96454b1d53b7355b3c5a700f16f60c16a76a9ba7fd60c455e771086f87f
+# input sha256 ceb7377dd8ec1d6dba5e0a41650a786a514bdaeb5284d98f09ea2ee110506990
 [package]
 name = "hwdefs"
 version = "0.1.0"

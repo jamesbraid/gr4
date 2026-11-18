@@ -1,7 +1,7 @@
 {
  "license": "BSD-3-Clause",
  "generator": "defs-gen 2",
- "input_sha256": "a9842ec1f6b06506b2107ec53cb941f3493ff2fb8ec249fe4ac5ddcd1d8488ef",
+ "input_sha256": "b675de79b42016475501c3985bba9f037caa1a89b8fb7bbdcaa8db5f050233dd",
  "schema": "defs-flat/1",
  "source": "devices/te1/registers.toml",
  "profile": "public",
@@ -9,7 +9,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "texmode2",
+   "name": "texture_mode_drawn",
    "offset": 61824,
    "access": "rw",
    "width": 32,
@@ -23,7 +23,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.mipmap_active_copy",
+   "name": "texture_mode_drawn.mipmap_active_copy",
    "hi": 19,
    "lo": 19,
    "grade": "inferred",
@@ -32,7 +32,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.no_border",
+   "name": "texture_mode_drawn.no_border",
    "hi": 16,
    "lo": 16,
    "grade": "unknown",
@@ -41,7 +41,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.clamp_is_gl_clamp",
+   "name": "texture_mode_drawn.clamp_is_gl_clamp",
    "hi": 14,
    "lo": 14,
    "grade": "inferred",
@@ -50,7 +50,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.r_clamp",
+   "name": "texture_mode_drawn.r_clamp",
    "hi": 13,
    "lo": 13,
    "grade": "inferred",
@@ -59,7 +59,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.t_clamp",
+   "name": "texture_mode_drawn.t_clamp",
    "hi": 12,
    "lo": 12,
    "grade": "inferred",
@@ -68,7 +68,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.s_clamp",
+   "name": "texture_mode_drawn.s_clamp",
    "hi": 11,
    "lo": 11,
    "grade": "inferred",
@@ -77,7 +77,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.min_within_level",
+   "name": "texture_mode_drawn.min_within_level",
    "hi": 8,
    "lo": 8,
    "grade": "inferred",
@@ -86,7 +86,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.mag_linear",
+   "name": "texture_mode_drawn.mag_linear",
    "hi": 7,
    "lo": 7,
    "grade": "inferred",
@@ -95,7 +95,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.min_between_levels",
+   "name": "texture_mode_drawn.min_between_levels",
    "hi": 6,
    "lo": 6,
    "grade": "inferred",
@@ -104,7 +104,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.mipmap_active",
+   "name": "texture_mode_drawn.mipmap_active",
    "hi": 5,
    "lo": 5,
    "grade": "inferred",
@@ -113,7 +113,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.multibuffer_hint",
+   "name": "texture_mode_drawn.multibuffer_hint",
    "hi": 4,
    "lo": 4,
    "grade": "inferred",
@@ -122,7 +122,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texmode2.depth_code",
+   "name": "texture_mode_drawn.depth_code",
    "hi": 3,
    "lo": 2,
    "grade": "inferred",
@@ -131,7 +131,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "txsize",
+   "name": "texture_size",
    "offset": 61825,
    "access": "rw",
    "width": 32,
@@ -145,7 +145,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txsize.depth_log2",
+   "name": "texture_size.depth_log2",
    "hi": 22,
    "lo": 19,
    "grade": "inferred",
@@ -154,7 +154,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txsize.detail_level_code",
+   "name": "texture_size.detail_level_code",
    "hi": 18,
    "lo": 16,
    "grade": "inferred",
@@ -163,7 +163,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txsize.height_log2_copy",
+   "name": "texture_size.height_log2_copy",
    "hi": 15,
    "lo": 12,
    "grade": "inferred",
@@ -172,7 +172,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txsize.width_log2_copy",
+   "name": "texture_size.width_log2_copy",
    "hi": 11,
    "lo": 8,
    "grade": "inferred",
@@ -181,7 +181,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txsize.height_log2",
+   "name": "texture_size.height_log2",
    "hi": 7,
    "lo": 4,
    "grade": "inferred",
@@ -190,7 +190,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txsize.width_log2",
+   "name": "texture_size.width_log2",
    "hi": 3,
    "lo": 0,
    "grade": "inferred",
@@ -199,7 +199,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "txtile",
+   "name": "texture_manager_init",
    "offset": 61826,
    "access": "rw",
    "width": 32,
@@ -213,7 +213,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "txlod",
+   "name": "texture_lod",
    "offset": 61827,
    "access": "rw",
    "width": 32,
@@ -227,7 +227,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txlod.min_lod_64ths",
+   "name": "texture_lod.min_lod_64ths",
    "hi": 25,
    "lo": 16,
    "grade": "inferred",
@@ -236,7 +236,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txlod.context_bits",
+   "name": "texture_lod.context_bits",
    "hi": 15,
    "lo": 10,
    "grade": "unknown",
@@ -245,7 +245,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txlod.last_level",
+   "name": "texture_lod.last_level",
    "hi": 3,
    "lo": 0,
    "grade": "inferred",
@@ -254,7 +254,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "txbcolor_rg",
+   "name": "texture_border_color_rg",
    "offset": 61828,
    "access": "rw",
    "width": 32,
@@ -268,7 +268,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txbcolor_rg.green",
+   "name": "texture_border_color_rg.green",
    "hi": 23,
    "lo": 12,
    "grade": "inferred",
@@ -277,7 +277,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txbcolor_rg.red",
+   "name": "texture_border_color_rg.red",
    "hi": 11,
    "lo": 0,
    "grade": "inferred",
@@ -286,7 +286,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "txbcolor_ba",
+   "name": "texture_border_color_ba",
    "offset": 61829,
    "access": "rw",
    "width": 32,
@@ -300,7 +300,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txbcolor_ba.alpha",
+   "name": "texture_border_color_ba.alpha",
    "hi": 23,
    "lo": 12,
    "grade": "inferred",
@@ -309,7 +309,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txbcolor_ba.blue",
+   "name": "texture_border_color_ba.blue",
    "hi": 11,
    "lo": 0,
    "grade": "inferred",
@@ -318,7 +318,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "txbase",
+   "name": "texture_base",
    "offset": 61830,
    "access": "rw",
    "width": 32,
@@ -332,7 +332,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txbase.base_block",
+   "name": "texture_base.base_block",
    "hi": 7,
    "lo": 0,
    "grade": "inferred",
@@ -341,7 +341,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tram_cntrl",
+   "name": "texture_ram_control",
    "offset": 61831,
    "access": "rw",
    "width": 32,
@@ -383,7 +383,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "mddma_cntrl",
+   "name": "multi_dimensional_texture_addressing",
    "offset": 61834,
    "access": "rw",
    "width": 32,
@@ -397,7 +397,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "mddma_cntrl.depth_term",
+   "name": "multi_dimensional_texture_addressing.depth_term",
    "hi": 29,
    "lo": 26,
    "grade": "inferred",
@@ -406,7 +406,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "mddma_cntrl.block_pair_log2",
+   "name": "multi_dimensional_texture_addressing.block_pair_log2",
    "hi": 25,
    "lo": 23,
    "grade": "inferred",
@@ -415,7 +415,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "mddma_cntrl.size3_log2",
+   "name": "multi_dimensional_texture_addressing.size3_log2",
    "hi": 17,
    "lo": 14,
    "grade": "inferred",
@@ -424,7 +424,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "mddma_cntrl.size2_log2",
+   "name": "multi_dimensional_texture_addressing.size2_log2",
    "hi": 13,
    "lo": 10,
    "grade": "inferred",
@@ -433,7 +433,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "mddma_cntrl.size1_log2",
+   "name": "multi_dimensional_texture_addressing.size1_log2",
    "hi": 9,
    "lo": 6,
    "grade": "inferred",
@@ -442,7 +442,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "mddma_cntrl.size0_log2",
+   "name": "multi_dimensional_texture_addressing.size0_log2",
    "hi": 5,
    "lo": 2,
    "grade": "inferred",
@@ -451,7 +451,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "texrbuffer",
+   "name": "texture_read_buffer",
    "offset": 61835,
    "access": "rw",
    "width": 32,
@@ -465,7 +465,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "texrbuffer.buffer",
+   "name": "texture_read_buffer.buffer",
    "hi": 0,
    "lo": 0,
    "grade": "inferred",
@@ -474,7 +474,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "txclampsize",
+   "name": "texture_clamp_size",
    "offset": 61836,
    "access": "rw",
    "width": 32,
@@ -488,7 +488,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txclampsize.clamp_width",
+   "name": "texture_clamp_size.clamp_width",
    "hi": 25,
    "lo": 13,
    "grade": "inferred",
@@ -497,7 +497,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txclampsize.clamp_height",
+   "name": "texture_clamp_size.clamp_height",
    "hi": 12,
    "lo": 0,
    "grade": "inferred",
@@ -506,7 +506,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "te_reset",
+   "name": "texture_engine_reset",
    "offset": 61838,
    "access": "w",
    "width": 32,
@@ -520,7 +520,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "txaddr",
+   "name": "texture_level_table_index",
    "offset": 61840,
    "access": "rw",
    "width": 32,
@@ -534,7 +534,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txaddr.index",
+   "name": "texture_level_table_index.index",
    "hi": 4,
    "lo": 0,
    "grade": "inferred",
@@ -543,7 +543,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "txdetail",
+   "name": "texture_detail_block",
    "offset": 61842,
    "access": "rw",
    "width": 32,
@@ -557,7 +557,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txdetail.block",
+   "name": "texture_detail_block.block",
    "hi": 8,
    "lo": 0,
    "grade": "inferred",
@@ -566,7 +566,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "txborder",
+   "name": "texture_border_block",
    "offset": 61843,
    "access": "rw",
    "width": 32,
@@ -580,7 +580,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "txborder.block",
+   "name": "texture_border_block.block",
    "hi": 7,
    "lo": 0,
    "grade": "inferred",
@@ -612,7 +612,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tevers",
+   "name": "texture_engine_revision",
    "offset": 61846,
    "access": "r",
    "width": 32,
@@ -626,7 +626,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_wbuffer",
+   "name": "texture_loader_write_buffer",
    "offset": 61856,
    "access": "w",
    "width": 32,
@@ -640,7 +640,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_wbuffer.buffer",
+   "name": "texture_loader_write_buffer.buffer",
    "hi": 0,
    "lo": 0,
    "grade": "inferred",
@@ -649,7 +649,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_mode",
+   "name": "texture_loader_mode",
    "offset": 61857,
    "access": "w",
    "width": 32,
@@ -663,7 +663,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_mode.fixed",
+   "name": "texture_loader_mode.fixed",
    "hi": 18,
    "lo": 16,
    "grade": "established",
@@ -672,7 +672,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_mode.bit14",
+   "name": "texture_loader_mode.field_14",
    "hi": 14,
    "lo": 14,
    "grade": "inferred",
@@ -681,7 +681,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_mode.enables",
+   "name": "texture_loader_mode.enables",
    "hi": 12,
    "lo": 9,
    "grade": "inferred",
@@ -690,7 +690,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_mode.flag8",
+   "name": "texture_loader_mode.field_8",
    "hi": 8,
    "lo": 8,
    "grade": "inferred",
@@ -699,7 +699,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_mode.component_depth",
+   "name": "texture_loader_mode.component_depth",
    "hi": 6,
    "lo": 5,
    "grade": "inferred",
@@ -708,7 +708,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_mode.cell_slot",
+   "name": "texture_loader_mode.cell_slot",
    "hi": 4,
    "lo": 3,
    "grade": "inferred",
@@ -717,7 +717,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_mode.components_minus_1",
+   "name": "texture_loader_mode.components_minus_1",
    "hi": 2,
    "lo": 1,
    "grade": "inferred",
@@ -726,7 +726,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_spec",
+   "name": "texture_loader_level_spec",
    "offset": 61858,
    "access": "w",
    "width": 32,
@@ -740,7 +740,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_spec.log2_height",
+   "name": "texture_loader_level_spec.log2_height",
    "hi": 11,
    "lo": 8,
    "grade": "inferred",
@@ -749,7 +749,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_spec.log2_width",
+   "name": "texture_loader_level_spec.log2_width",
    "hi": 7,
    "lo": 4,
    "grade": "inferred",
@@ -758,7 +758,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_spec.level",
+   "name": "texture_loader_level_spec.level",
    "hi": 3,
    "lo": 0,
    "grade": "inferred",
@@ -767,7 +767,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_addr",
+   "name": "texture_loader_index",
    "offset": 61859,
    "access": "w",
    "width": 32,
@@ -781,7 +781,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_addr.index",
+   "name": "texture_loader_index.index",
    "hi": 3,
    "lo": 0,
    "grade": "inferred",
@@ -790,7 +790,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_mipmap",
+   "name": "texture_loader_mipmap_block",
    "offset": 61860,
    "access": "w",
    "width": 32,
@@ -804,7 +804,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_mipmap.flag",
+   "name": "texture_loader_mipmap_block.flag",
    "hi": 8,
    "lo": 8,
    "grade": "inferred",
@@ -813,7 +813,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_mipmap.block",
+   "name": "texture_loader_mipmap_block.block",
    "hi": 7,
    "lo": 0,
    "grade": "inferred",
@@ -822,7 +822,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_border",
+   "name": "texture_loader_border_block",
    "offset": 61861,
    "access": "w",
    "width": 32,
@@ -836,7 +836,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_border.block",
+   "name": "texture_loader_border_block.block",
    "hi": 7,
    "lo": 0,
    "grade": "inferred",
@@ -845,7 +845,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_vidcntrl",
+   "name": "texture_loader_video_capture_start",
    "offset": 61862,
    "access": "w",
    "width": 32,
@@ -859,7 +859,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_base",
+   "name": "texture_loader_base_block",
    "offset": 61863,
    "access": "w",
    "width": 32,
@@ -873,7 +873,7 @@
   {
    "unit": "te1",
    "kind": "field",
-   "name": "tl_base.base_block",
+   "name": "texture_loader_base_block.base_block",
    "hi": 7,
    "lo": 0,
    "grade": "inferred",
@@ -882,7 +882,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_s_size",
+   "name": "texture_loader_copy_width",
    "offset": 61865,
    "access": "w",
    "width": 32,
@@ -896,7 +896,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_t_size",
+   "name": "texture_loader_copy_height",
    "offset": 61866,
    "access": "w",
    "width": 32,
@@ -910,7 +910,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_s_left",
+   "name": "texture_loader_copy_left",
    "offset": 61867,
    "access": "w",
    "width": 32,
@@ -924,7 +924,7 @@
   {
    "unit": "te1",
    "kind": "register",
-   "name": "tl_t_bottom",
+   "name": "texture_loader_copy_bottom",
    "offset": 61868,
    "access": "w",
    "width": 32,
@@ -983,7 +983,16 @@
   {
    "unit": "te1",
    "kind": "constant",
-   "name": "TRAM_REV_WORD0",
+   "name": "TRAM_TEXTURE_BYTES",
+   "value": 4194304,
+   "count": 1,
+   "grade": "established",
+   "from": "driver readings"
+  },
+  {
+   "unit": "te1",
+   "kind": "constant",
+   "name": "TRAM_WORD_0",
    "value": 469832705,
    "count": 1,
    "grade": "established",
@@ -992,7 +1001,7 @@
   {
    "unit": "te1",
    "kind": "constant",
-   "name": "TRAM_REV_WORD0_HIGH_HALF",
+   "name": "TRAM_WORD_0_HIGH_HALF",
    "value": 7169,
    "count": 1,
    "grade": "established",
@@ -1001,7 +1010,7 @@
   {
    "unit": "te1",
    "kind": "constant",
-   "name": "TRAM_REV_WORD0_LOW_HALF",
+   "name": "TRAM_WORD_0_LOW_HALF",
    "value": 5121,
    "count": 1,
    "grade": "established",
@@ -1010,20 +1019,11 @@
   {
    "unit": "te1",
    "kind": "constant",
-   "name": "TRAM_REV_WORD1",
+   "name": "TRAM_WORD_1",
    "value": 201327616,
    "count": 1,
    "grade": "established",
    "from": "diagnostic transcript"
-  },
-  {
-   "unit": "te1",
-   "kind": "constant",
-   "name": "TRAM_TEXTURE_BYTES",
-   "value": 4194304,
-   "count": 1,
-   "grade": "established",
-   "from": "driver readings"
   }
  ]
 }
