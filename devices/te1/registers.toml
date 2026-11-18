@@ -429,5 +429,5 @@ TRAM_TEXTURE_BYTES = { value = 0x400000, grade = "established", doc = "texture m
 TRAM_BLOCKS_PER_PATH = { value = 256, grade = "established", doc = "texture blocks each raster path's texture RAM is divided into; the kernel's block table has 256 entries", from = "driver readings" }
 TRAM_BLOCK_SIZE_SHIFT = { value = 12, grade = "established", doc = "a block is the unit count shifted left by this many bits, so four units give 16 KiB blocks", from = "driver readings" }
 TE_REV_D_CHECKSUM = { value = 0x2aa70d210, grade = "inferred", doc = "render checksum the diagnostic expects from texture engine revision D", from = "diagnostic program data" }
-TE_REV_B_1TRAM_CHECKSUM = { value = 0x0bdf48fc, grade = "inferred", doc = "render checksum the diagnostic expects from texture engine revision B with one texture RAM unit", from = "diagnostic program data" }
+TE_REV_B_1TRAM_CHECKSUM = { value = 0xbdfc48fc, grade = "inferred", doc = "render checksum the diagnostic expects from texture engine revision B with one texture RAM unit", from = "diagnostic program data" }
 TE_REV_B_4TRAM_CHECKSUM = { value = 0x236379000, grade = "inferred", doc = "render checksum the diagnostic expects from texture engine revision B with four texture RAM units", from = "diagnostic program data" }

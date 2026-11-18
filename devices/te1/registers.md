@@ -324,7 +324,7 @@ Copy rectangle bottom edge for a framebuffer copy, 14 bits in the diagnostic's m
 
 | Constant | Value | Grade | Source | Description |
 |---|---|---|---|---|
-| `TE_REV_B_1TRAM_CHECKSUM` | 0xbdf48fc | inferred | driver readings | render checksum the diagnostic expects from texture engine revision B with one texture RAM unit |
+| `TE_REV_B_1TRAM_CHECKSUM` | 0xbdfc48fc | inferred | driver readings | render checksum the diagnostic expects from texture engine revision B with one texture RAM unit |
 | `TE_REV_B_4TRAM_CHECKSUM` | 0x236379000 | inferred | driver readings | render checksum the diagnostic expects from texture engine revision B with four texture RAM units |
 | `TE_REV_D_CHECKSUM` | 0x2aa70d210 | inferred | driver readings | render checksum the diagnostic expects from texture engine revision D |
 | `TRAM_BLOCKS_PER_PATH` | 0x100 | established | driver readings | texture blocks each raster path's texture RAM is divided into; the kernel's block table has 256 entries |

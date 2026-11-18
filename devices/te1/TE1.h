@@ -654,7 +654,7 @@ extern "C" {
 #define TE_REV_D                    2           /* Revision D (Octane & late Indigo2) */
 
 #define TE_REV_D_CHECKSUM           0x2AA70D210ULL
-#define TE_REV_B_1TRAM_CHECKSUM     0x0BDF48FCULL
+#define TE_REV_B_1TRAM_CHECKSUM     0xBDFC48FCULL
 #define TE_REV_B_4TRAM_CHECKSUM     0x236379000ULL
 
 #ifdef __cplusplus

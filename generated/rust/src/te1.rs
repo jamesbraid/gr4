@@ -707,7 +707,7 @@ pub mod tl_t_bottom {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xf1ac;
 }
-pub const TE_REV_B_1TRAM_CHECKSUM: u32 = 0xbdf48fc; // inferred
+pub const TE_REV_B_1TRAM_CHECKSUM: u32 = 0xbdfc48fc; // inferred
 pub const TE_REV_B_4TRAM_CHECKSUM: u64 = 0x236379000; // inferred
 pub const TE_REV_D_CHECKSUM: u64 = 0x2aa70d210; // inferred
 pub const TRAM_BLOCKS_PER_PATH: u32 = 0x100; // established

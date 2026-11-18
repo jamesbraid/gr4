@@ -201,7 +201,7 @@ kernel's video path does.</doc>
   <struct name="TL_T_BOTTOM" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf1ac" access="w" space="te1_regs" reset="unknown">
     <doc>Copy rectangle bottom edge for a framebuffer copy, 14 bits in the diagnostic's mask.</doc>
   </struct>
-  <constant name="TE_REV_B_1TRAM_CHECKSUM" value="0xbdf48fc" grade="inferred"/>
+  <constant name="TE_REV_B_1TRAM_CHECKSUM" value="0xbdfc48fc" grade="inferred"/>
   <constant name="TE_REV_B_4TRAM_CHECKSUM" value="0x236379000" grade="inferred"/>
   <constant name="TE_REV_D_CHECKSUM" value="0x2aa70d210" grade="inferred"/>
   <constant name="TRAM_BLOCKS_PER_PATH" value="0x100" grade="established" from="driver readings"/>

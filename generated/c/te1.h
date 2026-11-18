@@ -385,7 +385,7 @@
 /* tl_t_bottom: w32, space te1_regs, reset unknown; driver readings */
 #define TE_TL_T_BOTTOM_OFFSET                        0xf1acu /* inferred */
 
-#define TE_TE_REV_B_1TRAM_CHECKSUM                   0xbdf48fcu /* inferred */
+#define TE_TE_REV_B_1TRAM_CHECKSUM                   0xbdfc48fcu /* inferred */
 #define TE_TE_REV_B_4TRAM_CHECKSUM                   0x236379000ull /* inferred */
 #define TE_TE_REV_D_CHECKSUM                         0x2aa70d210ull /* inferred */
 #define TE_TRAM_BLOCKS_PER_PATH                      0x100u /* established */

@@ -936,7 +936,7 @@
    "unit": "te1",
    "kind": "constant",
    "name": "TE_REV_B_1TRAM_CHECKSUM",
-   "value": 199182588,
+   "value": 3187427580,
    "count": 1,
    "grade": "inferred",
    "from": "driver readings"
