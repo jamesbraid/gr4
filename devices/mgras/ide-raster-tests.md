@@ -219,25 +219,63 @@ starting from the image's initial shadow, zero), 0x46 gets the start (0), 0x47 g
 - Clear colour (0, 0, 0, 0): `0x176=0x00100000 0x177=0x1000 0x178=0x1000 0x179=0x1000 0x170=0x100 0x171=0x100 0x172=0x100 0x173=0x100`.
 - The two clears run before the green, blue and alpha triangles (not before the red one).
 
-### Line draw `0x20897638`
+### Board state before the red triangle and the lines
 
-Partially decoded; the routine faults in the emulator at a data pointer the board model does not supply, so the stream stops
-before the end. Seen: endpoints and slope in registers 0x0c to 0x12 (for the red line (4,16) to (0,0): `0xc=0x473fff80 0xd=0x473fff80
-0xe=0x47400380 0xf=0x47400f80 0x10=0x00400000 0x11=0x01000000 0x12=0`), colour starts in 0x5c to 0x5f, `0x116=0`, `0x445=3`; the stipple flag
-adds writes to 0x15a and 0x15b; the last flag loads register 0x15c with `0xb0000000` and then register 0x15d with a 64-entry
-table `0xff, 0xfb, 0xf7, ... ` falling by 4 (inferred: an antialias weight ramp). The meaning of the flags, line width, and the
-rest of the stream are **not decoded**.
+Neither `mg_color_tri` nor `mg_lines` writes any board state before its first primitive: the routine `0x20832308` that
+`mg_color_tri` calls only validates the raster-engine number (and selects a board when asked to, which the tests do not). The
+state those primitives need is the one the diagnostic's pixel-processor initialisation `0x20849548` (test name
+`mg_initppregs`) sets; that this runs before these tests is **inferred** (it is the only routine that writes the pixel-processor
+defaults, and the table's zero background needs a cleared buffer, which this page cannot confirm). Its writes, in order, with
+the page pointer global `0x2095869c` at 0x240: `0x112=0x4`, `0x160=0`, `0x161=0x4200`, `0x162=0xff`, `0x163=0xffffffff`,
+`0x164=0xffffffff`, `0x165=0x58840000`, `0x166=0x7`, `0x167=0xffff`, `0x168=0x0ffffff1`, `0x169=0x7`, `0x16a=0`, `0x16d=0x000c8240`,
+`0x16e=0x25e`, `0x16f=0`, `0x68=0`, `0x69=0`, `0x176=0x01a08190`, `0x177=0x000807f8`, `0x178=0x000807f8`, `0x179=0xfff00ff0`,
+`0x170=0x00081a19`, `0x171=0x0008807f`, `0x172=0x0008807f`, `0x173=0xff`, `0x17b=0`. Registers `0x16b` and `0x16c` are not written
+(software expectation, run of the routine).
 
-### The alpha triangle's state
+### Line draw `0x20897638` (arguments: end vertex, start vertex, stipple flag, stipple pattern, flag B, smooth flag)
 
-Read-modify-write start values are the image's initial words at `0x209585f8` and `0x209585f0` (both zero in the file; nothing was
-found that changes them before the block, not proven). With those: register 0x165 gets `0x80000074`, then `0x7880c8c4`; register
-0x161 gets `0x0c00420b`. Registers 0x16b and 0x16c are **never written** in the colour-triangle test or the clear. Bit 3:0 of
-0x165 = 4 selects source alpha; bits 7:4 of the second write = 0xc select one minus constant alpha. The stored alpha triangle
-(green falling linearly, red 0.75, alpha `a*a + 0.18`) is what a destination factor of 0.75 gives against the first draw's red
-of alpha 0.25 (so one-minus-destination-alpha) but the last write to 0x165 selects one-minus-constant-alpha with a constant
-that is never written. This conflict is unresolved, so the alpha triangle is **not replayable**. The blend-enable bit was not
-identified.
+Fully captured for the five lines of `mg_lines` (the earlier fault was an artefact of the emulator's memory-write hook, not a
+missing data pointer). Order of writes per line (software expectation, run of the routine):
+
+- Endpoints: `0x0c`, `0x0d` = `float32(B + x, B + y)` of the **end** vertex, `0x0e`, `0x0f` = the same for the **start** vertex
+  (`B` = 49151.5). Registers `0x10`, `0x11` = per-step x and y increments in s.24, normalised to 1.0 on the major axis
+  (`0x10 = 0x400000` for dx/dy = 0.25 with y major, `0x1000000, 0` for x major, `0, 0x1000000` for a vertical line); the
+  sign convention was not isolated, since all five lines run toward smaller coordinates. `0x12 = 0`.
+- `0x110 = 0x7000`. With the stipple flag set: `0x110 = 0x70a0`, then `0x15b` = the pattern and `0x15a = 0`.
+- `0x60`, `0x62`, `0x64`, `0x66` = 0 (colour deltas), then `0x5c` to `0x5f` = colour times `0xFFF000` (red, green, blue, alpha),
+  `0x116 = 0`, then the trigger, a write of 3 to the register at offset `0x2c114` of the host window (register 0x445 in the
+  numbering the write helper uses).
+- Smooth flag (line 5 only) adds, before the trigger: `0x15c = 0xb0000000` then 128 writes of `0x15d` (the 64 values `0xff` down to
+  `0x03` in steps of 4, twice), `0x15c = 0xb0000080`, 32 writes of `0x15d = 0x100`, `0x110 = 0x7100`, blend factors
+  `0x165 = 0x80000074` then `0x165 = 0x7880c8c4`, fill mode `0x161 = 0x0c00000b`, `0x116 = 1` (twice), and the trigger value 0x63.
+- Flag B (line 2) changes nothing in the stream: its meaning is **unknown** (possibly unused by this path).
+
+The five lines, each as (end vertex from start vertex, flags): (1) red (0,0) from (4,16), no flags: `0xc=0x473fff80 0xd=0x473fff80
+0xe=0x47400380 0xf=0x47400f80 0x10=0x400000 0x11=0x1000000`, colour `0x5c=0xfff000 0x5d=0 0x5e=0 0x5f=0xfff000`. (2) green (5,0)
+from (9,16), flag B: `0xc=0x47400480 0xd=0x473fff80 0xe=0x47400880 0xf=0x47400f80`, same increments, `0x5d=0xfff000`. (3) blue (0,5) from (5,5),
+stipple: `0xc=0x473fff80 0xd=0x47400480 0xe=0x47400480 0xf=0x47400480 0x10=0x1000000 0x11=0`, `0x5e=0xfff000`. (4) blue (5,5) from (10,5),
+stipple: `0xc=0x47400480 0xd=0x47400480 0xe=0x47400980 0xf=0x47400480`, as (3). (5) purple (12,0) from (12,10), smooth,
+colour (0.5, 0, 0.5, 1): `0xc=0x47400b80 0xd=0x473fff80 0xe=0x47400b80 0xf=0x47400980 0x10=0 0x11=0x1000000`, `0x5c=0x7ff800 0x5e=0x7ff800 0x5f=0xfff000`, plus
+the smooth-line writes above. The stipple pattern is `0xa9876543` for lines 3 to 5.
+
+### The alpha triangle, resolved
+
+- **Colour set.** The setup routine reads the **second** colour set of each vertex record (floats 8 to 11) for all four channels;
+  the first set is ignored (run with the sets differing: only the second changes the start and delta registers). Corrected
+  vertex colours: first draw: red 1, green 0, blue 0, alpha 0.25 at all three vertices; second draw: (0, 1, 0, alpha) with alpha
+  0, 0.5, 1 at the top, middle and bottom vertex. (Two stores in jump delay slots, which an earlier pass missed, set the top
+  vertex's second-set red to 0 in the second draw and alpha to 0.25 in the first.)
+- **Register values.** First draw: `0x5c=0x00fff000`, `0x5f=0x003ffc00`, deltas 0. Second draw: `0x5d=0x00fff000`, `0x66=0x00111000`,
+  `0x67=0xffffa10c`, others 0 (both with the common `0x4` to `0xb`, `0x0` to `0x3` of the red example, then `0x445=0`).
+- **Order.** Two clears (as the green triangle), draw 1, then `0x165=0x80000074`, `0x165=0x7880c8c4`, `0x161=0x0c00420b`, then draw 2.
+- **Blend factor.** The same two writes to `0x165` and a fill mode with the same low bits (`0x0c00000b`) are made by the line routine
+  for a smooth line, so `0x7880c8c4` is the diagnostic's standard "blend on" setting, not an alpha-triangle special. The stored image
+  needs a destination factor of 0.75 (the earlier fit; one minus the first draw's alpha of 0.25). No write to `0x16b` or `0x16c` exists anywhere in the program path
+  (initialisation, clears, setup, lines, test), so a constant-alpha reading of the destination nibble `0xc` would need a constant
+  nobody sets. Reading: **inferred** that the destination encoding `0xc` means one minus destination alpha, or that the encoding
+  table in PP1.h (which is itself unsourced) is wrong for the destination nibble. A model that reproduces the stored image
+  settles it. Blend enable is inferred to be among bits 3 and 1:0 of fill mode `0x161`, the only bits changed in the blend writes
+  (both the triangle and the smooth line set them).
 
 ## Replay readiness for a model's acceptance tests
 
@@ -249,25 +287,34 @@ remaining tests are ordered by how little is missing.
 
 ### Runnable now
 
-Both: `mg_color_tri` green (check call `0x2081cdc8`) and blue (`0x2081cfe4`). Conditions, all assumptions about initial state: the
-image's initial words are the values in effect (shadows at `0x209585f0`, `0x209585f8` are zero; the page pointer global
-`0x2095869c` is 0x240), board status polls complete at once, and the clear covers the whole 0x540 by 0x400 area.
+Three: `mg_color_tri` red (`0x2081cba8`), green (`0x2081cdc8`) and blue (`0x2081cfe4`). Conditions, all assumptions about initial
+state: the image's initial words are in effect (shadows at `0x209585f0`, `0x209585f8` zero; page pointer `0x2095869c` is 0x240), board
+status polls complete at once, the framebuffer starts cleared to zero for the red triangle (nothing in the test clears it; **inferred**, and
+the test's pixel-processor initialisation `0x20849548` is assumed run first), and the clears cover the whole 0x540 by 0x400 area.
+Grade: software expectation for every register value (obtained by running the routines); the initial-state assumptions are inferred.
 
-Replay spec (software expectation):
+Replay spec:
 
-1. Clear (colour 0.2, 0.4, 0.8, 0.1, start (0,0), size 0x540 by 0x400): register writes 0x176=0x03400330, 0x177=0x00067660,
-   0x178=0x000cdcc0, 0x179=0x1991a198, 0x170=0x3433, 0x171=0x6766, 0x172=0xcdcc, 0x173=0x00081a19, 0x110=0x100000,
-   0x161=0x4203, 0x46=0, 0x47=0x05400400, 0x445=0x18, 0x110=0x5000, 0x161=0x4203.
-2. Clear (colour 0, 0, 0, 0): 0x176=0x100000, 0x177=0x1000, 0x178=0x1000, 0x179=0x1000, 0x170 to 0x173=0x100, 0x110=0x100000,
-   0x161=0x4203, 0x46=0, 0x47=0x05400400, 0x445=0x18, 0x110=0x5000, 0x161=0x4203.
-3. Triangle (vertices (0,15), (23,7), (0,0), z 0, w 1, alpha 1): the register list for the colour in the previous section (green:
-   colours 0, 0.5, 1; blue: 0.5, 1, 0), first 0x4 to 0xb and 0x0 to 0x3 (identical for both), then 0x5c to 0x67, then 0x445=0.
-4. Read back 16 rows by 24 columns from (0,0), draw page 0x240, mask `0xffffffff`; compare with the table at `0x20953980`
-   (green) or `0x20953f80` (blue), 1536 bytes, `0xAABBGGRR` words. Stored sum (for `-d`) `0x5455be00` (green), `0xa7180000` (blue).
+0. Red only: the initialisation writes listed under "Board state before the red triangle and the lines", then no clear.
+1. Green and blue only. Clear (colour 0.2, 0.4, 0.8, 0.1, start (0,0), size 0x540 by 0x400): `0x176=0x03400330`, `0x177=0x00067660`,
+   `0x178=0x000cdcc0`, `0x179=0x1991a198`, `0x170=0x3433`, `0x171=0x6766`, `0x172=0xcdcc`, `0x173=0x00081a19`, `0x110=0x100000`,
+   `0x161=0x4203`, `0x46=0`, `0x47=0x05400400`, `0x445=0x18`, `0x110=0x5000`, `0x161=0x4203`.
+2. Green and blue only. Clear (0,0,0,0): `0x176=0x100000`, `0x177` to `0x179=0x1000`, `0x170` to `0x173=0x100`, then the same tail.
+3. Triangle, vertices (0,15), (23,7), (0,0), z 0, w 1, alpha 1: `0x4=0x47400680 0x5=0x473fff80 0x6=0 0x7=0 0x8=0 0x9=0x02e00000
+   0xa=0xffffffff 0xb=0xfcb6db6c 0x0=0x473fff80 0x1=0x473fff80 0x2=0x47401680 0x3=0x47400e80`, then colour registers: red (colour
+   1, 0.5, 0) `0x5c=0x00fff000 0x5f=0x00fff000 0x60=0xffeef000 0x61=0x00005ef4`; green (0, 0.5, 1) `0x5f=0x00fff000 0x62=0x00111000
+   0x63=0xffffa10c`; blue (0.5, 1, 0) `0x5e=0x007ff800 0x5f=0x00fff000 0x64=0xfff77800 0x65=0x000887ff`; unlisted `0x5c` to `0x67` zero;
+   then `0x445=0`.
+4. Read back 16 rows by 24 columns from (0,0), draw page 0x240, mask `0xffffffff`; compare with the table (1536 bytes, `0xAABBGGRR`):
+   red `0x20953380` sum `0x54005595`; green `0x20953980` sum `0x5455be00`; blue `0x20953f80` sum `0xa7180000`.
 
-Not runnable and why, updated: the **red** triangle (no clear before it; the board state comes from the test's initialisation
-routine `0x20832308`, not decoded), the **alpha** triangle (both draws' colours not isolated, blend state conflict above,
-`0x16b`/`0x16c` never written), **`mg_lines`** (line routine stream incomplete, flag meanings unknown).
+Not fully runnable: **`mg_lines`** and the **alpha triangle**. Both now have their full register streams (see above) but each
+still has a gap: for lines, the stored table's line state (width, the stipple repeat and the smooth-line blend state at the time
+of the read-back) is captured but its flag B and the sign convention of `0x10`/`0x11` are undecoded, so only the captured five
+lines are replayable as logged streams (software expectation), not generalisable; the replay spec is the five streams above, read back
+17 rows by 14 columns from (0,0) at `0x20954b80`, sum `0xc584ed6b`, with the red triangle's initialisation. For the alpha triangle,
+the blend-factor reading (destination 0.75 against the written nibble `0xc`) is unresolved and enable bits are inferred, so a model
+may reproduce the table only under one of the two readings.
 
 ### Closest to runnable (the rest)
 
@@ -277,7 +324,7 @@ expectation, all items below).
 
 | Test | Primitives (decoded) | Expected table | Still missing |
 |---|---|---|---|
-| `mg_color_tri` red (check call `0x2081cba8`) | As in the previous section; table `0x20953380`, sum `0x54005595` | Initial board state: no clear precedes this triangle, so fill mode and the buffer state come from the test initialisation `0x20832308`, not decoded |
+| `mg_color_tri` red (check call `0x2081cba8`) | As in the previous section; table `0x20953380`, sum `0x54005595` | (moved to Runnable now) |
 | `mg_lines` (check call `0x2081f244`) | Five lines through `0x20897638` (arguments: end vertex, start vertex, a flag, a pattern, two more flags; their meaning is unknown). Vertex layout x, y, z, w, then two RGBA sets. (1) (4,16) to (0,0) red 1,0,0,1, flag 0. (2) (9,16) to (5,0) green, third flag 1. (3) (5,5) to (0,5) blue, flag 1, pattern `0xa9876543`. (4) (10,5) to (5,5) blue, flag 1, same pattern. (5) (12,10) to (12,0) colour (0.5, 0, 0.5, 1), fourth flag 1. Inferred meaning: line 3 and 4 are stippled, 2 and 5 are antialiased or wide, and the table agrees (a dotted blue row at y = 5, a one-pixel vertical purple line, weighted green pixels) | `0x20954b80`, 17 rows by 14 columns, 952 bytes, sum `0xc584ed6b` | Meaning of the three flags; the line routine's stream is incomplete (see above); line-width and stipple state words; clear state |
 | `mg_color_tri` alpha (check call `0x2081d448`) | Same vertices; the draw is followed by blend writes. Register 0x165 (blend factors, source bits 3:0, destination 7:4): first a read-modify-write that forces bits 7:0 to `0x74` (source alpha, one-minus-destination-alpha) and sets bit 31, then a write of `0x7880c8c4` (source alpha, one-minus-constant-alpha). Register 0x161 (fill mode) is modified: bits 10:8 set to 2 (8-8-8-8), bit 9 set, bits 18:14 cleared and `0x0c004008` ORed in (operation field 3, copy). A second draw follows | `0x20954580`, 16 by 24, 1536 bytes, sum `0xf1563e81` | Starting values for the read-modify-writes (shadow copies maintained by the library), per-vertex colours of both draws, the blend-enable bit, constant colour registers 0x16b and 0x16c (no write found in this block), and why the stored alpha falls non-linearly |
 | `mg_stip_tri` (check call `0x2081f99c`) | Not decoded (vertices, stipple pattern) | `0x20954f38`, 16 by 24, 1536 bytes, sum `0xaa0055aa` | Primitive, pattern, state |
