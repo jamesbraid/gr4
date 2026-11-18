@@ -81,7 +81,7 @@ binds = [
 board = "MGRAS"
 
 [gen.qemu.units.re4]
-name = "RE"
+name = "RE4"
 
 [gen.qemu.units.pp1]
 
