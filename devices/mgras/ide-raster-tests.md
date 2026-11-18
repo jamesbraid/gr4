@@ -157,3 +157,40 @@ The stored sums can be recomputed from the stored tables with a one-line sum, wh
 the images against candidate rules needs a small model (setup, edge walk, plane iteration, dither) and the three or four
 vertices per test; the colour triangles are fully specified above. No model or replay tool for MGRAS, RE4 or PP1 exists in this
 repository or in `retools/`.
+
+## Replay readiness for a model's acceptance tests
+
+Criterion for "runnable": every input decoded to values, namely vertices and attributes, every register and rendering state
+written, the region, the read-back format and mask, and the stored expected table with address and size. **No test meets it
+yet.** Every test reaches the board through diagnostic library routines whose register values are computed at run time from
+floats (clear `0x20835714`, triangle setup `0x208671f4`, line draw `0x20897638`). Their register numbers are decoded below;
+their value arithmetic was not. A harness can either port those routines or wait for the values. The tests below are
+ordered by how little is missing.
+
+### Closest to runnable
+
+Common to all: region read back from `(0, 0)`, rows and columns as given, draw-buffer page pointer `0x240` (default of the
+`-b` option, global `0x2095869c`), read-back mode argument 1, compare mask `0xffffffff`, expected words `0xAABBGGRR` (software
+expectation, all items below).
+
+| Test | Primitives (decoded) | Expected table | Still missing |
+|---|---|---|---|
+| `mg_color_tri` red, green, blue (check calls `0x2081cba8`, `0x2081cdc8`, `0x2081cfe4`) | Vertices V0 (0,15), V1 (23,7), V2 (0,0), z 0, w 1; colour of the swept channel 1.0/0.5/0.0 (red), 0/0.5/1 (green), 0.5/1/0 (blue) at V0/V1/V2, other channels 0, alpha 1 | `0x20953380`, `0x20953980`, `0x20953f80`; 16 rows by 24 columns, 1536 bytes each; stored sums `0x54005595`, `0x5455be00`, `0xa7180000` | Register values: the clear is two calls of `0x20835714` per triangle, first with a float colour argument (0.4 in the second component and 0.1 in the fourth in all three blocks, the first and third components 0.2/0.8 with the triangle's own channel zeroed, as read), then with (0, 0, 0, 0); this routine writes registers 0x110, 0x161, 0x167, 0x174, 0x176, 0x46, 0x47 and others, values not decoded. The setup routine writes registers 0x00 to 0x0b, 0x5c to 0x67, 0x68, 0x6a, 0x6c and 12 more through `0x2083609c` (offsets 0x80 to 0x8a, 0xc0 to 0xca), values not decoded. Fill mode and pixel format words not decoded |
+| `mg_lines` (check call `0x2081f244`) | Five lines through `0x20897638` (arguments: end vertex, start vertex, a flag, a pattern, two more flags; their meaning is unknown). Vertex layout x, y, z, w, then two RGBA sets. (1) (4,16) to (0,0) red 1,0,0,1, flag 0. (2) (9,16) to (5,0) green, third flag 1. (3) (5,5) to (0,5) blue, flag 1, pattern `0xa9876543`. (4) (10,5) to (5,5) blue, flag 1, same pattern. (5) (12,10) to (12,0) colour (0.5, 0, 0.5, 1), fourth flag 1. Inferred meaning: line 3 and 4 are stippled, 2 and 5 are antialiased or wide, and the table agrees (a dotted blue row at y = 5, a one-pixel vertical purple line, weighted green pixels) | `0x20954b80`, 17 rows by 14 columns, 952 bytes, sum `0xc584ed6b` | Meaning of the three flags, line register writes inside `0x20897638`, the line-width and stipple state words, clear state as above |
+| `mg_color_tri` alpha (check call `0x2081d448`) | Same vertices; the draw is followed by blend writes. Register 0x165 (blend factors, source bits 3:0, destination 7:4): first a read-modify-write that forces bits 7:0 to `0x74` (source alpha, one-minus-destination-alpha) and sets bit 31, then a write of `0x7880c8c4` (source alpha, one-minus-constant-alpha). Register 0x161 (fill mode) is modified: bits 10:8 set to 2 (8-8-8-8), bit 9 set, bits 18:14 cleared and `0x0c004008` ORed in (operation field 3, copy). A second draw follows | `0x20954580`, 16 by 24, 1536 bytes, sum `0xf1563e81` | Starting values for the read-modify-writes (shadow copies maintained by the library), per-vertex colours of both draws, the blend-enable bit, constant colour registers 0x16b and 0x16c (no write found in this block), and why the stored alpha falls non-linearly |
+| `mg_stip_tri` (check call `0x2081f99c`) | Not decoded (vertices, stipple pattern) | `0x20954f38`, 16 by 24, 1536 bytes, sum `0xaa0055aa` | Primitive, pattern, state |
+
+### Missing
+
+| Test | What is missing |
+|---|---|
+| `mg_z_tri` (`0x2081d530`) | Fifteen records on its stack (index `0x11` to `0x1f`, a 32-bit value such as `0x80403f80`, a table pointer) were not decoded: vertices, depth state, depth function sequence, the 16 by 16 tables and their sums. |
+| `mg_points` | Primitives and state not decoded; expected 4 by 6 array is a stack array with no stored constants found, so its provenance is unknown. Sum `0xfd4fbe7c`. |
+| `mg_xblock` | Same: stack array, sum `0x3fffff40`, primitives not decoded. |
+| `mg_logicop` | 16 operations by 3 inputs, 48 words compared under `0x00ffffff`; draw values and expected array not found (stack array, sum `0x188eecb0`). |
+| `mg_dither` | Draw and expected array not found; sum not read reliably. |
+| `mg_chars` | Table at `0x20955538` (16 by 40, sum `0x920e01d2`) is stored, glyph draw sequence not decoded. |
+| `mg_notex_line`, `mg_tex_poly`, `mg_notex_poly`, `mg_tex_load`, `mg_tex_lut4d`, `mg_tex_mddma` | Draw sequence, state and expected data not decoded; the stored tables from data offset `0x46d8` are unexamined. Sums read at call sites: `mg_tex_poly` `0xf6afae79`, `mg_notex_poly` `0x639c0` (not verified). |
+| Alpha-blend and per-pixel-processor scene tests the IDE guide describes | Not located; no string or table entry names them. |
+
+Table addresses above are the data base `0x20953380` plus the offsets in the table earlier on this page.
