@@ -321,6 +321,18 @@ So in this build the GL library does use slot 0, the slot the display server ins
 
 Still open: which table each start word (0xB9, 0xB1) selects. Settling test: decode the start word's select bits in the host-address-generator microcode. The 6.5.13f and 6.5.30m call sites are unread; the same eight-routine search on those builds would confirm the slot choices carry over.
 
+### 21. Raster arithmetic
+
+Question: the rounding, tie and reduction rules of the raster path. [devices/mgras/raster-reference.md](../devices/mgras/raster-reference.md) tabulates what is known per stage; every rule below is unknown there. The cheapest source for most is the expected values and checksums inside the shipped standalone diagnostic (`ide`, IP30 build), which is not in `root/` yet: the routines `mg_color_tri`, `mg_z_tri`, `mg_points`, `mg_lines`, `mg_stip_tri`, `mg_logicop`, `mg_dither`, `mg_tex_poly` and the alpha-blend and scene tests (IDE guide pp. 7-12 to 7-14).
+
+- Setup snap: whether the float add of the +49151.5 bias rounds to nearest or truncates, and what its 0.5 means. Settles with an operand-level trace of the `trigeom` microcode module, or a setup-write trace of a vertex at n + 1/512.
+- Edge and tie ownership of shared edges; span end exclusivity; the aliased line pixel rule. Settles with the diag triangle and line expected values, or a readback of two triangles sharing an edge through a pixel centre.
+- Reduction of the 12-bit colour and alpha iterators to the stored value; the 24-bit depth rounding; INCR and DECR saturation. Settles with the diag colour, depth and stencil expected values.
+- Blend multiply width and rounding, constant colour width, and whether the RE4 or the PP1 blends (the Octane report says both). Settles with the diag alpha-blend test setup and CRC.
+- Fog: whether the factor is per vertex or per pixel and how it is tabulated. Settles with a decode of the `fog` microcode module (index 0x043 of `mgras_geif.u`) with the GE11 Ghidra processor.
+- Texture: iterator widths, divide precision, LOD arithmetic and filter weight rounding. Settles with the three TE1 render checksums already in `devices/te1/registers.toml` replayed against a model, or a trilinear ramp readback.
+- Dither pattern and the pixel types it covers. Settles with `mg_dither` expected values.
+
 ## Still open, with what would settle each
 
 | Mark | Where | Status | What would settle it |

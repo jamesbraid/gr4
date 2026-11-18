@@ -23,6 +23,7 @@ opening heading or first sentence.
 ### Devices (`devices/`)
 
 - [devices/mgras/board-facts.md](devices/mgras/board-facts.md): Facts from published SGI documents the headers did not yet carry.
+- [devices/mgras/raster-reference.md](devices/mgras/raster-reference.md): The raster arithmetic of the IMPACT pipeline stage by stage (setup, edges, interpolation, depth, stencil, blend, fog, texture, lines, dither), with grades and what would settle each unknown.
 - [devices/mgras/antialiasing.md](devices/mgras/antialiasing.md): What the published Octane description says the board does for antialiased points and lines, with grades and open questions.
 - [devices/mgras/board-identity.md](devices/mgras/board-identity.md): How IRIX reads the IMPACT board identity words, the product and revision codes, and what captured boards read back.
 - [devices/mgras/two-re.md](devices/mgras/two-re.md): How the two-raster-engine boards split the screen, select a pixel processor and reach their two geometry engines, with grades and open questions.
