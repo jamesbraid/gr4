@@ -1,7 +1,7 @@
 <!-- generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 2990898932b62921ac32666e4a149a54a1f713d8f3cb1c523469100391afbb8c -->
+<!-- input sha256 252bc2bf46f613252ee264e8764327c27b46c980c303b9ec0c18d8bf3775b0df -->
 
 # host interface and command processor registers for the Impact graphics subsystem
 
@@ -50,9 +50,9 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | `bfifo_lowater` | 0x4043 | rw | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
 | `bfifo_delay` | 0x4044 | rw | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
 | `gio_config` | 0x4045 | rw | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
-| `reif_ctx` | 0x4080 | rw | 32 | 64 | hq3_regs | unknown | inferred | driver and diagnostic readings |
-| `hag_ctx` | 0x40c0 | rw | 32 | 128 | hq3_regs | unknown | inferred | driver and diagnostic readings |
-| `hif_ctx` | 0x4140 | rw | 32 | 64 | hq3_regs | unknown | inferred | driver and diagnostic readings |
+| `reg_4080` | 0x4080 | rw | 32 | 64 | hq3_regs | unknown | inferred | driver and diagnostic readings |
+| `reg_40c0` | 0x40c0 | rw | 32 | 128 | hq3_regs | unknown | inferred | driver and diagnostic readings |
+| `reg_4140` | 0x4140 | rw | 32 | 64 | hq3_regs | unknown | inferred | driver and diagnostic readings |
 | `gio_ctx` | 0x4180 | rw | 32 | 64 | hq3_regs | unknown | inferred | driver and diagnostic readings |
 | `tlb_entries` | 0x4200 | rw | 32 | 32 | hq3_regs | unknown | inferred | driver and diagnostic readings |
 | `tlb_fault_page` | 0x4220 | r | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
@@ -61,8 +61,8 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | `fifo_status` | 0xc001 | r | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
 | `flag_set` | 0xc002 | w | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
 | `flag_clr` | 0xc003 | w | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
-| `rebus_read_hi` | 0xc004 | r | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
-| `rebus_read_lo` | 0xc005 | r | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
+| `reg_c004` | 0xc004 | r | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
+| `reg_c005` | 0xc005 | r | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
 | `cfifo_user` | 0xc020 | w | 64 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
 | `gio_status` | 0xc040 | r | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
 | `dma_busy` | 0xc041 | r | 32 |  | hq3_regs | unknown | inferred | driver and diagnostic readings |
@@ -147,15 +147,21 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | 1 | `display_bus_big_endian` | inferred |  | driver and diagnostic readings |  |
 | 0 | `host_big_endian` | inferred |  | driver and diagnostic readings |  |
 
-### Register `reif_ctx`
+### Register `reg_4080`
+
+Formerly reif_ctx.
 
 Array of 64 registers, stride 1.
 
-### Register `hag_ctx`
+### Register `reg_40c0`
+
+Formerly hag_ctx.
 
 Array of 128 registers, stride 1.
 
-### Register `hif_ctx`
+### Register `reg_4140`
+
+Formerly hif_ctx.
 
 Array of 64 registers, stride 1.
 
@@ -214,9 +220,13 @@ Array of 32 registers, stride 1.
 
 ### Register `flag_clr`
 
-### Register `rebus_read_hi`
+### Register `reg_c004`
 
-### Register `rebus_read_lo`
+Formerly rebus_read_hi.
+
+### Register `reg_c005`
+
+Formerly rebus_read_lo.
 
 ### Register `cfifo_user`
 
@@ -235,7 +245,7 @@ Array of 32 registers, stride 1.
 | 11 | `raster_dma` | inferred |  | driver and diagnostic readings |  |
 | 9 | `master_dma` | inferred |  | driver and diagnostic readings |  |
 | 4 | `raster_if` | inferred |  | driver and diagnostic readings |  |
-| 3 | `cd` | inferred |  | driver and diagnostic readings |  |
+| 3 | `field_3` | inferred |  | driver and diagnostic readings | Formerly cd. |
 | 2 | `cfifo` | inferred |  | driver and diagnostic readings |  |
 | 1 | `host_if` | inferred |  | driver and diagnostic readings |  |
 | 0 | `sync` | inferred |  | driver and diagnostic readings |  |
@@ -248,7 +258,7 @@ Array of 32 registers, stride 1.
 |---|---|---|---|
 | `CFIFO_CTL` | 32 | inferred | driver and diagnostic readings |
 | `CFIFO_INLINE` | 32 | inferred | driver and diagnostic readings |
-| `CTX_W1` | 32 | unknown | driver and diagnostic readings |
+| `CTX_FLAGS_WORD` | 32 | unknown | driver and diagnostic readings |
 
 ### Word `CFIFO_CTL`
 
@@ -281,20 +291,20 @@ kernel's table loader: a software expectation, not a board measurement.
 | 23:22 | `first_offset` | inferred |  | driver and diagnostic readings |  |
 | 19:0 | `length` | inferred |  | driver and diagnostic readings |  |
 
-### Word `CTX_W1`
+### Word `CTX_FLAGS_WORD`
 
 Context image, word 1 (the flags word of the host-memory image the kernel
 keeps per context). Bits 26 and 27 are read from the kernel's code that
 writes them; 29 to 31 come from traced values and the kernel clearing them
 after a load; the reader of bit 28 is not found (set only on the kernel's
-own context at creation).
+own context at creation). Formerly CTX_W1.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
 | 31 | `first_load` | inferred |  | driver and diagnostic readings |  |
 | 30 | `nothing_saved` | inferred |  | driver and diagnostic readings |  |
 | 29 | `window_changed` | inferred |  | driver and diagnostic readings |  |
-| 28 | `bit28` | unknown |  | driver and diagnostic readings |  |
+| 28 | `field_28` | unknown |  | driver and diagnostic readings | Formerly bit28. |
 | 27 | `xserver_shadow` | established |  | driver and diagnostic readings |  |
 | 26 | `banks_changed` | established |  | driver and diagnostic readings |  |
 
@@ -306,37 +316,37 @@ own context at creation).
 | `BFIFO_HIWATER_DEFAULT` | 0x8 | established | driver and diagnostic readings | diagnostic |
 | `BFIFO_LOWATER_DEFAULT` | 0x2 | established | driver and diagnostic readings | diagnostic |
 | `BFIFO_MAX` | 0x10 | inferred | driver and diagnostic readings |  |
-| `CFIFO_CLASS_DMA_BANK_0A` | 0xa | inferred | driver and diagnostic readings | class field of the second DMA bank, used by the GL client's pixel read path; the meaning of registers 0x02, 0x03, 0x04 and 0x06 on a read is unknown |
 | `CFIFO_CLASS_DMA_BANK_HOST` | 0x8 | inferred | driver and diagnostic readings | class field of the host-memory DMA descriptor bank, header 0x0008 in bits 31:16; the register number is in bits 15:8 |
+| `CFIFO_CLASS_DMA_BANK_SECOND` | 0xa | inferred | driver and diagnostic readings | class field of the second DMA bank, used by the GL client's pixel read path; the meaning of registers 0x02, 0x03, 0x04 and 0x06 on a read is unknown. Formerly CFIFO_CLASS_DMA_BANK_0A. |
 | `CFIFO_CLASS_SYNC` | 0xe | inferred | driver and diagnostic readings | class field of the synchronisation headers: register 0x04 is a write fence, register 0x01 a DMA-read sync |
 | `CFIFO_CMD_BITMAP` | 0x94 | inferred | driver and diagnostic readings | glBitmap small-image header; eight payload words of flags, size, origin, move and word count, then an inline block of the image |
 | `CFIFO_CMD_CLEAR_COLOUR` | 0x15 | inferred | driver and diagnostic readings | colour-buffer clear, no payload; the GL client sends one per clear bit |
 | `CFIFO_CMD_CLEAR_DEPTH` | 0x4a | inferred | driver and diagnostic readings | depth-buffer clear, no payload |
 | `CFIFO_CMD_CLEAR_STENCIL` | 0x4c | inferred | driver and diagnostic readings | stencil-buffer clear, no payload |
-| `CFIFO_CMD_CLIP_BIND` | 0xe4 | inferred | driver and diagnostic readings | kernel: the window clip-word packet of a loaded context, 60 payload bytes; see software/opengl/gl-commands.md |
 | `CFIFO_CMD_CONTEXT_CONFIG` | 0x8c | inferred | driver and diagnostic readings | four payload bytes, one configuration int, sent after the context opener |
 | `CFIFO_CMD_CONTEXT_OPEN` | 0x6 | inferred | driver and diagnostic readings | zero-length; the first word of each GL context setup |
-| `CFIFO_CMD_ERAM_READ` | 0xfc | inferred | driver and diagnostic readings | kernel: reads a context out of geometry-engine memory, with the ERAM address and word count; a DMA read follows |
-| `CFIFO_CMD_ERAM_WRITE_ADDR` | 0xfb | inferred | driver and diagnostic readings | kernel: the ERAM address and word count for the write-back chunk that precedes it |
-| `CFIFO_CMD_ERAM_WRITE_CHUNK` | 0xfd | inferred | driver and diagnostic readings | kernel: one write-back chunk of at most 0x384 words, with its count and DMA descriptor |
-| `CFIFO_CMD_ERAM_WRITE_END` | 0xfa | inferred | driver and diagnostic readings | kernel: ends a context write-back |
 | `CFIFO_CMD_FILLER` | 0xe1 | inferred | driver and diagnostic readings | padding: an int count n, then n filler words the pipe discards; payload is 4n + 4 bytes |
 | `CFIFO_CMD_FLUSH` | 0x36 | inferred | driver and diagnostic readings | glFlush, no payload |
+| `CFIFO_CMD_GE_MEMORY_READ` | 0xfc | inferred | driver and diagnostic readings | kernel: reads a context out of geometry-engine memory, with the ERAM address and word count; a DMA read follows. Formerly CFIFO_CMD_ERAM_READ. |
+| `CFIFO_CMD_GE_MEMORY_WRITE_ADDR` | 0xfb | inferred | driver and diagnostic readings | kernel: the ERAM address and word count for the write-back chunk that precedes it. Formerly CFIFO_CMD_ERAM_WRITE_ADDR. |
+| `CFIFO_CMD_GE_MEMORY_WRITE_CHUNK` | 0xfd | inferred | driver and diagnostic readings | kernel: one write-back chunk of at most 0x384 words, with its count and DMA descriptor. Formerly CFIFO_CMD_ERAM_WRITE_CHUNK. |
+| `CFIFO_CMD_GE_MEMORY_WRITE_END` | 0xfa | inferred | driver and diagnostic readings | kernel: ends a context write-back. Formerly CFIFO_CMD_ERAM_WRITE_END. |
 | `CFIFO_CMD_GE_TABLE_LOAD` | 0x82 | inferred | driver and diagnostic readings | geometry-engine table load: a size-class int, then an inline block of descriptor and data words |
-| `CFIFO_CMD_NAME_POP` | 0xc6 | inferred | driver and diagnostic readings | command field of a CFIFO_CTL word with no payload; the GL client's selection name-stack pop, from the client's API handler |
-| `CFIFO_CMD_NAME_PUSH` | 0xc7 | inferred | driver and diagnostic readings | command field with one payload word (the name); the GL client's selection name push |
-| `CFIFO_CMD_NAME_REPLACE` | 0xc5 | inferred | driver and diagnostic readings | command field with one payload word (the name); the GL client's selection name replacement |
-| `CFIFO_CMD_NAME_STACK_INIT` | 0xc4 | inferred | driver and diagnostic readings | command field with no payload; the GL client's selection name-stack initialisation |
 | `CFIFO_CMD_QUERY` | 0xa2 | inferred | driver and diagnostic readings | state query: three int payload words; the client then polls the query-ready flag and reads the answer |
 | `CFIFO_CMD_RASTER_PAIRS` | 0x7f | inferred | driver and diagnostic readings | raster register (register, value) pairs, after a record count and a word count |
 | `CFIFO_CMD_RASTER_TRIPLES` | 0x7c | inferred | driver and diagnostic readings | raster register three-word records, with the same count framing as the pairs |
 | `CFIFO_CMD_RESULT_BEGIN` | 0x61 | inferred | driver and diagnostic readings | command field with no payload; the GL client brackets its selection result fetch with this and CFIFO_CMD_RESULT_END |
 | `CFIFO_CMD_RESULT_END` | 0x62 | inferred | driver and diagnostic readings | command field with no payload; ends the selection result fetch |
 | `CFIFO_CMD_SCISSOR` | 0x39 | inferred | driver and diagnostic readings | glScissor, four int words: x, width less one, y, height less one |
+| `CFIFO_CMD_SELECTION_NAME_POP` | 0xc6 | inferred | driver and diagnostic readings | command field of a CFIFO_CTL word with no payload; the GL client's selection name-stack pop, from the client's API handler. Formerly CFIFO_CMD_NAME_POP. |
+| `CFIFO_CMD_SELECTION_NAME_PUSH` | 0xc7 | inferred | driver and diagnostic readings | command field with one payload word (the name); the GL client's selection name push. Formerly CFIFO_CMD_NAME_PUSH. |
+| `CFIFO_CMD_SELECTION_NAME_REPLACE` | 0xc5 | inferred | driver and diagnostic readings | command field with one payload word (the name); the GL client's selection name replacement. Formerly CFIFO_CMD_NAME_REPLACE. |
+| `CFIFO_CMD_SELECTION_NAME_STACK_INIT` | 0xc4 | inferred | driver and diagnostic readings | command field with no payload; the GL client's selection name-stack initialisation. Formerly CFIFO_CMD_NAME_STACK_INIT. |
 | `CFIFO_CMD_SELECT_ENTER` | 0xcb | inferred | driver and diagnostic readings | command field with one payload word taken from the GL client's per-context state; selection entry |
 | `CFIFO_CMD_SELECT_EXIT` | 0xc9 | inferred | driver and diagnostic readings | command field with no payload; leaving selection mode, result handling begins |
 | `CFIFO_CMD_SWAP_TMESH` | 0xdc | inferred | driver and diagnostic readings | IRIS GL swaptmesh inside a triangle strip, no payload |
 | `CFIFO_CMD_VIEWPORT` | 0x33 | inferred | driver and diagnostic readings | glViewport, four int words: x, y, width, height |
+| `CFIFO_CMD_WINDOW_CLIP_PACKET` | 0xe4 | inferred | driver and diagnostic readings | kernel: the window clip-word packet of a loaded context, 60 payload bytes; see software/opengl/gl-commands.md. Formerly CFIFO_CMD_CLIP_BIND. |
 | `CFIFO_DELAY_DEFAULT` | 0x64 | established | driver and diagnostic readings | diagnostic |
 | `CFIFO_HIWATER_DEFAULT` | 0x28 | established | driver and diagnostic readings | diagnostic |
 | `CFIFO_LOWATER_DEFAULT` | 0x14 | established | driver and diagnostic readings | diagnostic |
@@ -388,4 +398,4 @@ A vector is a value recorded from a source. An example only shows the layout.
 | `CFIFO_CTL` | 0x39000006 | vector | bytes=6, command=0, sync=0, kernel=0, convert=114, pad_flag=0, pixel=0 |
 | `CFIFO_CTL` | 0x59000004 | vector | bytes=4, command=0, sync=0, kernel=0, convert=50, pad_flag=1, pixel=0 |
 | `CFIFO_INLINE` | 0x80000214 | example | inline=1, first_offset=0, length=532 |
-| `CTX_W1` | 0xc000000 | vector | banks_changed=1, xserver_shadow=1, bit28=0, first_load=0 |
+| `CTX_FLAGS_WORD` | 0xc000000 | vector | banks_changed=1, xserver_shadow=1, field_28=0, first_load=0 |

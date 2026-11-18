@@ -4,11 +4,13 @@ title = "host interface and command processor registers for the Impact graphics 
 doc = "Host interface and command processor registers of the Impact graphics subsystem."
 from = "driver and diagnostic readings"
 public_from = ["driver and diagnostic readings"]
+name_source = "ours"
 
 [spaces.hq3_regs]
 unit = "reg"
 
 [registers.pc]
+name_source = "ours"
 offset = 0x1800
 access = "rw"
 width = 32
@@ -16,6 +18,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.cp_data]
+name_source = "ours"
 offset = 0x1c00
 access = "rw"
 width = 32
@@ -23,6 +26,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.rss_diag]
+name_source = "ours"
 offset = 0x3000
 access = "rw"
 width = 32
@@ -30,6 +34,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.config]
+name_source = "ours"
 offset = 0x4000
 access = "rw"
 width = 32
@@ -58,6 +63,7 @@ value = 0x7e8c
 expect = { big_endian = 1, ucode_stall = 1, diag_route = 0, diag_loopback = 1 }
 
 [registers.flag_ctx]
+name_source = "ours"
 offset = 0x4001
 access = "rw"
 width = 32
@@ -65,6 +71,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.flag_set_priv]
+name_source = "ours"
 offset = 0x4002
 access = "rw"
 width = 32
@@ -72,6 +79,7 @@ grade = "established"
 space = "hq3_regs"
 
 [registers.flag_clr_priv]
+name_source = "ours"
 offset = 0x4003
 access = "w"
 width = 32
@@ -79,6 +87,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.flag_enab_set]
+name_source = "ours"
 offset = 0x4004
 access = "rw"
 width = 32
@@ -86,6 +95,7 @@ grade = "established"
 space = "hq3_regs"
 
 [registers.flag_enab_clr]
+name_source = "ours"
 offset = 0x4005
 access = "w"
 width = 32
@@ -93,6 +103,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.intr_enab_set]
+name_source = "ours"
 offset = 0x4006
 access = "rw"
 width = 32
@@ -110,6 +121,7 @@ value = 0x4400e200
 expect = { cfifo_above_high = 1, cfifo_below_low = 0, dfifo_above_high = 1, dfifo_below_low = 0 }
 
 [registers.intr_enab_clr]
+name_source = "ours"
 offset = 0x4007
 access = "w"
 width = 32
@@ -117,6 +129,8 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.cfifo_hiwater]
+# UNSURE: header name is IMPACTSR_CFIFO_HW (impactreg.h:36)
+name_source = "ours"
 offset = 0x4008
 access = "rw"
 width = 32
@@ -124,6 +138,8 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.cfifo_lowater]
+# UNSURE: header name is IMPACTSR_CFIFO_LW (impactreg.h:37)
+name_source = "ours"
 offset = 0x4009
 access = "rw"
 width = 32
@@ -131,6 +147,9 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.cfifo_delay]
+# sys/arch/sgi/dev/impactreg.h:38 IMPACTSR_CFIFO_DELAY
+name_source = "public"
+name_cite = "OpenBSD impact(4) driver register header"
 offset = 0x400a
 access = "rw"
 width = 32
@@ -138,6 +157,8 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.dfifo_hiwater]
+# UNSURE: header name is IMPACTSR_DFIFO_HW (impactreg.h:39)
+name_source = "ours"
 offset = 0x400b
 access = "rw"
 width = 32
@@ -145,6 +166,8 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.dfifo_lowater]
+# UNSURE: header name is IMPACTSR_DFIFO_LW (impactreg.h:40)
+name_source = "ours"
 offset = 0x400c
 access = "rw"
 width = 32
@@ -152,6 +175,9 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.dfifo_delay]
+# sys/arch/sgi/dev/impactreg.h:41 IMPACTSR_DFIFO_DELAY
+name_source = "public"
+name_cite = "OpenBSD impact(4) driver register header"
 offset = 0x400d
 access = "rw"
 width = 32
@@ -159,6 +185,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.ge0_diag_data]
+name_source = "ours"
 offset = 0x4010
 access = "rw"
 width = 32
@@ -166,6 +193,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.ge0_diag_index]
+name_source = "ours"
 offset = 0x4011
 access = "rw"
 width = 32
@@ -173,6 +201,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.ge1_diag_data]
+name_source = "ours"
 offset = 0x4012
 access = "rw"
 width = 32
@@ -180,6 +209,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.ge1_diag_index]
+name_source = "ours"
 offset = 0x4013
 access = "rw"
 width = 32
@@ -187,6 +217,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.ctx_switch]
+name_source = "ours"
 offset = 0x4014
 access = "w"
 width = 32
@@ -194,6 +225,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.cfifo_priv]
+name_source = "ours"
 offset = 0x4020
 access = "w"
 width = 64
@@ -201,6 +233,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.ctx_data]
+name_source = "ours"
 offset = 0x4040
 access = "rw"
 width = 32
@@ -208,6 +241,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.bfifo_hiwater]
+name_source = "ours"
 offset = 0x4042
 access = "rw"
 width = 32
@@ -215,6 +249,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.bfifo_lowater]
+name_source = "ours"
 offset = 0x4043
 access = "rw"
 width = 32
@@ -222,6 +257,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.bfifo_delay]
+name_source = "ours"
 offset = 0x4044
 access = "rw"
 width = 32
@@ -229,6 +265,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.gio_config]
+name_source = "ours"
 offset = 0x4045
 access = "rw"
 width = 32
@@ -251,7 +288,10 @@ expect = { host_big_endian = 1, display_bus_big_endian = 1, ext_pipe_register = 
 value = 0x765b900f
 expect = { host_big_endian = 1, display_bus_big_endian = 1, ext_pipe_register = 1, tlb_update = 1, bus_bypass = 0, fifo_high_water = 1 }
 
-[registers.reif_ctx]
+[registers.reg_4080]
+# UNSURE: the description does not name this register
+name_source = "ours"
+doc = "Formerly reif_ctx."
 offset = 0x4080
 access = "rw"
 width = 32
@@ -259,7 +299,10 @@ grade = "inferred"
 count = 64
 space = "hq3_regs"
 
-[registers.hag_ctx]
+[registers.reg_40c0]
+# UNSURE: the description does not name this register
+name_source = "ours"
+doc = "Formerly hag_ctx."
 offset = 0x40c0
 access = "rw"
 width = 32
@@ -267,7 +310,10 @@ grade = "inferred"
 count = 128
 space = "hq3_regs"
 
-[registers.hif_ctx]
+[registers.reg_4140]
+# UNSURE: the description does not name this register
+name_source = "ours"
+doc = "Formerly hif_ctx."
 offset = 0x4140
 access = "rw"
 width = 32
@@ -276,6 +322,7 @@ count = 64
 space = "hq3_regs"
 
 [registers.gio_ctx]
+name_source = "ours"
 offset = 0x4180
 access = "rw"
 width = 32
@@ -284,6 +331,7 @@ count = 64
 space = "hq3_regs"
 
 [registers.tlb_entries]
+name_source = "ours"
 offset = 0x4200
 access = "rw"
 width = 32
@@ -292,6 +340,7 @@ count = 32
 space = "hq3_regs"
 
 [registers.tlb_fault_page]
+name_source = "ours"
 offset = 0x4220
 access = "r"
 width = 32
@@ -299,6 +348,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.tlb_valid]
+name_source = "ours"
 offset = 0x4240
 access = "rw"
 width = 32
@@ -306,6 +356,8 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.status]
+# header IMPACT_STATUS (impactreg.h:30) matches, but the fields have no public source
+name_source = "ours"
 offset = 0xc000
 access = "r"
 width = 32
@@ -321,6 +373,8 @@ pipe_idle = { bits = [1, 1], grade = "inferred" }
 commands_done = { bits = [0, 0], grade = "inferred" }
 
 [registers.fifo_status]
+# header IMPACT_FIFOSTATUS (impactreg.h:31) matches, but the fields have no public source
+name_source = "ours"
 offset = 0xc001
 access = "r"
 width = 32
@@ -334,6 +388,7 @@ cfifo_valid = { bits = [14, 7], grade = "inferred" }
 cfifo_depth = { bits = [6, 0], grade = "inferred" }
 
 [registers.flag_set]
+name_source = "ours"
 offset = 0xc002
 access = "w"
 width = 32
@@ -363,20 +418,27 @@ value = 0xe200
 expect = { ucode_error = 1, dma_address_error = 1, cfifo_privilege_violation = 1, dma_access_or_stack_overflow = 1 }
 
 [registers.flag_clr]
+name_source = "ours"
 offset = 0xc003
 access = "w"
 width = 32
 grade = "inferred"
 space = "hq3_regs"
 
-[registers.rebus_read_hi]
+[registers.reg_c004]
+# UNSURE: the description does not name this register
+name_source = "ours"
+doc = "Formerly rebus_read_hi."
 offset = 0xc004
 access = "r"
 width = 32
 grade = "inferred"
 space = "hq3_regs"
 
-[registers.rebus_read_lo]
+[registers.reg_c005]
+# UNSURE: the description does not name this register
+name_source = "ours"
+doc = "Formerly rebus_read_lo."
 offset = 0xc005
 access = "r"
 width = 32
@@ -384,6 +446,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.cfifo_user]
+name_source = "ours"
 offset = 0xc020
 access = "w"
 width = 64
@@ -391,6 +454,8 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.gio_status]
+# header IMPACT_GIOSTATUS (impactreg.h:32) matches, but the fields have no public source
+name_source = "ours"
 offset = 0xc040
 access = "r"
 width = 32
@@ -402,6 +467,8 @@ display_bus_busy = { bits = [5, 5], grade = "inferred" }
 bfifo_depth = { bits = [4, 0], grade = "inferred" }
 
 [registers.dma_busy]
+# header IMPACT_DMABUSY (impactreg.h:33) matches, but the fields have no public source
+name_source = "ours"
 offset = 0xc041
 access = "r"
 width = 32
@@ -413,12 +480,14 @@ address_gen_dma = { bits = [12, 12], grade = "inferred" }
 raster_dma = { bits = [11, 11], grade = "inferred" }
 master_dma = { bits = [9, 9], grade = "inferred" }
 raster_if = { bits = [4, 4], grade = "inferred" }
-cd = { bits = [3, 3], grade = "inferred" }
+# UNSURE: the description does not expand cd
+field_3 = { bits = [3, 3], grade = "inferred", doc = "Formerly cd." }
 cfifo = { bits = [2, 2], grade = "inferred" }
 host_if = { bits = [1, 1], grade = "inferred" }
 sync = { bits = [0, 0], grade = "inferred" }
 
 [registers.cfifo_gl]
+name_source = "ours"
 offset = 0xd020
 access = "w"
 width = 64
@@ -426,6 +495,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [words.CFIFO_CTL]
+name_source = "ours"
 width = 32
 doc = """
 Command-FIFO control word (bit 31 clear). The word every OpenGL library
@@ -450,6 +520,7 @@ value = 0x59000004
 expect = { bytes = 4, command = 0, sync = 0, kernel = 0, convert = 50, pad_flag = 1, pixel = 0 }
 
 [words.CFIFO_INLINE]
+name_source = "ours"
 width = 32
 doc = """
 Command-FIFO header of an inline data block (bit 31 set). The GL client sends
@@ -471,37 +542,39 @@ kind = "example"
 value = 0x80000214
 expect = { inline = 1, first_offset = 0, length = 0x214 }
 
-[words.CTX_W1]
+[words.CTX_FLAGS_WORD]
+name_source = "ours"
 width = 32
 doc = """
 Context image, word 1 (the flags word of the host-memory image the kernel
 keeps per context). Bits 26 and 27 are read from the kernel's code that
 writes them; 29 to 31 come from traced values and the kernel clearing them
 after a load; the reader of bit 28 is not found (set only on the kernel's
-own context at creation)."""
+own context at creation). Formerly CTX_W1."""
 grade = "unknown"
 
-[words.CTX_W1.fields]
+[words.CTX_FLAGS_WORD.fields]
 first_load = { bits = [31, 31], grade = "inferred" }
 nothing_saved = { bits = [30, 30], grade = "inferred" }
 window_changed = { bits = [29, 29], grade = "inferred" }
-bit28 = { bits = [28, 28], grade = "unknown" }
+# UNSURE: the description does not name this bit
+field_28 = { bits = [28, 28], grade = "unknown", doc = "Formerly bit28." }
 xserver_shadow = { bits = [27, 27], grade = "established" }
 banks_changed = { bits = [26, 26], grade = "established" }
 
-[[words.CTX_W1.tests]]
+[[words.CTX_FLAGS_WORD.tests]]
 value = 0xc000000
-expect = { banks_changed = 1, xserver_shadow = 1, bit28 = 0, first_load = 0 }
+expect = { banks_changed = 1, xserver_shadow = 1, field_28 = 0, first_load = 0 }
 
 [constants]
 BFIFO_DELAY_DEFAULT = { value = 0x64, grade = "established", doc = "diagnostic" }
 BFIFO_HIWATER_DEFAULT = { value = 0x8, grade = "established", doc = "diagnostic" }
 BFIFO_LOWATER_DEFAULT = { value = 0x2, grade = "established", doc = "diagnostic" }
 BFIFO_MAX = { value = 0x10, grade = "inferred" }
-CFIFO_CMD_NAME_POP = { value = 0xc6, grade = "inferred", doc = "command field of a CFIFO_CTL word with no payload; the GL client's selection name-stack pop, from the client's API handler" }
-CFIFO_CMD_NAME_PUSH = { value = 0xc7, grade = "inferred", doc = "command field with one payload word (the name); the GL client's selection name push" }
-CFIFO_CMD_NAME_REPLACE = { value = 0xc5, grade = "inferred", doc = "command field with one payload word (the name); the GL client's selection name replacement" }
-CFIFO_CMD_NAME_STACK_INIT = { value = 0xc4, grade = "inferred", doc = "command field with no payload; the GL client's selection name-stack initialisation" }
+CFIFO_CMD_SELECTION_NAME_POP = { value = 0xc6, grade = "inferred", doc = "command field of a CFIFO_CTL word with no payload; the GL client's selection name-stack pop, from the client's API handler. Formerly CFIFO_CMD_NAME_POP." }
+CFIFO_CMD_SELECTION_NAME_PUSH = { value = 0xc7, grade = "inferred", doc = "command field with one payload word (the name); the GL client's selection name push. Formerly CFIFO_CMD_NAME_PUSH." }
+CFIFO_CMD_SELECTION_NAME_REPLACE = { value = 0xc5, grade = "inferred", doc = "command field with one payload word (the name); the GL client's selection name replacement. Formerly CFIFO_CMD_NAME_REPLACE." }
+CFIFO_CMD_SELECTION_NAME_STACK_INIT = { value = 0xc4, grade = "inferred", doc = "command field with no payload; the GL client's selection name-stack initialisation. Formerly CFIFO_CMD_NAME_STACK_INIT." }
 CFIFO_CMD_RESULT_BEGIN = { value = 0x61, grade = "inferred", doc = "command field with no payload; the GL client brackets its selection result fetch with this and CFIFO_CMD_RESULT_END" }
 CFIFO_CMD_RESULT_END = { value = 0x62, grade = "inferred", doc = "command field with no payload; ends the selection result fetch" }
 CFIFO_CMD_SELECT_ENTER = { value = 0xcb, grade = "inferred", doc = "command field with one payload word taken from the GL client's per-context state; selection entry" }
@@ -510,13 +583,13 @@ CFIFO_CMD_BITMAP = { value = 0x94, grade = "inferred", doc = "glBitmap small-ima
 CFIFO_CMD_CLEAR_COLOUR = { value = 0x15, grade = "inferred", doc = "colour-buffer clear, no payload; the GL client sends one per clear bit" }
 CFIFO_CMD_CLEAR_DEPTH = { value = 0x4a, grade = "inferred", doc = "depth-buffer clear, no payload" }
 CFIFO_CMD_CLEAR_STENCIL = { value = 0x4c, grade = "inferred", doc = "stencil-buffer clear, no payload" }
-CFIFO_CMD_CLIP_BIND = { value = 0xe4, grade = "inferred", doc = "kernel: the window clip-word packet of a loaded context, 60 payload bytes; see software/opengl/gl-commands.md" }
+CFIFO_CMD_WINDOW_CLIP_PACKET = { value = 0xe4, grade = "inferred", doc = "kernel: the window clip-word packet of a loaded context, 60 payload bytes; see software/opengl/gl-commands.md. Formerly CFIFO_CMD_CLIP_BIND." }
 CFIFO_CMD_CONTEXT_CONFIG = { value = 0x8c, grade = "inferred", doc = "four payload bytes, one configuration int, sent after the context opener" }
 CFIFO_CMD_CONTEXT_OPEN = { value = 0x6, grade = "inferred", doc = "zero-length; the first word of each GL context setup" }
-CFIFO_CMD_ERAM_READ = { value = 0xfc, grade = "inferred", doc = "kernel: reads a context out of geometry-engine memory, with the ERAM address and word count; a DMA read follows" }
-CFIFO_CMD_ERAM_WRITE_ADDR = { value = 0xfb, grade = "inferred", doc = "kernel: the ERAM address and word count for the write-back chunk that precedes it" }
-CFIFO_CMD_ERAM_WRITE_CHUNK = { value = 0xfd, grade = "inferred", doc = "kernel: one write-back chunk of at most 0x384 words, with its count and DMA descriptor" }
-CFIFO_CMD_ERAM_WRITE_END = { value = 0xfa, grade = "inferred", doc = "kernel: ends a context write-back" }
+CFIFO_CMD_GE_MEMORY_READ = { value = 0xfc, grade = "inferred", doc = "kernel: reads a context out of geometry-engine memory, with the ERAM address and word count; a DMA read follows. Formerly CFIFO_CMD_ERAM_READ." }
+CFIFO_CMD_GE_MEMORY_WRITE_ADDR = { value = 0xfb, grade = "inferred", doc = "kernel: the ERAM address and word count for the write-back chunk that precedes it. Formerly CFIFO_CMD_ERAM_WRITE_ADDR." }
+CFIFO_CMD_GE_MEMORY_WRITE_CHUNK = { value = 0xfd, grade = "inferred", doc = "kernel: one write-back chunk of at most 0x384 words, with its count and DMA descriptor. Formerly CFIFO_CMD_ERAM_WRITE_CHUNK." }
+CFIFO_CMD_GE_MEMORY_WRITE_END = { value = 0xfa, grade = "inferred", doc = "kernel: ends a context write-back. Formerly CFIFO_CMD_ERAM_WRITE_END." }
 CFIFO_CMD_FILLER = { value = 0xe1, grade = "inferred", doc = "padding: an int count n, then n filler words the pipe discards; payload is 4n + 4 bytes" }
 CFIFO_CMD_FLUSH = { value = 0x36, grade = "inferred", doc = "glFlush, no payload" }
 CFIFO_CMD_GE_TABLE_LOAD = { value = 0x82, grade = "inferred", doc = "geometry-engine table load: a size-class int, then an inline block of descriptor and data words" }
@@ -524,10 +597,11 @@ CFIFO_CMD_QUERY = { value = 0xa2, grade = "inferred", doc = "state query: three 
 CFIFO_CMD_RASTER_PAIRS = { value = 0x7f, grade = "inferred", doc = "raster register (register, value) pairs, after a record count and a word count" }
 CFIFO_CMD_RASTER_TRIPLES = { value = 0x7c, grade = "inferred", doc = "raster register three-word records, with the same count framing as the pairs" }
 CFIFO_CMD_SCISSOR = { value = 0x39, grade = "inferred", doc = "glScissor, four int words: x, width less one, y, height less one" }
+# UNSURE: IRIS GL name, not checked against a public GL source
 CFIFO_CMD_SWAP_TMESH = { value = 0xdc, grade = "inferred", doc = "IRIS GL swaptmesh inside a triangle strip, no payload" }
 CFIFO_CMD_VIEWPORT = { value = 0x33, grade = "inferred", doc = "glViewport, four int words: x, y, width, height" }
 CFIFO_CLASS_DMA_BANK_HOST = { value = 0x8, grade = "inferred", doc = "class field of the host-memory DMA descriptor bank, header 0x0008 in bits 31:16; the register number is in bits 15:8" }
-CFIFO_CLASS_DMA_BANK_0A = { value = 0xa, grade = "inferred", doc = "class field of the second DMA bank, used by the GL client's pixel read path; the meaning of registers 0x02, 0x03, 0x04 and 0x06 on a read is unknown" }
+CFIFO_CLASS_DMA_BANK_SECOND = { value = 0xa, grade = "inferred", doc = "class field of the second DMA bank, used by the GL client's pixel read path; the meaning of registers 0x02, 0x03, 0x04 and 0x06 on a read is unknown. Formerly CFIFO_CLASS_DMA_BANK_0A." }
 CFIFO_CLASS_SYNC = { value = 0xe, grade = "inferred", doc = "class field of the synchronisation headers: register 0x04 is a write fence, register 0x01 a DMA-read sync" }
 CFIFO_DELAY_DEFAULT = { value = 0x64, grade = "established", doc = "diagnostic" }
 CFIFO_HIWATER_DEFAULT = { value = 0x28, grade = "established", doc = "diagnostic" }

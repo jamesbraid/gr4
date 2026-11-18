@@ -1,7 +1,7 @@
 /* generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 2990898932b62921ac32666e4a149a54a1f713d8f3cb1c523469100391afbb8c */
+/* input sha256 252bc2bf46f613252ee264e8764327c27b46c980c303b9ec0c18d8bf3775b0df */
 /* host interface and command processor registers for the Impact graphics subsystem */
 #ifndef HQ_GEN_H
 #define HQ_GEN_H
@@ -137,20 +137,29 @@
 #define HQ_GIO_CONFIG_HOST_BIG_ENDIAN_MASK           0x1u
 #define HQ_GIO_CONFIG_HOST_BIG_ENDIAN_INPLACE        (HQ_GIO_CONFIG_HOST_BIG_ENDIAN_MASK << HQ_GIO_CONFIG_HOST_BIG_ENDIAN_SHIFT)
 
-/* reif_ctx: rw32, space hq3_regs, reset unknown; driver and diagnostic readings */
-#define HQ_REIF_CTX_OFFSET                           0x4080u /* inferred */
-#define HQ_REIF_CTX_COUNT                            64
-#define HQ_REIF_CTX_STRIDE                           1
+/*
+ * Formerly reif_ctx.
+ */
+/* reg_4080: rw32, space hq3_regs, reset unknown; driver and diagnostic readings */
+#define HQ_REG_4080_OFFSET                           0x4080u /* inferred */
+#define HQ_REG_4080_COUNT                            64
+#define HQ_REG_4080_STRIDE                           1
 
-/* hag_ctx: rw32, space hq3_regs, reset unknown; driver and diagnostic readings */
-#define HQ_HAG_CTX_OFFSET                            0x40c0u /* inferred */
-#define HQ_HAG_CTX_COUNT                             128
-#define HQ_HAG_CTX_STRIDE                            1
+/*
+ * Formerly hag_ctx.
+ */
+/* reg_40c0: rw32, space hq3_regs, reset unknown; driver and diagnostic readings */
+#define HQ_REG_40C0_OFFSET                           0x40c0u /* inferred */
+#define HQ_REG_40C0_COUNT                            128
+#define HQ_REG_40C0_STRIDE                           1
 
-/* hif_ctx: rw32, space hq3_regs, reset unknown; driver and diagnostic readings */
-#define HQ_HIF_CTX_OFFSET                            0x4140u /* inferred */
-#define HQ_HIF_CTX_COUNT                             64
-#define HQ_HIF_CTX_STRIDE                            1
+/*
+ * Formerly hif_ctx.
+ */
+/* reg_4140: rw32, space hq3_regs, reset unknown; driver and diagnostic readings */
+#define HQ_REG_4140_OFFSET                           0x4140u /* inferred */
+#define HQ_REG_4140_COUNT                            64
+#define HQ_REG_4140_STRIDE                           1
 
 /* gio_ctx: rw32, space hq3_regs, reset unknown; driver and diagnostic readings */
 #define HQ_GIO_CTX_OFFSET                            0x4180u /* inferred */
@@ -258,11 +267,17 @@
 /* flag_clr: w32, space hq3_regs, reset unknown; driver and diagnostic readings */
 #define HQ_FLAG_CLR_OFFSET                           0xc003u /* inferred */
 
-/* rebus_read_hi: r32, space hq3_regs, reset unknown; driver and diagnostic readings */
-#define HQ_REBUS_READ_HI_OFFSET                      0xc004u /* inferred */
+/*
+ * Formerly rebus_read_hi.
+ */
+/* reg_c004: r32, space hq3_regs, reset unknown; driver and diagnostic readings */
+#define HQ_REG_C004_OFFSET                           0xc004u /* inferred */
 
-/* rebus_read_lo: r32, space hq3_regs, reset unknown; driver and diagnostic readings */
-#define HQ_REBUS_READ_LO_OFFSET                      0xc005u /* inferred */
+/*
+ * Formerly rebus_read_lo.
+ */
+/* reg_c005: r32, space hq3_regs, reset unknown; driver and diagnostic readings */
+#define HQ_REG_C005_OFFSET                           0xc005u /* inferred */
 
 /* cfifo_user: w64, space hq3_regs, reset unknown; driver and diagnostic readings */
 #define HQ_CFIFO_USER_OFFSET                         0xc020u /* inferred */
@@ -290,9 +305,9 @@
 #define HQ_DMA_BUSY_RASTER_IF_SHIFT                  4 /* inferred */
 #define HQ_DMA_BUSY_RASTER_IF_MASK                   0x1u
 #define HQ_DMA_BUSY_RASTER_IF_INPLACE                (HQ_DMA_BUSY_RASTER_IF_MASK << HQ_DMA_BUSY_RASTER_IF_SHIFT)
-#define HQ_DMA_BUSY_CD_SHIFT                         3 /* inferred */
-#define HQ_DMA_BUSY_CD_MASK                          0x1u
-#define HQ_DMA_BUSY_CD_INPLACE                       (HQ_DMA_BUSY_CD_MASK << HQ_DMA_BUSY_CD_SHIFT)
+#define HQ_DMA_BUSY_FIELD_3_SHIFT                    3 /* inferred */
+#define HQ_DMA_BUSY_FIELD_3_MASK                     0x1u
+#define HQ_DMA_BUSY_FIELD_3_INPLACE                  (HQ_DMA_BUSY_FIELD_3_MASK << HQ_DMA_BUSY_FIELD_3_SHIFT)
 #define HQ_DMA_BUSY_CFIFO_SHIFT                      2 /* inferred */
 #define HQ_DMA_BUSY_CFIFO_MASK                       0x1u
 #define HQ_DMA_BUSY_CFIFO_INPLACE                    (HQ_DMA_BUSY_CFIFO_MASK << HQ_DMA_BUSY_CFIFO_SHIFT)
@@ -360,64 +375,64 @@
  * keeps per context). Bits 26 and 27 are read from the kernel's code that
  * writes them; 29 to 31 come from traced values and the kernel clearing them
  * after a load; the reader of bit 28 is not found (set only on the kernel's
- * own context at creation).
+ * own context at creation). Formerly CTX_W1.
  */
-/* word CTX_W1: 32 bits; driver and diagnostic readings */
-#define HQ_CTX_W1_WIDTH                              32 /* unknown */
-#define HQ_CTX_W1_FIRST_LOAD_SHIFT                   31 /* inferred */
-#define HQ_CTX_W1_FIRST_LOAD_MASK                    0x1u
-#define HQ_CTX_W1_FIRST_LOAD_INPLACE                 (HQ_CTX_W1_FIRST_LOAD_MASK << HQ_CTX_W1_FIRST_LOAD_SHIFT)
-#define HQ_CTX_W1_NOTHING_SAVED_SHIFT                30 /* inferred */
-#define HQ_CTX_W1_NOTHING_SAVED_MASK                 0x1u
-#define HQ_CTX_W1_NOTHING_SAVED_INPLACE              (HQ_CTX_W1_NOTHING_SAVED_MASK << HQ_CTX_W1_NOTHING_SAVED_SHIFT)
-#define HQ_CTX_W1_WINDOW_CHANGED_SHIFT               29 /* inferred */
-#define HQ_CTX_W1_WINDOW_CHANGED_MASK                0x1u
-#define HQ_CTX_W1_WINDOW_CHANGED_INPLACE             (HQ_CTX_W1_WINDOW_CHANGED_MASK << HQ_CTX_W1_WINDOW_CHANGED_SHIFT)
-#define HQ_CTX_W1_BIT28_SHIFT                        28 /* unknown */
-#define HQ_CTX_W1_BIT28_MASK                         0x1u
-#define HQ_CTX_W1_BIT28_INPLACE                      (HQ_CTX_W1_BIT28_MASK << HQ_CTX_W1_BIT28_SHIFT)
-#define HQ_CTX_W1_XSERVER_SHADOW_SHIFT               27 /* established */
-#define HQ_CTX_W1_XSERVER_SHADOW_MASK                0x1u
-#define HQ_CTX_W1_XSERVER_SHADOW_INPLACE             (HQ_CTX_W1_XSERVER_SHADOW_MASK << HQ_CTX_W1_XSERVER_SHADOW_SHIFT)
-#define HQ_CTX_W1_BANKS_CHANGED_SHIFT                26 /* established */
-#define HQ_CTX_W1_BANKS_CHANGED_MASK                 0x1u
-#define HQ_CTX_W1_BANKS_CHANGED_INPLACE              (HQ_CTX_W1_BANKS_CHANGED_MASK << HQ_CTX_W1_BANKS_CHANGED_SHIFT)
+/* word CTX_FLAGS_WORD: 32 bits; driver and diagnostic readings */
+#define HQ_CTX_FLAGS_WORD_WIDTH                      32 /* unknown */
+#define HQ_CTX_FLAGS_WORD_FIRST_LOAD_SHIFT           31 /* inferred */
+#define HQ_CTX_FLAGS_WORD_FIRST_LOAD_MASK            0x1u
+#define HQ_CTX_FLAGS_WORD_FIRST_LOAD_INPLACE         (HQ_CTX_FLAGS_WORD_FIRST_LOAD_MASK << HQ_CTX_FLAGS_WORD_FIRST_LOAD_SHIFT)
+#define HQ_CTX_FLAGS_WORD_NOTHING_SAVED_SHIFT        30 /* inferred */
+#define HQ_CTX_FLAGS_WORD_NOTHING_SAVED_MASK         0x1u
+#define HQ_CTX_FLAGS_WORD_NOTHING_SAVED_INPLACE      (HQ_CTX_FLAGS_WORD_NOTHING_SAVED_MASK << HQ_CTX_FLAGS_WORD_NOTHING_SAVED_SHIFT)
+#define HQ_CTX_FLAGS_WORD_WINDOW_CHANGED_SHIFT       29 /* inferred */
+#define HQ_CTX_FLAGS_WORD_WINDOW_CHANGED_MASK        0x1u
+#define HQ_CTX_FLAGS_WORD_WINDOW_CHANGED_INPLACE     (HQ_CTX_FLAGS_WORD_WINDOW_CHANGED_MASK << HQ_CTX_FLAGS_WORD_WINDOW_CHANGED_SHIFT)
+#define HQ_CTX_FLAGS_WORD_FIELD_28_SHIFT             28 /* unknown */
+#define HQ_CTX_FLAGS_WORD_FIELD_28_MASK              0x1u
+#define HQ_CTX_FLAGS_WORD_FIELD_28_INPLACE           (HQ_CTX_FLAGS_WORD_FIELD_28_MASK << HQ_CTX_FLAGS_WORD_FIELD_28_SHIFT)
+#define HQ_CTX_FLAGS_WORD_XSERVER_SHADOW_SHIFT       27 /* established */
+#define HQ_CTX_FLAGS_WORD_XSERVER_SHADOW_MASK        0x1u
+#define HQ_CTX_FLAGS_WORD_XSERVER_SHADOW_INPLACE     (HQ_CTX_FLAGS_WORD_XSERVER_SHADOW_MASK << HQ_CTX_FLAGS_WORD_XSERVER_SHADOW_SHIFT)
+#define HQ_CTX_FLAGS_WORD_BANKS_CHANGED_SHIFT        26 /* established */
+#define HQ_CTX_FLAGS_WORD_BANKS_CHANGED_MASK         0x1u
+#define HQ_CTX_FLAGS_WORD_BANKS_CHANGED_INPLACE      (HQ_CTX_FLAGS_WORD_BANKS_CHANGED_MASK << HQ_CTX_FLAGS_WORD_BANKS_CHANGED_SHIFT)
 
 #define HQ_BFIFO_DELAY_DEFAULT                       0x64u /* established */
 #define HQ_BFIFO_HIWATER_DEFAULT                     0x8u /* established */
 #define HQ_BFIFO_LOWATER_DEFAULT                     0x2u /* established */
 #define HQ_BFIFO_MAX                                 0x10u /* inferred */
-#define HQ_CFIFO_CLASS_DMA_BANK_0A                   0xau /* inferred */
 #define HQ_CFIFO_CLASS_DMA_BANK_HOST                 0x8u /* inferred */
+#define HQ_CFIFO_CLASS_DMA_BANK_SECOND               0xau /* inferred */
 #define HQ_CFIFO_CLASS_SYNC                          0xeu /* inferred */
 #define HQ_CFIFO_CMD_BITMAP                          0x94u /* inferred */
 #define HQ_CFIFO_CMD_CLEAR_COLOUR                    0x15u /* inferred */
 #define HQ_CFIFO_CMD_CLEAR_DEPTH                     0x4au /* inferred */
 #define HQ_CFIFO_CMD_CLEAR_STENCIL                   0x4cu /* inferred */
-#define HQ_CFIFO_CMD_CLIP_BIND                       0xe4u /* inferred */
 #define HQ_CFIFO_CMD_CONTEXT_CONFIG                  0x8cu /* inferred */
 #define HQ_CFIFO_CMD_CONTEXT_OPEN                    0x6u /* inferred */
-#define HQ_CFIFO_CMD_ERAM_READ                       0xfcu /* inferred */
-#define HQ_CFIFO_CMD_ERAM_WRITE_ADDR                 0xfbu /* inferred */
-#define HQ_CFIFO_CMD_ERAM_WRITE_CHUNK                0xfdu /* inferred */
-#define HQ_CFIFO_CMD_ERAM_WRITE_END                  0xfau /* inferred */
 #define HQ_CFIFO_CMD_FILLER                          0xe1u /* inferred */
 #define HQ_CFIFO_CMD_FLUSH                           0x36u /* inferred */
+#define HQ_CFIFO_CMD_GE_MEMORY_READ                  0xfcu /* inferred */
+#define HQ_CFIFO_CMD_GE_MEMORY_WRITE_ADDR            0xfbu /* inferred */
+#define HQ_CFIFO_CMD_GE_MEMORY_WRITE_CHUNK           0xfdu /* inferred */
+#define HQ_CFIFO_CMD_GE_MEMORY_WRITE_END             0xfau /* inferred */
 #define HQ_CFIFO_CMD_GE_TABLE_LOAD                   0x82u /* inferred */
-#define HQ_CFIFO_CMD_NAME_POP                        0xc6u /* inferred */
-#define HQ_CFIFO_CMD_NAME_PUSH                       0xc7u /* inferred */
-#define HQ_CFIFO_CMD_NAME_REPLACE                    0xc5u /* inferred */
-#define HQ_CFIFO_CMD_NAME_STACK_INIT                 0xc4u /* inferred */
 #define HQ_CFIFO_CMD_QUERY                           0xa2u /* inferred */
 #define HQ_CFIFO_CMD_RASTER_PAIRS                    0x7fu /* inferred */
 #define HQ_CFIFO_CMD_RASTER_TRIPLES                  0x7cu /* inferred */
 #define HQ_CFIFO_CMD_RESULT_BEGIN                    0x61u /* inferred */
 #define HQ_CFIFO_CMD_RESULT_END                      0x62u /* inferred */
 #define HQ_CFIFO_CMD_SCISSOR                         0x39u /* inferred */
+#define HQ_CFIFO_CMD_SELECTION_NAME_POP              0xc6u /* inferred */
+#define HQ_CFIFO_CMD_SELECTION_NAME_PUSH             0xc7u /* inferred */
+#define HQ_CFIFO_CMD_SELECTION_NAME_REPLACE          0xc5u /* inferred */
+#define HQ_CFIFO_CMD_SELECTION_NAME_STACK_INIT       0xc4u /* inferred */
 #define HQ_CFIFO_CMD_SELECT_ENTER                    0xcbu /* inferred */
 #define HQ_CFIFO_CMD_SELECT_EXIT                     0xc9u /* inferred */
 #define HQ_CFIFO_CMD_SWAP_TMESH                      0xdcu /* inferred */
 #define HQ_CFIFO_CMD_VIEWPORT                        0x33u /* inferred */
+#define HQ_CFIFO_CMD_WINDOW_CLIP_PACKET              0xe4u /* inferred */
 #define HQ_CFIFO_DELAY_DEFAULT                       0x64u /* established */
 #define HQ_CFIFO_HIWATER_DEFAULT                     0x28u /* established */
 #define HQ_CFIFO_LOWATER_DEFAULT                     0x14u /* established */

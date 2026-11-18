@@ -1,7 +1,7 @@
 {
  "license": "BSD-3-Clause",
  "generator": "defs-gen 2",
- "input_sha256": "2990898932b62921ac32666e4a149a54a1f713d8f3cb1c523469100391afbb8c",
+ "input_sha256": "252bc2bf46f613252ee264e8764327c27b46c980c303b9ec0c18d8bf3775b0df",
  "schema": "defs-flat/1",
  "source": "devices/hq3/registers.toml",
  "profile": "public",
@@ -543,7 +543,7 @@
   {
    "unit": "hq3",
    "kind": "register",
-   "name": "reif_ctx",
+   "name": "reg_4080",
    "offset": 16512,
    "access": "rw",
    "width": 32,
@@ -557,7 +557,7 @@
   {
    "unit": "hq3",
    "kind": "register",
-   "name": "hag_ctx",
+   "name": "reg_40c0",
    "offset": 16576,
    "access": "rw",
    "width": 32,
@@ -571,7 +571,7 @@
   {
    "unit": "hq3",
    "kind": "register",
-   "name": "hif_ctx",
+   "name": "reg_4140",
    "offset": 16704,
    "access": "rw",
    "width": 32,
@@ -931,7 +931,7 @@
   {
    "unit": "hq3",
    "kind": "register",
-   "name": "rebus_read_hi",
+   "name": "reg_c004",
    "offset": 49156,
    "access": "r",
    "width": 32,
@@ -945,7 +945,7 @@
   {
    "unit": "hq3",
    "kind": "register",
-   "name": "rebus_read_lo",
+   "name": "reg_c005",
    "offset": 49157,
    "access": "r",
    "width": 32,
@@ -1055,7 +1055,7 @@
   {
    "unit": "hq3",
    "kind": "field",
-   "name": "dma_busy.cd",
+   "name": "dma_busy.field_3",
    "hi": 3,
    "lo": 3,
    "grade": "inferred",
@@ -1211,7 +1211,7 @@
   {
    "unit": "hq3",
    "kind": "word",
-   "name": "CTX_W1",
+   "name": "CTX_FLAGS_WORD",
    "width": 32,
    "grade": "unknown",
    "from": "driver and diagnostic readings"
@@ -1219,7 +1219,7 @@
   {
    "unit": "hq3",
    "kind": "field",
-   "name": "CTX_W1.first_load",
+   "name": "CTX_FLAGS_WORD.first_load",
    "hi": 31,
    "lo": 31,
    "grade": "inferred",
@@ -1228,7 +1228,7 @@
   {
    "unit": "hq3",
    "kind": "field",
-   "name": "CTX_W1.nothing_saved",
+   "name": "CTX_FLAGS_WORD.nothing_saved",
    "hi": 30,
    "lo": 30,
    "grade": "inferred",
@@ -1237,7 +1237,7 @@
   {
    "unit": "hq3",
    "kind": "field",
-   "name": "CTX_W1.window_changed",
+   "name": "CTX_FLAGS_WORD.window_changed",
    "hi": 29,
    "lo": 29,
    "grade": "inferred",
@@ -1246,7 +1246,7 @@
   {
    "unit": "hq3",
    "kind": "field",
-   "name": "CTX_W1.bit28",
+   "name": "CTX_FLAGS_WORD.field_28",
    "hi": 28,
    "lo": 28,
    "grade": "unknown",
@@ -1255,7 +1255,7 @@
   {
    "unit": "hq3",
    "kind": "field",
-   "name": "CTX_W1.xserver_shadow",
+   "name": "CTX_FLAGS_WORD.xserver_shadow",
    "hi": 27,
    "lo": 27,
    "grade": "established",
@@ -1264,7 +1264,7 @@
   {
    "unit": "hq3",
    "kind": "field",
-   "name": "CTX_W1.banks_changed",
+   "name": "CTX_FLAGS_WORD.banks_changed",
    "hi": 26,
    "lo": 26,
    "grade": "established",
@@ -1309,8 +1309,8 @@
   {
    "unit": "hq3",
    "kind": "constant",
-   "name": "CFIFO_CLASS_DMA_BANK_0A",
-   "value": 10,
+   "name": "CFIFO_CLASS_DMA_BANK_HOST",
+   "value": 8,
    "count": 1,
    "grade": "inferred",
    "from": "driver and diagnostic readings"
@@ -1318,8 +1318,8 @@
   {
    "unit": "hq3",
    "kind": "constant",
-   "name": "CFIFO_CLASS_DMA_BANK_HOST",
-   "value": 8,
+   "name": "CFIFO_CLASS_DMA_BANK_SECOND",
+   "value": 10,
    "count": 1,
    "grade": "inferred",
    "from": "driver and diagnostic readings"
@@ -1372,15 +1372,6 @@
   {
    "unit": "hq3",
    "kind": "constant",
-   "name": "CFIFO_CMD_CLIP_BIND",
-   "value": 228,
-   "count": 1,
-   "grade": "inferred",
-   "from": "driver and diagnostic readings"
-  },
-  {
-   "unit": "hq3",
-   "kind": "constant",
    "name": "CFIFO_CMD_CONTEXT_CONFIG",
    "value": 140,
    "count": 1,
@@ -1392,42 +1383,6 @@
    "kind": "constant",
    "name": "CFIFO_CMD_CONTEXT_OPEN",
    "value": 6,
-   "count": 1,
-   "grade": "inferred",
-   "from": "driver and diagnostic readings"
-  },
-  {
-   "unit": "hq3",
-   "kind": "constant",
-   "name": "CFIFO_CMD_ERAM_READ",
-   "value": 252,
-   "count": 1,
-   "grade": "inferred",
-   "from": "driver and diagnostic readings"
-  },
-  {
-   "unit": "hq3",
-   "kind": "constant",
-   "name": "CFIFO_CMD_ERAM_WRITE_ADDR",
-   "value": 251,
-   "count": 1,
-   "grade": "inferred",
-   "from": "driver and diagnostic readings"
-  },
-  {
-   "unit": "hq3",
-   "kind": "constant",
-   "name": "CFIFO_CMD_ERAM_WRITE_CHUNK",
-   "value": 253,
-   "count": 1,
-   "grade": "inferred",
-   "from": "driver and diagnostic readings"
-  },
-  {
-   "unit": "hq3",
-   "kind": "constant",
-   "name": "CFIFO_CMD_ERAM_WRITE_END",
-   "value": 250,
    "count": 1,
    "grade": "inferred",
    "from": "driver and diagnostic readings"
@@ -1453,44 +1408,44 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CMD_GE_MEMORY_READ",
+   "value": 252,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_GE_MEMORY_WRITE_ADDR",
+   "value": 251,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_GE_MEMORY_WRITE_CHUNK",
+   "value": 253,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_GE_MEMORY_WRITE_END",
+   "value": 250,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_CMD_GE_TABLE_LOAD",
    "value": 130,
-   "count": 1,
-   "grade": "inferred",
-   "from": "driver and diagnostic readings"
-  },
-  {
-   "unit": "hq3",
-   "kind": "constant",
-   "name": "CFIFO_CMD_NAME_POP",
-   "value": 198,
-   "count": 1,
-   "grade": "inferred",
-   "from": "driver and diagnostic readings"
-  },
-  {
-   "unit": "hq3",
-   "kind": "constant",
-   "name": "CFIFO_CMD_NAME_PUSH",
-   "value": 199,
-   "count": 1,
-   "grade": "inferred",
-   "from": "driver and diagnostic readings"
-  },
-  {
-   "unit": "hq3",
-   "kind": "constant",
-   "name": "CFIFO_CMD_NAME_REPLACE",
-   "value": 197,
-   "count": 1,
-   "grade": "inferred",
-   "from": "driver and diagnostic readings"
-  },
-  {
-   "unit": "hq3",
-   "kind": "constant",
-   "name": "CFIFO_CMD_NAME_STACK_INIT",
-   "value": 196,
    "count": 1,
    "grade": "inferred",
    "from": "driver and diagnostic readings"
@@ -1552,6 +1507,42 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CMD_SELECTION_NAME_POP",
+   "value": 198,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SELECTION_NAME_PUSH",
+   "value": 199,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SELECTION_NAME_REPLACE",
+   "value": 197,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SELECTION_NAME_STACK_INIT",
+   "value": 196,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_CMD_SELECT_ENTER",
    "value": 203,
    "count": 1,
@@ -1581,6 +1572,15 @@
    "kind": "constant",
    "name": "CFIFO_CMD_VIEWPORT",
    "value": 51,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_WINDOW_CLIP_PACKET",
+   "value": 228,
    "count": 1,
    "grade": "inferred",
    "from": "driver and diagnostic readings"

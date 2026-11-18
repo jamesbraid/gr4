@@ -1,9 +1,9 @@
 /* generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 2990898932b62921ac32666e4a149a54a1f713d8f3cb1c523469100391afbb8c */
+/* input sha256 252bc2bf46f613252ee264e8764327c27b46c980c303b9ec0c18d8bf3775b0df */
 /* host interface and command processor registers for the Impact graphics subsystem */
-/* Names are MGRAS_HQ3_*; name source: imported-unchecked. */
+/* Names are MGRAS_HQ3_*; name source: ours. */
 /* Offsets are bytes; registers of a register-indexed space are written as index * size. */
 #ifndef HW_SGI_GPU_MGRAS_HQ3_REGS_H
 #define HW_SGI_GPU_MGRAS_HQ3_REGS_H
@@ -44,13 +44,13 @@ REG32(MGRAS_HQ3_CFIFO_HIWATER, 0x10020) /* inferred */
 
 REG32(MGRAS_HQ3_CFIFO_LOWATER, 0x10024) /* inferred */
 
-REG32(MGRAS_HQ3_CFIFO_DELAY, 0x10028) /* inferred */
+REG32(MGRAS_HQ3_CFIFO_DELAY, 0x10028) /* inferred; name source: public (OpenBSD impact(4) driver register header) */
 
 REG32(MGRAS_HQ3_DFIFO_HIWATER, 0x1002c) /* inferred */
 
 REG32(MGRAS_HQ3_DFIFO_LOWATER, 0x10030) /* inferred */
 
-REG32(MGRAS_HQ3_DFIFO_DELAY, 0x10034) /* inferred */
+REG32(MGRAS_HQ3_DFIFO_DELAY, 0x10034) /* inferred; name source: public (OpenBSD impact(4) driver register header) */
 
 REG32(MGRAS_HQ3_GE0_DIAG_DATA, 0x10040) /* inferred */
 
@@ -80,17 +80,17 @@ FIELD(MGRAS_HQ3_GIO_CONFIG, EXT_PIPE_REGISTER, 2, 1) /* inferred */
 FIELD(MGRAS_HQ3_GIO_CONFIG, DISPLAY_BUS_BIG_ENDIAN, 1, 1) /* inferred */
 FIELD(MGRAS_HQ3_GIO_CONFIG, HOST_BIG_ENDIAN, 0, 1) /* inferred */
 
-REG32(MGRAS_HQ3_REIF_CTX, 0x10200) /* inferred */
-#define MGRAS_HQ3_REIF_CTX_COUNT 64
-#define MGRAS_HQ3_REIF_CTX_STRIDE 0x4
+REG32(MGRAS_HQ3_REG_4080, 0x10200) /* inferred */
+#define MGRAS_HQ3_REG_4080_COUNT 64
+#define MGRAS_HQ3_REG_4080_STRIDE 0x4
 
-REG32(MGRAS_HQ3_HAG_CTX, 0x10300) /* inferred */
-#define MGRAS_HQ3_HAG_CTX_COUNT 128
-#define MGRAS_HQ3_HAG_CTX_STRIDE 0x4
+REG32(MGRAS_HQ3_REG_40C0, 0x10300) /* inferred */
+#define MGRAS_HQ3_REG_40C0_COUNT 128
+#define MGRAS_HQ3_REG_40C0_STRIDE 0x4
 
-REG32(MGRAS_HQ3_HIF_CTX, 0x10500) /* inferred */
-#define MGRAS_HQ3_HIF_CTX_COUNT 64
-#define MGRAS_HQ3_HIF_CTX_STRIDE 0x4
+REG32(MGRAS_HQ3_REG_4140, 0x10500) /* inferred */
+#define MGRAS_HQ3_REG_4140_COUNT 64
+#define MGRAS_HQ3_REG_4140_STRIDE 0x4
 
 REG32(MGRAS_HQ3_GIO_CTX, 0x10600) /* inferred */
 #define MGRAS_HQ3_GIO_CTX_COUNT 64
@@ -138,9 +138,9 @@ FIELD(MGRAS_HQ3_FLAG_SET, RETRACE, 0, 1) /* inferred */
 
 REG32(MGRAS_HQ3_FLAG_CLR, 0x3000c) /* inferred */
 
-REG32(MGRAS_HQ3_REBUS_READ_HI, 0x30010) /* inferred */
+REG32(MGRAS_HQ3_REG_C004, 0x30010) /* inferred */
 
-REG32(MGRAS_HQ3_REBUS_READ_LO, 0x30014) /* inferred */
+REG32(MGRAS_HQ3_REG_C005, 0x30014) /* inferred */
 
 REG64(MGRAS_HQ3_CFIFO_USER, 0x60100) /* inferred */
 
@@ -153,7 +153,7 @@ FIELD(MGRAS_HQ3_DMA_BUSY, ADDRESS_GEN_DMA, 12, 1) /* inferred */
 FIELD(MGRAS_HQ3_DMA_BUSY, RASTER_DMA, 11, 1) /* inferred */
 FIELD(MGRAS_HQ3_DMA_BUSY, MASTER_DMA, 9, 1) /* inferred */
 FIELD(MGRAS_HQ3_DMA_BUSY, RASTER_IF, 4, 1) /* inferred */
-FIELD(MGRAS_HQ3_DMA_BUSY, CD, 3, 1) /* inferred */
+FIELD(MGRAS_HQ3_DMA_BUSY, FIELD_3, 3, 1) /* inferred */
 FIELD(MGRAS_HQ3_DMA_BUSY, CFIFO, 2, 1) /* inferred */
 FIELD(MGRAS_HQ3_DMA_BUSY, HOST_IF, 1, 1) /* inferred */
 FIELD(MGRAS_HQ3_DMA_BUSY, SYNC, 0, 1) /* inferred */
@@ -174,49 +174,49 @@ FIELD(MGRAS_HQ3_CFIFO_INLINE, INLINE, 31, 1) /* inferred */
 FIELD(MGRAS_HQ3_CFIFO_INLINE, FIRST_OFFSET, 22, 2) /* inferred */
 FIELD(MGRAS_HQ3_CFIFO_INLINE, LENGTH, 0, 20) /* inferred */
 
-#define MGRAS_HQ3_CTX_W1_WIDTH 32 /* unknown; word */
-FIELD(MGRAS_HQ3_CTX_W1, FIRST_LOAD, 31, 1) /* inferred */
-FIELD(MGRAS_HQ3_CTX_W1, NOTHING_SAVED, 30, 1) /* inferred */
-FIELD(MGRAS_HQ3_CTX_W1, WINDOW_CHANGED, 29, 1) /* inferred */
-FIELD(MGRAS_HQ3_CTX_W1, BIT28, 28, 1) /* unknown */
-FIELD(MGRAS_HQ3_CTX_W1, XSERVER_SHADOW, 27, 1) /* established */
-FIELD(MGRAS_HQ3_CTX_W1, BANKS_CHANGED, 26, 1) /* established */
+#define MGRAS_HQ3_CTX_FLAGS_WORD_WIDTH 32 /* unknown; word */
+FIELD(MGRAS_HQ3_CTX_FLAGS_WORD, FIRST_LOAD, 31, 1) /* inferred */
+FIELD(MGRAS_HQ3_CTX_FLAGS_WORD, NOTHING_SAVED, 30, 1) /* inferred */
+FIELD(MGRAS_HQ3_CTX_FLAGS_WORD, WINDOW_CHANGED, 29, 1) /* inferred */
+FIELD(MGRAS_HQ3_CTX_FLAGS_WORD, FIELD_28, 28, 1) /* unknown */
+FIELD(MGRAS_HQ3_CTX_FLAGS_WORD, XSERVER_SHADOW, 27, 1) /* established */
+FIELD(MGRAS_HQ3_CTX_FLAGS_WORD, BANKS_CHANGED, 26, 1) /* established */
 
 #define MGRAS_HQ3_BFIFO_DELAY_DEFAULT 0x64u /* established */
 #define MGRAS_HQ3_BFIFO_HIWATER_DEFAULT 0x8u /* established */
 #define MGRAS_HQ3_BFIFO_LOWATER_DEFAULT 0x2u /* established */
 #define MGRAS_HQ3_BFIFO_MAX 0x10u /* inferred */
-#define MGRAS_HQ3_CFIFO_CLASS_DMA_BANK_0A 0xau /* inferred */
 #define MGRAS_HQ3_CFIFO_CLASS_DMA_BANK_HOST 0x8u /* inferred */
+#define MGRAS_HQ3_CFIFO_CLASS_DMA_BANK_SECOND 0xau /* inferred */
 #define MGRAS_HQ3_CFIFO_CLASS_SYNC 0xeu /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_BITMAP 0x94u /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_CLEAR_COLOUR 0x15u /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_CLEAR_DEPTH 0x4au /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_CLEAR_STENCIL 0x4cu /* inferred */
-#define MGRAS_HQ3_CFIFO_CMD_CLIP_BIND 0xe4u /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_CONTEXT_CONFIG 0x8cu /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_CONTEXT_OPEN 0x6u /* inferred */
-#define MGRAS_HQ3_CFIFO_CMD_ERAM_READ 0xfcu /* inferred */
-#define MGRAS_HQ3_CFIFO_CMD_ERAM_WRITE_ADDR 0xfbu /* inferred */
-#define MGRAS_HQ3_CFIFO_CMD_ERAM_WRITE_CHUNK 0xfdu /* inferred */
-#define MGRAS_HQ3_CFIFO_CMD_ERAM_WRITE_END 0xfau /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_FILLER 0xe1u /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_FLUSH 0x36u /* inferred */
+#define MGRAS_HQ3_CFIFO_CMD_GE_MEMORY_READ 0xfcu /* inferred */
+#define MGRAS_HQ3_CFIFO_CMD_GE_MEMORY_WRITE_ADDR 0xfbu /* inferred */
+#define MGRAS_HQ3_CFIFO_CMD_GE_MEMORY_WRITE_CHUNK 0xfdu /* inferred */
+#define MGRAS_HQ3_CFIFO_CMD_GE_MEMORY_WRITE_END 0xfau /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_GE_TABLE_LOAD 0x82u /* inferred */
-#define MGRAS_HQ3_CFIFO_CMD_NAME_POP 0xc6u /* inferred */
-#define MGRAS_HQ3_CFIFO_CMD_NAME_PUSH 0xc7u /* inferred */
-#define MGRAS_HQ3_CFIFO_CMD_NAME_REPLACE 0xc5u /* inferred */
-#define MGRAS_HQ3_CFIFO_CMD_NAME_STACK_INIT 0xc4u /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_QUERY 0xa2u /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_RASTER_PAIRS 0x7fu /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_RASTER_TRIPLES 0x7cu /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_RESULT_BEGIN 0x61u /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_RESULT_END 0x62u /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_SCISSOR 0x39u /* inferred */
+#define MGRAS_HQ3_CFIFO_CMD_SELECTION_NAME_POP 0xc6u /* inferred */
+#define MGRAS_HQ3_CFIFO_CMD_SELECTION_NAME_PUSH 0xc7u /* inferred */
+#define MGRAS_HQ3_CFIFO_CMD_SELECTION_NAME_REPLACE 0xc5u /* inferred */
+#define MGRAS_HQ3_CFIFO_CMD_SELECTION_NAME_STACK_INIT 0xc4u /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_SELECT_ENTER 0xcbu /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_SELECT_EXIT 0xc9u /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_SWAP_TMESH 0xdcu /* inferred */
 #define MGRAS_HQ3_CFIFO_CMD_VIEWPORT 0x33u /* inferred */
+#define MGRAS_HQ3_CFIFO_CMD_WINDOW_CLIP_PACKET 0xe4u /* inferred */
 #define MGRAS_HQ3_CFIFO_DELAY_DEFAULT 0x64u /* established */
 #define MGRAS_HQ3_CFIFO_HIWATER_DEFAULT 0x28u /* established */
 #define MGRAS_HQ3_CFIFO_LOWATER_DEFAULT 0x14u /* established */
