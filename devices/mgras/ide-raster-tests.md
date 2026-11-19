@@ -258,7 +258,7 @@ Arguments, in the order the 64-bit calling convention passes them (eight in regi
 
 | Arg | Role | Evidence |
 |---|---|---|
-| 1, 2 | end vertex and start vertex (pointers) | vertex fields read from both, as before |
+| 1, 2 | start vertex and end vertex (pointers) | the first vertex's x and y go to registers `0x0c` and `0x0d`, the second's to `0x0e` and `0x0f`; the step registers are second minus first (`0x20897830`, `0x2089784c`) |
 | 3 | stipple enable | selects the stipple block that writes `0x110 = 0x70a0` (`0x7000` with bits 5 and 7) and the two stipple registers |
 | 4 | **repeat and control word**, written to `0x15b` (`0x20897cec`) | value is `(w & 0xfff00000)`, with `0x000f0000` ORed in and bits 15:8 cleared for the stippled lines; `w` is a diagnostic variable that is zero in the image and filled at run time |
 | 5 | **stipple pattern**, written to `0x15a` (`0x20897cf8`) | `0xa9876543` on the stippled lines |
@@ -278,10 +278,10 @@ other bits do is unknown.
 
 Order of writes per line, unchanged where the earlier run agreed:
 
-- Endpoints: `0x0c`, `0x0d` = `float32(B + x, B + y)` of the **end** vertex, `0x0e`, `0x0f` = the same for the **start** vertex
+- Endpoints: `0x0c`, `0x0d` = `float32(B + x, B + y)` of the **start** vertex (first argument), `0x0e`, `0x0f` = the same for the **end** vertex (second argument)
   (`B` = 49151.5). Registers `0x10`, `0x11` = per-step x and y increments in s.24, normalised to 1.0 on the major axis
   (`0x10 = 0x400000` for dx/dy = 0.25 with y major, `0x1000000, 0` for x major, `0, 0x1000000` for a vertical line); the
-  sign convention was not isolated, since all five lines run toward smaller coordinates. `0x12 = 0`.
+  the steps are end minus start, so all five lines run toward larger coordinates and the steps are non-negative here (the sign of a negative step was not seen). An earlier version of this page had the vertex roles reversed; the register names `aaline_x_start` and so on in [registers.toml](../re4/registers.toml) were right. `0x12 = 0`.
 - `0x110 = 0x7000`, then (stipple) `0x110 = 0x70a0`, `0x15b`, `0x15a`.
 - `0x60`, `0x62`, `0x64`, `0x66` = 0 (colour deltas), then `0x5c` to `0x5f` = colour times `0xFFF000` (red, green, blue, alpha),
   `0x116 = 0`, then the trigger, a write of 3 to the register at offset `0x2c114` of the host window.
@@ -296,22 +296,22 @@ Order of writes per line, unchanged where the earlier run agreed:
   upper bits could not be derived from the routine. Software expectation for the written bits, unknown for the rest.
 - Argument 5 on lines 1 and 2 is 0 and the unused stack argument 9 is 0 in every call.
 
-The five calls (end from start, flags), with the corrected roles:
+The five calls (start to end, flags), with the corrected roles:
 
 | Line | Vertices | Arguments set |
 |---|---|---|
-| 1 red | (0,0) from (4,16) | none (`0xc=0x473fff80 0xd=0x473fff80 0xe=0x47400380 0xf=0x47400f80 0x10=0x400000 0x11=0x1000000`, colour `0x5c=0xfff000 0x5f=0xfff000`) |
-| 2 green | (5,0) from (9,16) | smooth (argument 6 = 1): `0xc=0x47400480 0xd=0x473fff80 0xe=0x47400880 0xf=0x47400f80`, `0x5d=0xfff000` |
-| 3 blue | (0,5) from (5,5) | stipple, repeat word, pattern `0xa9876543`: `0xc=0x473fff80 0xd=0x47400480 0xe=0x47400480 0xf=0x47400480 0x10=0x1000000 0x11=0`, `0x5e=0xfff000` |
-| 4 blue | (5,5) from (10,5) | as line 3: `0xc=0x47400480 0xd=0x47400480 0xe=0x47400980 0xf=0x47400480` |
-| 5 purple | (12,0) from (12,10) | argument 7 = 1 only (pattern passed but stipple off): `0xc=0x47400b80 0xd=0x473fff80 0xe=0x47400b80 0xf=0x47400980 0x10=0 0x11=0x1000000`, `0x5c=0x7ff800 0x5e=0x7ff800 0x5f=0xfff000` |
+| 1 red | (0,0) to (4,16) | none (`0xc=0x473fff80 0xd=0x473fff80 0xe=0x47400380 0xf=0x47400f80 0x10=0x400000 0x11=0x1000000`, colour `0x5c=0xfff000 0x5f=0xfff000`) |
+| 2 green | (5,0) to (9,16) | smooth (argument 6 = 1): `0xc=0x47400480 0xd=0x473fff80 0xe=0x47400880 0xf=0x47400f80`, `0x5d=0xfff000` |
+| 3 blue | (0,5) to (5,5) | stipple, repeat word, pattern `0xa9876543`: `0xc=0x473fff80 0xd=0x47400480 0xe=0x47400480 0xf=0x47400480 0x10=0x1000000 0x11=0`, `0x5e=0xfff000` |
+| 4 blue | (5,5) to (10,5) | as line 3: `0xc=0x47400480 0xd=0x47400480 0xe=0x47400980 0xf=0x47400480` |
+| 5 purple | (12,0) to (12,10) | argument 7 = 1 only (pattern passed but stipple off): `0xc=0x47400b80 0xd=0x473fff80 0xe=0x47400b80 0xf=0x47400980 0x10=0 0x11=0x1000000`, `0x5c=0x7ff800 0x5e=0x7ff800 0x5f=0xfff000` |
 
 What the stored lines table (17 by 14) shows, with the corrected roles:
 
 - **The green weights (inferred, fit to the table: 27 of 27 pixels reproduce).** The loader `0x2083bccc` writes `0x15c = 0xb0000000`
   and then 64 values to `0x15d`, counting down from `0xff` in steps of 4 (`0xff`, `0xfb`, ... `0x03`), and does that twice (two
   loops, read from the instructions). Read as a linear cross-section filter indexed by distance in 1/64 pixel (`k = 64 * d`), the
-  weight is `a = 255 - 4 * k`. The green line runs from the end vertex (5, 0) with x = 5 + 0.25 * row sampled at integer rows,
+  weight is `a = 255 - 4 * k`. The green line runs from the start vertex (5, 0) with x = 5 + 0.25 * row sampled at integer rows,
   and a pixel is covered when its centre `p + 0.5` is within one pixel of that x, so each row holds two pixels at distances
   that are multiples of 0.25, giving `a` = `0xff`, `0xbf`, `0x7f`, `0x3f`. A stored pixel then follows from a blend of a unit
   green source with source alpha `a` onto a zero destination, in 12 bits and dithered like the triangles:
@@ -326,12 +326,13 @@ What the stored lines table (17 by 14) shows, with the corrected roles:
   stored result is blue `0xff`, alpha `0xff` and green `0x3b`, which is `63 * (255 - 16) / 255` = 59: the destination factor
   `0xc` acts as one minus the destination alpha, the source factor as source alpha. That is the reading the alpha triangle needs
   (see its blend-factor note) and it agrees; both rest on arithmetic over stored pixels, not on a register definition.
-- **Stipple dot order (unknown).** The dots of the two stippled lines lie on alternate pixels counted from each line's own start vertex:
-  line 3 (from x = 5 toward 0) stores x = 4, 2, 0 and line 4 (from x = 10 toward 5) stores x = 9, 7, with its start pixel unlit; the pixel
-  at x = 5 is blue in the table and belongs to either line. So the index sequence from the start is 0, 1, 0, 1, 0, 1. In
-  `0xa9876543` the run `010101` occurs only starting at bit 5 read upward (bit 5 to bit 10) or at bit 11 read downward (bit 11
-  to bit 6). Neither start follows from the `0xf` in bits 19:16 of the repeat word (a start at bit 15 would give a different sequence),
-  and an index by absolute x position fails at x = 5 and x = 8. The pattern and repeat-word fields therefore stay **unknown**.
+- **Stipple dot order (inferred, one of two readings).** With the vertex roles corrected (start first), line 3 runs from x = 0 to 5 and
+  stores x = 0, 2, 4; line 4 runs from x = 5 to 10 and stores x = 5 (the pixel the green line also touches), 7, 9. The end pixel of each
+  is not drawn (float-endpoint lines stop short). So counted from the start, even pixel indices are on and odd are off: 1, 0, 1, 0, 1, 0.
+  In `0xa9876543` that six-bit run occurs at bits 31 down to 26 (the top of the word, read most significant first) and at bits 6
+  up to 11 (read least significant first). The first is the simpler reading, a pattern consumed from bit 31 downward with the repeat
+  count of one; the `0xf` in bits 19:16 of the repeat word is not explained by either. Neither is excluded by this table. The repeat-word
+  fields stay **unknown**. (An earlier version of this note counted the lines from the wrong end and called the order unknown.)
 - The purple line (colour 0.5, 0.0, 0.5, alpha 1, not smooth) stores `0x80` and `0x7f` by row exactly as the dither predicts.
 - **Integer-endpoint line and its last pixel (argument 7; inferred).** The two words the routine stores at `+0x13400` are not a
   point or pixel-write command. They are the ordinary one-register write the diagnostic uses everywhere (the shared helper `0x2082ae2c`
