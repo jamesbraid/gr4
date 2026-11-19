@@ -308,17 +308,30 @@ The five calls (end from start, flags), with the corrected roles:
 
 What the stored lines table (17 by 14) shows, with the corrected roles:
 
-- **The green weights.** The weighted green pixels are explained by the smooth line, not by interpolation or the dither. Each row holds
-  two pixels whose coverage `c` is `1 - |distance|` at quarter-pixel steps (1, 0.75, 0.5, 0.25 for a slope of 0.25 per row), and a
-  stored pixel is green `c`, alpha `c * c`: for `c` = 0.5 the words are `0x3f007f00` (alpha `0x3f`, green `0x7f`), for 0.25 `0x0f003e00`,
-  for 0.75 `0x8f00bf00`, for 1 `0xff00ff00`. The pairs in a row sum to one, as a unit-width tent does. The one-level differences
-  between a pair (`0x3f`/`0x7e`, `0x0f`/`0x10`, `0x8f`/`0x90`) are the Bayer dither above. That the alpha is `c * c` is what a source
-  alpha blend of colour and alpha onto a zero destination gives. **inferred** (arithmetic fit to the stored pixels; the filter table
-  loader's 64 entries were not matched against it).
-- The dots of the two stippled lines lie on alternate pixels in the stored table: line 3 (drawn from x = 5 toward 0) stores x = 4, 2, 0,
-  and line 4 (from x = 10 toward 5) stores x = 9, 7 and x = 5 (hidden under the green line's blend), with the start pixel unlit in line 4. No reading of
-  `0xa9876543` I tried, in either bit order, as a 32-bit or 16-bit pattern with repeat one, gives that sequence; the order of the
-  pattern bits and the effect of the `0xf0000` field are **unknown**.
+- **The green weights (inferred, fit to the table: 27 of 27 pixels reproduce).** The loader `0x2083bccc` writes `0x15c = 0xb0000000`
+  and then 64 values to `0x15d`, counting down from `0xff` in steps of 4 (`0xff`, `0xfb`, ... `0x03`), and does that twice (two
+  loops, read from the instructions). Read as a linear cross-section filter indexed by distance in 1/64 pixel (`k = 64 * d`), the
+  weight is `a = 255 - 4 * k`. The green line runs from the end vertex (5, 0) with x = 5 + 0.25 * row sampled at integer rows,
+  and a pixel is covered when its centre `p + 0.5` is within one pixel of that x, so each row holds two pixels at distances
+  that are multiples of 0.25, giving `a` = `0xff`, `0xbf`, `0x7f`, `0x3f`. A stored pixel then follows from a blend of a unit
+  green source with source alpha `a` onto a zero destination, in 12 bits and dithered like the triangles:
+  `a' = a + (a >> 7)` (so 255 becomes 256), green = `4095 * a' >> 8`, alpha = `4095 * a' * a' >> 16`, each reduced with
+  `y = x - (x >> 8)` and carried by the Bayer matrix. This reproduces every green-line word (alpha and green) except the one
+  pixel the blue line overwrites. The earlier readings (interpolation, plain dither, `c` squared from a 255 scale) were close but
+  miss the one-level differences; the `>> 8` scale, not `/ 255`, is what makes 255 exact and 127 land at `0x7e`/`0x7f`.
+  Which index the loader's table uses at a distance that is not a multiple of 1/64 (rounding) and the second 64-entry table's use
+  are **unknown**.
+- **Blend factors and the blue overwrite (inferred, one pixel).** The blend state written by the smooth line stays on for the two
+  stippled lines after it. At (5, 5) the blue stipple pixel lands on a green pixel of stored green `0x3f` and alpha `0x10`; the
+  stored result is blue `0xff`, alpha `0xff` and green `0x3b`, which is `63 * (255 - 16) / 255` = 59: the destination factor
+  `0xc` acts as one minus the destination alpha, the source factor as source alpha. That is the reading the alpha triangle needs
+  (see its blend-factor note) and it agrees; both rest on arithmetic over stored pixels, not on a register definition.
+- **Stipple dot order (unknown).** The dots of the two stippled lines lie on alternate pixels counted from each line's own start vertex:
+  line 3 (from x = 5 toward 0) stores x = 4, 2, 0 and line 4 (from x = 10 toward 5) stores x = 9, 7, with its start pixel unlit; the pixel
+  at x = 5 is blue in the table and belongs to either line. So the index sequence from the start is 0, 1, 0, 1, 0, 1. In
+  `0xa9876543` the run `010101` occurs only starting at bit 5 read upward (bit 5 to bit 10) or at bit 11 read downward (bit 11
+  to bit 6). Neither start follows from the `0xf` in bits 19:16 of the repeat word (a start at bit 15 would give a different sequence),
+  and an index by absolute x position fails at x = 5 and x = 8. The pattern and repeat-word fields therefore stay **unknown**.
 - The purple line (colour 0.5, 0.0, 0.5, alpha 1, not smooth) stores `0x80` and `0x7f` by row exactly as the dither predicts.
 
 ### The alpha triangle, resolved
