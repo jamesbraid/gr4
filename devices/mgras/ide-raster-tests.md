@@ -59,6 +59,11 @@ stored in the program.
   The three values the revision test compares are `0x2aa70d210` (revision D), `0xbdfc48fc` (revision B, one TRAM) and
   `0x236379000` (revision B, four TRAMs). Read from the instruction words, the one-TRAM value is `0xbdfc48fc`; `devices/te1/registers.toml`
   carries `0x0bdf48fc` for it, two hex digits transposed.
+- **Reading the tables in place.** The binary's second load segment starts at file offset `0x107000` and virtual address
+  `0x20917000`, so a data address maps to the file offset `0x107000 + (address - 0x20917000)`: the data base `0x20953380` is file
+  offset `0x143380`, the lines table `0x20954b80` is `0x144b80`. Words are big-endian. A wrapping sum of each table's words was checked
+  against the stored sum for the red, lines and stipple tables. The binary is in the extracted IRIX 6.4 disc image named above
+  (local, never committed).
 - **Expected tables live in data** at `0x20953380` (the table area ends at `0x5244` bytes in, where flags begin). Words are
   `0xAABBGGRR`. Known layout:
 
