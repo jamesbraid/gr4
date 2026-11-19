@@ -107,22 +107,31 @@ Fitting the three ramp tables (172 covered pixels each) against the exact plane 
   pixels. Which table row is screen row 0, and the y of the base vertex, are not pinned.
 - **Colour sampling.** The channel values fit the unrounded plane evaluated at `x = col`, `y = row + 1` with mean residual
   within 0.05 of a level on all three channels (zero bias) and no pixel off by more than one level.
-- **Dither.** The residual is not noise: it is a fixed 4 by 4 pattern. Treating the stored value as `floor(v + T)` where `v` is
-  the plane value in 0..255 units, every pixel is consistent with one threshold `T(x mod 4, y mod 4)` per position
-  (0 contradictions over 516 channel samples). Intervals for T by table row mod 4 (rows) and column mod 4:
+- **Dither.** The residual is not noise: it is a fixed 4 by 4 pattern. The iterated value is the register accumulation
+  `start - dy * (row + 1 - 15) + dx * col` in the 12.12 register format, where `start`, `dy` and `dx` are the values listed in the replay
+  spec below and `15` is the base vertex's y. Round it to 12 bits (add `0x800` to the 24-bit sum, then drop 12 bits to get `x`), scale
+  with the diagnostic's own routine `y = x - (x >> 8)`, and keep `y >> 4` as the level and `y & 15` as the fraction. The stored byte is
+  the level plus one when the fraction is greater than a threshold `T(row mod 4, col mod 4)`, with `row` and `col` the table indices
+  (framebuffer origin at the table origin). **inferred (fit to the stored tables)**: with this arithmetic all 516 channel samples of
+  the three ramps (172 covered pixels each) reproduce with 0 mismatches, and the thresholds are:
 
 | row mod 4 | col 0 | col 1 | col 2 | col 3 |
 |---|---|---|---|---|
-| 0 | [0.957, 1.0) | [0.370, 0.630) | [0.826, 1.0) | [0.109, 0.413) |
-| 1 | [0.087, 0.435) | [0.717, 0.804) | [0.0, 0.174) | [0.543, 0.587) |
-| 2 | [0.609, 0.913) | [0.239, 0.283) | [0.870, 1.0) | [0.413, 0.457) |
-| 3 | [0.0, 0.043) | [0.5, 0.5] | [0.0, 0.174) | [0.587, 0.891) |
+| 0 | 0 | 8 | 2 | 10 |
+| 1 | 12 | 4 | 14 | 6 |
+| 2 | 3 | 11 | 1 | 9 |
+| 3 | 15 | 7 | 13 | 5 |
 
-  No classic 4 by 4 Bayer matrix fits under any of 16 shifts, transposition and offsets of 0, 0.5 or 1 sixteenth; the intervals
-  are the fact, the matrix is not recovered. Constants show the same thing: a constant 0.75 (191.25) alternates `0xc0`/`0xbf` in a
-  checkerboard of rows, and the vertical purple line of the lines table (0.5 = 127.5) alternates `0x80`/`0x7f` by row.
-- This is a fit to stored images; it assumes the plane values are exact. Slope quantisation was not modelled, so the
-  intervals are wider than the real thresholds.
+  That is the classic 4 by 4 Bayer matrix, unshifted and untransposed. The stored tables pin cells (0,0)=0, (1,3)=6, (2,3)=9, (3,0)=15
+  and (3,1)=7 exactly, (0,1) to 6..9 and (1,1) to 3..4; the remaining cells are bounded to a few values by the same samples, so the matrix
+  is the canonical member of a small family that the samples allow, not the only one (every cell lies inside its allowed interval).
+  The 0.5 rounding is what the earlier fit lacked: without it, cells need contradictory thresholds and no classic matrix fits. A constant
+  0.5 colour (start `0x7ff800`, the lines table's purple column at x = 12) gives level `0x7f`, fraction 8, so rows 0 to 3 store
+  `0x80`, `0x7f`, `0x80`, `0x7f`, as the table does. A constant 0.75 alternates by row in the same way. The earlier version of this
+  page reported threshold intervals from a plane evaluated without the 12-bit rounding and concluded that no classic matrix fits.
+- This is a fit to stored images. Slope quantisation in the real setup was not modelled (the registers are used as written), and the
+  rounding is fitted: an offset of minus half a 12-bit step also fits, with every threshold one lower (carry when the fraction is
+  not less than the Bayer value), so the split between bias and compare is not pinned (inferred).
 
 ## Host-side setup arithmetic seen in the diagnostic
 
