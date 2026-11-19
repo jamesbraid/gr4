@@ -237,7 +237,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.instr_alias]
-# UNSURE: header name is IR_ALIAS (impactreg.h:84), not an exact match
+# ours: expands header name IR_ALIAS (impactreg.h:84), not an exact match
 name_source = "ours"
 offset = 0xe045
 access = "w"
@@ -251,7 +251,7 @@ fill or to arm a glyph rectangle, which is the block primitive above. Software
 expectation; what the board does with the alias is not decoded here."""
 
 [registers.block_xy_start]
-# UNSURE: header name is BLOCKXYSTARTI (impactreg.h:85)
+# ours: expands header name BLOCKXYSTARTI (impactreg.h:85), not an exact match
 name_source = "ours"
 offset = 0xe046
 access = "w"
@@ -268,7 +268,7 @@ x = { bits = [31, 16], grade = "inferred" }
 y = { bits = [15, 0], grade = "inferred" }
 
 [registers.block_xy_end]
-# UNSURE: header name is BLOCKXYENDI (impactreg.h:86)
+# ours: expands header name BLOCKXYENDI (impactreg.h:86), not an exact match
 name_source = "ours"
 offset = 0xe047
 access = "w"
@@ -302,7 +302,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.color_packed]
-# UNSURE: header name is PACKEDCOLOR (impactreg.h:87), words reversed
+# ours: expands header name PACKEDCOLOR (impactreg.h:87), not an exact match
 name_source = "ours"
 offset = 0xe05b
 access = "w"
@@ -502,7 +502,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.xfer_control]
-# UNSURE: header name is XFRCONTROL (impactreg.h:91)
+# ours: expands header name XFRCONTROL (impactreg.h:91), not an exact match
 name_source = "ours"
 offset = 0xe102
 access = "rw"
@@ -709,7 +709,7 @@ x = { bits = [15, 0], grade = "inferred" }
 y = { bits = [31, 16], grade = "inferred" }
 
 [registers.background_rg]
-# UNSURE: header name is BKGRD_RG (impactreg.h:95)
+# ours: expands header name BKGRD_RG (impactreg.h:95), not an exact match
 name_source = "ours"
 offset = 0xe140
 access = "rw"
@@ -724,7 +724,7 @@ the index sits in the low twelve bits of the first."""
 space = "re4_regs"
 
 [registers.background_ba]
-# UNSURE: header name is BKGRD_BA (impactreg.h:96)
+# ours: expands header name BKGRD_BA (impactreg.h:96), not an exact match
 name_source = "ours"
 offset = 0xe141
 access = "rw"
@@ -733,7 +733,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.texenv_rg]
-# UNSURE: may be the generic GL texture environment term
+# ours: texture environment colour is the generic GL term, not an SGI name
 name_source = "ours"
 offset = 0xe142
 access = "rw"
@@ -742,7 +742,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.texenv_b]
-# UNSURE: may be the generic GL texture environment term
+# ours: texture environment colour is the generic GL term, not an SGI name
 name_source = "ours"
 offset = 0xe143
 access = "rw"
@@ -904,7 +904,7 @@ enable2 = { bits = [1, 1], grade = "inferred" }
 enable1 = { bits = [0, 0], grade = "inferred" }
 
 [registers.xfer_size]
-# UNSURE: header name is XFRSIZE (impactreg.h:97)
+# ours: expands header name XFRSIZE (impactreg.h:97), not an exact match
 name_source = "ours"
 offset = 0xe153
 access = "rw"
@@ -933,7 +933,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.xfer_mask_lo]
-# UNSURE: header name is XFRMASKLO (impactreg.h:98)
+# ours: expands header name XFRMASKLO (impactreg.h:98), not an exact match
 name_source = "ours"
 offset = 0xe156
 access = "rw"
@@ -950,7 +950,7 @@ stated here.
 space = "re4_regs"
 
 [registers.xfer_mask_hi]
-# UNSURE: header name is XFRMASKHI (impactreg.h:99)
+# ours: expands header name XFRMASKHI (impactreg.h:99), not an exact match
 name_source = "ours"
 offset = 0xe157
 access = "rw"
@@ -959,7 +959,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.xfer_counters]
-# UNSURE: header name is XFRCOUNTERS (impactreg.h:100)
+# ours: expands header name XFRCOUNTERS (impactreg.h:100), not an exact match
 name_source = "ours"
 offset = 0xe158
 access = "r"
@@ -968,7 +968,7 @@ grade = "inferred"
 space = "re4_regs"
 
 [registers.xfer_mode]
-# UNSURE: header name is XFRMODE (impactreg.h:101)
+# ours: expands header name XFRMODE (impactreg.h:101), not an exact match
 name_source = "ours"
 offset = 0xe159
 access = "rw"
@@ -1075,7 +1075,7 @@ board_index = { bits = [3, 2], grade = "inferred" }
 chip_count = { bits = [1, 0], grade = "inferred" }
 
 [registers.toggle_context]
-# UNSURE: header name is RE_TOGGLECNTX (impactreg.h:102)
+# ours: expands header name RE_TOGGLECNTX (impactreg.h:102), not an exact match
 name_source = "ours"
 offset = 0xe15f
 access = "w"

@@ -1,7 +1,7 @@
 /* generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 252bc2bf46f613252ee264e8764327c27b46c980c303b9ec0c18d8bf3775b0df */
+/* input sha256 034ef22b3faeb54d7027472aae3d3f6ce5f2c13008db8fde2000c8c2a02243b5 */
 /* host interface and command processor registers for the Impact graphics subsystem */
 /* Names are MGRAS_HQ3_*; name source: ours. */
 /* Offsets are bytes; registers of a register-indexed space are written as index * size. */

@@ -472,7 +472,7 @@ TRAM_BLOCKS_PER_PATH = { value = 256, grade = "established", doc = "texture bloc
 TRAM_BLOCK_SIZE_SHIFT = { value = 12, grade = "established", doc = "a block is the unit count shifted left by this many bits, so four units give 16 KiB blocks", from = "driver readings" }
 # UNSURE: REV letter is the diagnostic's label
 TE_REV_D_CHECKSUM = { value = 0x2aa70d210, grade = "inferred", doc = "render checksum the diagnostic expects from texture engine revision D", from = "diagnostic program data" }
-# UNSURE: REV letter is the diagnostic's label
+# ours: the diagnostic's own message names revision B for the one- and four-TRAM checksums
 TE_REV_B_1TRAM_CHECKSUM = { value = 0xbdfc48fc, grade = "inferred", doc = "render checksum the diagnostic expects from texture engine revision B with one texture RAM unit", from = "diagnostic program data" }
-# UNSURE: REV letter is the diagnostic's label
+# ours: the diagnostic's own message names revision B for the one- and four-TRAM checksums
 TE_REV_B_4TRAM_CHECKSUM = { value = 0x236379000, grade = "inferred", doc = "render checksum the diagnostic expects from texture engine revision B with four texture RAM units", from = "diagnostic program data" }

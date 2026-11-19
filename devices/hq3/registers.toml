@@ -129,7 +129,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.cfifo_hiwater]
-# UNSURE: header name is IMPACTSR_CFIFO_HW (impactreg.h:36)
+# ours: expands header name IMPACTSR_CFIFO_HW (impactreg.h:36), not an exact match
 name_source = "ours"
 offset = 0x4008
 access = "rw"
@@ -138,7 +138,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.cfifo_lowater]
-# UNSURE: header name is IMPACTSR_CFIFO_LW (impactreg.h:37)
+# ours: expands header name IMPACTSR_CFIFO_LW (impactreg.h:37), not an exact match
 name_source = "ours"
 offset = 0x4009
 access = "rw"
@@ -157,7 +157,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.dfifo_hiwater]
-# UNSURE: header name is IMPACTSR_DFIFO_HW (impactreg.h:39)
+# ours: expands header name IMPACTSR_DFIFO_HW (impactreg.h:39), not an exact match
 name_source = "ours"
 offset = 0x400b
 access = "rw"
@@ -166,7 +166,7 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.dfifo_lowater]
-# UNSURE: header name is IMPACTSR_DFIFO_LW (impactreg.h:40)
+# ours: expands header name IMPACTSR_DFIFO_LW (impactreg.h:40), not an exact match
 name_source = "ours"
 offset = 0x400c
 access = "rw"

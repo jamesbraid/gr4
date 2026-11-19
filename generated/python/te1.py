@@ -1,7 +1,7 @@
 """generated from devices/te1/registers.toml by defs-gen - do not edit, change the source
 SPDX-License-Identifier: BSD-3-Clause
 defs-gen 2
-input sha256 b675de79b42016475501c3985bba9f037caa1a89b8fb7bbdcaa8db5f050233dd
+input sha256 13f53acf9b97e4eaa1c0e9c42d6ae6bb94348a4f7f842d8c919098013fc9f000
 texture engine and texture RAM registers of the Impact graphics subsystem"""
 
 UNIT = 'te1'
