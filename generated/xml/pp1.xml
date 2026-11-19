@@ -2,7 +2,7 @@
 <!-- generated from devices/pp1/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 7740e32432c1d5eaacd28ec8c352e6e097293c4022bb488b99ba718ef273eeec -->
+<!-- input sha256 c422a74e11aec753e45bdef3c968ff2db9d9523c7fc347cf50bf63260674922c -->
 <genxml unit="pp1" prefix="PP" title="display read buffer registers of the Impact graphics" from="driver readings">
   <doc>Display read buffer registers of the Impact graphics subsystem.</doc>
   <space name="pp1_regs" unit="reg"/>
@@ -30,18 +30,18 @@
     <field name="auto_flush_off" start="10" size="1" type="uint" grade="inferred"/>
     <field name="dma_line_count_mask" start="8" size="2" type="uint" grade="inferred"/>
     <field name="raster_engines_minus_1" start="6" size="2" type="uint" grade="established"/>
-    <field name="xtiles36" start="2" size="4" type="uint" grade="established"/>
-    <field name="xtiles9" start="0" size="2" type="uint" grade="established"/>
+    <field name="tile_columns_36bit" start="2" size="4" type="uint" grade="established"/>
+    <field name="tile_columns_9bit" start="0" size="2" type="uint" grade="established"/>
     <test value="0x25a" kind="vector">
-      <expect field="xtiles9" value="2"/>
-      <expect field="xtiles36" value="6"/>
+      <expect field="tile_columns_9bit" value="2"/>
+      <expect field="tile_columns_36bit" value="6"/>
       <expect field="raster_engines_minus_1" value="1"/>
       <expect field="dma_line_count_mask" value="2"/>
       <expect field="auto_flush_off" value="0"/>
     </test>
     <test value="0x31a" kind="vector">
-      <expect field="xtiles9" value="2"/>
-      <expect field="xtiles36" value="6"/>
+      <expect field="tile_columns_9bit" value="2"/>
+      <expect field="tile_columns_36bit" value="6"/>
       <expect field="raster_engines_minus_1" value="0"/>
       <expect field="dma_line_count_mask" value="3"/>
       <expect field="auto_flush_off" value="0"/>

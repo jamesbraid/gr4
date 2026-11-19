@@ -1,7 +1,7 @@
 <!-- generated from devices/pp1/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 7740e32432c1d5eaacd28ec8c352e6e097293c4022bb488b99ba718ef273eeec -->
+<!-- input sha256 c422a74e11aec753e45bdef3c968ff2db9d9523c7fc347cf50bf63260674922c -->
 
 # display read buffer registers of the Impact graphics
 
@@ -39,8 +39,8 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | 10 | `auto_flush_off` | inferred |  | driver readings |  |
 | 9:8 | `dma_line_count_mask` | inferred |  | driver readings |  |
 | 7:6 | `raster_engines_minus_1` | established |  | driver readings |  |
-| 5:2 | `xtiles36` | established |  | driver readings |  |
-| 1:0 | `xtiles9` | established |  | driver readings |  |
+| 5:2 | `tile_columns_36bit` | established |  | driver readings | Formerly xtiles36. |
+| 1:0 | `tile_columns_9bit` | established |  | driver readings | Formerly xtiles9. |
 
 ## Constants
 
@@ -59,5 +59,5 @@ A vector is a value recorded from a source. An example only shows the layout.
 | `drb_pointers` | 0x380e0 | vector | page_a=224, page_b=224 |
 | `drb_pointers` | 0x90240 | vector | page_a=576, page_b=576 |
 | `drb_pointers` | 0xc8240 | vector | page_a=576, page_b=800 |
-| `drb_size` | 0x25a | vector | xtiles9=2, xtiles36=6, raster_engines_minus_1=1, dma_line_count_mask=2, auto_flush_off=0 |
-| `drb_size` | 0x31a | vector | xtiles9=2, xtiles36=6, raster_engines_minus_1=0, dma_line_count_mask=3, auto_flush_off=0 |
+| `drb_size` | 0x25a | vector | tile_columns_9bit=2, tile_columns_36bit=6, raster_engines_minus_1=1, dma_line_count_mask=2, auto_flush_off=0 |
+| `drb_size` | 0x31a | vector | tile_columns_9bit=2, tile_columns_36bit=6, raster_engines_minus_1=0, dma_line_count_mask=3, auto_flush_off=0 |

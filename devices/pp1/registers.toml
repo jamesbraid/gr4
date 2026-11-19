@@ -4,11 +4,14 @@ title = "display read buffer registers of the Impact graphics"
 doc = "Display read buffer registers of the Impact graphics subsystem."
 from = "driver readings"
 public_from = ["driver readings"]
+name_source = "ours"
 
 [spaces.pp1_regs]
 unit = "reg"
 
 [registers.drb_pointers]
+# header CMD_DRBPOINTERS (impactreg.h:107) matches, but the fields have no public source
+name_source = "ours"
 offset = 0xf16d
 access = "w"
 width = 32
@@ -36,6 +39,8 @@ value = 0xc8240
 expect = { page_a = 576, page_b = 800 }
 
 [registers.drb_size]
+# UNSURE: no public header name; the words match an identifier the kernel and PROM use
+name_source = "ours"
 offset = 0xf16e
 access = "w"
 width = 32
@@ -43,19 +48,21 @@ grade = "inferred"
 space = "pp1_regs"
 
 [registers.drb_size.fields]
+# UNSURE: the words follow an inverted enable name in the PROM, not a public source
 auto_flush_off = { bits = [10, 10], grade = "inferred" }
+# UNSURE: the words match an identifier the PROM uses; the meaning is inferred
 dma_line_count_mask = { bits = [9, 8], grade = "inferred" }
 raster_engines_minus_1 = { bits = [7, 6], grade = "established" }
-xtiles36 = { bits = [5, 2], grade = "established" }
-xtiles9 = { bits = [1, 0], grade = "established" }
+tile_columns_36bit = { bits = [5, 2], grade = "established", doc = "Formerly xtiles36." }
+tile_columns_9bit = { bits = [1, 0], grade = "established", doc = "Formerly xtiles9." }
 
 [[registers.drb_size.tests]]
 value = 0x25a
-expect = { xtiles9 = 2, xtiles36 = 6, raster_engines_minus_1 = 1, dma_line_count_mask = 2, auto_flush_off = 0 }
+expect = { tile_columns_9bit = 2, tile_columns_36bit = 6, raster_engines_minus_1 = 1, dma_line_count_mask = 2, auto_flush_off = 0 }
 
 [[registers.drb_size.tests]]
 value = 0x31a
-expect = { xtiles9 = 2, xtiles36 = 6, raster_engines_minus_1 = 0, dma_line_count_mask = 3, auto_flush_off = 0 }
+expect = { tile_columns_9bit = 2, tile_columns_36bit = 6, raster_engines_minus_1 = 0, dma_line_count_mask = 3, auto_flush_off = 0 }
 
 [constants]
 DRB_POINTERS_COMMAND_WORD = { value = 0x196d04, grade = "established", doc = "kernel constant table" }

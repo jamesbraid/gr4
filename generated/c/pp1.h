@@ -1,7 +1,7 @@
 /* generated from devices/pp1/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 7740e32432c1d5eaacd28ec8c352e6e097293c4022bb488b99ba718ef273eeec */
+/* input sha256 c422a74e11aec753e45bdef3c968ff2db9d9523c7fc347cf50bf63260674922c */
 /* display read buffer registers of the Impact graphics */
 #ifndef PP_GEN_H
 #define PP_GEN_H
@@ -29,12 +29,12 @@
 #define PP_DRB_SIZE_RASTER_ENGINES_MINUS_1_SHIFT     6 /* established */
 #define PP_DRB_SIZE_RASTER_ENGINES_MINUS_1_MASK      0x3u
 #define PP_DRB_SIZE_RASTER_ENGINES_MINUS_1_INPLACE   (PP_DRB_SIZE_RASTER_ENGINES_MINUS_1_MASK << PP_DRB_SIZE_RASTER_ENGINES_MINUS_1_SHIFT)
-#define PP_DRB_SIZE_XTILES36_SHIFT                   2 /* established */
-#define PP_DRB_SIZE_XTILES36_MASK                    0xfu
-#define PP_DRB_SIZE_XTILES36_INPLACE                 (PP_DRB_SIZE_XTILES36_MASK << PP_DRB_SIZE_XTILES36_SHIFT)
-#define PP_DRB_SIZE_XTILES9_SHIFT                    0 /* established */
-#define PP_DRB_SIZE_XTILES9_MASK                     0x3u
-#define PP_DRB_SIZE_XTILES9_INPLACE                  (PP_DRB_SIZE_XTILES9_MASK << PP_DRB_SIZE_XTILES9_SHIFT)
+#define PP_DRB_SIZE_TILE_COLUMNS_36BIT_SHIFT         2 /* established */
+#define PP_DRB_SIZE_TILE_COLUMNS_36BIT_MASK          0xfu
+#define PP_DRB_SIZE_TILE_COLUMNS_36BIT_INPLACE       (PP_DRB_SIZE_TILE_COLUMNS_36BIT_MASK << PP_DRB_SIZE_TILE_COLUMNS_36BIT_SHIFT)
+#define PP_DRB_SIZE_TILE_COLUMNS_9BIT_SHIFT          0 /* established */
+#define PP_DRB_SIZE_TILE_COLUMNS_9BIT_MASK           0x3u
+#define PP_DRB_SIZE_TILE_COLUMNS_9BIT_INPLACE        (PP_DRB_SIZE_TILE_COLUMNS_9BIT_MASK << PP_DRB_SIZE_TILE_COLUMNS_9BIT_SHIFT)
 
 #define PP_DRB_POINTERS_COMMAND_WORD                 0x196d04u /* established */
 #define PP_DRB_SIZE_COMMAND_WORD                     0x196e04u /* established */

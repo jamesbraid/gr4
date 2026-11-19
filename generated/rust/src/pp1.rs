@@ -1,7 +1,7 @@
 // generated from devices/pp1/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 2
-// input sha256 7740e32432c1d5eaacd28ec8c352e6e097293c4022bb488b99ba718ef273eeec
+// input sha256 c422a74e11aec753e45bdef3c968ff2db9d9523c7fc347cf50bf63260674922c
 // display read buffer registers of the Impact graphics
 #![allow(dead_code)]
 
@@ -64,7 +64,7 @@ pub mod drb_size {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod xtiles36 { // bits 5:2, established
+    pub mod tile_columns_36bit { // bits 5:2, established
         pub const SHIFT: u32 = 2;
         pub const MASK: u32 = 0xf;
         pub const fn get(v: u32) -> u32 {
@@ -74,7 +74,7 @@ pub mod drb_size {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod xtiles9 { // bits 1:0, established
+    pub mod tile_columns_9bit { // bits 1:0, established
         pub const SHIFT: u32 = 0;
         pub const MASK: u32 = 0x3;
         pub const fn get(v: u32) -> u32 {
@@ -118,8 +118,8 @@ mod tests {
 
     #[test]
     fn drb_size_25a() {
-        assert_eq!(drb_size::xtiles9::get(0x25a), 2);
-        assert_eq!(drb_size::xtiles36::get(0x25a), 6);
+        assert_eq!(drb_size::tile_columns_9bit::get(0x25a), 2);
+        assert_eq!(drb_size::tile_columns_36bit::get(0x25a), 6);
         assert_eq!(drb_size::raster_engines_minus_1::get(0x25a), 1);
         assert_eq!(drb_size::dma_line_count_mask::get(0x25a), 2);
         assert_eq!(drb_size::auto_flush_off::get(0x25a), 0);
@@ -127,8 +127,8 @@ mod tests {
 
     #[test]
     fn drb_size_31a() {
-        assert_eq!(drb_size::xtiles9::get(0x31a), 2);
-        assert_eq!(drb_size::xtiles36::get(0x31a), 6);
+        assert_eq!(drb_size::tile_columns_9bit::get(0x31a), 2);
+        assert_eq!(drb_size::tile_columns_36bit::get(0x31a), 6);
         assert_eq!(drb_size::raster_engines_minus_1::get(0x31a), 0);
         assert_eq!(drb_size::dma_line_count_mask::get(0x31a), 3);
         assert_eq!(drb_size::auto_flush_off::get(0x31a), 0);
