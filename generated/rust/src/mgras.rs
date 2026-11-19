@@ -1,7 +1,7 @@
 // generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 2
-// input sha256 cf5fdcf0eab8322dcb5cee7a3b107a012c29a9c6ad1021ffa18e87e9b39d37e6
+// input sha256 b9c621cc43d1b1fca76dbfdde731f0c6b566338b60f2a8932021cdc2a9d3dd72
 // board-level words of the Impact graphics subsystem
 #![allow(dead_code)]
 
@@ -757,6 +757,7 @@ pub const HQ_GL_FLAG_FLUSH: u32 = 0x100000; // inferred
 pub const HQ_GL_FLAG_QUERY_READY: u32 = 0x20000; // inferred
 pub const HQ_GL_FLAG_SYNC_COMPLETE: u32 = 0x10000; // inferred
 pub const HQ_GL_QUERY_ANSWER_OFFSET: u32 = 0x28004; // inferred
+pub const HQ_GL_STATUS_DMA_BUSY: u32 = 0x1000; // inferred
 pub const HQ_GL_STATUS_OFFSET: u32 = 0x20000; // inferred
 pub const HQ_GL_STATUS_PIPE_IDLE: u32 = 0x2; // inferred
 pub const HQ_ID_MANUFACTURER_EXPECTED: u32 = 0x2aa; // inferred
@@ -783,6 +784,10 @@ pub const HQ_SERIAL_MASTER_OFFSET: u32 = 0x11098; // inferred
 pub const HQ_SWAP_ACK_VALUE: u32 = 0x401; // established
 pub const HQ_SWAP_CMD: u32 = 0x3700; // established
 pub const HQ_VC3_RETRACE_OFFSET: u32 = 0x72038; // established
+pub const HQ_VIDEO_DMA_CONTROL_OFFSET: u32 = 0x81010; // inferred
+pub const HQ_VIDEO_DMA_DESCRIPTOR_OFFSET: u32 = 0x81000; // inferred
+pub const HQ_VIDEO_DMA_MODE_OFFSET: u32 = 0x81018; // inferred
+pub const HQ_VIDEO_DMA_SOURCE_OFFSET: u32 = 0x60018; // inferred
 pub const MCO_BANK_BASE_CH0: u32 = 0x0; // established
 pub const MCO_BANK_BASE_CH1: u32 = 0x20; // established
 pub const MCO_BANK_BASE_CH2: u32 = 0x30; // established

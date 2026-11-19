@@ -1,7 +1,7 @@
 /* generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 cf5fdcf0eab8322dcb5cee7a3b107a012c29a9c6ad1021ffa18e87e9b39d37e6 */
+/* input sha256 b9c621cc43d1b1fca76dbfdde731f0c6b566338b60f2a8932021cdc2a9d3dd72 */
 /* board-level words of the Impact graphics subsystem */
 #ifndef MGRAS_GEN_H
 #define MGRAS_GEN_H
@@ -401,6 +401,7 @@
 #define MGRAS_HQ_GL_FLAG_QUERY_READY                 0x20000u /* inferred */
 #define MGRAS_HQ_GL_FLAG_SYNC_COMPLETE               0x10000u /* inferred */
 #define MGRAS_HQ_GL_QUERY_ANSWER_OFFSET              0x28004u /* inferred */
+#define MGRAS_HQ_GL_STATUS_DMA_BUSY                  0x1000u /* inferred */
 #define MGRAS_HQ_GL_STATUS_OFFSET                    0x20000u /* inferred */
 #define MGRAS_HQ_GL_STATUS_PIPE_IDLE                 0x2u /* inferred */
 #define MGRAS_HQ_ID_MANUFACTURER_EXPECTED            0x2aau /* inferred */
@@ -427,6 +428,10 @@
 #define MGRAS_HQ_SWAP_ACK_VALUE                      0x401u /* established */
 #define MGRAS_HQ_SWAP_CMD                            0x3700u /* established */
 #define MGRAS_HQ_VC3_RETRACE_OFFSET                  0x72038u /* established */
+#define MGRAS_HQ_VIDEO_DMA_CONTROL_OFFSET            0x81010u /* inferred */
+#define MGRAS_HQ_VIDEO_DMA_DESCRIPTOR_OFFSET         0x81000u /* inferred */
+#define MGRAS_HQ_VIDEO_DMA_MODE_OFFSET               0x81018u /* inferred */
+#define MGRAS_HQ_VIDEO_DMA_SOURCE_OFFSET             0x60018u /* inferred */
 #define MGRAS_MCO_BANK_BASE_CH0                      0x0u /* established */
 #define MGRAS_MCO_BANK_BASE_CH1                      0x20u /* established */
 #define MGRAS_MCO_BANK_BASE_CH2                      0x30u /* established */

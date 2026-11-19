@@ -365,6 +365,8 @@ grade = "inferred"
 space = "hq3_regs"
 
 [registers.status.fields]
+# bit 12 is read only by the digital video driver; see MGRAS HQ_GL_STATUS_DMA_BUSY
+dma_busy = { bits = [12, 12], grade = "inferred", doc = "Set while a video DMA is in flight, from the digital video driver's wait loop only; clear means done. Not seen in the graphics kernel driver." }
 dfifo_below_low = { bits = [8, 8], grade = "inferred" }
 dfifo_above_high = { bits = [7, 7], grade = "inferred" }
 cfifo_below_low = { bits = [4, 4], grade = "inferred" }

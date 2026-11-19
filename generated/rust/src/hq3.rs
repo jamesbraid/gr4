@@ -1,7 +1,7 @@
 // generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 2
-// input sha256 ff578dabddcbabea31e4222cde74bc2e82b482fd7937056bd43782fd3439453c
+// input sha256 48084a86d0569573796c5ea9673bd3af48ac41384b005835f9b93225508fb2a1
 // host interface and command processor registers for the Impact graphics subsystem
 #![allow(dead_code)]
 
@@ -358,6 +358,16 @@ pub mod tlb_valid {
 pub mod status {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xc000;
+    pub mod dma_busy { // bits 12:12, inferred
+        pub const SHIFT: u32 = 12;
+        pub const MASK: u32 = 0x1;
+        pub const fn get(v: u32) -> u32 {
+            (v >> SHIFT) & MASK
+        }
+        pub const fn set(v: u32, x: u32) -> u32 {
+            (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
+        }
+    }
     pub mod dfifo_below_low { // bits 8:8, inferred
         pub const SHIFT: u32 = 8;
         pub const MASK: u32 = 0x1;

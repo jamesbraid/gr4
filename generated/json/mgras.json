@@ -1,7 +1,7 @@
 {
  "license": "BSD-3-Clause",
  "generator": "defs-gen 2",
- "input_sha256": "cf5fdcf0eab8322dcb5cee7a3b107a012c29a9c6ad1021ffa18e87e9b39d37e6",
+ "input_sha256": "b9c621cc43d1b1fca76dbfdde731f0c6b566338b60f2a8932021cdc2a9d3dd72",
  "schema": "defs-flat/1",
  "source": "devices/mgras/registers.toml",
  "profile": "public",
@@ -1170,6 +1170,15 @@
   {
    "unit": "mgras",
    "kind": "constant",
+   "name": "HQ_GL_STATUS_DMA_BUSY",
+   "value": 4096,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
    "name": "HQ_GL_STATUS_OFFSET",
    "value": 131072,
    "count": 1,
@@ -1399,6 +1408,42 @@
    "value": 467000,
    "count": 1,
    "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_VIDEO_DMA_CONTROL_OFFSET",
+   "value": 528400,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_VIDEO_DMA_DESCRIPTOR_OFFSET",
+   "value": 528384,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_VIDEO_DMA_MODE_OFFSET",
+   "value": 528408,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_VIDEO_DMA_SOURCE_OFFSET",
+   "value": 393240,
+   "count": 1,
+   "grade": "inferred",
    "from": "driver and firmware readings"
   },
   {

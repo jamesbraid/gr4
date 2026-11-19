@@ -1,7 +1,7 @@
 <!-- generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 cf5fdcf0eab8322dcb5cee7a3b107a012c29a9c6ad1021ffa18e87e9b39d37e6 -->
+<!-- input sha256 b9c621cc43d1b1fca76dbfdde731f0c6b566338b60f2a8932021cdc2a9d3dd72 -->
 
 # board-level words of the Impact graphics subsystem
 
@@ -351,6 +351,7 @@ revision. Inferred from the kernel object.
 | `HQ_GL_FLAG_QUERY_READY` | 0x20000 | inferred | driver and firmware readings | bit 17 of the flags word: the client clears it before a query and polls until the board sets it |
 | `HQ_GL_FLAG_SYNC_COMPLETE` | 0x10000 | inferred | driver and firmware readings | bit 16 of the flags word: a write fence sets it when earlier writes finish; the client clears it before a DMA setup |
 | `HQ_GL_QUERY_ANSWER_OFFSET` | 0x28004 | inferred | driver and firmware readings | answer word read after a query flag is set; the kernel reads the same address after a geometry-engine download (GE_REVISION) |
+| `HQ_GL_STATUS_DMA_BUSY` | 0x1000 | inferred | driver and firmware readings | bit 12 of HQ_GL_STATUS_OFFSET, read as a 32-bit word. The Octane digital video driver polls it up to 200 times after starting a video DMA and treats it set as busy, clear as done. Only that wait supports the meaning; the graphics kernel driver never tests this bit alone, and an older header calls it DMA active. What sets and clears it is unknown |
 | `HQ_GL_STATUS_OFFSET` | 0x20000 | inferred | driver and firmware readings | HQ status word the GL client polls; bit 1 is the pipe-idle sense, the bit number the hq3 status register calls pipe_idle |
 | `HQ_GL_STATUS_PIPE_IDLE` | 0x2 | inferred | driver and firmware readings | bit 1 of HQ_GL_STATUS_OFFSET; the client's finish and the kernel's raster idle wait both poll it |
 | `HQ_ID_MANUFACTURER_EXPECTED` | 0x2aa | inferred | driver and firmware readings | manufacturer code the diagnostic's HQ4 probe accepts, at bits 11:1 of the identity word, the first board word |
@@ -377,6 +378,10 @@ revision. Inferred from the kernel object.
 | `HQ_SWAP_ACK_VALUE` | 0x401 | established | driver and firmware readings | acknowledge the swap path writes to the pending-clear word, covering status bit 10 and the flag at bit 0. The bit-0 mirror is inferred |
 | `HQ_SWAP_CMD` | 0x3700 | established | driver and firmware readings | class 0, opcode 0x37, no payload. Written to the command port after source 10 is enabled. That the board raises source 10 once the queue ahead of it drains is inferred |
 | `HQ_VC3_RETRACE_OFFSET` | 0x72038 | established | driver and firmware readings | VC3 register 0x1e, written by the kernel's retrace enable. The kernel sets bit 0; that bit gates the board's retrace message is inferred |
+| `HQ_VIDEO_DMA_CONTROL_OFFSET` | 0x81010 | inferred | driver and firmware readings | video DMA control word: the driver's last store before it polls is the value with bits 0 and 4 set, which starts the transfer; on timeout it stores 2 here to abort. Roles inferred from the order of stores and the timeout path |
+| `HQ_VIDEO_DMA_DESCRIPTOR_OFFSET` | 0x81000 | inferred | driver and firmware readings | 64-bit video DMA descriptor the digital video driver stores: a flag set (bits 25, 24, 23 and 19) and the low 48 bits of the buffer's physical page address |
+| `HQ_VIDEO_DMA_MODE_OFFSET` | 0x81018 | inferred | driver and firmware readings | video DMA mode word, stored before the control word: low nibble forced to 0xc by the driver |
+| `HQ_VIDEO_DMA_SOURCE_OFFSET` | 0x60018 | inferred | driver and firmware readings | word stored before the descriptor, built from the caller's fields (bit 2 set, bits 5:3, 1:0 and 9:6 from three caller values); meaning unknown |
 | `MCO_BANK_BASE_CH0` | 0x0 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH1` | 0x20 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH2` | 0x30 | established | driver and firmware readings |  |

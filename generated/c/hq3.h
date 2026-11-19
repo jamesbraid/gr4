@@ -1,7 +1,7 @@
 /* generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 ff578dabddcbabea31e4222cde74bc2e82b482fd7937056bd43782fd3439453c */
+/* input sha256 48084a86d0569573796c5ea9673bd3af48ac41384b005835f9b93225508fb2a1 */
 /* host interface and command processor registers for the Impact graphics subsystem */
 #ifndef HQ_GEN_H
 #define HQ_GEN_H
@@ -179,6 +179,9 @@
 
 /* status: r32, space hq3_regs, reset unknown; driver and diagnostic readings */
 #define HQ_STATUS_OFFSET                             0xc000u /* inferred */
+#define HQ_STATUS_DMA_BUSY_SHIFT                     12 /* inferred */
+#define HQ_STATUS_DMA_BUSY_MASK                      0x1u
+#define HQ_STATUS_DMA_BUSY_INPLACE                   (HQ_STATUS_DMA_BUSY_MASK << HQ_STATUS_DMA_BUSY_SHIFT)
 #define HQ_STATUS_DFIFO_BELOW_LOW_SHIFT              8 /* inferred */
 #define HQ_STATUS_DFIFO_BELOW_LOW_MASK               0x1u
 #define HQ_STATUS_DFIFO_BELOW_LOW_INPLACE            (HQ_STATUS_DFIFO_BELOW_LOW_MASK << HQ_STATUS_DFIFO_BELOW_LOW_SHIFT)

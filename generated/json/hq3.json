@@ -1,7 +1,7 @@
 {
  "license": "BSD-3-Clause",
  "generator": "defs-gen 2",
- "input_sha256": "ff578dabddcbabea31e4222cde74bc2e82b482fd7937056bd43782fd3439453c",
+ "input_sha256": "48084a86d0569573796c5ea9673bd3af48ac41384b005835f9b93225508fb2a1",
  "schema": "defs-flat/1",
  "source": "devices/hq3/registers.toml",
  "profile": "public",
@@ -649,6 +649,15 @@
    "stride": 1,
    "space": "hq3_regs",
    "reset": "unknown",
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "field",
+   "name": "status.dma_busy",
+   "hi": 12,
+   "lo": 12,
    "grade": "inferred",
    "from": "driver and diagnostic readings"
   },

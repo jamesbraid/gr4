@@ -1,7 +1,7 @@
 /* generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 ff578dabddcbabea31e4222cde74bc2e82b482fd7937056bd43782fd3439453c */
+/* input sha256 48084a86d0569573796c5ea9673bd3af48ac41384b005835f9b93225508fb2a1 */
 /* host interface and command processor registers for the Impact graphics subsystem */
 /* Names are MGRAS_HQ3_*; name source: ours. */
 /* Offsets are bytes; registers of a register-indexed space are written as index * size. */
@@ -105,6 +105,7 @@ REG32(MGRAS_HQ3_TLB_FAULT_PAGE, 0x10880) /* inferred */
 REG32(MGRAS_HQ3_TLB_VALID, 0x10900) /* inferred */
 
 REG32(MGRAS_HQ3_STATUS, 0x30000) /* inferred */
+FIELD(MGRAS_HQ3_STATUS, DMA_BUSY, 12, 1) /* inferred */
 FIELD(MGRAS_HQ3_STATUS, DFIFO_BELOW_LOW, 8, 1) /* inferred */
 FIELD(MGRAS_HQ3_STATUS, DFIFO_ABOVE_HIGH, 7, 1) /* inferred */
 FIELD(MGRAS_HQ3_STATUS, CFIFO_BELOW_LOW, 4, 1) /* inferred */

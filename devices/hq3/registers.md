@@ -1,7 +1,7 @@
 <!-- generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 ff578dabddcbabea31e4222cde74bc2e82b482fd7937056bd43782fd3439453c -->
+<!-- input sha256 48084a86d0569573796c5ea9673bd3af48ac41384b005835f9b93225508fb2a1 -->
 
 # host interface and command processor registers for the Impact graphics subsystem
 
@@ -181,6 +181,7 @@ Array of 32 registers, stride 1.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
+| 12 | `dma_busy` | inferred |  | driver and diagnostic readings | Set while a video DMA is in flight, from the digital video driver's wait loop only; clear means done. Not seen in the graphics kernel driver. |
 | 8 | `dfifo_below_low` | inferred |  | driver and diagnostic readings |  |
 | 7 | `dfifo_above_high` | inferred |  | driver and diagnostic readings |  |
 | 4 | `cfifo_below_low` | inferred |  | driver and diagnostic readings |  |

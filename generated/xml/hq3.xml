@@ -2,7 +2,7 @@
 <!-- generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 ff578dabddcbabea31e4222cde74bc2e82b482fd7937056bd43782fd3439453c -->
+<!-- input sha256 48084a86d0569573796c5ea9673bd3af48ac41384b005835f9b93225508fb2a1 -->
 <genxml unit="hq3" prefix="HQ" title="host interface and command processor registers for the Impact graphics subsystem" from="driver and diagnostic readings">
   <doc>Host interface and command processor registers of the Impact graphics subsystem.</doc>
   <space name="hq3_regs" unit="reg"/>
@@ -132,6 +132,7 @@
   <struct name="TLB_VALID" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x4240" access="rw" space="hq3_regs" reset="unknown">
   </struct>
   <struct name="STATUS" size="4" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0xc000" access="r" space="hq3_regs" reset="unknown">
+    <field name="dma_busy" start="12" size="1" type="uint" grade="inferred"/>
     <field name="dfifo_below_low" start="8" size="1" type="uint" grade="inferred"/>
     <field name="dfifo_above_high" start="7" size="1" type="uint" grade="inferred"/>
     <field name="cfifo_below_low" start="4" size="1" type="uint" grade="inferred"/>

@@ -2,7 +2,7 @@
 <!-- generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 cf5fdcf0eab8322dcb5cee7a3b107a012c29a9c6ad1021ffa18e87e9b39d37e6 -->
+<!-- input sha256 b9c621cc43d1b1fca76dbfdde731f0c6b566338b60f2a8932021cdc2a9d3dd72 -->
 <genxml unit="mgras" prefix="MGRAS" title="board-level words of the Impact graphics subsystem" from="driver and firmware readings">
   <doc>Board-level words of the Impact graphics subsystem.</doc>
   <enum name="bdvers2_product">
@@ -367,6 +367,7 @@ revision. Inferred from the kernel object.</doc>
   <constant name="HQ_GL_FLAG_QUERY_READY" value="0x20000" grade="inferred"/>
   <constant name="HQ_GL_FLAG_SYNC_COMPLETE" value="0x10000" grade="inferred"/>
   <constant name="HQ_GL_QUERY_ANSWER_OFFSET" value="0x28004" grade="inferred"/>
+  <constant name="HQ_GL_STATUS_DMA_BUSY" value="0x1000" grade="inferred"/>
   <constant name="HQ_GL_STATUS_OFFSET" value="0x20000" grade="inferred"/>
   <constant name="HQ_GL_STATUS_PIPE_IDLE" value="0x2" grade="inferred"/>
   <constant name="HQ_ID_MANUFACTURER_EXPECTED" value="0x2aa" grade="inferred"/>
@@ -393,6 +394,10 @@ revision. Inferred from the kernel object.</doc>
   <constant name="HQ_SWAP_ACK_VALUE" value="0x401" grade="established"/>
   <constant name="HQ_SWAP_CMD" value="0x3700" grade="established"/>
   <constant name="HQ_VC3_RETRACE_OFFSET" value="0x72038" grade="established"/>
+  <constant name="HQ_VIDEO_DMA_CONTROL_OFFSET" value="0x81010" grade="inferred"/>
+  <constant name="HQ_VIDEO_DMA_DESCRIPTOR_OFFSET" value="0x81000" grade="inferred"/>
+  <constant name="HQ_VIDEO_DMA_MODE_OFFSET" value="0x81018" grade="inferred"/>
+  <constant name="HQ_VIDEO_DMA_SOURCE_OFFSET" value="0x60018" grade="inferred"/>
   <constant name="MCO_BANK_BASE_CH0" value="0x0" grade="established"/>
   <constant name="MCO_BANK_BASE_CH1" value="0x20" grade="established"/>
   <constant name="MCO_BANK_BASE_CH2" value="0x30" grade="established"/>
