@@ -1,3 +1,6 @@
+[gen]
+rust_crate = "gr4-defs"
+
 [project]
 license = "BSD-3-Clause"
 name = "gr4"

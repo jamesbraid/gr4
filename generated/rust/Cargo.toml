@@ -3,7 +3,7 @@
 # defs-gen 2
 # input sha256 991f2db6cfbf7577b3775df027faa82ed8055b09502a9f5fb744048f49c4ee32
 [package]
-name = "hwdefs"
+name = "gr4-defs"
 version = "0.1.0"
 edition = "2021"
 publish = false
