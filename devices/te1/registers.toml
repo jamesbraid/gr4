@@ -458,6 +458,286 @@ space = "te1_regs"
 doc = """
 Copy rectangle bottom edge for a framebuffer copy, 14 bits in the diagnostic's mask. Formerly tl_t_bottom."""
 
+[registers.texture_mipmap_levels]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf191
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Mipmap level addresses and offsets. Role inferred from the hand-written header, not measured."
+
+[registers.texture_toggle_context]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf195
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Texture engine context toggle. Role inferred from the hand-written header, not measured."
+
+[registers.texture_loader_video_capture_abort]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf1a8
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Video texture capture abort. Role inferred from the hand-written header, not measured."
+
+[registers.texture_s_over_w_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe080
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "S/W texture coordinate, upper 16 bits. Role inferred from the hand-written header, not measured."
+
+[registers.texture_s_over_w_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe081
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "S/W texture coordinate, lower 16 bits. Role inferred from the hand-written header, not measured."
+
+[registers.texture_t_over_w_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe082
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "T/W texture coordinate, upper half (the header reuses this register for a derivative in warp mode). Role inferred from the hand-written header, not measured."
+
+[registers.texture_t_over_w_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe083
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "T/W texture coordinate, lower half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_one_over_w_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe084
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "1/W coordinate, upper half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_one_over_w_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe085
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "1/W coordinate, lower half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_one_over_w_edge_step_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe086
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of 1/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_one_over_w_edge_step_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe087
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of 1/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_one_over_w_x_step_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe088
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of 1/W per pixel in x, upper half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_one_over_w_x_step_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe089
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of 1/W per pixel in x, lower half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_one_over_w_y_step_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe08a
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of 1/W per scanline in y, upper half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_one_over_w_y_step_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe08b
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of 1/W per scanline in y, lower half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_scale_factor]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe08c
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Texture scale factor. Role inferred from the hand-written header, not measured."
+
+[registers.texture_s_over_w_edge_step_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0c0
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of S/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_s_over_w_edge_step_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0c1
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of S/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_t_over_w_edge_step_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0c2
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of T/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_t_over_w_edge_step_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0c3
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of T/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_s_over_w_x_step_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0c4
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of S/W per pixel in x, upper half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_s_over_w_x_step_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0c5
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of S/W per pixel in x, lower half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_t_over_w_x_step_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0c6
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of T/W per pixel in x, upper half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_t_over_w_x_step_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0c7
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of T/W per pixel in x, lower half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_s_over_w_y_step_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0c8
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of S/W per scanline in y, upper half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_s_over_w_y_step_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0c9
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of S/W per scanline in y, lower half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_t_over_w_y_step_upper]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0ca
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of T/W per scanline in y, upper half. Role inferred from the hand-written header, not measured."
+
+[registers.texture_t_over_w_y_step_lower]
+# role from the texture engine header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xe0cb
+access = "w"
+width = 32
+grade = "inferred"
+space = "te1_regs"
+doc = "Step of T/W per scanline in y, lower half. Role inferred from the hand-written header, not measured."
+
 [constants]
 # UNSURE: the source gives no meaning for REV
 TRAM_WORD_0 = { value = 0x1c011401, grade = "established", doc = "diagnostic. Formerly TRAM_REV_WORD0.", from = "diagnostic transcript" }

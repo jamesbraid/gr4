@@ -1,10 +1,135 @@
 // generated from devices/te1/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 2
-// input sha256 13f53acf9b97e4eaa1c0e9c42d6ae6bb94348a4f7f842d8c919098013fc9f000
+// input sha256 8ee765eb25302e83f0b76fd3fd6d61ad0223693cf3052508164eda23983dc1e5
 // texture engine and texture RAM registers of the Impact graphics subsystem
 #![allow(dead_code)]
 
+/// S/W texture coordinate, upper 16 bits. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_s_over_w_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe080;
+}
+/// S/W texture coordinate, lower 16 bits. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_s_over_w_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe081;
+}
+/// T/W texture coordinate, upper half (the header reuses this register for a derivative in warp mode). Role inferred from the hand-written header, not me (inferred)
+pub mod texture_t_over_w_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe082;
+}
+/// T/W texture coordinate, lower half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_t_over_w_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe083;
+}
+/// 1/W coordinate, upper half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_one_over_w_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe084;
+}
+/// 1/W coordinate, lower half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_one_over_w_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe085;
+}
+/// Step of 1/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_one_over_w_edge_step_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe086;
+}
+/// Step of 1/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_one_over_w_edge_step_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe087;
+}
+/// Step of 1/W per pixel in x, upper half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_one_over_w_x_step_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe088;
+}
+/// Step of 1/W per pixel in x, lower half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_one_over_w_x_step_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe089;
+}
+/// Step of 1/W per scanline in y, upper half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_one_over_w_y_step_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe08a;
+}
+/// Step of 1/W per scanline in y, lower half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_one_over_w_y_step_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe08b;
+}
+/// Texture scale factor. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_scale_factor {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe08c;
+}
+/// Step of S/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_s_over_w_edge_step_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0c0;
+}
+/// Step of S/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_s_over_w_edge_step_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0c1;
+}
+/// Step of T/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_t_over_w_edge_step_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0c2;
+}
+/// Step of T/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_t_over_w_edge_step_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0c3;
+}
+/// Step of S/W per pixel in x, upper half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_s_over_w_x_step_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0c4;
+}
+/// Step of S/W per pixel in x, lower half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_s_over_w_x_step_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0c5;
+}
+/// Step of T/W per pixel in x, upper half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_t_over_w_x_step_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0c6;
+}
+/// Step of T/W per pixel in x, lower half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_t_over_w_x_step_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0c7;
+}
+/// Step of S/W per scanline in y, upper half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_s_over_w_y_step_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0c8;
+}
+/// Step of S/W per scanline in y, lower half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_s_over_w_y_step_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0c9;
+}
+/// Step of T/W per scanline in y, upper half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_t_over_w_y_step_upper {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0ca;
+}
+/// Step of T/W per scanline in y, lower half. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_t_over_w_y_step_lower {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xe0cb;
+}
 /// Texture mode for the drawn texture: component depth, filters, wrap and the no-border flag. The diagnostic's mask is 25 bits. The field positions are t (inferred)
 pub mod texture_mode_drawn {
     pub const WIDTH: u32 = 32;
@@ -440,6 +565,11 @@ pub mod texture_level_table_index {
         }
     }
 }
+/// Mipmap level addresses and offsets. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_mipmap_levels {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xf191;
+}
 /// First block of the detail texture, 9 bits in the diagnostic's mask. Formerly txdetail. (inferred)
 pub mod texture_detail_block {
     pub const WIDTH: u32 = 32;
@@ -484,6 +614,11 @@ pub mod detailscale {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
+}
+/// Texture engine context toggle. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_toggle_context {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xf195;
 }
 /// Texture engine revision, 29 bits in the diagnostic's mask. The client does not write it. The diagnostic identifies revisions by a render checksum inst (inferred)
 pub mod texture_engine_revision {
@@ -689,6 +824,11 @@ pub mod texture_loader_base_block {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
+}
+/// Video texture capture abort. Role inferred from the hand-written header, not measured. (inferred)
+pub mod texture_loader_video_capture_abort {
+    pub const WIDTH: u32 = 32;
+    pub const OFFSET: u64 = 0xf1a8;
 }
 /// Copy rectangle width for a framebuffer copy, 14 bits in the diagnostic's mask. Formerly tl_s_size. (inferred)
 pub mod texture_loader_copy_width {

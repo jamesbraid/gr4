@@ -2,10 +2,37 @@
 <!-- generated from devices/pp1/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 c422a74e11aec753e45bdef3c968ff2db9d9523c7fc347cf50bf63260674922c -->
+<!-- input sha256 e1a18a4b96ad72e5bdae304875b0f08c335204cf50091e4966771a1c1d3a89c5 -->
 <genxml unit="pp1" prefix="PP" title="display read buffer registers of the Impact graphics" from="driver readings">
   <doc>Display read buffer registers of the Impact graphics subsystem.</doc>
   <space name="pp1_regs" unit="reg"/>
+  <struct name="PIXEL_COMMAND" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf160" access="w" space="pp1_regs" reset="unknown">
+    <doc>Pixel command: starts a pixel-processor operation. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="BLEND_FACTOR" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf165" access="w" space="pp1_regs" reset="unknown">
+    <doc>Source and destination blend factors. Source in bits 3:0, destination in bits 7:4; the encodings are inferred. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="STENCIL_MODE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf166" access="w" space="pp1_regs" reset="unknown">
+    <doc>Stencil test function and operations. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="STENCIL_MASK" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf167" access="w" space="pp1_regs" reset="unknown">
+    <doc>Stencil read and write mask. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="DEPTH_MODE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf168" access="w" space="pp1_regs" reset="unknown">
+    <doc>Depth test function and depth write enable. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="ALPHA_TEST_MODE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf169" access="w" space="pp1_regs" reset="unknown">
+    <doc>Alpha test function and reference value. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="ACCUMULATION_MODE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf16a" access="w" space="pp1_regs" reset="unknown">
+    <doc>Accumulation buffer control. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="BLEND_COLOR_RG" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf16b" access="w" space="pp1_regs" reset="unknown">
+    <doc>Constant blend colour, red and green. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="BLEND_COLOR_BA" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf16c" access="w" space="pp1_regs" reset="unknown">
+    <doc>Constant blend colour, blue and alpha. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
   <struct name="DRB_POINTERS" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf16d" access="w" space="pp1_regs" reset="unknown">
     <field name="page_b" start="10" size="10" type="uint" grade="established"/>
     <field name="page_a" start="0" size="10" type="uint" grade="established"/>
@@ -46,6 +73,51 @@
       <expect field="dma_line_count_mask" value="3"/>
       <expect field="auto_flush_off" value="0"/>
     </test>
+  </struct>
+  <struct name="TAG_MODE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf16f" access="w" space="pp1_regs" reset="unknown">
+    <doc>Tag readback mode control. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TAG_DATA_RED" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf170" access="r" space="pp1_regs" reset="unknown">
+    <doc>Tag readback data, red. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TAG_DATA_GREEN" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf171" access="r" space="pp1_regs" reset="unknown">
+    <doc>Tag readback data, green. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TAG_DATA_BLUE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf172" access="r" space="pp1_regs" reset="unknown">
+    <doc>Tag readback data, blue. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TAG_DATA_ALPHA" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf173" access="r" space="pp1_regs" reset="unknown">
+    <doc>Tag readback data, alpha. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TAG_DATA_DEPTH" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf174" access="r" space="pp1_regs" reset="unknown">
+    <doc>Tag readback data, depth. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="PIXEL_COORDINATE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf175" access="w" space="pp1_regs" reset="unknown">
+    <doc>Coordinate of the pixel that the direct pixel colour registers address, y in the high half and x in the low half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="PIXEL_COLOR_RED" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf176" access="w" space="pp1_regs" reset="unknown">
+    <doc>Direct pixel colour write, red. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="PIXEL_COLOR_GREEN" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf177" access="w" space="pp1_regs" reset="unknown">
+    <doc>Direct pixel colour write, green. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="PIXEL_COLOR_BLUE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf178" access="w" space="pp1_regs" reset="unknown">
+    <doc>Direct pixel colour write, blue. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="PIXEL_COLOR_ALPHA" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf179" access="w" space="pp1_regs" reset="unknown">
+    <doc>Direct pixel colour write, alpha. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="PIXEL_COLOR_ACCUMULATION" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf17a" access="w" space="pp1_regs" reset="unknown">
+    <doc>Direct pixel colour write, accumulation. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="WINDOW_MODE" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf17b" access="w" space="pp1_regs" reset="unknown">
+    <doc>Pixel-processor window mode. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="MAIN_BUFFER_SELECT" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf17e" access="w" space="pp1_regs" reset="unknown">
+    <doc>Front or back selection of the main display buffer. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="OVERLAY_BUFFER_SELECT" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf17f" access="w" space="pp1_regs" reset="unknown">
+    <doc>Buffer selection of the overlay display buffer. Role inferred from the hand-written header, not measured.</doc>
   </struct>
   <constant name="DRB_POINTERS_COMMAND_WORD" value="0x196d04" grade="established"/>
   <constant name="DRB_SIZE_COMMAND_WORD" value="0x196e04" grade="established"/>

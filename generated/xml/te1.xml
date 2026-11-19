@@ -2,10 +2,85 @@
 <!-- generated from devices/te1/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 13f53acf9b97e4eaa1c0e9c42d6ae6bb94348a4f7f842d8c919098013fc9f000 -->
+<!-- input sha256 8ee765eb25302e83f0b76fd3fd6d61ad0223693cf3052508164eda23983dc1e5 -->
 <genxml unit="te1" prefix="TE" title="texture engine and texture RAM registers of the Impact graphics subsystem" from="driver readings">
   <doc>Texture engine and texture RAM registers and loader registers of the Impact graphics subsystem.</doc>
   <space name="te1_regs" unit="reg"/>
+  <struct name="TEXTURE_S_OVER_W_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe080" access="w" space="te1_regs" reset="unknown">
+    <doc>S/W texture coordinate, upper 16 bits. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_S_OVER_W_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe081" access="w" space="te1_regs" reset="unknown">
+    <doc>S/W texture coordinate, lower 16 bits. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_T_OVER_W_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe082" access="w" space="te1_regs" reset="unknown">
+    <doc>T/W texture coordinate, upper half (the header reuses this register for a derivative in warp mode). Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_T_OVER_W_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe083" access="w" space="te1_regs" reset="unknown">
+    <doc>T/W texture coordinate, lower half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_ONE_OVER_W_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe084" access="w" space="te1_regs" reset="unknown">
+    <doc>1/W coordinate, upper half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_ONE_OVER_W_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe085" access="w" space="te1_regs" reset="unknown">
+    <doc>1/W coordinate, lower half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_ONE_OVER_W_EDGE_STEP_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe086" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of 1/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_ONE_OVER_W_EDGE_STEP_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe087" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of 1/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_ONE_OVER_W_X_STEP_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe088" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of 1/W per pixel in x, upper half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_ONE_OVER_W_X_STEP_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe089" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of 1/W per pixel in x, lower half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_ONE_OVER_W_Y_STEP_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe08a" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of 1/W per scanline in y, upper half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_ONE_OVER_W_Y_STEP_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe08b" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of 1/W per scanline in y, lower half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_SCALE_FACTOR" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe08c" access="w" space="te1_regs" reset="unknown">
+    <doc>Texture scale factor. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_S_OVER_W_EDGE_STEP_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0c0" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of S/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_S_OVER_W_EDGE_STEP_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0c1" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of S/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_T_OVER_W_EDGE_STEP_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0c2" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of T/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_T_OVER_W_EDGE_STEP_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0c3" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of T/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_S_OVER_W_X_STEP_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0c4" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of S/W per pixel in x, upper half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_S_OVER_W_X_STEP_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0c5" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of S/W per pixel in x, lower half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_T_OVER_W_X_STEP_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0c6" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of T/W per pixel in x, upper half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_T_OVER_W_X_STEP_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0c7" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of T/W per pixel in x, lower half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_S_OVER_W_Y_STEP_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0c8" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of S/W per scanline in y, upper half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_S_OVER_W_Y_STEP_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0c9" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of S/W per scanline in y, lower half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_T_OVER_W_Y_STEP_UPPER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0ca" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of T/W per scanline in y, upper half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
+  <struct name="TEXTURE_T_OVER_W_Y_STEP_LOWER" size="4" grade="inferred" from="driver readings" register="yes" offset="0xe0cb" access="w" space="te1_regs" reset="unknown">
+    <doc>Step of T/W per scanline in y, lower half. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
   <struct name="TEXTURE_MODE_DRAWN" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf180" access="rw" space="te1_regs" reset="unknown">
     <doc>Texture mode for the drawn texture: component depth, filters, wrap and the
 no-border flag. The diagnostic's mask is 25 bits. The field positions are the
@@ -112,6 +187,9 @@ through the indexed-write token, and advances one entry per table write. The
 diagnostic's mask is 5 bits. Formerly txaddr.</doc>
     <field name="index" start="0" size="5" type="uint" grade="inferred"/>
   </struct>
+  <struct name="TEXTURE_MIPMAP_LEVELS" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf191" access="w" space="te1_regs" reset="unknown">
+    <doc>Mipmap level addresses and offsets. Role inferred from the hand-written header, not measured.</doc>
+  </struct>
   <struct name="TEXTURE_DETAIL_BLOCK" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf192" access="rw" space="te1_regs" reset="unknown">
     <doc>First block of the detail texture, 9 bits in the diagnostic's mask. Formerly txdetail.</doc>
     <field name="block" start="0" size="9" type="uint" grade="inferred"/>
@@ -126,6 +204,9 @@ register. The diagnostic's mask is 9 bits. Formerly txborder.</doc>
 through the indexed-write token. The client's default fills the table with 31,
 31, 31, 29, 28 down to 1. The diagnostic's mask is 6 bits.</doc>
     <field name="value" start="0" size="6" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="TEXTURE_TOGGLE_CONTEXT" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf195" access="w" space="te1_regs" reset="unknown">
+    <doc>Texture engine context toggle. Role inferred from the hand-written header, not measured.</doc>
   </struct>
   <struct name="TEXTURE_ENGINE_REVISION" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf196" access="r" space="te1_regs" reset="unknown">
     <doc>Texture engine revision, 29 bits in the diagnostic's mask. The client does not
@@ -193,6 +274,9 @@ kernel's video path does. Formerly tl_vidcntrl.</doc>
   <struct name="TEXTURE_LOADER_BASE_BLOCK" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf1a7" access="w" space="te1_regs" reset="unknown">
     <doc>Base block of the texture being loaded, 8 bits in the diagnostic's mask. Formerly tl_base.</doc>
     <field name="base_block" start="0" size="8" type="uint" grade="inferred"/>
+  </struct>
+  <struct name="TEXTURE_LOADER_VIDEO_CAPTURE_ABORT" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf1a8" access="w" space="te1_regs" reset="unknown">
+    <doc>Video texture capture abort. Role inferred from the hand-written header, not measured.</doc>
   </struct>
   <struct name="TEXTURE_LOADER_COPY_WIDTH" size="4" grade="inferred" from="driver readings" register="yes" offset="0xf1a9" access="w" space="te1_regs" reset="unknown">
     <doc>Copy rectangle width for a framebuffer copy, 14 bits in the diagnostic's mask. Formerly tl_s_size.</doc>

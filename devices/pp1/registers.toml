@@ -64,6 +64,246 @@ expect = { tile_columns_9bit = 2, tile_columns_36bit = 6, raster_engines_minus_1
 value = 0x31a
 expect = { tile_columns_9bit = 2, tile_columns_36bit = 6, raster_engines_minus_1 = 0, dma_line_count_mask = 3, auto_flush_off = 0 }
 
+[registers.pixel_command]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf160
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Pixel command: starts a pixel-processor operation. Role inferred from the hand-written header, not measured."
+
+[registers.blend_factor]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf165
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Source and destination blend factors. Source in bits 3:0, destination in bits 7:4; the encodings are inferred. Role inferred from the hand-written header, not measured."
+
+[registers.stencil_mode]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf166
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Stencil test function and operations. Role inferred from the hand-written header, not measured."
+
+[registers.stencil_mask]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf167
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Stencil read and write mask. Role inferred from the hand-written header, not measured."
+
+[registers.depth_mode]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf168
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Depth test function and depth write enable. Role inferred from the hand-written header, not measured."
+
+[registers.alpha_test_mode]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf169
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Alpha test function and reference value. Role inferred from the hand-written header, not measured."
+
+[registers.accumulation_mode]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf16a
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Accumulation buffer control. Role inferred from the hand-written header, not measured."
+
+[registers.blend_color_rg]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf16b
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Constant blend colour, red and green. Role inferred from the hand-written header, not measured."
+
+[registers.blend_color_ba]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf16c
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Constant blend colour, blue and alpha. Role inferred from the hand-written header, not measured."
+
+[registers.tag_mode]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf16f
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Tag readback mode control. Role inferred from the hand-written header, not measured."
+
+[registers.tag_data_red]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf170
+access = "r"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Tag readback data, red. Role inferred from the hand-written header, not measured."
+
+[registers.tag_data_green]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf171
+access = "r"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Tag readback data, green. Role inferred from the hand-written header, not measured."
+
+[registers.tag_data_blue]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf172
+access = "r"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Tag readback data, blue. Role inferred from the hand-written header, not measured."
+
+[registers.tag_data_alpha]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf173
+access = "r"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Tag readback data, alpha. Role inferred from the hand-written header, not measured."
+
+[registers.tag_data_depth]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf174
+access = "r"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Tag readback data, depth. Role inferred from the hand-written header, not measured."
+
+[registers.pixel_coordinate]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf175
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Coordinate of the pixel that the direct pixel colour registers address, y in the high half and x in the low half. Role inferred from the hand-written header, not measured."
+
+[registers.pixel_color_red]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf176
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Direct pixel colour write, red. Role inferred from the hand-written header, not measured."
+
+[registers.pixel_color_green]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf177
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Direct pixel colour write, green. Role inferred from the hand-written header, not measured."
+
+[registers.pixel_color_blue]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf178
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Direct pixel colour write, blue. Role inferred from the hand-written header, not measured."
+
+[registers.pixel_color_alpha]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf179
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Direct pixel colour write, alpha. Role inferred from the hand-written header, not measured."
+
+[registers.pixel_color_accumulation]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf17a
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Direct pixel colour write, accumulation. Role inferred from the hand-written header, not measured."
+
+[registers.window_mode]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf17b
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Pixel-processor window mode. Role inferred from the hand-written header, not measured."
+
+[registers.main_buffer_select]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf17e
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Front or back selection of the main display buffer. Role inferred from the hand-written header, not measured."
+
+[registers.overlay_buffer_select]
+# role from the PP1 header's register list; the offset is not named by a public source
+name_source = "ours"
+offset = 0xf17f
+access = "w"
+width = 32
+grade = "inferred"
+space = "pp1_regs"
+doc = "Buffer selection of the overlay display buffer. Role inferred from the hand-written header, not measured."
+
 [constants]
 DRB_POINTERS_COMMAND_WORD = { value = 0x196d04, grade = "established", doc = "kernel constant table" }
 DRB_SIZE_COMMAND_WORD = { value = 0x196e04, grade = "established", doc = "kernel constant table" }

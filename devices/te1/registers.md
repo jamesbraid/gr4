@@ -1,7 +1,7 @@
 <!-- generated from devices/te1/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 13f53acf9b97e4eaa1c0e9c42d6ae6bb94348a4f7f842d8c919098013fc9f000 -->
+<!-- input sha256 8ee765eb25302e83f0b76fd3fd6d61ad0223693cf3052508164eda23983dc1e5 -->
 
 # texture engine and texture RAM registers of the Impact graphics subsystem
 
@@ -22,6 +22,31 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 
 | Register | Offset | Access | Width | Count | Space | Reset | Grade | Source |
 |---|---|---|---|---|---|---|---|---|
+| `texture_s_over_w_upper` | 0xe080 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_s_over_w_lower` | 0xe081 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_t_over_w_upper` | 0xe082 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_t_over_w_lower` | 0xe083 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_one_over_w_upper` | 0xe084 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_one_over_w_lower` | 0xe085 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_one_over_w_edge_step_upper` | 0xe086 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_one_over_w_edge_step_lower` | 0xe087 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_one_over_w_x_step_upper` | 0xe088 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_one_over_w_x_step_lower` | 0xe089 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_one_over_w_y_step_upper` | 0xe08a | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_one_over_w_y_step_lower` | 0xe08b | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_scale_factor` | 0xe08c | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_s_over_w_edge_step_upper` | 0xe0c0 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_s_over_w_edge_step_lower` | 0xe0c1 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_t_over_w_edge_step_upper` | 0xe0c2 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_t_over_w_edge_step_lower` | 0xe0c3 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_s_over_w_x_step_upper` | 0xe0c4 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_s_over_w_x_step_lower` | 0xe0c5 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_t_over_w_x_step_upper` | 0xe0c6 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_t_over_w_x_step_lower` | 0xe0c7 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_s_over_w_y_step_upper` | 0xe0c8 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_s_over_w_y_step_lower` | 0xe0c9 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_t_over_w_y_step_upper` | 0xe0ca | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_t_over_w_y_step_lower` | 0xe0cb | w | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_mode_drawn` | 0xf180 | rw | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_size` | 0xf181 | rw | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_manager_init` | 0xf182 | rw | 32 |  | te1_regs | unknown | inferred | driver readings |
@@ -37,9 +62,11 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | `texture_clamp_size` | 0xf18c | rw | 32 |  | te1_regs | unknown | established | driver readings |
 | `texture_engine_reset` | 0xf18e | w | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_level_table_index` | 0xf190 | rw | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_mipmap_levels` | 0xf191 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_detail_block` | 0xf192 | rw | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_border_block` | 0xf193 | rw | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `detailscale` | 0xf194 | rw | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_toggle_context` | 0xf195 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_engine_revision` | 0xf196 | r | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_loader_write_buffer` | 0xf1a0 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_loader_mode` | 0xf1a1 | w | 32 |  | te1_regs | unknown | established | driver readings |
@@ -49,10 +76,111 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | `texture_loader_border_block` | 0xf1a5 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_loader_video_capture_start` | 0xf1a6 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_loader_base_block` | 0xf1a7 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+| `texture_loader_video_capture_abort` | 0xf1a8 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_loader_copy_width` | 0xf1a9 | w | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_loader_copy_height` | 0xf1aa | w | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_loader_copy_left` | 0xf1ab | w | 32 |  | te1_regs | unknown | inferred | driver readings |
 | `texture_loader_copy_bottom` | 0xf1ac | w | 32 |  | te1_regs | unknown | inferred | driver readings |
+
+### Register `texture_s_over_w_upper`
+
+S/W texture coordinate, upper 16 bits. Role inferred from the hand-written header, not measured.
+
+### Register `texture_s_over_w_lower`
+
+S/W texture coordinate, lower 16 bits. Role inferred from the hand-written header, not measured.
+
+### Register `texture_t_over_w_upper`
+
+T/W texture coordinate, upper half (the header reuses this register for a derivative in warp mode). Role inferred from the hand-written header, not measured.
+
+### Register `texture_t_over_w_lower`
+
+T/W texture coordinate, lower half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_one_over_w_upper`
+
+1/W coordinate, upper half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_one_over_w_lower`
+
+1/W coordinate, lower half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_one_over_w_edge_step_upper`
+
+Step of 1/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_one_over_w_edge_step_lower`
+
+Step of 1/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_one_over_w_x_step_upper`
+
+Step of 1/W per pixel in x, upper half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_one_over_w_x_step_lower`
+
+Step of 1/W per pixel in x, lower half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_one_over_w_y_step_upper`
+
+Step of 1/W per scanline in y, upper half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_one_over_w_y_step_lower`
+
+Step of 1/W per scanline in y, lower half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_scale_factor`
+
+Texture scale factor. Role inferred from the hand-written header, not measured.
+
+### Register `texture_s_over_w_edge_step_upper`
+
+Step of S/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_s_over_w_edge_step_lower`
+
+Step of S/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_t_over_w_edge_step_upper`
+
+Step of T/W along the triangle edge, upper half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_t_over_w_edge_step_lower`
+
+Step of T/W along the triangle edge, lower half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_s_over_w_x_step_upper`
+
+Step of S/W per pixel in x, upper half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_s_over_w_x_step_lower`
+
+Step of S/W per pixel in x, lower half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_t_over_w_x_step_upper`
+
+Step of T/W per pixel in x, upper half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_t_over_w_x_step_lower`
+
+Step of T/W per pixel in x, lower half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_s_over_w_y_step_upper`
+
+Step of S/W per scanline in y, upper half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_s_over_w_y_step_lower`
+
+Step of S/W per scanline in y, lower half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_t_over_w_y_step_upper`
+
+Step of T/W per scanline in y, upper half. Role inferred from the hand-written header, not measured.
+
+### Register `texture_t_over_w_y_step_lower`
+
+Step of T/W per scanline in y, lower half. Role inferred from the hand-written header, not measured.
 
 ### Register `texture_mode_drawn`
 
@@ -205,6 +333,10 @@ diagnostic's mask is 5 bits. Formerly txaddr.
 |---|---|---|---|---|---|
 | 4:0 | `index` | inferred |  | driver readings |  |
 
+### Register `texture_mipmap_levels`
+
+Mipmap level addresses and offsets. Role inferred from the hand-written header, not measured.
+
 ### Register `texture_detail_block`
 
 First block of the detail texture, 9 bits in the diagnostic's mask. Formerly txdetail.
@@ -231,6 +363,10 @@ through the indexed-write token. The client's default fills the table with 31,
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
 | 5:0 | `value` | inferred |  | driver readings |  |
+
+### Register `texture_toggle_context`
+
+Texture engine context toggle. Role inferred from the hand-written header, not measured.
 
 ### Register `texture_engine_revision`
 
@@ -310,6 +446,10 @@ Base block of the texture being loaded, 8 bits in the diagnostic's mask. Formerl
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
 | 7:0 | `base_block` | inferred |  | driver readings |  |
+
+### Register `texture_loader_video_capture_abort`
+
+Video texture capture abort. Role inferred from the hand-written header, not measured.
 
 ### Register `texture_loader_copy_width`
 
