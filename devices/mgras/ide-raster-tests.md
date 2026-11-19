@@ -241,31 +241,80 @@ the page pointer global `0x2095869c` at 0x240: `0x112=0x4`, `0x160=0`, `0x161=0x
 `0x170=0x00081a19`, `0x171=0x0008807f`, `0x172=0x0008807f`, `0x173=0xff`, `0x17b=0`. Registers `0x16b` and `0x16c` are not written
 (software expectation, run of the routine).
 
-### Line draw `0x20897638` (arguments: end vertex, start vertex, stipple flag, stipple pattern, flag B, smooth flag)
+### Line draw `0x20897638`
 
-Fully captured for the five lines of `mg_lines` (the earlier fault was an artefact of the emulator's memory-write hook, not a
-missing data pointer). Order of writes per line (software expectation, run of the routine):
+**Correction.** An earlier version of this section came from running the routine on its own with guessed arguments, and labelled
+the arguments wrongly. This version reads the routine and its five call sites in `mg_lines` (`0x2081efc4`, `0x2081f078`,
+`0x2081f0f4`, `0x2081f14c`, `0x2081f1e0`) statically. Everything below is a **software expectation** from those instructions unless
+marked. The earlier writes, in particular `0x15b` = pattern and `0x15a` = 0, the smooth line being line 5, and the logged fill mode
+`0x0c00000b`, are withdrawn.
+
+Arguments, in the order the 64-bit calling convention passes them (eight in registers, two on the stack):
+
+| Arg | Role | Evidence |
+|---|---|---|
+| 1, 2 | end vertex and start vertex (pointers) | vertex fields read from both, as before |
+| 3 | stipple enable | selects the stipple block that writes `0x110 = 0x70a0` (`0x7000` with bits 5 and 7) and the two stipple registers |
+| 4 | **repeat and control word**, written to `0x15b` (`0x20897cec`) | value is `(w & 0xfff00000)`, with `0x000f0000` ORed in and bits 15:8 cleared for the stippled lines; `w` is a diagnostic variable that is zero in the image and filled at run time |
+| 5 | **stipple pattern**, written to `0x15a` (`0x20897cf8`) | `0xa9876543` on the stippled lines |
+| 6 | smooth (antialiased) line enable | when set, the routine calls the filter-table loader `0x2083bccc` (the `0x15c`/`0x15d` writes) and writes the blend factor `0x7880c8c4` |
+| 7 | alternate integer-coordinate setup | when set, the routine writes `0x58004004` and the packed truncated start coordinates (x in the high half) to the host window at `+0x13400`, then rejoins; purpose inferred only |
+| 8 | mode select | zero in all five calls; non-zero changes the trigger word's low bits (`0xb` against `3`) and the trigger routine; meaning inferred only |
+| 9 | zero | never read |
+| 10 | pointer to a context | stack argument |
+
+The stipple stores are made only when argument 3 is set, in the order `0x15b` then `0x15a`. So **the pattern lives in `0x15a`, the
+repeat and control word in `0x15b`**, which agrees with `line_stipple_pattern` and `line_stipple_repeat` in
+[registers.toml](../re4/registers.toml) and with a real IRIX 6.5.30 recording (a 32-bit pattern in `0x15a` and `0x000f0000` in
+`0x15b`, reported by the iris engine work). The earlier decode swapped arguments 4 and 5. The purple line also receives the
+pattern, but its stipple enable is off, so nothing is stored. Bits 19:16 are set to `0xf`; what the field means
+(repeat count less one is the natural reading, inferred from the client's repeat-minus-one encoding in [HQ3.h](../hq3/HQ3.h)) and what the
+other bits do is unknown.
+
+Order of writes per line, unchanged where the earlier run agreed:
 
 - Endpoints: `0x0c`, `0x0d` = `float32(B + x, B + y)` of the **end** vertex, `0x0e`, `0x0f` = the same for the **start** vertex
   (`B` = 49151.5). Registers `0x10`, `0x11` = per-step x and y increments in s.24, normalised to 1.0 on the major axis
   (`0x10 = 0x400000` for dx/dy = 0.25 with y major, `0x1000000, 0` for x major, `0, 0x1000000` for a vertical line); the
   sign convention was not isolated, since all five lines run toward smaller coordinates. `0x12 = 0`.
-- `0x110 = 0x7000`. With the stipple flag set: `0x110 = 0x70a0`, then `0x15b` = the pattern and `0x15a = 0`.
+- `0x110 = 0x7000`, then (stipple) `0x110 = 0x70a0`, `0x15b`, `0x15a`.
 - `0x60`, `0x62`, `0x64`, `0x66` = 0 (colour deltas), then `0x5c` to `0x5f` = colour times `0xFFF000` (red, green, blue, alpha),
-  `0x116 = 0`, then the trigger, a write of 3 to the register at offset `0x2c114` of the host window (register 0x445 in the
-  numbering the write helper uses).
-- Smooth flag (line 5 only) adds, before the trigger: `0x15c = 0xb0000000` then 128 writes of `0x15d` (the 64 values `0xff` down to
-  `0x03` in steps of 4, twice), `0x15c = 0xb0000080`, 32 writes of `0x15d = 0x100`, `0x110 = 0x7100`, blend factors
-  `0x165 = 0x80000074` then `0x165 = 0x7880c8c4`, fill mode `0x161 = 0x0c00000b`, `0x116 = 1` (twice), and the trigger value 0x63.
-- Flag B (line 2) changes nothing in the stream: its meaning is **unknown** (possibly unused by this path).
+  `0x116 = 0`, then the trigger, a write of 3 to the register at offset `0x2c114` of the host window.
+- Smooth path (line 2 only): `0x15c = 0xb0000000` then the 64 values `0xff` down to `0x03` in steps of 4, twice, on `0x15d` (written by
+  `0x2083bccc`), `0x15c = 0xb0000080` and 32 writes of `0x100`, `0x110 = 0x7100`, blend factors `0x80000074` then `0x7880c8c4`, the fill
+  mode, `0x116 = 1`, and a trigger word with `0x60` ORed in. The values come from the earlier run; the loader's own constants
+  (`0xb0000000`, then `0xff`, `0xfb`, `0xf7` and on) were seen in the binary, the rest was not rechecked.
+- **Fill mode.** The smooth path builds the fill-mode word by read-modify-write on a shadow: the routine copies six 32-bit
+  shadow words from globals into its frame on entry (`0x2096d308` to `0x2096d330`), all zero in the image and filled at run time.
+  It sets bits 1:0 and 3, clears bit 5, and ORs in `0x200` or `0x500` by a pixel-type global. So the earlier logged `0x0c00000b` is an
+  artefact of replaying from zero shadows: only the written bits are known, the rest come from the register's prior value. The
+  upper bits could not be derived from the routine. Software expectation for the written bits, unknown for the rest.
+- Argument 5 on lines 1 and 2 is 0 and the unused stack argument 9 is 0 in every call.
 
-The five lines, each as (end vertex from start vertex, flags): (1) red (0,0) from (4,16), no flags: `0xc=0x473fff80 0xd=0x473fff80
-0xe=0x47400380 0xf=0x47400f80 0x10=0x400000 0x11=0x1000000`, colour `0x5c=0xfff000 0x5d=0 0x5e=0 0x5f=0xfff000`. (2) green (5,0)
-from (9,16), flag B: `0xc=0x47400480 0xd=0x473fff80 0xe=0x47400880 0xf=0x47400f80`, same increments, `0x5d=0xfff000`. (3) blue (0,5) from (5,5),
-stipple: `0xc=0x473fff80 0xd=0x47400480 0xe=0x47400480 0xf=0x47400480 0x10=0x1000000 0x11=0`, `0x5e=0xfff000`. (4) blue (5,5) from (10,5),
-stipple: `0xc=0x47400480 0xd=0x47400480 0xe=0x47400980 0xf=0x47400480`, as (3). (5) purple (12,0) from (12,10), smooth,
-colour (0.5, 0, 0.5, 1): `0xc=0x47400b80 0xd=0x473fff80 0xe=0x47400b80 0xf=0x47400980 0x10=0 0x11=0x1000000`, `0x5c=0x7ff800 0x5e=0x7ff800 0x5f=0xfff000`, plus
-the smooth-line writes above. The stipple pattern is `0xa9876543` for lines 3 to 5.
+The five calls (end from start, flags), with the corrected roles:
+
+| Line | Vertices | Arguments set |
+|---|---|---|
+| 1 red | (0,0) from (4,16) | none (`0xc=0x473fff80 0xd=0x473fff80 0xe=0x47400380 0xf=0x47400f80 0x10=0x400000 0x11=0x1000000`, colour `0x5c=0xfff000 0x5f=0xfff000`) |
+| 2 green | (5,0) from (9,16) | smooth (argument 6 = 1): `0xc=0x47400480 0xd=0x473fff80 0xe=0x47400880 0xf=0x47400f80`, `0x5d=0xfff000` |
+| 3 blue | (0,5) from (5,5) | stipple, repeat word, pattern `0xa9876543`: `0xc=0x473fff80 0xd=0x47400480 0xe=0x47400480 0xf=0x47400480 0x10=0x1000000 0x11=0`, `0x5e=0xfff000` |
+| 4 blue | (5,5) from (10,5) | as line 3: `0xc=0x47400480 0xd=0x47400480 0xe=0x47400980 0xf=0x47400480` |
+| 5 purple | (12,0) from (12,10) | argument 7 = 1 only (pattern passed but stipple off): `0xc=0x47400b80 0xd=0x473fff80 0xe=0x47400b80 0xf=0x47400980 0x10=0 0x11=0x1000000`, `0x5c=0x7ff800 0x5e=0x7ff800 0x5f=0xfff000` |
+
+What the stored lines table (17 by 14) shows, with the corrected roles:
+
+- **The green weights.** The weighted green pixels are explained by the smooth line, not by interpolation or the dither. Each row holds
+  two pixels whose coverage `c` is `1 - |distance|` at quarter-pixel steps (1, 0.75, 0.5, 0.25 for a slope of 0.25 per row), and a
+  stored pixel is green `c`, alpha `c * c`: for `c` = 0.5 the words are `0x3f007f00` (alpha `0x3f`, green `0x7f`), for 0.25 `0x0f003e00`,
+  for 0.75 `0x8f00bf00`, for 1 `0xff00ff00`. The pairs in a row sum to one, as a unit-width tent does. The one-level differences
+  between a pair (`0x3f`/`0x7e`, `0x0f`/`0x10`, `0x8f`/`0x90`) are the Bayer dither above. That the alpha is `c * c` is what a source
+  alpha blend of colour and alpha onto a zero destination gives. **inferred** (arithmetic fit to the stored pixels; the filter table
+  loader's 64 entries were not matched against it).
+- The dots of the two stippled lines lie on alternate pixels in the stored table: line 3 (drawn from x = 5 toward 0) stores x = 4, 2, 0,
+  and line 4 (from x = 10 toward 5) stores x = 9, 7 and x = 5 (hidden under the green line's blend), with the start pixel unlit in line 4. No reading of
+  `0xa9876543` I tried, in either bit order, as a 32-bit or 16-bit pattern with repeat one, gives that sequence; the order of the
+  pattern bits and the effect of the `0xf0000` field are **unknown**.
+- The purple line (colour 0.5, 0.0, 0.5, alpha 1, not smooth) stores `0x80` and `0x7f` by row exactly as the dither predicts.
 
 ### The alpha triangle, resolved
 
@@ -317,11 +366,11 @@ Replay spec:
 4. Read back 16 rows by 24 columns from (0,0), draw page 0x240, mask `0xffffffff`; compare with the table (1536 bytes, `0xAABBGGRR`):
    red `0x20953380` sum `0x54005595`; green `0x20953980` sum `0x5455be00`; blue `0x20953f80` sum `0xa7180000`.
 
-Not fully runnable: **`mg_lines`** and the **alpha triangle**. Both now have their full register streams (see above) but each
-still has a gap: for lines, the stored table's line state (width, the stipple repeat and the smooth-line blend state at the time
-of the read-back) is captured but its flag B and the sign convention of `0x10`/`0x11` are undecoded, so only the captured five
-lines are replayable as logged streams (software expectation), not generalisable; the replay spec is the five streams above, read back
-17 rows by 14 columns from (0,0) at `0x20954b80`, sum `0xc584ed6b`, with the red triangle's initialisation. For the alpha triangle,
+Not fully runnable: **`mg_lines`** and the **alpha triangle**. For lines, the argument roles are now read from the call sites (see
+above) and the green weights are explained, but the stipple dot sequence, the field meaning of the repeat word, the pixel-type bits of the
+fill mode and the sign of `0x10`/`0x11` are undecoded, and the stream logged earlier used mislabelled arguments (smooth on the wrong line,
+stipple registers swapped), so it must be redone from the table above before replaying: read back 17 rows by 14 columns from (0,0) at
+`0x20954b80`, sum `0xc584ed6b`, with the red triangle's initialisation. For the alpha triangle,
 the blend-factor reading (destination 0.75 against the written nibble `0xc`) is unresolved and enable bits are inferred, so a model
 may reproduce the table only under one of the two readings.
 
@@ -334,7 +383,7 @@ expectation, all items below).
 | Test | Primitives (decoded) | Expected table | Still missing |
 |---|---|---|---|
 | `mg_color_tri` red (check call `0x2081cba8`) | As in the previous section; table `0x20953380`, sum `0x54005595` | (moved to Runnable now) |
-| `mg_lines` (check call `0x2081f244`) | Five lines through `0x20897638` (arguments: end vertex, start vertex, a flag, a pattern, two more flags; their meaning is unknown). Vertex layout x, y, z, w, then two RGBA sets. (1) (4,16) to (0,0) red 1,0,0,1, flag 0. (2) (9,16) to (5,0) green, third flag 1. (3) (5,5) to (0,5) blue, flag 1, pattern `0xa9876543`. (4) (10,5) to (5,5) blue, flag 1, same pattern. (5) (12,10) to (12,0) colour (0.5, 0, 0.5, 1), fourth flag 1. Inferred meaning: line 3 and 4 are stippled, 2 and 5 are antialiased or wide, and the table agrees (a dotted blue row at y = 5, a one-pixel vertical purple line, weighted green pixels) | `0x20954b80`, 17 rows by 14 columns, 952 bytes, sum `0xc584ed6b` | Meaning of the three flags; the line routine's stream is incomplete (see above); line-width and stipple state words; clear state |
+| `mg_lines` (check call `0x2081f244`) | Five lines through `0x20897638`; argument roles and the call table are in the line draw section above (stipple enable, repeat word to `0x15b`, pattern to `0x15a`, smooth enable, an integer-start flag and a mode select). Line 2 (green) is the smooth line; lines 3 and 4 (blue) are stippled; line 5 (purple) has the integer-start flag. Vertex layout x, y, z, w, then two RGBA sets | `0x20954b80`, 17 rows by 14 columns, 952 bytes, sum `0xc584ed6b` | Stipple dot order and the repeat word's fields; the fill mode's pixel-type bits; sign of `0x10`/`0x11`; the integer-start flag's purpose; clear state |
 | `mg_color_tri` alpha (check call `0x2081d448`) | Same vertices; the draw is followed by blend writes. Register 0x165 (blend factors, source bits 3:0, destination 7:4): first a read-modify-write that forces bits 7:0 to `0x74` (source alpha, one-minus-destination-alpha) and sets bit 31, then a write of `0x7880c8c4` (source alpha, one-minus-constant-alpha). Register 0x161 (fill mode) is modified: bits 10:8 set to 2 (8-8-8-8), bit 9 set, bits 18:14 cleared and `0x0c004008` ORed in (operation field 3, copy). A second draw follows | `0x20954580`, 16 by 24, 1536 bytes, sum `0xf1563e81` | Starting values for the read-modify-writes (shadow copies maintained by the library), per-vertex colours of both draws, the blend-enable bit, constant colour registers 0x16b and 0x16c (no write found in this block), and why the stored alpha falls non-linearly |
 | `mg_stip_tri` (check call `0x2081f99c`) | Not decoded (vertices, stipple pattern) | `0x20954f38`, 16 by 24, 1536 bytes, sum `0xaa0055aa` | Primitive, pattern, state |
 
