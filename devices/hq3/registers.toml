@@ -600,6 +600,49 @@ CFIFO_CMD_SCISSOR = { value = 0x39, grade = "inferred", doc = "glScissor, four i
 # UNSURE: IRIS GL name, not checked against a public GL source
 CFIFO_CMD_SWAP_TMESH = { value = 0xdc, grade = "inferred", doc = "IRIS GL swaptmesh inside a triangle strip, no payload" }
 CFIFO_CMD_VIEWPORT = { value = 0x33, grade = "inferred", doc = "glViewport, four int words: x, y, width, height" }
+CFIFO_CMD_INIT_RGB_CONTEXT = { value = 0x9, grade = "inferred", doc = "no payload: starts a context in RGB colour mode. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_INIT_COLOR_INDEX_CONTEXT = { value = 0xa, grade = "inferred", doc = "one word, 8 or 12: starts a colour-index context; colours are then indices. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_TEXTURE_OFF = { value = 0xc, grade = "inferred", doc = "disables texturing; sent before every texture load. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_SCHEDULE_SWAP = { value = 0x37, grade = "inferred", doc = "buffer swap at the next retrace; raises command-processor flag 0. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_SCISSOR_TEST_ENABLE = { value = 0x6e, grade = "inferred", doc = "one word, 1 or 0: the GL scissor test enable. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_GE_STATE_BLOCK = { value = 0x80, grade = "inferred", doc = "geometry-engine state block whose data follows later. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_RESET_HISTOGRAM_MEMORY = { value = 0x83, grade = "inferred", doc = "resets the histogram memory; 12-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_INIT_CONVOLVE_2D_STATE = { value = 0x85, grade = "inferred", doc = "sets up 2D convolution state; 12-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_FAST_COPY_PIXELS = { value = 0x86, grade = "inferred", doc = "pixel copy fast path, no payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_INIT_FAST_PATH = { value = 0x88, grade = "inferred", doc = "initialises the fast path, no payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_INIT_COLOR_TABLE = { value = 0x89, grade = "inferred", doc = "initialises a colour table or lookup table; 4-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_RETURN_HISTOGRAM_PIO = { value = 0x8b, grade = "inferred", doc = "returns histogram results by programmed I/O; 8-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_SEND_PIXELS = { value = 0x8d, grade = "inferred", doc = "sends pixel data: eight words, data words per row and the row geometry. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_COPY_TILE = { value = 0x8e, grade = "inferred", doc = "copies a tile; 112-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_GENERAL_BITMAP = { value = 0x91, grade = "inferred", doc = "general bitmap draw; 20-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_VALIDATE_BANKS = { value = 0x98, grade = "inferred", doc = "names the bank the next frame draws, two copies of the count. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_INIT_FORMAT_VALUES = { value = 0x9a, grade = "inferred", doc = "initialises the pixel format values; 8-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_TEXTURE_LOAD = { value = 0x9b, grade = "inferred", doc = "runs a texture load, no payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_TEXTURE_LOAD_END = { value = 0x9c, grade = "inferred", doc = "sent after each pixel send of a texture load. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_SPIN_AND_RETURN = { value = 0xa1, grade = "inferred", doc = "waits and returns; 4-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_EVAL_MESH_1D = { value = 0xa9, grade = "inferred", doc = "evaluates a 1D mesh on the geometry engine; 12-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_EVAL_MESH_2D = { value = 0xaa, grade = "inferred", doc = "evaluates a 2D mesh on the geometry engine; 24-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_EVAL_COORD_1D = { value = 0xab, grade = "inferred", doc = "evaluates a 1D map coordinate on the geometry engine, no payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_EVAL_COORD_2D = { value = 0xac, grade = "inferred", doc = "evaluates a 2D map coordinate on the geometry engine, no payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_CLEAN_UP_1D = { value = 0xb0, grade = "inferred", doc = "1D map clean-up; 48-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_CLEAN_UP_2D = { value = 0xb1, grade = "inferred", doc = "2D map clean-up; 68-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_SEND_MAP_DATA_1D = { value = 0xb2, grade = "inferred", doc = "sends 1D map data; 24-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_SEND_MAP_DATA_2D = { value = 0xb3, grade = "inferred", doc = "sends 2D map data; 36-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_END_GENERIC = { value = 0xcc, grade = "inferred", doc = "ends a generic primitive, no payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_INIT_PIXEL_STATE_BLOCK = { value = 0xcd, grade = "inferred", doc = "pixel state block whose data follows later. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_SAVE_RASTER_STATE = { value = 0xd2, grade = "inferred", doc = "saves the raster subsystem state; 20-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_RESTORE_RASTER_STATE = { value = 0xd3, grade = "inferred", doc = "restores the saved raster subsystem state, no payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_SEND_HISTOGRAM_FILLS = { value = 0xd4, grade = "inferred", doc = "sends histogram fill values; 24-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_SEND_MINMAX_FILLS = { value = 0xd5, grade = "inferred", doc = "sends min and max fill values; 36-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_UPDATE_RASTER_POS = { value = 0xd6, grade = "inferred", doc = "updates the raster position; 8-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_LOAD_RASTER_POS_INFO = { value = 0xd7, grade = "inferred", doc = "loads the raster position information, no payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_GET_PIXELS = { value = 0xdb, grade = "inferred", doc = "reads pixels back by programmed I/O or DMA; 4-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_NORMAL_3F = { value = 0xdf, grade = "inferred", doc = "three floats: the current normal. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_DRAW_POINT_SIMPLE = { value = 0xe0, grade = "inferred", doc = "draws a plain point; 28-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_SAVE_TEXTURE_MODE = { value = 0xe9, grade = "inferred", doc = "saves the texture mode; 16-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_RESTORE_TEXTURE_MODE = { value = 0xea, grade = "inferred", doc = "restores the saved texture mode, no payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_DETAIL_TEXTURE_FUNC = { value = 0xec, grade = "inferred", doc = "detail texture function; 16-byte payload. Role from the hand-written header, payload size unchecked." }
+CFIFO_CMD_READ_TEXTURE = { value = 0xf0, grade = "inferred", doc = "reads a texture back (the GL texture image query). Role from the hand-written header, payload size unchecked." }
 CFIFO_CLASS_DMA_BANK_HOST = { value = 0x8, grade = "inferred", doc = "class field of the host-memory DMA descriptor bank, header 0x0008 in bits 31:16; the register number is in bits 15:8" }
 CFIFO_CLASS_DMA_BANK_SECOND = { value = 0xa, grade = "inferred", doc = "class field of the second DMA bank, used by the GL client's pixel read path; the meaning of registers 0x02, 0x03, 0x04 and 0x06 on a read is unknown. Formerly CFIFO_CLASS_DMA_BANK_0A." }
 CFIFO_CLASS_SYNC = { value = 0xe, grade = "inferred", doc = "class field of the synchronisation headers: register 0x04 is a write fence, register 0x01 a DMA-read sync" }

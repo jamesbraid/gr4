@@ -2,7 +2,7 @@
 <!-- generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 034ef22b3faeb54d7027472aae3d3f6ce5f2c13008db8fde2000c8c2a02243b5 -->
+<!-- input sha256 ff578dabddcbabea31e4222cde74bc2e82b482fd7937056bd43782fd3439453c -->
 <genxml unit="hq3" prefix="HQ" title="host interface and command processor registers for the Impact graphics subsystem" from="driver and diagnostic readings">
   <doc>Host interface and command processor registers of the Impact graphics subsystem.</doc>
   <space name="hq3_regs" unit="reg"/>
@@ -268,31 +268,74 @@ own context at creation). Formerly CTX_W1.</doc>
   <constant name="CFIFO_CLASS_DMA_BANK_SECOND" value="0xa" grade="inferred"/>
   <constant name="CFIFO_CLASS_SYNC" value="0xe" grade="inferred"/>
   <constant name="CFIFO_CMD_BITMAP" value="0x94" grade="inferred"/>
+  <constant name="CFIFO_CMD_CLEAN_UP_1D" value="0xb0" grade="inferred"/>
+  <constant name="CFIFO_CMD_CLEAN_UP_2D" value="0xb1" grade="inferred"/>
   <constant name="CFIFO_CMD_CLEAR_COLOUR" value="0x15" grade="inferred"/>
   <constant name="CFIFO_CMD_CLEAR_DEPTH" value="0x4a" grade="inferred"/>
   <constant name="CFIFO_CMD_CLEAR_STENCIL" value="0x4c" grade="inferred"/>
   <constant name="CFIFO_CMD_CONTEXT_CONFIG" value="0x8c" grade="inferred"/>
   <constant name="CFIFO_CMD_CONTEXT_OPEN" value="0x6" grade="inferred"/>
+  <constant name="CFIFO_CMD_COPY_TILE" value="0x8e" grade="inferred"/>
+  <constant name="CFIFO_CMD_DETAIL_TEXTURE_FUNC" value="0xec" grade="inferred"/>
+  <constant name="CFIFO_CMD_DRAW_POINT_SIMPLE" value="0xe0" grade="inferred"/>
+  <constant name="CFIFO_CMD_END_GENERIC" value="0xcc" grade="inferred"/>
+  <constant name="CFIFO_CMD_EVAL_COORD_1D" value="0xab" grade="inferred"/>
+  <constant name="CFIFO_CMD_EVAL_COORD_2D" value="0xac" grade="inferred"/>
+  <constant name="CFIFO_CMD_EVAL_MESH_1D" value="0xa9" grade="inferred"/>
+  <constant name="CFIFO_CMD_EVAL_MESH_2D" value="0xaa" grade="inferred"/>
+  <constant name="CFIFO_CMD_FAST_COPY_PIXELS" value="0x86" grade="inferred"/>
   <constant name="CFIFO_CMD_FILLER" value="0xe1" grade="inferred"/>
   <constant name="CFIFO_CMD_FLUSH" value="0x36" grade="inferred"/>
+  <constant name="CFIFO_CMD_GENERAL_BITMAP" value="0x91" grade="inferred"/>
+  <constant name="CFIFO_CMD_GET_PIXELS" value="0xdb" grade="inferred"/>
   <constant name="CFIFO_CMD_GE_MEMORY_READ" value="0xfc" grade="inferred"/>
   <constant name="CFIFO_CMD_GE_MEMORY_WRITE_ADDR" value="0xfb" grade="inferred"/>
   <constant name="CFIFO_CMD_GE_MEMORY_WRITE_CHUNK" value="0xfd" grade="inferred"/>
   <constant name="CFIFO_CMD_GE_MEMORY_WRITE_END" value="0xfa" grade="inferred"/>
+  <constant name="CFIFO_CMD_GE_STATE_BLOCK" value="0x80" grade="inferred"/>
   <constant name="CFIFO_CMD_GE_TABLE_LOAD" value="0x82" grade="inferred"/>
+  <constant name="CFIFO_CMD_INIT_COLOR_INDEX_CONTEXT" value="0xa" grade="inferred"/>
+  <constant name="CFIFO_CMD_INIT_COLOR_TABLE" value="0x89" grade="inferred"/>
+  <constant name="CFIFO_CMD_INIT_CONVOLVE_2D_STATE" value="0x85" grade="inferred"/>
+  <constant name="CFIFO_CMD_INIT_FAST_PATH" value="0x88" grade="inferred"/>
+  <constant name="CFIFO_CMD_INIT_FORMAT_VALUES" value="0x9a" grade="inferred"/>
+  <constant name="CFIFO_CMD_INIT_PIXEL_STATE_BLOCK" value="0xcd" grade="inferred"/>
+  <constant name="CFIFO_CMD_INIT_RGB_CONTEXT" value="0x9" grade="inferred"/>
+  <constant name="CFIFO_CMD_LOAD_RASTER_POS_INFO" value="0xd7" grade="inferred"/>
+  <constant name="CFIFO_CMD_NORMAL_3F" value="0xdf" grade="inferred"/>
   <constant name="CFIFO_CMD_QUERY" value="0xa2" grade="inferred"/>
   <constant name="CFIFO_CMD_RASTER_PAIRS" value="0x7f" grade="inferred"/>
   <constant name="CFIFO_CMD_RASTER_TRIPLES" value="0x7c" grade="inferred"/>
+  <constant name="CFIFO_CMD_READ_TEXTURE" value="0xf0" grade="inferred"/>
+  <constant name="CFIFO_CMD_RESET_HISTOGRAM_MEMORY" value="0x83" grade="inferred"/>
+  <constant name="CFIFO_CMD_RESTORE_RASTER_STATE" value="0xd3" grade="inferred"/>
+  <constant name="CFIFO_CMD_RESTORE_TEXTURE_MODE" value="0xea" grade="inferred"/>
   <constant name="CFIFO_CMD_RESULT_BEGIN" value="0x61" grade="inferred"/>
   <constant name="CFIFO_CMD_RESULT_END" value="0x62" grade="inferred"/>
+  <constant name="CFIFO_CMD_RETURN_HISTOGRAM_PIO" value="0x8b" grade="inferred"/>
+  <constant name="CFIFO_CMD_SAVE_RASTER_STATE" value="0xd2" grade="inferred"/>
+  <constant name="CFIFO_CMD_SAVE_TEXTURE_MODE" value="0xe9" grade="inferred"/>
+  <constant name="CFIFO_CMD_SCHEDULE_SWAP" value="0x37" grade="inferred"/>
   <constant name="CFIFO_CMD_SCISSOR" value="0x39" grade="inferred"/>
+  <constant name="CFIFO_CMD_SCISSOR_TEST_ENABLE" value="0x6e" grade="inferred"/>
   <constant name="CFIFO_CMD_SELECTION_NAME_POP" value="0xc6" grade="inferred"/>
   <constant name="CFIFO_CMD_SELECTION_NAME_PUSH" value="0xc7" grade="inferred"/>
   <constant name="CFIFO_CMD_SELECTION_NAME_REPLACE" value="0xc5" grade="inferred"/>
   <constant name="CFIFO_CMD_SELECTION_NAME_STACK_INIT" value="0xc4" grade="inferred"/>
   <constant name="CFIFO_CMD_SELECT_ENTER" value="0xcb" grade="inferred"/>
   <constant name="CFIFO_CMD_SELECT_EXIT" value="0xc9" grade="inferred"/>
+  <constant name="CFIFO_CMD_SEND_HISTOGRAM_FILLS" value="0xd4" grade="inferred"/>
+  <constant name="CFIFO_CMD_SEND_MAP_DATA_1D" value="0xb2" grade="inferred"/>
+  <constant name="CFIFO_CMD_SEND_MAP_DATA_2D" value="0xb3" grade="inferred"/>
+  <constant name="CFIFO_CMD_SEND_MINMAX_FILLS" value="0xd5" grade="inferred"/>
+  <constant name="CFIFO_CMD_SEND_PIXELS" value="0x8d" grade="inferred"/>
+  <constant name="CFIFO_CMD_SPIN_AND_RETURN" value="0xa1" grade="inferred"/>
   <constant name="CFIFO_CMD_SWAP_TMESH" value="0xdc" grade="inferred"/>
+  <constant name="CFIFO_CMD_TEXTURE_LOAD" value="0x9b" grade="inferred"/>
+  <constant name="CFIFO_CMD_TEXTURE_LOAD_END" value="0x9c" grade="inferred"/>
+  <constant name="CFIFO_CMD_TEXTURE_OFF" value="0xc" grade="inferred"/>
+  <constant name="CFIFO_CMD_UPDATE_RASTER_POS" value="0xd6" grade="inferred"/>
+  <constant name="CFIFO_CMD_VALIDATE_BANKS" value="0x98" grade="inferred"/>
   <constant name="CFIFO_CMD_VIEWPORT" value="0x33" grade="inferred"/>
   <constant name="CFIFO_CMD_WINDOW_CLIP_PACKET" value="0xe4" grade="inferred"/>
   <constant name="CFIFO_DELAY_DEFAULT" value="0x64" grade="established"/>

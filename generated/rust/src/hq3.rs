@@ -1,7 +1,7 @@
 // generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 2
-// input sha256 034ef22b3faeb54d7027472aae3d3f6ce5f2c13008db8fde2000c8c2a02243b5
+// input sha256 ff578dabddcbabea31e4222cde74bc2e82b482fd7937056bd43782fd3439453c
 // host interface and command processor registers for the Impact graphics subsystem
 #![allow(dead_code)]
 
@@ -944,31 +944,74 @@ pub const CFIFO_CLASS_DMA_BANK_HOST: u32 = 0x8; // inferred
 pub const CFIFO_CLASS_DMA_BANK_SECOND: u32 = 0xa; // inferred
 pub const CFIFO_CLASS_SYNC: u32 = 0xe; // inferred
 pub const CFIFO_CMD_BITMAP: u32 = 0x94; // inferred
+pub const CFIFO_CMD_CLEAN_UP_1D: u32 = 0xb0; // inferred
+pub const CFIFO_CMD_CLEAN_UP_2D: u32 = 0xb1; // inferred
 pub const CFIFO_CMD_CLEAR_COLOUR: u32 = 0x15; // inferred
 pub const CFIFO_CMD_CLEAR_DEPTH: u32 = 0x4a; // inferred
 pub const CFIFO_CMD_CLEAR_STENCIL: u32 = 0x4c; // inferred
 pub const CFIFO_CMD_CONTEXT_CONFIG: u32 = 0x8c; // inferred
 pub const CFIFO_CMD_CONTEXT_OPEN: u32 = 0x6; // inferred
+pub const CFIFO_CMD_COPY_TILE: u32 = 0x8e; // inferred
+pub const CFIFO_CMD_DETAIL_TEXTURE_FUNC: u32 = 0xec; // inferred
+pub const CFIFO_CMD_DRAW_POINT_SIMPLE: u32 = 0xe0; // inferred
+pub const CFIFO_CMD_END_GENERIC: u32 = 0xcc; // inferred
+pub const CFIFO_CMD_EVAL_COORD_1D: u32 = 0xab; // inferred
+pub const CFIFO_CMD_EVAL_COORD_2D: u32 = 0xac; // inferred
+pub const CFIFO_CMD_EVAL_MESH_1D: u32 = 0xa9; // inferred
+pub const CFIFO_CMD_EVAL_MESH_2D: u32 = 0xaa; // inferred
+pub const CFIFO_CMD_FAST_COPY_PIXELS: u32 = 0x86; // inferred
 pub const CFIFO_CMD_FILLER: u32 = 0xe1; // inferred
 pub const CFIFO_CMD_FLUSH: u32 = 0x36; // inferred
+pub const CFIFO_CMD_GENERAL_BITMAP: u32 = 0x91; // inferred
+pub const CFIFO_CMD_GET_PIXELS: u32 = 0xdb; // inferred
 pub const CFIFO_CMD_GE_MEMORY_READ: u32 = 0xfc; // inferred
 pub const CFIFO_CMD_GE_MEMORY_WRITE_ADDR: u32 = 0xfb; // inferred
 pub const CFIFO_CMD_GE_MEMORY_WRITE_CHUNK: u32 = 0xfd; // inferred
 pub const CFIFO_CMD_GE_MEMORY_WRITE_END: u32 = 0xfa; // inferred
+pub const CFIFO_CMD_GE_STATE_BLOCK: u32 = 0x80; // inferred
 pub const CFIFO_CMD_GE_TABLE_LOAD: u32 = 0x82; // inferred
+pub const CFIFO_CMD_INIT_COLOR_INDEX_CONTEXT: u32 = 0xa; // inferred
+pub const CFIFO_CMD_INIT_COLOR_TABLE: u32 = 0x89; // inferred
+pub const CFIFO_CMD_INIT_CONVOLVE_2D_STATE: u32 = 0x85; // inferred
+pub const CFIFO_CMD_INIT_FAST_PATH: u32 = 0x88; // inferred
+pub const CFIFO_CMD_INIT_FORMAT_VALUES: u32 = 0x9a; // inferred
+pub const CFIFO_CMD_INIT_PIXEL_STATE_BLOCK: u32 = 0xcd; // inferred
+pub const CFIFO_CMD_INIT_RGB_CONTEXT: u32 = 0x9; // inferred
+pub const CFIFO_CMD_LOAD_RASTER_POS_INFO: u32 = 0xd7; // inferred
+pub const CFIFO_CMD_NORMAL_3F: u32 = 0xdf; // inferred
 pub const CFIFO_CMD_QUERY: u32 = 0xa2; // inferred
 pub const CFIFO_CMD_RASTER_PAIRS: u32 = 0x7f; // inferred
 pub const CFIFO_CMD_RASTER_TRIPLES: u32 = 0x7c; // inferred
+pub const CFIFO_CMD_READ_TEXTURE: u32 = 0xf0; // inferred
+pub const CFIFO_CMD_RESET_HISTOGRAM_MEMORY: u32 = 0x83; // inferred
+pub const CFIFO_CMD_RESTORE_RASTER_STATE: u32 = 0xd3; // inferred
+pub const CFIFO_CMD_RESTORE_TEXTURE_MODE: u32 = 0xea; // inferred
 pub const CFIFO_CMD_RESULT_BEGIN: u32 = 0x61; // inferred
 pub const CFIFO_CMD_RESULT_END: u32 = 0x62; // inferred
+pub const CFIFO_CMD_RETURN_HISTOGRAM_PIO: u32 = 0x8b; // inferred
+pub const CFIFO_CMD_SAVE_RASTER_STATE: u32 = 0xd2; // inferred
+pub const CFIFO_CMD_SAVE_TEXTURE_MODE: u32 = 0xe9; // inferred
+pub const CFIFO_CMD_SCHEDULE_SWAP: u32 = 0x37; // inferred
 pub const CFIFO_CMD_SCISSOR: u32 = 0x39; // inferred
+pub const CFIFO_CMD_SCISSOR_TEST_ENABLE: u32 = 0x6e; // inferred
 pub const CFIFO_CMD_SELECTION_NAME_POP: u32 = 0xc6; // inferred
 pub const CFIFO_CMD_SELECTION_NAME_PUSH: u32 = 0xc7; // inferred
 pub const CFIFO_CMD_SELECTION_NAME_REPLACE: u32 = 0xc5; // inferred
 pub const CFIFO_CMD_SELECTION_NAME_STACK_INIT: u32 = 0xc4; // inferred
 pub const CFIFO_CMD_SELECT_ENTER: u32 = 0xcb; // inferred
 pub const CFIFO_CMD_SELECT_EXIT: u32 = 0xc9; // inferred
+pub const CFIFO_CMD_SEND_HISTOGRAM_FILLS: u32 = 0xd4; // inferred
+pub const CFIFO_CMD_SEND_MAP_DATA_1D: u32 = 0xb2; // inferred
+pub const CFIFO_CMD_SEND_MAP_DATA_2D: u32 = 0xb3; // inferred
+pub const CFIFO_CMD_SEND_MINMAX_FILLS: u32 = 0xd5; // inferred
+pub const CFIFO_CMD_SEND_PIXELS: u32 = 0x8d; // inferred
+pub const CFIFO_CMD_SPIN_AND_RETURN: u32 = 0xa1; // inferred
 pub const CFIFO_CMD_SWAP_TMESH: u32 = 0xdc; // inferred
+pub const CFIFO_CMD_TEXTURE_LOAD: u32 = 0x9b; // inferred
+pub const CFIFO_CMD_TEXTURE_LOAD_END: u32 = 0x9c; // inferred
+pub const CFIFO_CMD_TEXTURE_OFF: u32 = 0xc; // inferred
+pub const CFIFO_CMD_UPDATE_RASTER_POS: u32 = 0xd6; // inferred
+pub const CFIFO_CMD_VALIDATE_BANKS: u32 = 0x98; // inferred
 pub const CFIFO_CMD_VIEWPORT: u32 = 0x33; // inferred
 pub const CFIFO_CMD_WINDOW_CLIP_PACKET: u32 = 0xe4; // inferred
 pub const CFIFO_DELAY_DEFAULT: u32 = 0x64; // established

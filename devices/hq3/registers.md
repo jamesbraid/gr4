@@ -1,7 +1,7 @@
 <!-- generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 034ef22b3faeb54d7027472aae3d3f6ce5f2c13008db8fde2000c8c2a02243b5 -->
+<!-- input sha256 ff578dabddcbabea31e4222cde74bc2e82b482fd7937056bd43782fd3439453c -->
 
 # host interface and command processor registers for the Impact graphics subsystem
 
@@ -320,31 +320,74 @@ own context at creation). Formerly CTX_W1.
 | `CFIFO_CLASS_DMA_BANK_SECOND` | 0xa | inferred | driver and diagnostic readings | class field of the second DMA bank, used by the GL client's pixel read path; the meaning of registers 0x02, 0x03, 0x04 and 0x06 on a read is unknown. Formerly CFIFO_CLASS_DMA_BANK_0A. |
 | `CFIFO_CLASS_SYNC` | 0xe | inferred | driver and diagnostic readings | class field of the synchronisation headers: register 0x04 is a write fence, register 0x01 a DMA-read sync |
 | `CFIFO_CMD_BITMAP` | 0x94 | inferred | driver and diagnostic readings | glBitmap small-image header; eight payload words of flags, size, origin, move and word count, then an inline block of the image |
+| `CFIFO_CMD_CLEAN_UP_1D` | 0xb0 | inferred | driver and diagnostic readings | 1D map clean-up; 48-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_CLEAN_UP_2D` | 0xb1 | inferred | driver and diagnostic readings | 2D map clean-up; 68-byte payload. Role from the hand-written header, payload size unchecked. |
 | `CFIFO_CMD_CLEAR_COLOUR` | 0x15 | inferred | driver and diagnostic readings | colour-buffer clear, no payload; the GL client sends one per clear bit |
 | `CFIFO_CMD_CLEAR_DEPTH` | 0x4a | inferred | driver and diagnostic readings | depth-buffer clear, no payload |
 | `CFIFO_CMD_CLEAR_STENCIL` | 0x4c | inferred | driver and diagnostic readings | stencil-buffer clear, no payload |
 | `CFIFO_CMD_CONTEXT_CONFIG` | 0x8c | inferred | driver and diagnostic readings | four payload bytes, one configuration int, sent after the context opener |
 | `CFIFO_CMD_CONTEXT_OPEN` | 0x6 | inferred | driver and diagnostic readings | zero-length; the first word of each GL context setup |
+| `CFIFO_CMD_COPY_TILE` | 0x8e | inferred | driver and diagnostic readings | copies a tile; 112-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_DETAIL_TEXTURE_FUNC` | 0xec | inferred | driver and diagnostic readings | detail texture function; 16-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_DRAW_POINT_SIMPLE` | 0xe0 | inferred | driver and diagnostic readings | draws a plain point; 28-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_END_GENERIC` | 0xcc | inferred | driver and diagnostic readings | ends a generic primitive, no payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_EVAL_COORD_1D` | 0xab | inferred | driver and diagnostic readings | evaluates a 1D map coordinate on the geometry engine, no payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_EVAL_COORD_2D` | 0xac | inferred | driver and diagnostic readings | evaluates a 2D map coordinate on the geometry engine, no payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_EVAL_MESH_1D` | 0xa9 | inferred | driver and diagnostic readings | evaluates a 1D mesh on the geometry engine; 12-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_EVAL_MESH_2D` | 0xaa | inferred | driver and diagnostic readings | evaluates a 2D mesh on the geometry engine; 24-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_FAST_COPY_PIXELS` | 0x86 | inferred | driver and diagnostic readings | pixel copy fast path, no payload. Role from the hand-written header, payload size unchecked. |
 | `CFIFO_CMD_FILLER` | 0xe1 | inferred | driver and diagnostic readings | padding: an int count n, then n filler words the pipe discards; payload is 4n + 4 bytes |
 | `CFIFO_CMD_FLUSH` | 0x36 | inferred | driver and diagnostic readings | glFlush, no payload |
+| `CFIFO_CMD_GENERAL_BITMAP` | 0x91 | inferred | driver and diagnostic readings | general bitmap draw; 20-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_GET_PIXELS` | 0xdb | inferred | driver and diagnostic readings | reads pixels back by programmed I/O or DMA; 4-byte payload. Role from the hand-written header, payload size unchecked. |
 | `CFIFO_CMD_GE_MEMORY_READ` | 0xfc | inferred | driver and diagnostic readings | kernel: reads a context out of geometry-engine memory, with the ERAM address and word count; a DMA read follows. Formerly CFIFO_CMD_ERAM_READ. |
 | `CFIFO_CMD_GE_MEMORY_WRITE_ADDR` | 0xfb | inferred | driver and diagnostic readings | kernel: the ERAM address and word count for the write-back chunk that precedes it. Formerly CFIFO_CMD_ERAM_WRITE_ADDR. |
 | `CFIFO_CMD_GE_MEMORY_WRITE_CHUNK` | 0xfd | inferred | driver and diagnostic readings | kernel: one write-back chunk of at most 0x384 words, with its count and DMA descriptor. Formerly CFIFO_CMD_ERAM_WRITE_CHUNK. |
 | `CFIFO_CMD_GE_MEMORY_WRITE_END` | 0xfa | inferred | driver and diagnostic readings | kernel: ends a context write-back. Formerly CFIFO_CMD_ERAM_WRITE_END. |
+| `CFIFO_CMD_GE_STATE_BLOCK` | 0x80 | inferred | driver and diagnostic readings | geometry-engine state block whose data follows later. Role from the hand-written header, payload size unchecked. |
 | `CFIFO_CMD_GE_TABLE_LOAD` | 0x82 | inferred | driver and diagnostic readings | geometry-engine table load: a size-class int, then an inline block of descriptor and data words |
+| `CFIFO_CMD_INIT_COLOR_INDEX_CONTEXT` | 0xa | inferred | driver and diagnostic readings | one word, 8 or 12: starts a colour-index context; colours are then indices. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_INIT_COLOR_TABLE` | 0x89 | inferred | driver and diagnostic readings | initialises a colour table or lookup table; 4-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_INIT_CONVOLVE_2D_STATE` | 0x85 | inferred | driver and diagnostic readings | sets up 2D convolution state; 12-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_INIT_FAST_PATH` | 0x88 | inferred | driver and diagnostic readings | initialises the fast path, no payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_INIT_FORMAT_VALUES` | 0x9a | inferred | driver and diagnostic readings | initialises the pixel format values; 8-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_INIT_PIXEL_STATE_BLOCK` | 0xcd | inferred | driver and diagnostic readings | pixel state block whose data follows later. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_INIT_RGB_CONTEXT` | 0x9 | inferred | driver and diagnostic readings | no payload: starts a context in RGB colour mode. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_LOAD_RASTER_POS_INFO` | 0xd7 | inferred | driver and diagnostic readings | loads the raster position information, no payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_NORMAL_3F` | 0xdf | inferred | driver and diagnostic readings | three floats: the current normal. Role from the hand-written header, payload size unchecked. |
 | `CFIFO_CMD_QUERY` | 0xa2 | inferred | driver and diagnostic readings | state query: three int payload words; the client then polls the query-ready flag and reads the answer |
 | `CFIFO_CMD_RASTER_PAIRS` | 0x7f | inferred | driver and diagnostic readings | raster register (register, value) pairs, after a record count and a word count |
 | `CFIFO_CMD_RASTER_TRIPLES` | 0x7c | inferred | driver and diagnostic readings | raster register three-word records, with the same count framing as the pairs |
+| `CFIFO_CMD_READ_TEXTURE` | 0xf0 | inferred | driver and diagnostic readings | reads a texture back (the GL texture image query). Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_RESET_HISTOGRAM_MEMORY` | 0x83 | inferred | driver and diagnostic readings | resets the histogram memory; 12-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_RESTORE_RASTER_STATE` | 0xd3 | inferred | driver and diagnostic readings | restores the saved raster subsystem state, no payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_RESTORE_TEXTURE_MODE` | 0xea | inferred | driver and diagnostic readings | restores the saved texture mode, no payload. Role from the hand-written header, payload size unchecked. |
 | `CFIFO_CMD_RESULT_BEGIN` | 0x61 | inferred | driver and diagnostic readings | command field with no payload; the GL client brackets its selection result fetch with this and CFIFO_CMD_RESULT_END |
 | `CFIFO_CMD_RESULT_END` | 0x62 | inferred | driver and diagnostic readings | command field with no payload; ends the selection result fetch |
+| `CFIFO_CMD_RETURN_HISTOGRAM_PIO` | 0x8b | inferred | driver and diagnostic readings | returns histogram results by programmed I/O; 8-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_SAVE_RASTER_STATE` | 0xd2 | inferred | driver and diagnostic readings | saves the raster subsystem state; 20-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_SAVE_TEXTURE_MODE` | 0xe9 | inferred | driver and diagnostic readings | saves the texture mode; 16-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_SCHEDULE_SWAP` | 0x37 | inferred | driver and diagnostic readings | buffer swap at the next retrace; raises command-processor flag 0. Role from the hand-written header, payload size unchecked. |
 | `CFIFO_CMD_SCISSOR` | 0x39 | inferred | driver and diagnostic readings | glScissor, four int words: x, width less one, y, height less one |
+| `CFIFO_CMD_SCISSOR_TEST_ENABLE` | 0x6e | inferred | driver and diagnostic readings | one word, 1 or 0: the GL scissor test enable. Role from the hand-written header, payload size unchecked. |
 | `CFIFO_CMD_SELECTION_NAME_POP` | 0xc6 | inferred | driver and diagnostic readings | command field of a CFIFO_CTL word with no payload; the GL client's selection name-stack pop, from the client's API handler. Formerly CFIFO_CMD_NAME_POP. |
 | `CFIFO_CMD_SELECTION_NAME_PUSH` | 0xc7 | inferred | driver and diagnostic readings | command field with one payload word (the name); the GL client's selection name push. Formerly CFIFO_CMD_NAME_PUSH. |
 | `CFIFO_CMD_SELECTION_NAME_REPLACE` | 0xc5 | inferred | driver and diagnostic readings | command field with one payload word (the name); the GL client's selection name replacement. Formerly CFIFO_CMD_NAME_REPLACE. |
 | `CFIFO_CMD_SELECTION_NAME_STACK_INIT` | 0xc4 | inferred | driver and diagnostic readings | command field with no payload; the GL client's selection name-stack initialisation. Formerly CFIFO_CMD_NAME_STACK_INIT. |
 | `CFIFO_CMD_SELECT_ENTER` | 0xcb | inferred | driver and diagnostic readings | command field with one payload word taken from the GL client's per-context state; selection entry |
 | `CFIFO_CMD_SELECT_EXIT` | 0xc9 | inferred | driver and diagnostic readings | command field with no payload; leaving selection mode, result handling begins |
+| `CFIFO_CMD_SEND_HISTOGRAM_FILLS` | 0xd4 | inferred | driver and diagnostic readings | sends histogram fill values; 24-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_SEND_MAP_DATA_1D` | 0xb2 | inferred | driver and diagnostic readings | sends 1D map data; 24-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_SEND_MAP_DATA_2D` | 0xb3 | inferred | driver and diagnostic readings | sends 2D map data; 36-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_SEND_MINMAX_FILLS` | 0xd5 | inferred | driver and diagnostic readings | sends min and max fill values; 36-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_SEND_PIXELS` | 0x8d | inferred | driver and diagnostic readings | sends pixel data: eight words, data words per row and the row geometry. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_SPIN_AND_RETURN` | 0xa1 | inferred | driver and diagnostic readings | waits and returns; 4-byte payload. Role from the hand-written header, payload size unchecked. |
 | `CFIFO_CMD_SWAP_TMESH` | 0xdc | inferred | driver and diagnostic readings | IRIS GL swaptmesh inside a triangle strip, no payload |
+| `CFIFO_CMD_TEXTURE_LOAD` | 0x9b | inferred | driver and diagnostic readings | runs a texture load, no payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_TEXTURE_LOAD_END` | 0x9c | inferred | driver and diagnostic readings | sent after each pixel send of a texture load. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_TEXTURE_OFF` | 0xc | inferred | driver and diagnostic readings | disables texturing; sent before every texture load. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_UPDATE_RASTER_POS` | 0xd6 | inferred | driver and diagnostic readings | updates the raster position; 8-byte payload. Role from the hand-written header, payload size unchecked. |
+| `CFIFO_CMD_VALIDATE_BANKS` | 0x98 | inferred | driver and diagnostic readings | names the bank the next frame draws, two copies of the count. Role from the hand-written header, payload size unchecked. |
 | `CFIFO_CMD_VIEWPORT` | 0x33 | inferred | driver and diagnostic readings | glViewport, four int words: x, y, width, height |
 | `CFIFO_CMD_WINDOW_CLIP_PACKET` | 0xe4 | inferred | driver and diagnostic readings | kernel: the window clip-word packet of a loaded context, 60 payload bytes; see software/opengl/gl-commands.md. Formerly CFIFO_CMD_CLIP_BIND. |
 | `CFIFO_DELAY_DEFAULT` | 0x64 | established | driver and diagnostic readings | diagnostic |

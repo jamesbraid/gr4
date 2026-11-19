@@ -1,7 +1,7 @@
 /* generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 034ef22b3faeb54d7027472aae3d3f6ce5f2c13008db8fde2000c8c2a02243b5 */
+/* input sha256 ff578dabddcbabea31e4222cde74bc2e82b482fd7937056bd43782fd3439453c */
 /* host interface and command processor registers for the Impact graphics subsystem */
 #ifndef HQ_GEN_H
 #define HQ_GEN_H
@@ -406,31 +406,74 @@
 #define HQ_CFIFO_CLASS_DMA_BANK_SECOND               0xau /* inferred */
 #define HQ_CFIFO_CLASS_SYNC                          0xeu /* inferred */
 #define HQ_CFIFO_CMD_BITMAP                          0x94u /* inferred */
+#define HQ_CFIFO_CMD_CLEAN_UP_1D                     0xb0u /* inferred */
+#define HQ_CFIFO_CMD_CLEAN_UP_2D                     0xb1u /* inferred */
 #define HQ_CFIFO_CMD_CLEAR_COLOUR                    0x15u /* inferred */
 #define HQ_CFIFO_CMD_CLEAR_DEPTH                     0x4au /* inferred */
 #define HQ_CFIFO_CMD_CLEAR_STENCIL                   0x4cu /* inferred */
 #define HQ_CFIFO_CMD_CONTEXT_CONFIG                  0x8cu /* inferred */
 #define HQ_CFIFO_CMD_CONTEXT_OPEN                    0x6u /* inferred */
+#define HQ_CFIFO_CMD_COPY_TILE                       0x8eu /* inferred */
+#define HQ_CFIFO_CMD_DETAIL_TEXTURE_FUNC             0xecu /* inferred */
+#define HQ_CFIFO_CMD_DRAW_POINT_SIMPLE               0xe0u /* inferred */
+#define HQ_CFIFO_CMD_END_GENERIC                     0xccu /* inferred */
+#define HQ_CFIFO_CMD_EVAL_COORD_1D                   0xabu /* inferred */
+#define HQ_CFIFO_CMD_EVAL_COORD_2D                   0xacu /* inferred */
+#define HQ_CFIFO_CMD_EVAL_MESH_1D                    0xa9u /* inferred */
+#define HQ_CFIFO_CMD_EVAL_MESH_2D                    0xaau /* inferred */
+#define HQ_CFIFO_CMD_FAST_COPY_PIXELS                0x86u /* inferred */
 #define HQ_CFIFO_CMD_FILLER                          0xe1u /* inferred */
 #define HQ_CFIFO_CMD_FLUSH                           0x36u /* inferred */
+#define HQ_CFIFO_CMD_GENERAL_BITMAP                  0x91u /* inferred */
+#define HQ_CFIFO_CMD_GET_PIXELS                      0xdbu /* inferred */
 #define HQ_CFIFO_CMD_GE_MEMORY_READ                  0xfcu /* inferred */
 #define HQ_CFIFO_CMD_GE_MEMORY_WRITE_ADDR            0xfbu /* inferred */
 #define HQ_CFIFO_CMD_GE_MEMORY_WRITE_CHUNK           0xfdu /* inferred */
 #define HQ_CFIFO_CMD_GE_MEMORY_WRITE_END             0xfau /* inferred */
+#define HQ_CFIFO_CMD_GE_STATE_BLOCK                  0x80u /* inferred */
 #define HQ_CFIFO_CMD_GE_TABLE_LOAD                   0x82u /* inferred */
+#define HQ_CFIFO_CMD_INIT_COLOR_INDEX_CONTEXT        0xau /* inferred */
+#define HQ_CFIFO_CMD_INIT_COLOR_TABLE                0x89u /* inferred */
+#define HQ_CFIFO_CMD_INIT_CONVOLVE_2D_STATE          0x85u /* inferred */
+#define HQ_CFIFO_CMD_INIT_FAST_PATH                  0x88u /* inferred */
+#define HQ_CFIFO_CMD_INIT_FORMAT_VALUES              0x9au /* inferred */
+#define HQ_CFIFO_CMD_INIT_PIXEL_STATE_BLOCK          0xcdu /* inferred */
+#define HQ_CFIFO_CMD_INIT_RGB_CONTEXT                0x9u /* inferred */
+#define HQ_CFIFO_CMD_LOAD_RASTER_POS_INFO            0xd7u /* inferred */
+#define HQ_CFIFO_CMD_NORMAL_3F                       0xdfu /* inferred */
 #define HQ_CFIFO_CMD_QUERY                           0xa2u /* inferred */
 #define HQ_CFIFO_CMD_RASTER_PAIRS                    0x7fu /* inferred */
 #define HQ_CFIFO_CMD_RASTER_TRIPLES                  0x7cu /* inferred */
+#define HQ_CFIFO_CMD_READ_TEXTURE                    0xf0u /* inferred */
+#define HQ_CFIFO_CMD_RESET_HISTOGRAM_MEMORY          0x83u /* inferred */
+#define HQ_CFIFO_CMD_RESTORE_RASTER_STATE            0xd3u /* inferred */
+#define HQ_CFIFO_CMD_RESTORE_TEXTURE_MODE            0xeau /* inferred */
 #define HQ_CFIFO_CMD_RESULT_BEGIN                    0x61u /* inferred */
 #define HQ_CFIFO_CMD_RESULT_END                      0x62u /* inferred */
+#define HQ_CFIFO_CMD_RETURN_HISTOGRAM_PIO            0x8bu /* inferred */
+#define HQ_CFIFO_CMD_SAVE_RASTER_STATE               0xd2u /* inferred */
+#define HQ_CFIFO_CMD_SAVE_TEXTURE_MODE               0xe9u /* inferred */
+#define HQ_CFIFO_CMD_SCHEDULE_SWAP                   0x37u /* inferred */
 #define HQ_CFIFO_CMD_SCISSOR                         0x39u /* inferred */
+#define HQ_CFIFO_CMD_SCISSOR_TEST_ENABLE             0x6eu /* inferred */
 #define HQ_CFIFO_CMD_SELECTION_NAME_POP              0xc6u /* inferred */
 #define HQ_CFIFO_CMD_SELECTION_NAME_PUSH             0xc7u /* inferred */
 #define HQ_CFIFO_CMD_SELECTION_NAME_REPLACE          0xc5u /* inferred */
 #define HQ_CFIFO_CMD_SELECTION_NAME_STACK_INIT       0xc4u /* inferred */
 #define HQ_CFIFO_CMD_SELECT_ENTER                    0xcbu /* inferred */
 #define HQ_CFIFO_CMD_SELECT_EXIT                     0xc9u /* inferred */
+#define HQ_CFIFO_CMD_SEND_HISTOGRAM_FILLS            0xd4u /* inferred */
+#define HQ_CFIFO_CMD_SEND_MAP_DATA_1D                0xb2u /* inferred */
+#define HQ_CFIFO_CMD_SEND_MAP_DATA_2D                0xb3u /* inferred */
+#define HQ_CFIFO_CMD_SEND_MINMAX_FILLS               0xd5u /* inferred */
+#define HQ_CFIFO_CMD_SEND_PIXELS                     0x8du /* inferred */
+#define HQ_CFIFO_CMD_SPIN_AND_RETURN                 0xa1u /* inferred */
 #define HQ_CFIFO_CMD_SWAP_TMESH                      0xdcu /* inferred */
+#define HQ_CFIFO_CMD_TEXTURE_LOAD                    0x9bu /* inferred */
+#define HQ_CFIFO_CMD_TEXTURE_LOAD_END                0x9cu /* inferred */
+#define HQ_CFIFO_CMD_TEXTURE_OFF                     0xcu /* inferred */
+#define HQ_CFIFO_CMD_UPDATE_RASTER_POS               0xd6u /* inferred */
+#define HQ_CFIFO_CMD_VALIDATE_BANKS                  0x98u /* inferred */
 #define HQ_CFIFO_CMD_VIEWPORT                        0x33u /* inferred */
 #define HQ_CFIFO_CMD_WINDOW_CLIP_PACKET              0xe4u /* inferred */
 #define HQ_CFIFO_DELAY_DEFAULT                       0x64u /* established */

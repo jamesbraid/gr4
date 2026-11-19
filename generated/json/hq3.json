@@ -1,7 +1,7 @@
 {
  "license": "BSD-3-Clause",
  "generator": "defs-gen 2",
- "input_sha256": "034ef22b3faeb54d7027472aae3d3f6ce5f2c13008db8fde2000c8c2a02243b5",
+ "input_sha256": "ff578dabddcbabea31e4222cde74bc2e82b482fd7937056bd43782fd3439453c",
  "schema": "defs-flat/1",
  "source": "devices/hq3/registers.toml",
  "profile": "public",
@@ -1345,6 +1345,24 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CMD_CLEAN_UP_1D",
+   "value": 176,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_CLEAN_UP_2D",
+   "value": 177,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_CMD_CLEAR_COLOUR",
    "value": 21,
    "count": 1,
@@ -1390,6 +1408,87 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CMD_COPY_TILE",
+   "value": 142,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_DETAIL_TEXTURE_FUNC",
+   "value": 236,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_DRAW_POINT_SIMPLE",
+   "value": 224,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_END_GENERIC",
+   "value": 204,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_EVAL_COORD_1D",
+   "value": 171,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_EVAL_COORD_2D",
+   "value": 172,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_EVAL_MESH_1D",
+   "value": 169,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_EVAL_MESH_2D",
+   "value": 170,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_FAST_COPY_PIXELS",
+   "value": 134,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_CMD_FILLER",
    "value": 225,
    "count": 1,
@@ -1401,6 +1500,24 @@
    "kind": "constant",
    "name": "CFIFO_CMD_FLUSH",
    "value": 54,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_GENERAL_BITMAP",
+   "value": 145,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_GET_PIXELS",
+   "value": 219,
    "count": 1,
    "grade": "inferred",
    "from": "driver and diagnostic readings"
@@ -1444,8 +1561,98 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CMD_GE_STATE_BLOCK",
+   "value": 128,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_CMD_GE_TABLE_LOAD",
    "value": 130,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_INIT_COLOR_INDEX_CONTEXT",
+   "value": 10,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_INIT_COLOR_TABLE",
+   "value": 137,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_INIT_CONVOLVE_2D_STATE",
+   "value": 133,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_INIT_FAST_PATH",
+   "value": 136,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_INIT_FORMAT_VALUES",
+   "value": 154,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_INIT_PIXEL_STATE_BLOCK",
+   "value": 205,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_INIT_RGB_CONTEXT",
+   "value": 9,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_LOAD_RASTER_POS_INFO",
+   "value": 215,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_NORMAL_3F",
+   "value": 223,
    "count": 1,
    "grade": "inferred",
    "from": "driver and diagnostic readings"
@@ -1480,6 +1687,42 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CMD_READ_TEXTURE",
+   "value": 240,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_RESET_HISTOGRAM_MEMORY",
+   "value": 131,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_RESTORE_RASTER_STATE",
+   "value": 211,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_RESTORE_TEXTURE_MODE",
+   "value": 234,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_CMD_RESULT_BEGIN",
    "value": 97,
    "count": 1,
@@ -1498,8 +1741,53 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CMD_RETURN_HISTOGRAM_PIO",
+   "value": 139,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SAVE_RASTER_STATE",
+   "value": 210,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SAVE_TEXTURE_MODE",
+   "value": 233,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SCHEDULE_SWAP",
+   "value": 55,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_CMD_SCISSOR",
    "value": 57,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SCISSOR_TEST_ENABLE",
+   "value": 110,
    "count": 1,
    "grade": "inferred",
    "from": "driver and diagnostic readings"
@@ -1561,8 +1849,107 @@
   {
    "unit": "hq3",
    "kind": "constant",
+   "name": "CFIFO_CMD_SEND_HISTOGRAM_FILLS",
+   "value": 212,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SEND_MAP_DATA_1D",
+   "value": 178,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SEND_MAP_DATA_2D",
+   "value": 179,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SEND_MINMAX_FILLS",
+   "value": 213,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SEND_PIXELS",
+   "value": 141,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_SPIN_AND_RETURN",
+   "value": 161,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
    "name": "CFIFO_CMD_SWAP_TMESH",
    "value": 220,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_TEXTURE_LOAD",
+   "value": 155,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_TEXTURE_LOAD_END",
+   "value": 156,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_TEXTURE_OFF",
+   "value": 12,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_UPDATE_RASTER_POS",
+   "value": 214,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "hq3",
+   "kind": "constant",
+   "name": "CFIFO_CMD_VALIDATE_BANKS",
+   "value": 152,
    "count": 1,
    "grade": "inferred",
    "from": "driver and diagnostic readings"

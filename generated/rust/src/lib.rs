@@ -1,7 +1,7 @@
 // generated from devices/ and formats/ by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 2
-// input sha256 be67c9b63228ece224c93588e0112eb20d99b70bcbde452abc52686960399e7f
+// input sha256 10a23b86b8d3dbc73d4b2a8a7f451c8ecfe14054b3289187352748cec184236e
 #![no_std]
 pub mod ge11;
 pub mod hq3;
