@@ -263,7 +263,7 @@ Arguments, in the order the 64-bit calling convention passes them (eight in regi
 | 4 | **repeat and control word**, written to `0x15b` (`0x20897cec`) | value is `(w & 0xfff00000)`, with `0x000f0000` ORed in and bits 15:8 cleared for the stippled lines; `w` is a diagnostic variable that is zero in the image and filled at run time |
 | 5 | **stipple pattern**, written to `0x15a` (`0x20897cf8`) | `0xa9876543` on the stippled lines |
 | 6 | smooth (antialiased) line enable | when set, the routine calls the filter-table loader `0x2083bccc` (the `0x15c`/`0x15d` writes) and writes the blend factor `0x7880c8c4` |
-| 7 | alternate integer-coordinate setup | when set, the routine writes `0x58004004` and the packed truncated start coordinates (x in the high half) to the host window at `+0x13400`, then rejoins; purpose inferred only |
+| 7 | integer-endpoint line | when set, the routine skips the float endpoint and step writes (registers `0x0c` to `0x0f`, `0x10`, `0x12`) and instead writes registers `0x40` and `0x41` with the truncated integer coordinates (x in the high half, the two vertices in argument order), then rejoins at the colour setup; see the integer line note below |
 | 8 | mode select | zero in all five calls; non-zero changes the trigger word's low bits (`0xb` against `3`) and the trigger routine; meaning inferred only |
 | 9 | zero | never read |
 | 10 | pointer to a context | stack argument |
@@ -333,6 +333,21 @@ What the stored lines table (17 by 14) shows, with the corrected roles:
   to bit 6). Neither start follows from the `0xf` in bits 19:16 of the repeat word (a start at bit 15 would give a different sequence),
   and an index by absolute x position fails at x = 5 and x = 8. The pattern and repeat-word fields therefore stay **unknown**.
 - The purple line (colour 0.5, 0.0, 0.5, alpha 1, not smooth) stores `0x80` and `0x7f` by row exactly as the dither predicts.
+- **Integer-endpoint line and its last pixel (argument 7; inferred).** The two words the routine stores at `+0x13400` are not a
+  point or pixel-write command. They are the ordinary one-register write the diagnostic uses everywhere (the shared helper `0x2082ae2c`
+  sends the same pair to the same address): a header `((reg + 0x1800) & 0x1fff) << 8 | 0x400004` followed by the data word. The
+  headers are `0x00584004`, which is register `0x40`, and `0x00584104`, register `0x41`. (The earlier row and an earlier
+  note wrote the first as `0x58004004`, a misplaced digit.) The window at `+0x13400` is the host interface's command-word
+  window, the same one every register write goes through; the unit behind it is the host interface (HQ3), which passes the write on to
+  the raster engine. Registers `0x40` and `0x41` are the raster engine's integer line start and end ([RE4.h](../re4/RE4.h):
+  `line_xy_start` and `line_xy_end` in [registers.toml](../re4/registers.toml)), so argument 7 selects the integer line primitive.
+  The trigger is the same write of 3. Nothing in the routine adds a pixel or lengthens the line: it passes the two vertices unchanged.
+  The extra pixel is therefore the primitive's own rule: an integer line draws **both end pixels** unless the fill mode's skip-last bit
+  (bit 10, the X cap-style option in [RE4.h](../re4/RE4.h)) is set, and the routine's fill mode `0x7000` leaves bit 10 clear. The table agrees:
+  (12, 0) to (12, 10) stores 11 pixels, rows 0 to 10, while the float-endpoint lines (registers `0x0c` to `0x0f`, arguments 7 clear) stop one
+  row short of their end vertex (the red and green lines stop at y = 15 for an end at y = 16). Rating: inferred (from the register
+  decode, the clear skip-last bit and the table; no source states the inclusive rule). The packed order is x high, y low as the routine
+  builds it; the gloss "Y:16, X:16" on `RE4_REG_XLINE_XYSTARTI` reads the other way and is unchecked.
 
 ### The alpha triangle, resolved
 
