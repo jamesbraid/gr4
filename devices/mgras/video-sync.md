@@ -112,3 +112,73 @@ is **unknown** (see the open questions below).
   `glxQueryMaxSwapBarriersSGIX` returning zero on this board means clients are told there are no barriers.
 - The diagnostic: no swap command and no interrupt. Its only frame-synchronous behaviour is the line-counter spins in
   section 4, which stand in for a retrace wait.
+
+## 2. External status
+
+What the engine exposes about video, sync and option boards, and who reads it. The kernel reads all of it once, at attach
+(`MgrasGatherInfo`, `mgras_init.o` `0xadc`), except the option-board registers, which the option code reads at its own
+probe. There is no polled or interrupt-driven external status line: nothing the kernel or the diagnostic reads changes with
+the state of an external sync input, a video cable or a signal lock (software expectation from the full set of reads below;
+a line the board has but the software never reads would not appear here).
+
+| Address (board base +) | Access | Bits | What it reports | Read by | Grade |
+|---|---|---|---|---|---|
+| `0x071308` | byte | 7:4 | monitor ID: sense lines on the monitor connector; 0 means none identified; picks the default timing | kernel (`mgras_init.o` `0xdbc`, stored in the board record at +0x29); diagnostic `ide` `0x2082a81c` | software expectation |
+| `0x071308` | byte | 2:0 | CMAP revision (the diagnostic checks it against `0x071708`) | diagnostic only | software expectation |
+| `0x071708` | byte | 2:0 | CMAP revision | kernel (+0x3d), diagnostic `0x2082a828` | software expectation |
+| `0x071708` | byte | 6:4 | RA board revision | kernel (+0x32), diagnostic `0x20849fdc` (printed as `RA Board version` when nonzero) | software expectation |
+| `0x071708` | byte | 7 | clear when an option board is attached: the kernel stores `bit 7 == 0` at +0x35 of the board record | kernel `mgras_init.o` `0xde4` to `0xdfc` | software expectation |
+| `0x071708` | byte | 6 | the diagnostic prints `MGRAS video board not installed` when it is set and `MGRAS video board found.` when clear | diagnostic `0x2084a024` to `0x2084a05c` | software expectation; conflicts with the row above, see open question 3 |
+| `0x072488` | word | top byte | GE count, product ID, MGRAS revision ([board identity](board-identity.md)); bit 7 is read by neither | kernel, diagnostic `0x2084a0cc` | software expectation |
+| `0x072408` | word | top byte | RE count, TRAM fields, RB revision (reads); the same address takes the board configuration writes of section 1.4 | kernel, diagnostic | software expectation |
+| `0x070008` | byte | high nibble | after a `0xff` write to `0x072c08`, the option board's ID nibble, accepted when it is 4 (single-read builds) | option probe, see [questions](../../questions/README.md#1-multi-channel-option-register-map) | established as the routine's words |
+| `0x072c08` | byte | all | option board data port; the probe in this IP30 build (`mgras_mco.o` `0x0`) writes `0xff`, reads, writes 0, reads, requires equal reads and accepts 1 or a high nibble of `0xa`, returning the low nibble | `mgras_mco_probe` | established as the routine's words |
+| VC3 index `0x0b`, 16 bit | read via `0x072008` and `0x0720b0` | all | vertical line counter, read by the Digital Video driver and the diagnostic | srv `_srvWaitForVertLineCnt`; `mgras_tex.o` `MgrasGetVertLineCnt` (`0x810`); diagnostic spins (section 4) | software expectation |
+| `0x020100` | word | 4:0 | display-bus room (not a status of the outside world; every VC3 and XMAP write waits for it) | kernel, diagnostic | established as the kernel's wait |
+
+### 2.1 The option bit and what it selects
+
+At attach the kernel's board record has three related bytes: +0x35, the option-attached flag from bit 7 above; +0x49, a flat-panel
+type; +0x40, the multi-channel option's presence. The sequence (`mgras_init.o` `0xe44` to `0xeb4`), established as the routine's
+words:
+
+1. If the option flag is **set** (bit 7 clear): +0x49 becomes `0xff` and `mgras_mco_probe` (which first sets the device's display-bus control word) runs; its result goes to +0x40.
+2. If it is **clear**: `mgras_fp_probe` runs first. It probes an I2C bus on the same device window as the option (below). A panel
+   ID of 3 sets +0x49 to `0x82`, and 4 sets it to `0x83`. Any other ID sets it to 0. When the bus probe itself fails the routine returns before touching +0x49. A found or
+   changed panel is also recorded in the hardware inventory (class `0x11`), which `hinv` shows.
+   - Panel found (+0x49 not 0 or `0xff`): the option flag is cleared, the monitor ID at +0x29 is **replaced** by the panel type
+     (`0x82` or `0x83`), and +0x40 is cleared. `0x82` is the monitor type that [display timing](../../software/kernel/display-timing.md)
+     lists as using the 1024 by 768 timing.
+   - No panel: `mgras_mco_probe` runs anyway.
+3. If the option probe finds a board (+0x40 nonzero): the option flag is cleared and +0x36 is set to 1.
+
+So the byte at `0x071708` bit 7 is a hint the kernel confirms by probing; a model that always reports "no option" with an
+unanswered probe (reads back unequal) gets a plain single-monitor board.
+
+Two request handlers test +0x35: one returns error 19 (`ENODEV`) when it is set (`mgras.o` `0x5e68`), another calls
+`mgras_fp_reinit` when it is clear (`0x620c`). Their request numbers were not read; the flat-panel and option requests are
+unexamined here.
+
+### 2.2 The flat-panel I2C bus
+
+Software expectation, `mgras_corona_i2c.o` of the same archive. It shares the option's device window:
+
+- Set-up: `0x2128` to the display-bus control word at `+0x061058`, then the probe writes `0` to `+0x072c08` and `0x40` to
+  `+0x072c88`, writes `0x55` to `+0x072c08` and `0x40` to `+0x072c88`, reads `+0x072c88` and requires `+0x072c08` to read back
+  `0x55`, then repeats with `0xaa`; each access is followed by a 1 microsecond delay. So `+0x072c08` echoes what is written
+  while the bus is idle (the probe's own test), and `+0x072c88` is a control byte written `0x40` after each data write.
+- Panel ID: an I2C read from address `0x70` (a read of device `0x70 | 1` through `mgras_i2cStart`, `Receive`, `Stop`); the ID is
+  bits 7:5 of the byte (`mgras_i2cPanelID`, `0x620`).
+- Other entries (panel on and off, backlight up and down, audio volume, bass, treble and switch) use the same bus. They are not
+  external status and are not read here.
+
+A model with no panel must make the probe fail: leave `+0x072c08` unreadable as `0x55`, so `mgras_i2cProbe` returns 0.
+
+### 2.3 What is not exposed
+
+- **External sync lock:** no register, bit or interrupt source reads it. Unknown whether the board has one.
+- **Genlock input present, house sync, composite sync status:** none read. The Digital Video driver reads VC3's line counter
+  to align to the video field instead (section 3).
+- **Video cable or capture-board presence beyond the option byte:** the Digital Video driver's own presence check is on its board
+  (see chips section 11), not on MGRAS.
+- **Monitor-detect timing:** the monitor ID is a static sense value; whether it changes on hot-plug is unknown.
