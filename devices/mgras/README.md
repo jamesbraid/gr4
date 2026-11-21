@@ -14,6 +14,7 @@ Source: driver and firmware readings.
 - [IMPACT board facts from published documents](board-facts.md)
 - [MGRAS board identity](board-identity.md)
 - [MGRAS two-engine boards](two-re.md)
+- [MGRAS video and sync hooks](video-sync.md)
 - [MGRAS visual buffers](visual-buffers.md)
 
 ## Used by

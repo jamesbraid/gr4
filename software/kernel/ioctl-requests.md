@@ -101,11 +101,11 @@ the send. Where the sender does not settle a sub-fact, the entry marks it unknow
   two routines, in the same alternating pattern (`__glMgrAllocERAM` at 0xdae45d8 through 0xdae4b44), so
   the pairing is the fact this entry rests on. Its order within the pair is unknown.
 
-- `0x6d670014`: **Inferred.** A per-screen request with a constant argument. `mgrasSetScrnGlock` in
-  impactpc.so sends it at 0x5e3d94f8 with a4 set to 1 and a per-screen field among its arguments, and reports
-  a failed call through ErrorF at 0x5e3d94b8 and 0x5e3d9520. The return at 0x5e3d950c passes either the
-  ioctl result or the ErrorF result, so the success value is unknown. The direction of the constant (set
-  or clear) is unknown.
+- `0x6d670014`: **Established.** The set-genlock request. The X server's error text names it `MGRAS_SET_GENLOCK`
+  (`mgrasSetScrnGlock`); the kernel copies in eight bytes and calls `MgrasSetGenlock`, which sets or clears bits 5 and 6
+  of VC3 register `0x1e` from the two words and then writes the board configuration word at `0x072408`. The first word is
+  the sync-output side, the second the genlock-slave side, which the X server takes from a per-screen value that must be 0 or 1.
+  See [video and sync hooks](../../devices/mgras/video-sync.md).
 
 - `0x6d670015`: **Inferred.** The texture read-back start request. `mgrTM_DoTexRead` in libGLcore.so at
   0xdac0444 sends it to start the transfer. The same routine locks and unlocks a DMA pool around the
@@ -113,11 +113,12 @@ the send. Where the sender does not settle a sub-fact, the entry marks it unknow
   __glMgrWaitForDMARead. `mgrTM_SR_TexRead` sends the same request. The flags passed in a7 (0x4 and 0x8000)
   are unknown.
 
-- `0x6d670016`: **Inferred.** The video-texture state request, sent only when the state changes.
-  `mgrTM_VidTexWait` in libGLcore.so at 0xdabb6d0 compares bytes at +0xb7, +0xb8 and +0xc1 of its request
-  with the values cached in `MgrasPrevVidTexture`, and sends the request only when they differ, then
-  stores the new values to the cache. `mgrTM_DoCopyTex` sends it at 0xdac1970 on its copy path. The send
-  is conditional on the change check in `mgrTM_VidTexWait`.
+- `0x6d670016`: **Established** as the kernel's video-texture transfer request, **inferred** as to the library's use.
+  The kernel's switch copies in 0x28 bytes, calls `MgrasVidTextureXfer` and copies the record back. A zero word at +4 of the
+  record calls the Digital Video driver's `srvVidTextureXfer` directly; a nonzero word first checks the window's fault state
+  (`RRM_CheckValidFault`), takes a per-board semaphore and sleeps in one-tick timeouts while a board flag is zero, then calls it. `mgrTM_VidTexWait` in libGLcore.so sends it only
+  when the cached video-texture bytes change, and `mgrTM_DoCopyTex` sends it on its copy path. See
+  [video and sync hooks](../../devices/mgras/video-sync.md).
 
 - `0x6d670017`: **Inferred.** A default-state request. `__glMgrasInitDefaultValues` in libGLcore.so at
   0xda719b8 stores the default state into the context at offsets 0x96c0 through 0x9890, sends selected

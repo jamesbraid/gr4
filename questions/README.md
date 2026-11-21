@@ -365,3 +365,27 @@ Still open, with what would settle each:
 ## Notes on provenance
 
 The standalone diagnostics are shipped with IRIX 6.5.7; their facts are cited by what they do (a value written, a mask tested) and no source text is copied. Routine names in the kernel objects are used as locators only; the offsets above are text offsets in the objects named.
+
+## Video and sync hooks: open questions and proposals
+
+Added with [video and sync hooks](../devices/mgras/video-sync.md). Each entry names the unknown, the evidence tried and the
+smallest test. None needs anyone contacted; the physical ones wait for the owner's agreement under the repository's rule for
+bringing the user's systems online.
+
+1. **Which writer of the board configuration word (`0x072408`) the board follows for genlock.** Unknown: the kernel's
+   `MgrasSetGenlock` writes `0x64000000` or `0x60000000` by its sync-output argument; the diagnostic's helper writes
+   `0x20000000` or `0x24000000` by its genlock argument. Evidence tried: both routines read in full, no read-back of the
+   word exists in either, and the word's top byte is read for board identity, so a read cannot show the written bits. Smallest
+   test (physical, Octane2): with a scope on the genlock BNC and a known reference, send one `MGRAS_SET_GENLOCK` request
+   (`0x6d670014`) with each of the four combinations of its two words and record the sync output and whether the screen locks.
+   Four requests, no register reads.
+2. **Whether the VC3 display-control bits 5 and 6 have any status counterpart.** Unknown. Evidence tried: the kernel never
+   reads index `0x1e`; the diagnostic reads it back only to print the bits it wrote. Smallest test (physical): with the
+   reference connected and then removed, read VC3 index `0x1e` and `0x1f` (index write to `0x072008`, 16-bit read at `0x0720b0`;
+   neither has read side effects in any code seen) and see whether any bit other than the written ones changes.
+3. **The video-option bit.** The kernel reads bit 7 of the byte at `0x071708` clear as "option attached"; the diagnostic's
+   `RA Board version` routine (`ide` `0x20849f9c`) tests bit 6 for its "video board not installed" message. Both cannot name
+   the same line unless bit 6 is also the top bit of the RA revision field. Evidence tried: both code paths read; no captured
+   board value of the byte is held. Smallest test (physical, read-only): one byte read at `0x071708` on the Octane2 with no
+   option, recorded verbatim. A plan naming the register's side effects is needed first: none are known, it is a plain
+   status byte in the DCB device window the kernel reads at every attach.

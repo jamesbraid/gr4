@@ -29,6 +29,7 @@ opening heading or first sentence.
 - [devices/mgras/board-identity.md](devices/mgras/board-identity.md): How IRIX reads the IMPACT board identity words, the product and revision codes, and what captured boards read back.
 - [devices/mgras/two-re.md](devices/mgras/two-re.md): How the two-raster-engine boards split the screen, select a pixel processor and reach their two geometry engines, with grades and open questions.
 - [devices/mgras/visual-buffers.md](devices/mgras/visual-buffers.md): The published Octane frame buffer building blocks, the 1280 by 1024 visuals per model and the stereo modes.
+- [devices/mgras/video-sync.md](devices/mgras/video-sync.md): What the IMPACT graphics side offers for swap and sync, external status, video into the framebuffer, and what the shipped diagnostic checks, with a list of what a model must do to pass.
 - [devices/te1/texture-path.md](devices/te1/texture-path.md): The texture engine and texture RAM: block sizes, the texel formats the client maps to, the filter, wrap and environment encodings, the save and restore words and the open questions, with grades.
 - [devices/re4/2d-transactions.md](devices/re4/2d-transactions.md): The write sequences the public OpenBSD driver uses for RE4 rectangle fills and console glyph rows, with grades and open questions.
 - [devices/ge11/program-format.md](devices/ge11/program-format.md): What the shipped GE11 microcode images show about the 72-bit instruction word, with grades and the conflicts with GE11.h.
