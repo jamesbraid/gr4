@@ -1,7 +1,7 @@
 {
  "license": "BSD-3-Clause",
  "generator": "defs-gen 2",
- "input_sha256": "b9c621cc43d1b1fca76dbfdde731f0c6b566338b60f2a8932021cdc2a9d3dd72",
+ "input_sha256": "527f694ae8a7a88b221407df4266896ca44eae060855348313383ee6919a16d0",
  "schema": "defs-flat/1",
  "source": "devices/mgras/registers.toml",
  "profile": "public",
@@ -846,6 +846,15 @@
   {
    "unit": "mgras",
    "kind": "constant",
+   "name": "BOARD_CONFIG_OFFSET",
+   "value": 467976,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
    "name": "CMAP_ENTRIES",
    "value": 8192,
    "count": 1,
@@ -1683,6 +1692,24 @@
   {
    "unit": "mgras",
    "kind": "constant",
+   "name": "MGRAS_SET_GENLOCK_REQUEST",
+   "value": 1835466772,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "MGRAS_VIDEO_TEXTURE_XFER_REQUEST",
+   "value": 1835466774,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
    "name": "PP1_SELECT_ADDR",
    "value": 465928,
    "count": 1,
@@ -1730,6 +1757,60 @@
    "kind": "constant",
    "name": "RSS_RE_SELECT_REG",
    "value": 274,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "VC3_DISPLAY_GENLOCK",
+   "value": 64,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "VC3_DISPLAY_GENSYNC",
+   "value": 32,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "VC3_DISPLAY_RETRACE_ENABLE",
+   "value": 1,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "VC3_DISPLAY_TIMING_BITS",
+   "value": 30,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "VC3_REG_CONFIG",
+   "value": 31,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "VC3_REG_CURS_CONTROL",
+   "value": 29,
    "count": 1,
    "grade": "established",
    "from": "driver and firmware readings"
@@ -1829,6 +1910,15 @@
    "kind": "constant",
    "name": "VC3_REG_DID_LINETAB2",
    "value": 19,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and firmware readings"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "VC3_REG_DISPLAY_CONTROL",
+   "value": 30,
    "count": 1,
    "grade": "established",
    "from": "driver and firmware readings"

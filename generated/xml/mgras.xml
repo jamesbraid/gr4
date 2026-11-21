@@ -2,7 +2,7 @@
 <!-- generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 b9c621cc43d1b1fca76dbfdde731f0c6b566338b60f2a8932021cdc2a9d3dd72 -->
+<!-- input sha256 527f694ae8a7a88b221407df4266896ca44eae060855348313383ee6919a16d0 -->
 <genxml unit="mgras" prefix="MGRAS" title="board-level words of the Impact graphics subsystem" from="driver and firmware readings">
   <doc>Board-level words of the Impact graphics subsystem.</doc>
   <enum name="bdvers2_product">
@@ -331,6 +331,7 @@ revision. Inferred from the kernel object.</doc>
   <constant name="ADV7162_REG_BLANK" value="0x4" grade="established"/>
   <constant name="ADV7162_REG_ID" value="0x3" grade="established"/>
   <constant name="ADV7162_RESTORE_VALUE" value="0xffff" grade="established"/>
+  <constant name="BOARD_CONFIG_OFFSET" value="0x72408" grade="established"/>
   <constant name="CMAP_ENTRIES" value="0x2000" grade="established"/>
   <constant name="GE0_UPLOAD_PORT_A" value="0x58040" grade="established"/>
   <constant name="GE0_UPLOAD_PORT_B" value="0x58044" grade="established"/>
@@ -424,12 +425,20 @@ revision. Inferred from the kernel object.</doc>
   <constant name="MCO_SEL_TIMING_DATA" value="0x5" grade="established"/>
   <constant name="MCO_SEL_TIMING_RAM" value="0x7" grade="established"/>
   <constant name="MCO_SEL_TIMING_REG" value="0x4" grade="established"/>
+  <constant name="MGRAS_SET_GENLOCK_REQUEST" value="0x6d670014" grade="established"/>
+  <constant name="MGRAS_VIDEO_TEXTURE_XFER_REQUEST" value="0x6d670016" grade="established"/>
   <constant name="PP1_SELECT_ADDR" value="0x71c08" grade="established"/>
   <constant name="RDRAM_ADDR_PORT_ADDR" value="0x2c570" grade="inferred"/>
   <constant name="RDRAM_BUFFER_PORT_ADDR" value="0x2c5b4" grade="inferred"/>
   <constant name="RDRAM_DATA_PORT_ADDR" value="0x2c574" grade="established"/>
   <constant name="RSS_RE_SELECT_PIO_ADDR" value="0x2c448" grade="inferred"/>
   <constant name="RSS_RE_SELECT_REG" value="0x112" grade="established"/>
+  <constant name="VC3_DISPLAY_GENLOCK" value="0x40" grade="inferred"/>
+  <constant name="VC3_DISPLAY_GENSYNC" value="0x20" grade="inferred"/>
+  <constant name="VC3_DISPLAY_RETRACE_ENABLE" value="0x1" grade="inferred"/>
+  <constant name="VC3_DISPLAY_TIMING_BITS" value="0x1e" grade="inferred"/>
+  <constant name="VC3_REG_CONFIG" value="0x1f" grade="established"/>
+  <constant name="VC3_REG_CURS_CONTROL" value="0x1d" grade="established"/>
   <constant name="VC3_REG_CURS_EP" value="0x1" grade="established"/>
   <constant name="VC3_REG_CURS_TBL_PTR" value="0xc" grade="established"/>
   <constant name="VC3_REG_CURS_X_LOC" value="0x2" grade="established"/>
@@ -441,6 +450,7 @@ revision. Inferred from the kernel object.</doc>
   <constant name="VC3_REG_DID_FRAMETAB2" value="0x12" grade="established"/>
   <constant name="VC3_REG_DID_LINETAB1" value="0x11" grade="established"/>
   <constant name="VC3_REG_DID_LINETAB2" value="0x13" grade="established"/>
+  <constant name="VC3_REG_DISPLAY_CONTROL" value="0x1e" grade="established"/>
   <constant name="VC3_REG_RAM_ADDR" value="0x7" grade="established"/>
   <constant name="VC3_REG_SCAN_LENGTH" value="0x6" grade="established"/>
   <constant name="VC3_REG_VERT_LINE_COUNT" value="0xb" grade="established"/>

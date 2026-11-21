@@ -1,7 +1,7 @@
 /* generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 b9c621cc43d1b1fca76dbfdde731f0c6b566338b60f2a8932021cdc2a9d3dd72 */
+/* input sha256 527f694ae8a7a88b221407df4266896ca44eae060855348313383ee6919a16d0 */
 /* board-level words of the Impact graphics subsystem */
 #ifndef MGRAS_GEN_H
 #define MGRAS_GEN_H
@@ -365,6 +365,7 @@
 #define MGRAS_ADV7162_REG_BLANK                      0x4u /* established */
 #define MGRAS_ADV7162_REG_ID                         0x3u /* established */
 #define MGRAS_ADV7162_RESTORE_VALUE                  0xffffu /* established */
+#define MGRAS_BOARD_CONFIG_OFFSET                    0x72408u /* established */
 #define MGRAS_CMAP_ENTRIES                           0x2000u /* established */
 #define MGRAS_GE0_UPLOAD_PORT_A                      0x58040u /* established */
 #define MGRAS_GE0_UPLOAD_PORT_B                      0x58044u /* established */
@@ -458,12 +459,20 @@
 #define MGRAS_MCO_SEL_TIMING_DATA                    0x5u /* established */
 #define MGRAS_MCO_SEL_TIMING_RAM                     0x7u /* established */
 #define MGRAS_MCO_SEL_TIMING_REG                     0x4u /* established */
+#define MGRAS_MGRAS_SET_GENLOCK_REQUEST              0x6d670014u /* established */
+#define MGRAS_MGRAS_VIDEO_TEXTURE_XFER_REQUEST       0x6d670016u /* established */
 #define MGRAS_PP1_SELECT_ADDR                        0x71c08u /* established */
 #define MGRAS_RDRAM_ADDR_PORT_ADDR                   0x2c570u /* inferred */
 #define MGRAS_RDRAM_BUFFER_PORT_ADDR                 0x2c5b4u /* inferred */
 #define MGRAS_RDRAM_DATA_PORT_ADDR                   0x2c574u /* established */
 #define MGRAS_RSS_RE_SELECT_PIO_ADDR                 0x2c448u /* inferred */
 #define MGRAS_RSS_RE_SELECT_REG                      0x112u /* established */
+#define MGRAS_VC3_DISPLAY_GENLOCK                    0x40u /* inferred */
+#define MGRAS_VC3_DISPLAY_GENSYNC                    0x20u /* inferred */
+#define MGRAS_VC3_DISPLAY_RETRACE_ENABLE             0x1u /* inferred */
+#define MGRAS_VC3_DISPLAY_TIMING_BITS                0x1eu /* inferred */
+#define MGRAS_VC3_REG_CONFIG                         0x1fu /* established */
+#define MGRAS_VC3_REG_CURS_CONTROL                   0x1du /* established */
 #define MGRAS_VC3_REG_CURS_EP                        0x1u /* established */
 #define MGRAS_VC3_REG_CURS_TBL_PTR                   0xcu /* established */
 #define MGRAS_VC3_REG_CURS_X_LOC                     0x2u /* established */
@@ -475,6 +484,7 @@
 #define MGRAS_VC3_REG_DID_FRAMETAB2                  0x12u /* established */
 #define MGRAS_VC3_REG_DID_LINETAB1                   0x11u /* established */
 #define MGRAS_VC3_REG_DID_LINETAB2                   0x13u /* established */
+#define MGRAS_VC3_REG_DISPLAY_CONTROL                0x1eu /* established */
 #define MGRAS_VC3_REG_RAM_ADDR                       0x7u /* established */
 #define MGRAS_VC3_REG_SCAN_LENGTH                    0x6u /* established */
 #define MGRAS_VC3_REG_VERT_LINE_COUNT                0xbu /* established */

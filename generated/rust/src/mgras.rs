@@ -1,7 +1,7 @@
 // generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 2
-// input sha256 b9c621cc43d1b1fca76dbfdde731f0c6b566338b60f2a8932021cdc2a9d3dd72
+// input sha256 527f694ae8a7a88b221407df4266896ca44eae060855348313383ee6919a16d0
 // board-level words of the Impact graphics subsystem
 #![allow(dead_code)]
 
@@ -721,6 +721,7 @@ pub const ADV7162_PORT_PROBE: u32 = 0x3; // inferred
 pub const ADV7162_REG_BLANK: u32 = 0x4; // established
 pub const ADV7162_REG_ID: u32 = 0x3; // established
 pub const ADV7162_RESTORE_VALUE: u32 = 0xffff; // established
+pub const BOARD_CONFIG_OFFSET: u32 = 0x72408; // established
 pub const CMAP_ENTRIES: u32 = 0x2000; // established
 pub const GE0_UPLOAD_PORT_A: u32 = 0x58040; // established
 pub const GE0_UPLOAD_PORT_B: u32 = 0x58044; // established
@@ -814,12 +815,20 @@ pub const MCO_SEL_FPGA_DATA: u32 = 0x0; // established
 pub const MCO_SEL_TIMING_DATA: u32 = 0x5; // established
 pub const MCO_SEL_TIMING_RAM: u32 = 0x7; // established
 pub const MCO_SEL_TIMING_REG: u32 = 0x4; // established
+pub const MGRAS_SET_GENLOCK_REQUEST: u32 = 0x6d670014; // established
+pub const MGRAS_VIDEO_TEXTURE_XFER_REQUEST: u32 = 0x6d670016; // established
 pub const PP1_SELECT_ADDR: u32 = 0x71c08; // established
 pub const RDRAM_ADDR_PORT_ADDR: u32 = 0x2c570; // inferred
 pub const RDRAM_BUFFER_PORT_ADDR: u32 = 0x2c5b4; // inferred
 pub const RDRAM_DATA_PORT_ADDR: u32 = 0x2c574; // established
 pub const RSS_RE_SELECT_PIO_ADDR: u32 = 0x2c448; // inferred
 pub const RSS_RE_SELECT_REG: u32 = 0x112; // established
+pub const VC3_DISPLAY_GENLOCK: u32 = 0x40; // inferred
+pub const VC3_DISPLAY_GENSYNC: u32 = 0x20; // inferred
+pub const VC3_DISPLAY_RETRACE_ENABLE: u32 = 0x1; // inferred
+pub const VC3_DISPLAY_TIMING_BITS: u32 = 0x1e; // inferred
+pub const VC3_REG_CONFIG: u32 = 0x1f; // established
+pub const VC3_REG_CURS_CONTROL: u32 = 0x1d; // established
 pub const VC3_REG_CURS_EP: u32 = 0x1; // established
 pub const VC3_REG_CURS_TBL_PTR: u32 = 0xc; // established
 pub const VC3_REG_CURS_X_LOC: u32 = 0x2; // established
@@ -831,6 +840,7 @@ pub const VC3_REG_DID_FRAMETAB1: u32 = 0x10; // established
 pub const VC3_REG_DID_FRAMETAB2: u32 = 0x12; // established
 pub const VC3_REG_DID_LINETAB1: u32 = 0x11; // established
 pub const VC3_REG_DID_LINETAB2: u32 = 0x13; // established
+pub const VC3_REG_DISPLAY_CONTROL: u32 = 0x1e; // established
 pub const VC3_REG_RAM_ADDR: u32 = 0x7; // established
 pub const VC3_REG_SCAN_LENGTH: u32 = 0x6; // established
 pub const VC3_REG_VERT_LINE_COUNT: u32 = 0xb; // established

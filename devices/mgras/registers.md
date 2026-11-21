@@ -1,7 +1,7 @@
 <!-- generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 b9c621cc43d1b1fca76dbfdde731f0c6b566338b60f2a8932021cdc2a9d3dd72 -->
+<!-- input sha256 527f694ae8a7a88b221407df4266896ca44eae060855348313383ee6919a16d0 -->
 
 # board-level words of the Impact graphics subsystem
 
@@ -315,6 +315,7 @@ revision. Inferred from the kernel object.
 | `ADV7162_REG_BLANK` | 0x4 | established | driver and firmware readings | the pixel mask register, 004H in the data sheet: 8 bits, ANDed with every pixel's red, green and blue bits |
 | `ADV7162_REG_ID` | 0x3 | established | driver and firmware readings |  |
 | `ADV7162_RESTORE_VALUE` | 0xffff | established | driver and firmware readings |  |
+| `BOARD_CONFIG_OFFSET` | 0x72408 | established | driver and firmware readings | board configuration word: read for product identity, written with the top byte for clock, genlock and pixel-clock-doubler control; bit meanings unknown except that the diagnostic names bit 27 as the digital sync output pull-up (inferred) |
 | `CMAP_ENTRIES` | 0x2000 | established | driver and firmware readings | per map; 24-bit width inferred |
 | `GE0_UPLOAD_PORT_A` | 0x58040 | established | driver and firmware readings | first of the two program upload ports for geometry engine 0 |
 | `GE0_UPLOAD_PORT_B` | 0x58044 | established | driver and firmware readings | second of the two program upload ports for geometry engine 0 |
@@ -408,12 +409,20 @@ revision. Inferred from the kernel object.
 | `MCO_SEL_TIMING_DATA` | 0x5 | established | driver and firmware readings |  |
 | `MCO_SEL_TIMING_RAM` | 0x7 | established | driver and firmware readings |  |
 | `MCO_SEL_TIMING_REG` | 0x4 | established | driver and firmware readings |  |
+| `MGRAS_SET_GENLOCK_REQUEST` | 0x6d670014 | established | driver and firmware readings | kernel request number of the set-genlock call; the X server's error text names it MGRAS_SET_GENLOCK |
+| `MGRAS_VIDEO_TEXTURE_XFER_REQUEST` | 0x6d670016 | established | driver and firmware readings | kernel request number of the video-texture transfer, a 0x28-byte record |
 | `PP1_SELECT_ADDR` | 0x71c08 | established | driver and firmware readings | pixel processor select: which pixel processors the XMAP registers reach |
 | `RDRAM_ADDR_PORT_ADDR` | 0x2c570 | inferred | driver and firmware readings | RDRAM address port in the raster window, as the diagnostic uses it |
 | `RDRAM_BUFFER_PORT_ADDR` | 0x2c5b4 | inferred | driver and firmware readings | buffer pointer for the RDRAM path, as the diagnostic uses it |
 | `RDRAM_DATA_PORT_ADDR` | 0x2c574 | established | driver and firmware readings | RDRAM data port; the kernel reads it with each raster engine selected in turn |
 | `RSS_RE_SELECT_PIO_ADDR` | 0x2c448 | inferred | driver and firmware readings | the same raster register as the diagnostic reaches it through the programmed I/O window |
 | `RSS_RE_SELECT_REG` | 0x112 | established | driver and firmware readings | raster register that selects one raster engine; the kernel writes the engine number as its value |
+| `VC3_DISPLAY_GENLOCK` | 0x40 | inferred | driver and firmware readings | bit 6 of VC3 register 0x1e, set by the second argument of the genlock request; the diagnostic prints it as VC3 GENLOCK |
+| `VC3_DISPLAY_GENSYNC` | 0x20 | inferred | driver and firmware readings | bit 5 of VC3 register 0x1e, set by the first argument of the genlock request; the diagnostic prints it as VC3 GENSYNC |
+| `VC3_DISPLAY_RETRACE_ENABLE` | 0x1 | inferred | driver and firmware readings | bit 0 of VC3 register 0x1e, set by MgrasEnableRetraceInterrupts; that it gates the retrace message is inferred |
+| `VC3_DISPLAY_TIMING_BITS` | 0x1e | inferred | driver and firmware readings | bits 4:1 of VC3 register 0x1e: all set by the diagnostic's start-timing and cleared by its stop-timing; bit 1 is also the bit the kernel's blackout routine sets |
+| `VC3_REG_CONFIG` | 0x1f | established | driver and firmware readings | VC3 register index written 0x0100 by the diagnostic's PLL set-up (message: VC3 Config register is set to 1) and the index selected to read the VC3 revision (bits 7:6) at attach |
+| `VC3_REG_CURS_CONTROL` | 0x1d | established | driver and firmware readings | VC3 register index written zero by the diagnostic's start and stop timing; the chip header calls it cursor control. See devices/mgras/video-sync.md |
 | `VC3_REG_CURS_EP` | 0x1 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
 | `VC3_REG_CURS_TBL_PTR` | 0xc | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
 | `VC3_REG_CURS_X_LOC` | 0x2 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Hardware cursor X |
@@ -425,6 +434,7 @@ revision. Inferred from the kernel object.
 | `VC3_REG_DID_FRAMETAB2` | 0x12 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Frame table of the second display-ID entry point |
 | `VC3_REG_DID_LINETAB1` | 0x11 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Line table of the first display-ID entry point |
 | `VC3_REG_DID_LINETAB2` | 0x13 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Line table of the second display-ID entry point |
+| `VC3_REG_DISPLAY_CONTROL` | 0x1e | established | driver and firmware readings | VC3 register index the kernel and the diagnostic write for retrace enable, timing enable and genlock; the diagnostic reads it back. See devices/mgras/video-sync.md |
 | `VC3_REG_RAM_ADDR` | 0x7 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Reads back the SRAM address it was loaded with |
 | `VC3_REG_SCAN_LENGTH` | 0x6 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
 | `VC3_REG_VERT_LINE_COUNT` | 0xb | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
