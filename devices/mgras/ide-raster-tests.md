@@ -53,7 +53,8 @@ stored in the program.
   14 columns) `0xc584ed6b`; stipple triangle (16 by 24) `0xaa0055aa`. Standard CRC-32 and CRC-32C settings (both byte orders,
   both reflections, init and xor-out 0 or all ones, masks 0xffffffff and 0x00ffffff) were tried on the colour tables and none
   matches. Whether the board's signature register accumulates exactly this sum is unknown; the diagnostic only compares
-  it with the sum of its own table.
+  it with the sum of its own table. The signature is read from DAC registers `0x10` to `0x12`, not from the pixel processors
+  (see [video and sync hooks](video-sync.md#43-the-signature-check-on-the-raster-tests)).
 - **A second, host-side checksum** at `0x20831560` (used for texture-engine revision detection, strings `te_rev
   checksum`) accumulates a 64-bit value over the read-back words as `c = (c >> 1) + (c & 1 ? 0x8000 : 0); c += word`.
   The three values the revision test compares are `0x2aa70d210` (revision D), `0xbdfc48fc` (revision B, one TRAM) and

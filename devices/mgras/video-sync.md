@@ -272,3 +272,103 @@ words are inferred (see the HQ3 README).
 - VL: the `impact` VL device and its nodes are created by the video overlay's `mgv.so` (chips section 10.8), not by anything
   in the graphics driver.
 - Applications named in the shipped overlay documentation (Smoke, Flame) reach it through VL; their specifics are chips'.
+
+## 4. What the diagnostic tests
+
+The diagnostic is `usr/stand/ide` (IP30, Feb 5, 1997). Its field script defines the suites; the video, timing and sync
+behaviour is in the **back end** suite (`bkend`) and the VC3, DAC and CMAP suites it calls. Every statement is a software
+expectation; the diagnostic has no genlock, swap or interrupt test, and no test prints a pass for those features.
+
+### 4.1 The sequence
+
+`bkend` (script text in the program's read-only data) runs, stopping at the first nonzero status:
+
+1. `mg_setboard`, then `mg_hqfifoinit`.
+2. `dactest`: DAC reset and mode, address and palette tests, each separated by `mg_dacreset`.
+3. `vc3test`: `mg_vc3reset`, `mg_vc3internalreg`, `mg_vc3addrsbus`, `mg_vc3databus`, `mg_vc3addrsuniq`, `mg_vc3patrn`: register
+   and SRAM walking tests; no timing is running.
+4. `cmaptest`: `mg_vc3init -t 0x107` (timing token `0x107`, 1280 by 1024 at 60 Hz, see [VC3.h](../vc3/VC3.h)) first, then the CMAP
+   revision, data bus, pattern and address tests for CMAP 0 and 1.
+5. `mg_reset`, then `mg_dcbdma_tests` (enable the DCB DMA path, repeat `dactest` and `vc3test`, disable it).
+6. `mg_xmapdcbreg 0` and `1`, and `2` and `3` when `mg_setnumre4s -q` reports two raster engines.
+7. **The video-timing walk:** `mg_starttiming`, `mg_crcwalk`; `mg_vc3init -t 0x139` (1280 by 1024 at 76 Hz), `mg_crcwalk`,
+   `mg_reset`; `mg_stoptiming`, `mg_vc3init -t 0x159` (1600 by 1200 at 60 Hz), `mg_starttiming`, `mg_crcwalk`.
+8. `mg_xmapinit`, four delays, then `mg_vc3cursorposition`.
+
+### 4.2 What each step needs of the video side
+
+| Step | Behaviour the model must provide | Hangs or fails if absent |
+|---|---|---|
+| `mg_vc3init -t TOKEN` | the DAC PLL programming (R 2, V 4 and control `0x91` to the DAC registers `0xc`, `0xf`, `0x9`, the 1280 by 1024 at 60 Hz values, then the token's own values), settle delays (arguments `0x1e` and `0xc350` to the delay routine at `0x208d6984`), then VC3 index `0x1f` written with `0x0100` (`ide` `0x208621ac`) and the timing tables loaded; prints `Video Timing Starting`, `Started Video Timing`; an unknown token prints `Unknown Timing Token Selected` and fails | a PLL that does not accept the writes is not detected; an unknown token is |
+| `mg_starttiming` (`0x20846050`) | accepts VC3 index `0x1e` data `0x1e` and index `0x1d` data 0 as plain writes | none |
+| `mg_stoptiming` (`0x208460e0`) | reads index `0x1e` back (byte index write to `0x072008`, 16-bit read at `0x0720b0`), clears bits 4:1, writes it back, then writes index `0x1d` zero | a read-back that does not return the written value changes what is written back |
+| `mg_crcwalk` (`0x20852600`) | six repetitions, each of: a frame-boundary XMAP and buffer-select update (`0x2084daec`), clearing its own host-memory result words (`0x2084d930`), a frame-synchronous wait that also brackets a DAC command write (`0x2084d158`), a read of DAC registers `0x10`, `0x11`, `0x12` as 16-bit values (`0x2084cf74`, printed as `i = R G B`) and a comparison (`0x2082b5c0`) | the frame wait never ends |
+| `mg_vc3cursorposition` (`0x20843a14`) | after writing cursor X (index 2) and Y (index 3), the line counter passes 200 and returns to 0 twice, then index `0x0e` (current cursor X) reads back the X that was written | the line wait never ends; a mismatch prints the written and read values |
+
+The frame waits are the dominant hazard. They are unbounded loops that select VC3 index `0x0b` through `+0x072008` and read the
+16-bit line count at `+0x0720b0` on every pass:
+
+- `0x2084d174`: waits until the count reads 0, writes DAC register 8 (command register 4 in the ADV7162 numbering of the
+  option pages) with `0xa0` and then `0xe0` through the DAC address halfword at `+0x071810` and data byte at `+0x071910`, waits
+  until the count is at least 200, waits for 0 again, writes `0xc0` to the same register, then sets the address to `0x10`, `0x11`
+  and `0x12` and reads each with a 16-bit load at `+0x071910`. Software expectation.
+- `0x2084daec`: waits for 0, writes the XMAP words at `+0x071f00`, `+0x071c88` (index 0) and `+0x071d80` (the buffer-select
+  word, three bytes packed), waits for 0 again between writes. Software expectation. This is the diagnostic's version of the
+  retrace-ordered buffer flip the kernel does at its retrace interrupt.
+- `mg_vc3cursorposition`: waits for at least 200, then 0, twice.
+
+So the model's line counter must start from a value that reaches 0 within a frame, pass 200 within a frame, and wrap, for
+every timing token above; a counter held at a constant, or one that never reads 0, hangs the suite.
+
+### 4.3 The signature check on the raster tests
+
+The raster tests' `-d` option (see [IDE raster tests](ide-raster-tests.md)) calls `_check_crc_sig` (`ide` `0x2084b994`), which
+uses the same frame-synchronous machinery as `mg_crcwalk`: it clears its result words (`0x2084d930`), runs the wait that
+brackets the DAC command-register-4 writes (`0x2084d158`), and compares what `0x2084cf74` assembles against the value the test
+passes (the 32-bit sum of the expected table words). `0x2084cf74` assembles it from three 16-bit reads of DAC registers `0x10`,
+`0x11` and `0x12` (each masked to 10 bits after a shift by one), so **the signature the diagnostic checks is read from the DAC,
+not from the pixel processors**. That the three registers are the DAC's per-channel signature results, started and stopped by the
+command-register-4 values `0xa0`/`0xe0`/`0xc0` at frame boundaries, is inferred from the access pattern and the printed
+`R G B`; the ADV7160/ADV7162 data sheet cited in the questions page was not re-read for it. How the 10-bit results pack into
+the 32-bit comparison value is not resolved. This partly answers the open point in the IDE raster page, which asked whether
+the board's signature register accumulates the stored sum: the diagnostic does not read a pixel-processor register; the model's
+DAC has to produce the three results.
+
+### 4.4 The genlock helper
+
+The helper that sets and prints the genlock state (`ide` `0x208461a4`, usage `GenLockVal GenSyncVal`) calls the routine at
+`0x208cbe40` (the diagnostic's `MgrasSetGenlock`), reads VC3 index `0x1e` back and prints whether bit 5 (`VC3 GENSYNC is set`)
+and bit 6 (`VC3 GENLOCK is set`) are set. It is not in the 75-entry command table I read and has no direct call site, so it is
+reached some other way or not at all; no suite in the field script calls it. Its only expectation is that bits 5 and 6 read
+back as written.
+
+## 5. What a model must do to pass the diagnostic
+
+Not a hardware claim: this is the list of things the shipped diagnostic and the shipped drivers wait for, so a model that
+provides them gets the video and sync parts of the suites to finish. Items marked (U) are unknown in detail.
+
+1. **VC3 ports.** A byte write to `+0x072008` selects a register index; a 16-bit read at `+0x0720b0` returns that register; a
+   32-bit write at `+0x072038` stores a 16-bit value (bits 23:8) at the index in bits 31:24. Registers `0x1d`, `0x1e` and `0x1f`
+   must read back what was written.
+2. **Line counter (index `0x0b`).** Advances with the display lines of the running timing, reaches at least 200 each frame, reads
+   0 at the start of each frame, and wraps. It must do so for the tokens `0x107`, `0x139` and `0x159`, and also move on a
+   board whose timing the kernel has started (the Digital Video driver's wait window is 5 lines either side of line 27 or 34).
+3. **Cursor latch (index `0x0e`).** The current cursor X takes the written X at a frame boundary.
+4. **Display control (index `0x1e`).** Bits 4:1 settable and clearable by the start and stop sequences; bit 0 settable (retrace
+   enable); bits 5 and 6 settable by genlock requests and read back. No effect on the model's timing is needed for the
+   diagnostic. For the kernel, bit 0 must make the retrace interrupt fire once per frame (inferred).
+5. **Board configuration word (`+0x072408`).** Accepts writes of the values in section 1.4 without side effects the diagnostic
+   observes; its reads still return the product word.
+6. **Display-bus room (`+0x020100` bits 4:0).** Reads low enough that the `(n + 1) >> 1 < 8` test passes, or every VC3 and
+   XMAP write stalls.
+7. **Status bytes.** `+0x071308` and `+0x071708` bits 2:0 equal and at least 2 (CMAP revisions), bit 7 of `+0x071708` set for no
+   option, the option probe at `+0x072c08` failing (reads that differ or an ID outside the accepted set) and `+0x072c08`
+   not echoing `0x55` so the flat-panel probe fails.
+8. **DAC signature registers (U).** DAC registers `0x10`, `0x11` and `0x12`, read as 16-bit values after the DAC's command
+   register 4 takes `0xa0`, `0xe0` and `0xc0` at frame boundaries, must return per-channel results of the pixel stream (10 bits
+   each) that equal what the diagnostic expects; the accumulation rule and the packing into the stored sum are not resolved
+   here. Without them the colour walk and every raster test with `-d` fail.
+9. **For the Digital Video driver:** the HQ4 busy bit at `+0x020000` bit 12 clears within 200 polls after the DMA start stores,
+   and the video-texture request's status codes of section 3.2.
+10. **Not needed:** genlock lock status, swap-ready, external sync inputs, video-in signal detect. Nothing the diagnostic or
+    kernel reads reports them.
