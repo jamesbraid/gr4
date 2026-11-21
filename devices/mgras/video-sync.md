@@ -132,7 +132,8 @@ a line the board has but the software never reads would not appear here).
 | `0x072488` | word | top byte | GE count, product ID, MGRAS revision ([board identity](board-identity.md)); bit 7 is read by neither | kernel, diagnostic `0x2084a0cc` | software expectation |
 | `0x072408` | word | top byte | RE count, TRAM fields, RB revision (reads); the same address takes the board configuration writes of section 1.4 | kernel, diagnostic | software expectation |
 | `0x070008` | byte | high nibble | after a `0xff` write to `0x072c08`, the option board's ID nibble, accepted when it is 4 (single-read builds) | option probe, see [questions](../../questions/README.md#1-multi-channel-option-register-map) | established as the routine's words |
-| `0x072c08` | byte | all | option board data port; the probe in this IP30 build (`mgras_mco.o` `0x0`) writes `0xff`, reads, writes 0, reads, requires equal reads and accepts 1 or a high nibble of `0xa`, returning the low nibble | `mgras_mco_probe` | established as the routine's words |
+| `0x072c08` | byte | all | option board data port; the probe in this archive's IP30 build (`mgras_mco.o` `0x0`, an older shape than the 6.5.22 and 6.5.30 IP30 builds, which use the single read above) writes `0xff`, reads, writes 0, reads, requires equal reads and accepts 1 or a high nibble of `0xa`, returning the low nibble | `mgras_mco_probe` | established as the routine's words |
+| `0x070008` | byte | all | the Digital Video driver's presence byte: `0x11` is a video board, `0xff` none (chips section 8.3); the option probe reads the same byte | srv probe, not the graphics driver | established for the reader, inferred for the byte |
 | VC3 index `0x0b`, 16 bit | read via `0x072008` and `0x0720b0` | all | vertical line counter, read by the Digital Video driver and the diagnostic | srv `_srvWaitForVertLineCnt`; `mgras_tex.o` `MgrasGetVertLineCnt` (`0x810`); diagnostic spins (section 4) | software expectation |
 | `0x020100` | word | 4:0 | display-bus room (not a status of the outside world; every VC3 and XMAP write waits for it) | kernel, diagnostic | established as the kernel's wait |
 
@@ -182,3 +183,92 @@ A model with no panel must make the probe fail: leave `+0x072c08` unreadable as 
 - **Video cable or capture-board presence beyond the option byte:** the Digital Video driver's own presence check is on its board
   (see chips section 11), not on MGRAS.
 - **Monitor-detect timing:** the monitor ID is a static sense value; whether it changes on hot-plug is unknown.
+
+## 3. Video into the framebuffer, from the graphics side
+
+The video board, its VGI1 channels, the TMI, CSC and GAL registers and the Digital Video driver's own paths are in chips
+`devices/octane-digital-video/` (sections 2.3, 8.3, 10, 13, 14 and 16). This section records only the boundary on the graphics
+side: what the graphics kernel, the X server and the GL library do, and the HQ4 and TE1 registers that carry the pixels. It
+adds nothing about the video board's registers.
+
+### 3.1 There is no direct video-to-framebuffer path
+
+No graphics-kernel routine writes the pixel processors' framebuffer from the video side. Video reaches the framebuffer in
+two steps, both through texture memory, or through a separate DMA that does not carry pixels:
+
+1. **Video to texture** (the capture path). The video board's TMI chip writes frames into the texture RAM through the TE1's
+   loader. The graphics kernel exposes it as ioctl `0x6d670016`.
+2. **Texture to framebuffer.** An ordinary GL copy-texture or textured draw (`mgrTM_DoCopyTex` in libGLcore.so, `0xdabb960`)
+   moves it onward; nothing in this path is video-specific.
+3. **The HQ4 video DMA** (`+0x081000` block, below) is used by the video driver for the CSC tables and for `putframe`
+   output, not for capture into the framebuffer. Its pixels never touch the raster engines.
+
+### 3.2 The video-texture request (`0x6d670016`)
+
+- **Kernel entry.** `MgrasVidTextureXfer` (`mgras_tex.o` `0x658`). It copies in a 0x28-byte record, calls the video driver's
+  `srvVidTextureXfer`, and copies the record back. Established.
+  - If the word at +4 is zero, it calls the driver at once with a zero second argument (a query: the driver reports the board's
+    current state, below). Established.
+  - If it is nonzero, it validates the window's fault state (`RRM_CheckValidFault`), takes a per-board semaphore at +0x7a8 of
+    the device structure (priority `0x51a`) and calls the driver with a small record (device, board, and the user record's
+    last word at +0x24). If taking the semaphore is interrupted it retries in one-tick timeouts, and it fails with -1 when a
+    flag in the board's block (+0x44 of the block at +0xc8) is set. The semaphore is released by `MgrasVidTextureXferDone`
+    (`0x890`), which the driver calls when the transfer finishes. Established as the routine's words; the flag's meaning is
+    unknown.
+- **What the driver checks** (`srv_tmi.o` `srvVidTextureXfer`, `0x192c`): the record's words +8, +0xc, +0x10 and +0x14 must equal
+  the driver's current TMI geometry (start and size words from its channel, a bit from its register `0xfe`, and the GL type for
+  its pixel format); +0x18 must be zero. On a mismatch it writes a status into +0x20: 2 board or TMI not ready, 3 start or
+  size mismatch, 4 the register-`0xfe` word, 5 format, 6 a nonzero +0x18; success is 7, or 0 when the query finds no transfer
+  running. The routine returns -1 for any other status, which the kernel turns into error 22 (`EINVAL`). +0x1c reports a
+  board field (`0x23f8`). Software expectation for the structure; the meaning of each geometry word is inferred.
+- **Start and finish hooks.** The driver starts the capture by calling `MgrasVidTextureXferStart` (`mgras_tex.o` `0x838`), after
+  setting bit 0 of the HQ4 word at `+0x081018` by read-modify-write (`srv_tmi.o` `0xd6c` to `0xd74`). The start writes either
+  the raster command-FIFO word `0x9300` to `+0x120400`, when the record's last word (+0x24) is nonzero, or the TE1 loader
+  register `0x1a6` (`texture_loader_video_capture_start`) with 1 through `__glMgrasSet`, when it is zero. So the last word
+  chooses between starting the capture in order with queued rendering (command FIFO, token `0x93`, not in gr4's token list) and
+  starting it at once. Established for the two writes; the choice rule is inferred.
+- **Line alignment.** The driver aligns a transfer to a scanline of the graphics display: `_srvWaitForVertLineCnt` (`srv_tmi.o`
+  `0x290`) reads VC3's line counter (`MgrasGetVertLineCnt`, below) until it is outside the window of 5 lines either side of a reference
+  line of 27 or 34 (`_srvCheckVertLineCnt`, `0x260`: 27 when a flag byte in its board record at +0x104 is nonzero, 34 when zero),
+  retrying every 10 microseconds for at most `gal15itimeout` times 20 milliseconds, then logging a timeout and returning 0.
+  The effect is that a transfer is not started while the graphics scan is within five lines of that line. Software
+  expectation. A counter that sits inside the window forever makes this wait expire.
+
+### 3.3 The line counter
+
+`MgrasGetVertLineCnt` (`mgras_tex.o` `0x810`): a byte write of `0x0b` to `+0x072008`, then a 16-bit read of `+0x0720b0`; it
+returns the value shifted so that the line number is in the low bits (`dsra32` by 16 of the 16-bit load). So VC3 index `0x0b`
+must read as a counter that advances with display timing. Its range is not stated by any code seen: the driver compares with
+27 or 34 and the diagnostic with 0 and 200 (section 4), so the counter runs at least from 0 to 200. Established for the
+access; the counter's exact line origin and wrap are unknown (see [display timing](../../software/kernel/display-timing.md)).
+
+### 3.4 The HQ4 video DMA block
+
+Registers (all 32-bit stores except the descriptor), written by the Digital Video driver in `srv_hq4_vdma`
+(`srv_hq4_dma.o` `0x168`) in this order, after the page list is built by `srv_hq4_setup_vdma`; constants are in
+[registers.toml](registers.toml) (`HQ_VIDEO_DMA_*`):
+
+1. `+0x011028` takes `0x02000000` (interrupt pending clear).
+2. `+0x060018` takes a word built from three caller fields.
+3. `+0x081018` takes a mode word; the driver forces the low nibble to `0xc`.
+4. `+0x081000` takes a 64-bit descriptor: flag bits 25, 24, 23 and 19 and the low 48 bits of the buffer's physical address.
+5. `+0x081010` takes the control word with bits 0 and 4 set, which starts the transfer.
+6. `_srv_hq4_wait_dma` polls the 32-bit word at `+0x020000` for bit 12 clear, up to 200 times, 500 microseconds apart on
+   board revision 1 (with a write of `0x55` to `+0x070808` every other pass at that interval), or a short nanosecond delay
+   otherwise. On timeout it stores `2` to `+0x081010` and logs.
+
+Callers: `srv_clut.o` (the CSC table load, via `_srv_csc_hq4_tdma`) and `srv_cc1_putframe.o` (two sites). The graphics kernel
+objects write none of these registers that I found. Grades: the order and values are software expectations; the roles of the
+words are inferred (see the HQ3 README).
+
+### 3.5 Who uses it
+
+- Kernel: the Digital Video driver (`srv`), through four graphics-driver entries it imports: `MgrasWriteBfifo` (its DCB writes,
+  41 call sites), `MgrasGetVertLineCnt`, `MgrasVidTextureXferStart` and `MgrasVidTextureXferDone`.
+- GL: `mgrTM_VidTexWait` (libGLcore.so `0xdab49cc`) sends `0x6d670016` only when the cached video-texture bytes change;
+  `mgrTM_DoCopyTex` sends it on its copy path; `__glMgrIsCurrentGLXReadVideo` (`0xda9387c`) says whether the current read
+  drawable is a video source. libGL.so creates `GLX_SGIX_video_source` objects (`glXCreateGLXVideoSourceSGIX`) through libvl
+  (`vlGetControl`), and `glx.so` advertises `GLX_SGIX_video_source`, `GLX_SGIX_video_resize` and `GLX_SGI_video_sync`.
+- VL: the `impact` VL device and its nodes are created by the video overlay's `mgv.so` (chips section 10.8), not by anything
+  in the graphics driver.
+- Applications named in the shipped overlay documentation (Smoke, Flame) reach it through VL; their specifics are chips'.
