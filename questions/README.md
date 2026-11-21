@@ -389,11 +389,8 @@ bringing the user's systems online.
    board value of the byte is held. Smallest test (physical, read-only): one byte read at `0x071708` on the Octane2 with no
    option, recorded verbatim. A plan naming the register's side effects is needed first: none are known, it is a plain
    status byte in the DCB device window the kernel reads at every attach.
-4. **The DAC signature registers and how they pack into the stored sum.** Unknown: what DAC registers `0x10` to `0x12` hold after
-   command register 4 takes `0xa0`, `0xe0` and `0xc0` around a frame, and how the diagnostic's comparison value is built from
-   them. Evidence tried: the diagnostic's `_check_crc_sig` and colour-walk code read in full as far as the reads; the
-   ADV7160/ADV7162 data sheet's test-register text was not found in the local Library. Settled without hardware by locating
-   the data sheet's test and signature register section (a Library lookup by part number and revision), then reading
-   `0x2084cf74` and `0x2082b5c0`. A physical test is only needed if the data sheet does not give the accumulation rule: one
-   read-only pass of registers `0x10` to `0x12` after a known solid frame, on the owner's Octane2, with a plan naming the
-   read side effects first.
+4. **The DAC signature registers and the expected words.** Settled in part by the data sheet (see the video-sync page, section 4.3): the
+   algorithm, inputs, control bits and readout are decoded. Still unknown: the gate polarity after the NAND in the data sheet's
+   figure, the reset state and the exact displayed frame behind each of the 42 expected words, so the stored words are not
+   reproduced. Settled without hardware by emulating the diagnostic's generated expectation routine (`0x2084dc80`) for the
+   walking-one colours and comparing with the analyzer model. A physical read is not available (James's Octane2 is VPro).

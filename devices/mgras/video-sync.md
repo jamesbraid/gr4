@@ -95,6 +95,7 @@ word is the digital sync output pull-up, **inferred** from the message text only
 writes disagree on bit 30 and on which argument drives bit 26, and neither shows a reason; which of them the board follows
 is **unknown** (see the open questions below).
 
+
 ### 1.5 Interrupts and the X and kernel paths
 
 - The retrace interrupt, the swap-finish source and the swap command are in the HQ4 page and are not repeated: retrace is one
@@ -320,19 +321,59 @@ The frame waits are the dominant hazard. They are unbounded loops that select VC
 So the model's line counter must start from a value that reaches 0 within a frame, pass 200 within a frame, and wrap, for
 every timing token above; a counter held at a constant, or one that never reads 0, hangs the suite.
 
-### 4.3 The signature check on the raster tests
+### 4.3 The signature check
 
-The raster tests' `-d` option (see [IDE raster tests](ide-raster-tests.md)) calls `_check_crc_sig` (`ide` `0x2084b994`), which
-uses the same frame-synchronous machinery as `mg_crcwalk`: it clears its result words (`0x2084d930`), runs the wait that
-brackets the DAC command-register-4 writes (`0x2084d158`), and compares what `0x2084cf74` assembles against the value the test
-passes (the 32-bit sum of the expected table words). `0x2084cf74` assembles it from three 16-bit reads of DAC registers `0x10`,
-`0x11` and `0x12` (each masked to 10 bits after a shift by one), so **the signature the diagnostic checks is read from the DAC,
-not from the pixel processors**. That the three registers are the DAC's per-channel signature results, started and stopped by the
-command-register-4 values `0xa0`/`0xe0`/`0xc0` at frame boundaries, is inferred from the access pattern and the printed
-`R G B`; the ADV7160/ADV7162 data sheet cited in the questions page was not re-read for it. How the 10-bit results pack into
-the 32-bit comparison value is not resolved. This partly answers the open point in the IDE raster page, which asked whether
-the board's signature register accumulates the stored sum: the diagnostic does not read a pixel-processor register; the model's
-DAC has to produce the three results.
+**Datasheet.** The ADV7160/ADV7162 data sheet (Analog Devices, Rev. 0, 1995; Library manifest path
+`graphics/analog-devices/adv7160_7162.pdf`, sha256 `c8fa1a6dfc222d72655b9a33298198eae8675add875e96690e719b0dec713c24`, held in the
+Origami Library cache and resolving through the Library's `origami-docs` root as `library/cache/graphics/analog-devices/adv7160_7162.pdf`;
+it was already a `have` row, so nothing was fetched) has a signature analyzer in the pixel datapath, just before the DAC
+decoders (page 40, Appendix 5, and the Command Register 4 description on page 29). Established from the data sheet:
+
+- **Width and inputs.** 33 cells S0 to S32. The 30-bit pixel (10 bits each of blue, green and red) is the parallel input:
+  cell S1 to S10 take B0 to B9, S11 to S20 take G0 to G9, S21 to S30 take R0 to R9, S31 and S32 take 0, and S0 takes cell S19.
+  It sees the pixel after the palette and gamma stages (it is "just before the DAC decoders"), so it sees the 10-bit
+  values, not the framebuffer bytes.
+- **Structure.** Each cell is the exclusive-or of its input with the NAND of the feedback enable and the previous cell (cell 0's
+  previous cell is S32): a rotating chain with the single extra tap S19 into S0, so the feedback polynomial has taps at stages 33
+  and 20. The figure labels the enable `CR42` where the text says CR47; the text is used here. Whether the gate after the NAND is an
+  exclusive-or or its complement is not readable from the figure.
+- **Clocking.** It accumulates only during active display, while BLANK is high.
+- **Control, Command Register 4 (DAC register 8).** CR45 (`0x20`) enables the signature clock; CR46 (`0x40`) taken low and then high
+  resets the analyzer; CR47 (`0x80`) high enables the feedback, low latches the pixel straight in. The data sheet's procedure: set
+  CR45 and CR47 during vertical retrace and toggle CR46; the signature is acquired over the next active screen; clear CR45 in the
+  following retrace (allow at least 20 clocks for the pipeline) and read it.
+- **Readout.** Registers `0x10` (red: S30 to S21), `0x11` (green: S20 to S11), `0x12` (blue: S10 to S1) and `0x13` (S32, S31 and
+  S0 in bits 2:0), each read-only and 10 bits wide, read through the same address and data ports as the palette.
+
+**The diagnostic follows that procedure exactly** (software expectation, `ide` `0x2084d158`): wait for line count 0 (retrace); write
+register 8 with `0xa0` (CR47 and CR45 high, CR46 low) and then `0xe0` (CR46 high: reset released, accumulating); wait for the line
+count to pass 200 and return to 0 (one full frame); write `0xc0` (CR45 low, clock off); set the address to `0x10`, `0x11` and
+`0x12` and read each as a 16-bit value (in 8-bit-bus mode the top two bits come from bits 15:14 of the 16-bit read). It never
+reads `0x13`. The three 10-bit values are stored into one host word as `(S30..S21) << 1 | (S20..S11) << 11 | (S10..S1) << 21`
+(`0x2084d3b4` to `0x2084d478`), and `0x2084cf74` compares that word field by field against an expected word and returns the
+number of fields that differ.
+
+**What it compares against.** Not frame against frame, and not the stored table sums:
+
+- The raster tests' `-d` option and `mg_crcwalk` each take their expected words from a table of 8-byte entries in host memory at
+  `0x20a17970` (entry word at +8), indexed by the test's sum index. That table is not in the file: it is filled at run time by
+  the routine at `0x2084b1f8` (called at `0x20848480` and `0x20849a78`), whose stores are immediate constants, so the expected
+  values are **fixed numbers carried in the code**, 42 entries, bit 31 and bit 0 clear in all of them. Several entries repeat
+  (in pairs and fours), which suggests the same displayed frame at different sum indexes. The values are not recorded here.
+- They are not the 32-bit sums that the tests pass as their first argument (`0xc584ed6b` for the lines table and so on): the passed
+  word is only printed (`0x2082b5c0` shows its fields on a mismatch). The two numbers are unrelated by the arithmetic of the
+  data sheet; the sums stay what [the raster page](ide-raster-tests.md) says: the plain wrapping sum of the expected table words.
+- `mg_crcwalk` is different: it builds a walking-one colour for each of red, green and blue (`(1 << k) & 0x3ff`, ORed with
+  `0x300c03`), sets it through the XMAP, and obtains its expected word by running a large generated routine
+  (`0x2084dc80` to `0x20852600`, about 19 kilobytes) before the same field comparison. That routine is the software model of the
+  analyzer for a whole frame, so its expectation is computed, not stored. It was not run here.
+
+**Reproduction attempt (not reproduced).** The analyzer above, with the enable gate read both ways, both reset states (all zeros and
+all ones) and an all-black input, was clocked for every pixel count from 1 to 4,000,000 and the packed result compared with all 42
+stored words. One chance-level hit came out (a 1 in 2 to 3 expectation for that many tries), so nothing is reproduced. The
+displayed frames in the tests are not black and depend on XMAP, colour map and gamma state (the colour-map tests load a linear
+ramp) and the timing's active area; those inputs are not pinned, so a model should implement the data sheet's analyzer on the
+actual 10-bit pixel stream, not copy the stored words.
 
 ### 4.4 The genlock helper
 
@@ -364,10 +405,10 @@ provides them gets the video and sync parts of the suites to finish. Items marke
 7. **Status bytes.** `+0x071308` and `+0x071708` bits 2:0 equal and at least 2 (CMAP revisions), bit 7 of `+0x071708` set for no
    option, the option probe at `+0x072c08` failing (reads that differ or an ID outside the accepted set) and `+0x072c08`
    not echoing `0x55` so the flat-panel probe fails.
-8. **DAC signature registers (U).** DAC registers `0x10`, `0x11` and `0x12`, read as 16-bit values after the DAC's command
-   register 4 takes `0xa0`, `0xe0` and `0xc0` at frame boundaries, must return per-channel results of the pixel stream (10 bits
-   each) that equal what the diagnostic expects; the accumulation rule and the packing into the stored sum are not resolved
-   here. Without them the colour walk and every raster test with `-d` fail.
+8. **DAC signature analyzer.** DAC registers `0x10`, `0x11` and `0x12` return the data sheet's signature of the 10-bit pixel stream
+   over one frame, with Command Register 4 (`0x20`, `0x40`, `0x80`) controlling it as in section 4.3, and the diagnostic's
+   expected words depend on the exact displayed frame (unreproduced here). Without the analyzer the colour walk and every
+   raster test with `-d` fail.
 9. **For the Digital Video driver:** the HQ4 busy bit at `+0x020000` bit 12 clears within 200 polls after the DMA start stores,
    and the video-texture request's status codes of section 3.2.
 10. **Not needed:** genlock lock status, swap-ready, external sync inputs, video-in signal detect. Nothing the diagnostic or
