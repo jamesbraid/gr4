@@ -95,6 +95,25 @@ word is the digital sync output pull-up, **inferred** from the message text only
 writes disagree on bit 30 and on which argument drives bit 26, and neither shows a reason; which of them the board follows
 is **unknown** (see the open questions below).
 
+**Comparing the writers' values bit by bit** (top byte; every other byte of the word is zero in all writes seen):
+
+| Value | Bits set | Who, when |
+|---|---|---|
+| `0x40` | 6 | kernel, start of timing set-up (`mgras_init.o` `0x1540`) and in `MgrasInitHQ` (`0x111c`) |
+| `0xc8`, `0xe8`, `0xe9` | 7 6 3 / 7 6 5 3 / 7 6 5 3 0 | the IP27 kernel build's timing writes (see [display timing](../../software/kernel/display-timing.md)); not in this IP30 archive |
+| `0x09` | 3 0 | diagnostic, NTSC/PAL token path (`ide` `0x20844f58`); bit 3 matches the `DGTL_SYNC_OUT pulled up` message |
+| `0x60`, `0x62` | 6 5 / 6 5 1 | both: running value; the `0x62` pulses clock the pixel-clock doubler's serial program (`ide` `0x20864284`, kernel `0x71b4`) |
+| `0x64` | 6 5 2 | kernel genlock, sync output on |
+| `0x20`, `0x24` | 5 / 5 2 | diagnostic genlock, genlock input on / off |
+
+Bit 29 (`0x20`) is set in every running value (`0x60`, `0x62`, `0x64`, `0x20`, `0x24`) and clear in the set-up values `0x40` and `0x09`. Bit 25 (`0x02`) is a strobe. Bit 26 (`0x04`) is the only bit the genlock writes vary. The two writers differ in two ways
+the code does not explain: the kernel keeps bit 30 (`0x40`, set in the running value) and the diagnostic clears it, and
+the kernel drives bit 26 from its **sync-output** argument (set when on) while the diagnostic drives it from its **genlock** argument
+(set when off). The first difference is not a different board revision in any evidence read here (both routines come from
+the same IP30 build family and neither tests a revision); the diagnostic is dated February 1997, the kernel archive 1998,
+so a change of the field's meaning between board generations is possible but unsupported. Neither write is masked (each
+stores the whole word). Verdict: **unknown**, graded so; settling it needs the register's behaviour on an IMPACT board, and
+James's Octane2 is a VPro, not IMPACT, so no capture is possible on his systems.
 
 ### 1.5 Interrupts and the X and kernel paths
 
@@ -153,6 +172,15 @@ words:
      lists as using the 1024 by 768 timing.
    - No panel: `mgras_mco_probe` runs anyway.
 3. If the option probe finds a board (+0x40 nonzero): the option flag is cleared and +0x36 is set to 1.
+
+**Reconciling bit 7 (kernel) with bit 6 (diagnostic).** The kernel's RA revision is bits 6:4 and the diagnostic prints the same three
+bits as `RA Board version` when they are nonzero, then separately tests bit 6 for its video-board message. Both cannot be right
+if bit 6 is also the top bit of a revision field that takes values of 4 or more. The consistent reading is that bit 6 and bit 7 are
+two separate absent lines, bit 6 for the video board the diagnostic names and bit 7 for the option connector the kernel probes
+(multi-channel option or flat panel), and that the RA revision field is really bits 5:4 on the boards seen (so bit 6 never
+carries a revision). That reading explains why the diagnostic's own messages never conflict, and why a kernel with no video board
+still probes the option. It is **inferred** from the code only; the other reading (one line, one of the two routines wrong for
+some board revision) cannot be excluded, and no board value is held. Unknown, with no IMPACT capture possible on James's systems.
 
 So the byte at `0x071708` bit 7 is a hint the kernel confirms by probing; a model that always reports "no option" with an
 unanswered probe (reads back unequal) gets a plain single-monitor board.

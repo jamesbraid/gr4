@@ -376,18 +376,18 @@ bringing the user's systems online.
    `MgrasSetGenlock` writes `0x64000000` or `0x60000000` by its sync-output argument; the diagnostic's helper writes
    `0x20000000` or `0x24000000` by its genlock argument. Evidence tried: both routines read in full, no read-back of the
    word exists in either, and the word's top byte is read for board identity, so a read cannot show the written bits. Smallest
-   test (physical, Octane2): with a scope on the genlock BNC and a known reference, send one `MGRAS_SET_GENLOCK` request
+   test (physical, IMPACT board; James's Octane2 is a VPro, so none is available to us): with a scope on the genlock BNC and a known reference, send one `MGRAS_SET_GENLOCK` request
    (`0x6d670014`) with each of the four combinations of its two words and record the sync output and whether the screen locks.
    Four requests, no register reads.
 2. **Whether the VC3 display-control bits 5 and 6 have any status counterpart.** Unknown. Evidence tried: the kernel never
-   reads index `0x1e`; the diagnostic reads it back only to print the bits it wrote. Smallest test (physical): with the
+   reads index `0x1e`; the diagnostic reads it back only to print the bits it wrote. Smallest test (physical, IMPACT only, not available on James's systems): with the
    reference connected and then removed, read VC3 index `0x1e` and `0x1f` (index write to `0x072008`, 16-bit read at `0x0720b0`;
    neither has read side effects in any code seen) and see whether any bit other than the written ones changes.
 3. **The video-option bit.** The kernel reads bit 7 of the byte at `0x071708` clear as "option attached"; the diagnostic's
    `RA Board version` routine (`ide` `0x20849f9c`) tests bit 6 for its "video board not installed" message. Both cannot name
    the same line unless bit 6 is also the top bit of the RA revision field. Evidence tried: both code paths read; no captured
-   board value of the byte is held. Smallest test (physical, read-only): one byte read at `0x071708` on the Octane2 with no
-   option, recorded verbatim. A plan naming the register's side effects is needed first: none are known, it is a plain
+   board value of the byte is held. Smallest test (physical, read-only, IMPACT only, not available on James's systems): one byte read at `0x071708` with no
+   option, recorded verbatim. Reading the kernel and diagnostic again gave a consistent reading, bit 6 and bit 7 as separate absent lines (video board and option connector), recorded as inferred. A plan naming the register's side effects is needed first: none are known, it is a plain
    status byte in the DCB device window the kernel reads at every attach.
 4. **The DAC signature registers and the expected words.** Settled in part by the data sheet (see the video-sync page, section 4.3): the
    algorithm, inputs, control bits and readout are decoded. Still unknown: the gate polarity after the NAND in the data sheet's
