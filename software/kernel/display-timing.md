@@ -14,8 +14,8 @@ reasoning) and unknown.
 ## Sources
 
 - **Kernel.** `mgras_init.o`, `mgras_timing.o` and `mgras_retrace.o` from
-  `usr/cpu/sysgen/IP30boot/mgras.a` of the `6.5-base` tree of the extracted
-  "IRIX 6.4 for Origin, Onyx2 and OCTANE" disc image (archive SHA-256
+  `usr/cpu/sysgen/IP30boot/mgras.a` of the `6.5-base` directory of the extracted
+  "IRIX 6.4 for Origin, Onyx2 and OCTANE" disc image (the "disc build" below; archive SHA-256
   `6b6c19b5db366331489e36f461a5fbd03211ad96deed89957564f44b990772bc`; members
   `58ededa91f26...`, `21699d9d22c3...`, `a8be0178ab32...`). The write sequence is
   the one read earlier in the IRIX 6.5.30 IP27 `mgras_init.o` (SHA-256
@@ -33,16 +33,20 @@ reasoning) and unknown.
   page 18 and the PLL command register on page 30.
 - **Other trees read for the field question** (not for the numbers above). The
   `6.5-base` tree of the June 1998 base set and the IRIX 6.5.30 overlay set of
-  the Origami media extraction, which are not the same files as the disc named
-  above: both hold `vof/1280x1024_60_2f.sdb`, `_50_2f` and the `_32db` pair, and
+  the Origami media extraction (`refs/irix-media/6.5-base` and `6.5.30`; the first
+  shares only its name with the disc's `6.5-base` directory and its files differ:
+  `mgras.a` SHA-256 `3c4a579eb824...`, against `6b6c19b5db36...` for the disc and
+  `32a535dc5957...` for 6.5.30): both hold `vof/1280x1024_60_2f.sdb`, `_50_2f` and the `_32db` pair, and
   `vof/2RSS/1280x1024_60_2f.sdb` and `_50_2f`. The IRIX 6.5.30 set also ships the
   video format compiler's rule files for this board
   (`usr/gfx/ucode/vfc/rules/mgras.def`, SHA-256
   `804704e31948f544d46d4838833989e9c792ae792346241fb1948bb87d2effc3`, and
-  `mgras_vc3.def`). The 1998 patches 3133 and 3366 carry older copies of the
-  `_2f` files. The IP30 `mgras.a` of those trees (three builds in all, the disc
-  above, the 1998 base set and 6.5.30) was disassembled for the VC3 accesses
-  listed under Retrace.
+  `mgras_vc3.def`). Patch 3133 (IRIX 6.2, `globe/6.2/3133`, August 1998) lists a
+  `2RSS/1280x1024_60_2f.sdb` in its inventory (not extracted), and patch 3366
+  (IRIX 6.4, `globe/6.4/3366`, March 1999) carries one, `compress`-packed in its
+  `eoe_sw` image (SHA-256 `30363ca6b85d...` once unpacked). The IP30 `mgras.a` of the
+  three trees (the disc build, the June 1998 base build and 6.5.30) was
+  disassembled for the VC3 accesses listed under Retrace.
 - The binaries and timing files are not stored in this repository.
 
 ## Timing file layout
@@ -265,15 +269,19 @@ none were held: see Sources. The one Smoke 5.0 loads on an MXI,
 frame, field 2 has a 6-line front porch instead of 3, and the two active runs are
 1,024 lines each (**established**, decoded from SHA-256 `dfa031ba2c99...` of the
 1998 base set and `f0661bf866ba...` of the 6.5.30 set; both decode to the same
-timing). The 1998 patch copies (`FieldsPerFrame` 1, `SwapsPerFrame` 2) differ only
-in those metadata fields.
+timing; they differ only in `VerticalStateCount`). The patch 3366 copy is a
+different compile of the same format, not a metadata variant: a 607-halfword line
+table against 611, `FieldsPerFrame` 1 and `SwapsPerFrame` 2, `FormatInfo_H_Active`
+1279 and back porch 239, rounded horizontal times, and a different
+`VIS_LN_VC_N` waveform. Its frame table, line count and `VINT_N` pulse (line 2126,
+clock 824) are the same.
 
 ## Signals the line table drives
 
 **Established**: the 6.5.30 compiler rules (`mgras.def`) name the 21 signals the
 VC3 table drives and say how each is produced from the format. Decoding the
 tables of 81 shipped files (all non-combination files of the four trees, one-field,
-two-field, stereo and interlaced) reproduces the rules' waveforms exactly for
+two-field, stereo and interlaced) reproduces the rules' waveforms for
 `VINT_N`, `VSTAT_N`, `EOF_VC_N`, `VPOS_VC_N`, `LDTOPSCAN_N` and `MON_VSYNC_N` (the line,
 and for `VINT_N` and `LDTOPSCAN_N` the clock, of each edge agrees with the rule's
 arithmetic in the stock, two-field, stereo and interlaced files compared; the
@@ -289,11 +297,13 @@ other signals were not compared), which fixes the bit layout:
   `B11` `ODDFIELD_VC_N`, `B12` `EOF_VC_N`, `B13` `VPOS_VC_N`; `A14` `VIS_LN_VC_N`,
   `A15` `HPOS_VC_N`, `A16` `DAC_CSYNC`, `A17` `UPDATE_EN_N`, `A18` `TRQ_N`, `A19`
   `VBLANK_PP_N`, `A20` `HBLANK_PP_N`.
-- Per frame, `VINT_N` is low for 0.3 microseconds (16 VC3 clocks) and rises at the
+- Per frame, `VINT_N` is low for about 0.3 microseconds (16 VC3 clocks in the
+  107 MHz-class formats; 2 to 24 clocks across the 58 non-combination files that
+  hold a pulse in the two trees) and rises at the
   end of the active region of the last field, and nowhere else. In the stock
   1280 by 1024 file that is clocks 824 to 840 of line 1061 (of 1,065); in
   `2RSS/1280x1024_60_2f` clocks 824 to 840 of line 2126 (of 2,133), the last active line
-  of field 2. Field 1 has no pulse. The same holds in every one of the 81 files,
+  of field 2. Line numbers here count from 0, so 2126 is line 2127 counting from 1. Field 1 has no pulse. The same holds in every one of the 81 files,
   including the stereo (`1280x492_120s`, `1024x768_96s`, `616x492_140os`) and
   interlaced (`640x486_30i`, `768x576_25i`, `1280x960_30i`) ones: one pulse per
   frame, at the end of the last field. `mgras.def` writes this rule once, with no
@@ -301,15 +311,17 @@ other signals were not compared), which fixes the bit layout:
   settled by decoding, as above (none does).
 - The per-field signals are different: `EOF_VC_N` (low for line 1 of every field,
   or of the frame for the older stereo formats), `VPOS_VC_N`, `LDTOPSCAN_N` and
-  `MON_VSYNC_N` pulse once per field in the two-field formats. `VSTAT_N` is low
-  from the front porch of the last field to the end of the back porch of field 1,
-  so it is high exactly while the first field's active lines through the last
-  field's active lines are scanned.
+  `MON_VSYNC_N` pulse once per field in the two-field formats. `VSTAT_N` is high
+  from the start of field 1's active lines through the front porch of the last
+  field, and low from there to the end of field 1's back porch. In the interlaced
+  files `EOF_VC_N` is half a line off the rule, so the agreement above is for
+  the signals named, not all of them.
 - `FieldSwap`, `SwapsPerFrame`, `FieldEye` and `UnbalancedSwaps` do not appear in
   `mgras.def`. Among shipped programs, `FieldSwap` and `UnbalancedSwaps` are read
   only by `vfc` (and, for `FieldSwap`, by the `dg4` rules, which gate a register
   load per field). `SwapsPerFrame`, `FieldEye` and `FieldLineCount` are read by
-  `setmon` as well. Neither `impactpc.so` nor any `mgras.a` object names any of
+  `setmon` as well, and `SwapsPerFrame` is named in `ircombine`, `sgcombine`,
+  `dmconf` and the Kona and Odyssey X server modules, none of them MGRAS. Neither `impactpc.so` nor any `mgras.a` object names any of
   them. For this board they are descriptive metadata: they do not change what the
   table does.
 
@@ -341,30 +353,40 @@ documented.
   interrupts. Nothing in the handler or the scheduler consults a field, a
   `FieldSwap` or `SwapsPerFrame` value.
 - **Established** (all access instructions of the three IP30 `mgras.a` builds,
-  checked with `objdump`, not the decompile): the kernel's only accesses to the
-  VC3 window (`0x072000` to `0x0720ff`) are index-and-data writes through
-  `0x072038` and, for the revision, a byte write of `0x1f` to `0x072008` followed
-  by a 16-bit read of `0x0720b0`. It never reads VC3 status, the field parity or
-  register `0x1e` back. There is no field-parity source in the kernel.
+  checked with `objdump`, not the decompile): the kernel's accesses to the VC3
+  window (`0x072000` to `0x0720ff`) are index-and-data writes through `0x072038`
+  and two reads, each a byte write of an index to `0x072008` followed by a 16-bit
+  read of `0x0720b0`: index `0x1f` for the revision, and index `0x0b` in
+  `MgrasGetVertLineCnt` (`mgras_tex.o`, `0x810` in the disc build, `0x7a0` in the
+  June 1998 build, `0x7ac` in 6.5.30), which returns the vertical line counter
+  (see [video sync](../../devices/mgras/video-sync.md)). It never reads VC3
+  status, the field parity or register `0x1e` back. There is no field-parity
+  source in the kernel.
 - **Inferred**: bit 7 of register `0x1e` is the interlace bit. It is set exactly
   when record flag bit 2 is, and that bit is the `MgrasFlag` bit set in the
   interlaced files (`MgrasFlag` bit 2; the stereo and two-field files leave it
   clear, so they get `0x1e`). That the flag word is `MgrasFlag` rests on the X
   server's loader decompile only.
-- **Established**: register `0x1e` is written from a shadow word, with the word
+- **Established**: register `0x1e` is written from a shadow word (a global in the
+  disc build, a field at +80 of a per-board record in the other two), with the word
   `0x1e000000 | (shadow << 8)`. The only code that changes the shadow is
   `MgrasSetVC3Timing` (reset to `0x9e` when bit 2 of the timing record's flag
   word is set and to `0x1e` when it is clear; then bit 5 is set when record bit 1
   is set and bit 6 as well when record bit 3 is also set),
   `MgrasEnableRetraceInterrupts` (sets bit 0), `MgrasBlackoutTiming` (bit 1) and
   `MgrasSetGenlock` (bits 5 and 6). `MgrasEnableVideoTiming(0)` writes plain
-  `0x1e000000`. `MgrasEnableRetraceInterrupts` has two callers in `mgras.o` (the
-  end of `MgrasStart` and of `MgrasPrivate`) and is skipped when the global
-  `SuppressRetraceIntr` is set. Nothing masks or enables the interrupt per field.
+  `0x1e000000`. `MgrasEnableRetraceInterrupts` has two callers in `mgras.o` in all
+  three builds (the end of `MgrasStart` and of `MgrasPrivate`). In the disc build
+  it returns without writing when the global `SuppressRetraceIntr` is non-zero;
+  the symbol is in neither of the other two builds and neither has the guard. The
+  other writers above are the same in all three builds. Nothing masks or enables
+  the interrupt per field.
 - **Established**: Smoke 5.0 `VideoSetHiresMonitor` (`0x10b60270`): for the
-  external-sync 30 Hz setting (`Hires 30Hzf` in the installation guide) it picks
-  `%dx%d_60_2f` when `GraphicsGetVersion()` (`0x10f05a90`) returns 0 and
-  `%dx%d_30f%s` otherwise (`0x10b60934`, `0x10b60ff8`, `0x10b610d8`), and stores 30
+  external-sync 30 Hz setting (`Hires 30Hzf` in the installation guide) it calls
+  `GraphicsGetVersion()` (`0x10f05a90`) once, at `0x10b602b0`, and picks
+  `%dx%d_60_2f` when it returns 0 (`0x10b60934`, `0x10b60ff8`). Otherwise it uses
+  `%dx%d_30f%s` only when the word at `22904($gp)` is -1 (`0x10b60940`,
+  `0x10b610d8`) and the `%dx%d+%dx%d_%s` combination name in every other case. It stores 30
   as the hires rate (`li a2,30` at `0x10b60990`). The 25 Hz setting does the same
   with `_50_2f` and 25. Which boards make `GraphicsGetVersion()` return 0 was not traced. `PlSwapTable::_build` (`0x10e65aa0`) divides that integer
   by the playback rate; when it divides exactly the table is one entry.

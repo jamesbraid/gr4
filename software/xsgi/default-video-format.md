@@ -9,7 +9,7 @@ Grades are the repository's: established, inferred, unknown.
 
 ## Sources
 
-- **X server.** `usr/lib/X11/dyDDX/impactpc.so` of the `6.5-base` tree of the
+- **X server.** `usr/lib/X11/dyDDX/impactpc.so` of the `6.5-base` directory of the
   extracted "IRIX 6.4 for Origin, Onyx2 and OCTANE" disc image (SHA-256
   `1170547ecffb6c5246192c3e0e46dd2d2abaf64cb6f5888e1d0ef920a16985af`),
   disassembled from `mgrasAttachXvc` (`0x5e2c9170`).
@@ -112,8 +112,8 @@ whose pixel clock is itself unknown.
   for the external-sync settings (`0x10b60934`, `0x10b60ff8`). The 1280 by 1024
   `_2f` files that name produces at that screen size are not in the Smoke 5.0
   `DLvfo` set (which holds `1600x1024_50_2f` and `_60_2f` only) but in the
-  `vof/2RSS` directory of the 1998 base set, the 6.5.30 set and patches 3133 and
-  3366; the IRIX 6.4 disc tree named above has none, and no `_30f`, `_25f`, `_50f`
+  `vof/2RSS` directory of the June 1998 base set and the 6.5.30 set, and in
+  patch 3366 (patch 3133 lists one too); the IRIX 6.4 disc tree named above has none, and no `_30f`, `_25f`, `_50f`
   or `_60f` file is held anywhere. See [display timing](../kernel/display-timing.md#signals-the-line-table-drives)
   for what a `_2f` table does to the retrace.
 - Which format a later IRIX release picks by default; only the 6.5-base server
