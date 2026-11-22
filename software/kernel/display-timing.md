@@ -31,6 +31,18 @@ reasoning) and unknown.
 - **Data sheet.** The Analog Devices ADV7160/ADV7162 data sheet, Rev. 0 (Library
   `graphics/analog-devices/adv7160_7162.pdf`, SHA-256 `c8fa1a6d...`): the PLL on
   page 18 and the PLL command register on page 30.
+- **Other trees read for the field question** (not for the numbers above). The
+  `6.5-base` tree of the June 1998 base set and the IRIX 6.5.30 overlay set of
+  the Origami media extraction, which are not the same files as the disc named
+  above: both hold `vof/1280x1024_60_2f.sdb`, `_50_2f` and the `_32db` pair, and
+  `vof/2RSS/1280x1024_60_2f.sdb` and `_50_2f`. The IRIX 6.5.30 set also ships the
+  video format compiler's rule files for this board
+  (`usr/gfx/ucode/vfc/rules/mgras.def`, SHA-256
+  `804704e31948f544d46d4838833989e9c792ae792346241fb1948bb87d2effc3`, and
+  `mgras_vc3.def`). The 1998 patches 3133 and 3366 carry older copies of the
+  `_2f` files. The IP30 `mgras.a` of those trees (three builds in all, the disc
+  above, the 1998 base set and 6.5.30) was disassembled for the VC3 accesses
+  listed under Retrace.
 - The binaries and timing files are not stored in this repository.
 
 ## Timing file layout
@@ -246,26 +258,127 @@ In every file the frame table has one long repeat run (the active lines) per
 field, each followed by a single-repeat entry that ends the field: one run in the
 41 one-field files and two in the 10 two-field files.
 
+The 1280 by 1024 two-field files exist where an earlier version of this page said
+none were held: see Sources. The one Smoke 5.0 loads on an MXI,
+`2RSS/1280x1024_60_2f.sdb`, is 2,133 lines of 840 VC3 clocks (1,791,720 clocks,
+33.41 ms at 107.25 MHz, 29.929 Hz): field 1 is the 1,065 lines of the stock
+frame, field 2 has a 6-line front porch instead of 3, and the two active runs are
+1,024 lines each (**established**, decoded from SHA-256 `dfa031ba2c99...` of the
+1998 base set and `f0661bf866ba...` of the 6.5.30 set; both decode to the same
+timing). The 1998 patch copies (`FieldsPerFrame` 1, `SwapsPerFrame` 2) differ only
+in those metadata fields.
+
+## Signals the line table drives
+
+**Established**: the 6.5.30 compiler rules (`mgras.def`) name the 21 signals the
+VC3 table drives and say how each is produced from the format. Decoding the
+tables of 81 shipped files (all non-combination files of the four trees, one-field,
+two-field, stereo and interlaced) reproduces the rules' waveforms exactly for
+`VINT_N`, `VSTAT_N`, `EOF_VC_N`, `VPOS_VC_N`, `LDTOPSCAN_N` and `MON_VSYNC_N` (the line,
+and for `VINT_N` and `LDTOPSCAN_N` the clock, of each edge agrees with the rule's
+arithmetic in the stock, two-field, stereo and interlaced files compared; the
+other signals were not compared), which fixes the bit layout:
+
+- In a two-halfword entry, the second halfword holds 7 signals in bits 6:0 (`C0`
+  to `C6`) and 7 in bits 14:8 (`B7` to `B13`). The first halfword's low 7 bits are
+  `A14` to `A20`. A one-halfword entry changes only the A group; the other
+  signals keep their level.
+- `C0` is `VINT_N`, `C1` `VSTAT_N`, `C2` `LEFT_LKOUT_N`, `C3` `VID_HDRIVE_N`,
+  `C4` `VID_VDRIVE_N`, `C5` `FRAME_LOCK_N`, `C6` `MCO_VSYNC_N`; `B7`
+  `LDTOPSCAN_N`, `B8` `DAC_TRISYNC_N`, `B9` `MON_HSYNC_N`, `B10` `MON_VSYNC_N`,
+  `B11` `ODDFIELD_VC_N`, `B12` `EOF_VC_N`, `B13` `VPOS_VC_N`; `A14` `VIS_LN_VC_N`,
+  `A15` `HPOS_VC_N`, `A16` `DAC_CSYNC`, `A17` `UPDATE_EN_N`, `A18` `TRQ_N`, `A19`
+  `VBLANK_PP_N`, `A20` `HBLANK_PP_N`.
+- Per frame, `VINT_N` is low for 0.3 microseconds (16 VC3 clocks) and rises at the
+  end of the active region of the last field, and nowhere else. In the stock
+  1280 by 1024 file that is clocks 824 to 840 of line 1061 (of 1,065); in
+  `2RSS/1280x1024_60_2f` clocks 824 to 840 of line 2126 (of 2,133), the last active line
+  of field 2. Field 1 has no pulse. The same holds in every one of the 81 files,
+  including the stereo (`1280x492_120s`, `1024x768_96s`, `616x492_140os`) and
+  interlaced (`640x486_30i`, `768x576_25i`, `1280x960_30i`) ones: one pulse per
+  frame, at the end of the last field. `mgras.def` writes this rule once, with no
+  case for field count, stereo or interlace. Whether a given file overrides it is
+  settled by decoding, as above (none does).
+- The per-field signals are different: `EOF_VC_N` (low for line 1 of every field,
+  or of the frame for the older stereo formats), `VPOS_VC_N`, `LDTOPSCAN_N` and
+  `MON_VSYNC_N` pulse once per field in the two-field formats. `VSTAT_N` is low
+  from the front porch of the last field to the end of the back porch of field 1,
+  so it is high exactly while the first field's active lines through the last
+  field's active lines are scanned.
+- `FieldSwap`, `SwapsPerFrame`, `FieldEye` and `UnbalancedSwaps` do not appear in
+  `mgras.def`. Among shipped programs, `FieldSwap` and `UnbalancedSwaps` are read
+  only by `vfc` (and, for `FieldSwap`, by the `dg4` rules, which gate a register
+  load per field). `SwapsPerFrame`, `FieldEye` and `FieldLineCount` are read by
+  `setmon` as well. Neither `impactpc.so` nor any `mgras.a` object names any of
+  them. For this board they are descriptive metadata: they do not change what the
+  table does.
+
+**Inferred**: `VINT_N` is the VC3 output that becomes the board's retrace
+interrupt. The evidence is the name, that it is the only per-frame vertical
+signal, that kernel retrace counting and swap intervals (below) are in frames at
+the file's `VerticalRetraceRate`, and that `FieldSwap` of `0, 1` allows a swap only after field 2, the
+same instant `VINT_N` fires. No VC3 data sheet is held, so the pin-to-interrupt wiring is not
+documented.
+
 ## Retrace
 
-- **Established** (IP30 `MgrasRetraceHandler`): the handler returns at once when
-  the word at +68 of the record at +200 of its argument is non-zero; otherwise it
-  does the same work for every interrupt. It increments two retrace counters of the board record
-  (offsets 0x7c and 0x80), wakes video-sync waiters (`rrmValidateVideoSync`,
-  which serves `glXGetVideoSyncSGI` and `glXWaitVideoSyncSGI`), completes queued
-  buffer swaps and validates waiting retrace events. It reads no field or
-  parity bit. Its hardware reads are the FIFO-level polls before register writes
-  and a wait of at most 10 microseconds on bit 19 of one status word. On every
-  6 times the rate byte (clamped to [30, 120]) of interrupts it also calls
-  `mgras_update_pp1ccv`.
-- **Inferred**: one interrupt per VC3 vertical event, and the tables have one such
-  event per field (previous section), so the stereo and two-field formats
-  interrupt once per field, not once per frame. The clamp to 120 in the handler
-  and a swap flag per field both fit that reading. For the formats an Octane
-  desktop uses (progressive, one field) any reading gives one interrupt per
-  frame at the refresh rate above.
-- **Unknown**: which table bit raises the interrupt, and whether it comes at the
-  start or the end of the vertical blank.
+- **Established** (IP30 `MgrasRetraceHandler`, all three builds; disc build
+  object at `0x12c`): the handler returns at once when the word at +68 of the
+  record at +200 of its argument is non-zero; otherwise it does the same work for
+  every interrupt. It reads no field or parity bit. It increments two counters of
+  the board record (+124 and +128 in the disc build), wakes video-sync waiters
+  (`rrmValidateVideoSync`, behind `glXGetVideoSyncSGI` and `glXWaitVideoSyncSGI`),
+  completes queued buffer swaps and validates waiting retrace events. Its hardware
+  reads are the FIFO-level polls before register writes and a wait of at most 10
+  microseconds on bit 19 of one status word. Every 6 times the rate byte (clamped
+  to [30, 120]) interrupts it also calls `mgras_update_pp1ccv`.
+- **Established** (disassembly of `MgrasSchedSwapTask` in
+  `mgras_retrace.o` of the disc build): a queued swap has a countdown in its slot
+  (+44) set to the buffer's last-swap stamp plus the requested swap interval minus
+  the retrace counter at +128, or 1 when that is under 2. Each interrupt
+  decrements it and the swap completes on the interrupt where it is below 2,
+  stamping the buffer with the counter. The interval is therefore counted in
+  interrupts. Nothing in the handler or the scheduler consults a field, a
+  `FieldSwap` or `SwapsPerFrame` value.
+- **Established** (all access instructions of the three IP30 `mgras.a` builds,
+  checked with `objdump`, not the decompile): the kernel's only accesses to the
+  VC3 window (`0x072000` to `0x0720ff`) are index-and-data writes through
+  `0x072038` and, for the revision, a byte write of `0x1f` to `0x072008` followed
+  by a 16-bit read of `0x0720b0`. It never reads VC3 status, the field parity or
+  register `0x1e` back. There is no field-parity source in the kernel.
+- **Inferred**: bit 7 of register `0x1e` is the interlace bit. It is set exactly
+  when record flag bit 2 is, and that bit is the `MgrasFlag` bit set in the
+  interlaced files (`MgrasFlag` bit 2; the stereo and two-field files leave it
+  clear, so they get `0x1e`). That the flag word is `MgrasFlag` rests on the X
+  server's loader decompile only.
+- **Established**: register `0x1e` is written from a shadow word, with the word
+  `0x1e000000 | (shadow << 8)`. The only code that changes the shadow is
+  `MgrasSetVC3Timing` (reset to `0x9e` when bit 2 of the timing record's flag
+  word is set and to `0x1e` when it is clear; then bit 5 is set when record bit 1
+  is set and bit 6 as well when record bit 3 is also set),
+  `MgrasEnableRetraceInterrupts` (sets bit 0), `MgrasBlackoutTiming` (bit 1) and
+  `MgrasSetGenlock` (bits 5 and 6). `MgrasEnableVideoTiming(0)` writes plain
+  `0x1e000000`. `MgrasEnableRetraceInterrupts` has two callers in `mgras.o` (the
+  end of `MgrasStart` and of `MgrasPrivate`) and is skipped when the global
+  `SuppressRetraceIntr` is set. Nothing masks or enables the interrupt per field.
+- **Established**: Smoke 5.0 `VideoSetHiresMonitor` (`0x10b60270`): for the
+  external-sync 30 Hz setting (`Hires 30Hzf` in the installation guide) it picks
+  `%dx%d_60_2f` when `GraphicsGetVersion()` (`0x10f05a90`) returns 0 and
+  `%dx%d_30f%s` otherwise (`0x10b60934`, `0x10b60ff8`, `0x10b610d8`), and stores 30
+  as the hires rate (`li a2,30` at `0x10b60990`). The 25 Hz setting does the same
+  with `_50_2f` and 25. Which boards make `GraphicsGetVersion()` return 0 was not traced. `PlSwapTable::_build` (`0x10e65aa0`) divides that integer
+  by the playback rate; when it divides exactly the table is one entry.
+- **Inferred**: with `VINT_N` once per frame, an MXI running `1280x1024_60_2f`
+  gets one retrace interrupt per frame, 29.929 times a second (33.41 ms apart),
+  both fields of a frame show the same buffer, and a swap interval of 1 swaps every
+  frame. Smoke playing 29.97 frames per second at hires rate 30 therefore swaps on
+  every retrace, not every second one, at 29.929 Hz refresh.
+- **Unknown**: whether the interrupt is raised on the falling or the rising edge
+  of `VINT_N` (0.3 microseconds before the end of the last active line, or the
+  start of the front porch), and whether the HQ4 or the Hub latches it. No VC3 or
+  HQ4 data sheet is held. The question
+  [retrace interrupt source](../../questions/mgras-retrace-field.md) lists what
+  would settle it.
 - **Unknown**: the retrace period before any table is loaded.
 
 ## Stock timing selection

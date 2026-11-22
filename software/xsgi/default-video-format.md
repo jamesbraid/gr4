@@ -107,9 +107,14 @@ whose pixel clock is itself unknown.
 
 - `_75` is requested for a 75 Hz setting and no `_75` file is held (the base
   trees hold `_76`).
-- Which of the `f` and `_2f` names smoke tries for external sync on an MXI, and
-  whether a given install holds them: the 6.5-base tree holds no `_2f` file and
-  no `_30f`, `_25f`, `_50f` or `_60f` file; the Smoke 5.0 `DLvfo` set holds
-  `_50_2f` and `_60_2f` for 1600 by 1024 only.
+- Which boards make `GraphicsGetVersion()` (`0x10f05a90`) return 0, so that
+  `VideoSetHiresMonitor` picks `_60_2f` or `_50_2f` rather than `_30f` or `_25f`
+  for the external-sync settings (`0x10b60934`, `0x10b60ff8`). The 1280 by 1024
+  `_2f` files that name produces at that screen size are not in the Smoke 5.0
+  `DLvfo` set (which holds `1600x1024_50_2f` and `_60_2f` only) but in the
+  `vof/2RSS` directory of the 1998 base set, the 6.5.30 set and patches 3133 and
+  3366; the IRIX 6.4 disc tree named above has none, and no `_30f`, `_25f`, `_50f`
+  or `_60f` file is held anywhere. See [display timing](../kernel/display-timing.md#signals-the-line-table-drives)
+  for what a `_2f` table does to the retrace.
 - Which format a later IRIX release picks by default; only the 6.5-base server
   was read.
