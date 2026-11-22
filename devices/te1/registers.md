@@ -471,12 +471,12 @@ Copy rectangle bottom edge for a framebuffer copy, 14 bits in the diagnostic's m
 
 | Constant | Value | Grade | Source | Description |
 |---|---|---|---|---|
-| `TE_REV_B_1TRAM_CHECKSUM` | 0xbdfc48fc | inferred | driver readings | render checksum the diagnostic expects from texture engine revision B with one texture RAM unit |
-| `TE_REV_B_4TRAM_CHECKSUM` | 0x236379000 | inferred | driver readings | render checksum the diagnostic expects from texture engine revision B with four texture RAM units |
-| `TE_REV_D_CHECKSUM` | 0x2aa70d210 | inferred | driver readings | render checksum the diagnostic expects from texture engine revision D |
+| `TE_REV_B_1TRAM_CHECKSUM` | 0xbdfc48fc | inferred |  | render checksum the diagnostic expects from texture engine revision B with one texture RAM unit |
+| `TE_REV_B_4TRAM_CHECKSUM` | 0x236379000 | inferred |  | render checksum the diagnostic expects from texture engine revision B with four texture RAM units |
+| `TE_REV_D_CHECKSUM` | 0x2aa70d210 | inferred |  | render checksum the diagnostic expects from texture engine revision D |
 | `TRAM_BLOCKS_PER_PATH` | 0x100 | established | driver readings | texture blocks each raster path's texture RAM is divided into; the kernel's block table has 256 entries |
 | `TRAM_BLOCK_SIZE_SHIFT` | 0xc | established | driver readings | a block is the unit count shifted left by this many bits, so four units give 16 KiB blocks |
-| `TRAM_TEXTURE_BYTES` | 0x400000 | established | driver readings | texture memory of one TRAM ASIC, one per texture engine; OCTANE Technical Report section 4.2.5 |
+| `TRAM_TEXTURE_BYTES` | 0x400000 | established |  | texture memory of one TRAM ASIC, one per texture engine; OCTANE Technical Report section 4.2.5 |
 | `TRAM_WORD_0` | 0x1c011401 | established | diagnostic transcript | diagnostic. Formerly TRAM_REV_WORD0. |
 | `TRAM_WORD_0_HIGH_HALF` | 0x1c01 | established | diagnostic transcript | diagnostic. Formerly TRAM_REV_WORD0_HIGH_HALF. |
 | `TRAM_WORD_0_LOW_HALF` | 0x1401 | established | diagnostic transcript | diagnostic. Formerly TRAM_REV_WORD0_LOW_HALF. |

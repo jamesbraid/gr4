@@ -315,7 +315,7 @@ revision. Inferred from the kernel object.
 | `ADV7162_REG_BLANK` | 0x4 | established | driver and firmware readings | the pixel mask register, 004H in the data sheet: 8 bits, ANDed with every pixel's red, green and blue bits |
 | `ADV7162_REG_ID` | 0x3 | established | driver and firmware readings |  |
 | `ADV7162_RESTORE_VALUE` | 0xffff | established | driver and firmware readings |  |
-| `BOARD_CONFIG_OFFSET` | 0x72408 | established | driver and firmware readings | board configuration word: read for product identity, written with the top byte for clock, genlock and pixel-clock-doubler control; bit meanings unknown except that the diagnostic names bit 27 as the digital sync output pull-up (inferred) |
+| `BOARD_CONFIG_OFFSET` | 0x72408 | established |  | board configuration word: read for product identity, written with the top byte for clock, genlock and pixel-clock-doubler control; bit meanings unknown except that the diagnostic names bit 27 as the digital sync output pull-up (inferred) |
 | `CMAP_ENTRIES` | 0x2000 | established | driver and firmware readings | per map; 24-bit width inferred |
 | `GE0_UPLOAD_PORT_A` | 0x58040 | established | driver and firmware readings | first of the two program upload ports for geometry engine 0 |
 | `GE0_UPLOAD_PORT_B` | 0x58044 | established | driver and firmware readings | second of the two program upload ports for geometry engine 0 |
@@ -325,24 +325,24 @@ revision. Inferred from the kernel object.
 | `GE_READBACK_PORT_B` | 0x58230 | established | driver and firmware readings | second read-back port shared by both geometry engines |
 | `GL_CLIENT_FIFO_PROCESS_ADDR` | 0x124400 | inferred | driver and firmware readings | address the IRIX GL client stores its command words to, in its own process mapping; the board window offset it maps to is not established (see software/opengl/gl-commands.md) |
 | `HQ4_NORMAL_FIFO_OFFSET` | 0x20400 | established | OpenBSD impact(4) driver register header | normal command FIFO in the board's register window; the driver writes aligned 64-bit packets here |
-| `HQ_BUS_STATUS_OFFSET` | 0x20100 | established | driver and firmware readings | bus status. The kernel waits for bits 4:0 to show room before it writes display registers. What the other bits mean is unknown |
-| `HQ_CTXSW_RETURN_CMD` | 0xf400 | established | driver and firmware readings | word the switch tail writes to the command port only when the incoming context is the default context |
-| `HQ_CTXSW_START_OFFSET` | 0x130500 | established | driver and firmware readings | microcode start register. The switch writes HQ_CTXSW_START_VALUE, the only value the kernel writes here |
-| `HQ_CTXSW_START_VALUE` | 0x4fc | established | driver and firmware readings | value written to HQ_CTXSW_START_OFFSET |
-| `HQ_CTXSW_TAIL_OFFSET` | 0x40088 | established | driver and firmware readings | written 1 by the switch tail; meaning unknown |
-| `HQ_CTXSW_WAIT_MASK` | 0x1eff | established | driver and firmware readings | mask for HQ_CTXSW_WAIT_OFFSET |
-| `HQ_CTXSW_WAIT_OFFSET` | 0x8000 | established | driver and firmware readings | polled until the bits in HQ_CTXSW_WAIT_MASK are zero, before the start register is written; meaning unknown |
-| `HQ_CTX_ENAB_CLEAR_OFFSET` | 0x11038 | established | driver and firmware readings | written all ones by the context switch tail; meaning unknown |
-| `HQ_CTX_ENAB_OFFSET` | 0x11030 | established | driver and firmware readings | per-context word saved and restored by the context switch; meaning unknown |
-| `HQ_CTX_WORD_OFFSET` | 0x11008 | established | driver and firmware readings | per-context word saved by the context switch and written from the incoming context after the first handshake interrupt; meaning unknown |
-| `HQ_FIFO_CTL0_OFFSET` | 0x40000 | inferred | driver and firmware readings | FIFO control word; the diagnostic's start-up writes 0x28. Its role is inferred from the layout of the other FIFO controls |
-| `HQ_FIFO_CTL2_OFFSET` | 0x40010 | inferred | driver and firmware readings | FIFO control word; the diagnostic's start-up writes 0x0a. Role inferred |
-| `HQ_FIFO_CTL3_OFFSET` | 0x40020 | inferred | driver and firmware readings | FIFO control word; the diagnostic's start-up writes 0x28. Role inferred |
-| `HQ_FIFO_CTL4_OFFSET` | 0x40028 | inferred | driver and firmware readings | FIFO control word; the diagnostic's start-up writes 0x14. Role inferred |
-| `HQ_FIFO_CTL5_OFFSET` | 0x40030 | inferred | driver and firmware readings | FIFO control word; the diagnostic's start-up writes 0x0a. Role inferred |
-| `HQ_FIFO_LOWATER_OFFSET` | 0x40008 | established | driver and firmware readings | FIFO low-water level. The flush routine writes the wanted level plus one before it sleeps and 0x14 when it wakes. The diagnostic's start-up writes 0x14 too |
-| `HQ_FIFO_STATUS_OFFSET` | 0x20008 | inferred | driver and firmware readings | FIFO status. Its low byte is the level the flush routine waits to fall to. The wait for an empty FIFO requires that byte to be exactly zero |
-| `HQ_FLOW_TIMEOUT_OFFSET` | 0x40078 | inferred | driver and firmware readings | flow-control timeout; the diagnostic's register test uses mask 0x3ff |
+| `HQ_BUS_STATUS_OFFSET` | 0x20100 | established |  | bus status. The kernel waits for bits 4:0 to show room before it writes display registers. What the other bits mean is unknown |
+| `HQ_CTXSW_RETURN_CMD` | 0xf400 | established |  | word the switch tail writes to the command port only when the incoming context is the default context |
+| `HQ_CTXSW_START_OFFSET` | 0x130500 | established |  | microcode start register. The switch writes HQ_CTXSW_START_VALUE, the only value the kernel writes here |
+| `HQ_CTXSW_START_VALUE` | 0x4fc | established |  | value written to HQ_CTXSW_START_OFFSET |
+| `HQ_CTXSW_TAIL_OFFSET` | 0x40088 | established |  | written 1 by the switch tail; meaning unknown |
+| `HQ_CTXSW_WAIT_MASK` | 0x1eff | established |  | mask for HQ_CTXSW_WAIT_OFFSET |
+| `HQ_CTXSW_WAIT_OFFSET` | 0x8000 | established |  | polled until the bits in HQ_CTXSW_WAIT_MASK are zero, before the start register is written; meaning unknown |
+| `HQ_CTX_ENAB_CLEAR_OFFSET` | 0x11038 | established |  | written all ones by the context switch tail; meaning unknown |
+| `HQ_CTX_ENAB_OFFSET` | 0x11030 | established |  | per-context word saved and restored by the context switch; meaning unknown |
+| `HQ_CTX_WORD_OFFSET` | 0x11008 | established |  | per-context word saved by the context switch and written from the incoming context after the first handshake interrupt; meaning unknown |
+| `HQ_FIFO_CTL0_OFFSET` | 0x40000 | inferred |  | FIFO control word; the diagnostic's start-up writes 0x28. Its role is inferred from the layout of the other FIFO controls |
+| `HQ_FIFO_CTL2_OFFSET` | 0x40010 | inferred |  | FIFO control word; the diagnostic's start-up writes 0x0a. Role inferred |
+| `HQ_FIFO_CTL3_OFFSET` | 0x40020 | inferred |  | FIFO control word; the diagnostic's start-up writes 0x28. Role inferred |
+| `HQ_FIFO_CTL4_OFFSET` | 0x40028 | inferred |  | FIFO control word; the diagnostic's start-up writes 0x14. Role inferred |
+| `HQ_FIFO_CTL5_OFFSET` | 0x40030 | inferred |  | FIFO control word; the diagnostic's start-up writes 0x0a. Role inferred |
+| `HQ_FIFO_LOWATER_OFFSET` | 0x40008 | established |  | FIFO low-water level. The flush routine writes the wanted level plus one before it sleeps and 0x14 when it wakes. The diagnostic's start-up writes 0x14 too |
+| `HQ_FIFO_STATUS_OFFSET` | 0x20008 | inferred |  | FIFO status. Its low byte is the level the flush routine waits to fall to. The wait for an empty FIFO requires that byte to be exactly zero |
+| `HQ_FLOW_TIMEOUT_OFFSET` | 0x40078 | inferred |  | flow-control timeout; the diagnostic's register test uses mask 0x3ff |
 | `HQ_GE_SELECT_ADDR` | 0x11000 | established | driver and firmware readings | host interface control word; the geometry engine select field is HQ_GE_SELECT |
 | `HQ_GL_DMA_STATUS_OFFSET` | 0x20200 | inferred | driver and firmware readings | DMA status word; after a DMA read the client waits for the bits named by HQ_GL_DMA_STATUS_WAIT_MASK to clear |
 | `HQ_GL_DMA_STATUS_WAIT_MASK` | 0x1eff | inferred | driver and firmware readings | mask of DMA status bits the client waits to see clear after a DMA read; what each bit means is unknown |
@@ -352,37 +352,37 @@ revision. Inferred from the kernel object.
 | `HQ_GL_FLAG_QUERY_READY` | 0x20000 | inferred | driver and firmware readings | bit 17 of the flags word: the client clears it before a query and polls until the board sets it |
 | `HQ_GL_FLAG_SYNC_COMPLETE` | 0x10000 | inferred | driver and firmware readings | bit 16 of the flags word: a write fence sets it when earlier writes finish; the client clears it before a DMA setup |
 | `HQ_GL_QUERY_ANSWER_OFFSET` | 0x28004 | inferred | driver and firmware readings | answer word read after a query flag is set; the kernel reads the same address after a geometry-engine download (GE_REVISION) |
-| `HQ_GL_STATUS_DMA_BUSY` | 0x1000 | inferred | driver and firmware readings | bit 12 of HQ_GL_STATUS_OFFSET, read as a 32-bit word. The Octane digital video driver polls it up to 200 times after starting a video DMA and treats it set as busy, clear as done. Only that wait supports the meaning; the graphics kernel driver never tests this bit alone, and an older header calls it DMA active. What sets and clears it is unknown |
+| `HQ_GL_STATUS_DMA_BUSY` | 0x1000 | inferred |  | bit 12 of HQ_GL_STATUS_OFFSET, read as a 32-bit word. The Octane digital video driver polls it up to 200 times after starting a video DMA and treats it set as busy, clear as done. Only that wait supports the meaning; the graphics kernel driver never tests this bit alone, and an older header calls it DMA active. What sets and clears it is unknown |
 | `HQ_GL_STATUS_OFFSET` | 0x20000 | inferred | driver and firmware readings | HQ status word the GL client polls; bit 1 is the pipe-idle sense, the bit number the hq3 status register calls pipe_idle |
 | `HQ_GL_STATUS_PIPE_IDLE` | 0x2 | inferred | driver and firmware readings | bit 1 of HQ_GL_STATUS_OFFSET; the client's finish and the kernel's raster idle wait both poll it |
-| `HQ_ID_MANUFACTURER_EXPECTED` | 0x2aa | inferred | driver and firmware readings | manufacturer code the diagnostic's HQ4 probe accepts, at bits 11:1 of the identity word, the first board word |
-| `HQ_ID_PART_EXPECTED` | 0xc003 | inferred | driver and firmware readings | part number the diagnostic's HQ4 probe accepts, at bits 27:12 of the identity word, the first board word |
-| `HQ_INTR_ENAB_CLEAR_OFFSET` | 0x11048 | inferred | driver and firmware readings | write-one-to-clear for the enable word above. Every kernel site fits this pairing; the register is not named in the binary |
-| `HQ_INTR_ENAB_DEFAULT` | 0x3008a200 | established | driver and firmware readings | enable word start-up writes after setting the enable clear word to all ones. Enables sources 9, 13, 15, 19, 28 and 29 |
-| `HQ_INTR_ENAB_SET_OFFSET` | 0x11040 | established | driver and firmware readings | interrupt enable word, readable. Start-up writes 0x3008a200 to it. The kernel's writes and their order are established; a write setting only the bits it names is inferred |
-| `HQ_INTR_LEVEL2_CLEAR_OFFSET` | 0x11058 | inferred | driver and firmware readings | write-one-to-clear for the second-level word. The switch writes 0xffffffef; the flush routine writes the bits it changed |
-| `HQ_INTR_LEVEL2_ENAB_OFFSET` | 0x11050 | established | driver and firmware readings | second-level interrupt enable. Bit 4 is the FIFO low-water enable. The switch saves and restores the word so bit 4 is clear after a switch. Bit 3 and bits 0x1e8 are unknown |
-| `HQ_INTR_LEVEL2_LOWATER` | 0x10 | established | driver and firmware readings | bit 4 of HQ_INTR_LEVEL2_ENAB_OFFSET, the FIFO low-water source |
-| `HQ_INTR_PENDING_CLEAR_OFFSET` | 0x11028 | inferred | driver and firmware readings | write-one-to-clear for the status word. The handler clears the bit it served; the switch writes 0x80 before its work and 0x70 after it |
-| `HQ_INTR_SRC_CTX_ACK1` | 0x80000 | established | driver and firmware readings | status bit 19; the first context-switch handshake. The handler releases the first switch semaphore |
-| `HQ_INTR_SRC_CTX_ACK2` | 0x10000000 | established | driver and firmware readings | status bit 28; the second context-switch handshake, after the 63 image words. The handler releases the second switch semaphore |
-| `HQ_INTR_SRC_DMA_OVERFLOW` | 0x8000 | established | driver and firmware readings | status bit 15; the general handler reports a DMA access or stack overflow and marks the board failed |
-| `HQ_INTR_SRC_DMA_RANGE` | 0x2000 | established | driver and firmware readings | status bit 13; the general handler reports a DMA address-range error |
-| `HQ_INTR_SRC_FIFO_OVERFLOW` | 0x20000000 | established | driver and firmware readings | status bit 29; the general handler reports a flow-control or command-FIFO overflow |
-| `HQ_INTR_SRC_PRIV` | 0x4000 | established | driver and firmware readings | status bit 14; the general handler reports a command-FIFO privilege violation |
-| `HQ_INTR_SRC_PROGRAM_ERROR` | 0x200 | established | driver and firmware readings | status bit 9; the general handler reports an HQ program error |
-| `HQ_INTR_SRC_RELEASE` | 0x10000 | established | driver and firmware readings | status bit 16; the general handler releases a board semaphore and acknowledges the bit. No routine enables or waits on it |
-| `HQ_INTR_SRC_SWAP` | 0x400 | established | driver and firmware readings | status bit 10; enabled only around a buffer swap |
-| `HQ_INTR_STATUS_OFFSET` | 0x11020 | established | driver and firmware readings | interrupt status word; the general handler reads it masked by the enable word. The switch tail writes 0x80 to it and reads bit 5 back; what the write does is unknown |
-| `HQ_INTR_VECTOR_OFFSET` | 0x11070 | established | driver and firmware readings | packs three interrupt vectors the attach routine connects: low-water in bits 7:0, general in bits 15:8, retrace in bits 23:16 |
-| `HQ_SERIAL_MASTER_OFFSET` | 0x11098 | inferred | driver and firmware readings | one-wire master for the board's serial-number record; each bit slot is one 32-bit store, see HQ_SERIAL_SLOT |
-| `HQ_SWAP_ACK_VALUE` | 0x401 | established | driver and firmware readings | acknowledge the swap path writes to the pending-clear word, covering status bit 10 and the flag at bit 0. The bit-0 mirror is inferred |
-| `HQ_SWAP_CMD` | 0x3700 | established | driver and firmware readings | class 0, opcode 0x37, no payload. Written to the command port after source 10 is enabled. That the board raises source 10 once the queue ahead of it drains is inferred |
-| `HQ_VC3_RETRACE_OFFSET` | 0x72038 | established | driver and firmware readings | VC3 register 0x1e, written by the kernel's retrace enable. The kernel sets bit 0; that bit gates the board's retrace message is inferred |
-| `HQ_VIDEO_DMA_CONTROL_OFFSET` | 0x81010 | inferred | driver and firmware readings | video DMA control word: the driver's last store before it polls is the value with bits 0 and 4 set, which starts the transfer; on timeout it stores 2 here to abort. Roles inferred from the order of stores and the timeout path |
-| `HQ_VIDEO_DMA_DESCRIPTOR_OFFSET` | 0x81000 | inferred | driver and firmware readings | 64-bit video DMA descriptor the digital video driver stores: a flag set (bits 25, 24, 23 and 19) and the low 48 bits of the buffer's physical page address |
-| `HQ_VIDEO_DMA_MODE_OFFSET` | 0x81018 | inferred | driver and firmware readings | video DMA mode word, stored before the control word: low nibble forced to 0xc by the driver |
-| `HQ_VIDEO_DMA_SOURCE_OFFSET` | 0x60018 | inferred | driver and firmware readings | word stored before the descriptor, built from the caller's fields (bit 2 set, bits 5:3, 1:0 and 9:6 from three caller values); meaning unknown |
+| `HQ_ID_MANUFACTURER_EXPECTED` | 0x2aa | inferred |  | manufacturer code the diagnostic's HQ4 probe accepts, at bits 11:1 of the identity word, the first board word |
+| `HQ_ID_PART_EXPECTED` | 0xc003 | inferred |  | part number the diagnostic's HQ4 probe accepts, at bits 27:12 of the identity word, the first board word |
+| `HQ_INTR_ENAB_CLEAR_OFFSET` | 0x11048 | inferred |  | write-one-to-clear for the enable word above. Every kernel site fits this pairing; the register is not named in the binary |
+| `HQ_INTR_ENAB_DEFAULT` | 0x3008a200 | established |  | enable word start-up writes after setting the enable clear word to all ones. Enables sources 9, 13, 15, 19, 28 and 29 |
+| `HQ_INTR_ENAB_SET_OFFSET` | 0x11040 | established |  | interrupt enable word, readable. Start-up writes 0x3008a200 to it. The kernel's writes and their order are established; a write setting only the bits it names is inferred |
+| `HQ_INTR_LEVEL2_CLEAR_OFFSET` | 0x11058 | inferred |  | write-one-to-clear for the second-level word. The switch writes 0xffffffef; the flush routine writes the bits it changed |
+| `HQ_INTR_LEVEL2_ENAB_OFFSET` | 0x11050 | established |  | second-level interrupt enable. Bit 4 is the FIFO low-water enable. The switch saves and restores the word so bit 4 is clear after a switch. Bit 3 and bits 0x1e8 are unknown |
+| `HQ_INTR_LEVEL2_LOWATER` | 0x10 | established |  | bit 4 of HQ_INTR_LEVEL2_ENAB_OFFSET, the FIFO low-water source |
+| `HQ_INTR_PENDING_CLEAR_OFFSET` | 0x11028 | inferred |  | write-one-to-clear for the status word. The handler clears the bit it served; the switch writes 0x80 before its work and 0x70 after it |
+| `HQ_INTR_SRC_CTX_ACK1` | 0x80000 | established |  | status bit 19; the first context-switch handshake. The handler releases the first switch semaphore |
+| `HQ_INTR_SRC_CTX_ACK2` | 0x10000000 | established |  | status bit 28; the second context-switch handshake, after the 63 image words. The handler releases the second switch semaphore |
+| `HQ_INTR_SRC_DMA_OVERFLOW` | 0x8000 | established |  | status bit 15; the general handler reports a DMA access or stack overflow and marks the board failed |
+| `HQ_INTR_SRC_DMA_RANGE` | 0x2000 | established |  | status bit 13; the general handler reports a DMA address-range error |
+| `HQ_INTR_SRC_FIFO_OVERFLOW` | 0x20000000 | established |  | status bit 29; the general handler reports a flow-control or command-FIFO overflow |
+| `HQ_INTR_SRC_PRIV` | 0x4000 | established |  | status bit 14; the general handler reports a command-FIFO privilege violation |
+| `HQ_INTR_SRC_PROGRAM_ERROR` | 0x200 | established |  | status bit 9; the general handler reports an HQ program error |
+| `HQ_INTR_SRC_RELEASE` | 0x10000 | established |  | status bit 16; the general handler releases a board semaphore and acknowledges the bit. No routine enables or waits on it |
+| `HQ_INTR_SRC_SWAP` | 0x400 | established |  | status bit 10; enabled only around a buffer swap |
+| `HQ_INTR_STATUS_OFFSET` | 0x11020 | established |  | interrupt status word; the general handler reads it masked by the enable word. The switch tail writes 0x80 to it and reads bit 5 back; what the write does is unknown |
+| `HQ_INTR_VECTOR_OFFSET` | 0x11070 | established |  | packs three interrupt vectors the attach routine connects: low-water in bits 7:0, general in bits 15:8, retrace in bits 23:16 |
+| `HQ_SERIAL_MASTER_OFFSET` | 0x11098 | inferred |  | one-wire master for the board's serial-number record; each bit slot is one 32-bit store, see HQ_SERIAL_SLOT |
+| `HQ_SWAP_ACK_VALUE` | 0x401 | established |  | acknowledge the swap path writes to the pending-clear word, covering status bit 10 and the flag at bit 0. The bit-0 mirror is inferred |
+| `HQ_SWAP_CMD` | 0x3700 | established |  | class 0, opcode 0x37, no payload. Written to the command port after source 10 is enabled. That the board raises source 10 once the queue ahead of it drains is inferred |
+| `HQ_VC3_RETRACE_OFFSET` | 0x72038 | established |  | VC3 register 0x1e, written by the kernel's retrace enable. The kernel sets bit 0; that bit gates the board's retrace message is inferred |
+| `HQ_VIDEO_DMA_CONTROL_OFFSET` | 0x81010 | inferred |  | video DMA control word: the driver's last store before it polls is the value with bits 0 and 4 set, which starts the transfer; on timeout it stores 2 here to abort. Roles inferred from the order of stores and the timeout path |
+| `HQ_VIDEO_DMA_DESCRIPTOR_OFFSET` | 0x81000 | inferred |  | 64-bit video DMA descriptor the digital video driver stores: a flag set (bits 25, 24, 23 and 19) and the low 48 bits of the buffer's physical page address |
+| `HQ_VIDEO_DMA_MODE_OFFSET` | 0x81018 | inferred |  | video DMA mode word, stored before the control word: low nibble forced to 0xc by the driver |
+| `HQ_VIDEO_DMA_SOURCE_OFFSET` | 0x60018 | inferred |  | word stored before the descriptor, built from the caller's fields (bit 2 set, bits 5:3, 1:0 and 9:6 from three caller values); meaning unknown |
 | `MCO_BANK_BASE_CH0` | 0x0 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH1` | 0x20 | established | driver and firmware readings |  |
 | `MCO_BANK_BASE_CH2` | 0x30 | established | driver and firmware readings |  |
@@ -409,40 +409,40 @@ revision. Inferred from the kernel object.
 | `MCO_SEL_TIMING_DATA` | 0x5 | established | driver and firmware readings |  |
 | `MCO_SEL_TIMING_RAM` | 0x7 | established | driver and firmware readings |  |
 | `MCO_SEL_TIMING_REG` | 0x4 | established | driver and firmware readings |  |
-| `MGRAS_SET_GENLOCK_REQUEST` | 0x6d670014 | established | driver and firmware readings | kernel request number of the set-genlock call; the X server's error text names it MGRAS_SET_GENLOCK |
-| `MGRAS_VIDEO_TEXTURE_XFER_REQUEST` | 0x6d670016 | established | driver and firmware readings | kernel request number of the video-texture transfer, a 0x28-byte record |
+| `MGRAS_SET_GENLOCK_REQUEST` | 0x6d670014 | established |  | kernel request number of the set-genlock call; the X server's error text names it MGRAS_SET_GENLOCK |
+| `MGRAS_VIDEO_TEXTURE_XFER_REQUEST` | 0x6d670016 | established |  | kernel request number of the video-texture transfer, a 0x28-byte record |
 | `PP1_SELECT_ADDR` | 0x71c08 | established | driver and firmware readings | pixel processor select: which pixel processors the XMAP registers reach |
 | `RDRAM_ADDR_PORT_ADDR` | 0x2c570 | inferred | driver and firmware readings | RDRAM address port in the raster window, as the diagnostic uses it |
 | `RDRAM_BUFFER_PORT_ADDR` | 0x2c5b4 | inferred | driver and firmware readings | buffer pointer for the RDRAM path, as the diagnostic uses it |
 | `RDRAM_DATA_PORT_ADDR` | 0x2c574 | established | driver and firmware readings | RDRAM data port; the kernel reads it with each raster engine selected in turn |
 | `RSS_RE_SELECT_PIO_ADDR` | 0x2c448 | inferred | driver and firmware readings | the same raster register as the diagnostic reaches it through the programmed I/O window |
 | `RSS_RE_SELECT_REG` | 0x112 | established | driver and firmware readings | raster register that selects one raster engine; the kernel writes the engine number as its value |
-| `VC3_DISPLAY_GENLOCK` | 0x40 | inferred | driver and firmware readings | bit 6 of VC3 register 0x1e, set by the second argument of the genlock request; the diagnostic prints it as VC3 GENLOCK |
-| `VC3_DISPLAY_GENSYNC` | 0x20 | inferred | driver and firmware readings | bit 5 of VC3 register 0x1e, set by the first argument of the genlock request; the diagnostic prints it as VC3 GENSYNC |
-| `VC3_DISPLAY_RETRACE_ENABLE` | 0x1 | inferred | driver and firmware readings | bit 0 of VC3 register 0x1e, set by MgrasEnableRetraceInterrupts; that it gates the retrace message is inferred |
-| `VC3_DISPLAY_TIMING_BITS` | 0x1e | inferred | driver and firmware readings | bits 4:1 of VC3 register 0x1e: all set by the diagnostic's start-timing and cleared by its stop-timing; bit 1 is also the bit the kernel's blackout routine sets |
-| `VC3_REG_CONFIG` | 0x1f | established | driver and firmware readings | VC3 register index written 0x0100 by the diagnostic's PLL set-up (message: VC3 Config register is set to 1) and the index selected to read the VC3 revision (bits 7:6) at attach |
-| `VC3_REG_CURS_CONTROL` | 0x1d | established | driver and firmware readings | VC3 register index written zero by the diagnostic's start and stop timing; the chip header calls it cursor control. See devices/mgras/video-sync.md |
-| `VC3_REG_CURS_EP` | 0x1 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
-| `VC3_REG_CURS_TBL_PTR` | 0xc | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
-| `VC3_REG_CURS_X_LOC` | 0x2 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Hardware cursor X |
-| `VC3_REG_CURS_Y_LOC` | 0x3 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Hardware cursor Y |
-| `VC3_REG_CUR_CURSOR_X` | 0xe | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
-| `VC3_REG_DID_EP1` | 0x4 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. First display-ID entry point, with its own frame and line tables |
-| `VC3_REG_DID_EP2` | 0x5 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Second display-ID entry point |
-| `VC3_REG_DID_FRAMETAB1` | 0x10 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Frame table of the first display-ID entry point |
-| `VC3_REG_DID_FRAMETAB2` | 0x12 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Frame table of the second display-ID entry point |
-| `VC3_REG_DID_LINETAB1` | 0x11 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Line table of the first display-ID entry point |
-| `VC3_REG_DID_LINETAB2` | 0x13 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Line table of the second display-ID entry point |
-| `VC3_REG_DISPLAY_CONTROL` | 0x1e | established | driver and firmware readings | VC3 register index the kernel and the diagnostic write for retrace enable, timing enable and genlock; the diagnostic reads it back. See devices/mgras/video-sync.md |
-| `VC3_REG_RAM_ADDR` | 0x7 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Reads back the SRAM address it was loaded with |
-| `VC3_REG_SCAN_LENGTH` | 0x6 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
-| `VC3_REG_VERT_LINE_COUNT` | 0xb | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
-| `VC3_REG_VID_EP` | 0x0 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Main display frame table pointer; see software/kernel/display-timing.md |
-| `VC3_REG_VT_FRAME_TBL_PTR` | 0x8 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
-| `VC3_REG_VT_LINES_RUN` | 0xa | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
-| `VC3_REG_VT_LINE_SEQ_PTR` | 0x9 | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
-| `VC3_REG_WORKING_CURS_Y` | 0xd | established | driver and firmware readings | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_DISPLAY_GENLOCK` | 0x40 | inferred |  | bit 6 of VC3 register 0x1e, set by the second argument of the genlock request; the diagnostic prints it as VC3 GENLOCK |
+| `VC3_DISPLAY_GENSYNC` | 0x20 | inferred |  | bit 5 of VC3 register 0x1e, set by the first argument of the genlock request; the diagnostic prints it as VC3 GENSYNC |
+| `VC3_DISPLAY_RETRACE_ENABLE` | 0x1 | inferred |  | bit 0 of VC3 register 0x1e, set by MgrasEnableRetraceInterrupts; that it gates the retrace message is inferred |
+| `VC3_DISPLAY_TIMING_BITS` | 0x1e | inferred |  | bits 4:1 of VC3 register 0x1e: all set by the diagnostic's start-timing and cleared by its stop-timing; bit 1 is also the bit the kernel's blackout routine sets |
+| `VC3_REG_CONFIG` | 0x1f | established |  | VC3 register index written 0x0100 by the diagnostic's PLL set-up (message: VC3 Config register is set to 1) and the index selected to read the VC3 revision (bits 7:6) at attach |
+| `VC3_REG_CURS_CONTROL` | 0x1d | established |  | VC3 register index written zero by the diagnostic's start and stop timing; the chip header calls it cursor control. See devices/mgras/video-sync.md |
+| `VC3_REG_CURS_EP` | 0x1 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_CURS_TBL_PTR` | 0xc | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_CURS_X_LOC` | 0x2 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Hardware cursor X |
+| `VC3_REG_CURS_Y_LOC` | 0x3 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Hardware cursor Y |
+| `VC3_REG_CUR_CURSOR_X` | 0xe | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_DID_EP1` | 0x4 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. First display-ID entry point, with its own frame and line tables |
+| `VC3_REG_DID_EP2` | 0x5 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Second display-ID entry point |
+| `VC3_REG_DID_FRAMETAB1` | 0x10 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Frame table of the first display-ID entry point |
+| `VC3_REG_DID_FRAMETAB2` | 0x12 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Frame table of the second display-ID entry point |
+| `VC3_REG_DID_LINETAB1` | 0x11 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Line table of the first display-ID entry point |
+| `VC3_REG_DID_LINETAB2` | 0x13 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Line table of the second display-ID entry point |
+| `VC3_REG_DISPLAY_CONTROL` | 0x1e | established |  | VC3 register index the kernel and the diagnostic write for retrace enable, timing enable and genlock; the diagnostic reads it back. See devices/mgras/video-sync.md |
+| `VC3_REG_RAM_ADDR` | 0x7 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Reads back the SRAM address it was loaded with |
+| `VC3_REG_SCAN_LENGTH` | 0x6 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_VERT_LINE_COUNT` | 0xb | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_VID_EP` | 0x0 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index. Main display frame table pointer; see software/kernel/display-timing.md |
+| `VC3_REG_VT_FRAME_TBL_PTR` | 0x8 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_VT_LINES_RUN` | 0xa | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_VT_LINE_SEQ_PTR` | 0x9 | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
+| `VC3_REG_WORKING_CURS_Y` | 0xd | established |  | VC3 register index, named in the diagnostic's VC3 register test; the VC3 chip page lists the same index |
 | `WINDOW_MODE_MAIN_ADDR` | 0x71e00 | established | driver and firmware readings | display mode words for window IDs 0 to 31, under XMAP index (ID & 0x1f) << 2 |
 | `WINDOW_MODE_OVERLAY_ADDR` | 0x71e80 | established | driver and firmware readings | display mode words for overlay window IDs 32 to 39 |
 | `WINDOW_SELECT_ADDR` | 0x71d80 | established | driver and firmware readings | one bit per window ID, written at each buffer swap; overlay IDs use XMAP index 4. What a set bit shows is inferred |

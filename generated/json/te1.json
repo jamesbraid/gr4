@@ -1333,8 +1333,7 @@
    "name": "TE_REV_B_1TRAM_CHECKSUM",
    "value": 3187427580,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver readings"
+   "grade": "inferred"
   },
   {
    "unit": "te1",
@@ -1342,8 +1341,7 @@
    "name": "TE_REV_B_4TRAM_CHECKSUM",
    "value": 9499545600,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver readings"
+   "grade": "inferred"
   },
   {
    "unit": "te1",
@@ -1351,8 +1349,7 @@
    "name": "TE_REV_D_CHECKSUM",
    "value": 11449455120,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver readings"
+   "grade": "inferred"
   },
   {
    "unit": "te1",
@@ -1378,8 +1375,7 @@
    "name": "TRAM_TEXTURE_BYTES",
    "value": 4194304,
    "count": 1,
-   "grade": "established",
-   "from": "driver readings"
+   "grade": "established"
   },
   {
    "unit": "te1",

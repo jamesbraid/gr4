@@ -849,8 +849,7 @@
    "name": "BOARD_CONFIG_OFFSET",
    "value": 467976,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -939,8 +938,7 @@
    "name": "HQ_BUS_STATUS_OFFSET",
    "value": 131328,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -948,8 +946,7 @@
    "name": "HQ_CTXSW_RETURN_CMD",
    "value": 62464,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -957,8 +954,7 @@
    "name": "HQ_CTXSW_START_OFFSET",
    "value": 1246464,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -966,8 +962,7 @@
    "name": "HQ_CTXSW_START_VALUE",
    "value": 1276,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -975,8 +970,7 @@
    "name": "HQ_CTXSW_TAIL_OFFSET",
    "value": 262280,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -984,8 +978,7 @@
    "name": "HQ_CTXSW_WAIT_MASK",
    "value": 7935,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -993,8 +986,7 @@
    "name": "HQ_CTXSW_WAIT_OFFSET",
    "value": 32768,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1002,8 +994,7 @@
    "name": "HQ_CTX_ENAB_CLEAR_OFFSET",
    "value": 69688,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1011,8 +1002,7 @@
    "name": "HQ_CTX_ENAB_OFFSET",
    "value": 69680,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1020,8 +1010,7 @@
    "name": "HQ_CTX_WORD_OFFSET",
    "value": 69640,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1029,8 +1018,7 @@
    "name": "HQ_FIFO_CTL0_OFFSET",
    "value": 262144,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1038,8 +1026,7 @@
    "name": "HQ_FIFO_CTL2_OFFSET",
    "value": 262160,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1047,8 +1034,7 @@
    "name": "HQ_FIFO_CTL3_OFFSET",
    "value": 262176,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1056,8 +1042,7 @@
    "name": "HQ_FIFO_CTL4_OFFSET",
    "value": 262184,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1065,8 +1050,7 @@
    "name": "HQ_FIFO_CTL5_OFFSET",
    "value": 262192,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1074,8 +1058,7 @@
    "name": "HQ_FIFO_LOWATER_OFFSET",
    "value": 262152,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1083,8 +1066,7 @@
    "name": "HQ_FIFO_STATUS_OFFSET",
    "value": 131080,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1092,8 +1074,7 @@
    "name": "HQ_FLOW_TIMEOUT_OFFSET",
    "value": 262264,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1182,8 +1163,7 @@
    "name": "HQ_GL_STATUS_DMA_BUSY",
    "value": 4096,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1209,8 +1189,7 @@
    "name": "HQ_ID_MANUFACTURER_EXPECTED",
    "value": 682,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1218,8 +1197,7 @@
    "name": "HQ_ID_PART_EXPECTED",
    "value": 49155,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1227,8 +1205,7 @@
    "name": "HQ_INTR_ENAB_CLEAR_OFFSET",
    "value": 69704,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1236,8 +1213,7 @@
    "name": "HQ_INTR_ENAB_DEFAULT",
    "value": 805872128,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1245,8 +1221,7 @@
    "name": "HQ_INTR_ENAB_SET_OFFSET",
    "value": 69696,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1254,8 +1229,7 @@
    "name": "HQ_INTR_LEVEL2_CLEAR_OFFSET",
    "value": 69720,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1263,8 +1237,7 @@
    "name": "HQ_INTR_LEVEL2_ENAB_OFFSET",
    "value": 69712,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1272,8 +1245,7 @@
    "name": "HQ_INTR_LEVEL2_LOWATER",
    "value": 16,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1281,8 +1253,7 @@
    "name": "HQ_INTR_PENDING_CLEAR_OFFSET",
    "value": 69672,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1290,8 +1261,7 @@
    "name": "HQ_INTR_SRC_CTX_ACK1",
    "value": 524288,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1299,8 +1269,7 @@
    "name": "HQ_INTR_SRC_CTX_ACK2",
    "value": 268435456,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1308,8 +1277,7 @@
    "name": "HQ_INTR_SRC_DMA_OVERFLOW",
    "value": 32768,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1317,8 +1285,7 @@
    "name": "HQ_INTR_SRC_DMA_RANGE",
    "value": 8192,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1326,8 +1293,7 @@
    "name": "HQ_INTR_SRC_FIFO_OVERFLOW",
    "value": 536870912,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1335,8 +1301,7 @@
    "name": "HQ_INTR_SRC_PRIV",
    "value": 16384,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1344,8 +1309,7 @@
    "name": "HQ_INTR_SRC_PROGRAM_ERROR",
    "value": 512,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1353,8 +1317,7 @@
    "name": "HQ_INTR_SRC_RELEASE",
    "value": 65536,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1362,8 +1325,7 @@
    "name": "HQ_INTR_SRC_SWAP",
    "value": 1024,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1371,8 +1333,7 @@
    "name": "HQ_INTR_STATUS_OFFSET",
    "value": 69664,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1380,8 +1341,7 @@
    "name": "HQ_INTR_VECTOR_OFFSET",
    "value": 69744,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1389,8 +1349,7 @@
    "name": "HQ_SERIAL_MASTER_OFFSET",
    "value": 69784,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1398,8 +1357,7 @@
    "name": "HQ_SWAP_ACK_VALUE",
    "value": 1025,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1407,8 +1365,7 @@
    "name": "HQ_SWAP_CMD",
    "value": 14080,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1416,8 +1373,7 @@
    "name": "HQ_VC3_RETRACE_OFFSET",
    "value": 467000,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1425,8 +1381,7 @@
    "name": "HQ_VIDEO_DMA_CONTROL_OFFSET",
    "value": 528400,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1434,8 +1389,7 @@
    "name": "HQ_VIDEO_DMA_DESCRIPTOR_OFFSET",
    "value": 528384,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1443,8 +1397,7 @@
    "name": "HQ_VIDEO_DMA_MODE_OFFSET",
    "value": 528408,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1452,8 +1405,7 @@
    "name": "HQ_VIDEO_DMA_SOURCE_OFFSET",
    "value": 393240,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1695,8 +1647,7 @@
    "name": "MGRAS_SET_GENLOCK_REQUEST",
    "value": 1835466772,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1704,8 +1655,7 @@
    "name": "MGRAS_VIDEO_TEXTURE_XFER_REQUEST",
    "value": 1835466774,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1767,8 +1717,7 @@
    "name": "VC3_DISPLAY_GENLOCK",
    "value": 64,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1776,8 +1725,7 @@
    "name": "VC3_DISPLAY_GENSYNC",
    "value": 32,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1785,8 +1733,7 @@
    "name": "VC3_DISPLAY_RETRACE_ENABLE",
    "value": 1,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1794,8 +1741,7 @@
    "name": "VC3_DISPLAY_TIMING_BITS",
    "value": 30,
    "count": 1,
-   "grade": "inferred",
-   "from": "driver and firmware readings"
+   "grade": "inferred"
   },
   {
    "unit": "mgras",
@@ -1803,8 +1749,7 @@
    "name": "VC3_REG_CONFIG",
    "value": 31,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1812,8 +1757,7 @@
    "name": "VC3_REG_CURS_CONTROL",
    "value": 29,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1821,8 +1765,7 @@
    "name": "VC3_REG_CURS_EP",
    "value": 1,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1830,8 +1773,7 @@
    "name": "VC3_REG_CURS_TBL_PTR",
    "value": 12,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1839,8 +1781,7 @@
    "name": "VC3_REG_CURS_X_LOC",
    "value": 2,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1848,8 +1789,7 @@
    "name": "VC3_REG_CURS_Y_LOC",
    "value": 3,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1857,8 +1797,7 @@
    "name": "VC3_REG_CUR_CURSOR_X",
    "value": 14,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1866,8 +1805,7 @@
    "name": "VC3_REG_DID_EP1",
    "value": 4,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1875,8 +1813,7 @@
    "name": "VC3_REG_DID_EP2",
    "value": 5,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1884,8 +1821,7 @@
    "name": "VC3_REG_DID_FRAMETAB1",
    "value": 16,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1893,8 +1829,7 @@
    "name": "VC3_REG_DID_FRAMETAB2",
    "value": 18,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1902,8 +1837,7 @@
    "name": "VC3_REG_DID_LINETAB1",
    "value": 17,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1911,8 +1845,7 @@
    "name": "VC3_REG_DID_LINETAB2",
    "value": 19,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1920,8 +1853,7 @@
    "name": "VC3_REG_DISPLAY_CONTROL",
    "value": 30,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1929,8 +1861,7 @@
    "name": "VC3_REG_RAM_ADDR",
    "value": 7,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1938,8 +1869,7 @@
    "name": "VC3_REG_SCAN_LENGTH",
    "value": 6,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1947,8 +1877,7 @@
    "name": "VC3_REG_VERT_LINE_COUNT",
    "value": 11,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1956,8 +1885,7 @@
    "name": "VC3_REG_VID_EP",
    "value": 0,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1965,8 +1893,7 @@
    "name": "VC3_REG_VT_FRAME_TBL_PTR",
    "value": 8,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1974,8 +1901,7 @@
    "name": "VC3_REG_VT_LINES_RUN",
    "value": 10,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1983,8 +1909,7 @@
    "name": "VC3_REG_VT_LINE_SEQ_PTR",
    "value": 9,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
@@ -1992,8 +1917,7 @@
    "name": "VC3_REG_WORKING_CURS_Y",
    "value": 13,
    "count": 1,
-   "grade": "established",
-   "from": "driver and firmware readings"
+   "grade": "established"
   },
   {
    "unit": "mgras",
