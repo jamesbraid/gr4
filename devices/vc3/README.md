@@ -7,5 +7,6 @@ Video Controller 3 (VC3), Video Timing, Cursor, and DID Frame Composition for SG
 ## Used by
 
 - [MGRAS display timing](../../software/kernel/display-timing.md)
+- [MGRAS default video format](../../software/xsgi/default-video-format.md)
 - [MGRAS HQ4 host interface](../../software/kernel/hq4-host-interface.md)
 - [gr4 ioctl request statements](../../software/kernel/ioctl-requests.md)

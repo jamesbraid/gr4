@@ -18,3 +18,9 @@
 | [gl-commands.md](opengl/gl-commands.md) | MGRAS GL command stream | What the IRIX OpenGL client library writes to the Impact board's command port, what the kernel writes around it, and... |
 | [pixel-texture.md](opengl/pixel-texture.md) | MGRAS pixel texture state | The words the IRIX OpenGL client writes when pixel texture is on, plus what its code says about the colour-table... |
 | [tram-corruption-analysis.md](opengl/tram-corruption-analysis.md) | SGI Impact Graphics (MGRAS / GR4): TRAM Page Desynchronization & Corruption Analysis | Author: Antigravity / Reverse Engineering Toolchain Date: October 14, 2026 Target: SGI IRIX `libGLcore.so` (Impact... |
+
+## xsgi
+
+| Page | Title | Summary |
+|---|---|---|
+| [default-video-format.md](xsgi/default-video-format.md) | MGRAS default video format | Which video format the IRIX X server loads on an IMPACT board when nothing has been configured, how a client such as... |
