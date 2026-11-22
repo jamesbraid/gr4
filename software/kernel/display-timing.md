@@ -56,22 +56,31 @@ kernel loads into VC3 SRAM at 0 and `0x380`.
 
 ## Write sequence
 
-**Established**, in this order:
+**Established** for the IP30 `MgrasSetTiming` (`mgras_init.o` at `0x146c`), in
+this order:
 
-1. `0x072408` takes `0xc8000000`.
-2. The DAC PLL bytes go to DAC registers `0x0c` (r), `0x0f` (v) and `0x09`
-   (control).
-3. A seven-byte program is shifted out to `0x070400`. The device behind that
-   address is **unknown**.
-4. `0x072408` is written again: `0xe8000000`, or `0xe9000000` when the timing
-   file sets its `RefPixClkSel` field. No installed file sets that field, so
-   what bit 24 selects is **unknown**.
-5. VC3 index `0x1f` is written with `0x0300` when the timing record's pixel
-   clock byte is below 85 (MHz) and `0x0100` otherwise (IP30 `MgrasSetVC3Timing`,
-   `0x1990` to `0x19b4`). What the bit that differs does is **unknown**.
-6. The VC3 line and frame tables are loaded, and VID_EP (VC3 register 0) is set.
-7. VC3 register `0x1e` is written last, which enables the display. Which bit of
-   that write gates the display is not settled here.
+1. `0x40000000` goes to `0x072408` (`0x1540`).
+2. `MgrasSetDacTiming` writes the DAC PLL bytes to DAC registers `0x0c` (r),
+   `0x0f` (v) and `0x09` (control).
+3. `mgras_pcd_write` (`0x1398`, called at `0x15c8`) shifts a seven-byte program
+   out to `0x070400`. The device behind that address is **unknown**.
+4. `0x60000000` goes to `0x072408` (`0x1614`).
+5. In the delay slot of the `MgrasSetVC3Timing` call (`0x1620`), VC3 index `0x1f`
+   is written with `0x0100` (`0x1624`). `MgrasSetVC3Timing` then writes it again
+   with `0x0300` when the timing record's pixel clock byte is below 85 (MHz) and
+   `0x0100` otherwise (`0x1990` to `0x19cc`). What the bit that differs does is
+   **unknown**.
+6. `MgrasSetVC3Timing` loads the VC3 line and frame tables and sets VID_EP (VC3
+   register 0).
+7. `MgrasEnableVideoTiming(1)` follows (`0x1630`). VC3 register `0x1e` is written
+   last, which enables the display. Which bit of that write gates the display is
+   not settled here.
+
+The IRIX 6.5.30 IP27 build writes `0xc8000000` and then `0xe8000000`, or
+`0xe9000000` when the timing file sets its `RefPixClkSel` field, to the same
+register instead of `0x40000000` and `0x60000000`. That is IP27 only; the IP30
+object has no conditional `0xe9` write. No installed file sets `RefPixClkSel`,
+so what bit 24 selects is **unknown**.
 
 Nothing in this sequence stops timing before the tables load.
 
@@ -83,23 +92,39 @@ point at four records, and `mgras_default_timing` is a list of pairs (monitor
 type, record index). **Established** from the object's data, walking each
 record's tables as described below:
 
-| Index | Width x height | Rate byte | Pixel clock byte | DAC bytes (r, v, control) | Frame (VC3 clocks) |
-|---|---|---|---|---|---|
-| 0 | 1280 x 1024 | 60 | 107 | 2, 4, `0x91` | 894,600 |
-| 1 | 1280 x 1024 | 72 | 130 | 4, 9, `0xc5` | 894,600 |
-| 2 | 1024 x 768 | 60 | 65 | 3, 7, `0xd5` | 536,512 |
-| 3 | 1280 x 1024 | 60 | 107 | 2, 4, `0x91` | 894,600 |
+| Index | Width x height | Rate byte | Pixel clock byte | DAC bytes (r, v, control), 1RSS | DAC bytes, 2RSS | Frame (VC3 clocks) |
+|---|---|---|---|---|---|---|
+| 0 | 1280 x 1024 | 60 | 107 | 2, 4, `0x91` | 2, 4, `0x91` | 894,600 |
+| 1 | 1280 x 1024 | 72 | 130 | 2, 13, `0xd5` | 4, 9, `0xc5` | 894,600 |
+| 2 | 1024 x 768 | 60 | 65 | 3, 7, `0xd5` | 3, 7, `0xd5` | 536,512 |
+| 3 | 1280 x 1024 | 60 | 107 | 2, 4, `0x91` | 2, 4, `0x91` | 894,600 |
+
+The 2RSS triple of record 1 is the one in `vof/1280x1024_72.sdb`. The 1RSS triple
+gives 129.94 MHz by the same formula as the files (bit 2 halving, see Clocks);
+the pixel clock bytes 130 and 65 fit the halved values and are nominal.
 
 The record fields read by `MgrasSetTiming`, `MgrasSetDacTiming` and
 `MgrasSetVC3Timing` are: width at +4, height at +8, rate in Hz at +0xc (the
 kernel copies it into the board record and the X server compares it with 72),
 pixel clock in MHz at +0x10, frame table pointer and word count at +0x18 and
 +0x20, line sequence pointer and count at +0x28 and +0x30, and the DAC byte
-triple at +0x38. The 1RSS and 2RSS tables hold the same four rates, clocks and
-frame lengths; only the table contents of records 2 and 3 differ in length.
+triple at +0x38. The 1RSS and 2RSS tables hold the same widths, heights, rates, pixel clock bytes
+and frame lengths. They differ in the DAC triple of record 1 and in the table
+contents.
 
-`mgras_default_timing` maps monitor types 1, 9 and `0x0b` to record 1 (72 Hz),
-`0x82` to record 2 and `0x83` to record 3. Every other type uses record 0. Which
+`MgrasLoadVC3SRAM` (`0x68cc`) copies exactly the stored count of halfwords from
+the line sequence pointer to VC3 SRAM, so the count at +0x30 is what the VC3
+receives. In the four 1RSS records it is one more than the walked extent of the
+sequences the frame table uses (342, 284, 266 and 280 against 341, 283, 265 and
+279). In the 2RSS records 2 and 3 it is also one more (278 and 295). In 2RSS
+record 0 the count is 342 against an extent of 336, and in 2RSS record 1 it is
+284 against an extent of 301, so some sequences that record's frame table
+names lie past the halfwords loaded. What the VC3 then reads there is
+**unknown**.
+
+`mgras_default_timing` maps monitor types 1, 9 and `0x0b` to record 1 (72 Hz)
+and `0x82` to record 2. Record 3 is chosen only for type `0x83`; every other
+type loads record 0. Which
 monitor type a real board reports is **unknown**.
 
 ## Clocks
@@ -124,15 +149,17 @@ requires 900 kHz < PLLREF < 40 MHz, 300 kHz < FPD < 10 MHz and
   reproduces `AchievedFrequency` exactly (41 of 41). FVCO is 127.3 to 220.0 MHz
   and FPD 1.94 to 8.25 MHz. The stock 1280 by 1024 at 60 Hz file is R = 2,
   V = 4, control `0x91`: FVCO = 33 * 26 / 4 = 214.5 MHz and FOUT = 107.25 MHz.
-- **Unknown, conflicting**: the 10 files with control bit 2 set (control `0xc5` or
-  `0xd5`: `1280x1024_72` and `_72_32db`, `1024x768_60p`, `2RSS/1024x768_60`,
-  `616x492_140os`, `2RSS/1600x1024_60_2f`, `2RSS/1920x1080_48_32db`, and the
-  copies of these in both directories) have an `AchievedFrequency` that agrees
-  with the formula only if bit 2 divides FOUT by 2. The data sheet makes that bit
-  VSEL, which doubles the feedback divider and puts FVCO at 511 to 521 MHz, twice
-  the part's limit. Either the compiler models bit 2 differently from the data
-  sheet or PLLREF differs when it is set. The pixel clock of those formats is
-  therefore unknown; the 72 Hz format is one of them.
+- **Unknown, conflicting**: ten files have control bit 2 set (control `0xc5` or
+  `0xd5`): `1280x1024_72` (both directories), `1280x1024_72_32db`,
+  `1024x768_60p` (both), `2RSS/1024x768_60`, `616x492_140os` (both),
+  `2RSS/1600x1024_60_2f` and `2RSS/1920x1080_48_32db`. Their
+  `AchievedFrequency` agrees with the formula only if bit 2 divides FOUT by 2.
+  The data sheet makes that bit VSEL, which doubles the feedback divider: with
+  PLLREF = 33 MHz it puts FVCO at 511 to 521 MHz, twice the part's limit, and
+  FOUT four times the file's value. The files fit the data sheet reading only
+  with PLLREF / 4 = 8.25 MHz and VSEL honoured. Either the compiler models bit 2
+  differently from the data sheet, or PLLREF differs when it is set. The pixel
+  clock of those formats is therefore unknown; the 72 Hz format is one of them.
 - **Inferred**: the VC3 clock is half the pixel clock. Every file records
   `VideoClockRatio` 0.5, and in all 51 files the frame length walked below equals
   `TotalLinesPerFrame * TotalPixelsPerLine / 2` exactly, so each VC3 clock covers
@@ -171,9 +198,10 @@ requires 900 kHz < PLLREF < 40 MHz, 300 kHz < FPD < 10 MHz and
 
 Refresh is the pixel clock times the clock ratio over the frame length in VC3
 clocks. For the files with VSEL clear this is **inferred** from the arithmetic
-above (the PLL reference is the inferred part). The file's own
-`VerticalRetraceRate` is computed from the desired frequency, so it differs from
-the rate the PLL produces where the two clocks differ.
+above (the PLL reference is the inferred part). In the 44 files that carry a `DesiredFrequency` field (the
+seven Smoke-set files do not), `VerticalRetraceRate` equals the rate computed
+from the desired frequency (44 of 44), so it differs from the rate the PLL
+produces where desired and achieved clocks differ.
 
 | Format | Pixel clock (MHz) | Frame (VC3 clocks) | Refresh (Hz) | File's `VerticalRetraceRate` |
 |---|---|---|---|---|
@@ -186,9 +214,11 @@ the rate the PLL produces where the two clocks differ.
 | `2RSS/1920x1035_60` | 159.5 | 1,328,400 | 60.035 | 60.096 |
 | `2RSS/1600x1024_60` | 132.0 | 1,099,560 | 60.024 | 60.000 |
 
-The stock 60 Hz frame lasts 16.68 ms and the 76 Hz frame 13.17 ms. No format
-scans a frame slower than 49 Hz (`1280x1024_49`), apart from the two-field
-formats below, which scan the picture twice per frame. A figure near 37 Hz for
+The stock 60 Hz frame lasts 16.68 ms and the 76 Hz frame 13.17 ms. Among the
+one-field formats the slowest are `1280x1024_49` (49.0 Hz) and
+`1920x1080_48_32db` (48 Hz). The two-field formats have slower frames: the
+stereo ones `1024x768_96s` and `_96s_vs` run 48 Hz frames, and `_50_2f` and
+`_60_2f` run 25 and 29.97 Hz frames of two scans each. A figure near 37 Hz for
 the stock format is what dividing the 894,600-clock frame by the 33 MHz
 reference gives (36.89 Hz): the reference reaches the VC3 multiplied by 26/4 in
 the PLL, halved by the output divider and halved again for the VC3, a factor of
@@ -218,13 +248,16 @@ field, each followed by a single-repeat entry that ends the field: one run in th
 
 ## Retrace
 
-- **Established** (IP30 `MgrasRetraceHandler`): the handler does the same work for
-  every interrupt. It increments two retrace counters of the board record
+- **Established** (IP30 `MgrasRetraceHandler`): the handler returns at once when
+  the word at +68 of the record at +200 of its argument is non-zero; otherwise it
+  does the same work for every interrupt. It increments two retrace counters of the board record
   (offsets 0x7c and 0x80), wakes video-sync waiters (`rrmValidateVideoSync`,
   which serves `glXGetVideoSyncSGI` and `glXWaitVideoSyncSGI`), completes queued
   buffer swaps and validates waiting retrace events. It reads no field or
-  parity bit. On every 6 times the rate byte (clamped to 30 to 120) of
-  interrupts it also calls `mgras_update_pp1ccv`.
+  parity bit. Its hardware reads are the FIFO-level polls before register writes
+  and a wait of at most 10 microseconds on bit 19 of one status word. On every
+  6 times the rate byte (clamped to [30, 120]) of interrupts it also calls
+  `mgras_update_pp1ccv`.
 - **Inferred**: one interrupt per VC3 vertical event, and the tables have one such
   event per field (previous section), so the stereo and two-field formats
   interrupt once per field, not once per frame. The clamp to 120 in the handler

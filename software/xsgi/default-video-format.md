@@ -46,9 +46,10 @@ is only ever selected by a stored name.
 Byte `+0x2a` is **established** as the rate byte of the timing record the
 kernel loaded: IP30 `MgrasSetTiming` (`0x180c`) stores record field `+0xc` there
 (see the built-in records in [display timing](../kernel/display-timing.md)).
-Byte `+0x29` is **unknown**: its writer was not traced. Its two values here,
-`0x82` and `0x83`, are the flat-panel types `mgras_fpi2cPanelOn` acts on at
-`+0x49`, which suggests the same type code. Which monitor type a real board
+Byte `+0x29` is **established** as written by IP30 `MgrasGatherInfo`: the upper
+nibble of the byte at offset 4872 of the board (`0xdbc` to `0xddc`), overwritten
+with the panel type from `+0x49` (`0xe7c`) when `mgras_fp_probe` finds a panel.
+`0x82` and `0x83` are the types `mgras_i2cPanelOn` acts on. Which monitor type a real board
 reports, and so whether the 72 Hz record is ever used, is **unknown**.
 
 The default on a conventional monitor is therefore `1280x1024_60`: 1,680 by
@@ -66,11 +67,12 @@ file named there is stored and wins over the default.
   film `Hires 72Hz`, 24p `Hires 60Hz` or `72Hz`. A `Custom` keyword leaves the
   rate to `setmon`. The resolution is not changed: it is what the system was
   set to before smoke started (guide, appendix on 24-inch monitors).
-- **Established** (disassembly of `smoke50`): `VideoInit` (`0x10b5fe90`) calls
-  `VideoSetHiresMonitor(true)` (`0x10b60270`), and so do `VideoSetHiresMode` and
-  `VideoGfxGenlock` when the mode or genlock changes. It builds a format name
+- **Established** (disassembly of `smoke50`): `VideoInit` (`0x10b5fbe0`, call at `0x10b5fe90`) calls
+  `VideoSetHiresMonitor(true)` (`0x10b60270`), and so does `VideoSetHiresMode`
+  when the mode changes. `VideoUninit` and `VideoGfxGenlock` call it with false
+  when smoke exits and when genlock is switched off. It builds a format name
   from the screen width and height and the rate, as `%dx%d_%d%s`-style strings
-  (`1280x1024_60`, `_50`, `_72`, `_24`, `_25`, `_30`, `_48`, `_75`, and the
+  (`1280x1024_60`, `_50`, `_72`, `_24`, `_25`, `_30`, `_48`, `_75`, never `_76`, and the
   `f`, `_50_2f` and `_60_2f` variants, plus `%dx%d+%dx%d_%s` for combined
   formats), and passes it to `SetmonLoadFormat` (`0x10b89760`), which loads the
   format through the X server's video-format extension (smoke imports
@@ -79,8 +81,8 @@ file named there is stored and wins over the default.
   `VideoGetHiresRateHz` returns.
 - **Established**: smoke does not use NTSC or PAL locked formats of the graphics
   board (the base IMPACT board has none). On an Octane MXI with a 1920 by 1080
-  display the guide lists `1920x1080_48_32db`, `_50_32db` and `_60_32db`; the
-  `Smoke50` install set carries those files and `1600x1024_50`, `_50_2f`, `_60`
+  display the guide names `1920x1080_60_32db`; the `DLvfo` set of the install
+  carries that file, `_48_32db` and `_50_32db` and `1600x1024_50`, `_50_2f`, `_60`
   and `_60_2f` (see display timing).
 - **Established**: when smoke cannot get a double-buffered RGBA visual it prints
   that the video format should be changed with
@@ -103,6 +105,8 @@ whose pixel clock is itself unknown.
 
 ## Unknown
 
+- `_75` is requested for a 75 Hz setting and no `_75` file is held (the base
+  trees hold `_76`).
 - Which of the `f` and `_2f` names smoke tries for external sync on an MXI, and
   whether a given install holds them: the 6.5-base tree holds no `_2f` file and
   no `_30f`, `_25f`, `_50f` or `_60f` file; the Smoke 5.0 `DLvfo` set holds
