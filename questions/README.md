@@ -76,7 +76,7 @@ The GIO configuration value decodes against fields the headers already define (b
 
 ### 5. Board identification probe
 
-The kernel's probe (`mgras_init.o`, text offset 0x770) accepts a board only if the first word has bits 6:0 equal to 0x10, bit 16 set, bit 17 clear and bits 31:18 equal to 1, and does not look at bits 15:7. The word the headers record, 0x00050190, passes. So the "revision" nibble at bits 7:4 is only partly checked (bits 6:4 must be 001, bit 7 is free), and bits 15:8 are not compared by the probe; the information-gathering routine later saves bits 15:8 as a one-byte board field. The headers' revision and product split is established from the GIO BUS Specification, version 1.1 (draft), 7 April 1992, sections 2.10.1 and 2.10.2: product ID code in bits 7:0, revision in bits 15:8. The PDF's running page headers read "GIO32 Specification, 6 May 1992". The probe fixes only which bits are compared.
+The kernel's probe (`mgras_init.o`, text offset 0x770) accepts a board only if the first word has bits 6:0 equal to 0x10, bit 16 set, bit 17 clear and bits 31:18 equal to 1, and does not look at bits 15:7. The word the headers record, 0x00050190, passes. So bit 7 is not checked beyond bits 6:4 being 001, and bits 15:8 are not compared by the probe; the information-gathering routine later saves bits 15:8 as a one-byte board field. The headers' revision and product split is established from the GIO BUS Specification, version 1.1 (draft), 7 April 1992, sections 2.10.1 and 2.10.2: product ID code in bits 7:0, revision in bits 15:8. The PDF's running page headers read "GIO32 Specification, 6 May 1992". The probe fixes only which bits are compared.
 
 ### 6. Framebuffer size register, top byte
 
