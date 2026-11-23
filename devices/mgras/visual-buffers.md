@@ -97,3 +97,7 @@ Two footnotes qualify rows (p. 4-22 [PDF 89] and p. 4-23 [PDF 90]):
   configuration. Table 4.3 lists rows at those sizes for SI1, SSI1 and SSI, with
   footnote 1. The report does not resolve this. Do not add those rows to any
   board description without release-specific evidence. **Unresolved.**
+
+## No 10-bit visual
+
+Software expectation, graded established for the table contents: `mgrasAllVisuals` (29 records) and `mgrasAllCapabilityInfo` in the X server's `impact.so`, `impactsr.so` and `impactpc.so` (6.5 base 0x5e85b390 and 0x5e85b9f0; 6.5.30 `impact.so` 0x58acc0 and 0x589830) decode identically in both releases. Component sizes present are 4/4/4/4, 5/5/5/1, 8/8/8/8, 8/8/8 and 12/12/12; nothing at 10 bits, so IMPACT offers no 10/10/10/2 framebuffer visual.
