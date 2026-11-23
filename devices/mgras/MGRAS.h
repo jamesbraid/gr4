@@ -218,15 +218,16 @@ typedef union {
 
 /*
  * GIO ID Register at offset 0x00000:
- * Product 0x10, 32-bit ID, revision 1, GIO64, no ROM, manufacturer 1 (SGI).
+ * Product 0x90 (8-bit ID, bits 7:0), revision 1 (bits 15:8), GIO64, no ROM,
+ * manufacturer 1 (SGI). The kernel probe checks only bits 6:0 (0x10).
  * Value: 0x00050190
  */
 #define MGRAS_GIO_ID_ADDR       0x00000
 #define MGRAS_GIO_ID            0x00050190
 
 /* Board Revision & Type Extraction */
-#define MGRAS_REV_MASK          0x000000F0
-#define MGRAS_PRODUCT_MASK      0xFFFFFF00
+#define MGRAS_REV_MASK          0x0000FF00
+#define MGRAS_PRODUCT_MASK      0x000000FF
 
 /* Board revision helper macros from BDVERS register */
 #define MGRAS_BOARD_REV(data)   (((data) & 0x1C) >> 2)

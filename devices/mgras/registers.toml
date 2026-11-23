@@ -137,17 +137,19 @@ width = 32
 doc = """
 Identification word read at the start of the board's window. The kernel's
 probe compares only bits 6:0 (must be 0x10), bit 16 (set), bit 17 (clear)
-and bits 31:18 (must be 1); bits 15:7 are not examined, so the split into
-revision and product below is a reading, not what the probe tests."""
+and bits 31:18 (must be 1); bits 15:7 are not examined. The field split
+follows the GIO bus word layout (sections 2.10.1 and 2.10.2, pages 2-12
+and 2-13 of the GIO32 specification, 6 May 1992): product ID code in bits
+7:0, revision in bits 15:8."""
 grade = "inferred"
 
 [words.GIO_ID.fields]
-product = { bits = [31, 8], grade = "inferred" }
-revision = { bits = [7, 4], grade = "inferred" }
+product = { bits = [7, 0], grade = "established" }
+revision = { bits = [15, 8], grade = "established" }
 
 [[words.GIO_ID.tests]]
 value = 0x50190
-expect = { revision = 9, product = 1281 }
+expect = { revision = 1, product = 144 }
 
 [words.HQ_REVISION]
 width = 32

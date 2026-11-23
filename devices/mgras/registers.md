@@ -1,7 +1,7 @@
 <!-- generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 527f694ae8a7a88b221407df4266896ca44eae060855348313383ee6919a16d0 -->
+<!-- input sha256 fe05b090dbc1b15f27e14bb42241d8b3a0ab8bef2b4cbe9a0ba0f03da5d43e5f -->
 
 # board-level words of the Impact graphics subsystem
 
@@ -127,13 +127,15 @@ captures.
 
 Identification word read at the start of the board's window. The kernel's
 probe compares only bits 6:0 (must be 0x10), bit 16 (set), bit 17 (clear)
-and bits 31:18 (must be 1); bits 15:7 are not examined, so the split into
-revision and product below is a reading, not what the probe tests.
+and bits 31:18 (must be 1); bits 15:7 are not examined. The field split
+follows the GIO bus word layout (sections 2.10.1 and 2.10.2, pages 2-12
+and 2-13 of the GIO32 specification, 6 May 1992): product ID code in bits
+7:0, revision in bits 15:8.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 31:8 | `product` | inferred |  | driver and firmware readings |  |
-| 7:4 | `revision` | inferred |  | driver and firmware readings |  |
+| 15:8 | `revision` | established |  | driver and firmware readings |  |
+| 7:0 | `product` | established |  | driver and firmware readings |  |
 
 ### Word `HQ4_NUMERIC_PACKET`
 
@@ -467,6 +469,6 @@ A vector is a value recorded from a source. An example only shows the layout.
 | `DCB_ADDR` | 0x2c08 | example | encrs_inc=0, endata_pack=0, crs=0, data_width=1, device=11 |
 | `DCB_ADDR` | 0x2d08 | example | encrs_inc=0, endata_pack=0, crs=2, data_width=1, device=11 |
 | `DCB_ADDR` | 0x2d88 | example | encrs_inc=0, endata_pack=0, crs=3, data_width=1, device=11 |
-| `GIO_ID` | 0x50190 | vector | revision=9, product=1281 |
+| `GIO_ID` | 0x50190 | vector | revision=1, product=144 |
 | `HQ4_NUMERIC_PACKET` | 0x1c450400000018 | example | execute=1, selector=69, payload=24 |
 | `MCO_INDEX` | 0x90 | vector | port=0, bank=9 |

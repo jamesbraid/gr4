@@ -1,7 +1,7 @@
 // generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 2
-// input sha256 527f694ae8a7a88b221407df4266896ca44eae060855348313383ee6919a16d0
+// input sha256 fe05b090dbc1b15f27e14bb42241d8b3a0ab8bef2b4cbe9a0ba0f03da5d43e5f
 // board-level words of the Impact graphics subsystem
 #![allow(dead_code)]
 
@@ -323,9 +323,9 @@ pub mod ge_revision {
 /// Identification word read at the start of the board's window. The kernel's probe compares only bits 6:0 (must be 0x10), bit 16 (set), bit 17 (clear) an (inferred)
 pub mod gio_id {
     pub const WIDTH: u32 = 32;
-    pub mod product { // bits 31:8, inferred
+    pub mod revision { // bits 15:8, established
         pub const SHIFT: u32 = 8;
-        pub const MASK: u32 = 0xffffff;
+        pub const MASK: u32 = 0xff;
         pub const fn get(v: u32) -> u32 {
             (v >> SHIFT) & MASK
         }
@@ -333,9 +333,9 @@ pub mod gio_id {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod revision { // bits 7:4, inferred
-        pub const SHIFT: u32 = 4;
-        pub const MASK: u32 = 0xf;
+    pub mod product { // bits 7:0, established
+        pub const SHIFT: u32 = 0;
+        pub const MASK: u32 = 0xff;
         pub const fn get(v: u32) -> u32 {
             (v >> SHIFT) & MASK
         }
@@ -903,8 +903,8 @@ mod tests {
 
     #[test]
     fn gio_id_50190() {
-        assert_eq!(gio_id::revision::get(0x50190), 9);
-        assert_eq!(gio_id::product::get(0x50190), 1281);
+        assert_eq!(gio_id::revision::get(0x50190), 1);
+        assert_eq!(gio_id::product::get(0x50190), 144);
     }
 
     #[test]

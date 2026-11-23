@@ -73,9 +73,9 @@ binds = [
 
 [[claims]]
 group = "mgras"
-label = "board id revision nibble"
+label = "GIO id revision byte"
 doc = "devices/mgras/MGRAS.h"
-regex = 'MGRAS_REV_MASK\s+0x0000000?(F)0'
+regex = 'MGRAS_REV_MASK\s+0x0000(FF)00'
 binds = [
   ["WHEX", "GIO_ID.revision", 1],
 ]

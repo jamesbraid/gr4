@@ -1,7 +1,7 @@
 /* generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 527f694ae8a7a88b221407df4266896ca44eae060855348313383ee6919a16d0 */
+/* input sha256 fe05b090dbc1b15f27e14bb42241d8b3a0ab8bef2b4cbe9a0ba0f03da5d43e5f */
 /* board-level words of the Impact graphics subsystem */
 #ifndef MGRAS_GEN_H
 #define MGRAS_GEN_H
@@ -136,17 +136,19 @@
 /*
  * Identification word read at the start of the board's window. The kernel's
  * probe compares only bits 6:0 (must be 0x10), bit 16 (set), bit 17 (clear)
- * and bits 31:18 (must be 1); bits 15:7 are not examined, so the split into
- * revision and product below is a reading, not what the probe tests.
+ * and bits 31:18 (must be 1); bits 15:7 are not examined. The field split
+ * follows the GIO bus word layout (sections 2.10.1 and 2.10.2, pages 2-12
+ * and 2-13 of the GIO32 specification, 6 May 1992): product ID code in bits
+ * 7:0, revision in bits 15:8.
  */
 /* word GIO_ID: 32 bits; driver and firmware readings */
 #define MGRAS_GIO_ID_WIDTH                           32 /* inferred */
-#define MGRAS_GIO_ID_PRODUCT_SHIFT                   8 /* inferred */
-#define MGRAS_GIO_ID_PRODUCT_MASK                    0xffffffu
-#define MGRAS_GIO_ID_PRODUCT_INPLACE                 (MGRAS_GIO_ID_PRODUCT_MASK << MGRAS_GIO_ID_PRODUCT_SHIFT)
-#define MGRAS_GIO_ID_REVISION_SHIFT                  4 /* inferred */
-#define MGRAS_GIO_ID_REVISION_MASK                   0xfu
+#define MGRAS_GIO_ID_REVISION_SHIFT                  8 /* established */
+#define MGRAS_GIO_ID_REVISION_MASK                   0xffu
 #define MGRAS_GIO_ID_REVISION_INPLACE                (MGRAS_GIO_ID_REVISION_MASK << MGRAS_GIO_ID_REVISION_SHIFT)
+#define MGRAS_GIO_ID_PRODUCT_SHIFT                   0 /* established */
+#define MGRAS_GIO_ID_PRODUCT_MASK                    0xffu
+#define MGRAS_GIO_ID_PRODUCT_INPLACE                 (MGRAS_GIO_ID_PRODUCT_MASK << MGRAS_GIO_ID_PRODUCT_SHIFT)
 
 /*
  * One command written to the normal command FIFO, as the public driver packs it:

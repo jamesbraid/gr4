@@ -2,7 +2,7 @@
 <!-- generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 527f694ae8a7a88b221407df4266896ca44eae060855348313383ee6919a16d0 -->
+<!-- input sha256 fe05b090dbc1b15f27e14bb42241d8b3a0ab8bef2b4cbe9a0ba0f03da5d43e5f -->
 <genxml unit="mgras" prefix="MGRAS" title="board-level words of the Impact graphics subsystem" from="driver and firmware readings">
   <doc>Board-level words of the Impact graphics subsystem.</doc>
   <enum name="bdvers2_product">
@@ -185,13 +185,15 @@ captures.</doc>
   <struct name="GIO_ID" size="4" grade="inferred" from="driver and firmware readings">
     <doc>Identification word read at the start of the board's window. The kernel's
 probe compares only bits 6:0 (must be 0x10), bit 16 (set), bit 17 (clear)
-and bits 31:18 (must be 1); bits 15:7 are not examined, so the split into
-revision and product below is a reading, not what the probe tests.</doc>
-    <field name="product" start="8" size="24" type="uint" grade="inferred"/>
-    <field name="revision" start="4" size="4" type="uint" grade="inferred"/>
+and bits 31:18 (must be 1); bits 15:7 are not examined. The field split
+follows the GIO bus word layout (sections 2.10.1 and 2.10.2, pages 2-12
+and 2-13 of the GIO32 specification, 6 May 1992): product ID code in bits
+7:0, revision in bits 15:8.</doc>
+    <field name="revision" start="8" size="8" type="uint" grade="established"/>
+    <field name="product" start="0" size="8" type="uint" grade="established"/>
     <test value="0x50190" kind="vector">
-      <expect field="revision" value="9"/>
-      <expect field="product" value="1281"/>
+      <expect field="revision" value="1"/>
+      <expect field="product" value="144"/>
     </test>
   </struct>
   <struct name="HQ4_NUMERIC_PACKET" size="8" grade="established" from="OpenBSD impact(4) driver register header">
