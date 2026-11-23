@@ -219,7 +219,8 @@ typedef union {
 /*
  * GIO ID Register at offset 0x00000:
  * Product 0x90 (8-bit ID, bits 7:0), revision 1 (bits 15:8), GIO64, no ROM,
- * manufacturer 1 (SGI). The kernel probe checks only bits 6:0 (0x10).
+ * manufacturer code 1. The kernel probe checks the product field's bits 6:0
+ * (0x10), plus bits 16, 17 and 31:18.
  * Value: 0x00050190
  */
 #define MGRAS_GIO_ID_ADDR       0x00000
