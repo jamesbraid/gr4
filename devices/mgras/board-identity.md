@@ -149,6 +149,64 @@ For the two SI-with-texture boards the top byte of 0x072488 is 0x45 (product 2,
 MGRAS revision 1, one GE). The ESI-with-texture board reads MGRAS revision 4
 there, GE revision 3 at 0x028004, and XMAP index 4 reads 4.
 
+## The GL_RENDERER and GL_VERSION text
+
+IRIX GL names an IMPACT board from the same identity bytes, so the renderer
+string is a function of the product ID, GE count, RE count and TRAM fields
+above. Each fact below is a software expectation read from the shipped
+`libGLcore.so`: it shows the text the library builds, not what the board is.
+Graded inferred in this repository's terms. Sources: the IRIX 6.5 base and
+6.5.30 libraries under `usr/gfx/arch/` (`IP30GR5`, `IP27GR5`, `IP28GR4`,
+`IP22GR4`). The 6.5.22 overlay is not in the media set read; 6.5.30 is the
+later of the two that were.
+
+**Where.** `GetBoardInfo` formats the string: 0xd94c594 in the 6.5.30
+`IP30GR5` (and `IP27GR5`) library, 0xda5bd04 in all four 6.5 base libraries.
+It issues the get-board-information request (ioctl 102 on the graphics
+descriptor, 204-byte reply) and takes the reply's name field. It compares the
+name with "IMPACT" (0xd94c788), "IMPACTSR" (0xd94c7dc) and "IMPACTPC"
+(0xd94c834); the three paths and the no-match path all call `sprintf` with the
+format `%s/%d/%d/%d` and the literal "IMPACT" (calls at 0xd94c7c0, 0xd94c818,
+0xd94c870 and 0xd94c8ac), so the text always starts `IMPACT/`. The result goes
+into the context's text buffer at +0x7b50, and the context's renderer
+pointer (+0xdf8) is set to that buffer at 0xd94fd90 in the 6.5.30 library.
+The 6.5 base libraries were checked for the format string and the call
+site only, not store by store. `GL_VERSION` has no board input: the context carries the
+constant `1.1 Irix 6.5` on every IMPACT library read (6.5.30 string at
+0xdacdcdc, stored by the context reset routine at 0xda2d528; 0xdbd0f6c in the
+6.5 base library).
+
+**Inputs.** The three numbers are reply bytes 43, 44 and 45:
+
+| Byte | Meaning | Filled by (6.5.30 `mgras.a`, `mgras_init.o` `MgrasGatherInfo` 0xbbc) |
+| --- | --- | --- |
+| 43 | GE count | bits 1:0 of the top byte of the word at 0x072488 (store at 0xce8); the kernel option `mgras_numge` overrides it with a single digit (0xd1c) |
+| 44 | RE count | product 1: 1. Products 2 and 3: the GE count. Product 0: 2, or 1 when bits 6:4 of the 0x072408 top byte are 3 or 7. The option `mgras_numre` overrides it (0xdb8) |
+| 45 | TRAM count on the first RE path | product 1: 0. Products 2 and 3: 4, or 0 when that path's field of the 0x072408 top byte is 3 (0xd78). Product 0: `1 << (t & 3)` |
+
+The product ID, the 0x072488 and 0x072408 reads and the per-product RE and TRAM
+rules are the ones tabulated above, so no new hardware fact comes from the
+library; the new fact is that the three counts are printed. Two software
+switches change the text: when byte 45 is 1 the library clears it if the
+environment variable `USE_SOFT_TEXTURE` is set (0xd94c6e8 to 0xd94c700), and
+the two kernel options above replace byte 43 or 44.
+
+**Strings per product** (derived from the rules above; not a capture of GL
+output):
+
+| Board (product) | GL_RENDERER | GL_VERSION |
+| --- | --- | --- |
+| Solid IMPACT (1) | `IMPACT/<ge>/1/0` | `1.1 Irix 6.5` |
+| SI or ESI with texture, one GE (2) | `IMPACT/1/1/4` | `1.1 Irix 6.5` |
+| MXI or EMXI, two GEs (3) | `IMPACT/2/2/4` | `1.1 Irix 6.5` |
+| ESSI-class, two GEs, no TRAM (3) | `IMPACT/2/2/0` | `1.1 Irix 6.5` |
+| Indigo2 IMPACT (0) | `IMPACT/<ge>/<1 or 2>/<1, 2, 4 or 8>` | `1.1 Irix 6.5` |
+
+A product 1 board with two GEs would print `IMPACT/2/1/0`; that and
+`IMPACT/1/1/n` are the two prefixes a consumer that tests the start of the
+string has to tell apart. No capture shows a product 1 board, so its row is
+derived only.
+
 ## Open questions
 
 - The product ID, MGRAS revision and ASIC revisions of a plain SI. Settled by
