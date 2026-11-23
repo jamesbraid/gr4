@@ -101,3 +101,5 @@ Two footnotes qualify rows (p. 4-22 [PDF 89] and p. 4-23 [PDF 90]):
 ## No 10-bit visual
 
 Software expectation, graded established for the table contents: `mgrasAllVisuals` (29 records) and `mgrasAllCapabilityInfo` in the X server's `impact.so`, `impactsr.so` and `impactpc.so` (6.5 base 0x5e85b390 and 0x5e85b9f0; 6.5.30 `impact.so` 0x58acc0 and 0x589830) decode identically in both releases. Component sizes present are 4/4/4/4, 5/5/5/1, 8/8/8/8, 8/8/8 and 12/12/12; nothing at 10 bits, so IMPACT offers no 10/10/10/2 framebuffer visual.
+
+The visual records (36 bytes each, 6.5.30 `impact.so` 0x58acc0) carry packed masks. Record 2 (0x58ad08) is the only 3/3/2 visual: class 2, 8 planes, red mask 0x07, green 0x38, blue 0xc0, bit offsets 0, 3 and 6. Records 11 to 14 are 4/4/4 (12 planes, masks 0x00f, 0x0f0, 0xf00), 15 to 18 are 5/5/5 (15 planes, masks 0x1f, 0x3e0, 0x7c00), 19 to 27 are 8/8/8 TrueColor (24 planes, masks 0xff, 0xff00, 0xff0000) and record 28 is the DirectColor form of the same masks; records 0 to 1, 3 to 10 are colour-index visuals with no masks. Established (read from the table).

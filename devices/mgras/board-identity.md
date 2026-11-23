@@ -155,7 +155,8 @@ IRIX GL names an IMPACT board from the same identity bytes, so the renderer
 string is a function of the product ID, GE count, RE count and TRAM fields
 above. Each fact below is a software expectation read from the shipped
 `libGLcore.so`: it shows the text the library builds, not what the board is.
-Graded inferred in this repository's terms. Sources: the IRIX 6.5 base and
+The builder sites and format strings are established (read in the code); the
+per-product rows and the 6.5-base store sites are inferred. Sources: the IRIX 6.5 base and
 6.5.30 libraries under `usr/gfx/arch/` (`IP30GR5`, `IP27GR5`, `IP28GR4`,
 `IP22GR4`). The 6.5.22 overlay is not in the media set read; 6.5.30 is the
 later of the two that were.
@@ -163,13 +164,14 @@ later of the two that were.
 **Where.** `GetBoardInfo` formats the string: 0xd94c594 in the 6.5.30
 `IP30GR5` (and `IP27GR5`) library, 0xda5bd04 in all four 6.5 base libraries.
 It issues the get-board-information request (ioctl 102 on the graphics
-descriptor, 204-byte reply) and takes the reply's name field. It compares the
-name with "IMPACT" (0xd94c788), "IMPACTSR" (0xd94c7dc) and "IMPACTPC"
-(0xd94c834); the three paths and the no-match path all call `sprintf` with the
+descriptor, 204-byte reply) and takes the reply's name field. It tests the
+name with `strcmp` against "IMPACT" (string 0xdac5bec, call at 0xd94c788),
+"IMPACTSR" (0xdac5c08, call at 0xd94c7dc) and "IMPACTPC" (call at 0xd94c834); the three paths and the no-match path all call `sprintf` with the
 format `%s/%d/%d/%d` and the literal "IMPACT" (calls at 0xd94c7c0, 0xd94c818,
 0xd94c870 and 0xd94c8ac), so the text always starts `IMPACT/`. The result goes
 into the context's text buffer at +0x7b50, and the context's renderer
-pointer (+0xdf8) is set to that buffer at 0xd94fd90 in the 6.5.30 library.
+pointer (+0xdf8) is set to that buffer at 0xd94fd90 in the 6.5.30 library, but
+only when bit 0 of context +0xa8 is clear.
 The 6.5 base libraries were checked for the format string and the call
 site only, not store by store. `GL_VERSION` has no board input: the context carries the
 constant `1.1 Irix 6.5` on every IMPACT library read (6.5.30 string at
@@ -202,10 +204,13 @@ output):
 | ESSI-class, two GEs, no TRAM (3) | `IMPACT/2/2/0` | `1.1 Irix 6.5` |
 | Indigo2 IMPACT (0) | `IMPACT/<ge>/<1 or 2>/<1, 2, 4 or 8>` | `1.1 Irix 6.5` |
 
-A product 1 board with two GEs would print `IMPACT/2/1/0`; that and
-`IMPACT/1/1/n` are the two prefixes a consumer that tests the start of the
-string has to tell apart. No capture shows a product 1 board, so its row is
-derived only.
+A product 1 board with two GEs would print `IMPACT/2/1/0`. A consumer that
+matches the first 11 characters against `IMPACT/2/1/` and `IMPACT/1/1/` (the
+Discreet programs do) therefore groups every board with one GE, including an
+SI or ESI with texture (`IMPACT/1/1/4`) and a product 1 board
+(`IMPACT/1/1/0`), with the two-GE product 1 case; only the two-GE boards
+with more than one RE (`IMPACT/2/2/n`) fall outside it. No capture shows a
+product 1 board, so its row is derived only.
 
 ## Open questions
 
