@@ -13,6 +13,7 @@ Source: driver and firmware readings.
 - [MGRAS antialiased points and lines](antialiasing.md)
 - [IMPACT board facts from published documents](board-facts.md)
 - [MGRAS board identity](board-identity.md)
+- [What the PROM leaves in an IMPACT board](prom-handoff.md)
 - [MGRAS two-engine boards](two-re.md)
 - [MGRAS video and sync hooks](video-sync.md)
 - [MGRAS visual buffers](visual-buffers.md)

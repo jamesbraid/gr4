@@ -27,6 +27,7 @@ opening heading or first sentence.
 - [devices/mgras/ide-raster-tests.md](devices/mgras/ide-raster-tests.md): What the shipped Octane diagnostic's raster tests store, compare and settle, test by test, with the table layout, stored sums and fits to the stored images.
 - [devices/mgras/antialiasing.md](devices/mgras/antialiasing.md): What the published Octane description says the board does for antialiased points and lines, with grades and open questions.
 - [devices/mgras/board-identity.md](devices/mgras/board-identity.md): How IRIX reads the IMPACT board identity words, the product and revision codes, and what captured boards read back.
+- [devices/mgras/prom-handoff.md](devices/mgras/prom-handoff.md): What the Origin's I/O PROM and the Octane's PROM do to an IMPACT board before the operating system starts, the state the text console leaves, and what changes with console=d.
 - [devices/mgras/two-re.md](devices/mgras/two-re.md): How the two-raster-engine boards split the screen, select a pixel processor and reach their two geometry engines, with grades and open questions.
 - [devices/mgras/visual-buffers.md](devices/mgras/visual-buffers.md): The published Octane frame buffer building blocks, the 1280 by 1024 visuals per model and the stereo modes.
 - [devices/mgras/video-sync.md](devices/mgras/video-sync.md): What the IMPACT graphics side offers for swap and sync, external status, video into the framebuffer, and what the shipped diagnostic checks, with a list of what a model must do to pass.
