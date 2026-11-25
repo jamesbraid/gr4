@@ -21,6 +21,7 @@ Source: driver and firmware readings.
 
 - [MGRAS display timing](../../software/kernel/display-timing.md)
 - [MGRAS HQ4 host interface](../../software/kernel/hq4-host-interface.md)
+- [HQ4 image writes: DMA and inline](../../software/kernel/hq4-image-write.md)
 - [gr4 ioctl request statements](../../software/kernel/ioctl-requests.md)
 - [MGRAS client selection and feedback](../../software/opengl/client-selection-feedback.md)
 - [MGRAS GL command stream](../../software/opengl/gl-commands.md)

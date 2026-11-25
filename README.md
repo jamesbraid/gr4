@@ -39,6 +39,7 @@ opening heading or first sentence.
 
 - [software/kernel/display-timing.md](software/kernel/display-timing.md): How the IRIX kernel programs MGRAS video timing, the PLL and VC3 clock arithmetic, and the stock 1280 by 1024 retrace rate.
 - [software/kernel/hq4-host-interface.md](software/kernel/hq4-host-interface.md): The HQ4 host interface as the IRIX software drives it: the interrupt block and sources, the context-switch handshake, the swap command, the status waits, the FIFO thresholds and the Octane page-list layout, with grades and open questions.
+- [software/kernel/hq4-image-write.md](software/kernel/hq4-image-write.md): How a host pushes pixels into an IMPACT board's raster engine: the page-list DMA sequence on an Origin (IP27) host against an Octane (IP30) host, and the inline writes that need no DMA and no geometry microcode.
 - [software/kernel/ioctl-requests.md](software/kernel/ioctl-requests.md): Each ioctl request number from the graphics device driver, as the code sends it, with the sender and what it means.
 - [software/opengl/client-selection-feedback.md](software/opengl/client-selection-feedback.md): How the IRIX GL client runs selection mode, the command forms it writes and how it reads hit records back.
 - [software/opengl/gl-commands.md](software/opengl/gl-commands.md): The word framing and command forms the IRIX GL client writes to the command port, the status and flag offsets it polls, and the kernel's context image and clip words.

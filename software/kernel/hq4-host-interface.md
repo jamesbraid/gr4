@@ -248,13 +248,12 @@ A DMA source-mapping list on Octane is an array of 32-bit words. Each word is a
 starting at offset 0 of its allocation, and programs the same slot registers as
 IRIX. The layout is a software expectation, so it is inferred for the board.
 
-Which field the board keys the entry size on is unknown. IRIX writes `0x00290000`
-to register `0x040918` in its IP27 build and `0x00680000` in its IP30 build. The
-Linux driver is reported to write the second value too (not re-read). Bit 22 of that word, set only in the
-IP30 build, is one candidate selector. The widget number, which differs between
-the two builds, is another. Neither is proven. A
-published HQ4 description of the DMA engine, or a measurement that varies one of
-them on one host, would settle it.
+The IP27 build's table entries are 64 bits wide, not 32: the 6.5.30 `mgras_dma.o` of that build stores eight-byte entries
+and the IP30 build four-byte entries ([hq4-image-write.md](hq4-image-write.md)). IRIX writes `0x00290000` to register
+`0x040918` in its IP27 build (a 9 in bits 19:16, the master hub's widget number, over bit 21) and `0x00680000` in its IP30
+build. The Linux driver is reported to write the second value too (not re-read). Bit 22, set only in the IP30 build and
+called a compatibility mode in the Octane diagnostic, is now the leading candidate for the entry-size selector: clear for
+64-bit entries, set for 32-bit entries. Inferred. A board or model run that flips only that bit would settle it.
 
 ## Identity and serial record
 
@@ -285,7 +284,8 @@ them on one host, would settle it.
   before or after those words.
 - Whether bit 19 is raised by the selection alone and bit 28 by the 63rd word
   alone. Only a board can separate them.
-- The entry-size selector for page lists (see above).
+- The entry-size selector for page lists (see above and [hq4-image-write.md](hq4-image-write.md), which also gives the DMA sequence, the
+  host address forms and the inline writes).
 - How the low-water service releases the flush's semaphore. The routine's own
   reading is not settled.
 - What bit 16's waiter and enabler are, and what bit 20 of the flags does on the
