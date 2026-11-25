@@ -33,9 +33,10 @@ Grades follow [AGENTS.md](../../AGENTS.md#7-published-documents). Nothing here w
 | Window origin | `XYWIN = (0, 0x3ff)` | | software expectation |
 
 The same fill mode with the same colour order is what the 6.5.22 X server uses for 24-bit windows (the PP1.h trace: fill
-mode `0xc006304`, mask `0xffffff`, main mode words for RGB windows naming colour-map block 29), so this is the board's
-ordinary single-buffered 24-bit RGB path, not a private driver mode. Inferred, from the match of two independent software
-sources.
+mode `0xc006304`, mask `0xffffff`, main mode words for RGB windows naming colour-map block 29), so the pixel-processor side is the
+board's ordinary 24-bit RGB path, not a private driver mode. Inferred, from the match of two independent software
+sources. The match covers the fill mode and the colour-map block only: no held trace gives the X server's single-buffered
+24-bit main-mode format, so that the display side (format 4) is the ordinary single-buffered window is not shown.
 
 ## Component order, alpha, buffers
 
@@ -47,15 +48,17 @@ sources.
 - **Alpha.** None in this visual. The XMAP configuration word the PROM writes carries a constant alpha of `0xff` (config
   default, bits 18:11), which belongs to the display side and is not a pixel. For a driver's shadow buffer: treat the top byte
   of each 32-bit pixel as unused on the way out and write zero.
-- **Scanout routing.** The pixel is 24 planes drawn into the main buffer's pages. XMAP window ID 0 with main mode `0x7a4` names
-  the frame buffer as RGB; the board's gamma table sits after the XMAP in the DAC and is the PROM's ramp
+- **Scanout routing.** The pixel is 24 planes drawn into the main buffer's pages. XMAP window ID 0 with main mode `0x7a4` shows the
+  frame buffer as colour (format 4 is undecoded; that it is an RGB format is inferred from the driver working on Octane hardware); the board's gamma table sits after the XMAP in the DAC and is the PROM's ramp
   ([prom-handoff.md](prom-handoff.md)); whether the colour map is in the path for an RGB window is not shown by any held source.
   The PROM loads all 8,192 colour-map entries with an identity ramp, which would make the block-29 name harmless either way
   (inferred).
 - **Displayed buffer.** OpenBSD is single-buffered: its draw field is 1, buffer A, `DRBpointers` bits 9:0, which are page
   `0x240`, the same page as the main pointer of the PROM's scanout word (`0x1c0c8240`). So it draws into the buffer being
-  displayed. That is a statement about the sequence: nothing in the driver or the PROM shows the buffer-select register
-  being written, so the PROM's value is assumed to select main (inferred; the PROM's default word is in a header not held).
+  displayed. That is a statement about the sequence: the driver never writes the buffer-select register, and the PROM's board
+  init writes it once for the main buffer and once for the overlay with a named default whose value is in a header not held.
+  The 6.5.30 IP27 kernel object's copy of that routine stores 0 for both, which is the unswapped state (inferred for the
+  PROM: same source routine, different build).
   A double-buffered 24-bit visual (the X server's format `0x15`) draws to the other page (draw field 4 or 5, `DRBpointers`
   bits 19:10) and is shown only after a swap through the buffer-select register. A boot-display backend and a miniport shadow
   should not use it.
@@ -73,7 +76,8 @@ byte swap for the host-image paths and the 64-bit numeric-FIFO words; this is a 
 
 - What format 4 means exactly, and what bit 10 of the main mode word encodes ([CMAP.h](../cmap/CMAP.h) lists format 4 as seen
   and not decoded).
-- Whether the XMAP buffer-select register's power-on or PROM value selects the main buffer for window ID 0.
+- Whether the buffer-select value 0 the kernel object's init stores (the PROM's own constant is not held) selects the main
+  buffer for window ID 0.
 - Whether the PP1-select value 1 that OpenBSD writes before the main mode word reaches both pixel processors on a
   two-engine board (the PROM writes with select 0, all).
 - Decoding of `Config = 0xcac`.
