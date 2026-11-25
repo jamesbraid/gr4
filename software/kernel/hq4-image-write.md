@@ -34,7 +34,8 @@ control commands, the pool registers, the page list) is the same code.
 | Value the init routine writes at board offset `0x040918` | `0x00200000` plus the master hub's widget number in bits 19:16 (`0x00290000` when that is 9) | `0x00680000` | established |
 | Value written at `0x040920` | `0x80200000` plus the hub widget number in bits 19:16 | `0x80280000` | established |
 | Value written at `0x040928` | 0 | 0 | established |
-| Payload of the per-pool control word at HAG register `0x4b + pool` | `0x00100000` plus the hub widget number in bits 19:16 | `0x00180000` | established |
+| Payload the install routine writes to HAG register `0x4b + pool` | `0x00100000` plus the hub widget number in bits 19:16 | `0x00180000` | established |
+| Payload the init routine writes to HAG registers `0x4b` to `0x4f` (and, once, to `0x4a`) | `0x4b` to `0x4f`: the widget number in bits 19:16 only; `0x4a`: `0x00100000` plus the widget number | `0x4b` to `0x4f`: `0x00080000`; `0x4a`: `0x00180000` | established |
 
 Reading these against the diagnostic, whose IP30 branch builds the same fields from named registers:
 
@@ -67,7 +68,8 @@ Host address form the board must present, by host:
 - IP27. The kernel's Hub DMA translation returns its input unchanged and its comment says the Hub has no DMA mapping
   registers: a widget's crosstalk address for host memory is the system physical address itself, with the node number in
   the address (`irix/kern/ml/SN/io.c`, `hub_dmatrans_addr`; node field position in `irix/kern/sys/SN/SN0/addrs.h`, shift 31
-  in the 32-node mode, 32 in the 64-bit-node mode). Established for the kernel's rule. This is why the entries are 64 bits.
+  with 9 node bits when the source is built for N mode, shift 32 with 8 bits in the default M mode; which one the shipped
+  kernels use is not checked). Established for the kernel's rule. This is why the entries are 64 bits.
 - IP30. HEART's translation adds `0x20000000` to a physical address below its alias size and returns an address already at or
   above it unchanged (`irix/kern/io/heart.c`, `heart_addr_phys_to_xio`). Memory sits from `0x20000000`. So the page
   frame number of a K0/K1 address is already the crosstalk page number. Established.
@@ -78,29 +80,33 @@ Host address form the board must present, by host:
 
 This is the diagnostic's host-to-raster-engine write with the Octane constants, followed by what changes for IP27. The
 order is the diagnostic's. Every "control command" is a 64-bit store to the privileged command FIFO of the board: a header
-word in the high half and a payload word in the low half. The header is `0x00040000 | (0x800 + register) << 8 | length`,
-with the length in bytes, for a HAG register (diagnostic's builder with its third argument set; the same arithmetic is
-in the kernel objects). The kernel's table commands go to board offset `0x130400` (established from the objects).
+word in the high half and a payload word in the low half. The header is `0x00400000 | (0x800 + register) << 8 | length`,
+with the length in bytes, for a HAG register (the diagnostic's builder sets bit 22 whatever its "privileged" argument says;
+the kernel objects load the same constant `0x00400000`). The kernel's table commands go to board offset `0x130400` (established from the objects).
 
-1. Set the formatter to a mode that does not invalidate trailing words (the diagnostic uses the canonical mode with the
-   invalidate-trailing bit cleared for a DMA write).
-2. Set the "HQ updates the TLB" bit in the GIO configuration word, clear all privileged flags, and write zero to the TLB valid
-   mask to drop every entry.
-3. Fill the translation table, one entry per 4 KiB page of the host buffer. Flush the data cache first; the board cannot read it.
-4. Write the three mode words of the table above (IP30 diagnostic: TLB mode with the table's top address bits, DMA mode A with
-   the widget number, DMA mode B with the remaining page-number bits).
-5. Control commands to the HAG context, in this order: table base (64-bit physical address of the table, register `0x26` for
-   the GL pool), page granularity (`0x2a`, payload 0 for 4 KiB), pool page count and pointer limit (`0x2e` and `0x33` for
-   the GL pool; for the same pool registers the kernel writes `0xa` to the page-range word and its fourth argument to the
-   limit, where the diagnostic writes 2 and 505).
-6. Page list and shape of the transfer: `IM_PG_LIST1` (`0x80000000`, entry 0 and "last"), page width, row offset, row start
-   address, line count, first and last span width (equal, in bytes), Y decimation 0, state remainder 0.
-7. Program the raster engine for the write. The registers, in the order the diagnostic writes them, are in the next section.
-   They must precede the kick.
-8. Kick: write the DMA control and status word of the HAG (`0x0b`). The diagnostic's value for a write sets run (bit 0), the
-   pool number from bit 1, destination raster engine (bit 4) and scan-packed (bit 5), and leaves direction (bit 3), decimate
-   (bit 6) and the conditional-start bit (bit 7) clear. Bit 3 is set for a read back. The diagnostic's own field comments
-   are the only source for these bit meanings.
+The diagnostic's order is: program the raster engine (step 1), then everything the host interface needs, ending with the
+kick, so the raster engine is ready before the first byte moves.
+
+1. Program the raster engine for the write: the registers of the next section, including the scan-width and DMA-type control
+   commands. (The diagnostic sets the formatter first, to the canonical mode with the invalidate-trailing bit cleared for a
+   DMA write.)
+2. Fill the translation table, one entry per 4 KiB page of the host buffer, and write the DMA mode B and DMA mode A words
+   (IP30 diagnostic: the remaining page-number bits, and the widget number in bits 19:16).
+3. Clear all privileged flags, write zero to the TLB valid mask to drop every entry, then set the "HQ updates the TLB" bit in
+   the GIO configuration word.
+4. Control commands to the HAG context, in this order: table base (64-bit physical address of the table, register `0x26` for
+   the GL pool; on IP30 the diagnostic then writes the TLB mode word with the table address's upper bits), page granularity
+   (`0x2a`, payload 0 for 4 KiB), pool page count and pointer limit (`0x2e` and `0x33` for the GL pool; for the same pool
+   registers the kernel writes `0xa` to the page-range word and its fourth argument to the limit, where the diagnostic
+   writes 2 and 505).
+5. Flush the data cache; the board cannot read it.
+6. Page list and shape of the transfer: `IM_PG_LIST1` (the diagnostic writes `0x80000000`; the bit meanings are not stated),
+   page width, row offset, row start address, line count, first and last span width (equal, in bytes), Y decimation 0,
+   state remainder 0.
+7. Flush again, then kick: write the DMA control and status word of the HAG (`0x0b`). The diagnostic's value for a write sets
+   run (bit 0), the pool number from bit 1, destination raster engine (bit 4) and scan-packed (bit 5), and leaves direction
+   (bit 3), decimate (bit 6) and the conditional-start bit (bit 7) clear. Bit 3 is set for a read back. The diagnostic's own
+   field comments are the only source for these bit meanings.
 
 IP27 differences: widget number from the master hub; 64-bit table entries; bit 22 of `0x040918` clear. The kernel's install
 routine takes a pool index below 5 (image pools 0 to 2, GL 3, display list 4, from the register numbering above).
@@ -113,6 +119,9 @@ Completion, from the diagnostic and consistent with the kernel's waits recorded 
   raster-engine DMA-active bit (bit 11, from [HQ3.h](../../devices/hq3/HQ3.h)) is clear for a write, or the HAG DMA (bit 12) and
   master DMA (bit 9) bits are clear for a read.
 - Then poll the HQ status word until the raster-side idle bit (bit 1) is set.
+
+The programmed-I/O write mode (below) waits differently: poll the busy word until its host-interface-sync, host-interface,
+command-FIFO, CD and raster-interface busy bits are all clear, then the same status bit 1. It sends no CD-flag command.
 
 No interrupt is used. The kernel's own wait masks are in [hq4-host-interface.md](hq4-host-interface.md). Whether bit 12 of
 the busy word means the same on a write is unknown: the diagnostic waits on bit 11 for writes and on bits 12 and 9 for reads.
