@@ -13,6 +13,7 @@ Source: driver and firmware readings.
 - [MGRAS antialiased points and lines](antialiasing.md)
 - [IMPACT board facts from published documents](board-facts.md)
 - [MGRAS board identity](board-identity.md)
+- [IMPACT in an Origin 2000 XIO slot](origin-xio-slot.md)
 - [Packed colour and the visual a console driver assumes](packed-colour.md)
 - [What the PROM leaves in an IMPACT board](prom-handoff.md)
 - [MGRAS two-engine boards](two-re.md)
