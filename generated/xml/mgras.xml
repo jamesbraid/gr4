@@ -2,7 +2,7 @@
 <!-- generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 fe05b090dbc1b15f27e14bb42241d8b3a0ab8bef2b4cbe9a0ba0f03da5d43e5f -->
+<!-- input sha256 45cc340820519febd97084f15bd72f61fde5e54545336083c3940c57b96d90b9 -->
 <genxml unit="mgras" prefix="MGRAS" title="board-level words of the Impact graphics subsystem" from="driver and firmware readings">
   <doc>Board-level words of the Impact graphics subsystem.</doc>
   <enum name="bdvers2_product">
@@ -375,6 +375,8 @@ revision. Inferred from the kernel object.</doc>
   <constant name="HQ_GL_STATUS_PIPE_IDLE" value="0x2" grade="inferred"/>
   <constant name="HQ_ID_MANUFACTURER_EXPECTED" value="0x2aa" grade="inferred"/>
   <constant name="HQ_ID_PART_EXPECTED" value="0xc003" grade="inferred"/>
+  <constant name="HQ_INTR_DEST_LOWER_OFFSET" value="0x11068" grade="inferred"/>
+  <constant name="HQ_INTR_DEST_UPPER_OFFSET" value="0x11060" grade="inferred"/>
   <constant name="HQ_INTR_ENAB_CLEAR_OFFSET" value="0x11048" grade="inferred"/>
   <constant name="HQ_INTR_ENAB_DEFAULT" value="0x3008a200" grade="established"/>
   <constant name="HQ_INTR_ENAB_SET_OFFSET" value="0x11040" grade="established"/>

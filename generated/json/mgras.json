@@ -1,7 +1,7 @@
 {
  "license": "BSD-3-Clause",
  "generator": "defs-gen 2",
- "input_sha256": "fe05b090dbc1b15f27e14bb42241d8b3a0ab8bef2b4cbe9a0ba0f03da5d43e5f",
+ "input_sha256": "45cc340820519febd97084f15bd72f61fde5e54545336083c3940c57b96d90b9",
  "schema": "defs-flat/1",
  "source": "devices/mgras/registers.toml",
  "profile": "public",
@@ -1196,6 +1196,22 @@
    "kind": "constant",
    "name": "HQ_ID_PART_EXPECTED",
    "value": 49155,
+   "count": 1,
+   "grade": "inferred"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_DEST_LOWER_OFFSET",
+   "value": 69736,
+   "count": 1,
+   "grade": "inferred"
+  },
+  {
+   "unit": "mgras",
+   "kind": "constant",
+   "name": "HQ_INTR_DEST_UPPER_OFFSET",
+   "value": 69728,
    "count": 1,
    "grade": "inferred"
   },

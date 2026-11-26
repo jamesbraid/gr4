@@ -1,7 +1,7 @@
 /* generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 2 */
-/* input sha256 fe05b090dbc1b15f27e14bb42241d8b3a0ab8bef2b4cbe9a0ba0f03da5d43e5f */
+/* input sha256 45cc340820519febd97084f15bd72f61fde5e54545336083c3940c57b96d90b9 */
 /* board-level words of the Impact graphics subsystem */
 #ifndef MGRAS_GEN_H
 #define MGRAS_GEN_H
@@ -409,6 +409,8 @@
 #define MGRAS_HQ_GL_STATUS_PIPE_IDLE                 0x2u /* inferred */
 #define MGRAS_HQ_ID_MANUFACTURER_EXPECTED            0x2aau /* inferred */
 #define MGRAS_HQ_ID_PART_EXPECTED                    0xc003u /* inferred */
+#define MGRAS_HQ_INTR_DEST_LOWER_OFFSET              0x11068u /* inferred */
+#define MGRAS_HQ_INTR_DEST_UPPER_OFFSET              0x11060u /* inferred */
 #define MGRAS_HQ_INTR_ENAB_CLEAR_OFFSET              0x11048u /* inferred */
 #define MGRAS_HQ_INTR_ENAB_DEFAULT                   0x3008a200u /* established */
 #define MGRAS_HQ_INTR_ENAB_SET_OFFSET                0x11040u /* established */

@@ -1,7 +1,7 @@
 <!-- generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 2 -->
-<!-- input sha256 fe05b090dbc1b15f27e14bb42241d8b3a0ab8bef2b4cbe9a0ba0f03da5d43e5f -->
+<!-- input sha256 45cc340820519febd97084f15bd72f61fde5e54545336083c3940c57b96d90b9 -->
 
 # board-level words of the Impact graphics subsystem
 
@@ -359,6 +359,8 @@ revision. Inferred from the kernel object.
 | `HQ_GL_STATUS_PIPE_IDLE` | 0x2 | inferred | driver and firmware readings | bit 1 of HQ_GL_STATUS_OFFSET; the client's finish and the kernel's raster idle wait both poll it |
 | `HQ_ID_MANUFACTURER_EXPECTED` | 0x2aa | inferred |  | manufacturer code the diagnostic's HQ4 probe accepts, at bits 11:1 of the identity word, the first board word |
 | `HQ_ID_PART_EXPECTED` | 0xc003 | inferred |  | part number the diagnostic's HQ4 probe accepts, at bits 27:12 of the identity word, the first board word |
+| `HQ_INTR_DEST_LOWER_OFFSET` | 0x11068 | inferred |  | written once at attach with address bits 31:0 of the first interrupt handle's target address. Role inferred from the packing and from its pairing with the upper word |
+| `HQ_INTR_DEST_UPPER_OFFSET` | 0x11060 | inferred |  | written once at attach with the interrupt target widget in bits 27:24, bit 29 set and address bits 47:32 in 15:0. The role is inferred from the packing: the kernel builds the value from the target widget and address of the first interrupt handle, and the register is not named in the binary |
 | `HQ_INTR_ENAB_CLEAR_OFFSET` | 0x11048 | inferred |  | write-one-to-clear for the enable word above. Every kernel site fits this pairing; the register is not named in the binary |
 | `HQ_INTR_ENAB_DEFAULT` | 0x3008a200 | established |  | enable word start-up writes after setting the enable clear word to all ones. Enables sources 9, 13, 15, 19, 28 and 29 |
 | `HQ_INTR_ENAB_SET_OFFSET` | 0x11040 | established |  | interrupt enable word, readable. Start-up writes 0x3008a200 to it. The kernel's writes and their order are established; a write setting only the bits it names is inferred |

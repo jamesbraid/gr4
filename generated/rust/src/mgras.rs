@@ -1,7 +1,7 @@
 // generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 2
-// input sha256 fe05b090dbc1b15f27e14bb42241d8b3a0ab8bef2b4cbe9a0ba0f03da5d43e5f
+// input sha256 45cc340820519febd97084f15bd72f61fde5e54545336083c3940c57b96d90b9
 // board-level words of the Impact graphics subsystem
 #![allow(dead_code)]
 
@@ -763,6 +763,8 @@ pub const HQ_GL_STATUS_OFFSET: u32 = 0x20000; // inferred
 pub const HQ_GL_STATUS_PIPE_IDLE: u32 = 0x2; // inferred
 pub const HQ_ID_MANUFACTURER_EXPECTED: u32 = 0x2aa; // inferred
 pub const HQ_ID_PART_EXPECTED: u32 = 0xc003; // inferred
+pub const HQ_INTR_DEST_LOWER_OFFSET: u32 = 0x11068; // inferred
+pub const HQ_INTR_DEST_UPPER_OFFSET: u32 = 0x11060; // inferred
 pub const HQ_INTR_ENAB_CLEAR_OFFSET: u32 = 0x11048; // inferred
 pub const HQ_INTR_ENAB_DEFAULT: u32 = 0x3008a200; // established
 pub const HQ_INTR_ENAB_SET_OFFSET: u32 = 0x11040; // established

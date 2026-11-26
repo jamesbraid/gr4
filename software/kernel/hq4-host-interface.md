@@ -61,6 +61,8 @@ The kernel's use of the interrupt block, in address order.
 | `0x011048` | `HQ_INTR_ENAB_CLEAR_OFFSET` | write-one-to-clear for the enable word | inferred |
 | `0x011050` | `HQ_INTR_LEVEL2_ENAB_OFFSET` | second-level enable; bit 4 is the FIFO low-water source | established; bit 3 and bits `0x1e8` unknown |
 | `0x011058` | `HQ_INTR_LEVEL2_CLEAR_OFFSET` | second-level clear | inferred |
+| `0x011060` | `HQ_INTR_DEST_UPPER_OFFSET` | interrupt destination, upper word: target widget bits 27:24, bit 29 set, address bits 47:32 | established (value written); role inferred |
+| `0x011068` | `HQ_INTR_DEST_LOWER_OFFSET` | interrupt destination, lower word: address bits 31:0 | established (value written); role inferred |
 | `0x011070` | `HQ_INTR_VECTOR_OFFSET` | packs three vectors: low-water in bits 7:0, general in 15:8, retrace in 23:16 | established |
 | `0x011098` | `HQ_SERIAL_MASTER_OFFSET` | one-wire master for the serial-number record | established |
 
@@ -116,6 +118,22 @@ sources.
 - Inferred: the board sends one interrupt per retrace while the VC3 bit is set.
 - The kernel's graphics fault path sleeps on a resource's retrace wait queue
   until the retrace handler validates it. Established.
+
+## Where the board's interrupt packets go
+
+Question: when the board raises an interrupt towards HEART on an Octane, does the path use only the destination widget, or the target address as well?
+
+**Answer (inferred): both are programmed and both are in the packet. The kernel gives the board the same two values it gives every widget. HEART is addressed by widget number, and it recognises an interrupt by the address of the write, so a packet to another offset is not an interrupt.** Nothing read shows the board ignoring the address.
+
+- **What the kernel writes** (**established**, the 6.5.30 IP30 `mgras.a`, `mgras_init.o`: `mgras_attach` at `0x47c` and `MgrasSetHQ4IntrVectors` at `0x7a8`, read in full). `mgras_attach` allocates four crosstalk interrupts and then connects them. The first takes whatever CPU the allocator picks and the other three ask for that CPU through the device description. The third is allocated with the error-interrupt flag set (HEART gives it a widget error vector) and the fourth at the graphics priority. `MgrasSetHQ4IntrVectors` takes the target widget and the address from the first handle only and builds, once per board, the words below. For HEART the widget is HEART's own widget number (crossbar port 8, `HEART_ID` in `irix/kern/sys/RACER/IP30.h`) and the address is the widget-space offset `0x80` (`HEART_XTALK_ISR` in the IRIX 6.5.7 HEART header `irix/kern/sys/RACER/heart.h`; the same header's destination-word macro packs the vector at bits 31:24 and the target widget at 19:16 of the upper word, with address bits 47:32 below).
+  - `0x011070`: three vectors, as above.
+  - `0x011060`: target widget in bits 27:24, bit 29 set, address bits 47:32 in 15:0.
+  - `0x011068`: address bits 31:0.
+  - Two 32-bit stores at window offsets `0x30` and `0x38`: the upper word (vector of the fourth handle, the HQ4 error handler, in bits 31:24; target widget in 19:16; bit 20 set; address bits 47:32) and the address bits 31:0. The generic Crosstalk widget layout puts its interrupt destination words at `0x34` and `0x3c`, so these sit four bytes below: whether the window pointer carries an offset or the stores reach different registers was not read (**unknown**).
+- **What the crossbar and HEART do** (published and software expectation). The Octane crossbar routes by the packet's target id (Crossbow ASIC specification rev 12.0, section 4.3.6), here HEART. HEART takes interrupts as writes to its widget register at offset `0x80`: IRIX writes that offset into every widget, OpenBSD and Linux use the same, and the data carries the vector in bits 7:0 and set-or-clear in bit 8 (Crossbow specification section 3.1.1; Bridge specification pp. 117 to 119). Whether HEART treats a write to a different offset of its widget space as an interrupt is not stated anywhere read: **unknown**.
+- **Why this is inferred, not established.** No HQ4 specification is held, so that the board sends the programmed address rather than a fixed one is a reading of the packing, with the generic widget behaviour as support. The two copies (board words and window words) are consistent with the board using its own pair for the three board vectors and the window pair for the error vector, which fits the vector packing, but no software reads either back.
+
+**Consequence for a model.** Deliver the board's interrupt packets to HEART by the target widget, and have HEART accept them only as a write to widget offset `0x80` with the vector in bits 7:0, bit 8 selecting set or clear. A packet to any other offset should be logged as unexpected, not delivered. Routes tried: the 6.5.30 IP30 and IP27 `mgras.a` attach routines, the IRIX 6.5.7 HEART header and driver, the Crossbow and Bridge specifications, OpenBSD and Linux.
 
 ## Context-switch transaction
 
