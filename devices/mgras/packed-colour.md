@@ -15,6 +15,12 @@ sequences are in [2d-transactions.md](../re4/2d-transactions.md); what the PROM 
 - The 6.5.22 X server and libGLcore traces recorded in [PP1.h](../pp1/PP1.h) and [CMAP.h](../cmap/CMAP.h): they are the evidence for
   the pixel-type and main-mode fields, graded in those headers.
 
+- The graphics module of the IRIX 6.5.30 and 6.5.0 X servers, `impactsr.so`
+  (SHA-256 `726dc1e25b711df84ff67ee9139dc4269551ec41bfe5191e34e2626882602d29` and
+  `08c695ff7c7f4bb024391d87593c72f2baec7a99db11024d50ebfdd1616c247a`), read as
+  disassembly and data from the install media: the static main-mode table and the
+  stores to register `0x5f`.
+
 Grades follow [AGENTS.md](../../AGENTS.md#7-published-documents). Nothing here was observed on a board.
 
 ## The visual, word by word
@@ -22,7 +28,8 @@ Grades follow [AGENTS.md](../../AGENTS.md#7-published-documents). Nothing here w
 | What | Value the driver writes | Meaning | Grade |
 | --- | --- | --- | --- |
 | Screen | 1280 x 1024, 32 bits per pixel | fixed in the driver; the PROM's default timing is the same size ([prom-handoff.md](prom-handoff.md)) | software expectation |
-| XMAP main mode, window ID 0 | `0x000007a4` (PP1 select 1, XMAP index 0) | format field (bits 4:0) 4; colour-map block (bits 9:5) 29; bit 10 set | software expectation |
+| XMAP main mode, window ID 0, OpenBSD driver | `0x000007a4` (PP1 select 1, XMAP index 0) | format field (bits 4:0) 4; colour-map block (bits 9:5) 29; bit 10 set | software expectation |
+| XMAP main mode, window ID 0, IRIX X server | `0x00000601`: format 1, colour-map block 16, bit 10 set (an 8-bit colour-index desktop window); window IDs 0 to 7 take `0x601 + 0x20 * ID`, blocks 16 to 23 | the 6.5.22 traces in [CMAP.h](../cmap/CMAP.h) give those blocks for IDs 0 to 7; the 6.5.30 and 6.5.0 server modules both hold `0x601`, `0x621` ... `0x6e1` first in their main-mode table (see below). `0x7a4` is in that table as well, for the 24-bit RGB class, not for ID 0 | the table's contents are established; that ID 0 uses its first word is inferred from the traces |
 | PP1 fill mode | `0x6300` or `0x6304`, with the logic operation in bits 29:26 (3 copy, 6 xor): `0x0c006300`, `0x18006304` | pixel type (bits 10:8) 3, bit 13 set (the "36-bit RGB" type, used here with 24 planes), draw-buffer field (bits 20:14) 1 = buffer A, bit 2 enables the logic op | software expectation; field names inferred from PP1.h's traces of the X server, which writes `0x0c006304` for a 24-bit window |
 | Fill mode | 0 | | software expectation |
 | Packed colour | red in 7:0, green in 15:8, blue in 23:16 | the driver builds `00BBGGRR` and says so in its comments; the console palette it uses puts red in the low byte | software expectation |
@@ -38,6 +45,26 @@ board's ordinary 24-bit RGB path, not a private driver mode. Inferred, from the 
 sources. The match covers the fill mode and the colour-map block only: no held trace gives the X server's single-buffered
 24-bit main-mode format, so that the display side (format 4) is the ordinary single-buffered window is not shown.
 
+## Main-mode words in the IRIX X server
+
+The 6.5.30 `impactsr.so` keeps its main-mode words in a data table of 12-byte
+records (word, a number, a flags word) at `0x5c4698`; the 6.5.0 module has the
+same records at `0x5e6dc6a8`. In order, with the number in brackets:
+
+| Words | Reading |
+| --- | --- |
+| `0x601`, `0x621`, `0x641`, `0x661`, `0x681`, `0x6a1`, `0x6c1`, `0x6e1` (1 to 8) | format 1, blocks 16 to 23, bit 10 |
+| `0x403` (9) | format 3, block 0, bit 10 |
+| `0x7a4` (10), `0x7a5` (11), `0x7a7` (12) | format 4, 5 and 7, block 29, bit 10 |
+| `0x17a8` (14), `0xc13` (15), `0xfb5` (16), `0xfb7` (13) | formats 8, 19, 21 and 23, with bit 12 set for the first and bit 11 for the others; blocks 29, 0, 29 and 29 |
+| `0x7a4`, `0xc1`, `0xc9`, `0xd1`, `0xd9`, `0x1f1` (0x20 to 0x25) | numbers 0x20 to 0x25, in the kernel's overlay window ID range (32 to 39); a different layout from the main-mode words |
+
+Both modules hold identical records. The table is **established** as data. What
+the number column selects, and how a record becomes a window ID, is not decoded
+(the numbers are not in window ID order after 12), so the rows say which words
+exist, not which window gets which. The first-row reading for IDs 0 to 7 rests on
+the 6.5.22 traces named above.
+
 ## Component order, alpha, buffers
 
 - **Order.** Packed colour red 7:0, green 15:8, blue 23:16. The host-image transfer path uses an order field that the
@@ -48,7 +75,13 @@ sources. The match covers the fill mode and the colour-map block only: no held t
 - **Alpha.** None in this visual. The XMAP configuration word the PROM writes carries a constant alpha of `0xff` (config
   default, bits 18:11), which belongs to the display side and is not a pixel. For a driver's shadow buffer: treat the top byte
   of each 32-bit pixel as unused on the way out and write zero.
-- **Scanout routing.** The pixel is 24 planes drawn into the main buffer's pages. XMAP window ID 0 with main mode `0x7a4` shows the
+  The IRIX X server does write register `0x5f` (`color_alpha` in the RE4 defs; the public driver header names it
+  `IMPACTSR_CMD_ALPHA`): its draw-pixels routine in the 6.5.30 module stores the 64-bit packet `0x00185f0400000000`
+  (register `0x5f`, payload 0) 33 times in a row at `0x577e68` to `0x577ee8`, and again at `0x5783d4`; the 6.5.0 module
+  has two runs of 33 as well. Each run sits behind a test of a per-context word and is followed by a store that sets the
+  word, so the run is skipped while the word is unchanged. The register's function is unknown. The
+  copy-pixels and sub-block routines store the same packet in runs of 21.
+- **Scanout routing.** The pixel is 24 planes drawn into the main buffer's pages. OpenBSD's XMAP window ID 0 with main mode `0x7a4` shows the
   frame buffer as colour (format 4 is undecoded; that it is an RGB format is inferred from the driver working on Octane hardware); the board's gamma table sits after the XMAP in the DAC and is the PROM's ramp
   ([prom-handoff.md](prom-handoff.md)); whether the colour map is in the path for an RGB window is not shown by any held source.
   The PROM loads all 8,192 colour-map entries with an identity ramp, which would make the block-29 name harmless either way
