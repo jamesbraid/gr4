@@ -28,7 +28,7 @@ reasoning) and unknown.
   `d11d83b5955a302dcefb7c4da73446068562718d42fcb4c3c51126e93e95bcdb`).
   `vof/cmb/` holds a different file kind and was not read for values. It is the
   same container: the 15 files directly in `cmb/` name a `VC2 for Impact MCO` chip
-  and no `DisplayArchitecture`; the 9 files of `cmb/1RSS` and 13 of `cmb/2RSS` name
+  with `DisplayArchitecture` `Unspecified` and `VfoVersion` 0; the 9 files of `cmb/1RSS` and 13 of `cmb/2RSS` name
   `VC3 for Impact` with `OptionHW` 2 (counted over the 6.5.30 tree; the 6.5 base tree has
   the same file counts). Field values are established as file contents.
 - **Data sheet.** The Analog Devices ADV7160/ADV7162 data sheet, Rev. 0 (Library
