@@ -2,7 +2,7 @@
  * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 4 */
-/* input sha256 45cc340820519febd97084f15bd72f61fde5e54545336083c3940c57b96d90b9 */
+/* input sha256 3644c4fbc19fbe45a9edb4530bdb2a473c2963f24427270c68f409e2c403a813 */
 /* board-level words of the Impact graphics subsystem */
 #ifndef MGRAS_GEN_H
 #define MGRAS_GEN_H
@@ -303,6 +303,20 @@
  * this field to every pixel processor when it initialises the board, so each
  * pixel processor learns how many raster engines share the screen. The field
  * being written is established; the pixel processor's use of it is inferred.
+ *
+ * The kernel writes it with XMAP index 0 selected as `((raster engine count -
+ * 1)
+ * & 3) << 20 | 0x0008073f`: 0x0008073f for one engine, 0x0018073f for two.
+ * During
+ * initialisation the first write is 0x0048073f with the same shifted count, and
+ * the word ends in the 0x0008073f form. Read with the XMAP configuration layout
+ * (cursor plane mask 9:0, constant alpha 18:11, auto-increment 19), the low
+ * bits
+ * are mask 0x73f, alpha 0 and auto-increment on; that reading is inferred. Bit
+ * 22
+ * is unknown. The values and where each is written are established; the sites
+ * are
+ * on the two-engine page.
  */
 /* word PP1_CONFIG: 32 bits; driver and firmware readings */
 #define MGRAS_PP1_CONFIG_WIDTH                       32 /* inferred */

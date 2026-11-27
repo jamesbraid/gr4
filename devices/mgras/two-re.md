@@ -93,6 +93,15 @@ the index byte at `XMAP_INDEX_ADDR` and the data registers it selects.
   count less one. The kernel writes this to every pixel processor when it
   initialises the board. That the pixel processor uses the field to learn it
   shares the screen is inferred. See `PP1_CONFIG` in defs.
+- **Established**, from the 6.5.30 IP27 `mgras_init.o` and `mgras_retrace.o`: with
+  XMAP index 0 selected at `0x071c88`, the kernel stores
+  `((count - 1) & 3) << 20 | 0x0008073f` to `0x071d00`, where `count` is board
+  byte `+0x2c`. That is `0x0018073f` for two engines. The writers are
+  `MgrasSyncREPP` (twice), `mgrasConfigureXMAP`, `MgrasSetXMAPTiming`, the end of
+  `MgrasInitXMAP`, `mgras_update_pp1ccv` and `MgrasCcvUpdate`. `MgrasInitXMAP`
+  first stores `0x0048073f | (count - 1) << 20` (`0x0058073f` for two engines) and
+  finishes with the `0x0008073f` form, so bit 22 is set only inside that routine.
+  What bit 22 does is unknown.
 
 ## Scanout and window select bits
 
