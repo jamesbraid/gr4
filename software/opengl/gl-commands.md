@@ -189,6 +189,15 @@ client converts nothing; the words are the application's values as written.
 The vertex header values match the ones [questions/README.md](../../questions/README.md)
 lists for the same entry points, from the same client listing.
 
+**Packed colour words.** Re-read in the `IP27GR532` client. The byte forms put
+the components in one word with red in bits 31:24, green in 23:16, blue in 15:8
+and alpha in 7:0. `__glMgrim_Color3ub` (`0xdac7b44`) sends `r << 24 | g << 16 |
+b << 8`, low byte zero. `__glMgrim_Color4ub` (`0xdac7df8`) adds alpha in bits 7:0.
+`__glMgrim_Color4ubv` (`0xdac7e38`) loads the four bytes as one big-endian word
+and sends it unchanged, so byte 0 is red. The short form `__glMgrim_Color3s`
+(`0xdac7aec`) sends `r << 16 | g` and then `b << 16`. **Established** as what the
+routines store; how the board reads the word is unknown.
+
 ## Commands
 
 Zero-payload commands are written as the header alone. Grades are inferred unless
