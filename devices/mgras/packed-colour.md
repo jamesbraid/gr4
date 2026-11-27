@@ -29,7 +29,7 @@ Grades follow [AGENTS.md](../../AGENTS.md#7-published-documents). Nothing here w
 | --- | --- | --- | --- |
 | Screen | 1280 x 1024, 32 bits per pixel | fixed in the driver; the PROM's default timing is the same size ([prom-handoff.md](prom-handoff.md)) | software expectation |
 | XMAP main mode, window ID 0, OpenBSD driver | `0x000007a4` (PP1 select 1, XMAP index 0) | format field (bits 4:0) 4; colour-map block (bits 9:5) 29; bit 10 set | software expectation |
-| XMAP main mode, window ID 0, IRIX X server | `0x00000601`: format 1, colour-map block 16, bit 10 set (an 8-bit colour-index desktop window); window IDs 0 to 7 take `0x601 + 0x20 * ID`, blocks 16 to 23 | the 6.5.22 traces in [CMAP.h](../cmap/CMAP.h) give those blocks for IDs 0 to 7; the 6.5.30 and 6.5.0 server modules both hold `0x601`, `0x621` ... `0x6e1` first in their main-mode table (see below). `0x7a4` is in that table as well, for the 24-bit RGB class, not for ID 0 | the table's contents are established; that ID 0 uses its first word is inferred from the traces |
+| XMAP main mode, window ID 0, IRIX X server | `0x00000601`: format 1, colour-map block 16, bit 10 set (an 8-bit colour-index desktop window); window IDs 0 to 7 take `0x601 + 0x20 * ID`, blocks 16 to 23 | the 6.5.22 traces in [CMAP.h](../cmap/CMAP.h) give those blocks for IDs 0 to 7; the 6.5.30 and 6.5.0 server modules both hold `0x601`, `0x621` ... `0x6e1` first in their main-mode table (see below). `0x7a4` is in that table as well, later (number 10); which window it serves is not shown by the table, and the OpenBSD driver's use of it for a 24-bit desktop is the only hint | the table's contents are established; that ID 0 uses its first word is inferred from the traces |
 | PP1 fill mode | `0x6300` or `0x6304`, with the logic operation in bits 29:26 (3 copy, 6 xor): `0x0c006300`, `0x18006304` | pixel type (bits 10:8) 3, bit 13 set (the "36-bit RGB" type, used here with 24 planes), draw-buffer field (bits 20:14) 1 = buffer A, bit 2 enables the logic op | software expectation; field names inferred from PP1.h's traces of the X server, which writes `0x0c006304` for a 24-bit window |
 | Fill mode | 0 | | software expectation |
 | Packed colour | red in 7:0, green in 15:8, blue in 23:16 | the driver builds `00BBGGRR` and says so in its comments; the console palette it uses puts red in the low byte | software expectation |
@@ -59,7 +59,9 @@ same records at `0x5e6dc6a8`. In order, with the number in brackets:
 | `0x17a8` (14), `0xc13` (15), `0xfb5` (16), `0xfb7` (13) | formats 8, 19, 21 and 23, with bit 12 set for the first and bit 11 for the others; blocks 29, 0, 29 and 29 |
 | `0x7a4`, `0xc1`, `0xc9`, `0xd1`, `0xd9`, `0x1f1` (0x20 to 0x25) | numbers 0x20 to 0x25, in the kernel's overlay window ID range (32 to 39); a different layout from the main-mode words |
 
-Both modules hold identical records. The table is **established** as data. What
+Both modules hold identical records up to the `0x1f1` row (the word after it,
+`0x1f9`, is followed by different data in the two, and is not read as a record).
+The table is **established** as data. What
 the number column selects, and how a record becomes a window ID, is not decoded
 (the numbers are not in window ID order after 12), so the rows say which words
 exist, not which window gets which. The first-row reading for IDs 0 to 7 rests on
