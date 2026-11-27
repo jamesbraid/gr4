@@ -321,6 +321,22 @@ is **inferred**. A light number is the application's enumerant less `GL_LIGHT0`
 | `glBitmap` | `0x00009420`, eight words; the fields were not decoded here | `__glMgrim_Bitmap`, `__glMgrRenderBitmap` |
 | swap | `0x00003700`, sent by the kernel's swap scheduler to the command port after it writes `0x400` to `0x011040`; what the board does is unknown | `MgrasSchedSwapBuf` (6.5.30 `mgras.a`) |
 
+**Matrix stack depth.** `__glMgrim_PushMatrix` (`0xd97ccc0`) and `PopMatrix` test a
+state word (raising `GL_INVALID_OPERATION` when it is 1, probably inside
+`glBegin`) and otherwise store their token (`0x2f00`, `0x2e00`). The client keeps no
+depth count and raises no overflow or underflow error. It does report limits to
+`glGet`. Context creation in the 6.5.30 `IP27GR532` client stores 32 at `+3788`,
+64 at `+3784`, 16 at `+3780` and `+3776` and 2 at `+3792` to `+3800`
+(`0xd9535a8` to `0xd9535f8`). `glGet` returns `+3788` for
+`GL_MAX_MODELVIEW_STACK_DEPTH` (`0xd36`, at `0xd992da0`) and `+3792` for
+`GL_MAX_PROJECTION_STACK_DEPTH` (`0xd38`, at `0xd9926f4`). The 6.5.0 `IP28GR432`
+client stores the same values 296 bytes earlier (modelview 32 at `+3492`, name stack
+64 at `+3488`, attribute stack 16 at `+3480`) and its `glGet` returns them for
+`0xd36`, `0xd37` and `0xd35`. So IRIX tells applications the modelview stack is 32
+deep and the projection stack 2. That is the library's own value (**established**
+as software); the depth of the board's stack, and what happens past it, are
+unknown.
+
 No store of `0x0000ff04` is in the 6.5.30 client, in the 6.5.30 `mgras.a` kernel
 members or in the 6.5.0 kernel objects held here, so a name for it (an earlier
 tool labelled it "GE count") has no support in the shipped software: **unknown**,
