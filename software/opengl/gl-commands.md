@@ -132,9 +132,12 @@ client converts nothing; the words are the application's values as written.
 | `glColor3s`, `4s` | `0x3d000206`, `0x1d000208` | shorts, packed |
 | `glColor3us`, `4us` | `0x35000206`, `0x15000208` | shorts, packed |
 | `glIndexf`, `glIndexi` | `0x00000204`, `0x18000204` | one float or int |
+| `glIndexub` | `0x10800201` | one byte, packed |
 | `glIndexs` | `0x19000202` | short in bits 31:16, zero below |
 | `glIndexd` | `0x12000208` | one double, as a 64-bit store |
 | `glNormal3f` | `0x0000070c` | three floats |
+| `glNormal3d`, `3i` | `0x12000718`, `0x1c00070c` | doubles, ints |
+| `glNormal3s`, `3b` | `0x1d000706`, `0x1c800703` | shorts, bytes, packed |
 | `glTexCoord2f` | `0x40000808` | two floats |
 | `glTexCoord3i` | `0x3800080c` | three ints |
 | `glTexCoord4f` | `0x00000810` | four floats |
@@ -199,6 +202,42 @@ the row says otherwise.
 | `glIglooInterfaceSGIX` | `0x00010200` turns on IRIS GL's colour-after-normal rule, `0x0000df00` and `0x0000de00` turn it off, `0x0000dd00` changes nothing; meaning inferred from the library's flag logic |
 | `glFlush` | `0x00003600` |
 | clear | `0x00001500` for colour, `0x00004c00` for stencil, `0x00004a00` for depth, one per selected bit |
+
+### Lighting, materials and further state
+
+Read in the `IP27GR532` client (the immediate-mode `__glMgrim_` routines; the
+display-list and `__glMgrlc_` twins store the same headers). Every header, and the
+light, face and parameter words after it, is **established** as what those routines
+store. The payload length is the header's low byte (see word framing), so a float
+count here follows from it; that every payload word of a scalar parameter is a float
+is **inferred**. A light number is the application's enumerant less `GL_LIGHT0`
+(`0x4000`).
+
+| Command | Header and payload | Routine |
+| --- | --- | --- |
+| `glLightfv`, `glLightiv` `GL_AMBIENT`, `GL_DIFFUSE`, `GL_SPECULAR` | `0x00001214`, `0x00001314`, `0x00001414`, the light number, four floats | `__glMgrim_Lightfv` (`0xd954680`), whose jump table runs in parameter order from `0x1200` |
+| `GL_POSITION` | `0x00004f14`, the light number, four floats | same |
+| `GL_SPOT_DIRECTION` | `0x00005010`, the light number, three floats | same |
+| `GL_SPOT_EXPONENT`, `GL_SPOT_CUTOFF`, `GL_CONSTANT_ATTENUATION`, `GL_LINEAR_ATTENUATION`, `GL_QUADRATIC_ATTENUATION` | `0x00005108`, `0x00005208`, `0x00005308`, `0x00005408`, `0x00005508`, the light number, one float; `glLightf` and `glLighti` send the same words | `__glMgrim_Lightf` (`0xd954550`) |
+| `GL_LIGHT_MODEL_AMBIENT` | `0x0000570c` and three floats | `__glMgrim_LightModelfv` |
+| `GL_LIGHT_MODEL_LOCAL_VIEWER`, `GL_LIGHT_MODEL_TWO_SIDE` | `0x00005804`, `0x00005904`, one word | `__glMgrim_LightModelf` |
+| `glMaterialfv`, `glMaterialf` and the int forms | `0x00001118`, the face (`0x404` front, `0x405` back, `0x408` both), the parameter enumerant, then four floats; a one-value parameter (`GL_SHININESS`) sends the value then three zeros | `__glMgrim_Materialf` (`0xd955230`) |
+| `glColorMaterial` | `0x0000bf04` front, `0x0000c004` back, `0x0000c104` both, then the mode enumerant (`0x1200`, `0x1201`, `0x1202`, `0x1600`, `0x1602`) | `__glMgrim_ColorMaterial` (`0xd980cc0`) |
+| `GL_COLOR_MATERIAL` enable, disable | `0x0000c200`, `0x0000c300` | `__glMgrim_Enable`, `__glMgrim_Disable` |
+| `glGetLightfv`, `glGetMaterialfv` | `0x0000ef08` with the light number and parameter; `0x0000ee08` with the face and parameter. The client then reads the answer back, one float word at a time, through its return-mode routine (`__Mgr_ReturnMode`) | `__glMgrim_GetLightfv` (`0xd995e50`), `__glMgrim_GetMaterialfv` (`0xd9963f0`) |
+| `glEdgeFlag` | `0x00000f00` for true, `0x00001000` for false, no payload | `__glMgrim_EdgeFlag` (`0xd97c120`) |
+| `glPushMatrix`, `glPopMatrix` | `0x00002f00`, `0x00002e00` | `__glMgrim_PushMatrix`, `__glMgrim_PopMatrix` |
+| `glOrtho`, `glFrustum` | `0x00003518`, `0x00003418` and six floats, the arguments narrowed from doubles, in argument order | `__glMgrim_Ortho` (`0xd97cb60`), `__glMgrim_Frustum` |
+| `glRenderMode` | `0x00009a08`; its payload was not read | `__glMgrim_RenderMode` (`0xd94f130`) |
+| `glBitmap` | `0x00009420`, eight words; the fields were not decoded here | `__glMgrim_Bitmap`, `__glMgrRenderBitmap` |
+| swap | `0x00003700`, sent by the kernel's swap scheduler to the command port after it writes `0x400` to `0x011040`; what the board does is unknown | `MgrasSchedSwapBuf` (6.5.30 `mgras.a`) |
+
+No store of `0x0000ff04` is in the 6.5.30 client, in the 6.5.30 `mgras.a` kernel
+members or in the 6.5.0 kernel objects held here, so a name for it (an earlier
+tool labelled it "GE count") has no support in the shipped software: **unknown**,
+routes tried as listed. `0x0000fd04`, `0x0000fb08` and `0x0000fa00` are the kernel's
+geometry-engine memory write words, in [Kernel context image and
+eviction](#kernel-context-image-and-eviction).
 
 ### Primitives
 
