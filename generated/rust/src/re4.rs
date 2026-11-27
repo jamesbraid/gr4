@@ -1,7 +1,7 @@
 // @generated from devices/re4/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 4
-// input sha256 1b5af358b19e14d139e18cfb571e76a2c710c2bb878034e96c4992aceccb6bec
+// input sha256 77aac85b4de0862562ee42bf232bc97d52b911e6dffa63958f8ac86545b299f1
 // raster engine register contract for the Impact graphics
 #![allow(dead_code)]
 #![allow(clippy::doc_markdown)]

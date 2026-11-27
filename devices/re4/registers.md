@@ -1,7 +1,7 @@
 <!-- generated from devices/re4/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 4 -->
-<!-- input sha256 1b5af358b19e14d139e18cfb571e76a2c710c2bb878034e96c4992aceccb6bec -->
+<!-- input sha256 77aac85b4de0862562ee42bf232bc97d52b911e6dffa63958f8ac86545b299f1 -->
 
 # raster engine register contract for the Impact graphics
 
@@ -462,7 +462,9 @@ D the destination extent the routine computed from the raster position and z,
 and n the number of times the client has the geometry engine replicate each
 source pixel (1 below one, else one of 2, 3, 4, 6, 12, 24 by the size of a
 non-whole |z|). For an aligned draw D = w |z|, so step = trunc(256 n / |z|):
-0x200 at 0.5, 0x155 at 1.5 and 0x13b at 3.25 in a 16-pixel draw. |z| = 1
+0x200 at 0.5, 0x155 at 1.5 and 0x13b at 3.25 in a 16-pixel draw. A closing test
+in the routine can adjust the 0x154 word (the rule is in questions/README.md entry 9);
+no traced draw reaches it. |z| = 1
 writes neither word, so the registers carry whatever the stack held (the
 traced 0x1000f424 with 0): inferred stale stack, not an encoding, with no mode
 bit set. That the geometry engine does the replication, and what RE4 does with
