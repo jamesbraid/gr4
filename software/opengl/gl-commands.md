@@ -150,9 +150,13 @@ none of it says what the board does with the words.
   keeps (offsets 776, 780, 980, 984 and 988), 0, and the data word count. The
   128 data words are the floats `exp(-i / 16)` and the 256 are `exp(-i / 4096)`;
   the three blocks of 156 are copied unchanged from a 1,872-byte constant table
-  in the library's data. The `exp` call is certain only in the 6.5.0 `IP28GR432`
-  client, where the same routine is `InitTables` (`0xda6e488`); the 6.5.30 one has
-  the same constants and loop counts. What the destinations are is unknown.
+  in the library's data. The routine is `InitTables` in the 6.5.30 file's own
+  debug names (`0xd94edf0` to `0xd94f03c`). The routine it calls in the loop is
+  reached through the global offset table slot at gp-0x4548, which the dynamic
+  symbol table binds to the libm import `exp`, and the two multipliers are the
+  doubles 0.0625 and 0.000244140625 in the literal pool. The 6.5.0 `IP28GR432`
+  client has the same routine at `0xda6e488` with the same constants and loop
+  counts. What the destinations are is unknown.
 
 ## Attribute headers
 
@@ -262,11 +266,15 @@ client loads `0x9a08` at three places (`0xd950558`, `0xd9505c4`, `0xd9507d4`), a
 one routine that runs from `0xd9504d0` to about `0xd9508a0` (re-read). That
 range lies after the end of `__glMgrim_RenderMode` (`0xd94f130`, 0x5f4 bytes),
 whose name the disassembly carries over it. `RenderMode` stores no `0x9a08`.
-The routine is `InitFormatValues` in the 6.5.0 `IP28GR432` client, whose debug
-names give it the same two-block structure and the same constants. It is called
-once, at `0xd951dec`, in the context make-current path, right after the routine
-that sets up the buffers. **Established** for the stores and the words; naming
-the 6.5.30 routine from the 6.5.0 one, and its caller, are **inferred**.
+The 6.5.30 file's own debug names give the routine as `InitFormatValues`
+(`0xd9504d0` to `0xd9508a4`), the routine before it as `InitBuffers` (`0xd9502f0`
+to `0xd9504c8`) and the function around the call as `MakeCurrentRead`
+(`0xd950930` to `0xd95317c`). The routine is called once, at `0xd951dec`, right
+after the call to `InitBuffers` at `0xd951ddc`. The 6.5.0 `IP28GR432` client has
+an `InitFormatValues` (`0xda6fc1c`) with the same constants but one `0x9a08`
+store (`0xda6fcbc`) where the 6.5.30 one has three. **Established** for the
+stores, the words, the names and the caller. What the words mean on the board is
+unknown.
 
 The two payload words are computed, not literals. Each is the format code of
 one buffer, built from a block of context fields: the first word from the block
@@ -377,7 +385,8 @@ board does with the token is unknown.
   17. If the bit is clear it reads again up to four more times on a counter that
   starts at 5, then once more: six reads of `0x020010` with no call between them.
   If the bit is still clear it loops without bound, each pass calling an
-  imported routine with argument 0 (a yield, inferred) and reading the flags
+  imported `sginap` (global offset table slot at gp-0x4528, bound by the dynamic
+  symbol table) with argument 0, which gives up the processor, and reading the flags
   again. Once the bit is set it reads the answer at `0x028004`.
 - **Attribute query, `0x0000a104`.** The routine at `0xd9917a0` (re-read) clears
   flag `0x20000` the same way, writes `0x0000a104` and one word (an index), and
