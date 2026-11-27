@@ -228,7 +228,8 @@ is **inferred**. A light number is the application's enumerant less `GL_LIGHT0`
 | `glEdgeFlag` | `0x00000f00` for true, `0x00001000` for false, no payload | `__glMgrim_EdgeFlag` (`0xd97c120`) |
 | `glPushMatrix`, `glPopMatrix` | `0x00002f00`, `0x00002e00` | `__glMgrim_PushMatrix`, `__glMgrim_PopMatrix` |
 | `glOrtho`, `glFrustum` | `0x00003518`, `0x00003418` and six floats, the arguments narrowed from doubles, in argument order | `__glMgrim_Ortho` (`0xd97cb60`), `__glMgrim_Frustum` |
-| `glRenderMode` | `0x00009a08`; its payload was not read | `__glMgrim_RenderMode` (`0xd94f130`) |
+| `glRenderMode` | leaving feedback `0x0000c800` (only when a context flag at `+0x85d8` is set) and leaving selection `0x0000c900`, no payload; entering feedback `0x0000ca08` and entering selection `0x0000cb04`, with two words and one word that were not decoded; entering `GL_RENDER` stores no header | `__glMgrim_RenderMode` (`0xd94f130`, 0x5f4 bytes) |
+| (context set-up) | `0x00009a08` and two words, stored at three sites of a static routine at `0xd9504d0`, called from a static set-up routine around `0xd951dec`; meaning not decoded. It is not stored by `glRenderMode`: a disassembly labels the routine inside `__glMgrim_RenderMode`, but that symbol ends at `0xd94f724` | static routine at `0xd9504d0` |
 | `glBitmap` | `0x00009420`, eight words; the fields were not decoded here | `__glMgrim_Bitmap`, `__glMgrRenderBitmap` |
 | swap | `0x00003700`, sent by the kernel's swap scheduler to the command port after it writes `0x400` to `0x011040`; what the board does is unknown | `MgrasSchedSwapBuf` (6.5.30 `mgras.a`) |
 
