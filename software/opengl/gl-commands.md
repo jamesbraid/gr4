@@ -309,8 +309,25 @@ board does with the token is unknown.
 
 - **Query.** Clear flag `0x20000` (write to `0x020018`). Write `0x0000a20c` and
   three int words. Poll flags bit 17 until set. Read the answer at `0x028004`.
-  Which answer each query index expects is unknown. The client's query routine is
-  called from more than a hundred sites.
+  `__Mgr_ReturnMode` (`0xd990d10`, re-read) does the first two steps and then
+  calls the poll routine. It is called from more than a hundred sites.
+- **Poll routine** (`0xd9917e0`, re-read). It reads flags `0x020010` and tests bit
+  17. If the bit is clear it reads again up to four more times on a counter that
+  starts at 5, then once more: six reads of `0x020010` with no call between them.
+  If the bit is still clear it loops without bound, each pass calling an
+  imported routine with argument 0 (a yield, inferred) and reading the flags
+  again. Once the bit is set it reads the answer at `0x028004`.
+- **Attribute query, `0x0000a104`.** The routine at `0xd9917a0` (re-read) clears
+  flag `0x20000` the same way, writes `0x0000a104` and one word (an index), and
+  enters the poll routine. All thirteen call sites are in `__Mgr_GetCurrentAttrState`
+  (`0xd9918a0`), which asks for index 4 to 7 for `GL_CURRENT_COLOR` (`0xb00`),
+  index 4 for `GL_CURRENT_INDEX` (`0xb01`), 8 to 10 for `GL_CURRENT_NORMAL`
+  (`0xb02`), 11 to 14 for `GL_CURRENT_TEXTURE_COORDS` (`0xb03`) and 15 for
+  `GL_EDGE_FLAG` (`0xb43`). Each answer but the last is stored as a float; the
+  edge flag is true when `answer & 0x01c00000` is nonzero. No call site uses an
+  index below 4. This is what the client expects the board to answer
+  (**inferred**: a software expectation); what the board answers for each index
+  is unknown.
 - **Answer halves.** The client reads an answer word as two signed halves, low and
   high, and sign-extends each one. With pixel texture enabled it makes two such
   queries, both with arguments 1 and 1, and uses the second answer to crop the input
@@ -547,8 +564,9 @@ Facts below come from the kernel listing.
 
 ## Open questions
 
-- The board's answer to each query index, and what the client does with it.
-  Settling it takes the answer word read after each query on a board.
+- The board's answer to each query index. The client's use of the `0x0000a104`
+  indices is above; settling the board's side takes the answer word read after
+  each query on a board.
 - The meaning of the opcodes `0x82`, `0x8c`, `0x06` and `0x9a` on the board.
 - What registers `0x02`, `0x03`, `0x04` and `0x06` of the `0x000a` bank do on a
   read, and what selects the `0x000a0504` slot word.
