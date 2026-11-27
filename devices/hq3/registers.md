@@ -1,6 +1,6 @@
 <!-- generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
-<!-- defs-gen 2 -->
+<!-- defs-gen 4 -->
 <!-- input sha256 48084a86d0569573796c5ea9673bd3af48ac41384b005835f9b93225508fb2a1 -->
 
 # host interface and command processor registers for the Impact graphics subsystem

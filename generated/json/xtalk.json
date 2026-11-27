@@ -1,6 +1,6 @@
 {
  "license": "BSD-3-Clause",
- "generator": "defs-gen 2",
+ "generator": "defs-gen 4",
  "input_sha256": "ce0e140540547793352d0556e26f1a335fbff78213b02f86da324550bab1e3a8",
  "schema": "defs-flat/1",
  "source": "devices/xtalk/registers.toml",

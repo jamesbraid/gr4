@@ -1,9 +1,11 @@
-// generated from devices/ge11/registers.toml by defs-gen - do not edit, change the source
+// @generated from devices/ge11/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
-// defs-gen 2
+// defs-gen 4
 // input sha256 817914a4ae5a04440d0c6b7b9face4bb4b60c4761b20164000e4f1fc915ec240
 // geometry engine control registers for the Impact graphics subsystem
 #![allow(dead_code)]
+#![allow(clippy::doc_markdown)]
+#![cfg_attr(rustfmt, rustfmt_skip)]
 
 /// (inferred)
 pub mod exec_control {

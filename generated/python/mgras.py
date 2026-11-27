@@ -1,6 +1,6 @@
 """generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source
 SPDX-License-Identifier: BSD-3-Clause
-defs-gen 2
+defs-gen 4
 input sha256 45cc340820519febd97084f15bd72f61fde5e54545336083c3940c57b96d90b9
 board-level words of the Impact graphics subsystem"""
 

@@ -1,9 +1,11 @@
-// generated from devices/pp1/registers.toml by defs-gen - do not edit, change the source
+// @generated from devices/pp1/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
-// defs-gen 2
+// defs-gen 4
 // input sha256 e1a18a4b96ad72e5bdae304875b0f08c335204cf50091e4966771a1c1d3a89c5
 // display read buffer registers of the Impact graphics
 #![allow(dead_code)]
+#![allow(clippy::doc_markdown)]
+#![cfg_attr(rustfmt, rustfmt_skip)]
 
 /// Pixel command: starts a pixel-processor operation. Role inferred from the hand-written header, not measured. (inferred)
 pub mod pixel_command {

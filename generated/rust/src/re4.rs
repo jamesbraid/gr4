@@ -1,9 +1,11 @@
-// generated from devices/re4/registers.toml by defs-gen - do not edit, change the source
+// @generated from devices/re4/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
-// defs-gen 2
+// defs-gen 4
 // input sha256 9f940ddb6e51059fceca251c397fccef034b17eb9de32a8586cd8a332a742e4b
 // raster engine register contract for the Impact graphics
 #![allow(dead_code)]
+#![allow(clippy::doc_markdown)]
+#![cfg_attr(rustfmt, rustfmt_skip)]
 
 /// (inferred)
 pub mod tri_x_major {

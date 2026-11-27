@@ -1,9 +1,11 @@
-// generated from devices/xtalk/registers.toml by defs-gen - do not edit, change the source
+// @generated from devices/xtalk/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
-// defs-gen 2
+// defs-gen 4
 // input sha256 ce0e140540547793352d0556e26f1a335fbff78213b02f86da324550bab1e3a8
 // expected power-up values of the host interface's crosstalk
 #![allow(dead_code)]
+#![allow(clippy::doc_markdown)]
+#![cfg_attr(rustfmt, rustfmt_skip)]
 
 /// Link-layer configuration. The diagnostic describes the expected value as a null timeout of 6 in bits 15:10 and a retry limit of 0x3ff in bits 25:16 (m (inferred)
 pub mod llp_config {

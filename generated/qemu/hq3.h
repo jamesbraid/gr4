@@ -1,10 +1,13 @@
-/* generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source */
+/* generated from devices/hq3/registers.toml by defs-gen - do not edit, change
+ * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* defs-gen 2 */
+/* defs-gen 4 */
 /* input sha256 48084a86d0569573796c5ea9673bd3af48ac41384b005835f9b93225508fb2a1 */
-/* host interface and command processor registers for the Impact graphics subsystem */
+/* host interface and command processor registers for the Impact graphics
+ * subsystem */
 /* Names are MGRAS_HQ3_*; name source: ours. */
-/* Offsets are bytes; registers of a register-indexed space are written as index * size. */
+/* Offsets are bytes; registers of a register-indexed space are written as index
+ * * size. */
 #ifndef HW_SGI_GPU_MGRAS_HQ3_REGS_H
 #define HW_SGI_GPU_MGRAS_HQ3_REGS_H
 
@@ -44,13 +47,15 @@ REG32(MGRAS_HQ3_CFIFO_HIWATER, 0x10020) /* inferred */
 
 REG32(MGRAS_HQ3_CFIFO_LOWATER, 0x10024) /* inferred */
 
-REG32(MGRAS_HQ3_CFIFO_DELAY, 0x10028) /* inferred; name source: public (OpenBSD impact(4) driver register header) */
+/* inferred; name source: public (OpenBSD impact(4) driver register header) */
+REG32(MGRAS_HQ3_CFIFO_DELAY, 0x10028)
 
 REG32(MGRAS_HQ3_DFIFO_HIWATER, 0x1002c) /* inferred */
 
 REG32(MGRAS_HQ3_DFIFO_LOWATER, 0x10030) /* inferred */
 
-REG32(MGRAS_HQ3_DFIFO_DELAY, 0x10034) /* inferred; name source: public (OpenBSD impact(4) driver register header) */
+/* inferred; name source: public (OpenBSD impact(4) driver register header) */
+REG32(MGRAS_HQ3_DFIFO_DELAY, 0x10034)
 
 REG32(MGRAS_HQ3_GE0_DIAG_DATA, 0x10040) /* inferred */
 

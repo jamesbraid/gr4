@@ -1,9 +1,11 @@
-// generated from devices/te1/registers.toml by defs-gen - do not edit, change the source
+// @generated from devices/te1/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
-// defs-gen 2
+// defs-gen 4
 // input sha256 8ee765eb25302e83f0b76fd3fd6d61ad0223693cf3052508164eda23983dc1e5
 // texture engine and texture RAM registers of the Impact graphics subsystem
 #![allow(dead_code)]
+#![allow(clippy::doc_markdown)]
+#![cfg_attr(rustfmt, rustfmt_skip)]
 
 /// S/W texture coordinate, upper 16 bits. Role inferred from the hand-written header, not measured. (inferred)
 pub mod texture_s_over_w_upper {

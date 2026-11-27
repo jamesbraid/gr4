@@ -1,6 +1,7 @@
-/* generated from devices/xtalk/registers.toml by defs-gen - do not edit, change the source */
+/* generated from devices/xtalk/registers.toml by defs-gen - do not edit, change
+ * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* defs-gen 2 */
+/* defs-gen 4 */
 /* input sha256 ce0e140540547793352d0556e26f1a335fbff78213b02f86da324550bab1e3a8 */
 /* expected power-up values of the host interface's crosstalk */
 #ifndef XTALK_GEN_H
@@ -18,19 +19,21 @@
 #define XTALK_LLP_CONFIG_WIDTH                       32 /* inferred */
 #define XTALK_LLP_CONFIG_RETRY_LIMIT_SHIFT           16 /* inferred */
 #define XTALK_LLP_CONFIG_RETRY_LIMIT_MASK            0x3ffu
-#define XTALK_LLP_CONFIG_RETRY_LIMIT_INPLACE         (XTALK_LLP_CONFIG_RETRY_LIMIT_MASK << XTALK_LLP_CONFIG_RETRY_LIMIT_SHIFT)
+#define XTALK_LLP_CONFIG_RETRY_LIMIT_INPLACE (XTALK_LLP_CONFIG_RETRY_LIMIT_MASK << XTALK_LLP_CONFIG_RETRY_LIMIT_SHIFT)
 #define XTALK_LLP_CONFIG_NULL_TIMEOUT_SHIFT          10 /* inferred */
 #define XTALK_LLP_CONFIG_NULL_TIMEOUT_MASK           0x3fu
-#define XTALK_LLP_CONFIG_NULL_TIMEOUT_INPLACE        (XTALK_LLP_CONFIG_NULL_TIMEOUT_MASK << XTALK_LLP_CONFIG_NULL_TIMEOUT_SHIFT)
+#define XTALK_LLP_CONFIG_NULL_TIMEOUT_INPLACE (XTALK_LLP_CONFIG_NULL_TIMEOUT_MASK << XTALK_LLP_CONFIG_NULL_TIMEOUT_SHIFT)
 
 #define XTALK_CONTROL_EXPECT                         0x32fu /* established */
 #define XTALK_ERR_ADDR_HI_EXPECT                     0x0u /* established */
 #define XTALK_ERR_ADDR_LO_EXPECT                     0x0u /* established */
 #define XTALK_ERR_CMD_EXPECT                         0x0u /* established */
-#define XTALK_ID_EXPECT                              0xe001d55u /* established */
+/* established */
+#define XTALK_ID_EXPECT                              0xe001d55u
 #define XTALK_INTR_DEST_HI_EXPECT                    0x0u /* established */
 #define XTALK_INTR_DEST_LO_EXPECT                    0x0u /* established */
-#define XTALK_LLP_CONFIG_EXPECT                      0x3ff1810u /* established */
+/* established */
+#define XTALK_LLP_CONFIG_EXPECT                      0x3ff1810u
 #define XTALK_REQ_TIMEOUT_EXPECT                     0xfffffu /* established */
 #define XTALK_STATUS_EXPECT                          0x0u /* established */
 #define XTALK_TARGET_FLUSH_EXPECT                    0x0u /* established */

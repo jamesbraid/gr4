@@ -1,10 +1,12 @@
-/* generated from devices/te1/registers.toml by defs-gen - do not edit, change the source */
+/* generated from devices/te1/registers.toml by defs-gen - do not edit, change
+ * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* defs-gen 2 */
+/* defs-gen 4 */
 /* input sha256 8ee765eb25302e83f0b76fd3fd6d61ad0223693cf3052508164eda23983dc1e5 */
 /* texture engine and texture RAM registers of the Impact graphics subsystem */
 /* Names are MGRAS_TE1_*; name source: ours. */
-/* Offsets are bytes; registers of a register-indexed space are written as index * size. */
+/* Offsets are bytes; registers of a register-indexed space are written as index
+ * * size. */
 #ifndef HW_SGI_GPU_MGRAS_TE1_REGS_H
 #define HW_SGI_GPU_MGRAS_TE1_REGS_H
 
@@ -107,12 +109,18 @@ REG32(MGRAS_TE1_MAX_PIXEL_RG, 0x3c620) /* inferred */
 REG32(MGRAS_TE1_MAX_PIXEL_BA, 0x3c624) /* inferred */
 
 REG32(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, 0x3c628) /* inferred */
-FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, DEPTH_TERM, 26, 4) /* inferred */
-FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, BLOCK_PAIR_LOG2, 23, 3) /* inferred */
-FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, SIZE3_LOG2, 14, 4) /* inferred */
-FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, SIZE2_LOG2, 10, 4) /* inferred */
-FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, SIZE1_LOG2, 6, 4) /* inferred */
-FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, SIZE0_LOG2, 2, 4) /* inferred */
+/* inferred */
+FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, DEPTH_TERM, 26, 4)
+/* inferred */
+FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, BLOCK_PAIR_LOG2, 23, 3)
+/* inferred */
+FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, SIZE3_LOG2, 14, 4)
+/* inferred */
+FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, SIZE2_LOG2, 10, 4)
+/* inferred */
+FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, SIZE1_LOG2, 6, 4)
+/* inferred */
+FIELD(MGRAS_TE1_MULTI_DIMENSIONAL_TEXTURE_ADDRESSING, SIZE0_LOG2, 2, 4)
 
 REG32(MGRAS_TE1_TEXTURE_READ_BUFFER, 0x3c62c) /* inferred */
 FIELD(MGRAS_TE1_TEXTURE_READ_BUFFER, BUFFER, 0, 1) /* inferred */

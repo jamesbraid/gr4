@@ -1,6 +1,7 @@
-/* generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source */
+/* generated from devices/mgras/registers.toml by defs-gen - do not edit, change
+ * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* defs-gen 2 */
+/* defs-gen 4 */
 /* input sha256 45cc340820519febd97084f15bd72f61fde5e54545336083c3940c57b96d90b9 */
 /* board-level words of the Impact graphics subsystem */
 #ifndef MGRAS_GEN_H
@@ -15,40 +16,42 @@
 #define MGRAS_DCB_CTRL_STRIDE                        4
 #define MGRAS_DCB_CTRL_CS_SETUP_SHIFT                10 /* inferred */
 #define MGRAS_DCB_CTRL_CS_SETUP_MASK                 0x7u
-#define MGRAS_DCB_CTRL_CS_SETUP_INPLACE              (MGRAS_DCB_CTRL_CS_SETUP_MASK << MGRAS_DCB_CTRL_CS_SETUP_SHIFT)
+#define MGRAS_DCB_CTRL_CS_SETUP_INPLACE (MGRAS_DCB_CTRL_CS_SETUP_MASK << MGRAS_DCB_CTRL_CS_SETUP_SHIFT)
 #define MGRAS_DCB_CTRL_CS_HOLD_SHIFT                 6 /* inferred */
 #define MGRAS_DCB_CTRL_CS_HOLD_MASK                  0x7u
-#define MGRAS_DCB_CTRL_CS_HOLD_INPLACE               (MGRAS_DCB_CTRL_CS_HOLD_MASK << MGRAS_DCB_CTRL_CS_HOLD_SHIFT)
+#define MGRAS_DCB_CTRL_CS_HOLD_INPLACE (MGRAS_DCB_CTRL_CS_HOLD_MASK << MGRAS_DCB_CTRL_CS_HOLD_SHIFT)
 #define MGRAS_DCB_CTRL_CS_WIDTH_SHIFT                2 /* inferred */
 #define MGRAS_DCB_CTRL_CS_WIDTH_MASK                 0x7u
-#define MGRAS_DCB_CTRL_CS_WIDTH_INPLACE              (MGRAS_DCB_CTRL_CS_WIDTH_MASK << MGRAS_DCB_CTRL_CS_WIDTH_SHIFT)
+#define MGRAS_DCB_CTRL_CS_WIDTH_INPLACE (MGRAS_DCB_CTRL_CS_WIDTH_MASK << MGRAS_DCB_CTRL_CS_WIDTH_SHIFT)
 #define MGRAS_DCB_CTRL_ASYNC_ACK_SHIFT               1 /* inferred */
 #define MGRAS_DCB_CTRL_ASYNC_ACK_MASK                0x1u
-#define MGRAS_DCB_CTRL_ASYNC_ACK_INPLACE             (MGRAS_DCB_CTRL_ASYNC_ACK_MASK << MGRAS_DCB_CTRL_ASYNC_ACK_SHIFT)
+#define MGRAS_DCB_CTRL_ASYNC_ACK_INPLACE (MGRAS_DCB_CTRL_ASYNC_ACK_MASK << MGRAS_DCB_CTRL_ASYNC_ACK_SHIFT)
 #define MGRAS_DCB_CTRL_SYNC_ACK_SHIFT                0 /* inferred */
 #define MGRAS_DCB_CTRL_SYNC_ACK_MASK                 0x1u
-#define MGRAS_DCB_CTRL_SYNC_ACK_INPLACE              (MGRAS_DCB_CTRL_SYNC_ACK_MASK << MGRAS_DCB_CTRL_SYNC_ACK_SHIFT)
+#define MGRAS_DCB_CTRL_SYNC_ACK_INPLACE (MGRAS_DCB_CTRL_SYNC_ACK_MASK << MGRAS_DCB_CTRL_SYNC_ACK_SHIFT)
 
 /*
  * Second board-version word at address 0x072408, of which the kernel
  * reads only the top byte (bits 31:24). Bits 1:0 and 3:2 of that byte are
  * the two TRAM fields, bits 6:4 the RB revision on product 0. The RE count
  * and the meaning of the TRAM fields depend on the product field of the word at
- * 0x072488 (BDVERS2): product 0 has two RE unless bits 6:4 are 3 or 7; product 1
- * has one RE and no TRAM; products 2 and 3 have one RE per GE, with 0 or 4 TRAMs
+ * 0x072488 (BDVERS2): product 0 has two RE unless bits 6:4 are 3 or 7; product
+ * 1
+ * has one RE and no TRAM; products 2 and 3 have one RE per GE, with 0 or 4
+ * TRAMs
  * per path. Bit 7 of the byte is not read. Inferred from the kernel object.
  */
 /* word BDVERS1: 32 bits; driver and firmware readings */
 #define MGRAS_BDVERS1_WIDTH                          32 /* inferred */
 #define MGRAS_BDVERS1_RB_REVISION_SHIFT              28 /* inferred */
 #define MGRAS_BDVERS1_RB_REVISION_MASK               0x7u
-#define MGRAS_BDVERS1_RB_REVISION_INPLACE            (MGRAS_BDVERS1_RB_REVISION_MASK << MGRAS_BDVERS1_RB_REVISION_SHIFT)
+#define MGRAS_BDVERS1_RB_REVISION_INPLACE (MGRAS_BDVERS1_RB_REVISION_MASK << MGRAS_BDVERS1_RB_REVISION_SHIFT)
 #define MGRAS_BDVERS1_TRAM_FIELD_1_SHIFT             26 /* inferred */
 #define MGRAS_BDVERS1_TRAM_FIELD_1_MASK              0x3u
-#define MGRAS_BDVERS1_TRAM_FIELD_1_INPLACE           (MGRAS_BDVERS1_TRAM_FIELD_1_MASK << MGRAS_BDVERS1_TRAM_FIELD_1_SHIFT)
+#define MGRAS_BDVERS1_TRAM_FIELD_1_INPLACE (MGRAS_BDVERS1_TRAM_FIELD_1_MASK << MGRAS_BDVERS1_TRAM_FIELD_1_SHIFT)
 #define MGRAS_BDVERS1_TRAM_FIELD_0_SHIFT             24 /* inferred */
 #define MGRAS_BDVERS1_TRAM_FIELD_0_MASK              0x3u
-#define MGRAS_BDVERS1_TRAM_FIELD_0_INPLACE           (MGRAS_BDVERS1_TRAM_FIELD_0_MASK << MGRAS_BDVERS1_TRAM_FIELD_0_SHIFT)
+#define MGRAS_BDVERS1_TRAM_FIELD_0_INPLACE (MGRAS_BDVERS1_TRAM_FIELD_0_MASK << MGRAS_BDVERS1_TRAM_FIELD_0_SHIFT)
 
 /*
  * Second board-version word, read 0x62488 above the board register
@@ -66,17 +69,17 @@
 #define MGRAS_BDVERS2_WIDTH                          32 /* established */
 #define MGRAS_BDVERS2_PRODUCT_SHIFT                  29 /* established */
 #define MGRAS_BDVERS2_PRODUCT_MASK                   0x3u
-#define MGRAS_BDVERS2_PRODUCT_INPLACE                (MGRAS_BDVERS2_PRODUCT_MASK << MGRAS_BDVERS2_PRODUCT_SHIFT)
+#define MGRAS_BDVERS2_PRODUCT_INPLACE (MGRAS_BDVERS2_PRODUCT_MASK << MGRAS_BDVERS2_PRODUCT_SHIFT)
 #define MGRAS_BDVERS2_PRODUCT_INDIGO2_GIO            0 /* inferred */
 #define MGRAS_BDVERS2_PRODUCT_SOLID_IMPACT           1 /* established */
 #define MGRAS_BDVERS2_PRODUCT_SINGLE_GE_TEXTURED     2 /* inferred */
 #define MGRAS_BDVERS2_PRODUCT_TWO_GE                 3 /* inferred */
 #define MGRAS_BDVERS2_MGRAS_REVISION_SHIFT           26 /* inferred */
 #define MGRAS_BDVERS2_MGRAS_REVISION_MASK            0x7u
-#define MGRAS_BDVERS2_MGRAS_REVISION_INPLACE         (MGRAS_BDVERS2_MGRAS_REVISION_MASK << MGRAS_BDVERS2_MGRAS_REVISION_SHIFT)
+#define MGRAS_BDVERS2_MGRAS_REVISION_INPLACE (MGRAS_BDVERS2_MGRAS_REVISION_MASK << MGRAS_BDVERS2_MGRAS_REVISION_SHIFT)
 #define MGRAS_BDVERS2_GE_COUNT_SHIFT                 24 /* inferred */
 #define MGRAS_BDVERS2_GE_COUNT_MASK                  0x3u
-#define MGRAS_BDVERS2_GE_COUNT_INPLACE               (MGRAS_BDVERS2_GE_COUNT_MASK << MGRAS_BDVERS2_GE_COUNT_SHIFT)
+#define MGRAS_BDVERS2_GE_COUNT_INPLACE (MGRAS_BDVERS2_GE_COUNT_MASK << MGRAS_BDVERS2_GE_COUNT_SHIFT)
 
 /*
  * Byte at address 0x071708: bits 2:0 the CMAP revision (0 is rev A,
@@ -88,33 +91,33 @@
 #define MGRAS_CMAP_RA_STATUS_WIDTH                   8 /* inferred */
 #define MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_SHIFT      7 /* inferred */
 #define MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_MASK       0x1u
-#define MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_INPLACE    (MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_MASK << MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_SHIFT)
+#define MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_INPLACE (MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_MASK << MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_SHIFT)
 #define MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_PRESENT    0 /* inferred */
 #define MGRAS_CMAP_RA_STATUS_VIDEO_OPTION_ABSENT     1 /* inferred */
 #define MGRAS_CMAP_RA_STATUS_RA_REVISION_SHIFT       4 /* inferred */
 #define MGRAS_CMAP_RA_STATUS_RA_REVISION_MASK        0x7u
-#define MGRAS_CMAP_RA_STATUS_RA_REVISION_INPLACE     (MGRAS_CMAP_RA_STATUS_RA_REVISION_MASK << MGRAS_CMAP_RA_STATUS_RA_REVISION_SHIFT)
+#define MGRAS_CMAP_RA_STATUS_RA_REVISION_INPLACE (MGRAS_CMAP_RA_STATUS_RA_REVISION_MASK << MGRAS_CMAP_RA_STATUS_RA_REVISION_SHIFT)
 #define MGRAS_CMAP_RA_STATUS_CMAP_REVISION_SHIFT     0 /* inferred */
 #define MGRAS_CMAP_RA_STATUS_CMAP_REVISION_MASK      0x7u
-#define MGRAS_CMAP_RA_STATUS_CMAP_REVISION_INPLACE   (MGRAS_CMAP_RA_STATUS_CMAP_REVISION_MASK << MGRAS_CMAP_RA_STATUS_CMAP_REVISION_SHIFT)
+#define MGRAS_CMAP_RA_STATUS_CMAP_REVISION_INPLACE (MGRAS_CMAP_RA_STATUS_CMAP_REVISION_MASK << MGRAS_CMAP_RA_STATUS_CMAP_REVISION_SHIFT)
 
 /* word DCB_ADDR: 32 bits; driver and firmware readings */
 #define MGRAS_DCB_ADDR_WIDTH                         32 /* inferred */
 #define MGRAS_DCB_ADDR_DEVICE_SHIFT                  10 /* inferred */
 #define MGRAS_DCB_ADDR_DEVICE_MASK                   0x1fu
-#define MGRAS_DCB_ADDR_DEVICE_INPLACE                (MGRAS_DCB_ADDR_DEVICE_MASK << MGRAS_DCB_ADDR_DEVICE_SHIFT)
+#define MGRAS_DCB_ADDR_DEVICE_INPLACE (MGRAS_DCB_ADDR_DEVICE_MASK << MGRAS_DCB_ADDR_DEVICE_SHIFT)
 #define MGRAS_DCB_ADDR_CRS_SHIFT                     7 /* inferred */
 #define MGRAS_DCB_ADDR_CRS_MASK                      0x7u
-#define MGRAS_DCB_ADDR_CRS_INPLACE                   (MGRAS_DCB_ADDR_CRS_MASK << MGRAS_DCB_ADDR_CRS_SHIFT)
+#define MGRAS_DCB_ADDR_CRS_INPLACE (MGRAS_DCB_ADDR_CRS_MASK << MGRAS_DCB_ADDR_CRS_SHIFT)
 #define MGRAS_DCB_ADDR_ENDATA_PACK_SHIFT             6 /* inferred */
 #define MGRAS_DCB_ADDR_ENDATA_PACK_MASK              0x1u
-#define MGRAS_DCB_ADDR_ENDATA_PACK_INPLACE           (MGRAS_DCB_ADDR_ENDATA_PACK_MASK << MGRAS_DCB_ADDR_ENDATA_PACK_SHIFT)
+#define MGRAS_DCB_ADDR_ENDATA_PACK_INPLACE (MGRAS_DCB_ADDR_ENDATA_PACK_MASK << MGRAS_DCB_ADDR_ENDATA_PACK_SHIFT)
 #define MGRAS_DCB_ADDR_ENCRS_INC_SHIFT               5 /* inferred */
 #define MGRAS_DCB_ADDR_ENCRS_INC_MASK                0x1u
-#define MGRAS_DCB_ADDR_ENCRS_INC_INPLACE             (MGRAS_DCB_ADDR_ENCRS_INC_MASK << MGRAS_DCB_ADDR_ENCRS_INC_SHIFT)
+#define MGRAS_DCB_ADDR_ENCRS_INC_INPLACE (MGRAS_DCB_ADDR_ENCRS_INC_MASK << MGRAS_DCB_ADDR_ENCRS_INC_SHIFT)
 #define MGRAS_DCB_ADDR_DATA_WIDTH_SHIFT              3 /* inferred */
 #define MGRAS_DCB_ADDR_DATA_WIDTH_MASK               0x3u
-#define MGRAS_DCB_ADDR_DATA_WIDTH_INPLACE            (MGRAS_DCB_ADDR_DATA_WIDTH_MASK << MGRAS_DCB_ADDR_DATA_WIDTH_SHIFT)
+#define MGRAS_DCB_ADDR_DATA_WIDTH_INPLACE (MGRAS_DCB_ADDR_DATA_WIDTH_MASK << MGRAS_DCB_ADDR_DATA_WIDTH_SHIFT)
 #define MGRAS_DCB_ADDR_DATA_WIDTH_FOUR_BYTES         0 /* inferred */
 #define MGRAS_DCB_ADDR_DATA_WIDTH_ONE_BYTE           1 /* inferred */
 #define MGRAS_DCB_ADDR_DATA_WIDTH_TWO_BYTES          2 /* inferred */
@@ -122,7 +125,8 @@
 
 /*
  * Read after the GE program download verifies: a 32-bit read of 0x028000, a
- * 13 microsecond wait, then a 32-bit read of 0x028004. The kernel keeps only the
+ * 13 microsecond wait, then a 32-bit read of 0x028004. The kernel keeps only
+ * the
  * low byte of the second read. A GE revision of 2 is the GE11 rev B; 3 or more
  * is the GE12 line, with 3 as rev A. Inferred from the kernel object and owner
  * captures.
@@ -131,7 +135,7 @@
 #define MGRAS_GE_REVISION_WIDTH                      32 /* inferred */
 #define MGRAS_GE_REVISION_GE_REVISION_SHIFT          0 /* inferred */
 #define MGRAS_GE_REVISION_GE_REVISION_MASK           0xffu
-#define MGRAS_GE_REVISION_GE_REVISION_INPLACE        (MGRAS_GE_REVISION_GE_REVISION_MASK << MGRAS_GE_REVISION_GE_REVISION_SHIFT)
+#define MGRAS_GE_REVISION_GE_REVISION_INPLACE (MGRAS_GE_REVISION_GE_REVISION_MASK << MGRAS_GE_REVISION_GE_REVISION_SHIFT)
 
 /*
  * Identification word read at the start of the board's window. The kernel's
@@ -145,14 +149,16 @@
 #define MGRAS_GIO_ID_WIDTH                           32 /* inferred */
 #define MGRAS_GIO_ID_REVISION_SHIFT                  8 /* established */
 #define MGRAS_GIO_ID_REVISION_MASK                   0xffu
-#define MGRAS_GIO_ID_REVISION_INPLACE                (MGRAS_GIO_ID_REVISION_MASK << MGRAS_GIO_ID_REVISION_SHIFT)
+#define MGRAS_GIO_ID_REVISION_INPLACE (MGRAS_GIO_ID_REVISION_MASK << MGRAS_GIO_ID_REVISION_SHIFT)
 #define MGRAS_GIO_ID_PRODUCT_SHIFT                   0 /* established */
 #define MGRAS_GIO_ID_PRODUCT_MASK                    0xffu
-#define MGRAS_GIO_ID_PRODUCT_INPLACE                 (MGRAS_GIO_ID_PRODUCT_MASK << MGRAS_GIO_ID_PRODUCT_SHIFT)
+#define MGRAS_GIO_ID_PRODUCT_INPLACE (MGRAS_GIO_ID_PRODUCT_MASK << MGRAS_GIO_ID_PRODUCT_SHIFT)
 
 /*
- * One command written to the normal command FIFO, as the public driver packs it:
- * the constant framing 0x0018000400000000, the register selector shifted left 40
+ * One command written to the normal command FIFO, as the public driver packs
+ * it:
+ * the constant framing 0x0018000400000000, the register selector shifted left
+ * 40
  * bits, and the 32-bit payload. The execute mark adds 0x0004000000000000 and is
  * set on the write that starts a drawing operation. The layout is the driver's
  * software expectation; what the board does with each field is not established.
@@ -161,13 +167,13 @@
 #define MGRAS_HQ4_NUMERIC_PACKET_WIDTH               64 /* established */
 #define MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_SHIFT       50 /* inferred */
 #define MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_MASK        0x1ull
-#define MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_INPLACE     (MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_MASK << MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_SHIFT)
+#define MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_INPLACE (MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_MASK << MGRAS_HQ4_NUMERIC_PACKET_EXECUTE_SHIFT)
 #define MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_SHIFT      40 /* established */
 #define MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_MASK       0x1ffull
-#define MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_INPLACE    (MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_MASK << MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_SHIFT)
+#define MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_INPLACE (MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_MASK << MGRAS_HQ4_NUMERIC_PACKET_SELECTOR_SHIFT)
 #define MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_SHIFT       0 /* established */
 #define MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_MASK        0xffffffffull
-#define MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_INPLACE     (MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_MASK << MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_SHIFT)
+#define MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_INPLACE (MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_MASK << MGRAS_HQ4_NUMERIC_PACKET_PAYLOAD_SHIFT)
 
 /*
  * Host interface control word. Its geometry engine select field chooses which
@@ -179,7 +185,7 @@
 #define MGRAS_HQ_GE_SELECT_WIDTH                     32 /* established */
 #define MGRAS_HQ_GE_SELECT_GE_SELECT_SHIFT           4 /* established */
 #define MGRAS_HQ_GE_SELECT_GE_SELECT_MASK            0x3u
-#define MGRAS_HQ_GE_SELECT_GE_SELECT_INPLACE         (MGRAS_HQ_GE_SELECT_GE_SELECT_MASK << MGRAS_HQ_GE_SELECT_GE_SELECT_SHIFT)
+#define MGRAS_HQ_GE_SELECT_GE_SELECT_INPLACE (MGRAS_HQ_GE_SELECT_GE_SELECT_MASK << MGRAS_HQ_GE_SELECT_GE_SELECT_SHIFT)
 #define MGRAS_HQ_GE_SELECT_GE_SELECT_GE0             2 /* established */
 #define MGRAS_HQ_GE_SELECT_GE_SELECT_GE1             3 /* established */
 
@@ -193,7 +199,7 @@
 #define MGRAS_HQ_REVISION_WIDTH                      32 /* inferred */
 #define MGRAS_HQ_REVISION_HQ_REVISION_SHIFT          28 /* inferred */
 #define MGRAS_HQ_REVISION_HQ_REVISION_MASK           0xfu
-#define MGRAS_HQ_REVISION_HQ_REVISION_INPLACE        (MGRAS_HQ_REVISION_HQ_REVISION_MASK << MGRAS_HQ_REVISION_HQ_REVISION_SHIFT)
+#define MGRAS_HQ_REVISION_HQ_REVISION_INPLACE (MGRAS_HQ_REVISION_HQ_REVISION_MASK << MGRAS_HQ_REVISION_HQ_REVISION_SHIFT)
 
 /*
  * One bit slot of the one-wire serial-number record at HQ_SERIAL_MASTER_OFFSET,
@@ -207,16 +213,16 @@
 #define MGRAS_HQ_SERIAL_SLOT_WIDTH                   32 /* inferred */
 #define MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_SHIFT        10 /* inferred */
 #define MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_MASK         0x3ffu
-#define MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_INPLACE      (MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_MASK << MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_SHIFT)
+#define MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_INPLACE (MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_MASK << MGRAS_HQ_SERIAL_SLOT_DRIVE_TIME_SHIFT)
 #define MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_SHIFT     2 /* inferred */
 #define MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_MASK      0xffu
-#define MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_INPLACE   (MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_MASK << MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_SHIFT)
+#define MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_INPLACE (MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_MASK << MGRAS_HQ_SERIAL_SLOT_SAMPLE_OFFSET_SHIFT)
 #define MGRAS_HQ_SERIAL_SLOT_DONE_SHIFT              1 /* inferred */
 #define MGRAS_HQ_SERIAL_SLOT_DONE_MASK               0x1u
-#define MGRAS_HQ_SERIAL_SLOT_DONE_INPLACE            (MGRAS_HQ_SERIAL_SLOT_DONE_MASK << MGRAS_HQ_SERIAL_SLOT_DONE_SHIFT)
+#define MGRAS_HQ_SERIAL_SLOT_DONE_INPLACE (MGRAS_HQ_SERIAL_SLOT_DONE_MASK << MGRAS_HQ_SERIAL_SLOT_DONE_SHIFT)
 #define MGRAS_HQ_SERIAL_SLOT_LEVEL_SHIFT             0 /* inferred */
 #define MGRAS_HQ_SERIAL_SLOT_LEVEL_MASK              0x1u
-#define MGRAS_HQ_SERIAL_SLOT_LEVEL_INPLACE           (MGRAS_HQ_SERIAL_SLOT_LEVEL_MASK << MGRAS_HQ_SERIAL_SLOT_LEVEL_SHIFT)
+#define MGRAS_HQ_SERIAL_SLOT_LEVEL_INPLACE (MGRAS_HQ_SERIAL_SLOT_LEVEL_MASK << MGRAS_HQ_SERIAL_SLOT_LEVEL_SHIFT)
 
 /*
  * Identification byte of the multi-channel option board (the byte at the
@@ -241,12 +247,12 @@
 #define MGRAS_MCO_ID_WIDTH                           32 /* established */
 #define MGRAS_MCO_ID_BOARD_SHIFT                     4 /* established */
 #define MGRAS_MCO_ID_BOARD_MASK                      0xfu
-#define MGRAS_MCO_ID_BOARD_INPLACE                   (MGRAS_MCO_ID_BOARD_MASK << MGRAS_MCO_ID_BOARD_SHIFT)
+#define MGRAS_MCO_ID_BOARD_INPLACE (MGRAS_MCO_ID_BOARD_MASK << MGRAS_MCO_ID_BOARD_SHIFT)
 #define MGRAS_MCO_ID_BOARD_PRESENT_SINGLE_READ       4 /* established */
 #define MGRAS_MCO_ID_BOARD_PRESENT                   10 /* established */
 #define MGRAS_MCO_ID_REVISION_SHIFT                  0 /* established */
 #define MGRAS_MCO_ID_REVISION_MASK                   0xfu
-#define MGRAS_MCO_ID_REVISION_INPLACE                (MGRAS_MCO_ID_REVISION_MASK << MGRAS_MCO_ID_REVISION_SHIFT)
+#define MGRAS_MCO_ID_REVISION_INPLACE (MGRAS_MCO_ID_REVISION_MASK << MGRAS_MCO_ID_REVISION_SHIFT)
 
 /*
  * Index byte of the multi-channel option board, written to the board's
@@ -260,7 +266,7 @@
 #define MGRAS_MCO_INDEX_WIDTH                        32 /* established */
 #define MGRAS_MCO_INDEX_BANK_SHIFT                   4 /* established */
 #define MGRAS_MCO_INDEX_BANK_MASK                    0xfu
-#define MGRAS_MCO_INDEX_BANK_INPLACE                 (MGRAS_MCO_INDEX_BANK_MASK << MGRAS_MCO_INDEX_BANK_SHIFT)
+#define MGRAS_MCO_INDEX_BANK_INPLACE (MGRAS_MCO_INDEX_BANK_MASK << MGRAS_MCO_INDEX_BANK_SHIFT)
 #define MGRAS_MCO_INDEX_BANK_OVERLAY_DAC_A           0 /* established */
 #define MGRAS_MCO_INDEX_BANK_OVERLAY_DAC_B           1 /* established */
 #define MGRAS_MCO_INDEX_BANK_TRUE_COLOUR_DAC_A       2 /* established */
@@ -270,7 +276,7 @@
 #define MGRAS_MCO_INDEX_BANK_CONTROL_3               10 /* established */
 #define MGRAS_MCO_INDEX_PORT_SHIFT                   0 /* established */
 #define MGRAS_MCO_INDEX_PORT_MASK                    0xfu
-#define MGRAS_MCO_INDEX_PORT_INPLACE                 (MGRAS_MCO_INDEX_PORT_MASK << MGRAS_MCO_INDEX_PORT_SHIFT)
+#define MGRAS_MCO_INDEX_PORT_INPLACE (MGRAS_MCO_INDEX_PORT_MASK << MGRAS_MCO_INDEX_PORT_SHIFT)
 
 /*
  * Byte at address 0x071308. Bits 7:4 are the monitor ID, which depends
@@ -280,13 +286,14 @@
  * 0 means no monitor identified; 0xf is the value every captured Origin and
  * Octane board reported, which the IRIX graphics tools print as an unknown
  * monitor assumed to be 19 inches. Whether 0xf is what a board reports with no
- * monitor attached is unknown. Inferred from the kernel object and owner captures.
+ * monitor attached is unknown. Inferred from the kernel object and owner
+ * captures.
  */
 /* word MONITOR_ID: 8 bits; driver and firmware readings */
 #define MGRAS_MONITOR_ID_WIDTH                       8 /* inferred */
 #define MGRAS_MONITOR_ID_MONITOR_SHIFT               4 /* inferred */
 #define MGRAS_MONITOR_ID_MONITOR_MASK                0xfu
-#define MGRAS_MONITOR_ID_MONITOR_INPLACE             (MGRAS_MONITOR_ID_MONITOR_MASK << MGRAS_MONITOR_ID_MONITOR_SHIFT)
+#define MGRAS_MONITOR_ID_MONITOR_INPLACE (MGRAS_MONITOR_ID_MONITOR_MASK << MGRAS_MONITOR_ID_MONITOR_SHIFT)
 #define MGRAS_MONITOR_ID_MONITOR_UNIDENTIFIED        0 /* inferred */
 #define MGRAS_MONITOR_ID_MONITOR_ASSUMED_19_INCH     15 /* inferred */
 
@@ -301,20 +308,22 @@
 #define MGRAS_PP1_CONFIG_WIDTH                       32 /* inferred */
 #define MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_SHIFT     20 /* inferred */
 #define MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_MASK      0x3u
-#define MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_INPLACE   (MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_MASK << MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_SHIFT)
+#define MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_INPLACE (MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_MASK << MGRAS_PP1_CONFIG_RE_COUNT_LESS_ONE_SHIFT)
 
 /*
  * Index write of 4 to the byte at address 0x071c88, then a 32-bit read of
  * 0x071d00. Bits 2:0 are the PP1 revision (XMAP index 4). Owner captures
- * of E-series boards read 4 here, while a reading of the IRIX Octane diagnostic's
- * XMAP test accepts only 0 or 1; that conflict is open. Inferred from the kernel
+ * of E-series boards read 4 here, while a reading of the IRIX Octane
+ * diagnostic's
+ * XMAP test accepts only 0 or 1; that conflict is open. Inferred from the
+ * kernel
  * object and owner captures.
  */
 /* word PP1_REVISION: 32 bits; driver and firmware readings */
 #define MGRAS_PP1_REVISION_WIDTH                     32 /* inferred */
 #define MGRAS_PP1_REVISION_PP1_REVISION_SHIFT        0 /* inferred */
 #define MGRAS_PP1_REVISION_PP1_REVISION_MASK         0x7u
-#define MGRAS_PP1_REVISION_PP1_REVISION_INPLACE      (MGRAS_PP1_REVISION_PP1_REVISION_MASK << MGRAS_PP1_REVISION_PP1_REVISION_SHIFT)
+#define MGRAS_PP1_REVISION_PP1_REVISION_INPLACE (MGRAS_PP1_REVISION_PP1_REVISION_MASK << MGRAS_PP1_REVISION_PP1_REVISION_SHIFT)
 
 /*
  * One 64-bit write to address 0x120400, then a 32-bit read of 0x02c578.
@@ -325,7 +334,7 @@
 #define MGRAS_RE4_REVISION_WIDTH                     32 /* inferred */
 #define MGRAS_RE4_REVISION_RE4_REVISION_SHIFT        4 /* inferred */
 #define MGRAS_RE4_REVISION_RE4_REVISION_MASK         0xfu
-#define MGRAS_RE4_REVISION_RE4_REVISION_INPLACE      (MGRAS_RE4_REVISION_RE4_REVISION_MASK << MGRAS_RE4_REVISION_RE4_REVISION_SHIFT)
+#define MGRAS_RE4_REVISION_RE4_REVISION_INPLACE (MGRAS_RE4_REVISION_RE4_REVISION_MASK << MGRAS_RE4_REVISION_RE4_REVISION_SHIFT)
 
 /*
  * Raster engine status word, read after the raster engine select register has
@@ -338,10 +347,10 @@
 #define MGRAS_RE4_STATUS_WIDTH                       32 /* inferred */
 #define MGRAS_RE4_STATUS_SELECTED_RE_SHIFT           2 /* inferred */
 #define MGRAS_RE4_STATUS_SELECTED_RE_MASK            0x3u
-#define MGRAS_RE4_STATUS_SELECTED_RE_INPLACE         (MGRAS_RE4_STATUS_SELECTED_RE_MASK << MGRAS_RE4_STATUS_SELECTED_RE_SHIFT)
+#define MGRAS_RE4_STATUS_SELECTED_RE_INPLACE (MGRAS_RE4_STATUS_SELECTED_RE_MASK << MGRAS_RE4_STATUS_SELECTED_RE_SHIFT)
 #define MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_SHIFT     0 /* inferred */
 #define MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_MASK      0x3u
-#define MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_INPLACE   (MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_MASK << MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_SHIFT)
+#define MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_INPLACE (MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_MASK << MGRAS_RE4_STATUS_RE_COUNT_LESS_ONE_SHIFT)
 
 /*
  * Byte write of 0x1f to address 0x072008, then a 16-bit read of
@@ -352,7 +361,7 @@
 #define MGRAS_VC3_REVISION_WIDTH                     16 /* inferred */
 #define MGRAS_VC3_REVISION_VC3_REVISION_SHIFT        6 /* inferred */
 #define MGRAS_VC3_REVISION_VC3_REVISION_MASK         0x3u
-#define MGRAS_VC3_REVISION_VC3_REVISION_INPLACE      (MGRAS_VC3_REVISION_VC3_REVISION_MASK << MGRAS_VC3_REVISION_VC3_REVISION_SHIFT)
+#define MGRAS_VC3_REVISION_VC3_REVISION_INPLACE (MGRAS_VC3_REVISION_VC3_REVISION_MASK << MGRAS_VC3_REVISION_VC3_REVISION_SHIFT)
 
 #define MGRAS_ADV473_PORT_ADDR                       0x0u /* established */
 #define MGRAS_ADV473_PORT_COMMAND                    0x6u /* established */
@@ -412,17 +421,20 @@
 #define MGRAS_HQ_INTR_DEST_LOWER_OFFSET              0x11068u /* inferred */
 #define MGRAS_HQ_INTR_DEST_UPPER_OFFSET              0x11060u /* inferred */
 #define MGRAS_HQ_INTR_ENAB_CLEAR_OFFSET              0x11048u /* inferred */
-#define MGRAS_HQ_INTR_ENAB_DEFAULT                   0x3008a200u /* established */
+/* established */
+#define MGRAS_HQ_INTR_ENAB_DEFAULT                   0x3008a200u
 #define MGRAS_HQ_INTR_ENAB_SET_OFFSET                0x11040u /* established */
 #define MGRAS_HQ_INTR_LEVEL2_CLEAR_OFFSET            0x11058u /* inferred */
 #define MGRAS_HQ_INTR_LEVEL2_ENAB_OFFSET             0x11050u /* established */
 #define MGRAS_HQ_INTR_LEVEL2_LOWATER                 0x10u /* established */
 #define MGRAS_HQ_INTR_PENDING_CLEAR_OFFSET           0x11028u /* inferred */
 #define MGRAS_HQ_INTR_SRC_CTX_ACK1                   0x80000u /* established */
-#define MGRAS_HQ_INTR_SRC_CTX_ACK2                   0x10000000u /* established */
+/* established */
+#define MGRAS_HQ_INTR_SRC_CTX_ACK2                   0x10000000u
 #define MGRAS_HQ_INTR_SRC_DMA_OVERFLOW               0x8000u /* established */
 #define MGRAS_HQ_INTR_SRC_DMA_RANGE                  0x2000u /* established */
-#define MGRAS_HQ_INTR_SRC_FIFO_OVERFLOW              0x20000000u /* established */
+/* established */
+#define MGRAS_HQ_INTR_SRC_FIFO_OVERFLOW              0x20000000u
 #define MGRAS_HQ_INTR_SRC_PRIV                       0x4000u /* established */
 #define MGRAS_HQ_INTR_SRC_PROGRAM_ERROR              0x200u /* established */
 #define MGRAS_HQ_INTR_SRC_RELEASE                    0x10000u /* established */
@@ -463,8 +475,10 @@
 #define MGRAS_MCO_SEL_TIMING_DATA                    0x5u /* established */
 #define MGRAS_MCO_SEL_TIMING_RAM                     0x7u /* established */
 #define MGRAS_MCO_SEL_TIMING_REG                     0x4u /* established */
-#define MGRAS_MGRAS_SET_GENLOCK_REQUEST              0x6d670014u /* established */
-#define MGRAS_MGRAS_VIDEO_TEXTURE_XFER_REQUEST       0x6d670016u /* established */
+/* established */
+#define MGRAS_MGRAS_SET_GENLOCK_REQUEST              0x6d670014u
+/* established */
+#define MGRAS_MGRAS_VIDEO_TEXTURE_XFER_REQUEST       0x6d670016u
 #define MGRAS_PP1_SELECT_ADDR                        0x71c08u /* established */
 #define MGRAS_RDRAM_ADDR_PORT_ADDR                   0x2c570u /* inferred */
 #define MGRAS_RDRAM_BUFFER_PORT_ADDR                 0x2c5b4u /* inferred */

@@ -1,9 +1,11 @@
-// generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source
+// @generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
-// defs-gen 2
+// defs-gen 4
 // input sha256 45cc340820519febd97084f15bd72f61fde5e54545336083c3940c57b96d90b9
 // board-level words of the Impact graphics subsystem
 #![allow(dead_code)]
+#![allow(clippy::doc_markdown)]
+#![cfg_attr(rustfmt, rustfmt_skip)]
 
 /// (inferred)
 pub mod dcb_ctrl {
@@ -307,6 +309,7 @@ pub mod dcb_addr {
     }
 }
 /// Read after the GE program download verifies: a 32-bit read of 0x028000, a 13 microsecond wait, then a 32-bit read of 0x028004. The kernel keeps only t (inferred)
+#[allow(clippy::module_inception)]
 pub mod ge_revision {
     pub const WIDTH: u32 = 32;
     pub mod ge_revision { // bits 7:0, inferred
@@ -417,6 +420,7 @@ pub mod hq_ge_select {
     }
 }
 /// Board word at address 0x000000, the first identity read IRIX makes. Bits 31:28 are the HQ revision: 1 is rev A, 2 is rev B. Read by the IRIX kernel's  (inferred)
+#[allow(clippy::module_inception)]
 pub mod hq_revision {
     pub const WIDTH: u32 = 32;
     pub mod hq_revision { // bits 31:28, inferred
@@ -643,6 +647,7 @@ pub mod pp1_config {
     }
 }
 /// Index write of 4 to the byte at address 0x071c88, then a 32-bit read of 0x071d00. Bits 2:0 are the PP1 revision (XMAP index 4). Owner captures of E-se (inferred)
+#[allow(clippy::module_inception)]
 pub mod pp1_revision {
     pub const WIDTH: u32 = 32;
     pub mod pp1_revision { // bits 2:0, inferred
@@ -657,6 +662,7 @@ pub mod pp1_revision {
     }
 }
 /// One 64-bit write to address 0x120400, then a 32-bit read of 0x02c578. Bits 7:4 are the RE4 revision. The value written is not recorded in the source t (inferred)
+#[allow(clippy::module_inception)]
 pub mod re4_revision {
     pub const WIDTH: u32 = 32;
     pub mod re4_revision { // bits 7:4, inferred
@@ -695,6 +701,7 @@ pub mod re4_status {
     }
 }
 /// Byte write of 0x1f to address 0x072008, then a 16-bit read of 0x0720b0 (read only when the RE count is nonzero). Bits 7:6 are the VC3 revision. Inferr (inferred)
+#[allow(clippy::module_inception)]
 pub mod vc3_revision {
     pub const WIDTH: u32 = 16;
     pub mod vc3_revision { // bits 7:6, inferred

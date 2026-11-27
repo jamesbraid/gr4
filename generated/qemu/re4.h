@@ -1,10 +1,12 @@
-/* generated from devices/re4/registers.toml by defs-gen - do not edit, change the source */
+/* generated from devices/re4/registers.toml by defs-gen - do not edit, change
+ * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
-/* defs-gen 2 */
+/* defs-gen 4 */
 /* input sha256 9f940ddb6e51059fceca251c397fccef034b17eb9de32a8586cd8a332a742e4b */
 /* raster engine register contract for the Impact graphics */
 /* Names are MGRAS_RE4_*; name source: ours. */
-/* Offsets are bytes; registers of a register-indexed space are written as index * size. */
+/* Offsets are bytes; registers of a register-indexed space are written as index
+ * * size. */
 #ifndef HW_SGI_GPU_MGRAS_RE4_REGS_H
 #define HW_SGI_GPU_MGRAS_RE4_REGS_H
 
@@ -251,7 +253,8 @@ FIELD(MGRAS_RE4_STATUS, CHIP_COUNT, 0, 2) /* inferred */
 
 REG32(MGRAS_RE4_TOGGLE_CONTEXT, 0x3857c) /* inferred */
 
-REG32(MGRAS_RE4_PP1_FILL_MODE, 0x38584) /* inferred; name source: public (OpenBSD impact(4) driver register header) */
+/* inferred; name source: public (OpenBSD impact(4) driver register header) */
+REG32(MGRAS_RE4_PP1_FILL_MODE, 0x38584)
 
 #define MGRAS_RE4_XFER_ZOOM_UNITY 0x100u /* established */
 
