@@ -21,8 +21,10 @@ the second engine). The register and word facts are in
   and the 6.5.30 `unix.IP27` kernel (SHA-256 `567474674eaa83d3...`; an earlier
   version of this page cited a `unix.IP27` with digest `cbdb02ea5d33...` that is
   not held). Read as machine code at the addresses named below.
-- **Re-read status.** The `IP27GR532` client is not in this checkout, so its
-  addresses were not rechecked. The header words in this page's tables were
+- **Re-read status.** The `IP27GR532` client is not in this checkout, so most of
+  its addresses were not rechecked. The sections that say "re-read" below were
+  read again in the shipped file (SHA-256 above, from the 6.5.30 install media).
+  The header words in this page's tables were
   compared with the 6.5.0 `IP28GR432` client listing (`software/opengl/asm/MGRAS/`):
   138 of the 154 eight-digit words appear as immediates there. The 16 that do not
   are the kernel's `0x9808`, `0xf400`, texture and eviction tokens, which the kernel
@@ -112,6 +114,46 @@ and `0x069` (`Z_LOW`). The table is **established** as the diagnostic's
 content. Whether a write to a `0x2xx` register reaches the pair, and how wide
 that write is, is **unknown**.
 
+## Batched register blocks and table loads
+
+Re-read in the `IP27GR532` client. **Established** as what the routines store;
+none of it says what the board does with the words.
+
+- **Triple records, `0x00007c08`.** `__glMgrasWrite` (`0xd9a15f0`) appends three
+  words per call: a register or token number, a value, and a third word the
+  caller loads from a table in the library's data (for example register `0x181`,
+  value `0xd6d6`, at `0xd99fc5c`; what the third word is for is unknown). A
+  fourth argument forces a flush; otherwise it flushes once the buffer holds 400
+  or more words. The flush routine at `0xd9a1560` writes the header `0x00007c08`
+  (opcode `0x7c`, eight payload bytes), then the record count (words divided by
+  three, rounded down, by a multiply with `0xaaaaaaab` at `0xd9a167c` to
+  `0xd9a1690`), then the
+  word count rounded up to even, then an inline block header
+  (`0x80000000 | words * 4`, masked to 20 bits) and that many words. When the
+  count is odd, the last word of the block is not a record: it is whatever the
+  buffer held from an earlier batch. 33 calls (99 words) go out as 33 records
+  and 100 words.
+- **Pair records, `0x00007f08`.** `__glMgrasSet` (`0xd9a1700`) is the same shape
+  with two words per call, its own buffer and counter, and the force flag as its
+  third data argument. The header is `0x00007f08`, then the pair count (words
+  divided by two), the word count, and the inline block. Three calls (six
+  words) go out as three pairs.
+- Both go through the inline-block rule above, so a parser that follows the
+  lengths stays aligned. What a record or pair means to the board is unknown.
+- **Table loads.** The routine at `0xd94edf0` loads five tables, each as
+  `0x00008204`, a size word, an inline block, then a zero word. The inline
+  header is `0x80000214` (532 bytes: five descriptor words and 128 data words),
+  `0x80000414` (1,044 bytes: five and 256) or `0x80000284` (644 bytes: five and
+  156). The three `0x80000284` blocks follow the first two. The size word is the
+  data word count divided by four (`0x20`, `0x40`, `0x27`). The descriptors are
+  0, the data bytes, a destination word read from a table of values the library
+  keeps (offsets 776, 780, 980, 984 and 988), 0, and the data word count. The
+  128 data words are the floats `exp(-i / 16)` and the 256 are `exp(-i / 4096)`;
+  the three blocks of 156 are copied unchanged from a 1,872-byte constant table
+  in the library's data. The `exp` call is certain only in the 6.5.0 `IP28GR432`
+  client, where the same routine is `InitTables` (`0xda6e488`); the 6.5.30 one has
+  the same constants and loop counts. What the destinations are is unknown.
+
 ## Attribute headers
 
 Entry points inside `glBegin`/`glEnd`, and raster positions outside them. The
@@ -158,8 +200,8 @@ the row says otherwise.
 | --- | --- |
 | context opener | `0x00000600` |
 | context configuration | `0x00008c04` and one int (a per-board configuration byte shifted right by one) |
-| geometry-engine table load | `0x00008204` and a size-class int (`0x20`, `0x40` or `0x27`); then an inline block of five descriptor words and that many data words; then a zero word |
-| colour-index setup | `0x00000a04` and the visual's colour-index width in bits |
+| geometry-engine table load | `0x00008204` and a size word (`0x20`, `0x40` or `0x27`); then an inline block of five descriptor words and 128, 256 or 156 data words; then a zero word (see [batched blocks](#batched-register-blocks-and-table-loads)) |
+| colour-index setup | `0x00000a04` and the visual's colour-index width in bits. `__glMgrInitCI` (`0xd94e830`, re-read) stores `0xa04` and then the context word at `+3252`, the same word it turns into the index mask `(1 << width) - 1` and the format routine compares with 5 and 9 |
 | RGBA setup | `0x00000900` |
 | `glViewport` | `0x00003310` and four ints: x, y, width, height |
 | `glScissor` | `0x00003910` and four ints: x, width less one, y, height less one |
