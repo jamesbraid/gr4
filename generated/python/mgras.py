@@ -1,7 +1,7 @@
 """generated from devices/mgras/registers.toml by defs-gen - do not edit, change the source
 SPDX-License-Identifier: BSD-3-Clause
 defs-gen 4
-input sha256 3644c4fbc19fbe45a9edb4530bdb2a473c2963f24427270c68f409e2c403a813
+input sha256 d57f30b0fa4e3ef163141a21e7df4515883b4a4840b2313300bf2e5d1aaf8920
 board-level words of the Impact graphics subsystem"""
 
 UNIT = 'mgras'

@@ -2,7 +2,7 @@
  * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 4 */
-/* input sha256 3644c4fbc19fbe45a9edb4530bdb2a473c2963f24427270c68f409e2c403a813 */
+/* input sha256 d57f30b0fa4e3ef163141a21e7df4515883b4a4840b2313300bf2e5d1aaf8920 */
 /* board-level words of the Impact graphics subsystem */
 #ifndef MGRAS_GEN_H
 #define MGRAS_GEN_H
@@ -310,12 +310,11 @@
  * During
  * initialisation the first write is 0x0048073f with the same shifted count, and
  * the word ends in the 0x0008073f form. Read with the XMAP configuration layout
- * (cursor plane mask 9:0, constant alpha 18:11, auto-increment 19), the low
- * bits
- * are mask 0x73f, alpha 0 and auto-increment on; that reading is inferred. Bit
- * 22
- * is unknown. The values and where each is written are established; the sites
- * are
+ * (cursor plane mask 9:0, constant alpha 18:11, auto-increment 19), the word
+ * has
+ * mask 0x33f, alpha 0 and auto-increment on, and bit 10 set, which that layout
+ * does not name; that reading is inferred. Bits 10 and 22 are unknown. The
+ * values and where each is written are established; the sites are
  * on the two-engine page.
  */
 /* word PP1_CONFIG: 32 bits; driver and firmware readings */
