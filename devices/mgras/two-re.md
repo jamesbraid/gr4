@@ -73,15 +73,15 @@ each engine, has two pixel processors. Table 4.1 of the report. **Established.**
   - The routine that applies these rules is at `0x208312a8` (re-read). It prints
     `X: %d, Y: %d ==> RSS-%d, PP-%d, RD-%d (RDRAM Addr: 0x%x)`, where the RSS is the
     raster engine (`RA BOARD` for 0, `RB BOARD` for 1). Its fourth argument is an
-    operation code. **0** prints that line and calls a failure recorder
-    (`0x20831534`); it reads nothing. **1** writes the address to `0x02c570`
+    operation code. **0** prints that line and calls a failure recorder (the
+    routine at `0x2081e988`, called from `0x20831534`); it reads nothing. **1** writes the address to `0x02c570`
     (`RDRAM_ADDR_PORT_ADDR`) and reads `0x02c574` (`RDRAM_DATA_PORT_ADDR`), compares the
     word with one expected-value argument, then writes the address plus 2, reads
     the port again and compares that with the other. **2** does both
-    reads and prints them (`Read:`) but compares nothing, so a caller that wants a
-    comparison does it itself. The callers are `0x2082a144`, `0x2082a1ec`,
-    `0x208311c8` and `0x2085a098` (0), `0x208321b0` (1) and `0x208327e0` (2). So the
-    mapping is tested at the drawing check (op 1) and nowhere else. The second
+    reads and prints them (`Read:`) but compares nothing. The callers are `0x2082a144`, `0x2082a1ec`,
+    `0x208311c8` and `0x2085a098` (0), `0x208321b0` (1) and `0x208327e0` (2). Only
+    op 1 compares; the callers of ops 1 and 2 then pass the words to a routine at
+    `0x20830f78` that prints them as fields (not decoded here). The second
     access sets bit 1 of an address whose formula leaves bits 1:0 clear, so the
     address is not a plain byte address of 32-bit words; what bit 1 selects is
     unknown.
