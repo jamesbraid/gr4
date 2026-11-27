@@ -67,6 +67,10 @@ SI and ESI boards) and product 3 when they have two GEs (MXI, EMXI, ESSI). All
 three two-GE captures print 3. Whether every two-GE board reports 3 is
 inferred from those captures.
 
+An emulator run that printed product 2 with two GEs for an ESSI board is a
+model output, because the model approximates the two-GE identity. It is not a
+capture and does not change the product 3 reading above.
+
 Product 1 has one RE and no TRAM, which is the count of a plain Solid
 IMPACT. No capture of a plain SI has been decoded, so whether a plain SI
 reports 1 or 2 is unknown. The same routine treats product 1 as the
