@@ -1,7 +1,7 @@
 // @generated from devices/re4/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 4
-// input sha256 9f940ddb6e51059fceca251c397fccef034b17eb9de32a8586cd8a332a742e4b
+// input sha256 1b5af358b19e14d139e18cfb571e76a2c710c2bb878034e96c4992aceccb6bec
 // raster engine register contract for the Impact graphics
 #![allow(dead_code)]
 #![allow(clippy::doc_markdown)]
@@ -1104,12 +1104,12 @@ pub mod xfer_zoom_init {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe154;
 }
-/// (inferred)
+/// Zoom words, 0x154 and 0x155 together: 8.8 fixed point, 0x100 is 1.0. Established from the client library's host-to-raster routine (`__glMgrInitHostToR (inferred)
 pub mod xfer_zoom_step {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe155;
 }
-/// Zoom encoding: both registers hold 8.8 fixed point, 0x100 meaning a factor of 1.0 (no zoom). Established: the library's host-to-raster setup routines  (inferred)
+/// (inferred)
 pub mod xfer_mask_lo {
     pub const WIDTH: u32 = 32;
     pub const OFFSET: u64 = 0xe156;

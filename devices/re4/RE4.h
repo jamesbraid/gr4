@@ -400,8 +400,10 @@ extern "C" {
  *   17    a one-bit flag the copy paths clear; nothing sets it. Bits 17, 18
  *         and 21 are the candidates for LSB-first and the read mask;
  *         bit 21 is never touched by any software examined.
- *   19    zoom: scale by XFRFACTOR
- *   20    decimate (zoom below 1)
+ *   19    zoom: scale by XFRFACTOR (the client sets it only for a whole-number x zoom above 1)
+ *   20    decimate: XFRFACTOR is a source step (the client sets it for every x zoom below 1 and every
+ *         non-whole one above 1, where it first has the geometry engine replicate each pixel n times;
+ *         neither bit at zoom 1; established, client library, registers.toml xfer_zoom_step)
  *   22    RGBorder: 1 = red first in host memory, 0 = ABGR
  * glReadPixels of RGBA bytes in two parts (6.5.13f and 6.5.30m, traced): 0xC10080 at
  * destination offset 0xD68 then 0xC10480 at 0x212C, and 0xC00080 then 0xC10480.

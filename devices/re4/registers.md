@@ -1,7 +1,7 @@
 <!-- generated from devices/re4/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 4 -->
-<!-- input sha256 9f940ddb6e51059fceca251c397fccef034b17eb9de32a8586cd8a332a742e4b -->
+<!-- input sha256 1b5af358b19e14d139e18cfb571e76a2c710c2bb878034e96c4992aceccb6bec -->
 
 # raster engine register contract for the Impact graphics
 
@@ -446,15 +446,29 @@ better.
 
 ### Register `xfer_zoom_step`
 
+Zoom words, 0x154 and 0x155 together: 8.8 fixed point, 0x100 is 1.0.
+Established from the client library's host-to-raster routine
+(`__glMgrInitHostToRSS`) and its pixel-zoom state setter (`__glMgrim_PixelZoom`),
+both read in full; builds and addresses are in questions/README.md entry 9. The
+setter keeps a mode code in bits 29:28 of a state word
+(1 whole-number |z|, 2 non-whole |z| above 1, 3 |z| below 1), and the routine
+picks one of four cases from the transfer kind and the x zoom z.
+Kinds 5, 6 and 7 (span read and return) put 0x100 in both words and set
+neither mode bit. A whole-number |z| above 1 puts trunc(256 |z|) in both words
+and sets mode bit 19 of 0x159. Any |z| below 1, or a non-whole |z| above 1,
+sets mode bit 20 and puts step = trunc(256 w n / D) in 0x155 and
+((trunc(256 w n / step) - D) << 8) + step in 0x154. Here w is the source width,
+D the destination extent the routine computed from the raster position and z,
+and n the number of times the client has the geometry engine replicate each
+source pixel (1 below one, else one of 2, 3, 4, 6, 12, 24 by the size of a
+non-whole |z|). For an aligned draw D = w |z|, so step = trunc(256 n / |z|):
+0x200 at 0.5, 0x155 at 1.5 and 0x13b at 3.25 in a 16-pixel draw. |z| = 1
+writes neither word, so the registers carry whatever the stack held (the
+traced 0x1000f424 with 0): inferred stale stack, not an encoding, with no mode
+bit set. That the geometry engine does the replication, and what RE4 does with
+each word, are inferred.
+
 ### Register `xfer_mask_lo`
-
-Zoom encoding: both registers hold 8.8 fixed point, 0x100 meaning a factor of
-1.0 (no zoom). Established: the library's host-to-raster setup routines write
-the pair this way, and the no-zoom path stores 0x100 in both. The magnifying
-and shrinking arithmetic that derives other values is inferred and not
-stated here.
-
-#define RE_XFER_ZOOM_UNITY 0x100 /* established
 
 ### Register `xfer_mask_hi`
 
@@ -466,6 +480,10 @@ Transfer mode. Placed from what the drivers write: component type in 3:0,
 pixel format in 7:4, begin skip bytes in 10:8, begin skip bits in 13:11,
 stride skip bytes in 16:14 (three bits in every writer read), zoom in 19,
 decimate in 20, RGB order in 22, and bit 23 set for every pixel draw.
+Bit 19 is set by the client only for a whole-number x zoom above 1 and bit 20
+for every other zoom except 1 (below 1, or non-whole above 1), neither at
+zoom 1 (established, client library; see xfer_zoom_step), so bit 20 marks the
+step form of the zoom words, not only a zoom below 1.
 Bits 17 and 18 are one-bit flags the shipped library sets or clears (it
 sets 18 in its default state and clears 17 to 20 in the copy paths); what
 they do is not known, and the unpack-order and read-mask flags are among
