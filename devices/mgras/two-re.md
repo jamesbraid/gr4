@@ -22,8 +22,9 @@ open questions.
   statements that rest on it were not re-read.
 - The Octane IDE graphics diagnostic, `ide.IP30` 6.5.30 (SHA-256
   `19d7a194cb417330475df9a187379404d413c72433cfc97fc9e238f0fe170d69`), read as
-  disassembly. Not in this checkout, so the diagnostic statements below were not
-  re-read.
+  disassembly (in the 6.5.30 install media as `ide.CPUBOARD-IP30`; it has no
+  symbols). Statements marked "re-read" were checked against that file; the other
+  diagnostic statements below were not.
 - Register names from the public OpenBSD `impact(4)` driver, checked against
   `sys/arch/sgi/dev/impactreg.h` at revision `2df91d80c104` of
   `the-machine-hall/openbsd-sgi` (see [the 2D transactions page](../re4/2d-transactions.md)).
@@ -58,14 +59,32 @@ each engine, has two pixel processors. Table 4.1 of the report. **Established.**
   that split pixels another way would fail its own tests. **Inferred**: a
   diagnostic's expectation, not a measurement.
   - Raster engine: row modulo `n`, so engine 0 takes row 0.
-  - Span: one full row of the diagnostic's 1344 by 1024 framebuffer, seven
-    192-pixel tiles across.
+  - Span: one full row of the diagnostic's framebuffer, 1344 by 1024 by default
+    (the globals at `0x20931c08` and `0x20931c04` hold `0x540` and `0x400`). The
+    tiles across are 192 pixels wide and number 7 for width 1344, 11 for width
+    2112 and `ceil(width / 192)` for any other width (re-read at `0x20831314` to
+    `0x20831344`).
   - Pixel processor within the engine: the low bit of `x`.
   - RDRAM device within the pixel processor: `((x >> 2) mod 3 + r mod 3) mod 3`.
   - RDRAM word: the pixel processor number in the top bits, then the device
     plus 4, then the tile, then `r mod 16`, then the column, where the column is
     `2 * ((x mod 192) / 12) + ((x >> 1) & 1)`. The diagnostic also reads the
     word after each pixel's address. What one address unit holds is unknown.
+  - The routine that applies these rules is at `0x208312a8` (re-read). It prints
+    `X: %d, Y: %d ==> RSS-%d, PP-%d, RD-%d (RDRAM Addr: 0x%x)`, where the RSS is the
+    raster engine (`RA BOARD` for 0, `RB BOARD` for 1). Its fourth argument is an
+    operation code. **0** prints that line and calls a failure recorder
+    (`0x20831534`); it reads nothing. **1** writes the address to `0x02c570`
+    (`RDRAM_ADDR_PORT_ADDR`) and reads `0x02c574` (`RDRAM_DATA_PORT_ADDR`), compares the
+    word with one expected-value argument, then writes the address plus 2, reads
+    the port again and compares that with the other. **2** does both
+    reads and prints them (`Read:`) but compares nothing, so a caller that wants a
+    comparison does it itself. The callers are `0x2082a144`, `0x2082a1ec`,
+    `0x208311c8` and `0x2085a098` (0), `0x208321b0` (1) and `0x208327e0` (2). So the
+    mapping is tested at the drawing check (op 1) and nowhere else. The second
+    access sets bit 1 of an address whose formula leaves bits 1:0 clear, so the
+    address is not a plain byte address of 32-bit words; what bit 1 selects is
+    unknown.
 
 ## Selecting a pixel processor
 
@@ -138,6 +157,11 @@ or an address bit to choose an engine.
   28. **Inferred** from the diagnostic.
 - After selecting engine `k` it requires the status word `RE4_STATUS` to show
   `k` in bits 3:2 and the engine count less one in bits 1:0. **Inferred.** The
+  check is at `0x2082a960` to `0x2082aa38` (re-read): it writes `k` to the select
+  register, reads `0x02c578` with mask `0xfff`, and fails with `RE4 ID is wrong`
+  if bits 3:2 differ from `k`, with `RE4's version is wrong` if bits 7:4 are
+  neither 0 nor 2, and with `The RE4 count is wrong` if bits 1:0 plus one differ
+  from the engine count the diagnostic holds (the global at `0x209f2e64`). The
   diagnostic also writes 4 to the select register on several paths. What bit 2
   means is unknown.
 - At initialisation the kernel selects engine 0 and then engine 1 through the
