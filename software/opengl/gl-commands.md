@@ -75,7 +75,7 @@ Three header forms, all read from the client's emitters:
 - The client writes a zero word after each of its five geometry-engine table
   loads, the last one included. Its effect is unknown. Reading it as a no-op is
   inferred.
-- Nothing closes a stream. The kernel's context switch ends with `0x0000f400`
+- Nothing closes a stream. What the board does with a command that stops short, and what IRIX does about it, is in [hq4-host-interface.md](../kernel/hq4-host-interface.md#a-command-cut-short). The kernel's context switch ends with `0x0000f400`
   only when it switches to the default context.
 
 Reconciling with `CFIFO_CTL` in [devices/hq3/registers.toml](../../devices/hq3/registers.toml): that word

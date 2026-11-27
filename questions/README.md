@@ -394,3 +394,9 @@ bringing the user's systems online.
    figure, the reset state and the exact displayed frame behind each of the 42 expected words, so the stored words are not
    reproduced. Settled without hardware by emulating the diagnostic's generated expectation routine (`0x2084dc80`) for the
    walking-one colours and comparing with the analyzer model. A physical read is not available (James's Octane2 is VPro).
+
+## Cut commands and taking the board back (2026-11-27)
+
+- **What the board does with a command that stops short.** Numeric packets are single 64-bit stores, so only a staged-then-execute sequence can be cut; a GL command with a byte-count header can be cut inside its payload. No shipped code or document says whether the board waits, times out or takes the next words as payload ([hq4-host-interface.md](../software/kernel/hq4-host-interface.md#a-command-cut-short)). Routes tried: the IP30 exit, suspend, DDRN-destroy, timeout and context-switch paths, the 6.5.7 text port library. Next: write a decoder for the HQ4 microcode image and read its command-header handler (software now); a model of the board's input logic (hardware only).
+- **Whether the full back-end re-initialisation is needed after a half-sent command.** IRIX always runs the whole `mgras_earlyinit` chain ([hq4-host-interface.md](../software/kernel/hq4-host-interface.md#taking-the-board-back-after-a-crash-or-a-lost-manager)). Nothing shipped tries less, and the 6.5.30 `MgrasInitRasterBackend` and the Origin kernel's early init were not read. Next: read both (software now), then a model run of the reduced order.
+- **What the three values stored at the end of `MgrasReset` select** (`0x40000000` to the board configuration word `0x072408`, `0x108d` to `0x011000`, `0x765b900f` to `0x011008`). Values and registers are established; the field meanings are not. Next: the Octane diagnostic's register tables and the HQ4 microcode read above.
