@@ -368,7 +368,7 @@ usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3190	388	rrmAllocPcxid	d
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3314	684	rrmValidateMyPcx	dwarf+symtab	13dd4077261d		in	named-only	generated/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x35c0	332	RRM_ValidateClip	dwarf+symtab	f60c1011a814		in	named-only	generated/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x370c	960	RRM_ValidFault	dwarf+symtab	13e0b7b861a0		in	named-only	software/kernel/readings/gfx.o.md#readings-usrcpusysgenip28bootgfxo	Readings: `usr/cpu/sysgen/IP28boot/gfx.o`
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3acc	100	RRM_CheckValidFault	dwarf+symtab	873d82267ad0		in	named-only	devices/mgras/readings/mgras.a-mgras.o.md#readings-usrcpusysgenip28bootmgrasamgraso	Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras.o)`
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3acc	100	RRM_CheckValidFault	dwarf+symtab	873d82267ad0		in	named-only	devices/mgras/video-sync.md#32-the-video-texture-request-0x6d670016	3.2 The video-texture request (`0x6d670016`)
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3b30	228	rrmSwapWait	dwarf+symtab	3b3915e47c0f		in	named-only	generated/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3c14	804	RRM_SwapBuf	dwarf+symtab	cce59cded90d		in	named-only	generated/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x3f38	216	rrmSwapUnGroup	dwarf+symtab	bfc7c7c6db9a		in	named-only	software/kernel/readings/rrm.o.md#readings-usrcpusysgenip28bootrrmo	Readings: `usr/cpu/sysgen/IP28boot/rrm.o`
@@ -386,9 +386,9 @@ usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4700	52	RRM_SetSwapInter
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4734	276	RRM_Message	dwarf+symtab	9d87a7efb5c8		in	named-only	generated/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4848	24	RRM_SetVideoSync	dwarf+symtab	eaabba223a7b		in	named-only	generated/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4860	72	RRM_GetVideoSync	dwarf+symtab	795dbe4d2843		in	named-only	generated/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x48a8	116	RRM_WaitVideoSync	dwarf+symtab	c3a30bc083a8		in	named-only	generated/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x491c	244	rrmWaitVideoSync	dwarf+symtab	3ff4d8c95d71		in	named-only	generated/inventory/functions.tsv	
-usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4a10	324	rrmValidateVideoSync	dwarf+symtab	ac6bd7d4e1b2		in	named-only	devices/mgras/readings/mgras.a-mgras_retrace.o.md#readings-usrcpusysgenip28bootmgrasamgras_retraceo	Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras_retrace.o)`
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x48a8	116	RRM_WaitVideoSync	dwarf+symtab	c3a30bc083a8		in	named-only	devices/mgras/video-sync.md#11-what-exists	1.1 What exists
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x491c	244	rrmWaitVideoSync	dwarf+symtab	3ff4d8c95d71		in	named-only	devices/mgras/video-sync.md#11-what-exists	1.1 What exists
+usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4a10	324	rrmValidateVideoSync	dwarf+symtab	ac6bd7d4e1b2		in	named-only	devices/mgras/video-sync.md#11-what-exists	1.1 What exists
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4b54	136	RRM_MapClipToSwapbufID	dwarf+symtab	e5526cbbd0fe		in	named-only	generated/inventory/functions.tsv	
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x4bdc	1384	RRM_Dispatch	dwarf+symtab	50ac3391eb64		in	named-only	software/kernel/readings/gfx.o.md#readings-usrcpusysgenip28bootgfxo	Readings: `usr/cpu/sysgen/IP28boot/gfx.o`
 usr/cpu/sysgen/IP28boot/rrm.o	shared-kernel	n64	.text	0x5144	228	irix5_to_RRM_ValidateClip	dwarf+symtab	9ce4516e40a7		in	named-only	generated/inventory/functions.tsv	
@@ -4592,11 +4592,11 @@ usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9cff44	1032	__glXGetDrawab
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d034c	352	glXDestroyGLXPbufferSGIX	dwarf+dynsym	75654b062ddd		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d04ac	1660	__glx_PixelStoref	dwarf+dynsym	7953c8d98e51		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d0b28	916	glXCreateGLXPbufferSGIX	dwarf+dynsym	2c1ab19cb0fa		in	named-only	devices/mgras/MGRAS.h:185	listvisuals, 2026-10-10; not yet compared with a real board):
-usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d0ebc	140	glXGetVideoSyncSGI	dwarf+dynsym	9bae0197143e		in	named-only	generated/inventory/functions.tsv	
-usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d0f48	196	glXWaitVideoSyncSGI	dwarf+dynsym	eec2f59abada		in	named-only	generated/inventory/functions.tsv	
+usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d0ebc	140	glXGetVideoSyncSGI	dwarf+dynsym	9bae0197143e		in	named-only	software/kernel/display-timing.md#retrace	Retrace
+usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d0f48	196	glXWaitVideoSyncSGI	dwarf+dynsym	eec2f59abada		in	named-only	software/kernel/display-timing.md#retrace	Retrace
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d100c	340	glXDestroyGLXVideoSourceSGIX	dwarf+dynsym	7a0d13645bd9		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32	.text	0xd9d1160	196	videoPackingToInternalFormat	dwarf+funcnames	16968338d67e		in	named-only	generated/inventory/functions.tsv	
-usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d1224	932	glXCreateGLXVideoSourceSGIX	dwarf+dynsym	40f685e0fcf0		in	named-only	generated/inventory/functions.tsv	
+usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d1224	932	glXCreateGLXVideoSourceSGIX	dwarf+dynsym	40f685e0fcf0		in	named-only	devices/mgras/video-sync.md#35-who-uses-it	3.5 Who uses it
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d15c8	88	__glXCreateVideoSourcePrivate	dwarf+dynsym	c26ee8452e77		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d1620	80	__glXDestroyVideoSourcePrivate	dwarf+dynsym	ef9c577d986c		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGL.so	board-library	n32		0xd9d1670	144	__glXInitializeVideoLibrary	dwarf+dynsym	86ae7efdf447		in	named-only	generated/inventory/functions.tsv	
@@ -4875,7 +4875,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6dcd0	480	StoreS
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6deb0	76	ReadColor	dwarf+funcnames	be278e54ea0d	multi-unit	in	named-only		
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda6defc	240	__glMgrInitCI	dwarf+dynsym	4e1b48fdf398		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda6dfec	52	__glMgrIoctl	dwarf+dynsym	b5209c781523		in	named-only	generated/inventory/functions.tsv	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6e020	1128	GetBoardInfo	dwarf+funcnames	fae8cc8ca963		in	named-only	generated/inventory/functions.tsv	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6e020	1128	GetBoardInfo	dwarf+funcnames	fae8cc8ca963		in	named-only	devices/mgras/board-identity.md#the-gl_renderer-and-gl_version-text	The GL_RENDERER and GL_VERSION text
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6e488	608	InitTables	dwarf+funcnames	816268e32d87		in	named-only	devices/hq3/HQ3.h:967	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda6e6e8	64	__glMgrAllocAccum	dwarf+dynsym	831c93afa3e4		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda6e728	188	SwapBuffers	dwarf+funcnames	90476a14caf8	multi-unit	in	named-only		
@@ -5256,7 +5256,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9640c	540	__glMgrim_T
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda96628	248	__glMgrim_CopyTexImage2DEXT	dwarf+dynsym	92eabe36f7b7		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda96720	2232	mgrTM_TexImage2D_setup	dwarf+funcnames	91f5e53d6766		in	named-only	software/opengl/tram-corruption-analysis.md#key-findings	Key Findings
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda96fd8	196	__glMgrim_TexSubImage2DEXT	dwarf+dynsym	b0968fa68a3a		in	named-only	devices/te1/TE1.h:374	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9709c	172	__glMgrIsCurrentGLXReadVideo	dwarf+dynsym	5fe3b55ca773		in	named-only	generated/inventory/functions.tsv	
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda9709c	172	__glMgrIsCurrentGLXReadVideo	dwarf+dynsym	5fe3b55ca773		in	named-only	devices/mgras/video-sync.md#35-who-uses-it	3.5 Who uses it
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda97148	272	__glMgrim_CopyTexSubImage2DEXT	dwarf+dynsym	c04870cb502b		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xda97258	1024	mgrTM_TexSubImage2D_setup	dwarf+funcnames	66b3c9feefe6		in	named-only	software/opengl/tram-corruption-analysis.md#key-findings	Key Findings
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xda97658	1536	__glMgrim_TexImage3DEXT	dwarf+dynsym	5d1c8d1d7d97		in	named-only	generated/inventory/functions.tsv	
@@ -5472,7 +5472,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdabed1c	652	mgrTM_
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabefa8	592	mgrTM_FreeDMAPool	dwarf+dynsym	742d4829cecb		in	located	software/opengl/readings/usr-gfx-arch-IP28GR432-libGLcore.so.md#mgrtm_freedmapool-in-usrgfxarchip28gr432libglcoreso-at-0xdabefa8	`mgrTM_FreeDMAPool` in `usr/gfx/arch/IP28GR432/libGLcore.so` at 0xdabefa8
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32	.text	0xdabf1f8	164	flushRegs	dwarf+funcnames	239c5bba742e		in	named-only	devices/mgras/readings/mgras.a-mgras_tex_io.o.md#readings-usrcpusysgenip28bootmgrasamgras_tex_ioo	Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex_io.o)`
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf29c	228	__glMgrasWrite	dwarf+dynsym	6c94ee09c2f6		in	named-only	software/kernel/ioctl-requests.md#gr4-ioctl-request-statements	gr4 ioctl request statements
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf380	172	__glMgrasSet	dwarf+dynsym	53e1ef78d9cb		in	named-only	devices/mgras/readings/mgras.a-mgras_tex.o.md#readings-usrcpusysgenip28bootmgrasamgras_texo	Readings: `usr/cpu/sysgen/IP28boot/mgras.a(mgras_tex.o)`
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf380	172	__glMgrasSet	dwarf+dynsym	53e1ef78d9cb		in	named-only	devices/mgras/video-sync.md#32-the-video-texture-request-0x6d670016	3.2 The video-texture request (`0x6d670016`)
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf42c	36	__glMgrSaveTexmode	dwarf+dynsym	0f3ffdf265fb		in	named-only	devices/hq3/HQ3.h:1220	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf450	20	__glMgrRestoreTexmode	dwarf+dynsym	b2a94311343e		in	named-only	devices/hq3/HQ3.h:1221	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdabf464	4064	mgrTM_DoTexLoad	dwarf+dynsym	81eb4e5a103c		in	named-only	software/opengl/tram-corruption-analysis.md#3-the-four-intersecting-bugs	3. The Four Intersecting Bugs
@@ -9257,7 +9257,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9420	12	glPixelMapui
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd942c	12	glPixelMapusv	dwarf+dynsym	f0ffc01f394a		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9438	12	glReadBuffer	dwarf+dynsym	cea45e9aea66		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9444	12	glCopyPixels	dwarf+dynsym	7ca9c88f1d6b		in	named-only	questions/README.md#11-command-stream-tokens-0x096-0x097-0x0da-and-0x05f	11. Command-stream tokens 0x096, 0x097, 0x0DA and 0x05F
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9450	12	glReadPixels	dwarf+dynsym	ecd13f6e31c4		in	named-only	questions/README.md#11-command-stream-tokens-0x096-0x097-0x0da-and-0x05f	11. Command-stream tokens 0x096, 0x097, 0x0DA and 0x05F
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9450	12	glReadPixels	dwarf+dynsym	ecd13f6e31c4		in	named-only	devices/mgras/raster-reference.md#4-depth-interpolation-store-rounding	4. Depth interpolation, store, rounding
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd945c	12	glDrawPixels	dwarf+dynsym	05e4a83d751f		in	named-only	software/opengl/gl-commands.md#pixel-images	Pixel images
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9468	12	glGetBooleanv	dwarf+dynsym	66c04f96219a		in	named-only	devices/ge11/GE11.h:737	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9474	12	glGetClipPlane	dwarf+dynsym	439fee3d4638		in	named-only	generated/inventory/functions.tsv	
@@ -9410,7 +9410,7 @@ usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9948	12	glInterleave
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9954	12	glNormalPointer	dwarf+dynsym	ce65ea26579d		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9960	12	glTexCoordPointer	dwarf+dynsym	490630363665		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd996c	12	glVertexPointer	dwarf+dynsym	baab093c62d5		in	named-only	generated/inventory/functions.tsv	
-usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9978	12	glPolygonOffset	dwarf+dynsym	98bd9c9c419e		in	named-only	software/opengl/gl-commands.md#context-setup-and-state	Context setup and state
+usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9978	12	glPolygonOffset	dwarf+dynsym	98bd9c9c419e		in	named-only	devices/mgras/raster-reference.md#4-depth-interpolation-store-rounding	4. Depth interpolation, store, rounding
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9984	12	glIndexub	dwarf+dynsym	92e442ea73e0		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd9990	12	glIndexubv	dwarf+dynsym	9b37cf7b02cd		in	named-only	generated/inventory/functions.tsv	
 usr/gfx/arch/IP28GR432/libGLcore.so	board-library	n32		0xdbd999c	12	glPopClientAttrib	dwarf+dynsym	0ca16c27818a		in	named-only	generated/inventory/functions.tsv	
@@ -9879,7 +9879,7 @@ usr/lib/X11/dyDDX/glx.so	shared-x-server	n32		0x5ff09b1c	704	glxSwapVendorPrivat
 usr/lib/X11/dyDDX/glx.so	shared-x-server	n32		0x5ff09ddc	752	glxSwapVendorPrivateWithReply	dynsym	759e6a5e0005		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/glx.so	shared-x-server	n32		0x5ff0a0cc	1120	glxJoinSwapGroupSGIX	dynsym	de0fb2b805c1		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/glx.so	shared-x-server	n32		0x5ff0a52c	760	glxBindSwapBarrierSGIX	dynsym	66bfc472983d		in	named-only	generated/inventory/functions.tsv	
-usr/lib/X11/dyDDX/glx.so	shared-x-server	n32		0x5ff0a824	308	glxQueryMaxSwapBarriersSGIX	dynsym	9f9f244850ca		in	named-only	generated/inventory/functions.tsv	
+usr/lib/X11/dyDDX/glx.so	shared-x-server	n32		0x5ff0a824	308	glxQueryMaxSwapBarriersSGIX	dynsym	9f9f244850ca		in	named-only	devices/mgras/video-sync.md#16-what-swap-group-software-and-the-diagnostic-expect	1.6 What swap-group software and the diagnostic expect
 usr/lib/X11/dyDDX/glx.so	shared-x-server	n32		0x5ff0a958	68	SwapGroupGone	dynsym	4bbca99f3cdf		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/glx.so	shared-x-server	n32		0x5ff0be44	264	__glXScreenInit	dynsym	24ecae5ea56d		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/glx.so	shared-x-server	n32		0x5ff0bf4c	96	glx_rt_DestroyContext	dynsym	b3540963160b		in	named-only	generated/inventory/functions.tsv	
@@ -10735,7 +10735,7 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3a2130	180	miDestroyGC	dyn
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3a21e4	1260	nfbMoveWindow	dynsym	48765c99b782		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3a26d0	1072	cfbSolidSpansCopy	dynsym	27d9bd36d44c		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3a2b00	1320	mgrasInstallOverlayMap	dynsym	908bbb599441		in	named-only	generated/inventory/functions.tsv	
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3a3028	3260	mgrasInitiateBufferSwap	dynsym	b64e72e94f89		in	named-only	generated/inventory/functions.tsv	
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3a3028	3260	mgrasInitiateBufferSwap	dynsym	b64e72e94f89		in	named-only	devices/mgras/video-sync.md#15-interrupts-and-the-x-and-kernel-paths	1.5 Interrupts and the X and kernel paths
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3a3ce4	1532	cfb8SetOpaqueStipple	dynsym	ee91c97b7eba		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3a42e0	868	cfbPutImage	dynsym	efea3253f2ac		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3a4644	684	cfbGetImage	dynsym	56e6d02a2c0b		in	named-only	generated/inventory/functions.tsv	
@@ -10811,8 +10811,8 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d89f4	2664	mgrasLoadAndFr
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d945c	212	mgrasSetScrnGlock	dynsym	0f987dbd7bc0		in	located	software/xsgi/readings/usr-lib-X11-dyDDX-impactpc.so.md#readings-usrlibx11dyddximpactpcso	Readings: `usr/lib/X11/dyDDX/impactpc.so`
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d9768	892	mgrasStrGamma8	dynsym	49115564ec6c		in	located	software/xsgi/readings/usr-lib-X11-dyDDX-impactpc.so.md#readings-usrlibx11dyddximpactpcso	Readings: `usr/lib/X11/dyDDX/impactpc.so`
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3d9ae4	772	mgrasStrGamma16	dynsym	03ab8ea4b3bd		in	located	software/xsgi/readings/usr-lib-X11-dyDDX-impactpc.so.md#readings-usrlibx11dyddximpactpcso	Readings: `usr/lib/X11/dyDDX/impactpc.so`
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3da2bc	184	mgrasSetPltParam	dynsym	73436083de26		in	named-only	generated/inventory/functions.tsv	
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3da374	208	mgrasQryPltParam	dynsym	30ac9eaccf46		in	named-only	generated/inventory/functions.tsv	
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3da2bc	184	mgrasSetPltParam	dynsym	73436083de26		in	named-only	devices/mgras/video-sync.md#12-the-genlock-request	1.2 The genlock request
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3da374	208	mgrasQryPltParam	dynsym	30ac9eaccf46		in	named-only	devices/mgras/video-sync.md#12-the-genlock-request	1.2 The genlock request
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3da444	1936	mgrasPostInit	dynsym	de99982c7342		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3dabd4	244	mgrasResetProc	dynsym	fd45f6662468		in	named-only	software/xsgi/readings/usr-lib-X11-dyDDX-impactpc.so.md#readings-usrlibx11dyddximpactpcso	Readings: `usr/lib/X11/dyDDX/impactpc.so`
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e3dacc8	5368	mgrasDefaultTTExists	dynsym	47efe84d2290		in	named-only	generated/inventory/functions.tsv	
@@ -11054,7 +11054,7 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a0900	440	mgrasPbufAllocC
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a0ab8	4568	mgrasPolyGlyphBltTE6	dynsym	2c4dbab0c675		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a1c90	5308	mgrasPolyGlyphBltTE9	dynsym	4c3220d61ffc		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a3890	3544	mgrasValidateClip	dynsym	0fe550436bd7		in	named-only	generated/inventory/functions.tsv	
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4668	268	mgrasValidateSwapbuf	dynsym	7240e7590599		in	named-only	generated/inventory/functions.tsv	
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4668	268	mgrasValidateSwapbuf	dynsym	7240e7590599		in	named-only	devices/mgras/video-sync.md#15-interrupts-and-the-x-and-kernel-paths	1.5 Interrupts and the X and kernel paths
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4774	236	mgrasValidateReservedMode	dynsym	a5d8d0e781a7		in	understood	software/xsgi/readings/usr-lib-X11-dyDDX-impactpc.so.md#readings-usrlibx11dyddximpactpcso	Readings: `usr/lib/X11/dyDDX/impactpc.so`
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4860	860	mgrasValidateMode	dynsym	706601f1b418		in	understood	software/xsgi/readings/usr-lib-X11-dyDDX-impactpc.so.md#readings-usrlibx11dyddximpactpcso	Readings: `usr/lib/X11/dyDDX/impactpc.so`
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4a4bbc	896	mgrasChangeDIDCmap	dynsym	387388ce9116		in	named-only	generated/inventory/functions.tsv	
@@ -11148,7 +11148,7 @@ usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4cd620	576	nfbChangeSaveUn
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4cd860	392	nfbPostChangeSaveUnder	dynsym	7aa8c8a672cf		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4cdabc	72	*clone*1*mgrasCursorOn	dynsym	7ec3bbc73165		in	undocumented		
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4cdb04	1616	mgrasClearPlanes	dynsym	a3ecb6577a51		in	named-only	questions/README.md#15-display-read-buffer-pointer-word-register-0x16d	15. Display read buffer pointer word (register 0x16D)
-usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4ce154	500	mgrasBlankScreen	dynsym	be501cc0ec05		in	named-only	devices/mgras/MGRAS.h:291	listvisuals, 2026-10-10; not yet compared with a real board):
+usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4ce154	500	mgrasBlankScreen	dynsym	be501cc0ec05		in	named-only	devices/mgras/MGRAS.h:293	listvisuals, 2026-10-10; not yet compared with a real board):
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4ce348	176	nfbMarkWindow	dynsym	9e5725c8efd1		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4ce6fc	6768	mfbBresS	dynsym	682ff5108b65		in	named-only	generated/inventory/functions.tsv	
 usr/lib/X11/dyDDX/impactpc.so	board-x-module	n32		0x5e4d016c	276	miRectAlloc	dynsym	a9e287eeeae2		in	named-only	generated/inventory/functions.tsv	

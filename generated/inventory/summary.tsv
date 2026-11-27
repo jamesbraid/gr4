@@ -1,10 +1,10 @@
 table	rows	out_of_scope	understood	understood_with_open	understood_distinct	templated	located	named_only	undocumented	no_software_dependency	pct_understood	pct_located_or_better	pct_mentioned	pct_done	unresolved_sites	truncated	audited_real_pct	audited_sample	audited_date	computes	reused	multi_unit	shared_address	address_unknown	input
-binaries	59	0	0	0	0	0	0	31	28	0	0.0	0.0	52.5	0.0							0				
+binaries	59	0	2	0	2	0	0	29	28	0	3.4	3.4	52.5	3.4							0				
 functions	11974	0	213	5	207	0	166	11587	8	0	1.8	3.2	99.9	1.8							0	24	1224	0	
 functions (distinct names)	11963	0	213	5	207	0	166	11576	8	0	1.8	3.2	99.9	1.8							0				
 mmio	10	0	0	0	0	0	0	7	3	0	0.0	0.0	70.0	0.0	0						0				
 tokens	6	0	3	0	3	0	3	0	0	0	50.0	100.0	100.0	50.0							0				
-ioctls	27	0	25	13	25	0	1	1	0	0	92.6	96.3	100.0	92.6							0				
+ioctls	27	0	25	12	25	0	1	1	0	0	92.6	96.3	100.0	92.6							0				
 ucode	0	0	0	0	0	0	0	0	0	0	0.0	0.0	0.0	0.0						0	0				
 spec-registers	0	0	0	0	0	0	0	0	0	0	0.0	0.0	0.0	0.0							0				
 input root manifest	46																								bb008cba96809cbdce5071e840fe791884f8c0eff8e82e1cdf6d36f9d08a8a51
