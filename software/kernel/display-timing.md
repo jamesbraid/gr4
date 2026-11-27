@@ -26,8 +26,11 @@ reasoning) and unknown.
   `_60`, `_60_2f`, `2RSS/1920x1080_48_32db`, `_50_32db`, `_60_32db`) unpacked from
   the `DLvfo.sw` image of the Smoke 5.0 install set (SHA-256
   `d11d83b5955a302dcefb7c4da73446068562718d42fcb4c3c51126e93e95bcdb`).
-  `vof/cmb/` holds a different file kind and was not read. Field values are
-  established as file contents.
+  `vof/cmb/` holds a different file kind and was not read for values. It is the
+  same container: the 15 files directly in `cmb/` name a `VC2 for Impact MCO` chip
+  and no `DisplayArchitecture`; the 9 files of `cmb/1RSS` and 13 of `cmb/2RSS` name
+  `VC3 for Impact` with `OptionHW` 2 (counted over the 6.5.30 tree; the 6.5 base tree has
+  the same file counts). Field values are established as file contents.
 - **Data sheet.** The Analog Devices ADV7160/ADV7162 data sheet, Rev. 0 (Library
   `graphics/analog-devices/adv7160_7162.pdf`, SHA-256 `c8fa1a6d...`): the PLL on
   page 18 and the PLL command register on page 30.
@@ -50,6 +53,8 @@ reasoning) and unknown.
 - The binaries and timing files are not stored in this repository.
 
 ## Timing file layout
+
+The same container is used by the O2, VPro, InfiniteReality and compositor files; the cross-board view and the container derivation are in kudzu `software/video/video-format-files.md` and kona `software/video/display-file-format.md`.
 
 **Established**: a parser written from the layout below reproduces
 `AchievedFrequency`, the `DacPll_*` values and the tables of all 51 files, and
