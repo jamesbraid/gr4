@@ -203,6 +203,7 @@ the row says otherwise.
 | geometry-engine table load | `0x00008204` and a size word (`0x20`, `0x40` or `0x27`); then an inline block of five descriptor words and 128, 256 or 156 data words; then a zero word (see [batched blocks](#batched-register-blocks-and-table-loads)) |
 | colour-index setup | `0x00000a04` and the visual's colour-index width in bits. `__glMgrInitCI` (`0xd94e830`, re-read) stores `0xa04` and then the context word at `+3252`, the same word it turns into the index mask `(1 << width) - 1` and the format routine compares with 5 and 9 |
 | RGBA setup | `0x00000900` |
+| buffer format words | `0x00009a08` and two words, written at context setup, not by `glRenderMode` (see [format words](#format-words-0x00009a08)) |
 | `glViewport` | `0x00003310` and four ints: x, y, width, height |
 | `glScissor` | `0x00003910` and four ints: x, width less one, y, height less one |
 | `glDepthRange` | `0x00004808` and two floats |
@@ -245,6 +246,43 @@ the row says otherwise.
 | `glFlush` | `0x00003600` |
 | clear | `0x00001500` for colour, `0x00004c00` for stencil, `0x00004a00` for depth, one per selected bit |
 
+### Format words, 0x00009a08
+
+An earlier version of this page put `0x00009a08` in `glRenderMode`. The 6.5.30
+client loads `0x9a08` at three places (`0xd950558`, `0xd9505c4`, `0xd9507d4`), all in
+one routine that runs from `0xd9504d0` to about `0xd9508a0` (re-read). That
+range lies after the end of `__glMgrim_RenderMode` (`0xd94f130`, 0x5f4 bytes),
+whose name the disassembly carries over it. `RenderMode` stores no `0x9a08`.
+The routine is `InitFormatValues` in the 6.5.0 `IP28GR432` client, whose debug
+names give it the same two-block structure and the same constants. It is called
+once, at `0xd951dec`, in the context make-current path, right after the routine
+that sets up the buffers. **Established** for the stores and the words; naming
+the 6.5.30 routine from the 6.5.0 one, and its caller, are **inferred**.
+
+The two payload words are computed, not literals. Each is the format code of
+one buffer, built from a block of context fields: the first word from the block
+at `+3380`, the second from the block at `+3220`. The blocks have the same shape
+and the same rules:
+
+- An RGB flag byte (`+3220` or `+3380`) set: a component size at `+3256` or
+  `+3416` of 4, 5, 8 or 12 gives `0`, `0x100`, `0x2200` and `0x2300`. For 12 the
+  code is `0x2400` instead when two further words (`+3260` and `+3268`, or `+3420`
+  and `+3428`) are both zero. Any other size gives 0. The sizes read as the
+  4-4-4-4, 5-5-5-1, 8-8-8-8 and 12-12-12-12 visuals (**inferred**); for 5 the plane
+  masks the routine stores (`0x40007fff`, `0xbfff8000`) are the 5-5-5-1 masks
+  [PP1.h](../../devices/pp1/PP1.h) records.
+- Otherwise a colour-index flag byte (`+3221` or `+3381`) set: the index width
+  (`+3252` or `+3412`) gives `0x600` below 5 bits, `0x500` for 5 to 8 and `0x400`
+  from 9. For 5 to 8 bits the code ORs in `0x2000` when another word (`+3300` or
+  `+3460`) is set, giving `0x2500`. The routine uses the same word to pick plane
+  masks, so it probably means double buffering (**inferred**).
+- Neither flag set: the word is 0.
+
+After the stores the routine copies bits 10:8 and bit 13 of the second word into a
+shadow word in the context. A single-buffered visual with an 8-bit colour index
+on both sides therefore sends `0x9a08, 0x500, 0x500`. What the opcode does on the
+board is unknown.
+
 ### Lighting, materials and further state
 
 Read in the `IP27GR532` client (the immediate-mode `__glMgrim_` routines; the
@@ -271,7 +309,6 @@ is **inferred**. A light number is the application's enumerant less `GL_LIGHT0`
 | `glPushMatrix`, `glPopMatrix` | `0x00002f00`, `0x00002e00` | `__glMgrim_PushMatrix`, `__glMgrim_PopMatrix` |
 | `glOrtho`, `glFrustum` | `0x00003518`, `0x00003418` and six floats, the arguments narrowed from doubles, in argument order | `__glMgrim_Ortho` (`0xd97cb60`), `__glMgrim_Frustum` |
 | `glRenderMode` | leaving feedback `0x0000c800` (only when a context flag at `+0x85d8` is set) and leaving selection `0x0000c900`, no payload; entering feedback `0x0000ca08` and entering selection `0x0000cb04`, with two words and one word that were not decoded; entering `GL_RENDER` stores no header | `__glMgrim_RenderMode` (`0xd94f130`, 0x5f4 bytes) |
-| (context set-up) | `0x00009a08` and two words, stored at three sites of a static routine at `0xd9504d0`, called from a static set-up routine around `0xd951dec`; meaning not decoded. It is not stored by `glRenderMode`: a disassembly labels the routine inside `__glMgrim_RenderMode`, but that symbol ends at `0xd94f724` | static routine at `0xd9504d0` |
 | `glBitmap` | `0x00009420`, eight words; the fields were not decoded here | `__glMgrim_Bitmap`, `__glMgrRenderBitmap` |
 | swap | `0x00003700`, sent by the kernel's swap scheduler to the command port after it writes `0x400` to `0x011040`; what the board does is unknown | `MgrasSchedSwapBuf` (6.5.30 `mgras.a`) |
 
