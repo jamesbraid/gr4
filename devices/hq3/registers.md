@@ -1,7 +1,7 @@
 <!-- generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 4 -->
-<!-- input sha256 48084a86d0569573796c5ea9673bd3af48ac41384b005835f9b93225508fb2a1 -->
+<!-- input sha256 3465678c224d844941a482f4b8ee2a06a5950f4d61f2a88408337bb52a820fd8 -->
 
 # host interface and command processor registers for the Impact graphics subsystem
 
@@ -81,7 +81,7 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | 7 | `diag_loopback` | inferred |  | driver and diagnostic readings |  |
 | 5:4 | `diag_route` | inferred | ge0=2, ge1=3 | driver and diagnostic readings |  |
 | 3 | `ucode_stall` | inferred |  | driver and diagnostic readings |  |
-| 2 | `big_endian` | inferred |  | driver and diagnostic readings |  |
+| 2 | `big_endian` | inferred |  | driver and diagnostic readings | Named for a big-endian host; every shipped write sets it. Effect when clear unknown (byte-order.md). |
 
 ### Register `flag_ctx`
 
@@ -144,8 +144,8 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 | 6 | `bus_bypass` | inferred |  | driver and diagnostic readings |  |
 | 3 | `tlb_update` | inferred |  | driver and diagnostic readings |  |
 | 2 | `ext_pipe_register` | inferred |  | driver and diagnostic readings |  |
-| 1 | `display_bus_big_endian` | inferred |  | driver and diagnostic readings |  |
-| 0 | `host_big_endian` | inferred |  | driver and diagnostic readings |  |
+| 1 | `display_bus_big_endian` | inferred |  | driver and diagnostic readings | Named for the display bus; every shipped write sets it. Effect when clear unknown (byte-order.md). |
+| 0 | `host_big_endian` | inferred |  | driver and diagnostic readings | Named for the host; every shipped write sets it. Effect when clear unknown (byte-order.md). |
 
 ### Register `reg_4080`
 

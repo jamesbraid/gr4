@@ -1,7 +1,7 @@
 // @generated from devices/ and formats/ by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 4
-// input sha256 7715df5eeab51dc8cd0a6b05e391fe944d1be54f4e087995244682555dc90c03
+// input sha256 1f41309ed29e3bc979b5c5d195140ba191cae40eee2ac552cd884f8a204b67fb
 #![no_std]
 #![cfg_attr(rustfmt, rustfmt_skip)]
 pub mod ge11;

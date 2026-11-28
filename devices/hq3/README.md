@@ -8,6 +8,10 @@ Source: driver and diagnostic readings.
 
 [HQ3.h](HQ3.h) is the commented C description of the chip; the values are in [registers.toml](registers.toml), each graded and sourced, and the generated reference page is [registers.md](registers.md).
 
+## More in this directory
+
+- [HQ3 and HQ4 byte order for a little-endian host](byte-order.md)
+
 ## Used by
 
 - [MGRAS display timing](../../software/kernel/display-timing.md)

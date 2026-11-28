@@ -2,7 +2,7 @@
 <!-- generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 4 -->
-<!-- input sha256 48084a86d0569573796c5ea9673bd3af48ac41384b005835f9b93225508fb2a1 -->
+<!-- input sha256 3465678c224d844941a482f4b8ee2a06a5950f4d61f2a88408337bb52a820fd8 -->
 <genxml unit="hq3" prefix="HQ" title="host interface and command processor registers for the Impact graphics subsystem" from="driver and diagnostic readings">
   <doc>Host interface and command processor registers of the Impact graphics subsystem.</doc>
   <space name="hq3_regs" unit="reg"/>

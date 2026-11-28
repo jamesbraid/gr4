@@ -2,7 +2,7 @@
  * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 4 */
-/* input sha256 48084a86d0569573796c5ea9673bd3af48ac41384b005835f9b93225508fb2a1 */
+/* input sha256 3465678c224d844941a482f4b8ee2a06a5950f4d61f2a88408337bb52a820fd8 */
 /* host interface and command processor registers for the Impact graphics
  * subsystem */
 /* Names are MGRAS_HQ3_*; name source: ours. */

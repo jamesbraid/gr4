@@ -44,7 +44,7 @@ space = "hq3_regs"
 [registers.config.fields]
 diag_loopback = { bits = [7, 7], grade = "inferred" }
 ucode_stall = { bits = [3, 3], grade = "inferred" }
-big_endian = { bits = [2, 2], grade = "inferred" }
+big_endian = { bits = [2, 2], grade = "inferred", doc = "Named for a big-endian host; every shipped write sets it. Effect when clear unknown (byte-order.md)." }
 
 [registers.config.fields.diag_route]
 bits = [5, 4]
@@ -277,8 +277,8 @@ fifo_high_water = { bits = [12, 12], grade = "inferred" }
 bus_bypass = { bits = [6, 6], grade = "inferred" }
 tlb_update = { bits = [3, 3], grade = "inferred" }
 ext_pipe_register = { bits = [2, 2], grade = "inferred" }
-display_bus_big_endian = { bits = [1, 1], grade = "inferred" }
-host_big_endian = { bits = [0, 0], grade = "inferred" }
+display_bus_big_endian = { bits = [1, 1], grade = "inferred", doc = "Named for the display bus; every shipped write sets it. Effect when clear unknown (byte-order.md)." }
+host_big_endian = { bits = [0, 0], grade = "inferred", doc = "Named for the host; every shipped write sets it. Effect when clear unknown (byte-order.md)." }
 
 [[registers.gio_config.tests]]
 value = 0xf
