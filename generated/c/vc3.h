@@ -2,7 +2,7 @@
  * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 4 */
-/* input sha256 dcdab93f298e3ff44eb34600bc479403a89099c3719578747f7ab0a77bc24375 */
+/* input sha256 9374ab79c9a0a7b287f1a095365143c0192d4b6111d7b3907264f2a6cfe684e3 */
 /* VC3 video controller registers of the Impact graphics subsystem */
 #ifndef VC3_GEN_H
 #define VC3_GEN_H
@@ -14,7 +14,7 @@
  * Port: selects the numbered register that the data port reads or writes (a
  * one-byte access at the start of the window).
  */
-/* index: rw8, reset unknown; driver and diagnostic readings */
+/* index: rw8, reset unknown */
 #define VC3_INDEX_OFFSET                             0x8u /* established */
 
 /*
@@ -22,7 +22,7 @@
  * number in bits 31:24 and the 16-bit value in bits 23:8. The kernel and the
  * diagnostic use it for every register write.
  */
-/* index_data: rw32, reset unknown; driver and diagnostic readings */
+/* index_data: rw32, reset unknown */
 #define VC3_INDEX_DATA_OFFSET                        0x38u /* established */
 #define VC3_INDEX_DATA_REGISTER_SHIFT                24 /* established */
 #define VC3_INDEX_DATA_REGISTER_MASK                 0xffu
@@ -36,7 +36,7 @@
  * selected, 16 bits at a time. The diagnostic reads a register back by writing
  * its number to the index port and reading this port.
  */
-/* data: rw16, reset unknown; driver and diagnostic readings */
+/* data: rw16, reset unknown */
 #define VC3_DATA_OFFSET                              0xb0u /* established */
 
 /*
@@ -44,7 +44,7 @@
  * store. The software defines it next to the 16-bit port and uses the same SRAM
  * address register.
  */
-/* ram64: rw64, reset unknown; driver and diagnostic readings */
+/* ram64: rw64, reset unknown */
 #define VC3_RAM64_OFFSET                             0x180u /* established */
 
 /*
@@ -52,7 +52,7 @@
  * (the kernel and the diagnostic load the timing tables, the cursor glyph and
  * the display-ID tables through it).
  */
-/* ram: rw16, reset unknown; driver and diagnostic readings */
+/* ram: rw16, reset unknown */
 #define VC3_RAM_OFFSET                               0x190u /* established */
 
 /*
@@ -60,80 +60,69 @@
  * diagnostic's register test writes walking patterns and expects them back
  * unchanged.
  */
-/* vid_ep: rw16, space vc3_index, reset unknown; driver and diagnostic readings
- */
+/* vid_ep: rw16, space vc3_index, reset unknown */
 #define VC3_VID_EP_OFFSET                            0x0u /* established */
 
 /*
  * Cursor entry point. Walking-pattern read-back is expected.
  */
-/* curs_ep: rw16, space vc3_index, reset unknown; driver and diagnostic readings
- */
+/* curs_ep: rw16, space vc3_index, reset unknown */
 #define VC3_CURS_EP_OFFSET                           0x1u /* established */
 
 /*
  * Hardware cursor x position. Walking-pattern read-back is expected.
  */
-/* curs_x: rw16, space vc3_index, reset unknown; driver and diagnostic readings
- */
+/* curs_x: rw16, space vc3_index, reset unknown */
 #define VC3_CURS_X_OFFSET                            0x2u /* established */
 
 /*
  * Hardware cursor y position. Walking-pattern read-back is expected.
  */
-/* curs_y: rw16, space vc3_index, reset unknown; driver and diagnostic readings
- */
+/* curs_y: rw16, space vc3_index, reset unknown */
 #define VC3_CURS_Y_OFFSET                            0x3u /* established */
 
 /*
  * First display-ID entry point, with its own frame and line tables.
  */
-/* did_ep1: rw16, space vc3_index, reset unknown; driver and diagnostic readings
- */
+/* did_ep1: rw16, space vc3_index, reset unknown */
 #define VC3_DID_EP1_OFFSET                           0x4u /* established */
 
 /*
  * Second display-ID entry point.
  */
-/* did_ep2: rw16, space vc3_index, reset unknown; driver and diagnostic readings
- */
+/* did_ep2: rw16, space vc3_index, reset unknown */
 #define VC3_DID_EP2_OFFSET                           0x5u /* established */
 
 /*
  * Scan line length. Walking-pattern read-back is expected; the unit (dot
  * clocks) is the name's reading and is inferred.
  */
-/* scan_length: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* scan_length: rw16, space vc3_index, reset unknown */
 #define VC3_SCAN_LENGTH_OFFSET                       0x6u /* established */
 
 /*
  * SRAM address register for the ram port. Reads back the address it was loaded
  * with.
  */
-/* ram_addr: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* ram_addr: rw16, space vc3_index, reset unknown */
 #define VC3_RAM_ADDR_OFFSET                          0x7u /* established */
 
 /*
  * Video timing frame table pointer. Walking-pattern read-back is expected.
  */
-/* vt_frame_tbl_ptr: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* vt_frame_tbl_ptr: rw16, space vc3_index, reset unknown */
 #define VC3_VT_FRAME_TBL_PTR_OFFSET                  0x8u /* established */
 
 /*
  * Video timing line sequence pointer. Walking-pattern read-back is expected.
  */
-/* vt_line_seq_ptr: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* vt_line_seq_ptr: rw16, space vc3_index, reset unknown */
 #define VC3_VT_LINE_SEQ_PTR_OFFSET                   0x9u /* established */
 
 /*
  * Video timing run count of lines. Walking-pattern read-back is expected.
  */
-/* vt_lines_run: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* vt_lines_run: rw16, space vc3_index, reset unknown */
 #define VC3_VT_LINES_RUN_OFFSET                      0xau /* established */
 
 /*
@@ -142,69 +131,60 @@
  * expects them back, which is odd for a running counter and is recorded as the
  * software's expectation.
  */
-/* vert_line_count: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* vert_line_count: rw16, space vc3_index, reset unknown */
 #define VC3_VERT_LINE_COUNT_OFFSET                   0xbu /* established */
 
 /*
  * Cursor table pointer. Walking-pattern read-back is expected.
  */
-/* curs_tbl_ptr: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* curs_tbl_ptr: rw16, space vc3_index, reset unknown */
 #define VC3_CURS_TBL_PTR_OFFSET                      0xcu /* established */
 
 /*
  * Working cursor y line. Walking-pattern read-back is expected.
  */
-/* working_curs_y: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* working_curs_y: rw16, space vc3_index, reset unknown */
 #define VC3_WORKING_CURS_Y_OFFSET                    0xdu /* established */
 
 /*
  * Current cursor x. Walking-pattern read-back is expected.
  */
-/* cur_cursor_x: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* cur_cursor_x: rw16, space vc3_index, reset unknown */
 #define VC3_CUR_CURSOR_X_OFFSET                      0xeu /* established */
 
 /*
  * Register number the diagnostic's register test writes and reads back under
  * the name unused. Its role is unknown.
  */
-/* unused: rw16, space vc3_index, reset unknown; driver and diagnostic readings
- */
+/* unused: rw16, space vc3_index, reset unknown */
 #define VC3_UNUSED_OFFSET                            0xfu /* inferred */
 
 /*
  * Frame table pointer of the first display-ID entry point. Walking-pattern
  * read-back is expected.
  */
-/* did_frametab1: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* did_frametab1: rw16, space vc3_index, reset unknown */
 #define VC3_DID_FRAMETAB1_OFFSET                     0x10u /* established */
 
 /*
  * Line table pointer of the first display-ID entry point. Walking-pattern
  * read-back is expected.
  */
-/* did_linetab1: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* did_linetab1: rw16, space vc3_index, reset unknown */
 #define VC3_DID_LINETAB1_OFFSET                      0x11u /* established */
 
 /*
  * Frame table pointer of the second display-ID entry point. Walking-pattern
  * read-back is expected.
  */
-/* did_frametab2: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* did_frametab2: rw16, space vc3_index, reset unknown */
 #define VC3_DID_FRAMETAB2_OFFSET                     0x12u /* established */
 
 /*
  * Line table pointer of the second display-ID entry point. Walking-pattern
  * read-back is expected.
  */
-/* did_linetab2: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* did_linetab2: rw16, space vc3_index, reset unknown */
 #define VC3_DID_LINETAB2_OFFSET                      0x13u /* established */
 
 /*
@@ -214,8 +194,7 @@
  * later. The diagnostic's start and stop timing write zero. The register test
  * skips it.
  */
-/* curs_control: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* curs_control: rw16, space vc3_index, reset unknown */
 #define VC3_CURS_CONTROL_OFFSET                      0x1du /* established */
 #define VC3_CURS_CONTROL_GLYPH_64_SHIFT              3 /* inferred */
 #define VC3_CURS_CONTROL_GLYPH_64_MASK               0x1u
@@ -237,8 +216,7 @@
  * skips it. Every field is named in a header and read from the writers' use;
  * what bits 1 to 4 and 7 do inside the chip is not settled.
  */
-/* display_control: rw16, space vc3_index, reset unknown; driver and diagnostic
- * readings */
+/* display_control: rw16, space vc3_index, reset unknown */
 #define VC3_DISPLAY_CONTROL_OFFSET                   0x1eu /* established */
 #define VC3_DISPLAY_CONTROL_ODD_FIELD_TIMING_SHIFT   10 /* inferred */
 #define VC3_DISPLAY_CONTROL_ODD_FIELD_TIMING_MASK    0x1u
@@ -279,8 +257,7 @@
  * the register is set to 1; the kernel selects this register to read the chip
  * revision at attach. Bits other than the revision are named in a header only.
  */
-/* config: rw16, space vc3_index, reset unknown; driver and diagnostic readings
- */
+/* config: rw16, space vc3_index, reset unknown */
 #define VC3_CONFIG_OFFSET                            0x1fu /* established */
 #define VC3_CONFIG_REVISION_SHIFT                    6 /* inferred */
 #define VC3_CONFIG_REVISION_MASK                     0x3u
@@ -309,7 +286,7 @@
 #define VC3_SRAM_CURS_GLYPH                          0x400u /* established */
 #define VC3_SRAM_DID_FRAMETAB1                       0x500u /* established */
 #define VC3_SRAM_DID_FRAME_MAX_WORDS                 0x43eu /* established */
-#define VC3_SRAM_END                                 0x8000u /* established */
+#define VC3_SRAM_END                                 0x2000u /* inferred */
 #define VC3_SRAM_FRAMETAB                            0x380u /* established */
 #define VC3_SRAM_FRAMETAB_WORDS                      0x80u /* established */
 #define VC3_SRAM_LINETAB                             0x0u /* established */

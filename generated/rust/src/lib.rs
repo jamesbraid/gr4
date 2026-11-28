@@ -1,7 +1,7 @@
 // @generated from devices/ and formats/ by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 4
-// input sha256 8ce8d682aac8f545a30b958821640ec84cc070d7635c2fbcfab177f62f33833e
+// input sha256 1157b25b3610f9f830c43d8ce48998f4b74ef2985729cb8f928ec68f208c7d76
 #![no_std]
 #![cfg_attr(rustfmt, rustfmt_skip)]
 pub mod cmap;

@@ -1,7 +1,7 @@
 """generated from devices/vc3/registers.toml by defs-gen - do not edit, change the source
 SPDX-License-Identifier: BSD-3-Clause
 defs-gen 4
-input sha256 dcdab93f298e3ff44eb34600bc479403a89099c3719578747f7ab0a77bc24375
+input sha256 9374ab79c9a0a7b287f1a095365143c0192d4b6111d7b3907264f2a6cfe684e3
 VC3 video controller registers of the Impact graphics subsystem"""
 
 UNIT = 'vc3'
@@ -10,7 +10,7 @@ WORDS = {}
 FIELDS = {'index': {}, 'index_data': {'register': (31, 24), 'value': (23, 8)}, 'data': {}, 'ram64': {}, 'ram': {}, 'vid_ep': {}, 'curs_ep': {}, 'curs_x': {}, 'curs_y': {}, 'did_ep1': {}, 'did_ep2': {}, 'scan_length': {}, 'ram_addr': {}, 'vt_frame_tbl_ptr': {}, 'vt_line_seq_ptr': {}, 'vt_lines_run': {}, 'vert_line_count': {}, 'curs_tbl_ptr': {}, 'working_curs_y': {}, 'cur_cursor_x': {}, 'unused': {}, 'did_frametab1': {}, 'did_linetab1': {}, 'did_frametab2': {}, 'did_linetab2': {}, 'curs_control': {'glyph_64': (3, 3), 'crosshair': (2, 2), 'display_enable': (1, 1), 'function_enable': (0, 0)}, 'display_control': {'odd_field_timing': (10, 10), 'odd_field': (9, 9), 'field_only': (8, 8), 'interlaced': (7, 7), 'genlock': (6, 6), 'gensync': (5, 5), 'did_enable2': (4, 4), 'did_enable1': (3, 3), 'video_enable': (2, 2), 'blackout': (1, 1), 'retrace_interrupt': (0, 0)}, 'config': {'revision': (7, 6), 'timing_error': (5, 5), 'did_error2': (4, 4), 'did_error1': (3, 3), 'cursor_error': (2, 2), 'slow_clock': (1, 1), 'unreset': (0, 0)}}
 ENUMS = {}
 FIELD_ENUM = {}
-CONSTANTS = {'CURS_HOTSPOT_OFFSET': {'value': 31, 'count': 1, 'stride': 1}, 'DCB_DEVICE': {'value': 8, 'count': 1, 'stride': 1}, 'SRAM_CURS_GLYPH': {'value': 1024, 'count': 1, 'stride': 1}, 'SRAM_DID_FRAMETAB1': {'value': 1280, 'count': 1, 'stride': 1}, 'SRAM_DID_FRAME_MAX_WORDS': {'value': 1086, 'count': 1, 'stride': 1}, 'SRAM_END': {'value': 32768, 'count': 1, 'stride': 1}, 'SRAM_FRAMETAB': {'value': 896, 'count': 1, 'stride': 1}, 'SRAM_FRAMETAB_WORDS': {'value': 128, 'count': 1, 'stride': 1}, 'SRAM_LINETAB': {'value': 0, 'count': 1, 'stride': 1}, 'SRAM_LINETAB_WORDS': {'value': 768, 'count': 1, 'stride': 1}}
+CONSTANTS = {'CURS_HOTSPOT_OFFSET': {'value': 31, 'count': 1, 'stride': 1}, 'DCB_DEVICE': {'value': 8, 'count': 1, 'stride': 1}, 'SRAM_CURS_GLYPH': {'value': 1024, 'count': 1, 'stride': 1}, 'SRAM_DID_FRAMETAB1': {'value': 1280, 'count': 1, 'stride': 1}, 'SRAM_DID_FRAME_MAX_WORDS': {'value': 1086, 'count': 1, 'stride': 1}, 'SRAM_END': {'value': 8192, 'count': 1, 'stride': 1}, 'SRAM_FRAMETAB': {'value': 896, 'count': 1, 'stride': 1}, 'SRAM_FRAMETAB_WORDS': {'value': 128, 'count': 1, 'stride': 1}, 'SRAM_LINETAB': {'value': 0, 'count': 1, 'stride': 1}, 'SRAM_LINETAB_WORDS': {'value': 768, 'count': 1, 'stride': 1}}
 TESTS = [('index_data', 486539520, {'register': 29, 'value': 1}), ('curs_control', 3, {'function_enable': 1, 'display_enable': 1, 'crosshair': 0, 'glyph_64': 0}), ('display_control', 30, {'retrace_interrupt': 0, 'blackout': 1, 'video_enable': 1, 'did_enable1': 1, 'did_enable2': 1, 'gensync': 0, 'genlock': 0}), ('config', 1, {'unreset': 1, 'slow_clock': 0, 'revision': 0})]
 
 

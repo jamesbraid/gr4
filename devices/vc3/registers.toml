@@ -8,9 +8,9 @@ display-bus window; the ports are the byte-addressed registers, the numbered reg
 the vc3_index space (offset = register number). Each numbered register is 16 bits wide. The
 window address depends on the board's map and is not given here. Grades follow the
 repository legend; a bit named in a header and never seen used is inferred."""
-from = "driver and diagnostic readings"
+from = "irix-6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/mgrashw.h.diag; irix-6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/mgras_sim.h; irix-6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/mgras_vc3.c; irix-6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/mgras_cmap.c; irix-6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/mgras_macro.h"
 public_from = ["driver and diagnostic readings"]
-name_source = "ours"
+name_source = "imported-unchecked"
 
 [spaces.vc3_index]
 unit = "reg"
@@ -25,7 +25,7 @@ SRAM_FRAMETAB_WORDS = { value = 128, grade = "established", doc = "Size of the f
 SRAM_CURS_GLYPH = { value = 0x400, grade = "established", doc = "Start of the 64 by 64 cursor glyph in SRAM; the glyph must sit on a 256-word boundary." }
 SRAM_DID_FRAMETAB1 = { value = 0x500, grade = "established", doc = "Start of the first display-ID frame table. The second follows it, then the two line tables fill the rest of SRAM up to SRAM_END." }
 SRAM_DID_FRAME_MAX_WORDS = { value = 1086, grade = "established", doc = "Room reserved for each display-ID frame table: 1085 lines plus an end-of-frame entry (the size is sized for HDTV)." }
-SRAM_END = { value = 0x8000, grade = "established", doc = "End of SRAM in 16-bit word addresses." }
+SRAM_END = { value = 0x2000, grade = "inferred", doc = "End of SRAM in 16-bit entries, exclusive. Two readings, not settled. The diagnostic's SRAM tests cover entries 0 to 8191 (its VC3_RAMSIZE constant). Its address mask, which the same constants call the last 16-bit entry, means 16384 entries if the address is a byte offset." }
 CURS_HOTSPOT_OFFSET = { value = 31, grade = "inferred", doc = "The software defines 31 for both axes as the cursor origin offset; no shipped use was read, so what the hardware does with it is inferred from the name." }
 
 [registers.index]

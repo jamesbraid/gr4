@@ -2,25 +2,25 @@
 <!-- generated from devices/cmap/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 4 -->
-<!-- input sha256 f306fbfe910a823bc6ca6ebfa7bd51ee2cdbacdfed514f3edc6ce4fcbda5d4bc -->
-<genxml unit="cmap" prefix="CMAP" title="CMAP colour map chips of the Impact graphics subsystem" from="driver and diagnostic readings">
+<!-- input sha256 ded8e67cb35c81337325ab34e6f92ace2d9647686f1d95349deb829ab921207c -->
+<genxml unit="cmap" prefix="CMAP" title="CMAP colour map chips of the Impact graphics subsystem">
   <doc>The two colour map chips (CMAP0 and CMAP1), each a table of 8192 entries of 24-bit colour that
 turns colour-index pixels into RGB. Every register is a port in the chip's display-bus window,
 so the offsets are bytes from the window start and each port's offset encodes its register
 select and access width. The window address depends on the board's map and is not given here;
 the broadcast window writes both chips at once. The DAC and the XMAP router on the same bus are
 not covered here. Grades follow the repository legend.</doc>
-  <struct name="ADDR_LO" size="1" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x8" access="rw" reset="unknown">
+  <struct name="ADDR_LO" size="1" grade="inferred" register="yes" offset="0x8" access="rw" reset="unknown">
     <doc>Port: low byte of the palette address. Defined next to the sixteen-bit address port; no shipped use of the byte form was read.</doc>
   </struct>
-  <struct name="ADDR" size="2" grade="established" from="driver and diagnostic readings" register="yes" offset="0x30" access="rw" reset="unknown">
+  <struct name="ADDR" size="2" grade="established" register="yes" offset="0x30" access="rw" reset="unknown">
     <doc>Port: palette entry address. The diagnostic and the loaders write it before a run of colour writes or reads, twice in a row as a workaround for the address being lost at random when the bus turns between writing and reading. The loaders set the address once per run of colour writes, so a write is read as stepping the address (inferred); a comment in the diagnostic says the counter wraps to zero after the last entry, and that the first read right after a write is not guaranteed, so it starts reading at the last entry and discards the first value.</doc>
     <field name="entry" start="0" size="13" type="uint" grade="inferred"/>
   </struct>
-  <struct name="ADDR_HI" size="1" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x88" access="rw" reset="unknown">
+  <struct name="ADDR_HI" size="1" grade="inferred" register="yes" offset="0x88" access="rw" reset="unknown">
     <doc>Port: high byte of the palette address. Defined next to the address port; no shipped use was read.</doc>
   </struct>
-  <struct name="PAL" size="4" grade="established" from="driver and diagnostic readings" register="yes" offset="0x118" access="rw" reset="unknown">
+  <struct name="PAL" size="4" grade="established" register="yes" offset="0x118" access="rw" reset="unknown">
     <doc>Port: palette entry data, a three-byte access. A write stores one entry at the current address and steps it; a read returns one entry. The loaders pack red in bits 31:24, green in 23:16 and blue in 15:8, and the diagnostic's read helper unpacks the same bytes.</doc>
     <field name="red" start="24" size="8" type="uint" grade="established"/>
     <field name="green" start="16" size="8" type="uint" grade="established"/>
@@ -31,25 +31,25 @@ not covered here. Grades follow the repository legend.</doc>
       <expect field="blue" value="86"/>
     </test>
   </struct>
-  <struct name="CMD" size="1" grade="established" from="driver and diagnostic readings" register="yes" offset="0x188" access="rw" reset="unknown">
+  <struct name="CMD" size="1" grade="established" register="yes" offset="0x188" access="rw" reset="unknown">
     <doc>Port: command. The diagnostic writes 3 through the broadcast window to enable the timing pipes, and the standalone and kernel initialisation write a mask built from a named unmask value; a read of each chip's own copy is defined. The bit meanings are unknown.</doc>
   </struct>
-  <struct name="STATUS" size="1" grade="established" from="driver and diagnostic readings" register="yes" offset="0x208" access="r" reset="unknown">
+  <struct name="STATUS" size="1" grade="established" register="yes" offset="0x208" access="r" reset="unknown">
     <doc>Port: status, read per chip. The loaders wait on it between runs of palette writes: the older builds wait until bit 3 is set and the Octane build waits until bit 2 is clear. Other bits are not read.</doc>
     <field name="ready" start="3" size="1" type="uint" grade="inferred"/>
     <field name="busy" start="2" size="1" type="uint" grade="inferred"/>
   </struct>
-  <struct name="REV" size="1" grade="established" from="driver and diagnostic readings" register="yes" offset="0x308" access="r" reset="unknown">
-    <doc>Port: chip revision, read per chip. The diagnostic masks the low three bits, requires at least REVISION_MIN, warns above REVISION_MAX_EXPECTED and requires the two chips to agree.</doc>
+  <struct name="REV" size="1" grade="established" register="yes" offset="0x308" access="r" reset="unknown">
+    <doc>Port: chip revision, read per chip. The diagnostic masks the low three bits, requires each chip to be at least REVISION_MIN, checking each one separately with no test that the two agree, and warns when either is above REVISION_MAX_EXPECTED.</doc>
     <field name="revision" start="0" size="3" type="uint" grade="established"/>
   </struct>
-  <struct name="RESERVED" size="1" grade="inferred" from="driver and diagnostic readings" register="yes" offset="0x388" access="rw" reset="unknown">
+  <struct name="RESERVED" size="1" grade="inferred" register="yes" offset="0x388" access="rw" reset="unknown">
     <doc>Port: defined by the software's register layout as the last select; no shipped use was read, and its role is unknown.</doc>
   </struct>
   <constant name="CMD_ENABLE_TIMING_PIPES" value="0x3" grade="established"/>
-  <constant name="DCB_DEVICE_ALL" value="0x3" grade="inferred"/>
-  <constant name="DCB_DEVICE_CMAP0" value="0x4" grade="established"/>
-  <constant name="DCB_DEVICE_CMAP1" value="0x5" grade="established"/>
+  <constant name="DCB_DEVICE_ALL" value="0x5" grade="established"/>
+  <constant name="DCB_DEVICE_CMAP0" value="0x6" grade="established"/>
+  <constant name="DCB_DEVICE_CMAP1" value="0x7" grade="established"/>
   <constant name="ENTRIES" value="0x2000" grade="established"/>
   <constant name="ENTRY_BITS" value="0x18" grade="inferred"/>
   <constant name="REVISION_MAX_EXPECTED" value="0x4" grade="established"/>

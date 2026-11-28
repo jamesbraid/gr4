@@ -1,7 +1,7 @@
 <!-- generated from devices/cmap/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 4 -->
-<!-- input sha256 f306fbfe910a823bc6ca6ebfa7bd51ee2cdbacdfed514f3edc6ce4fcbda5d4bc -->
+<!-- input sha256 ded8e67cb35c81337325ab34e6f92ace2d9647686f1d95349deb829ab921207c -->
 
 # CMAP colour map chips of the Impact graphics subsystem
 
@@ -13,7 +13,6 @@ the broadcast window writes both chips at once. The DAC and the XMAP router on t
 not covered here. Grades follow the repository legend.
 
 Unit `cmap`, macro prefix `CMAP`.
-Default source: driver and diagnostic readings.
 
 Every item has a grade: established, inferred or unknown. A grade says how the item was derived from its source; it does not claim the item was measured on silicon.
 
@@ -21,14 +20,14 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 
 | Register | Offset | Access | Width | Count | Space | Reset | Grade | Source |
 |---|---|---|---|---|---|---|---|---|
-| `addr_lo` | 0x8 | rw | 8 |  |  | unknown | inferred | driver and diagnostic readings |
-| `addr` | 0x30 | rw | 16 |  |  | unknown | established | driver and diagnostic readings |
-| `addr_hi` | 0x88 | rw | 8 |  |  | unknown | inferred | driver and diagnostic readings |
-| `pal` | 0x118 | rw | 32 |  |  | unknown | established | driver and diagnostic readings |
-| `cmd` | 0x188 | rw | 8 |  |  | unknown | established | driver and diagnostic readings |
-| `status` | 0x208 | r | 8 |  |  | unknown | established | driver and diagnostic readings |
-| `rev` | 0x308 | r | 8 |  |  | unknown | established | driver and diagnostic readings |
-| `reserved` | 0x388 | rw | 8 |  |  | unknown | inferred | driver and diagnostic readings |
+| `addr_lo` | 0x8 | rw | 8 |  |  | unknown | inferred |  |
+| `addr` | 0x30 | rw | 16 |  |  | unknown | established |  |
+| `addr_hi` | 0x88 | rw | 8 |  |  | unknown | inferred |  |
+| `pal` | 0x118 | rw | 32 |  |  | unknown | established |  |
+| `cmd` | 0x188 | rw | 8 |  |  | unknown | established |  |
+| `status` | 0x208 | r | 8 |  |  | unknown | established |  |
+| `rev` | 0x308 | r | 8 |  |  | unknown | established |  |
+| `reserved` | 0x388 | rw | 8 |  |  | unknown | inferred |  |
 
 ### Register `addr_lo`
 
@@ -40,7 +39,7 @@ Port: palette entry address. The diagnostic and the loaders write it before a ru
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 12:0 | `entry` | inferred |  | driver and diagnostic readings | Palette entry number; the address tests use bit 12 as the top bit. |
+| 12:0 | `entry` | inferred |  |  | Palette entry number; the address tests use bit 12 as the top bit. |
 
 ### Register `addr_hi`
 
@@ -52,9 +51,9 @@ Port: palette entry data, a three-byte access. A write stores one entry at the c
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 31:24 | `red` | established |  | driver and diagnostic readings |  |
-| 23:16 | `green` | established |  | driver and diagnostic readings |  |
-| 15:8 | `blue` | established |  | driver and diagnostic readings |  |
+| 31:24 | `red` | established |  |  |  |
+| 23:16 | `green` | established |  |  |  |
+| 15:8 | `blue` | established |  |  |  |
 
 ### Register `cmd`
 
@@ -66,16 +65,16 @@ Port: status, read per chip. The loaders wait on it between runs of palette writ
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 3 | `ready` | inferred |  | driver and diagnostic readings | Waited on for set by the older builds; read as FIFO ready. |
-| 2 | `busy` | inferred |  | driver and diagnostic readings | Waited on for clear by the Octane build; read as FIFO busy. |
+| 3 | `ready` | inferred |  |  | Waited on for set by the older builds; read as FIFO ready. |
+| 2 | `busy` | inferred |  |  | Waited on for clear by the Octane build; read as FIFO busy. |
 
 ### Register `rev`
 
-Port: chip revision, read per chip. The diagnostic masks the low three bits, requires at least REVISION_MIN, warns above REVISION_MAX_EXPECTED and requires the two chips to agree.
+Port: chip revision, read per chip. The diagnostic masks the low three bits, requires each chip to be at least REVISION_MIN, checking each one separately with no test that the two agree, and warns when either is above REVISION_MAX_EXPECTED.
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 2:0 | `revision` | established |  | driver and diagnostic readings |  |
+| 2:0 | `revision` | established |  |  |  |
 
 ### Register `reserved`
 
@@ -85,14 +84,14 @@ Port: defined by the software's register layout as the last select; no shipped u
 
 | Constant | Value | Grade | Source | Description |
 |---|---|---|---|---|
-| `CMD_ENABLE_TIMING_PIPES` | 0x3 | established | driver and diagnostic readings | Value the diagnostic's timing initialisation writes to the command port; its debug message calls it enabling the timing pipes. |
-| `DCB_DEVICE_ALL` | 0x3 | inferred | driver and diagnostic readings | Display-bus device number of the broadcast window that writes both chips. The diagnostic writes the palette and command through a combined window and reads each chip separately; the device number comes from the chip header and no other source was read. |
-| `DCB_DEVICE_CMAP0` | 0x4 | established | driver and diagnostic readings | Display-bus device number of the first chip. The kernel's and the diagnostic's reads of its revision byte land in this device's window on the Octane board map. |
-| `DCB_DEVICE_CMAP1` | 0x5 | established | driver and diagnostic readings | Display-bus device number of the second chip, read the same way. |
-| `ENTRIES` | 0x2000 | established | driver and diagnostic readings | Palette entries per chip. The diagnostic's address tests span all 8192; the entry counter wraps to zero after the last. |
-| `ENTRY_BITS` | 0x18 | inferred | driver and diagnostic readings | Width of a palette entry: the diagnostic compares 24 bits of each entry read back (8 bits each of red, green and blue). |
-| `REVISION_MAX_EXPECTED` | 0x4 | established | driver and diagnostic readings | Highest revision value the diagnostic knows; above it the diagnostic warns that the software may not be compatible. |
-| `REVISION_MIN` | 0x2 | established | driver and diagnostic readings | Lowest revision value the diagnostic accepts; below it the diagnostic fails the check. |
+| `CMD_ENABLE_TIMING_PIPES` | 0x3 | established |  | Value the diagnostic's timing initialisation writes to the command port; its debug message calls it enabling the timing pipes. |
+| `DCB_DEVICE_ALL` | 0x5 | established |  | Display-bus device number of the broadcast window that writes both chips: the cmapall window in the diagnostic header. The diagnostic writes the palette and command through it and reads each chip separately. |
+| `DCB_DEVICE_CMAP0` | 0x6 | established |  | Display-bus device number of the first chip. The kernel's and the diagnostic's reads of its revision byte land in this device's window on the Octane board map. |
+| `DCB_DEVICE_CMAP1` | 0x7 | established |  | Display-bus device number of the second chip, read the same way. |
+| `ENTRIES` | 0x2000 | established |  | Palette entries per chip. The diagnostic's address tests span all 8192; the entry counter wraps to zero after the last. |
+| `ENTRY_BITS` | 0x18 | inferred |  | Width of a palette entry: the diagnostic compares 24 bits of each entry read back (8 bits each of red, green and blue). |
+| `REVISION_MAX_EXPECTED` | 0x4 | established |  | Highest revision value the diagnostic knows; above it the diagnostic warns that the software may not be compatible. |
+| `REVISION_MIN` | 0x2 | established |  | Lowest revision value the diagnostic accepts; below it the diagnostic fails the check. |
 
 ## Test vectors
 

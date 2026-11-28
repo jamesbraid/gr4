@@ -1,7 +1,7 @@
 <!-- generated from devices/vc3/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 4 -->
-<!-- input sha256 dcdab93f298e3ff44eb34600bc479403a89099c3719578747f7ab0a77bc24375 -->
+<!-- input sha256 9374ab79c9a0a7b287f1a095365143c0192d4b6111d7b3907264f2a6cfe684e3 -->
 
 # VC3 video controller registers of the Impact graphics subsystem
 
@@ -13,7 +13,6 @@ window address depends on the board's map and is not given here. Grades follow t
 repository legend; a bit named in a header and never seen used is inferred.
 
 Unit `vc3`, macro prefix `VC3`.
-Default source: driver and diagnostic readings.
 
 Every item has a grade: established, inferred or unknown. A grade says how the item was derived from its source; it does not claim the item was measured on silicon.
 
@@ -27,34 +26,34 @@ Every item has a grade: established, inferred or unknown. A grade says how the i
 
 | Register | Offset | Access | Width | Count | Space | Reset | Grade | Source |
 |---|---|---|---|---|---|---|---|---|
-| `index` | 0x8 | rw | 8 |  |  | unknown | established | driver and diagnostic readings |
-| `index_data` | 0x38 | rw | 32 |  |  | unknown | established | driver and diagnostic readings |
-| `data` | 0xb0 | rw | 16 |  |  | unknown | established | driver and diagnostic readings |
-| `ram64` | 0x180 | rw | 64 |  |  | unknown | established | driver and diagnostic readings |
-| `ram` | 0x190 | rw | 16 |  |  | unknown | established | driver and diagnostic readings |
-| `vid_ep` | 0x0 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `curs_ep` | 0x1 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `curs_x` | 0x2 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `curs_y` | 0x3 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `did_ep1` | 0x4 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `did_ep2` | 0x5 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `scan_length` | 0x6 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `ram_addr` | 0x7 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `vt_frame_tbl_ptr` | 0x8 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `vt_line_seq_ptr` | 0x9 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `vt_lines_run` | 0xa | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `vert_line_count` | 0xb | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `curs_tbl_ptr` | 0xc | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `working_curs_y` | 0xd | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `cur_cursor_x` | 0xe | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `unused` | 0xf | rw | 16 |  | vc3_index | unknown | inferred | driver and diagnostic readings |
-| `did_frametab1` | 0x10 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `did_linetab1` | 0x11 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `did_frametab2` | 0x12 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `did_linetab2` | 0x13 | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `curs_control` | 0x1d | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `display_control` | 0x1e | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
-| `config` | 0x1f | rw | 16 |  | vc3_index | unknown | established | driver and diagnostic readings |
+| `index` | 0x8 | rw | 8 |  |  | unknown | established |  |
+| `index_data` | 0x38 | rw | 32 |  |  | unknown | established |  |
+| `data` | 0xb0 | rw | 16 |  |  | unknown | established |  |
+| `ram64` | 0x180 | rw | 64 |  |  | unknown | established |  |
+| `ram` | 0x190 | rw | 16 |  |  | unknown | established |  |
+| `vid_ep` | 0x0 | rw | 16 |  | vc3_index | unknown | established |  |
+| `curs_ep` | 0x1 | rw | 16 |  | vc3_index | unknown | established |  |
+| `curs_x` | 0x2 | rw | 16 |  | vc3_index | unknown | established |  |
+| `curs_y` | 0x3 | rw | 16 |  | vc3_index | unknown | established |  |
+| `did_ep1` | 0x4 | rw | 16 |  | vc3_index | unknown | established |  |
+| `did_ep2` | 0x5 | rw | 16 |  | vc3_index | unknown | established |  |
+| `scan_length` | 0x6 | rw | 16 |  | vc3_index | unknown | established |  |
+| `ram_addr` | 0x7 | rw | 16 |  | vc3_index | unknown | established |  |
+| `vt_frame_tbl_ptr` | 0x8 | rw | 16 |  | vc3_index | unknown | established |  |
+| `vt_line_seq_ptr` | 0x9 | rw | 16 |  | vc3_index | unknown | established |  |
+| `vt_lines_run` | 0xa | rw | 16 |  | vc3_index | unknown | established |  |
+| `vert_line_count` | 0xb | rw | 16 |  | vc3_index | unknown | established |  |
+| `curs_tbl_ptr` | 0xc | rw | 16 |  | vc3_index | unknown | established |  |
+| `working_curs_y` | 0xd | rw | 16 |  | vc3_index | unknown | established |  |
+| `cur_cursor_x` | 0xe | rw | 16 |  | vc3_index | unknown | established |  |
+| `unused` | 0xf | rw | 16 |  | vc3_index | unknown | inferred |  |
+| `did_frametab1` | 0x10 | rw | 16 |  | vc3_index | unknown | established |  |
+| `did_linetab1` | 0x11 | rw | 16 |  | vc3_index | unknown | established |  |
+| `did_frametab2` | 0x12 | rw | 16 |  | vc3_index | unknown | established |  |
+| `did_linetab2` | 0x13 | rw | 16 |  | vc3_index | unknown | established |  |
+| `curs_control` | 0x1d | rw | 16 |  | vc3_index | unknown | established |  |
+| `display_control` | 0x1e | rw | 16 |  | vc3_index | unknown | established |  |
+| `config` | 0x1f | rw | 16 |  | vc3_index | unknown | established |  |
 
 ### Register `index`
 
@@ -66,8 +65,8 @@ Port: a three-byte write sets a numbered register in one store, the register num
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 31:24 | `register` | established |  | driver and diagnostic readings |  |
-| 23:8 | `value` | established |  | driver and diagnostic readings |  |
+| 31:24 | `register` | established |  |  |  |
+| 23:8 | `value` | established |  |  |  |
 
 ### Register `data`
 
@@ -167,10 +166,10 @@ Cursor control. The standalone initialisation sets the function and display bits
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 3 | `glyph_64` | inferred |  | driver and diagnostic readings | Selects the 64 by 64 glyph rather than a smaller one; named only. |
-| 2 | `crosshair` | inferred |  | driver and diagnostic readings | Full-screen crosshair cursor; named only. |
-| 1 | `display_enable` | established |  | driver and diagnostic readings | Show the cursor. |
-| 0 | `function_enable` | established |  | driver and diagnostic readings | Cursor logic enable. |
+| 3 | `glyph_64` | inferred |  |  | Selects the 64 by 64 glyph rather than a smaller one; named only. |
+| 2 | `crosshair` | inferred |  |  | Full-screen crosshair cursor; named only. |
+| 1 | `display_enable` | established |  |  | Show the cursor. |
+| 0 | `function_enable` | established |  |  | Cursor logic enable. |
 
 ### Register `display_control`
 
@@ -178,17 +177,17 @@ Display control. The kernel keeps a shadow of the value, never reads the registe
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 10 | `odd_field_timing` | inferred |  | driver and diagnostic readings | Named only; no shipped use read. |
-| 9 | `odd_field` | inferred |  | driver and diagnostic readings | Named only; no shipped use read. |
-| 8 | `field_only` | inferred |  | driver and diagnostic readings | Named only; no shipped use read. |
-| 7 | `interlaced` | inferred |  | driver and diagnostic readings | Follows the interlace flag of the timing format in the kernel. |
-| 6 | `genlock` | inferred |  | driver and diagnostic readings | Genlock slave on: set from the second argument of the genlock request; the diagnostic prints it as GENLOCK. |
-| 5 | `gensync` | inferred |  | driver and diagnostic readings | Sync output on: set from the first argument of the genlock request; the diagnostic prints it as GENSYNC. |
-| 4 | `did_enable2` | inferred |  | driver and diagnostic readings | Named as enabling the second display-ID table; set by the diagnostic's start-timing. |
-| 3 | `did_enable1` | inferred |  | driver and diagnostic readings | Named as enabling the first display-ID table; set by the diagnostic's start-timing. |
-| 2 | `video_enable` | inferred |  | driver and diagnostic readings | Named as the master video enable; set by the diagnostic's start-timing. |
-| 1 | `blackout` | inferred |  | driver and diagnostic readings | Set by the kernel's blackout routine and by the diagnostic's start-timing together with bits 4:2; the polarity of the name is unknown. |
-| 0 | `retrace_interrupt` | inferred |  | driver and diagnostic readings | Set by the kernel's retrace enable; that it gates the once-per-frame retrace message is inferred. |
+| 10 | `odd_field_timing` | inferred |  |  | Named only; no shipped use read. |
+| 9 | `odd_field` | inferred |  |  | Named only; no shipped use read. |
+| 8 | `field_only` | inferred |  |  | Named only; no shipped use read. |
+| 7 | `interlaced` | inferred |  |  | Follows the interlace flag of the timing format in the kernel. |
+| 6 | `genlock` | inferred |  |  | Genlock slave on: set from the second argument of the genlock request; the diagnostic prints it as GENLOCK. |
+| 5 | `gensync` | inferred |  |  | Sync output on: set from the first argument of the genlock request; the diagnostic prints it as GENSYNC. |
+| 4 | `did_enable2` | inferred |  |  | Named as enabling the second display-ID table; set by the diagnostic's start-timing. |
+| 3 | `did_enable1` | inferred |  |  | Named as enabling the first display-ID table; set by the diagnostic's start-timing. |
+| 2 | `video_enable` | inferred |  |  | Named as the master video enable; set by the diagnostic's start-timing. |
+| 1 | `blackout` | inferred |  |  | Set by the kernel's blackout routine and by the diagnostic's start-timing together with bits 4:2; the polarity of the name is unknown. |
+| 0 | `retrace_interrupt` | inferred |  |  | Set by the kernel's retrace enable; that it gates the once-per-frame retrace message is inferred. |
 
 ### Register `config`
 
@@ -196,28 +195,28 @@ Master configuration. The diagnostic's PLL set-up writes 1 and prints that the r
 
 | Bits | Field | Grade | Values | Source | Description |
 |---|---|---|---|---|---|
-| 7:6 | `revision` | inferred |  | driver and diagnostic readings | Chip revision, read by the kernel through the data port; 0 is revision A and later values follow consecutively (board-identity.md). |
-| 5 | `timing_error` | inferred |  | driver and diagnostic readings | Named as a timing generator error flag; no shipped use read. |
-| 4 | `did_error2` | inferred |  | driver and diagnostic readings | Named as a display-ID table 2 error flag; no shipped use read. |
-| 3 | `did_error1` | inferred |  | driver and diagnostic readings | Named as a display-ID table 1 error flag; no shipped use read. |
-| 2 | `cursor_error` | inferred |  | driver and diagnostic readings | Named as a cursor error flag; no shipped use read. |
-| 1 | `slow_clock` | inferred |  | driver and diagnostic readings | Named only; no shipped use read. |
-| 0 | `unreset` | inferred |  | driver and diagnostic readings | Named as releasing the chip from reset; the diagnostic writes 1. |
+| 7:6 | `revision` | inferred |  |  | Chip revision, read by the kernel through the data port; 0 is revision A and later values follow consecutively (board-identity.md). |
+| 5 | `timing_error` | inferred |  |  | Named as a timing generator error flag; no shipped use read. |
+| 4 | `did_error2` | inferred |  |  | Named as a display-ID table 2 error flag; no shipped use read. |
+| 3 | `did_error1` | inferred |  |  | Named as a display-ID table 1 error flag; no shipped use read. |
+| 2 | `cursor_error` | inferred |  |  | Named as a cursor error flag; no shipped use read. |
+| 1 | `slow_clock` | inferred |  |  | Named only; no shipped use read. |
+| 0 | `unreset` | inferred |  |  | Named as releasing the chip from reset; the diagnostic writes 1. |
 
 ## Constants
 
 | Constant | Value | Grade | Source | Description |
 |---|---|---|---|---|
-| `CURS_HOTSPOT_OFFSET` | 0x1f | inferred | driver and diagnostic readings | The software defines 31 for both axes as the cursor origin offset; no shipped use was read, so what the hardware does with it is inferred from the name. |
-| `DCB_DEVICE` | 0x8 | established | driver and diagnostic readings | Display-bus device number of the chip; the window sits at device * 0x400 in the board's display-bus map. The kernel's and the diagnostic's accesses to the index, index_data and data ports land in this device's window on the Octane board map. |
-| `SRAM_CURS_GLYPH` | 0x400 | established | driver and diagnostic readings | Start of the 64 by 64 cursor glyph in SRAM; the glyph must sit on a 256-word boundary. |
-| `SRAM_DID_FRAMETAB1` | 0x500 | established | driver and diagnostic readings | Start of the first display-ID frame table. The second follows it, then the two line tables fill the rest of SRAM up to SRAM_END. |
-| `SRAM_DID_FRAME_MAX_WORDS` | 0x43e | established | driver and diagnostic readings | Room reserved for each display-ID frame table: 1085 lines plus an end-of-frame entry (the size is sized for HDTV). |
-| `SRAM_END` | 0x8000 | established | driver and diagnostic readings | End of SRAM in 16-bit word addresses. |
-| `SRAM_FRAMETAB` | 0x380 | established | driver and diagnostic readings | Start of the frame tables in SRAM (128 words). |
-| `SRAM_FRAMETAB_WORDS` | 0x80 | established | driver and diagnostic readings | Size of the frame-table area in words. |
-| `SRAM_LINETAB` | 0x0 | established | driver and diagnostic readings | Start of the horizontal line tables in the chip's 16-bit SRAM (768 words). |
-| `SRAM_LINETAB_WORDS` | 0x300 | established | driver and diagnostic readings | Size of the line-table area in words. |
+| `CURS_HOTSPOT_OFFSET` | 0x1f | inferred |  | The software defines 31 for both axes as the cursor origin offset; no shipped use was read, so what the hardware does with it is inferred from the name. |
+| `DCB_DEVICE` | 0x8 | established |  | Display-bus device number of the chip; the window sits at device * 0x400 in the board's display-bus map. The kernel's and the diagnostic's accesses to the index, index_data and data ports land in this device's window on the Octane board map. |
+| `SRAM_CURS_GLYPH` | 0x400 | established |  | Start of the 64 by 64 cursor glyph in SRAM; the glyph must sit on a 256-word boundary. |
+| `SRAM_DID_FRAMETAB1` | 0x500 | established |  | Start of the first display-ID frame table. The second follows it, then the two line tables fill the rest of SRAM up to SRAM_END. |
+| `SRAM_DID_FRAME_MAX_WORDS` | 0x43e | established |  | Room reserved for each display-ID frame table: 1085 lines plus an end-of-frame entry (the size is sized for HDTV). |
+| `SRAM_END` | 0x2000 | inferred |  | End of SRAM in 16-bit entries, exclusive. Two readings, not settled. The diagnostic's SRAM tests cover entries 0 to 8191 (its VC3_RAMSIZE constant). Its address mask, which the same constants call the last 16-bit entry, means 16384 entries if the address is a byte offset. |
+| `SRAM_FRAMETAB` | 0x380 | established |  | Start of the frame tables in SRAM (128 words). |
+| `SRAM_FRAMETAB_WORDS` | 0x80 | established |  | Size of the frame-table area in words. |
+| `SRAM_LINETAB` | 0x0 | established |  | Start of the horizontal line tables in the chip's 16-bit SRAM (768 words). |
+| `SRAM_LINETAB_WORDS` | 0x300 | established |  | Size of the line-table area in words. |
 
 ## Test vectors
 

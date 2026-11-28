@@ -8,14 +8,14 @@ so the offsets are bytes from the window start and each port's offset encodes it
 select and access width. The window address depends on the board's map and is not given here;
 the broadcast window writes both chips at once. The DAC and the XMAP router on the same bus are
 not covered here. Grades follow the repository legend."""
-from = "driver and diagnostic readings"
+from = "irix-6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/mgrashw.h.diag; irix-6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/mgras_sim.h; irix-6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/mgras_vc3.c; irix-6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/mgras_cmap.c; irix-6.5.7 stand/arcs/ide/isddevices/graphics/MGRAS/mgras_macro.h"
 public_from = ["driver and diagnostic readings"]
-name_source = "ours"
+name_source = "imported-unchecked"
 
 [constants]
-DCB_DEVICE_CMAP0 = { value = 4, grade = "established", doc = "Display-bus device number of the first chip. The kernel's and the diagnostic's reads of its revision byte land in this device's window on the Octane board map." }
-DCB_DEVICE_CMAP1 = { value = 5, grade = "established", doc = "Display-bus device number of the second chip, read the same way." }
-DCB_DEVICE_ALL = { value = 3, grade = "inferred", doc = "Display-bus device number of the broadcast window that writes both chips. The diagnostic writes the palette and command through a combined window and reads each chip separately; the device number comes from the chip header and no other source was read." }
+DCB_DEVICE_CMAP0 = { value = 6, grade = "established", doc = "Display-bus device number of the first chip. The kernel's and the diagnostic's reads of its revision byte land in this device's window on the Octane board map." }
+DCB_DEVICE_CMAP1 = { value = 7, grade = "established", doc = "Display-bus device number of the second chip, read the same way." }
+DCB_DEVICE_ALL = { value = 5, grade = "established", doc = "Display-bus device number of the broadcast window that writes both chips: the cmapall window in the diagnostic header. The diagnostic writes the palette and command through it and reads each chip separately." }
 ENTRIES = { value = 8192, grade = "established", doc = "Palette entries per chip. The diagnostic's address tests span all 8192; the entry counter wraps to zero after the last." }
 ENTRY_BITS = { value = 24, grade = "inferred", doc = "Width of a palette entry: the diagnostic compares 24 bits of each entry read back (8 bits each of red, green and blue)." }
 REVISION_MIN = { value = 2, grade = "established", doc = "Lowest revision value the diagnostic accepts; below it the diagnostic fails the check." }
@@ -85,7 +85,7 @@ offset = 0x308
 access = "r"
 width = 8
 grade = "established"
-doc = "Port: chip revision, read per chip. The diagnostic masks the low three bits, requires at least REVISION_MIN, warns above REVISION_MAX_EXPECTED and requires the two chips to agree."
+doc = "Port: chip revision, read per chip. The diagnostic masks the low three bits, requires each chip to be at least REVISION_MIN, checking each one separately with no test that the two agree, and warns when either is above REVISION_MAX_EXPECTED."
 
 [registers.rev.fields]
 revision = { bits = [2, 0], grade = "established" }

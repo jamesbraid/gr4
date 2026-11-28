@@ -1,7 +1,7 @@
 """generated from devices/cmap/registers.toml by defs-gen - do not edit, change the source
 SPDX-License-Identifier: BSD-3-Clause
 defs-gen 4
-input sha256 f306fbfe910a823bc6ca6ebfa7bd51ee2cdbacdfed514f3edc6ce4fcbda5d4bc
+input sha256 ded8e67cb35c81337325ab34e6f92ace2d9647686f1d95349deb829ab921207c
 CMAP colour map chips of the Impact graphics subsystem"""
 
 UNIT = 'cmap'
@@ -10,7 +10,7 @@ WORDS = {}
 FIELDS = {'addr_lo': {}, 'addr': {'entry': (12, 0)}, 'addr_hi': {}, 'pal': {'red': (31, 24), 'green': (23, 16), 'blue': (15, 8)}, 'cmd': {}, 'status': {'ready': (3, 3), 'busy': (2, 2)}, 'rev': {'revision': (2, 0)}, 'reserved': {}}
 ENUMS = {}
 FIELD_ENUM = {}
-CONSTANTS = {'CMD_ENABLE_TIMING_PIPES': {'value': 3, 'count': 1, 'stride': 1}, 'DCB_DEVICE_ALL': {'value': 3, 'count': 1, 'stride': 1}, 'DCB_DEVICE_CMAP0': {'value': 4, 'count': 1, 'stride': 1}, 'DCB_DEVICE_CMAP1': {'value': 5, 'count': 1, 'stride': 1}, 'ENTRIES': {'value': 8192, 'count': 1, 'stride': 1}, 'ENTRY_BITS': {'value': 24, 'count': 1, 'stride': 1}, 'REVISION_MAX_EXPECTED': {'value': 4, 'count': 1, 'stride': 1}, 'REVISION_MIN': {'value': 2, 'count': 1, 'stride': 1}}
+CONSTANTS = {'CMD_ENABLE_TIMING_PIPES': {'value': 3, 'count': 1, 'stride': 1}, 'DCB_DEVICE_ALL': {'value': 5, 'count': 1, 'stride': 1}, 'DCB_DEVICE_CMAP0': {'value': 6, 'count': 1, 'stride': 1}, 'DCB_DEVICE_CMAP1': {'value': 7, 'count': 1, 'stride': 1}, 'ENTRIES': {'value': 8192, 'count': 1, 'stride': 1}, 'ENTRY_BITS': {'value': 24, 'count': 1, 'stride': 1}, 'REVISION_MAX_EXPECTED': {'value': 4, 'count': 1, 'stride': 1}, 'REVISION_MIN': {'value': 2, 'count': 1, 'stride': 1}}
 TESTS = [('pal', 305419776, {'red': 18, 'green': 52, 'blue': 86})]
 
 

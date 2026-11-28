@@ -1,7 +1,7 @@
 // @generated from devices/vc3/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 4
-// input sha256 dcdab93f298e3ff44eb34600bc479403a89099c3719578747f7ab0a77bc24375
+// input sha256 9374ab79c9a0a7b287f1a095365143c0192d4b6111d7b3907264f2a6cfe684e3
 // VC3 video controller registers of the Impact graphics subsystem
 #![allow(dead_code)]
 #![allow(clippy::doc_markdown)]
@@ -392,7 +392,7 @@ pub const DCB_DEVICE: u32 = 0x8; // established
 pub const SRAM_CURS_GLYPH: u32 = 0x400; // established
 pub const SRAM_DID_FRAMETAB1: u32 = 0x500; // established
 pub const SRAM_DID_FRAME_MAX_WORDS: u32 = 0x43e; // established
-pub const SRAM_END: u32 = 0x8000; // established
+pub const SRAM_END: u32 = 0x2000; // inferred
 pub const SRAM_FRAMETAB: u32 = 0x380; // established
 pub const SRAM_FRAMETAB_WORDS: u32 = 0x80; // established
 pub const SRAM_LINETAB: u32 = 0x0; // established

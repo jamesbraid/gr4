@@ -1,7 +1,7 @@
 // @generated from devices/cmap/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 4
-// input sha256 f306fbfe910a823bc6ca6ebfa7bd51ee2cdbacdfed514f3edc6ce4fcbda5d4bc
+// input sha256 ded8e67cb35c81337325ab34e6f92ace2d9647686f1d95349deb829ab921207c
 // CMAP colour map chips of the Impact graphics subsystem
 #![allow(dead_code)]
 #![allow(clippy::doc_markdown)]
@@ -97,7 +97,7 @@ pub mod status {
         }
     }
 }
-/// Port: chip revision, read per chip. The diagnostic masks the low three bits, requires at least REVISION_MIN, warns above REVISION_MAX_EXPECTED and req (established)
+/// Port: chip revision, read per chip. The diagnostic masks the low three bits, requires each chip to be at least REVISION_MIN, checking each one separat (established)
 pub mod rev {
     pub const WIDTH: u32 = 8;
     pub const OFFSET: u64 = 0x308;
@@ -118,9 +118,9 @@ pub mod reserved {
     pub const OFFSET: u64 = 0x388;
 }
 pub const CMD_ENABLE_TIMING_PIPES: u32 = 0x3; // established
-pub const DCB_DEVICE_ALL: u32 = 0x3; // inferred
-pub const DCB_DEVICE_CMAP0: u32 = 0x4; // established
-pub const DCB_DEVICE_CMAP1: u32 = 0x5; // established
+pub const DCB_DEVICE_ALL: u32 = 0x5; // established
+pub const DCB_DEVICE_CMAP0: u32 = 0x6; // established
+pub const DCB_DEVICE_CMAP1: u32 = 0x7; // established
 pub const ENTRIES: u32 = 0x2000; // established
 pub const ENTRY_BITS: u32 = 0x18; // inferred
 pub const REVISION_MAX_EXPECTED: u32 = 0x4; // established
