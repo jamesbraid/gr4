@@ -1,0 +1,257 @@
+{
+ "license": "BSD-3-Clause",
+ "generator": "defs-gen 4",
+ "input_sha256": "f306fbfe910a823bc6ca6ebfa7bd51ee2cdbacdfed514f3edc6ce4fcbda5d4bc",
+ "schema": "defs-flat/1",
+ "source": "devices/cmap/registers.toml",
+ "profile": "public",
+ "rows": [
+  {
+   "unit": "cmap",
+   "kind": "register",
+   "name": "addr_lo",
+   "offset": 8,
+   "access": "rw",
+   "width": 8,
+   "count": 1,
+   "stride": 1,
+   "space": null,
+   "reset": "unknown",
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "register",
+   "name": "addr",
+   "offset": 48,
+   "access": "rw",
+   "width": 16,
+   "count": 1,
+   "stride": 2,
+   "space": null,
+   "reset": "unknown",
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "field",
+   "name": "addr.entry",
+   "hi": 12,
+   "lo": 0,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "register",
+   "name": "addr_hi",
+   "offset": 136,
+   "access": "rw",
+   "width": 8,
+   "count": 1,
+   "stride": 1,
+   "space": null,
+   "reset": "unknown",
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "register",
+   "name": "pal",
+   "offset": 280,
+   "access": "rw",
+   "width": 32,
+   "count": 1,
+   "stride": 4,
+   "space": null,
+   "reset": "unknown",
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "field",
+   "name": "pal.red",
+   "hi": 31,
+   "lo": 24,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "field",
+   "name": "pal.green",
+   "hi": 23,
+   "lo": 16,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "field",
+   "name": "pal.blue",
+   "hi": 15,
+   "lo": 8,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "register",
+   "name": "cmd",
+   "offset": 392,
+   "access": "rw",
+   "width": 8,
+   "count": 1,
+   "stride": 1,
+   "space": null,
+   "reset": "unknown",
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "register",
+   "name": "status",
+   "offset": 520,
+   "access": "r",
+   "width": 8,
+   "count": 1,
+   "stride": 1,
+   "space": null,
+   "reset": "unknown",
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "field",
+   "name": "status.ready",
+   "hi": 3,
+   "lo": 3,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "field",
+   "name": "status.busy",
+   "hi": 2,
+   "lo": 2,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "register",
+   "name": "rev",
+   "offset": 776,
+   "access": "r",
+   "width": 8,
+   "count": 1,
+   "stride": 1,
+   "space": null,
+   "reset": "unknown",
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "field",
+   "name": "rev.revision",
+   "hi": 2,
+   "lo": 0,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "register",
+   "name": "reserved",
+   "offset": 904,
+   "access": "rw",
+   "width": 8,
+   "count": 1,
+   "stride": 1,
+   "space": null,
+   "reset": "unknown",
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "constant",
+   "name": "CMD_ENABLE_TIMING_PIPES",
+   "value": 3,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "constant",
+   "name": "DCB_DEVICE_ALL",
+   "value": 3,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "constant",
+   "name": "DCB_DEVICE_CMAP0",
+   "value": 4,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "constant",
+   "name": "DCB_DEVICE_CMAP1",
+   "value": 5,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "constant",
+   "name": "ENTRIES",
+   "value": 8192,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "constant",
+   "name": "ENTRY_BITS",
+   "value": 24,
+   "count": 1,
+   "grade": "inferred",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "constant",
+   "name": "REVISION_MAX_EXPECTED",
+   "value": 4,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  },
+  {
+   "unit": "cmap",
+   "kind": "constant",
+   "name": "REVISION_MIN",
+   "value": 2,
+   "count": 1,
+   "grade": "established",
+   "from": "driver and diagnostic readings"
+  }
+ ]
+}
