@@ -2,7 +2,7 @@
  * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 4 */
-/* input sha256 77aac85b4de0862562ee42bf232bc97d52b911e6dffa63958f8ac86545b299f1 */
+/* input sha256 d826cf4cd23dad235f5abea2070ccd45e4af3d7b7f9eda4ae36f2df4ce9ffc1f */
 /* raster engine register contract for the Impact graphics */
 /* Names are MGRAS_RE4_*; name source: ours. */
 /* Offsets are bytes; registers of a register-indexed space are written as index

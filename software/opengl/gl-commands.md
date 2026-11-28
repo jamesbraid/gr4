@@ -592,8 +592,16 @@ Facts below come from the kernel listing.
   - One to four visible rectangles: mode 1, one enable bit each.
   - No visible rectangle but a window of nonzero width: mode 1, rectangle 0 is
     the window clamped to the screen.
-  - Five or more visible rectangles: mode 1, no enables (`0x10`). What bounds
-    such a window is unknown.
+  - Five or more visible rectangles: mode 1, no enables (`0x10`), so the four
+    screen masks clip nothing for this window. What bounds it is the clip-ID
+    plane: the X server gives such a window an ID (1 to 3) and paints its
+    visible area with it, and the kernel's word 4 below sets the match bit of
+    that ID in the pixel processor's window mode, which keeps pixels whose
+    stored ID matches. Inferred from the X server's `mgrasNeedCID`,
+    `FindFreeCID` and `mgrasDrawCID` and the kernel's word 4 ([PP1.h](../../devices/pp1/PP1.h),
+    "Clip IDs"; [cursor-and-did.md](../../devices/vc3/cursor-and-did.md)). The
+    server asks for an ID above 16 boxes and by a test not decoded between two
+    and 16; what makes a GL window's ID is not followed here.
   - Null clip: mode 2, rectangles 0 and 1 both the whole screen (`0x23`), and
     word 2 `0x04000000`.
   - When the window record has a clip ID, word 4 is `(x & 3) | (y & 3) << 2 |
@@ -601,7 +609,16 @@ Facts below come from the kernel listing.
     register `0x17b`.
   The kernel sends a changed clip as one `0xe43c` packet to a loaded context
   (`CFIFO_CMD_CLIP_BIND`). That the board treats mode 1 as inside the rectangles
-  and mode 2 as outside is inferred.
+  and mode 2 as outside is inferred. The raster engine's window mode register
+  names four enable bits and four inside-or-outside bits (IRIX 6.5.7
+  `mgras_init.c`, `MgrasInitRSS`), and the library and the kernel object both
+  initialise it to 0 with every inside-or-outside field set to the library's
+  "out" value, so out is 0 and in is 1 (`mgras_init.o` literal pool). Copied raw
+  into bits 7:4, mode 2 is "mask 2 in, mask 1 out" with both masks the whole
+  screen, which draws nothing and fits the name null clip. Mode 1 copied raw
+  would make masks 2 to 4 "out" for a window of two or more rectangles, which
+  cannot be the union of its visible rectangles, so the host-interface program
+  must translate the field (inferred). Its context-clip handler would settle it.
 - **Eviction.** When it needs geometry-engine memory, the kernel reads a context
   out and later writes it back. `MgrasEramRead` (`.text` `0xf18`) builds a DMA
   read descriptor, kicks it, then sends `0x0000fc08` with the ERAM address and

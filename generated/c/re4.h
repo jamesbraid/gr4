@@ -2,7 +2,7 @@
  * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 4 */
-/* input sha256 77aac85b4de0862562ee42bf232bc97d52b911e6dffa63958f8ac86545b299f1 */
+/* input sha256 d826cf4cd23dad235f5abea2070ccd45e4af3d7b7f9eda4ae36f2df4ce9ffc1f */
 /* raster engine register contract for the Impact graphics */
 #ifndef RE_GEN_H
 #define RE_GEN_H
@@ -574,7 +574,12 @@
  * The per-mask inside flags in the fields below are not settled. The kernel
  * sets
  * only bit 4 when four masks are enabled, which fits one mode field in bits 7:4
- * better.
+ * better. The shipped library source names the four enables and four
+ * inside-or-outside
+ * fields, sets all four inside-or-outside fields to its "out" value at start-up
+ * and the kernel object stores 0 there, so out is 0 and inside is 1
+ * (established:
+ * source names and the object's literal for the register).
  */
 /* window_mode: rw32, space re4_regs, reset unknown; driver and traffic readings
  */
