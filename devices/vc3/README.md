@@ -6,6 +6,10 @@ Video Controller 3 (VC3), Video Timing, Cursor, and DID Frame Composition for SG
 
 [registers.md](registers.md) is the graded register map, generated from `registers.toml`.
 
+## More in this directory
+
+- [VC3 cursor, display-ID tables and window IDs](cursor-and-did.md)
+
 ## Used by
 
 - [MGRAS display timing](../../software/kernel/display-timing.md)
