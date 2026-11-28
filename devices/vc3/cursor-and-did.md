@@ -31,7 +31,7 @@ Position (`MgrasPositionCursor`, **established**): under the board mutex, wait u
 The PROM builds the tables in `MgrasInitVC3`, after the timing tables are loaded (**established**):
 
 - Two sets, one per display-ID entry point: the main set (entry point register `0x04`, set by `MgrasSetVC3Timing` to the main frame table's SRAM base) and the overlay set (register `0x05`). SRAM starts: main frame table `0x500`, room `0x43e` words for each frame table; the line tables fill the SRAM above them, to word `0x2000` (the constants in [registers.md](registers.md)).
-- A frame table has one 16-bit entry per scanline of the timing format (its line count): the SRAM address of that scanline's line table. The last entry after the lines is `0xffff` (the source's "end of frame table"). The PROM points every line at one shared line table.
+- A frame table has one 16-bit entry per scanline of the timing format (its line count): the SRAM address of that scanline's line table. The entry after the last line is `0xffff`, the end marker. The PROM points every line at one shared line table.
 - A line table is a list of 16-bit entries. The PROM's is `{0x0000, 0x7ff << 5}`: DID 0 from x = 0, then an end-of-line entry. The source comment reads the second as the end-of-line flag shifted left by 5, so the entry is the x position in bits 15:5 and the window ID in bits 4:0 (**inferred** from that comment and from 32 main IDs fitting five bits; x = `0x7ff` ends the line).
 - `MgrasSetVC3Timing` writes the display control register (`0x1e`) with video, both DID enables and blackout (bits 2, 3, 4 and 1), and the interlace and genlock bits from the format.
 
