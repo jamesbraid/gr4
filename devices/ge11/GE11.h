@@ -185,13 +185,13 @@ extern "C" {
  *                      address inside the program (see VERTEX PATH MODULES).
  *                      No 6.5.0 binary names the file; its reader is UNKNOWN.
  *
- * Loading and starting (INFERRED from the PROM loader code and the kernel's
- * revision-program loader; the read-back mask, the PC reset and the latency
- * setting are UNKNOWN until read from that code): word n
- * goes to diagnostic window 0x200000 + 4n as three 32-bit writes, bits 31-0,
- * 63-32, then 71-64 (read-back masked to 8 bits). Word 0 is written again to
- * reset the PC, then execution control 0x40000 gets GE11_GO with bit 4 clear:
- * microcode latency four (GE11_EXEC_UCODE_LAT_4).
+ * Loading and starting (ESTABLISHED, IRIX 6.5.7 library source and the 6.5.0 and
+ * 6.5.30 kernel objects; software/kernel/microcode-download.md has the full
+ * sequence): the three file words of line n go, in file order, to the engine's
+ * diagnostic data port after its address port was set to 0x200000; the engine's
+ * output is read back for two interleaved passes; on success word 0 is written
+ * again, the diagnostic select and cram trim words are set, and execution control
+ * 0x40000 gets GE11_GO with bit 4 clear (latency four, GE11_EXEC_UCODE_LAT_4).
  *
  * Word layout (ESTABLISHED by wiring: each record field equals a W bit in
  * every word of a form):

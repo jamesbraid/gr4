@@ -40,6 +40,8 @@ the send. Where the sender does not settle a sub-fact, the entry marks it unknow
   `simTest` flag is set. On a negative return it prints a message, calls `ge11_diag_end` and exits, and on
   success it stores to `hw_pipe`. The send is conditional on `simTest`, as the acquire request is.
 
+- `0x6d670009`: **Established.** The geometry-engine configuration request, named `MGRAS_GE11_CONFIG` in the loader's own error text. `gfxinit` (`mgras_init` at `0x10009b00` in the 6.5.0 build) sends it once per board after the host-interface and geometry-engine downloads, with twelve 32-bit words built from the host-interface listing and printed as `config_args.*`: context base, size and maximum, the get-data token (162), and eight register-shadow offsets. The words and their values are in [microcode-download.md](microcode-download.md#what-the-loader-tells-the-kernel-afterwards-established). What the kernel does with them is not read.
+
 - `0x6d67000a`: **Inferred.** A request with no argument buffer. `mgrasKernInit` in impactpc.so sends it
   at 0x5e3d5bac with a null third argument, after the single-slot request 0x6d67000b at 0x5e3d5b2c and
   before the 0x4000-byte allocation at 0x5e3d5bec. `MakeCurrentRead` in libGLcore.so sends it at

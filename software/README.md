@@ -10,6 +10,7 @@
 | [hq4-host-interface.md](kernel/hq4-host-interface.md) | MGRAS HQ4 host interface | How the host interface chip on an IMPACT board works as the IRIX software drives it: the interrupt block, the... |
 | [hq4-image-write.md](kernel/hq4-image-write.md) | HQ4 image writes: DMA and inline | How a host pushes pixels into an IMPACT board's raster engine: the page-list DMA sequence on an Origin (IP27) host... |
 | [ioctl-requests.md](kernel/ioctl-requests.md) | gr4 ioctl request statements | Each entry gives one ioctl request number from the graphics device driver, as the code sends it. |
+| [microcode-download.md](kernel/microcode-download.md) | MGRAS microcode download: host interface and geometry engines | How IRIX puts the host-interface program and the GE11 program on an IMPACT board, in the order it does it, which... |
 
 ## opengl
 
