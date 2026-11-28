@@ -17,6 +17,7 @@
 |---|---|---|
 | [client-selection-feedback.md](opengl/client-selection-feedback.md) | MGRAS client selection and feedback | How the IRIX GL client library runs selection mode on the IMPACT pipe and reads the hit records back. |
 | [gl-commands.md](opengl/gl-commands.md) | MGRAS GL command stream | What the IRIX OpenGL client library writes to the Impact board's command port, what the kernel writes around it, and... |
+| [icd-sequences.md](opengl/icd-sequences.md) | IMPACT (MGRAS): the command sequences a GL driver must emit, per operation | What the shipped IRIX OpenGL client writes to the IMPACT board for a fresh context, a lit and textured triangle, a... |
 | [pixel-texture.md](opengl/pixel-texture.md) | MGRAS pixel texture state | The words the IRIX OpenGL client writes when pixel texture is on, plus what its code says about the colour-table... |
 | [tram-corruption-analysis.md](opengl/tram-corruption-analysis.md) | SGI Impact Graphics (MGRAS / GR4): TRAM Page Desynchronization & Corruption Analysis | Author: Antigravity / Reverse Engineering Toolchain Date: October 14, 2026 Target: SGI IRIX `libGLcore.so` (Impact... |
 
