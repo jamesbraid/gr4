@@ -2,7 +2,7 @@
  * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 4 */
-/* input sha256 3465678c224d844941a482f4b8ee2a06a5950f4d61f2a88408337bb52a820fd8 */
+/* input sha256 ee521a27af56f29bc85879f5dfd9c5e831b822dea69d08e218e68b1afd0b5c2c */
 /* host interface and command processor registers for the Impact graphics
  * subsystem */
 /* Names are MGRAS_HQ3_*; name source: ours. */
@@ -23,7 +23,7 @@ REG32(MGRAS_HQ3_CONFIG, 0x10000) /* inferred */
 FIELD(MGRAS_HQ3_CONFIG, DIAG_LOOPBACK, 7, 1) /* inferred */
 FIELD(MGRAS_HQ3_CONFIG, DIAG_ROUTE, 4, 2) /* inferred */
 FIELD(MGRAS_HQ3_CONFIG, UCODE_STALL, 3, 1) /* inferred */
-FIELD(MGRAS_HQ3_CONFIG, BIG_ENDIAN, 2, 1) /* inferred */
+FIELD(MGRAS_HQ3_CONFIG, BIG_ENDIAN, 2, 1) /* unknown */
 
 REG32(MGRAS_HQ3_FLAG_CTX, 0x10004) /* inferred */
 
@@ -82,8 +82,8 @@ FIELD(MGRAS_HQ3_GIO_CONFIG, FIFO_HIGH_WATER, 12, 1) /* inferred */
 FIELD(MGRAS_HQ3_GIO_CONFIG, BUS_BYPASS, 6, 1) /* inferred */
 FIELD(MGRAS_HQ3_GIO_CONFIG, TLB_UPDATE, 3, 1) /* inferred */
 FIELD(MGRAS_HQ3_GIO_CONFIG, EXT_PIPE_REGISTER, 2, 1) /* inferred */
-FIELD(MGRAS_HQ3_GIO_CONFIG, DISPLAY_BUS_BIG_ENDIAN, 1, 1) /* inferred */
-FIELD(MGRAS_HQ3_GIO_CONFIG, HOST_BIG_ENDIAN, 0, 1) /* inferred */
+FIELD(MGRAS_HQ3_GIO_CONFIG, DISPLAY_BUS_BIG_ENDIAN, 1, 1) /* unknown */
+FIELD(MGRAS_HQ3_GIO_CONFIG, HOST_BIG_ENDIAN, 0, 1) /* unknown */
 
 REG32(MGRAS_HQ3_REG_4080, 0x10200) /* inferred */
 #define MGRAS_HQ3_REG_4080_COUNT 64

@@ -1,7 +1,7 @@
 // @generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source
 // SPDX-License-Identifier: BSD-3-Clause
 // defs-gen 4
-// input sha256 3465678c224d844941a482f4b8ee2a06a5950f4d61f2a88408337bb52a820fd8
+// input sha256 ee521a27af56f29bc85879f5dfd9c5e831b822dea69d08e218e68b1afd0b5c2c
 // host interface and command processor registers for the Impact graphics subsystem
 #![allow(dead_code)]
 #![allow(clippy::doc_markdown)]
@@ -80,7 +80,7 @@ pub mod config {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod big_endian { // bits 2:2, inferred
+    pub mod big_endian { // bits 2:2, unknown
         pub const SHIFT: u32 = 2;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -290,7 +290,7 @@ pub mod gio_config {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod display_bus_big_endian { // bits 1:1, inferred
+    pub mod display_bus_big_endian { // bits 1:1, unknown
         pub const SHIFT: u32 = 1;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {
@@ -300,7 +300,7 @@ pub mod gio_config {
             (v & !(MASK << SHIFT)) | ((x & MASK) << SHIFT)
         }
     }
-    pub mod host_big_endian { // bits 0:0, inferred
+    pub mod host_big_endian { // bits 0:0, unknown
         pub const SHIFT: u32 = 0;
         pub const MASK: u32 = 0x1;
         pub const fn get(v: u32) -> u32 {

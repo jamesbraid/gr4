@@ -2,7 +2,7 @@
 <!-- generated from devices/hq3/registers.toml by defs-gen - do not edit, change the source -->
 <!-- SPDX-License-Identifier: BSD-3-Clause -->
 <!-- defs-gen 4 -->
-<!-- input sha256 3465678c224d844941a482f4b8ee2a06a5950f4d61f2a88408337bb52a820fd8 -->
+<!-- input sha256 ee521a27af56f29bc85879f5dfd9c5e831b822dea69d08e218e68b1afd0b5c2c -->
 <genxml unit="hq3" prefix="HQ" title="host interface and command processor registers for the Impact graphics subsystem" from="driver and diagnostic readings">
   <doc>Host interface and command processor registers of the Impact graphics subsystem.</doc>
   <space name="hq3_regs" unit="reg"/>
@@ -20,7 +20,7 @@
     <field name="diag_loopback" start="7" size="1" type="uint" grade="inferred"/>
     <field name="diag_route" start="4" size="2" type="config_diag_route" grade="inferred"/>
     <field name="ucode_stall" start="3" size="1" type="uint" grade="inferred"/>
-    <field name="big_endian" start="2" size="1" type="uint" grade="inferred"/>
+    <field name="big_endian" start="2" size="1" type="uint" grade="unknown"/>
     <test value="0x8e" kind="vector">
       <expect field="big_endian" value="1"/>
       <expect field="ucode_stall" value="1"/>
@@ -95,8 +95,8 @@
     <field name="bus_bypass" start="6" size="1" type="uint" grade="inferred"/>
     <field name="tlb_update" start="3" size="1" type="uint" grade="inferred"/>
     <field name="ext_pipe_register" start="2" size="1" type="uint" grade="inferred"/>
-    <field name="display_bus_big_endian" start="1" size="1" type="uint" grade="inferred"/>
-    <field name="host_big_endian" start="0" size="1" type="uint" grade="inferred"/>
+    <field name="display_bus_big_endian" start="1" size="1" type="uint" grade="unknown"/>
+    <field name="host_big_endian" start="0" size="1" type="uint" grade="unknown"/>
     <test value="0xf" kind="vector">
       <expect field="host_big_endian" value="1"/>
       <expect field="display_bus_big_endian" value="1"/>

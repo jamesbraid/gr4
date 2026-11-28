@@ -1,7 +1,7 @@
 {
  "license": "BSD-3-Clause",
  "generator": "defs-gen 4",
- "input_sha256": "3465678c224d844941a482f4b8ee2a06a5950f4d61f2a88408337bb52a820fd8",
+ "input_sha256": "ee521a27af56f29bc85879f5dfd9c5e831b822dea69d08e218e68b1afd0b5c2c",
  "schema": "defs-flat/1",
  "source": "devices/hq3/registers.toml",
  "profile": "public",
@@ -111,7 +111,7 @@
    "name": "config.big_endian",
    "hi": 2,
    "lo": 2,
-   "grade": "inferred",
+   "grade": "unknown",
    "from": "driver and diagnostic readings"
   },
   {
@@ -528,7 +528,7 @@
    "name": "gio_config.display_bus_big_endian",
    "hi": 1,
    "lo": 1,
-   "grade": "inferred",
+   "grade": "unknown",
    "from": "driver and diagnostic readings"
   },
   {
@@ -537,7 +537,7 @@
    "name": "gio_config.host_big_endian",
    "hi": 0,
    "lo": 0,
-   "grade": "inferred",
+   "grade": "unknown",
    "from": "driver and diagnostic readings"
   },
   {

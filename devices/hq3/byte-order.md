@@ -6,9 +6,8 @@ Octane (HQ4, XIO widget). No IRIX, PROM or public driver ever ran a little-endia
 bits' own effect is **unknown**; what is established is the wire rules around them, which fix most of the answer for
 the shipped bit values.
 
-Ratings are the six of the QEMU manual-page format: established, observed, software expectation, inferred,
-approximation, unknown. Nothing here is observed (no capture, no run). In `registers.toml` software expectation is
-carried as inferred, as the other pages do.
+Ratings follow the repository legend in [AGENTS.md](../../AGENTS.md), section 7: established, secondary, inferred,
+unknown. No capture or run backs any claim here.
 
 ## Short answer
 
@@ -27,7 +26,7 @@ carried as inferred, as the other pages do.
   standalone graphics diagnostic (`stand/arcs/ide/isddevices/graphics/MGRAS/mgras_const.h`, `gio_be`, `dcb_be`,
   and the "GIO_CONFIG reset conditions" block). The same diagnostic is built for the Octane with `-DHQ4`
   (`MGRAS/Makefile`), so the names cover both chips. Established for names and positions.
-- Every writer sets both. The diagnostic's default is `0xf` (`mgrashw.h.diag`); its GE download path writes
+- Every write the scan found sets both. The diagnostic's default is `0xf` (`mgrashw.h.diag`); its GE download path writes
   `0x765b104f`; the Indigo2 kernel (6.5.0 `mgras_init.o`, sha256 `8369b6d4a250d395...`) writes `0x765B900F` at board
   `+0x50114` in `MgrasGatherInfo`, `MgrasReset` and `MgrasInitHQ`; the Octane kernel (`mgras_init.o` from the 6.5.30 IP30
   `mgras.a`, sha256 `32a535dc59572759...`; the member is `ceb56765bf164654...`) writes the same constant at `+0x11008` in
@@ -35,7 +34,7 @@ carried as inferred, as the other pages do.
   PROM (sha256 `ee4722ca6f9b821f...`) does so at file offsets `0x3b494`, `0x3b8a8` and `0x3b91c`, next to a word at
   `+0x11000` (`0x108d` or `0x108c`, bit 2 set). The kernel's context switch saves and restores the word, and its GE
   download reads it, sets bit 6 and writes the saved value back. No write site read in these objects clears bit 0 or
-  bit 1. Software expectation; the scan covered 32-bit stores at `+0x1000` and `+0x1008` of the base the Octane objects
+  bit 1. Established for the writes the scan read: 32-bit stores at `+0x1000` and `+0x1008` of the base the Octane objects
   use, not every store in every object.
 - That `+0x11008` is the HQ4 counterpart of the HQ3 word at `+0x50114` is inferred: the same constant, written beside a
   host-interface control word, saved and restored by the switch (`registers.md` lists it as the per-context word).
@@ -47,7 +46,7 @@ carried as inferred, as the other pages do.
   power-on state, and its other expected word (host-interface config `0x89`, bit 2 clear) disagrees with what the
   Octane kernel and PROM write (`0x108c`, bit 2 set) and the Indigo2 kernel (`0x7E8C`). The shipped scripts ignore its result (the failure branch is
   commented out in `ide/IP22/field`). The reset value of both bits stays unknown.
-- The host-interface config word has a third bit named for big-endian, bit 2 (`big_endian`, `HQ3_BIGENDIAN`). It is set
+- The host-interface config word has a third bit named for big-endian, bit 2 (`big_endian`, `HQ3_CONFIG_BIGENDIAN`). It is set
   in every shipped write, and no reader turned up in the source tree. Unknown.
 
 ## What the wire looks like
@@ -56,11 +55,11 @@ carried as inferred, as the other pages do.
 
 | Rule | Rating | Source |
 |---|---|---|
-| GIO64 numbers bytes from the little end in a little-endian transfer (byte 0 on bits 7:0 of a doubleword, byte 7 on 63:56) and from the big end in a big-endian one. The byte-count cycle carries a little-endian bit (bit 28). The bus does nothing different; the devices must use the bit to read address and byte count. | established | GIO64 specification, section 4.2.1 and Table 7 (printed pages 4-1, 4-2, 4-6; `docs/library/cache/graphics/indy/erikarn-sgi_indy_gio64.pdf` pages 35, 36, 40) |
-| The Crosstalk "data section" numbering is endian independent: DS0 is bits 63:56 of the doubleword, whatever the mode. In big-endian mode DS n is byte n; in little-endian mode DS n is byte 7 minus n. | established | Bridge ASIC specification rev 4.0, "Crosstalk Data Ordering", printed page 87 and Figure 10, quoting the Crosstalk specification (`docs/library/cache/asic/sgi-bridge-asic-spec-rev4.0.ocr.txt`); chips repository `devices/crosstalk/packets.md`, section 3.5 |
-| On the processor's system bus, a sub-doubleword request puts its bytes on lanes chosen by address modulo 8 and the endian mode: a byte at modulo 1 is on SysAD[15:8] little-endian and SysAD[55:48] big-endian. | established for the NEC VR10000; inferred for the R4000, R4400 and R10000 | VR10000/VR12000 User's Manual, page 126 (`docs/library/cache/mips/nec-vr10000-um-r3-199805.pdf`); the R10000 manual is not held |
+| GIO64 numbers bytes from the little end in a little-endian transfer (byte 0 on bits 7:0 of a doubleword, byte 7 on 63:56) and from the big end in a big-endian one. The byte-count cycle carries a little-endian bit (bit 28). The bus does nothing different; the devices must use the bit to read address and byte count. | established | GIO Bus Specification, version 1.1 (draft), 7 April 1992, section 4.2.1 and Table 7 (printed pages 4-1, 4-2, 4-6) |
+| The Crosstalk "data section" numbering is endian independent: DS0 is bits 63:56 of the doubleword, whatever the mode. In big-endian mode DS n is byte n; in little-endian mode DS n is byte 7 minus n. | established | Bridge ASIC Specification, revision 4.0 (for Rev D silicon, 26 April 1998), "Crosstalk Data Ordering", section 7.2, printed page 87 and Figure 10, quoting the Crosstalk specification; the chips repository's Crosstalk packet notes, section 3.5 |
+| On the processor's system bus, a sub-doubleword request puts its bytes on lanes chosen by address modulo 8 and the endian mode: a byte at modulo 1 is on SysAD[15:8] little-endian and SysAD[55:48] big-endian. | established for the NEC VR10000; inferred for the R4000, R4400 and R10000 | VR10000/VR12000 User's Manual, NEC document U10278EJ3V0UM00 (3rd edition, May 1998), page 126; the R10000 manual is not held |
 | A doubleword store puts register bits 63:0 on SysAD[63:0] in both modes. | inferred | follows from the lane example above; no page states it for `sd` |
-| The Indigo2's MC is wired to SysAD[31:0] and answers each register at two addresses four bytes apart, the higher for a big-endian CPU and the lower for a little-endian one. A fixed-lane SGI device on this bus is reached by moving the word address, not by changing the value. | established for the MC | MC chip specification section 5, chips repository `devices/mc/README.md` |
+| The Indigo2's MC is wired to SysAD[31:0] and answers each register at two addresses four bytes apart, the higher for a big-endian CPU and the lower for a little-endian one. A fixed-lane SGI device on this bus is reached by moving the word address, not by changing the value. | established for the MC | MC Chip Specification, section 5 (MC Internal Registers); the held copy has no number, revision or date; the chips repository's MC notes |
 
 ### Little-endian host, derived lanes
 
@@ -78,7 +77,7 @@ two numbering rules above.
 | | `sw V` | 4-byte transfer, little-endian bit set; `V` on AD[31:0] for `a` mod 8 = 0 and AD[63:32] for 4. Whether the MC and the MUX chip also copy the word to the other half is unknown. | inferred / unknown |
 
 The board's side, with bits 0 and 1 left at their shipped value of 1 (inferred, reading the bits as "host is big
-endian"): the board decodes lanes as a big-endian host's would. IRIX and OpenBSD reach every 32-bit HQ4 register with `lw`/`sw`
+endian"): the board decodes lanes as a big-endian host's would. Inferred: IRIX and OpenBSD reach every 32-bit HQ4 register with `lw`/`sw`
 at an 8-byte-aligned offset (`+0x20000` status, `+0x20008` FIFO status, `+0x20100`, `+0x20200`, `+0x40000` FIFO
 thresholds, `+0x11000`, `+0x11008`; OpenBSD `impactreg.h`, IP30 objects), which on a big-endian host rides DS0 to DS3, the high half. The
 Crosstalk generic widget registers sit in the other half (`xwidget.h`: `w_id` at `+4`). So on the Octane:
@@ -86,7 +85,7 @@ Crosstalk generic widget registers sit in the other half (`xwidget.h`: `w_id` at
 - A register BE software reaches with `sw` at `b` (`b` mod 8 = 0) takes a little-endian `sw` at `b + 4`, value unchanged.
   A little-endian `sw` at `b` reaches the lanes of the generic widget register at `b + 4`. Inferred.
 - A little-endian `lw` at `+0` reads the low half, where the generic widget identification word sits; a read at `+4` reads
-  the high half, the board identity word the diagnostic reads at `+0`. Both words use the same
+  the high half, the board identity word the diagnostic reads at `+0`. Inferred: both words use the same
   revision, part and manufacturer layout, so the planned probe (read the identity word at `+0` under each candidate lane
   rule) cannot tell the rules apart unless the two words differ; the revision at `+4` is unknown.
 - The numeric packet (`cmd << 32 | data`) and the burst-write pixel pairs are `sd`: unchanged on a little-endian host, built
@@ -105,10 +104,10 @@ first. Both fit every source held; none separates them. Unknown.
 The DCB width field in the address (`MGRAS.h`: 1, 2, 3 or 4 bytes) picks how many bytes of the access go to the device.
 IRIX, OpenBSD and the Linux driver write byte registers at the slot base (`xmap + 0x08`, `0x88`; VC3 index at `+0x08`), and
 the VC3 index-and-data pair as one word, `0x1d000100`, at the width-3 address (index byte, then two data bytes). So in a
-big-endian host the device sees the first `n` bytes in address order, the top `n` bytes of the register value. Software
-expectation. For a little-endian host the same lanes are reached by the address rule above with the value unchanged
+big-endian host the device sees the first `n` bytes in address order, the top `n` bytes of the register value. Inferred
+from the public drivers. For a little-endian host the same lanes are reached by the address rule above with the value unchanged
 (inferred, with bit 1 at its shipped value); what clearing bit 1 would do is unknown.
-The only "swap endian" bit in the IRIX graphics source for a display bus word is bit 28 of the field layout in
+Inferred: the only "swap endian" bit in the IRIX graphics source for a display bus word is bit 28 of the field layout in
 `MGRAS/mgras_tv.c`, which is the REX3 `DCBMODE` layout (NetBSD `newportreg.h`: `REX3_DCBMODE_SWAPENDIAN` `0x10000000`)
 reused by a test file; none of the control words IRIX programs for IMPACT (`0x108c`, `0x1084`, `0x318c`, `0x210a`,
 `0x1090`) has bit 28. Whether IMPACT's per-device control word has any swap bit is unknown.
@@ -118,8 +117,8 @@ reused by a test file; none of the control words IRIX programs for IMPACT (`0x10
 The pixel-format word (`HQ_FC_ADDR_PIXEL_FORMAT_MODE`, sent as a command-FIFO header `0x000c0004` plus the word) has
 the endian field in bits 5:4: 0 BE_TO_BE, 1 LE_TO_BE, 2 BE_TO_LE; bit 6 swaps bytes, bit 7 swizzles components
 (`mgras_const.h`, names and positions established). Software leaves the field at 0: libGLcore sends `0xE00`
-(canonical), `0xE8D` and `0xE8E` (swizzled ABGR loads), the PROM writes the canonical mode, and the Linux driver writes
-`0xe00`, `0x200` and `0x600` (software expectation). The diagnostic plan lists tests for the BE-BE, BE-LE and LE-BE
+(canonical), `0xE8D` and `0xE8E` (swizzled ABGR loads) and the PROM writes the canonical mode, established from the shipped
+binaries; the Linux driver writes `0xe00`, `0x200` and `0x600`, inferred from the public driver. The diagnostic plan lists tests for the BE-BE, BE-LE and LE-BE
 cases (`MGRAS/doc/hq_level2_diagplan.fmdoc`), but no held source or `ide.IP30` string contains them. Reading LE_TO_BE as
 "little-endian host data converted for the big-endian board" is inferred from the names. Unknown: whether the
 formatter sees the burst-write `sd` stream or only DMA and command-FIFO pixel data, and what bits 5:4 = 1 does to
@@ -146,4 +145,4 @@ each component size.
   Linux Indigo2 and Octane framebuffer driver in the 2011 linux-mips posting "Impact video driver for SGI Indigo2"
   (`include/video/impact.h`); both big-endian only.
 - GIO64 specification (6 May 1992), Bridge ASIC specification rev 4.0, NEC VR10000 user's manual, as cited.
-- Chips repository: `devices/crosstalk/packets.md`, `devices/mc/README.md`, `devices/hpc3/byte-order.md`.
+- Chips repository notes on Crosstalk packets, the MC and HPC3 byte order: cross-checks only, not a source for any fact here.

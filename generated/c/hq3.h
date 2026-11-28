@@ -2,7 +2,7 @@
  * the source */
 /* SPDX-License-Identifier: BSD-3-Clause */
 /* defs-gen 4 */
-/* input sha256 3465678c224d844941a482f4b8ee2a06a5950f4d61f2a88408337bb52a820fd8 */
+/* input sha256 ee521a27af56f29bc85879f5dfd9c5e831b822dea69d08e218e68b1afd0b5c2c */
 /* host interface and command processor registers for the Impact graphics
  * subsystem */
 #ifndef HQ_GEN_H
@@ -36,7 +36,7 @@
 #define HQ_CONFIG_UCODE_STALL_SHIFT                  3 /* inferred */
 #define HQ_CONFIG_UCODE_STALL_MASK                   0x1u
 #define HQ_CONFIG_UCODE_STALL_INPLACE (HQ_CONFIG_UCODE_STALL_MASK << HQ_CONFIG_UCODE_STALL_SHIFT)
-#define HQ_CONFIG_BIG_ENDIAN_SHIFT                   2 /* inferred */
+#define HQ_CONFIG_BIG_ENDIAN_SHIFT                   2 /* unknown */
 #define HQ_CONFIG_BIG_ENDIAN_MASK                    0x1u
 #define HQ_CONFIG_BIG_ENDIAN_INPLACE (HQ_CONFIG_BIG_ENDIAN_MASK << HQ_CONFIG_BIG_ENDIAN_SHIFT)
 
@@ -159,10 +159,10 @@
 #define HQ_GIO_CONFIG_EXT_PIPE_REGISTER_SHIFT        2 /* inferred */
 #define HQ_GIO_CONFIG_EXT_PIPE_REGISTER_MASK         0x1u
 #define HQ_GIO_CONFIG_EXT_PIPE_REGISTER_INPLACE (HQ_GIO_CONFIG_EXT_PIPE_REGISTER_MASK << HQ_GIO_CONFIG_EXT_PIPE_REGISTER_SHIFT)
-#define HQ_GIO_CONFIG_DISPLAY_BUS_BIG_ENDIAN_SHIFT   1 /* inferred */
+#define HQ_GIO_CONFIG_DISPLAY_BUS_BIG_ENDIAN_SHIFT   1 /* unknown */
 #define HQ_GIO_CONFIG_DISPLAY_BUS_BIG_ENDIAN_MASK    0x1u
 #define HQ_GIO_CONFIG_DISPLAY_BUS_BIG_ENDIAN_INPLACE (HQ_GIO_CONFIG_DISPLAY_BUS_BIG_ENDIAN_MASK << HQ_GIO_CONFIG_DISPLAY_BUS_BIG_ENDIAN_SHIFT)
-#define HQ_GIO_CONFIG_HOST_BIG_ENDIAN_SHIFT          0 /* inferred */
+#define HQ_GIO_CONFIG_HOST_BIG_ENDIAN_SHIFT          0 /* unknown */
 #define HQ_GIO_CONFIG_HOST_BIG_ENDIAN_MASK           0x1u
 #define HQ_GIO_CONFIG_HOST_BIG_ENDIAN_INPLACE (HQ_GIO_CONFIG_HOST_BIG_ENDIAN_MASK << HQ_GIO_CONFIG_HOST_BIG_ENDIAN_SHIFT)
 
