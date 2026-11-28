@@ -90,15 +90,29 @@ For the colour word `0x00d0b0a0`, the driver sends BKGRD_RG `0x00b00a00`
 bits 11:0). Whether the board expands each component from those 12 bits
 in the same way is unknown.
 
+## What the IRIX text port does with glyphs
+
+Source: IRIX 6.5.7 `stand/arcs/lib/libsk/graphics/MGRAS/mgras_tport.c` (`MgrasTpDrawbitmap`, which the kernel text port is built from), and the 6.5.0 kernel object `usr/cpu/sysgen/IP28boot/mgras_tport.o` (`MgrasTpDrawbitmap` at `0x358`), whose literal pool holds the packets. Established as what software writes; what the board does with it is inferred.
+
+- **Background left alone.** The text port writes FILLMODE `0x00418008` before every bitmap (packet `0x0019100400418008` in the object's literal pool): glyph-stipple (bit 3) and block type 1, with the glyph-opaque bit (bit 4) clear. The routine sets no background colour. So a glyph that draws only its set bits is FILLMODE with bit 3 and not bit 4; OpenBSD's `0x00400018` sets both. That clearing bit 4 leaves the zero bits untouched is inferred from the two writers. The vector `0x418008` is in the `fill_mode` tests of [registers.toml](registers.toml).
+- **Glyphs over 16 wide.** The text port arms the block once for the whole bitmap and then sends the rows in order, never re-arming per row, whatever the width. A row is `shorts per row` 16-bit values (the bitmap's own count, rows padded to a short). For each four shorts it stores `CHAR_H` (first two shorts, high half first, stage) then `CHAR_L` (next two, execute); a remainder of three shorts is `CHAR_H` (two) then `CHAR_L` (the third in the high half); two or one shorts are a single `CHAR_H` execute. The library names the capability "handles large bitmaps" and the object returns it as 1. So the hardware takes up to 64 columns per execute, and wraps to the next row itself when the block's width is used up (inferred: no per-row set-up exists in the code). The driver in OpenBSD never goes past 16. Where the bits for columns beyond the block width go is not shown; the code pads rows only to a short.
+- **Order of bits.** Most significant bit first within each 16-bit short, shorts in left-to-right order. Inferred from the packing.
+
+## Background colour word
+
+Two writers are known. OpenBSD puts each 8-bit component in bits 11:4 of a 12-bit field (blue in the second register, green and red in the first: green in bits 23:12, red in bits 11:0), low nibble zero. The IRIX desktop's 50 percent icon dither is recorded in [RE4.h](RE4.h) with the same layout (green `0x700`, red `0xC00` for 8-bit `0x70` and `0xC0`). The "4:8:4" in the driver's comment describes the 12-bit field the driver builds, not an expansion the board does. Whether the board replicates the high nibble into the low when it draws is unknown; no IRIX source writes `BKGRD` (the PROM and the 6.5.7 diagnostic never set it). **Settled by:** an opaque glyph drawn in a background of `0x0f0` and read back, against `0x0ff`.
+
+## Copies
+
+No board-to-board (frame buffer to frame buffer) copy is documented. The OpenBSD driver says so in its header comment: framebuffer-to-framebuffer operations are, according to the author of the earlier Linux reverse engineering, "not reliable", and IRIX's X server does not use them, so the driver repaints from its own copy. That is hearsay with no mechanism: it names no failing case and cites no measurement. The shipped software agrees on the second half: `glCopyPixels` goes through host memory in the client (read in strips by host DMA, drawn back, see [HQ3.h](../hq3/HQ3.h)), and the X server's screen copy `mgrasCopyPixels` writes only host-address-generator registers and a start word (`0xB9` and `0xB1`, one read and one write direction, [questions](../../questions/README.md)). No held source or diagnostic copies one region of the frame buffer to another inside the board; the diagnostic's "block" tests are fills. What "unreliable" means on hardware is unknown. **Settled by:** a raster-engine copy attempt on a board, or the host-interface program's `copypixels` module (`hq3copypixels.uc` is one of its source names) once decoded.
+
 ## Open questions
 
 - Physical reset state and retention of a half-written glyph or armed
   rectangle. The driver does not show these.
 - Completion timing for the alias execute, and whether a second execute can
   be issued before the first finishes.
-- Glyph widths above sixteen, and glyph or fill traversal in reverse or
-  off-screen. The driver does not use them in the paths above.
-- Expansion of the 12-bit background components on the board, and whether a
-  set bit in a glyph row always selects the foreground.
+- Glyph or fill traversal in reverse or off-screen. The driver does not use them in the paths above.
+- Whether a set bit in a glyph row always selects the foreground.
 - Interrupts, DMA and the native bank and address routing of these writes.
   None of the paths above depend on them, so they are not described here.
