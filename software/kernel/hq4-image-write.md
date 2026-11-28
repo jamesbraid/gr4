@@ -177,6 +177,28 @@ and DMA-type commands are not sent by the PROM. The diagnostic runs after it has
 A trace of the host-interface microcode's handling of those two registers, or a run of the programmed-I/O path with the
 microcode left unloaded, would settle it.
 
+## What the board decodes before any microcode is loaded
+
+The PROM's graphics library runs on a board that has no host-interface or geometry-engine program (the download routines are compiled out of it, [prom-handoff.md](../../devices/mgras/prom-handoff.md)). So what its source does, in the order it does it, is the set the hardware itself accepts. Source: IRIX 6.5.7 `stand/arcs/lib/libsk/graphics/MGRAS/mgras_init.c` (`mgrasInitBoard`, `MgrasInitHQ`, `MgrasInitRasterBackend`, the RDRAM synchronisation routine) and `mgras_tport.c`. Established as what software does on an unloaded board; whether a particular access is decoded by hardware logic or by something else on the board is not shown.
+
+| Access | Used with no microcode | Grade |
+| --- | --- | --- |
+| Numeric register packets to the raster engine (selector in bits 48:40, execute mark in bit 50): fill mode, block corners, colour, the alias execute, `CHAR_H` and `CHAR_L` glyph rows, point and block fills, the full-screen clear | yes: the text port draws every glyph and box this way, and `MgrasInitRasterBackend` clears the screen with a block fill | established |
+| Host-interface configuration, flag and interrupt-enable words, FIFO marks, and one control command through the command FIFO (the formatter mode write) | yes (`MgrasInitHQ`) | established |
+| Display-bus writes to VC3, the XMAP, CMAP and the DAC through the buffer FIFO, and reads of the same devices | yes | established |
+| Reads of raster-engine registers and of pixel-processor memory devices (the RE4 status and version, each RDRAM's manufacturer register, the first eight lines of each RDRAM) | yes, during RDRAM synchronisation, before any program exists | established |
+| Programmed-I/O block write (block type 3, pairs of `CHAR_H`/`CHAR_L`), burst write (block type 5, a pixel command header and data in the command FIFO), host DMA with a page list, GL command tokens, the context image switch | not used by the PROM; only the diagnostic, the kernel and the client use them, all after the host-interface program is loaded | unknown without it |
+
+So numeric packets, glyph rows, block fills and register or device reads work on a board with no program. The burst write, the DMA path and everything above them are unproven without the program: their only users load it first. The host-interface listing's source names (`hq3main.uc`, `hq3pixelpath.uc`, `hq3drawpixels.uc`, `hq3copypixels.uc` among 21 modules) show that the program has pixel-path code; they do not say whether the burst header is decoded there or in logic in front of it (inferred that the program handles it). **What would settle it:** a model or board run of the programmed-I/O and burst paths with the program left out, or the program's handler for the pixel command header once its instruction set is decoded.
+
+## Packing of narrow pixels
+
+Established for the diagnostic (`mgras_hqpio_redma.c`, `_mgras_dma_re_setup` and the write routine): a burst row is one pixel command header carrying the row's byte count, then the row's bytes as 64-bit command-FIFO stores, each made of two host words taken from memory in order; the programmed-I/O write sends the same two words as `CHAR_H` (stage) then `CHAR_L` (execute). Host words are not swapped. For 32-bit pixels one store carries two pixels. The diagnostic's one 8-bit case, a luminance image to one texture RAM (transfer format 1 byte, `XFRMODE_L1`), uses a byte count of one per pixel and four pixels per host word, so one store carries eight pixels, memory order preserved, so on a big-endian host the first pixel is the high byte of the first word. The 12-bit-per-component frame-buffer case counts 1.5 words per pixel. No shipped code writes 8-bit colour-index pixels to the frame buffer by burst or programmed I/O in the sources read: the X server's `(0, 0)` transfer-mode word, a one-byte unsigned colour index, is the setting its image routines use, so one byte per pixel is inferred, with the same row header and 64-bit stores. Whether a row's last store is padded with zero or ignored bytes, and whether the header's byte count must be a multiple of four, is unknown. **Settled by:** a burst write of a 5-pixel row read back by programmed I/O.
+
+## Programmed-I/O texture load and read-back
+
+The diagnostic's texture-memory DMA test (`mg_dma_tram`, `mgras_hq_redma_TRAM`) writes texture memory by programmed I/O and reads it back by programmed I/O, as well as by burst: the same set-up with the transfer device field set to texture memory (`XFRCONTROL` bit 2), block type 3 for the write and 2 for the read, data in `CHAR_H`/`CHAR_L` pairs, and for the read a poll of the raster engine's status bit 8 (command FIFO empty) before reading `CHAR_H` (through the `+0x1000` execute alias of the direct raster window, [HQ3.h](../../devices/hq3/HQ3.h)) and `CHAR_L` in turn. Formats are 4/4/4/4 for one or four texture RAMs, or 8-bit luminance for one with double-buffer enable (`_mgras_dma_re_setup`, `_mgras_hqpio_redma_read_compare`). Established for the diagnostic's code. The same read path serves the frame buffer (pixel processor device) with block type 2. All of it runs after the host-interface program is loaded, so whether either works without it is unknown (same test as above).
+
 ## Open questions
 
 - Entry-size selector: bit 22 of `0x040918` is the strong candidate (above); a run that flips only that bit with both entry
