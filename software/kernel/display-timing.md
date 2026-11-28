@@ -75,6 +75,10 @@ multiple of 4 bytes, then three words: type, count and byte offset of the value.
 `LineSeqTab` and `FrameTab` are the two type-7 tables: they are the images the
 kernel loads into VC3 SRAM at 0 and `0x380`.
 
+## From a file to the kernel's record, established
+
+The X server turns one of these files into board timing in two steps. `mgrasLoadTimingTable` (`impactpc.so`, 6.5.0) opens the file's symbol database and reads the scalars listed below, and the two arrays `FrameTab` and `LineSeqTab`, then sends one request to the kernel (`0x6d670011`, record built on its stack). The kernel keeps what it gets and, when the display is set up, runs the write sequence below from the record's fields. Names read: `FrameBufferHeight`, `DIBSkip`, `DIBTopScan`, `DIBControl0` to `DIBControl3`, `DRBpointers_main`, `DRBpointers_overlay`, `DRB_banks` (six values), `DRB_total_bank_count`, `DRB_visible_bank_count`, `DIBPointer`, `REFControl`, `MgrasFlag`, `RefPixClkSel` (its absence is not an error), the pixel clock from the caller's format record (rounded to MHz), and three more scalars the loader reads through global-table slots (inferred to be the three DAC PLL bytes, since the kernel writes three bytes to the PLL registers). The X server's word for the format is the width and rate from its own mode record. The kernel's side of the record is the fields listed under "Built-in timing records"; the stack record of the request is not laid out here (**unknown**). The VC3 and XMAP values the loader passes are written by the kernel as the Write sequence shows; that is the whole path from file to board for IMPACT. The same container for VPro is described in the odsy repository (`software/userland/readings/usr-gfx-setmon.md`); the formats are not interchangeable.
+
 ## Write sequence
 
 **Established** for the IP30 `MgrasSetTiming` (`mgras_init.o` at `0x146c`), in
