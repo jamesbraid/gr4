@@ -4,6 +4,8 @@ Video Controller 3 (VC3), Video Timing, Cursor, and DID Frame Composition for SG
 
 [VC3.h](VC3.h) is the commented C description of the chip.
 
+[registers.md](registers.md) is the graded register map, generated from `registers.toml`.
+
 ## Used by
 
 - [MGRAS display timing](../../software/kernel/display-timing.md)

@@ -1,0 +1,296 @@
+unit = "vc3"
+prefix = "VC3"
+title = "VC3 video controller registers of the Impact graphics subsystem"
+doc = """
+Video timing, hardware cursor and display-ID controller on the display bus. Its internal
+registers are numbered 0 to 31 and are reached through a small set of ports in the chip's
+display-bus window; the ports are the byte-addressed registers, the numbered registers are
+the vc3_index space (offset = register number). Each numbered register is 16 bits wide. The
+window address depends on the board's map and is not given here. Grades follow the
+repository legend; a bit named in a header and never seen used is inferred."""
+from = "driver and diagnostic readings"
+public_from = ["driver and diagnostic readings"]
+name_source = "ours"
+
+[spaces.vc3_index]
+unit = "reg"
+doc = "VC3 internal register numbers"
+
+[constants]
+DCB_DEVICE = { value = 8, grade = "established", doc = "Display-bus device number of the chip; the window sits at device * 0x400 in the board's display-bus map. The kernel's and the diagnostic's accesses to the index, index_data and data ports land in this device's window on the Octane board map." }
+SRAM_LINETAB = { value = 0x0, grade = "established", doc = "Start of the horizontal line tables in the chip's 16-bit SRAM (768 words)." }
+SRAM_LINETAB_WORDS = { value = 768, grade = "established", doc = "Size of the line-table area in words." }
+SRAM_FRAMETAB = { value = 0x380, grade = "established", doc = "Start of the frame tables in SRAM (128 words)." }
+SRAM_FRAMETAB_WORDS = { value = 128, grade = "established", doc = "Size of the frame-table area in words." }
+SRAM_CURS_GLYPH = { value = 0x400, grade = "established", doc = "Start of the 64 by 64 cursor glyph in SRAM; the glyph must sit on a 256-word boundary." }
+SRAM_DID_FRAMETAB1 = { value = 0x500, grade = "established", doc = "Start of the first display-ID frame table. The second follows it, then the two line tables fill the rest of SRAM up to SRAM_END." }
+SRAM_DID_FRAME_MAX_WORDS = { value = 1086, grade = "established", doc = "Room reserved for each display-ID frame table: 1085 lines plus an end-of-frame entry (the size is sized for HDTV)." }
+SRAM_END = { value = 0x8000, grade = "established", doc = "End of SRAM in 16-bit word addresses." }
+CURS_HOTSPOT_OFFSET = { value = 31, grade = "inferred", doc = "The software defines 31 for both axes as the cursor origin offset; no shipped use was read, so what the hardware does with it is inferred from the name." }
+
+[registers.index]
+offset = 0x008
+access = "rw"
+width = 8
+grade = "established"
+doc = "Port: selects the numbered register that the data port reads or writes (a one-byte access at the start of the window)."
+
+[registers.index_data]
+offset = 0x038
+access = "rw"
+width = 32
+grade = "established"
+doc = "Port: a three-byte write sets a numbered register in one store, the register number in bits 31:24 and the 16-bit value in bits 23:8. The kernel and the diagnostic use it for every register write."
+
+[registers.index_data.fields]
+register = { bits = [31, 24], grade = "established" }
+value = { bits = [23, 8], grade = "established" }
+
+[[registers.index_data.tests]]
+value = 0x1d000100
+expect = { register = 0x1d, value = 1 }
+
+[registers.data]
+offset = 0x0b0
+access = "rw"
+width = 16
+grade = "established"
+doc = "Port: reads or writes the numbered register that the index port last selected, 16 bits at a time. The diagnostic reads a register back by writing its number to the index port and reading this port."
+
+[registers.ram64]
+offset = 0x180
+access = "rw"
+width = 64
+grade = "established"
+doc = "Port: SRAM access four bytes wide per bus transfer, written as a 64-bit store. The software defines it next to the 16-bit port and uses the same SRAM address register."
+
+[registers.ram]
+offset = 0x190
+access = "rw"
+width = 16
+grade = "established"
+doc = "Port: reads or writes the SRAM word addressed by ram_addr, 16 bits at a time (the kernel and the diagnostic load the timing tables, the cursor glyph and the display-ID tables through it)."
+
+[registers.vid_ep]
+space = "vc3_index"
+offset = 0x00
+access = "rw"
+width = 16
+grade = "established"
+doc = "Video timing entry point, the main display frame table pointer. The diagnostic's register test writes walking patterns and expects them back unchanged."
+
+[registers.curs_ep]
+space = "vc3_index"
+offset = 0x01
+access = "rw"
+width = 16
+grade = "established"
+doc = "Cursor entry point. Walking-pattern read-back is expected."
+
+[registers.curs_x]
+space = "vc3_index"
+offset = 0x02
+access = "rw"
+width = 16
+grade = "established"
+doc = "Hardware cursor x position. Walking-pattern read-back is expected."
+
+[registers.curs_y]
+space = "vc3_index"
+offset = 0x03
+access = "rw"
+width = 16
+grade = "established"
+doc = "Hardware cursor y position. Walking-pattern read-back is expected."
+
+[registers.did_ep1]
+space = "vc3_index"
+offset = 0x04
+access = "rw"
+width = 16
+grade = "established"
+doc = "First display-ID entry point, with its own frame and line tables."
+
+[registers.did_ep2]
+space = "vc3_index"
+offset = 0x05
+access = "rw"
+width = 16
+grade = "established"
+doc = "Second display-ID entry point."
+
+[registers.scan_length]
+space = "vc3_index"
+offset = 0x06
+access = "rw"
+width = 16
+grade = "established"
+doc = "Scan line length. Walking-pattern read-back is expected; the unit (dot clocks) is the name's reading and is inferred."
+
+[registers.ram_addr]
+space = "vc3_index"
+offset = 0x07
+access = "rw"
+width = 16
+grade = "established"
+doc = "SRAM address register for the ram port. Reads back the address it was loaded with."
+
+[registers.vt_frame_tbl_ptr]
+space = "vc3_index"
+offset = 0x08
+access = "rw"
+width = 16
+grade = "established"
+doc = "Video timing frame table pointer. Walking-pattern read-back is expected."
+
+[registers.vt_line_seq_ptr]
+space = "vc3_index"
+offset = 0x09
+access = "rw"
+width = 16
+grade = "established"
+doc = "Video timing line sequence pointer. Walking-pattern read-back is expected."
+
+[registers.vt_lines_run]
+space = "vc3_index"
+offset = 0x0a
+access = "rw"
+width = 16
+grade = "established"
+doc = "Video timing run count of lines. Walking-pattern read-back is expected."
+
+[registers.vert_line_count]
+space = "vc3_index"
+offset = 0x0b
+access = "rw"
+width = 16
+grade = "established"
+doc = "Current vertical line. The kernel reads it (the only numbered register it reads); the diagnostic's register test also writes walking patterns here and expects them back, which is odd for a running counter and is recorded as the software's expectation."
+
+[registers.curs_tbl_ptr]
+space = "vc3_index"
+offset = 0x0c
+access = "rw"
+width = 16
+grade = "established"
+doc = "Cursor table pointer. Walking-pattern read-back is expected."
+
+[registers.working_curs_y]
+space = "vc3_index"
+offset = 0x0d
+access = "rw"
+width = 16
+grade = "established"
+doc = "Working cursor y line. Walking-pattern read-back is expected."
+
+[registers.cur_cursor_x]
+space = "vc3_index"
+offset = 0x0e
+access = "rw"
+width = 16
+grade = "established"
+doc = "Current cursor x. Walking-pattern read-back is expected."
+
+[registers.unused]
+space = "vc3_index"
+offset = 0x0f
+access = "rw"
+width = 16
+grade = "inferred"
+doc = "Register number the diagnostic's register test writes and reads back under the name unused. Its role is unknown."
+
+[registers.did_frametab1]
+space = "vc3_index"
+offset = 0x10
+access = "rw"
+width = 16
+grade = "established"
+doc = "Frame table pointer of the first display-ID entry point. Walking-pattern read-back is expected."
+
+[registers.did_linetab1]
+space = "vc3_index"
+offset = 0x11
+access = "rw"
+width = 16
+grade = "established"
+doc = "Line table pointer of the first display-ID entry point. Walking-pattern read-back is expected."
+
+[registers.did_frametab2]
+space = "vc3_index"
+offset = 0x12
+access = "rw"
+width = 16
+grade = "established"
+doc = "Frame table pointer of the second display-ID entry point. Walking-pattern read-back is expected."
+
+[registers.did_linetab2]
+space = "vc3_index"
+offset = 0x13
+access = "rw"
+width = 16
+grade = "established"
+doc = "Line table pointer of the second display-ID entry point. Walking-pattern read-back is expected."
+
+[registers.curs_control]
+space = "vc3_index"
+offset = 0x1d
+access = "rw"
+width = 16
+grade = "established"
+doc = "Cursor control. The standalone initialisation sets the function and display bits to turn the cursor on; the hosted build of the same routine writes the complement of that pair, with a comment that the X server turns the cursor on later. The diagnostic's start and stop timing write zero. The register test skips it."
+
+[registers.curs_control.fields]
+function_enable = { bits = [0, 0], grade = "established", doc = "Cursor logic enable." }
+display_enable = { bits = [1, 1], grade = "established", doc = "Show the cursor." }
+crosshair = { bits = [2, 2], grade = "inferred", doc = "Full-screen crosshair cursor; named only." }
+glyph_64 = { bits = [3, 3], grade = "inferred", doc = "Selects the 64 by 64 glyph rather than a smaller one; named only." }
+
+[[registers.curs_control.tests]]
+value = 0x3
+expect = { function_enable = 1, display_enable = 1, crosshair = 0, glyph_64 = 0 }
+
+[registers.display_control]
+space = "vc3_index"
+offset = 0x1e
+access = "rw"
+width = 16
+grade = "established"
+doc = "Display control. The kernel keeps a shadow of the value, never reads the register back and writes it through the index_data port for retrace enable, blackout, timing and genlock; the diagnostic reads it back. The register test skips it. Every field is named in a header and read from the writers' use; what bits 1 to 4 and 7 do inside the chip is not settled."
+
+[registers.display_control.fields]
+retrace_interrupt = { bits = [0, 0], grade = "inferred", doc = "Set by the kernel's retrace enable; that it gates the once-per-frame retrace message is inferred." }
+blackout = { bits = [1, 1], grade = "inferred", doc = "Set by the kernel's blackout routine and by the diagnostic's start-timing together with bits 4:2; the polarity of the name is unknown." }
+video_enable = { bits = [2, 2], grade = "inferred", doc = "Named as the master video enable; set by the diagnostic's start-timing." }
+did_enable1 = { bits = [3, 3], grade = "inferred", doc = "Named as enabling the first display-ID table; set by the diagnostic's start-timing." }
+did_enable2 = { bits = [4, 4], grade = "inferred", doc = "Named as enabling the second display-ID table; set by the diagnostic's start-timing." }
+gensync = { bits = [5, 5], grade = "inferred", doc = "Sync output on: set from the first argument of the genlock request; the diagnostic prints it as GENSYNC." }
+genlock = { bits = [6, 6], grade = "inferred", doc = "Genlock slave on: set from the second argument of the genlock request; the diagnostic prints it as GENLOCK." }
+interlaced = { bits = [7, 7], grade = "inferred", doc = "Follows the interlace flag of the timing format in the kernel." }
+field_only = { bits = [8, 8], grade = "inferred", doc = "Named only; no shipped use read." }
+odd_field = { bits = [9, 9], grade = "inferred", doc = "Named only; no shipped use read." }
+odd_field_timing = { bits = [10, 10], grade = "inferred", doc = "Named only; no shipped use read." }
+
+[[registers.display_control.tests]]
+value = 0x1e
+expect = { retrace_interrupt = 0, blackout = 1, video_enable = 1, did_enable1 = 1, did_enable2 = 1, gensync = 0, genlock = 0 }
+
+[registers.config]
+space = "vc3_index"
+offset = 0x1f
+access = "rw"
+width = 16
+grade = "established"
+doc = "Master configuration. The diagnostic's PLL set-up writes 1 and prints that the register is set to 1; the kernel selects this register to read the chip revision at attach. Bits other than the revision are named in a header only."
+
+[registers.config.fields]
+unreset = { bits = [0, 0], grade = "inferred", doc = "Named as releasing the chip from reset; the diagnostic writes 1." }
+slow_clock = { bits = [1, 1], grade = "inferred", doc = "Named only; no shipped use read." }
+cursor_error = { bits = [2, 2], grade = "inferred", doc = "Named as a cursor error flag; no shipped use read." }
+did_error1 = { bits = [3, 3], grade = "inferred", doc = "Named as a display-ID table 1 error flag; no shipped use read." }
+did_error2 = { bits = [4, 4], grade = "inferred", doc = "Named as a display-ID table 2 error flag; no shipped use read." }
+timing_error = { bits = [5, 5], grade = "inferred", doc = "Named as a timing generator error flag; no shipped use read." }
+revision = { bits = [7, 6], grade = "inferred", doc = "Chip revision, read by the kernel through the data port; 0 is revision A and later values follow consecutively (board-identity.md)." }
+
+[[registers.config.tests]]
+value = 0x1
+expect = { unreset = 1, slow_clock = 0, revision = 0 }
